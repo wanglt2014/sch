@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java"%>
-<!-- footer -->
+<!-- footer 1-->
 <div id="footer">
 	<div class="split_2px"></div>
 		<p>

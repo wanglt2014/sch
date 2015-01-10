@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+.title_detail{
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-top: 15px;
+	float:center;
+	width: 100%;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.content_detail{
+	margin-top: 25px;
+	font-size:15px;
+	min-width: 925px;
+	
+}
+
+.content_detail2{height:58px;background:gray; repeat-x; width:80%; 
+margin:0px auto; min-width:1000px; float:none; 
+*width:expression((this.offsetWidth < 1000) ? (this.width = 1000 +'px') : true); }

@@ -44,7 +44,7 @@ public class Constant {
 	 */
 	public static String ARTICLE_TYPE_NEWS = "news";
 	/**
-	 * 通知
+	 * 教务教学通知
 	 */
 	public static String ARTICLE_TYPE_NOTICE = "notice";
 	/**

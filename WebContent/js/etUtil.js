@@ -19,21 +19,19 @@ $(document).ready(function(){
 	$navTitle.click(function(){
 		$this = $(this);
 		var id = $this.attr('id');
-		if (id == 'nav_link_trade'){
-			location.href = 'RepeatOrder_doRepeatOrderQuery.shtm';
-		}else if (id == 'nav_link_jianjie'){
-			location.href = 'College_toCollegeSummaryPage.shtm';
-		}else if (id == 'nav_link_jieshao'){
+		if (id == 'nav_link_index'){
+			location.href = 'Login_init.shtm';
+		}else if (id == 'nav_link_tongzhi'){
+			location.href = 'Article_toNoticePage.shtm';
+		}else if (id == 'nav_link_zhidu'){
 			location.href = 'College_toCollegePage.shtm';
-		}else if (id == 'nav_link_teach') {
-			location.href = 'Article_toTeachPage.shtm';
-		}else if (id == 'nav_link_subject') {
-			location.href = 'Subject_toSubjectPage.shtm';
-		}else if (id == 'nav_link_zixun') {
-			location.href = 'News_toNewsPage.shtm';
+		}else if (id == 'nav_link_download') {
+			location.href = 'Download_toDownloadPage.shtm';
 		}else if (id == 'nav_link_teacher') {
-			location.href = 'http://bbs.59et.com';
-		}else if (id == 'nav_link_student') {
+			location.href = 'Article_toTeachPage.shtm';
+		}else if (id == 'nav_link_plan') {
+			location.href = 'News_toNewsPage.shtm';
+		}else if (id == 'nav_link_result') {
 			location.href = 'http://bbs.59et.com';
 		}else if (id == 'nav_link_bbs') {
 			location.href = 'http://bbs.59et.com';

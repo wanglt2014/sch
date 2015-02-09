@@ -316,15 +316,15 @@
 			<result type="json"></result>
 		</action>
 		
-		<!-- 文章（通知，咨询，教学动态，学生风采） -->
+		<!-- 文章（教务教学通知，教学规章制度） -->
 		<action name="Article_*" class="ArticleAction" method="{1}">
 			<interceptor-ref name="json" />
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<interceptor-ref name="timerInterceptor" />
 			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="to_teach_index">/article/teachList.jsp</result>
-			<result name="teach_detail">/article/teachdetail.jsp</result>
-			<result name="teach_result">/article/teach_result.jsp</result>
+			<result name="to_notice_index">/article/noticeList.jsp</result>
+			<result name="notice_detail">/article/noticedetail.jsp</result>
+			<result name="notice_result">/article/notice_result.jsp</result>
 			<result name="index">/admin/news_index.jsp</result>
 			<result name="summary">/admin/news_index.jsp</result>
 			<result type="json"></result>

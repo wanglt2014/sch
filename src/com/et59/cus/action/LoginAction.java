@@ -8,9 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.httpclient.HttpClient;
-import org.apache.commons.httpclient.HttpStatus;
-import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -26,7 +23,6 @@ import com.et59.cus.mail.SimpleMailSender;
 import com.et59.cus.mail.TemplateVO;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
-import com.et59.cus.tools.DecAndEncUtil;
 import com.et59.cus.tools.JsonUtil;
 import com.et59.cus.tools.UUIDGenerator;
 import com.opensymphony.xwork2.ActionContext;
@@ -34,7 +30,6 @@ import com.opensymphony.xwork2.ActionContext;
 /**
  * @ClassName: LoginAction
  * @Description: 登陆类
- * @author liuhh(jxausea@gmail.com)
  * @date 2014-3-21 下午12:37:49
  * 
  */
@@ -67,10 +62,10 @@ public class LoginAction extends BaseAction {
 	private String loginError;
 	private String loginStatus;
 	private String idType;
-	
+
 	private String validate;// 校验码
 	/** 网站域名和协议头 ，如: http://www.59et.com */
-	
+
 	private String email;
 	private String mobilephone;
 	private String firstpassword;
@@ -185,27 +180,34 @@ public class LoginAction extends BaseAction {
 	public String directSumapay() {
 		return "directSumapay";
 	}
+
 	/**
 	 * 跳转到联系我们页面
+	 * 
 	 * @return
 	 */
-	public  String linkus(){
+	public String linkus() {
 		return "linkus";
 	}
+
 	/**
 	 * 跳转到team.jsp
+	 * 
 	 * @return
 	 */
-	public  String team(){
+	public String team() {
 		return "team";
 	}
+
 	/**
 	 * 跳转到招聘页面
+	 * 
 	 * @return
 	 */
-	public  String job(){
+	public String job() {
 		return "job";
 	}
+
 	@SuppressWarnings("unused")
 	private boolean checkValidate() {
 		Map<String, Object> session = ActionContext.getContext().getSession();
@@ -344,7 +346,7 @@ public class LoginAction extends BaseAction {
 				if (null != bsUserJson.getAtt2_RealName()) {
 					user1.setRealname(bsUserJson.getAtt2_RealName());
 				}
-				map = localServiceProxy.updateUser(user1,"");
+				map = localServiceProxy.updateUser(user1, "");
 				log.info("缴费平台更新用户信息--------------->:" + map);
 				if (ComonUtil.validateMapResult(map)) {
 					idNumber = bsUserJson.getTokenId();
@@ -369,7 +371,7 @@ public class LoginAction extends BaseAction {
 				if (null != bsUserJson.getAtt2_RealName()) {
 					user1.setRealname(bsUserJson.getAtt2_RealName());
 				}
-				map = localServiceProxy.createUser(user1,"");
+				map = localServiceProxy.createUser(user1, "");
 				if (ComonUtil.validateMapResult(map)) {
 					super.idNumber = bsUserJson.getTokenId();
 					login();
@@ -407,7 +409,7 @@ public class LoginAction extends BaseAction {
 		user.setUsername(email);
 		user.setIsadmin("no");
 		try {
-			Map result = localServiceProxy.createUser(user,"");
+			Map result = localServiceProxy.createUser(user, "");
 			if (ComonUtil.validateMapResult(result)) {
 				flag = true;
 			}
@@ -417,6 +419,7 @@ public class LoginAction extends BaseAction {
 		}
 
 	}
+
 	/***
 	 * 接受失败消息
 	 * 
@@ -434,17 +437,19 @@ public class LoginAction extends BaseAction {
 	public String findPasswordByEmail() {
 		return "findPassword";
 	}
+
 	/**
 	 * 用户是否登录
 	 */
-	public  void  isUserLogin(){
-		BsUser userobj =getUser();
-		if(null==userobj){
+	public void isUserLogin() {
+		BsUser userobj = getUser();
+		if (null == userobj) {
 			super.reponseWriter("");
-		}else{
+		} else {
 			super.reponseWriter(userobj.getUsername());
 		}
 	}
+
 	/**
 	 * 发送邮件
 	 * 
@@ -453,16 +458,17 @@ public class LoginAction extends BaseAction {
 	@SuppressWarnings("rawtypes")
 	public void sendmail() {
 		HttpSession hs = request.getSession();
-		System.out.println("hs.getId();"+hs.getId()+"|"+context.getSession());
+		System.out.println("hs.getId();" + hs.getId() + "|"
+				+ context.getSession());
 		String flag = "0";
 		String email = request.getParameter("email");
-		String checkcode =request.getParameter("checkcode");
+		String checkcode = request.getParameter("checkcode");
 		String randomcode = (String) context.getSession().get("RANDOMIMAGES");
-		log.info("checkcode|randomcode:"+checkcode+"|"+randomcode);
-		if(randomcode.equals(checkcode)){//验证码相等才能发送
+		log.info("checkcode|randomcode:" + checkcode + "|" + randomcode);
+		if (randomcode.equals(checkcode)) {// 验证码相等才能发送
 			user = new BsUser();
 			user.setEmail(email);
-			
+
 			try {
 				Map result = localServiceProxy.queryUserbyEmail(user);
 				if (ComonUtil.validateMapResult(result)) {
@@ -473,10 +479,9 @@ public class LoginAction extends BaseAction {
 					TemplateVO templateVO = new TemplateVO();
 					templateVO.setUsername(user.getUsername());
 					templateVO.setEmail(user.getEmail());
-					String code =UUIDGenerator.generate();
+					String code = UUIDGenerator.generate();
 					String encryptedStr = email + "|" + code;// 邮箱+"|"+UUID
-					String url = getWebsiteurl()
-							+ "/Login_vertifyEmail?param="
+					String url = getWebsiteurl() + "/Login_vertifyEmail?param="
 							+ java.net.URLEncoder.encode(encryptedStr);
 					System.out.println("url:" + url);
 					templateVO.setUrl(url);
@@ -501,9 +506,9 @@ public class LoginAction extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-			
-		}else{
-			flag ="2";
+
+		} else {
+			flag = "2";
 		}
 		try {
 			response.setContentType("text/html");
@@ -522,42 +527,49 @@ public class LoginAction extends BaseAction {
 		successFailPage = new SuccessFailPage();
 		successFailPage.setPage_failmeessage("尊敬的客户你好:你的邮件验证未通过,请重新发送验证邮件!");
 		successFailPage.setPage_title("邮件验证未通过");
-		String flag="vertifyemail_error";
-		String param =java.net.URLDecoder.decode(request.getParameter("param"));
+		String flag = "vertifyemail_error";
+		String param = java.net.URLDecoder
+				.decode(request.getParameter("param"));
 		try {
 			if (ComonUtil.validateEmptyForString(param)) {
-				flag= "vertifyemail_error";
+				flag = "vertifyemail_error";
 			} else {
 				String[] str = param.split("\\|");
 				String email = str[0];
 				String code = str[1];
 				System.out.println("email|code:" + email + ":" + code);
 				try {
-					BsEmail  bsEmail = new BsEmail();
+					BsEmail bsEmail = new BsEmail();
 					bsEmail.setCode(code);
 					bsEmail.setMailto(email);
 					bsEmail.setIsactive(Constant.ISACTIVE_NO);
-					Map resultemail =localServiceProxy.queryEmail(bsEmail);
+					Map resultemail = localServiceProxy.queryEmail(bsEmail);
 					if (ComonUtil.validateMapResult(resultemail)) {
-						BsEmail  updateemail = (BsEmail) resultemail.get(Constant.EMAIL);
+						BsEmail updateemail = (BsEmail) resultemail
+								.get(Constant.EMAIL);
 						updateemail.setIsactive(Constant.ISACTIVE_YES);
-						if (ComonUtil.validateMapResult(localServiceProxy.updateEmail(updateemail))) {//更新成功后才能更改密码
+						if (ComonUtil.validateMapResult(localServiceProxy
+								.updateEmail(updateemail))) {// 更新成功后才能更改密码
 							user = new BsUser();
 							user.setEmail(email);
-							Map result = localServiceProxy.queryUserbyEmail(user);
+							Map result = localServiceProxy
+									.queryUserbyEmail(user);
 							if (ComonUtil.validateMapResult(result)) {
 								user = (BsUser) result.get(Constant.USER);
 								user.setPassword(Constant.DEFAULT_PASSWORD);
-								localServiceProxy.updateUser(user,"");
+								localServiceProxy.updateUser(user, "");
 								successFailPage = new SuccessFailPage();
-								successFailPage.setPage_successmessage("尊敬的客户你好:你的邮件验证通过,登录账号["+user.getUsername()+"],密码重置为[123456]!请登录到个人中心修改密码!");
+								successFailPage
+										.setPage_successmessage("尊敬的客户你好:你的邮件验证通过,登录账号["
+												+ user.getUsername()
+												+ "],密码重置为[123456]!请登录到个人中心修改密码!");
 								successFailPage.setPage_title("邮件验证通过");
-								flag= "vertifyemail_suceess";
+								flag = "vertifyemail_suceess";
 							}
 						}
-						
+
 					}
-					
+
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -633,7 +645,6 @@ public class LoginAction extends BaseAction {
 		this.loginStatus = loginStatus;
 	}
 
-	
 	public String getIdType() {
 		return idType;
 	}
@@ -641,6 +652,7 @@ public class LoginAction extends BaseAction {
 	public void setIdType(String idType) {
 		this.idType = idType;
 	}
+
 	public String getValidate() {
 		return validate;
 	}
@@ -648,6 +660,7 @@ public class LoginAction extends BaseAction {
 	public void setValidate(String validate) {
 		this.validate = validate;
 	}
+
 	public String getUserEmailId() {
 		return userEmailId;
 	}

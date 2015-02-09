@@ -65,7 +65,7 @@ public abstract class BaseAction extends SystemAction {
 	 */
 	protected List<BsArticle> bsArticlelist;
 	/**
-	 * 通知
+	 * 教务教学通知
 	 */
 	protected List<BsArticle> notifylist;
 	/**
@@ -88,6 +88,11 @@ public abstract class BaseAction extends SystemAction {
 	 * 文章详情
 	 */
 	protected BsArticle bsArticledetail;
+
+	/**
+	 * 文件表
+	 */
+	protected TDownload downloaddetail;
 
 	@Override
 	public String execute() {
@@ -169,17 +174,17 @@ public abstract class BaseAction extends SystemAction {
 	}
 
 	/**
-	 * 公共查询教学动态左侧信息
+	 * 公共查询教务教学通知左侧信息
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void commonQueryForTeaching() {
+	public void commonQueryForNotice() {
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setType(Constant.ARTICLE_TYPE_TEACH);
+			bsArticle.setType(Constant.ARTICLE_TYPE_NOTICE);
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					9, 1);
 			if (ComonUtil.validateMapResult(map1)) {
-				teachList = (List<BsArticle>) map1.get(Constant.ARTICLE_LIST);
+				notifylist = (List<BsArticle>) map1.get(Constant.ARTICLE_LIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -447,6 +452,14 @@ public abstract class BaseAction extends SystemAction {
 
 	public void setSubjectList(List<TSubject> subjectList) {
 		this.subjectList = subjectList;
+	}
+
+	public TDownload getDownloaddetail() {
+		return downloaddetail;
+	}
+
+	public void setDownloaddetail(TDownload downloaddetail) {
+		this.downloaddetail = downloaddetail;
 	}
 
 }

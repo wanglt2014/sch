@@ -83,10 +83,10 @@
 	    <table tableName="bs_address" ></table>  -->
 	    <table tableName="bs_article" ></table>
 	    <table tableName="t_download" ></table>
-	    <table tableName="t_college" ></table>
+	    <!-- <table tableName="t_college" ></table>
 	    <table tableName="t_subject" ></table>
 	    <table tableName="t_dictionary" ></table>
 	    <table tableName="t_teacher" ></table>
-	    <table tableName="t_student" ></table>
+	    <table tableName="t_student" ></table> -->
 	</abatorContext>
 </abatorConfiguration>

@@ -17,7 +17,7 @@ import com.et59.cus.tools.DateUtil;
 
 /**
  * <p>
- * Title: 文章（通知，咨询，教学动态，学生风采）
+ * Title: 文章（教务教学通知，教学规章制度）
  * </p>
  * <p>
  * Description:
@@ -33,16 +33,16 @@ public class ArticleAction extends BaseAction {
 	Logger log = Logger.getLogger(this.getClass());
 
 	/**
-	 * @Title: toTeachPage
-	 * @Description: 跳转到教学动态
+	 * @Title: toNoticePage
+	 * @Description: 跳转到教务教学通知
 	 * @param @return /news/news.jsp
 	 * @return String 返回类型
 	 * @throws
 	 */
 
-	public String toTeachPage() {
-		super.commonQueryForTeaching();
-		return "to_teach_index";
+	public String toNoticePage() {
+		super.commonQueryForNotice();
+		return "to_notice_index";
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class ArticleAction extends BaseAction {
 		}
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setType(Constant.ARTICLE_TYPE_TEACH);
+			bsArticle.setType(Constant.ARTICLE_TYPE_NOTICE);
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Constant.PAGESIZE, currentPage);
 			if (ComonUtil.validateMapResult(map)) {
@@ -69,7 +69,7 @@ public class ArticleAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "teach_result";
+		return "notice_result";
 	}
 
 	/**
@@ -85,12 +85,17 @@ public class ArticleAction extends BaseAction {
 		try {
 			bsArticledetail = localServiceProxy.queryArticleById(Long
 					.valueOf(id));
+
+			downloaddetail = localServiceEXProxy
+					.queryDownloadById(bsArticledetail.getDownloadid());
+
+			bsArticledetail.setDownload(downloaddetail);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "teach_detail";
+		return "notice_detail";
 	}
 
 	/**

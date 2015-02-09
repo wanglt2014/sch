@@ -6,7 +6,7 @@
 
 <%
 	// 当前导航栏位置
-	request.setAttribute("cur_nav", 3);
+	request.setAttribute("cur_nav", 2);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -58,6 +58,9 @@
 						</div> 
 						<div class="content_detail" id="articcontentdetail">
 							<c:out value="${bsArticledetail.content}" escapeXml="false" />
+						</div>
+						<div>
+						<a href="${bsArticledetail.bsArticledetail.filepath}/${bsArticledetail.bsArticledetail.filename}" id="filePath" title="" ><c:out value="${bsArticledetail.bsArticledetail.filename}" /></a>
 						</div>
 					</div>
 

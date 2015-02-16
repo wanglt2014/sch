@@ -35,14 +35,25 @@ public class ArticleAction extends BaseAction {
 	/**
 	 * @Title: toNoticePage
 	 * @Description: 跳转到教务教学通知
-	 * @param @return /news/news.jsp
 	 * @return String 返回类型
 	 * @throws
 	 */
 
 	public String toNoticePage() {
-		super.commonQueryForNotice();
+		super.commonQueryForArticle(1);
 		return "to_notice_index";
+	}
+
+	/**
+	 * @Title: toRegulationPage
+	 * @Description: 跳转到教务教学制度
+	 * @return String 返回类型
+	 * @throws
+	 */
+
+	public String toRegulationPage() {
+		super.commonQueryForArticle(2);
+		return "to_regulation_index";
 	}
 
 	/**
@@ -73,8 +84,35 @@ public class ArticleAction extends BaseAction {
 	}
 
 	/**
+	 * 查询教务教学制度
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryRegulation() {
+		if (log.isDebugEnabled()) {
+			log.debug("查询交易信息currentPage>>>>:" + currentPage);
+		}
+		try {
+			BsArticleQuery bsArticle = new BsArticleQuery();
+			bsArticle.setType(Constant.ARTICLE_TYPE_REGULATION);
+			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+					Constant.PAGESIZE, currentPage);
+			if (ComonUtil.validateMapResult(map)) {
+				bsArticlelist = (List<BsArticle>) map
+						.get(Constant.ARTICLE_LIST);
+				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
+				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "regulation_result";
+	}
+
+	/**
 	 * @Title: teachDetail
-	 * @Description: 跳转到教学动态详细页面
+	 * @Description: 跳转到教务教学通知详细页面
 	 * @param @return 设定文件
 	 * @return String 返回类型
 	 * @throws
@@ -96,6 +134,31 @@ public class ArticleAction extends BaseAction {
 			e.printStackTrace();
 		}
 		return "notice_detail";
+	}
+
+	/**
+	 * @Title: regulationDetail
+	 * @Description: 跳转到教务教学制度详细页面
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String regulationDetail() {
+		super.commonquery();
+		String id = request.getParameter("id");
+		try {
+			bsArticledetail = localServiceProxy.queryArticleById(Long
+					.valueOf(id));
+
+			downloaddetail = localServiceEXProxy
+					.queryDownloadById(bsArticledetail.getDownloadid());
+
+			bsArticledetail.setDownload(downloaddetail);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "regulation_detail";
 	}
 
 	/**

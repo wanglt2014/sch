@@ -177,10 +177,14 @@ public abstract class BaseAction extends SystemAction {
 	 * 公共查询教务教学通知左侧信息
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public void commonQueryForNotice() {
+	public void commonQueryForArticle(int type) {
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setType(Constant.ARTICLE_TYPE_NOTICE);
+			if (1 == type) {
+				bsArticle.setType(Constant.ARTICLE_TYPE_NOTICE);
+			} else if (2 == type) {
+				bsArticle.setType(Constant.ARTICLE_TYPE_REGULATION);
+			}
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					9, 1);
 			if (ComonUtil.validateMapResult(map1)) {

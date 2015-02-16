@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE abatorConfiguration PUBLIC "-//Apache Software Foundation//DTD Abator for iBATIS Configuration 1.0//EN" "http://ibatis.apache.org/dtd/abator-config_1_0.dtd" >
 <abatorConfiguration>
- <properties url="file:///E:/workspace_school/sch/resources/abatorConfig.properties" />
+ <properties url="file:///E:/workspace_school/schnew/resources/abatorConfig.properties" />
 	<abatorContext id="com.59et.cus.web.internet" generatorSet="java5" defaultModelType="flat">
 		<commentGenerator>
 		  <property name="suppressDate" value="true" />

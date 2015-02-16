@@ -18,7 +18,7 @@
 				<s:property value="#downloadinfo.author" />
 				日期：
 				<s:date name="#downloadinfo.createdate" format="yyyy-MM-dd HH:mm" />
-				<a style="color: #524EA3; text-decoration: underline;" href="Download_downloaddetail_<s:property value="#downloadinfo.id"/>.shtm" target="_blank">[查看]</a>
+				<a style="color: #524EA3; text-decoration: underline;" href="Download_downloaddetail_<s:property value="#downloadinfo.downloadid"/>.shtm" target="_blank">[查看]</a>
 			</div>
 			<%-- <div class="artic_content">
 				<s:property value="#downloadinfo.summary" />

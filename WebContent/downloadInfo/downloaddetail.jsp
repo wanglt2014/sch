@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	// 当前导航栏位置
-	request.setAttribute("cur_nav", 9);
+	request.setAttribute("cur_nav", 3);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -45,7 +45,7 @@
 						<div class="artic_content_detail" id="articcontentdetail">
 							<%-- 描述：
 							<c:out value="${downloaddetail.directions}" escapeXml="false" /> --%>
-							<button>下载</button>
+						<a href="${downloaddetail.filepath}/${downloaddetail.filename}" id="filePath" title="" ><c:out value="${downloaddetail.filename}" /></a>
 						</div>
 					</div>
 				</div>

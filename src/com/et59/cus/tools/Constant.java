@@ -47,6 +47,11 @@ public class Constant {
 	 * 教务教学通知
 	 */
 	public static String ARTICLE_TYPE_NOTICE = "notice";
+
+	/**
+	 * 教务教学制度
+	 */
+	public static String ARTICLE_TYPE_REGULATION = "regulation";
 	/**
 	 * 行业新闻
 	 */

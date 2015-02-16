@@ -25,14 +25,7 @@ import com.et59.cus.service.LocalService;
  * <p>
  * Description: html生成
  * </p>
- * <p>
- * Copyright: 59et Software (c) 2011
- * </p>
- * <p>
- * Company: 点滴工作室
- * </p>
  * 
- * @author Liuhh(jxausea@gmail.com)
  * @date 2014-5-23 上午11:31:49
  * @version 2.0
  * 
@@ -72,10 +65,12 @@ public class HtmlCreatorServlet extends HttpServlet {
 		File cacheFile = new File(cachFileName);
 		boolean load = true;
 		// 如果静态html 存在，就直接显示html，否则，我们就生成它。
-		if (cacheFile.exists()) {
-			load = false;
-		}
-		RequestDispatcher dispatcher  = null;
+		// 注释掉 --------------------------------------------
+		// if (cacheFile.exists()) {
+		// load = false;
+		// }
+		// 注释掉 --------------------------------------------
+		RequestDispatcher dispatcher = null;
 		if (load) {
 			// 例如 index.shtm ，则转发到 index
 			dispatcher = request.getRequestDispatcher(templatePath);
@@ -95,7 +90,8 @@ public class HtmlCreatorServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		} else {
-			dispatcher = getServletContext().getRequestDispatcher("/" + htmlName);
+			dispatcher = getServletContext().getRequestDispatcher(
+					"/" + htmlName);
 			dispatcher.include(request, response);
 		}
 	}

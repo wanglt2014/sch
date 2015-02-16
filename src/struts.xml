@@ -325,6 +325,9 @@
 			<result name="to_notice_index">/article/noticeList.jsp</result>
 			<result name="notice_detail">/article/noticedetail.jsp</result>
 			<result name="notice_result">/article/notice_result.jsp</result>
+			<result name="to_regulation_index">/article/regulationList.jsp</result>
+			<result name="regulation_detail">/article/regulationdetail.jsp</result>
+			<result name="regulation_result">/article/regulation_result.jsp</result>
 			<result name="index">/admin/news_index.jsp</result>
 			<result name="summary">/admin/news_index.jsp</result>
 			<result type="json"></result>

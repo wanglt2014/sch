@@ -24,7 +24,7 @@ $(document).ready(function(){
 		}else if (id == 'nav_link_tongzhi'){
 			location.href = 'Article_toNoticePage.shtm';
 		}else if (id == 'nav_link_zhidu'){
-			location.href = 'College_toCollegePage.shtm';
+			location.href = 'Article_toRegulationPage.shtm';
 		}else if (id == 'nav_link_download') {
 			location.href = 'Download_toDownloadPage.shtm';
 		}else if (id == 'nav_link_teacher') {

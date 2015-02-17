@@ -7,11 +7,10 @@ import com.et59.cus.domain.entity.BsMenu;
 
 /**
  * 菜单节点
- * @author liuhaihua
  *
  */
-public class MenuNode extends BsMenu{
-	private  List<BsMenu> children = new ArrayList<BsMenu>();
+public class MenuNode extends BsMenu {
+	private List<BsMenu> children = new ArrayList<BsMenu>();
 
 	public List<BsMenu> getChildren() {
 		return children;
@@ -20,5 +19,5 @@ public class MenuNode extends BsMenu{
 	public void setChildren(List<BsMenu> children) {
 		this.children = children;
 	}
-	
+
 }

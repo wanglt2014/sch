@@ -166,6 +166,7 @@ public class LocalServiceImpl implements LocalService {
 	private BsAddressDAO bsAddressDAO;
 	@Autowired
 	private TCollegeDAO tCollegeDAO;
+
 	/**
 	 * 查询用户信息
 	 */
@@ -1712,7 +1713,6 @@ public class LocalServiceImpl implements LocalService {
 		return bsSystemDAO.selectByExample(example);
 	}
 
-	
 	/**
 	 * 缓存常量
 	 */
@@ -1726,12 +1726,13 @@ public class LocalServiceImpl implements LocalService {
 				Cache.getInstance().put(row.getSystemKey(),
 						row.getSystemValue());
 			}
-			
+
 			TCollegeExample example = new TCollegeExample();
 			example.createCriteria().andCollegelevelEqualTo("1");
 			TCollege college = (TCollege) Cache.getInstance().get("summary");
 			if (null == college) {
-				college = (TCollege) tCollegeDAO.selectByExample(example).get(0);
+				college = (TCollege) tCollegeDAO.selectByExample(example)
+						.get(0);
 				Cache.getInstance().put("summary", college);
 			}
 		} catch (Exception e) {
@@ -1935,5 +1936,29 @@ public class LocalServiceImpl implements LocalService {
 				orderDAO.updateByPrimaryKey(row);
 			}
 		}
+	}
+
+	/**
+	 * 查询Menu分页
+	 */
+	@Override
+	public Pager queryBsMenuByPage(BsMenu bsMenu, int pagesize,
+			int currentpage, BsUser user) throws Exception {
+		Pager page = new Pager();
+		HashMap map = new HashMap();
+		map.put("userId", user.getUserid());
+		map.put("isAdmin", user.getIsadmin());
+		int startrecord = (currentpage - 1) * pagesize;
+		List<BsResource> list = commonDAOEx.selectBsMenuForPage(map,
+				startrecord, pagesize);
+		int totalCount = 0;
+		if ("yes".equals(user.getIsadmin())) {
+			totalCount = bsMenuDAO.countByExample(new BsMenuExample());
+		} else {
+			totalCount = bsMenuDAO.countByExampleByUserid(map);
+		}
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
 	}
 }

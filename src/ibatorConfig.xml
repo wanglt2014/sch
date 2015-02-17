@@ -9,11 +9,11 @@
     <javaModelGenerator targetPackage="${javaModel.targetPackage}" targetProject="${workspace.domain.projectname}" />
     <sqlMapGenerator targetPackage="${sqlMap.targetPackage}" targetProject="${workspace.domain.projectname}" />
     <daoGenerator targetPackage="${dao.targetPackage}" targetProject="${workspace.domain.projectname}" type="SPRING" />
-<!--     <table schema="schoolweb" tableName="t_student" ></table>
-    <table schema="schoolweb" tableName="t_subject" ></table>
-    <table schema="schoolweb" tableName="t_teacher" ></table> -->
+<!--     <table schema="schoolweb" tableName="t_student" ></table>-->
+    <table schema="schoolweb" tableName="t_subject" ></table> 
+<!--     <table schema="schoolweb" tableName="t_teacher" ></table> -->
 <!--     <table schema="schoolweb" tableName="bs_article" ></table> -->
-	<table schema="schoolweb" tableName="t_download" ></table>
+<!-- 	<table schema="schoolweb" tableName="t_download" ></table> -->
 <!-- 	<table schema="schoolweb" tableName="t_paper" ></table> -->
 <!-- 	<table schema="schoolweb" tableName="t_prize" ></table> -->
 <!-- 	<table schema="schoolweb" tableName="t_research" ></table> -->

@@ -1,5 +1,6 @@
 package com.et59.cus.domain.dao.ex;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.et59.cus.domain.entity.BsAddress;
@@ -12,6 +13,7 @@ import com.et59.cus.domain.entity.BsLeavemessage;
 import com.et59.cus.domain.entity.BsLeavemessageExample;
 import com.et59.cus.domain.entity.BsMarking;
 import com.et59.cus.domain.entity.BsMarkingExample;
+import com.et59.cus.domain.entity.BsMenuExample;
 import com.et59.cus.domain.entity.BsOrder;
 import com.et59.cus.domain.entity.BsOrderExample;
 import com.et59.cus.domain.entity.BsProduct;
@@ -306,6 +308,28 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 		List<TSubject> list = (List<TSubject>) getSqlMapClientTemplate()
 				.queryForList("t_subject.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
+		return list;
+	}
+
+	/**
+	 * 分页查询Menu
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BsResource> selectBsMenuForPage(HashMap map, int startrecord,
+			int endrecord) throws Exception {
+		String isAdmin = (String) map.get("isAdmin");
+		String sql = null;
+		List<BsResource> list = null;
+		if ("yes".equals(isAdmin)) {
+			list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
+					"bs_menu.selectMenuByUserId", map, startrecord, endrecord);
+		} else {
+			list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
+					"bs_menu.abatorgenerated_selectByExample",
+					new BsMenuExample(), startrecord, endrecord);
+		}
+
 		return list;
 	}
 }

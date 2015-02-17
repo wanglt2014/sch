@@ -1,5 +1,6 @@
 package com.et59.cus.domain.dao.ex;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.et59.cus.domain.entity.BsAddress;
@@ -114,4 +115,10 @@ public interface CommonDAOEx {
 	 */
 	public List<TSubject> selectTSubjectForPage(TSubjectExample example,
 			int startrecord, int endrecord) throws Exception;
+
+	/**
+	 * 分页查询Menu列表
+	 */
+	public List<BsResource> selectBsMenuForPage(HashMap map, int startrecord,
+			int endrecord) throws Exception;
 }

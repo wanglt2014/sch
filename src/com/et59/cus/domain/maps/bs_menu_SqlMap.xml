@@ -171,4 +171,21 @@
       <include refid="bs_menu.abatorgenerated_Example_Where_Clause" />
     </isParameterPresent>
   </update>
+  
+  <!-- 根据用户ID查询菜单 -->
+   <select id="selectMenuByUserId" parameterClass="java.util.Map" resultMap="abatorgenerated_BsMenuResult">
+    select m.id, m.text, m.menulevel, m.menuurl, m.menuorder, m.menuparent
+		from bs_menu m,t_role_menu rm, bs_user_role ur
+		WHERE ur.userid =  #userId:BIGINT# 
+		AND ur.roleid =  rm.roleid 
+		AND rm.menuid =  m.id
+  </select>
+  
+  <select id="abatorgenerated_countByExampleByUserid" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+    select count(1)
+		from bs_menu m,t_role_menu rm, bs_user_role ur
+		WHERE ur.userid =  #userId:BIGINT# 
+		AND ur.roleid =  rm.roleid 
+		AND rm.menuid =  m.id
+  </select>
 </sqlMap>

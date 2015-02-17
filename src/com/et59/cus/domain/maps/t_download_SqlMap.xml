@@ -286,10 +286,10 @@
   <!-- 新增后返回自增主键 -->
   <insert id="ibatorgenerated_insertReturnId" parameterClass="com.et59.cus.domain.entity.TDownload">
     insert into t_download (filename, filepath, fileisvalid, createdate, author,
-      directions, infotype, infoorder)
+      directions, infotype, fileType)
     values (#filename:VARCHAR#, #filepath:VARCHAR#, #fileisvalid:VARCHAR#,
-      #createdate:TIMESTAMP#, #author:VARCHAR#, #directions:VARCHAR#, #infotype:INTEGER#,
-      #infoorder:INTEGER#)
+      #createdate:TIMESTAMP#, #author:VARCHAR#, #directions:VARCHAR#, #infotype:VARCHAR#,
+      #filetype:VARCHAR#)
   </insert>
   
   

@@ -45,4 +45,8 @@
   <sqlMap resource="com/et59/cus/domain/maps/t_student_SqlMap.xml" />
   <sqlMap resource="com/et59/cus/domain/maps/t_teacher_SqlMap.xml" />
   
+  <sqlMap resource="com/et59/cus/domain/maps/t_paper_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_prize_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_research_SqlMap.xml" />
+  
 </sqlMapConfig>

@@ -71,24 +71,24 @@
 				</select>
 			</div>
 			<div class="fitem">
-				<label>资源:</label><input name="resourceid" id="resourceid" class="easyui-validatebox" style="display: none;">
+				<label>菜单:</label><input name="menuid" id="menuid" class="easyui-validatebox" style="display: none;">
 				 <select class="easyui-combogrid" id="resourcecombox" name="resourcecombox" style="width:150px" data-options="
             panelWidth: 500,
             multiple: true,
             singleSelect:false, 
             idField: 'id',
-            textField: 'resouceName',
-            url: 'Resource_query',
+            textField: 'text',
+            url: 'Menu_queryForRole',
             method: 'get',
               pageSize: 10,//每页显示的记录条数，默认为10  
              pageList: [10,20],//可以设置每页记录条数的列表 
-              pagination : true,//是否分页  
+              pagination : false,//是否分页  
                rownumbers:true,//序号  
             columns: [[
                 {field:'ck',checkbox:true},
-                {field:'resouceName',title:'资源名字',width:80,align:'right'},
-                {field:'resourceUrl',title:'资源URL',width:120},
-                {field:'resourceType',title:'资源类型',width:80,align:'right'},
+                {field:'text',title:'菜单名称',width:80,align:'center'},
+                {field:'menuurl',title:'菜单URL',width:120},
+                {field:'menulevel',title:'菜单级别',width:80,align:'center'},
             ]],
             fitColumns: true
         ">
@@ -128,12 +128,13 @@
 				url = 'Role_update?id=' + row.id;
 				$.ajax({
 					type : 'post',
-					url : 'Role_queryresourceByroleid',
+					url : 'Role_queryTRoleMenuByroleid',
 					data : {
 						roleid :  row.id,
 					},
 					success : function(data) {
-						$('#resourcecombox').combogrid('setValues', data);
+						jAlert(data);
+						$('#resourcecombox').combogrid('setValues', data.split(","));
 					},
 					error : function() {
 						jAlert('系统错误，请联系管理员','错误提示');
@@ -144,7 +145,7 @@
 			}
 		}
 		function saveRole() {
-			$('#resourceid').val($('#resourcecombox').combogrid('getValues'));
+			$('#menuid').val($('#resourcecombox').combogrid('getValues'));
 			$('#rolefm').form('submit', {
 				url : url,
 				onSubmit : function() {

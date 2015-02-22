@@ -9,15 +9,13 @@ import org.apache.log4j.Logger;
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.BsRole;
 import com.et59.cus.domain.entity.BsRoleResource;
+import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.ex.Pager;
 
 /**
  * 
  * <p>Title: RoleAction.java</p>
  * <p>Description: 角色管理</p>
- * <p>Copyright: 59et Software (c) 2011</p>
- * <p>Company: 点滴工作室</p>
- * @author Liuhh(jxausea@gmail.com)
  * @date 2014-4-23 下午05:43:18
  * @version 2.0
  *
@@ -60,11 +58,11 @@ public class RoleAction extends BaseAction {
 	public  void  update(){
 		boolean flag =false ;
 		String id = request.getParameter("id"); 
-		String resourceid = request.getParameter("resourceid"); 
+		String menuid = request.getParameter("menuid"); 
 		BsRole role = getBsRole();
 		try {
 			role.setId(Integer.valueOf(id));
-			localServiceProxy.updateBsRole(role,resourceid);
+			localServiceProxy.updateBsRole(role,menuid);
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (NumberFormatException e) {
@@ -79,9 +77,9 @@ public class RoleAction extends BaseAction {
 	public void save(){
 		boolean flag =false ;
 		BsRole role = getBsRole();
-		String resourceid = request.getParameter("resourceid"); 
+		String menuid = request.getParameter("menuid"); 
 		try {
-			localServiceProxy.saveBsRole(role,resourceid);
+			localServiceProxy.saveBsRole(role,menuid);
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (NumberFormatException e) {
@@ -121,14 +119,14 @@ public class RoleAction extends BaseAction {
 	/**
 	 * 删除角色资源
 	 */
-	public void queryresourceByroleid(){
+	public void queryTRoleMenuByroleid(){
 		String roleid = request.getParameter("roleid"); 
 		try {
-			List<BsRoleResource>  list =localServiceProxy.queryBsRoleResourceByroleid(Integer.valueOf(roleid));
+			List<TRoleMenu>  list =localServiceProxy.queryTRoleMenuByroleid(Integer.valueOf(roleid));
 			String json ="";
 			if(null!=list&&list.size()>0){
-				for(BsRoleResource row:list){
-					json = json+row.getResourceid()+",";
+				for(TRoleMenu row:list){
+					json = json+row.getMenuid().toString()+",";
 				}
 				json = json.substring(0, json.length()-1);
 				log.info(json);
@@ -140,4 +138,27 @@ public class RoleAction extends BaseAction {
 			e.printStackTrace();
 		}
 	}
+	
+//	/**
+//	 * 删除角色资源
+//	 */
+//	public void queryresourceByroleid(){
+//		String roleid = request.getParameter("roleid"); 
+//		try {
+//			List<BsRoleResource>  list =localServiceProxy.queryBsRoleResourceByroleid(Integer.valueOf(roleid));
+//			String json ="";
+//			if(null!=list&&list.size()>0){
+//				for(BsRoleResource row:list){
+//					json = json+row.getResourceid()+",";
+//				}
+//				json = json.substring(0, json.length()-1);
+//				log.info(json);
+//			}
+//			super.reponseWriter(json);
+//		} catch (NumberFormatException e) {
+//			e.printStackTrace();
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+//	}
 }

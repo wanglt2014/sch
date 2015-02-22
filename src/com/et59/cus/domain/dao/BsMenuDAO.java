@@ -95,4 +95,9 @@ public interface BsMenuDAO {
 	 * @abatorgenerated
 	 */
 	public int countByExampleByUserid(HashMap map);
+	
+	/**
+	 * 根据用户获取菜单
+	 */
+	public List<BsMenu> selectByExampleByUserid(BsMenuExample example,HashMap map);
 }

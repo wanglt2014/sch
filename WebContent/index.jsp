@@ -15,7 +15,7 @@
 	request.setAttribute("css_path", css_path);
 	request.setAttribute("js_path", js_path);
 	
-	// 当前导航栏位置1
+	// 当前导航栏位置
 	request.setAttribute("cur_nav", 0);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">

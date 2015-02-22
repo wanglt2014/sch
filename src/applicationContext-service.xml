@@ -282,6 +282,12 @@
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
+	<!-- 角色菜单关联表 -->
+	<bean name="tRoleMenuDAO" class="com.et59.cus.domain.dao.TRoleMenuDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
 	
 	<!-- 动态多数据源支持 -->
 	<jee:jndi-lookup id="ds0" jndi-name="jdbc/ds0" />

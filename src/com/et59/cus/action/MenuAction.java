@@ -24,8 +24,10 @@ public class MenuAction extends BaseAction {
 	 */
 	public void query() {
 		String jsonstr = "";
+		Map<String, Object> session = context.getSession();
+		BsUser sessionuser = (BsUser) session.get("user");
 		try {
-			jsonstr = localServiceProxy.getMenuJsonstr();
+			jsonstr = localServiceProxy.getMenuJsonstr(sessionuser);
 			super.reponseWriter(jsonstr);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -41,13 +43,17 @@ public class MenuAction extends BaseAction {
 		String resourceurlquery = request.getParameter("resourceurlquery");
 		String page = request.getParameter("page"); // 当前页数
 		String rows = request.getParameter("rows"); // 每页显示行数
-		Map<String, Object> session = context.getSession();
-		BsUser sessionuser = (BsUser) session.get("user");
+		if(page == null || rows==null){
+			page="1";
+			rows="1000";
+		}
 		try {
-			BsResource bsBsResource = new BsResource();
-			bsBsResource.setResourceUrl(resourceurlquery);
+			Map<String, Object> session = context.getSession();
+			BsUser sessionuser = (BsUser) session.get("user");
+//			BsResource bsBsResource = new BsResource();
+//			bsBsResource.setResourceUrl(resourceurlquery);
 			Pager pager = localServiceProxy.queryBsMenuByPage(new BsMenu(),
-					Integer.valueOf(rows), Integer.valueOf(page), sessionuser);
+					Integer.valueOf(rows), Integer.valueOf(page),sessionuser);
 			super.reponseWriter(JSON.toJSONString(pager));
 		} catch (IOException e) {
 			e.printStackTrace();

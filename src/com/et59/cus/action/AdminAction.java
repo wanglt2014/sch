@@ -32,7 +32,8 @@ public class AdminAction extends BaseAction {
 		}
 		String str ="login";
 		BsUser sessionuser = (BsUser) session.get("user");
-		if(null==sessionuser||sessionuser.getIsadmin().equals("no")){
+		//if(null==sessionuser||sessionuser.getIsadmin().equals("no")){
+		if(null==sessionuser){
 			BsUser userobj = new BsUser();
 			try {
 				userobj.setUsername(idNumber);
@@ -45,23 +46,24 @@ public class AdminAction extends BaseAction {
 						if (ComonUtil.validateMapResult(map)) {
 							BsUser user1 = (BsUser) map.get(Constant.USER);
 								log.debug("登录成功");
-								if(user1.getIsadmin().equals("yes")){
-									str = "adminindex";
-								}else{
-									super.commonquery();
-									String url =(String) session.get("GOTO_URL_KEY");
-									log.info("url:"+url);
-									if(null==url||url.equals("")){
-										response.sendRedirect("index");
-									}else{
-										if(url.contains("OpenApp_index")){
-											response.sendRedirect("OpenApi_index");
-											//response.sendRedirect(url);
-										}else{
-											response.sendRedirect(url);
-										}
-									}
-								}
+//								if(user1.getIsadmin().equals("yes")){
+//									str = "adminindex";
+//								}else{
+//									super.commonquery();
+//									String url =(String) session.get("GOTO_URL_KEY");
+//									log.info("url:"+url);
+//									if(null==url||url.equals("")){
+//										response.sendRedirect("index");
+//									}else{
+//										if(url.contains("OpenApp_index")){
+//											response.sendRedirect("OpenApi_index");
+//											//response.sendRedirect(url);
+//										}else{
+//											response.sendRedirect(url);
+//										}
+//									}
+//								}
+								str = "adminindex";
 								showMessage = "";
 								session.put("user", user1);
 						} else {

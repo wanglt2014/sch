@@ -39,6 +39,7 @@ import com.et59.cus.domain.dao.OpenAppDAO;
 import com.et59.cus.domain.dao.OpenLogDAO;
 import com.et59.cus.domain.dao.OpenOauthDAO;
 import com.et59.cus.domain.dao.TCollegeDAO;
+import com.et59.cus.domain.dao.TRoleMenuDAO;
 import com.et59.cus.domain.dao.TjActiontimeDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
 import com.et59.cus.domain.entity.BsAddress;
@@ -88,6 +89,8 @@ import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
 import com.et59.cus.domain.entity.TCollege;
 import com.et59.cus.domain.entity.TCollegeExample;
+import com.et59.cus.domain.entity.TRoleMenu;
+import com.et59.cus.domain.entity.TRoleMenuExample;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.TjActiontimeExample;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
@@ -166,6 +169,9 @@ public class LocalServiceImpl implements LocalService {
 	private BsAddressDAO bsAddressDAO;
 	@Autowired
 	private TCollegeDAO tCollegeDAO;
+	
+	@Autowired
+	private TRoleMenuDAO tRoleMenuDAO;
 
 	/**
 	 * 查询用户信息
@@ -733,33 +739,47 @@ public class LocalServiceImpl implements LocalService {
 	 */
 	@SuppressWarnings({ "rawtypes" })
 	@Override
-	public String getMenuJsonstr() throws Exception {
+	public String getMenuJsonstr(BsUser user) throws Exception {
 		BsMenuExample example = new BsMenuExample();
 		example.setOrderByClause(" menulevel  desc ,menuorder  desc ");
-		List<BsMenu> dataList = bsMenuDAO.selectByExample(example);
+		//修改
+		//List<BsMenu> dataList = bsMenuDAO.selectByExample(example);
+		HashMap map = new HashMap();
+		map.put("userId", user.getUserid());
+		List<BsMenu> dataList = null;
+		if(user.getIsadmin().equals("no")){
+			dataList = bsMenuDAO.selectByExampleByUserid(example,map);
+		}else{
+			dataList = bsMenuDAO.selectByExample(example);
+		}
+		
+		
 		// 节点列表（散列表，用于临时存储节点对象）
 		HashMap<Integer, MenuNode> nodeList = new HashMap<Integer, MenuNode>();
 		// 根节点
 		MenuNode root = null;
-		// 根据结果集构造节点列表（存入散列表）
-		for (BsMenu dataRecord : dataList) {
-			MenuNode node = new MenuNode();
-			node.setId(dataRecord.getId());
-			BeanUtils.copyProperties(dataRecord, node);
-			nodeList.put(node.getId().intValue(), node);
-		}
-		// 构造无序的多叉树
-		Set entrySet = nodeList.entrySet();
-		for (Iterator it = entrySet.iterator(); it.hasNext();) {
-			MenuNode node = (MenuNode) ((Map.Entry) it.next()).getValue();
-			if (node.getMenuparent() == null || node.getMenuparent().equals("")
-					|| node.getMenuparent().equals(0)) {
-				root = node;
-			} else {
-				((MenuNode) nodeList.get(node.getMenuparent())).getChildren()
-						.add(node);
+		if(dataList!=null || dataList.size()>0){
+			// 根据结果集构造节点列表（存入散列表）
+			for (BsMenu dataRecord : dataList) {
+				MenuNode node = new MenuNode();
+				node.setId(dataRecord.getId());
+				BeanUtils.copyProperties(dataRecord, node);
+				nodeList.put(node.getId().intValue(), node);
+			}
+			// 构造无序的多叉树
+			Set entrySet = nodeList.entrySet();
+			for (Iterator it = entrySet.iterator(); it.hasNext();) {
+				MenuNode node = (MenuNode) ((Map.Entry) it.next()).getValue();
+				if (node.getMenuparent() == null || node.getMenuparent().equals("")
+						|| node.getMenuparent().equals(0)) {
+					root = node;
+				} else {
+					((MenuNode) nodeList.get(node.getMenuparent())).getChildren()
+							.add(node);
+				}
 			}
 		}
+		
 		String json = JSON.toJSONString(root);
 		return "[" + json + "]";
 	}
@@ -1288,54 +1308,78 @@ public class LocalServiceImpl implements LocalService {
 	@Override
 	public void deleteBsRole(int id) throws Exception {
 		bsRoleDAO.deleteByPrimaryKey(id);
-		BsRoleResourceExample example = new BsRoleResourceExample();
+		TRoleMenuExample example = new TRoleMenuExample();
 		example.createCriteria().andRoleidEqualTo(id);
-		bsRoleResourceDAO.deleteByExample(example);
+		tRoleMenuDAO.deleteByExample(example);
 	}
 
 	/**
 	 * 插入角色
 	 */
 	@Override
-	public void saveBsRole(BsRole bsRole, String resourceid) throws Exception {
+	public void saveBsRole(BsRole bsRole, String menuid) throws Exception {
 		bsRoleDAO.insert(bsRole);
 		BsRoleExample example = new BsRoleExample();
 		example.createCriteria().andIsactiveEqualTo(bsRole.getIsactive())
 				.andNameEqualTo(bsRole.getName());
 		List<BsRole> bsRoleparam = bsRoleDAO.selectByExample(example);
-		BsRoleResource bsRoleResource = new BsRoleResource();
-		String[] resourceidarray = resourceid.split(",");
+		TRoleMenu tRoleMenu = new TRoleMenu();
+		String[] resourceidarray = menuid.split(",");
 		for (int i = 0; i < resourceidarray.length; i++) {
 			if (!resourceidarray[i].equals("")) {
-				bsRoleResource.setResourceid(Integer
+				tRoleMenu.setMenuid(Integer
 						.valueOf(resourceidarray[i]));
-				bsRoleResource.setRoleid(bsRole.getId());
-				bsRoleResource.setRoleid(bsRoleparam.get(0).getId());
-				bsRoleResourceDAO.insert(bsRoleResource);
+				tRoleMenu.setRoleid(bsRole.getId());
+				tRoleMenu.setRoleid(bsRoleparam.get(0).getId());
+				tRoleMenuDAO.insert(tRoleMenu);
 			}
 		}
 
 	}
+	
+//	/**
+//	 * 插入角色
+//	 */
+//	@Override
+//	public void saveBsRole(BsRole bsRole, String resourceid) throws Exception {
+//		bsRoleDAO.insert(bsRole);
+//		BsRoleExample example = new BsRoleExample();
+//		example.createCriteria().andIsactiveEqualTo(bsRole.getIsactive())
+//				.andNameEqualTo(bsRole.getName());
+//		List<BsRole> bsRoleparam = bsRoleDAO.selectByExample(example);
+//		BsRoleResource bsRoleResource = new BsRoleResource();
+//		String[] resourceidarray = resourceid.split(",");
+//		for (int i = 0; i < resourceidarray.length; i++) {
+//			if (!resourceidarray[i].equals("")) {
+//				bsRoleResource.setResourceid(Integer
+//						.valueOf(resourceidarray[i]));
+//				bsRoleResource.setRoleid(bsRole.getId());
+//				bsRoleResource.setRoleid(bsRoleparam.get(0).getId());
+//				bsRoleResourceDAO.insert(bsRoleResource);
+//			}
+//		}
+//
+//	}
 
 	/**
 	 * 更新角色
 	 */
 	@Override
-	public void updateBsRole(BsRole bsRole, String resourceid) throws Exception {
+	public void updateBsRole(BsRole bsRole, String menuid) throws Exception {
 		bsRoleDAO.updateByPrimaryKey(bsRole);
 		// 先删除
-		BsRoleResourceExample example = new BsRoleResourceExample();
+		TRoleMenuExample example = new TRoleMenuExample();
 		example.createCriteria().andRoleidEqualTo(bsRole.getId());
-		bsRoleResourceDAO.deleteByExample(example);
+		tRoleMenuDAO.deleteByExample(example);
 		// 后新增
-		BsRoleResource bsRoleResource = new BsRoleResource();
-		String[] resourceidarray = resourceid.split(",");
+		TRoleMenu tRoleMenu = new TRoleMenu();
+		String[] resourceidarray = menuid.split(",");
 		for (int i = 0; i < resourceidarray.length; i++) {
 			if (!resourceidarray[i].equals("")) {
-				bsRoleResource.setResourceid(Integer
+				tRoleMenu.setMenuid(Integer
 						.valueOf(resourceidarray[i]));
-				bsRoleResource.setRoleid(bsRole.getId());
-				bsRoleResourceDAO.insert(bsRoleResource);
+				tRoleMenu.setRoleid(bsRole.getId());
+				tRoleMenuDAO.insert(tRoleMenu);
 			}
 		}
 
@@ -1945,20 +1989,32 @@ public class LocalServiceImpl implements LocalService {
 	public Pager queryBsMenuByPage(BsMenu bsMenu, int pagesize,
 			int currentpage, BsUser user) throws Exception {
 		Pager page = new Pager();
-		HashMap map = new HashMap();
-		map.put("userId", user.getUserid());
-		map.put("isAdmin", user.getIsadmin());
+		BsMenuExample example = new BsMenuExample();
+		com.et59.cus.domain.entity.BsMenuExample.Criteria criteria = example
+				.createCriteria();
+		criteria.andMenulevelGreaterThan(2);
 		int startrecord = (currentpage - 1) * pagesize;
-		List<BsResource> list = commonDAOEx.selectBsMenuForPage(map,
+		List<BsResource> list = commonDAOEx.selectBsMenuForPage(example,
 				startrecord, pagesize);
 		int totalCount = 0;
-		if ("yes".equals(user.getIsadmin())) {
-			totalCount = bsMenuDAO.countByExample(new BsMenuExample());
-		} else {
-			totalCount = bsMenuDAO.countByExampleByUserid(map);
-		}
+//		if ("yes".equals(user.getIsadmin())) {
+			totalCount = bsMenuDAO.countByExample(example);
+//		} else {
+//			totalCount = bsMenuDAO.countByExampleByUserid(map);
+//		}
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;
+	}
+	
+	/**
+	 * 查询角色对应的菜单
+	 */
+	@Override
+	public List<TRoleMenu> queryTRoleMenuByroleid(int roleid)
+			throws Exception {
+		TRoleMenuExample example = new TRoleMenuExample();
+		example.createCriteria().andRoleidEqualTo(roleid);
+		return tRoleMenuDAO.selectByExample(example);
 	}
 }

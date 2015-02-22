@@ -13,6 +13,7 @@ import com.et59.cus.domain.entity.BsLeavemessage;
 import com.et59.cus.domain.entity.BsLeavemessageExample;
 import com.et59.cus.domain.entity.BsMarking;
 import com.et59.cus.domain.entity.BsMarkingExample;
+import com.et59.cus.domain.entity.BsMenuExample;
 import com.et59.cus.domain.entity.BsOrder;
 import com.et59.cus.domain.entity.BsOrderExample;
 import com.et59.cus.domain.entity.BsProduct;
@@ -119,6 +120,6 @@ public interface CommonDAOEx {
 	/**
 	 * 分页查询Menu列表
 	 */
-	public List<BsResource> selectBsMenuForPage(HashMap map, int startrecord,
+	public List<BsResource> selectBsMenuForPage(BsMenuExample example,int startrecord,
 			int endrecord) throws Exception;
 }

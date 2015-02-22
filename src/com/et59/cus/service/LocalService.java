@@ -24,6 +24,7 @@ import com.et59.cus.domain.entity.BsUserservice;
 import com.et59.cus.domain.entity.OpenApi;
 import com.et59.cus.domain.entity.OpenApp;
 import com.et59.cus.domain.entity.OpenOauth;
+import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.BsEmailquery;
@@ -151,7 +152,7 @@ public interface LocalService {
 	public void deleteArticle(long id) throws Exception;
 
 	// 菜单表
-	public String getMenuJsonstr() throws Exception;
+	public String getMenuJsonstr(BsUser user) throws Exception;
 
 	public void updateOrAddMenu(BsMenu bsMenu) throws Exception;
 
@@ -313,4 +314,10 @@ public interface LocalService {
 	 */
 	public Pager queryBsMenuByPage(BsMenu bsMenu, int pagesize,
 			int currentpage, BsUser user) throws Exception;
+	
+	/**
+	 * 查询角色对应的菜单
+	 */
+	public List<TRoleMenu> queryTRoleMenuByroleid(int roleid)
+			throws Exception;
 }

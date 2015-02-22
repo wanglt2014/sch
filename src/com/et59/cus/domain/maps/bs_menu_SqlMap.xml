@@ -179,13 +179,21 @@
 		WHERE ur.userid =  #userId:BIGINT# 
 		AND ur.roleid =  rm.roleid 
 		AND rm.menuid =  m.id
+		union 
+	select m.id, m.text, m.menulevel, m.menuurl, m.menuorder, m.menuparent   
+		from bs_menu m where m.menulevel in (1,2)
+		order by menulevel  desc ,menuorder  desc
   </select>
   
-  <select id="abatorgenerated_countByExampleByUserid" parameterClass="java.util.Map" resultClass="java.lang.Integer">
-    select count(1)
-		from bs_menu m,t_role_menu rm, bs_user_role ur
-		WHERE ur.userid =  #userId:BIGINT# 
-		AND ur.roleid =  rm.roleid 
-		AND rm.menuid =  m.id
+   <!-- 角色查询菜单 -->
+   <select id="selectMenuByRole" parameterClass="com.et59.cus.domain.entity.BsMenuExample" resultMap="abatorgenerated_BsMenuResult">
+    select id, text, menulevel, menuurl, menuorder, menuparent
+    from bs_menu
+    where menulevel not in(1,2)
+    <isParameterPresent>
+      <isNotNull property="orderByClause">
+        order by $orderByClause$
+      </isNotNull>
+    </isParameterPresent>
   </select>
 </sqlMap>

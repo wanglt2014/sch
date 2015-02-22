@@ -316,19 +316,19 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BsResource> selectBsMenuForPage(HashMap map, int startrecord,
+	public List<BsResource> selectBsMenuForPage(BsMenuExample example,int startrecord,
 			int endrecord) throws Exception {
-		String isAdmin = (String) map.get("isAdmin");
-		String sql = null;
+//		String isAdmin = (String) map.get("isAdmin");
+//		String sql = null;
 		List<BsResource> list = null;
-		if ("yes".equals(isAdmin)) {
-			list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
-					"bs_menu.selectMenuByUserId", map, startrecord, endrecord);
-		} else {
+//		if ("yes".equals(isAdmin)) {
+//			list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
+//					"bs_menu.selectMenuByUserId", map, startrecord, endrecord);
+//		} else {
 			list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
 					"bs_menu.abatorgenerated_selectByExample",
-					new BsMenuExample(), startrecord, endrecord);
-		}
+					example, startrecord, endrecord);
+//		}
 
 		return list;
 	}

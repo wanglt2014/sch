@@ -72,7 +72,7 @@
       </tr>
       <tr>
         <td height="35" class="login-text02">验证图片：<br /></td>
-        <td>	<img width="80" height="20" id="randimage" src="${request_path}/common/validate_img.jsp" align="absMiddle" border="0" alt="看不清楚?请点击刷新" style="cursor : pointer;" onclick="this.src='${request_path}/common/validate_img.jsp?'+ Math.random()"/></td>
+        <td>	<img width="90" height="30" id="randimage" src="${request_path}/common/validate_img.jsp" align="absMiddle" border="0" alt="看不清楚?请点击刷新" style="cursor : pointer;" onclick="this.src='${request_path}/common/validate_img.jsp?'+ Math.random()"/></td>
       </tr>
       <tr>
         <td height="35" class="login-text02">请输入验证码：</td>

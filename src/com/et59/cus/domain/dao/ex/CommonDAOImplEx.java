@@ -38,6 +38,7 @@ import com.et59.cus.domain.entity.OpenLog;
 import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
+import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TSubject;
@@ -330,6 +331,19 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 					example, startrecord, endrecord);
 //		}
 
+		return list;
+	}
+	
+	/**
+	 * 分页查询数据字典
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TDictionary> selectDictionaryForPage(int startrecord, int endrecord)
+			throws Exception {
+		List<TDictionary> list = (List<TDictionary>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_dictionary.ibatorgenerated_selectByExample",startrecord, endrecord);
 		return list;
 	}
 }

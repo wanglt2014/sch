@@ -320,4 +320,10 @@ public interface LocalService {
 	 */
 	public List<TRoleMenu> queryTRoleMenuByroleid(int roleid)
 			throws Exception;
+	
+	/**
+	 * 数据字典查询
+	 */
+	public Pager queryDictionaryBypage(int pagesize, int currentpage)
+			throws Exception;
 }

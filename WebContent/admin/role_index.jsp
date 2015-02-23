@@ -133,7 +133,6 @@
 						roleid :  row.id,
 					},
 					success : function(data) {
-						jAlert(data);
 						$('#resourcecombox').combogrid('setValues', data.split(","));
 					},
 					error : function() {

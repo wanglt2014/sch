@@ -49,7 +49,7 @@ public class RandomImageGenerator {
 		g.setColor(Color.white);
 		g.fillRect(0, 0, width, height);
 		// 设置字体
-		Font mFont = new Font("Tahoma", Font.BOLD, 16);
+		Font mFont = new Font("Tahoma", Font.BOLD, 20);
 		g.setFont(mFont);
 		g.setColor(Color.BLACK);// 设置字体颜色
 		// 画认证码,每个认证码在不同的水平位置
@@ -79,17 +79,17 @@ public class RandomImageGenerator {
 			g.setColor(color1); // 随即画各种颜色的点
 			g.drawOval(x, y, 0, 0);
 		}
-		// 画干扰线
-		for (int i = 0; i < 5; i++) {
-			int x = random.nextInt(width);
-			int y = random.nextInt(height);
-			int x1 = random.nextInt(width);
-			int y1 = random.nextInt(height);
-			Color color1 = new Color(random.nextInt(255), random.nextInt(255),
-					random.nextInt(255));
-			g.setColor(color1); // 随即画各种颜色的线
-			g.drawLine(x, y, x1, y1);
-		}
+//		// 画干扰线
+//		for (int i = 0; i < 5; i++) {
+//			int x = random.nextInt(width);
+//			int y = random.nextInt(height);
+//			int x1 = random.nextInt(width);
+//			int y1 = random.nextInt(height);
+//			Color color1 = new Color(random.nextInt(255), random.nextInt(255),
+//					random.nextInt(255));
+//			g.setColor(color1); // 随即画各种颜色的线
+//			g.drawLine(x, y, x1, y1);
+//		}
 		// 图像生效
 		g.dispose();
 		// 输出页面

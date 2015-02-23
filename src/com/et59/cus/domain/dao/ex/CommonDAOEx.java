@@ -38,6 +38,7 @@ import com.et59.cus.domain.entity.OpenLog;
 import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
+import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TSubject;
@@ -122,4 +123,10 @@ public interface CommonDAOEx {
 	 */
 	public List<BsResource> selectBsMenuForPage(BsMenuExample example,int startrecord,
 			int endrecord) throws Exception;
+	
+	/**
+	 * 分页查询数据字典
+	 */
+	public List<TDictionary> selectDictionaryForPage(int startrecord, int endrecord)
+			throws Exception;
 }

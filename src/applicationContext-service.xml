@@ -137,6 +137,11 @@
 		scope="prototype" autowire="byName">
 	</bean>
 	
+	<!-- 数据字典 -->
+	<bean name="DictionaryAction" class="com.et59.cus.action.DictionaryAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	
 	
 	<!-- 本地数据Service服务 -->
 	<bean id="localService" class="com.et59.cus.service.LocalServiceImpl"
@@ -284,6 +289,12 @@
 	
 	<!-- 角色菜单关联表 -->
 	<bean name="tRoleMenuDAO" class="com.et59.cus.domain.dao.TRoleMenuDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 字典表 -->
+	<bean name="tDictionaryDAO" class="com.et59.cus.domain.dao.TDictionaryDAOImpl"
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>

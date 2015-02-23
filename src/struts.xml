@@ -347,6 +347,14 @@
 			<result type="json"></result>
 		</action>
 
+		<!-- 数据字典 -->
+		<action name="Dictionary_*" class="DictionaryAction"
+			method="{1}">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="timerInterceptor" />
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="index">/admin/dictionary_index.jsp</result>
+		</action>
 	</package>
 
 </struts>    

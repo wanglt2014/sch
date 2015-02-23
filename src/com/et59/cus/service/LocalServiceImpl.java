@@ -39,6 +39,7 @@ import com.et59.cus.domain.dao.OpenAppDAO;
 import com.et59.cus.domain.dao.OpenLogDAO;
 import com.et59.cus.domain.dao.OpenOauthDAO;
 import com.et59.cus.domain.dao.TCollegeDAO;
+import com.et59.cus.domain.dao.TDictionaryDAO;
 import com.et59.cus.domain.dao.TRoleMenuDAO;
 import com.et59.cus.domain.dao.TjActiontimeDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
@@ -89,6 +90,8 @@ import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
 import com.et59.cus.domain.entity.TCollege;
 import com.et59.cus.domain.entity.TCollegeExample;
+import com.et59.cus.domain.entity.TDictionary;
+import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TRoleMenuExample;
 import com.et59.cus.domain.entity.TjActiontime;
@@ -172,6 +175,9 @@ public class LocalServiceImpl implements LocalService {
 	
 	@Autowired
 	private TRoleMenuDAO tRoleMenuDAO;
+	
+	@Autowired
+	private TDictionaryDAO tDictionaryDAO;
 
 	/**
 	 * 查询用户信息
@@ -2016,5 +2022,31 @@ public class LocalServiceImpl implements LocalService {
 		TRoleMenuExample example = new TRoleMenuExample();
 		example.createCriteria().andRoleidEqualTo(roleid);
 		return tRoleMenuDAO.selectByExample(example);
+	}
+	
+	/**
+	 * 数据字典查询
+	 */
+	@Override
+	public Pager queryDictionaryBypage(int pagesize, int currentpage)
+			throws Exception {
+		Pager page = new Pager();
+		TDictionaryExample example = new TDictionaryExample();
+		com.et59.cus.domain.entity.TDictionaryExample.Criteria criteria = example
+				.createCriteria();
+//		if (null != bsProductcategory.getProductcategoryName()) {
+//			criteria.andProductcategoryNameLike("%"
+//					+ bsProductcategory.getProductcategoryName() + "%");
+//		}
+//		if (null != bsProductcategory.getSupplierCode()) {
+//			criteria.andSupplierCodeEqualTo(bsProductcategory.getSupplierCode());
+//		}
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TDictionary> list = commonDAOEx
+				.selectDictionaryForPage(startrecord, pagesize);
+		int totalCount = tDictionaryDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
 	}
 }

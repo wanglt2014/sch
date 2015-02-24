@@ -355,6 +355,21 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/dictionary_index.jsp</result>
 		</action>
+		
+		<!-- 师资队伍 -->
+		<action name="Teacher_*" class="TeacherAction"
+			method="{1}">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="timerInterceptor" />
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="index">/admin/teacher/teacher_index.jsp</result>
+		</action>
+		
+		<!-- 师资队伍 -->
+		<action name="File_*" class="FileAction"
+			method="{1}">
+			<result name="success">/admin/teacher/result.jsp</result>
+		</action>
 	</package>
 
 </struts>    

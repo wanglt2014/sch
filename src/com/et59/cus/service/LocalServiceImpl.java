@@ -41,6 +41,7 @@ import com.et59.cus.domain.dao.OpenOauthDAO;
 import com.et59.cus.domain.dao.TCollegeDAO;
 import com.et59.cus.domain.dao.TDictionaryDAO;
 import com.et59.cus.domain.dao.TRoleMenuDAO;
+import com.et59.cus.domain.dao.TTeacherDAO;
 import com.et59.cus.domain.dao.TjActiontimeDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
 import com.et59.cus.domain.entity.BsAddress;
@@ -94,6 +95,8 @@ import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TRoleMenuExample;
+import com.et59.cus.domain.entity.TTeacher;
+import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.TjActiontimeExample;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
@@ -170,14 +173,17 @@ public class LocalServiceImpl implements LocalService {
 	private TjActiontimeDAO tjActiontimeDAO;
 	@Autowired
 	private BsAddressDAO bsAddressDAO;
+	
+	
 	@Autowired
 	private TCollegeDAO tCollegeDAO;
-	
 	@Autowired
 	private TRoleMenuDAO tRoleMenuDAO;
-	
 	@Autowired
 	private TDictionaryDAO tDictionaryDAO;
+	@Autowired
+	private TTeacherDAO tTeacherDAO;
+	
 
 	/**
 	 * 查询用户信息
@@ -2028,23 +2034,76 @@ public class LocalServiceImpl implements LocalService {
 	 * 数据字典查询
 	 */
 	@Override
-	public Pager queryDictionaryBypage(int pagesize, int currentpage)
+	public Pager queryDictionaryBypage(TDictionary tDictionary,int pagesize, int currentpage)
 			throws Exception {
 		Pager page = new Pager();
 		TDictionaryExample example = new TDictionaryExample();
 		com.et59.cus.domain.entity.TDictionaryExample.Criteria criteria = example
 				.createCriteria();
-//		if (null != bsProductcategory.getProductcategoryName()) {
-//			criteria.andProductcategoryNameLike("%"
-//					+ bsProductcategory.getProductcategoryName() + "%");
-//		}
+		String type = tDictionary.getDictionarytype();
+		if (null != tDictionary.getDictionarytype()) {
+			criteria.andDictionarytypeEqualTo(type);
+		}
 //		if (null != bsProductcategory.getSupplierCode()) {
 //			criteria.andSupplierCodeEqualTo(bsProductcategory.getSupplierCode());
 //		}
 		int startrecord = (currentpage - 1) * pagesize;
 		List<TDictionary> list = commonDAOEx
-				.selectDictionaryForPage(startrecord, pagesize);
+				.selectDictionaryForPage(example,startrecord, pagesize);
 		int totalCount = tDictionaryDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+	
+	/**
+	 * 删除字典
+	 */
+	@Override
+	public void deleteDictionary(int id) throws Exception {
+		tDictionaryDAO.deleteByPrimaryKey(id);
+	}
+
+	/**
+	 * 保存字典
+	 */
+	@Override
+	public void saveDictionary(TDictionary tDictionary)
+			throws Exception {
+		tDictionaryDAO.insert(tDictionary);
+	}
+
+	/**
+	 * 更新字典
+	 */
+	@Override
+	public void udateDictionary(TDictionary tDictionary)
+			throws Exception {
+		tDictionaryDAO.updateByPrimaryKey(tDictionary);
+	}
+	
+	/**
+	 * 师资队伍查询
+	 */
+	@Override
+	public Pager queryTeacherBypage(TTeacher tTeacher,int pagesize, int currentpage)
+			throws Exception {
+		Pager page = new Pager();
+		TTeacherExample example = new TTeacherExample();
+		com.et59.cus.domain.entity.TTeacherExample.Criteria criteria = example
+				.createCriteria();
+		String teacherName = tTeacher.getTeachername();
+		Integer department = tTeacher.getDepartment();
+		if (null != teacherName) {
+			criteria.andTeachernameLike(teacherName);
+		}
+		if (null != department && department!=0) {
+			criteria.andDepartmentEqualTo(department);
+		}
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TTeacher> list = commonDAOEx
+				.selectTeacherForPage(example, startrecord, pagesize);
+		int totalCount = tTeacherDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;

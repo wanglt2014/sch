@@ -142,6 +142,16 @@
 		scope="prototype" autowire="byName">
 	</bean>
 	
+	<!-- 师资队伍 -->
+	<bean name="TeacherAction" class="com.et59.cus.action.TeacherAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	
+	<!-- 师资队伍 -->
+	<bean name="FileAction" class="com.et59.cus.tools.FileAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	
 	
 	<!-- 本地数据Service服务 -->
 	<bean id="localService" class="com.et59.cus.service.LocalServiceImpl"
@@ -295,6 +305,12 @@
 	
 	<!-- 字典表 -->
 	<bean name="tDictionaryDAO" class="com.et59.cus.domain.dao.TDictionaryDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 教师表 -->
+	<bean name="tTeacherDAO" class="com.et59.cus.domain.dao.TTeacherDAOImpl"
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>

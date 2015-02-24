@@ -2,19 +2,29 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 <%
+	response.setHeader("Pragma","No-cache");
+	response.setHeader("Cache-Control","no-cache");
+	response.setDateHeader("Expires", -10);
 	String request_path = request.getContextPath();
 	String image_path = request_path + "/images/blue-themes";
 	String css_path = request_path + "/css/blue-themes";
 	String js_path = request_path + "/js";
+	String basePath = request.getScheme() + "://"   
+            + request.getServerName() + ":" + request.getServerPort()   
+            + request_path + "/";   
 	request.setAttribute("request_path", request_path);
 	request.setAttribute("image_path", image_path);
 	request.setAttribute("css_path", css_path);
 	request.setAttribute("js_path", js_path);
+	request.setAttribute("basePath", basePath);
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="pragma" content="no-cache">
+ <meta http-equiv="cache-control" content="no-cache">
+ <meta http-equiv="expires" content="0">   
 <title>${sitename}--后台管理系统</title>
 <link rel="stylesheet" type="text/css"
 	href="${css_path}/admin/default/easyui.css">
@@ -40,6 +50,47 @@
 	src="${request_path}/umeditor/lang/zh-cn/zh-cn.js"></script>
 <script language="JavaScript" type="text/javascript"
 	src="${js_path}/footer.js" charset="UTF-8"></script>
+	<%--引入SWFUpload控制文件 --%>
+	<script type="text/javascript">
+		var request_path ="<%=request_path%>";
+	</script>
+<%-- <link rel="stylesheet" href="${js_path}/swfupload/swfupload.css" type="text/css" media="screen" /> --%>
+<%-- <script type="text/javascript"	src="${js_path}/swfupload/fileprogress.js"></script> --%>
+<%-- <script type="text/javascript"	src="${js_path}/swfupload/singlefileprogress.js"></script> --%>
+<%-- <script type="text/javascript"	src="${js_path}/swfupload/swfupload.js"></script> --%>
+<%-- <script type="text/javascript"	src="${js_path}/swfupload/swfupload.queue.js"></script> --%>
+<%-- <script type="text/javascript"	src="${js_path}/swfupload/SWFUpload_zh.js"></script> --%>
+
+<!-- <script type="text/javascript" -->
+<%-- 	src="${basePath}js/ajaxfileupload.js"></script> --%>
+<!-- <script type="text/javascript" -->
+<%-- 	src="${basePath}js/fileUploadHandle.js"></script> --%>
+<%-- <link rel="stylesheet" type="text/css" href="${js_path}/uploadify/uploadify.css"> --%>
+<%-- <script type="text/javascript" src="${js_path}/jquery-1.7.2.min.js"></script> --%>
+<%-- <script type="text/javascript" src="${js_path}/uploadify/jquery.uploadify.js"></script> --%>
+<!--  <script type="text/javascript"  -->
+<%--  	src="${js_path}/swfobject.js"></script>  --%>
+<script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script>
+<script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script>
+<script type="text/javascript" src="${js_path}/plupload/jquery.plupload.queue.js"></script>
+<link rel="stylesheet" href="${js_path}/plupload/jquery.plupload.queue.css" type="text/css" />
+
+	<style>
+	body{ font-size: 12px;}
+	body,p,div{ padding: 0; margin: 0;}
+	.wraper{ padding: 30px 0;}
+	.btn-wraper{ text-align: center;}
+	.btn-wraper input{ margin: 0 10px;}
+	#file-list{ width: 350px; margin: 20px auto;}
+	#file-list li{ margin-bottom: 10px;}
+	.file-name{ line-height: 30px;}
+	.progress{ height: 4px; font-size: 0; line-height: 4px; background: orange; width: 0;}
+	.tip1{text-align: center; font-size:14px; padding-top:10px;}
+    .tip2{text-align: center; font-size:12px; padding-top:10px; color:#b00}
+    .catalogue{ position: fixed; _position:absolute; _width:200px; left: 0; top: 0; border: 1px solid #ccc;padding: 10px; background: #eee}
+    .catalogue a{ line-height: 30px; color: #0c0}
+    .catalogue li{ padding: 0; margin: 0; list-style: none;}
+    </style>
 </head>
 <script type="text/javascript">
 	$(function() {
@@ -117,7 +168,7 @@
 				<div title="关于" id="tab_iframe_div"
 					data-options="href:'${request_path}/admin/about.html'"
 					style="padding: 10px">
-					
+				
 				</div>
 
 			</div>

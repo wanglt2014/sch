@@ -116,7 +116,7 @@
 						'编辑分类');
 				$('#dictionaryfm').form('clear');
 				$('#dictionaryfm').form('load', row);
-				url = 'Productcategory_update?id=' + row.id;
+				url = 'Dictionary_update?id=' + row.dictionaryid;
 			}
 		}
 		function saveDictionary() {
@@ -140,8 +140,8 @@
 			if (row) {
 				$.messager.confirm('确认', '你想要删除这个分类吗?', function(r) {
 					if (r) {
-						$.post('Productcategory_delete', {
-							id : row.id
+						$.post('Dictionary_delete', {
+							id : row.dictionaryid
 						}, function(result) {
 							if (result = "true") {
 								$('#productcategorydg').datagrid('reload'); // reload the user data

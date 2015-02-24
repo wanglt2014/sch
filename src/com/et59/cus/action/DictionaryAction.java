@@ -13,7 +13,6 @@ import com.et59.cus.domain.entity.ex.Pager;
  *
  */
 public class DictionaryAction extends BaseAction{
-	
 	/**
 	 * 序列化
 	 */
@@ -41,7 +40,7 @@ public class DictionaryAction extends BaseAction{
 //			if(null!=supplierCodequery&&!supplierCodequery.equals("")){
 //				bsProductcategory.setSupplierCode(supplierCodequery);
 //			}
-			Pager pager = localServiceProxy.queryDictionaryBypage(Integer.valueOf(rows),Integer.valueOf(page));
+			Pager pager = localServiceProxy.queryDictionaryBypage(new TDictionary(),Integer.valueOf(rows),Integer.valueOf(page));
 			super.reponseWriter(JSON.toJSONString(pager));
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -55,10 +54,10 @@ public class DictionaryAction extends BaseAction{
 	public  void  update(){
 		boolean flag =false ;
 		String id = request.getParameter("id"); 
-		BsProductcategory bsProductcategory = getBsProductcategory();
+		TDictionary tDictionary = getDictionary();
 		try {
-			bsProductcategory.setId(Integer.valueOf(id));
-			localServiceProxy.udateBsProductcategory(bsProductcategory);
+			tDictionary.setDictionaryid(Integer.valueOf(id));
+			localServiceProxy.udateDictionary(tDictionary);
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (NumberFormatException e) {
@@ -72,25 +71,9 @@ public class DictionaryAction extends BaseAction{
 	 */
 	public void save(){
 		boolean flag =false ;
-		BsProductcategory bsProductcategory = getBsProductcategory();
-//		try {
-//			localServiceProxy.saveBsProductcategory(bsProductcategory);
-//			flag = true;
-//			super.reponseWriter(JSON.toJSONString(flag));
-//		} catch (NumberFormatException e) {
-//			e.printStackTrace();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-	}
-	/**
-	 * 删除产品分类
-	 */
-	public void delete(){
-		boolean flag =false ;
-		String id = request.getParameter("id"); 
+		TDictionary tDictionary = getDictionary();
 		try {
-			localServiceProxy.deleteBsProductcategory(Integer.valueOf(id));
+			localServiceProxy.saveDictionary(tDictionary);
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (NumberFormatException e) {
@@ -100,20 +83,36 @@ public class DictionaryAction extends BaseAction{
 		}
 	}
 	/**
-	 * 得到产品分类
+	 * 删除数据字典
+	 */
+	public void delete(){
+		boolean flag =false ;
+		String id = request.getParameter("id"); 
+		try {
+			localServiceProxy.deleteDictionary(Integer.valueOf(id));
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 得到数据字典
 	 * @return
 	 */
-	public BsProductcategory  getBsProductcategory(){
-		String productcategoryCode = request.getParameter("productcategoryCode"); 
-		String productcategoryName = request.getParameter("productcategoryName"); 
-		String productcategoryRemark = request.getParameter("productcategoryRemark"); 
-		String supplierCode = request.getParameter("supplierCode"); 
-		BsProductcategory  bsProductcategory=  new BsProductcategory();
-		bsProductcategory.setProductcategoryCode(productcategoryCode);
-		bsProductcategory.setProductcategoryName(productcategoryName);
-		bsProductcategory.setProductcategoryRemark(productcategoryRemark);
-		bsProductcategory.setSupplierCode(supplierCode);
-		return bsProductcategory;
+	public TDictionary  getDictionary(){
+		String dictionarycode = request.getParameter("dictionarycode"); 
+		String dictionaryvalue = request.getParameter("dictionaryvalue"); 
+		String dictionarytype = request.getParameter("dictionarytype"); 
+		String dictionaryremark = request.getParameter("dictionaryremark"); 
+		TDictionary tDictionary = new TDictionary();
+		tDictionary.setDictionarycode(dictionarycode);
+		tDictionary.setDictionaryvalue(dictionaryvalue);
+		tDictionary.setDictionarytype(dictionarytype);
+		tDictionary.setDictionaryremark(dictionaryremark);
+		return tDictionary;
 	}
 	/**
 	 * 分页查询供应商
@@ -130,13 +129,16 @@ public class DictionaryAction extends BaseAction{
 		}
 	}
 	/**
-	 * 查询供应商名字
+	 * 通过类别查询数据字典
 	 */
-	public void querySupplierNameByCode(){
-		String code = request.getParameter("code"); 
+	public void queryDictionaryByType(){
+		String type = request.getParameter("type"); 
 		try {
-			String name = localServiceProxy.querySupplierNameByCode(code);
-			super.reponseWriter(name);
+			String name = localServiceProxy.querySupplierNameByCode(type);
+			TDictionary tDictionary = new TDictionary();
+			tDictionary.setDictionarytype(type);
+			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,100000,1);
+			super.reponseWriter(JSON.toJSONString(pager.getRows()));
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

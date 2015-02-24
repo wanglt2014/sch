@@ -39,10 +39,13 @@ import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
 import com.et59.cus.domain.entity.TDictionary;
+import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
+import com.et59.cus.domain.entity.TTeacher;
+import com.et59.cus.domain.entity.TTeacherExample;
 
 /**
  * <p>
@@ -127,6 +130,12 @@ public interface CommonDAOEx {
 	/**
 	 * 分页查询数据字典
 	 */
-	public List<TDictionary> selectDictionaryForPage(int startrecord, int endrecord)
+	public List<TDictionary> selectDictionaryForPage(TDictionaryExample example,int startrecord, int endrecord)
+			throws Exception;
+	
+	/**
+	 * 分页查询师资队伍
+	 */
+	public List<TTeacher> selectTeacherForPage(TTeacherExample example,int startrecord, int endrecord)
 			throws Exception;
 }

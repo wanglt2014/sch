@@ -39,10 +39,13 @@ import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
 import com.et59.cus.domain.entity.TDictionary;
+import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
+import com.et59.cus.domain.entity.TTeacher;
+import com.et59.cus.domain.entity.TTeacherExample;
 
 /**
  * <p>
@@ -339,11 +342,24 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TDictionary> selectDictionaryForPage(int startrecord, int endrecord)
+	public List<TDictionary> selectDictionaryForPage(TDictionaryExample example,int startrecord, int endrecord)
 			throws Exception {
 		List<TDictionary> list = (List<TDictionary>) getSqlMapClientTemplate()
 				.queryForList(
-						"t_dictionary.ibatorgenerated_selectByExample",startrecord, endrecord);
+						"t_dictionary.ibatorgenerated_selectByExample",example,startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询师资队伍
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TTeacher> selectTeacherForPage(TTeacherExample example,int startrecord, int endrecord)
+			throws Exception {
+		List<TTeacher> list = (List<TTeacher>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_teacher.ibatorgenerated_selectByExample",example,startrecord, endrecord);
 		return list;
 	}
 }

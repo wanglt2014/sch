@@ -1,5 +1,6 @@
 package com.et59.cus.action;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -59,7 +60,7 @@ public abstract class BaseAction extends SystemAction {
 	protected int totalPageCount;// 总页数
 	protected int totalCount;// 总记录数
 	protected int currentPage;// 当前页数
-
+	
 	/**
 	 * 资讯
 	 */
@@ -93,6 +94,9 @@ public abstract class BaseAction extends SystemAction {
 	 * 文件表
 	 */
 	protected TDownload downloaddetail;
+	
+	
+	
 
 	@Override
 	public String execute() {
@@ -465,5 +469,6 @@ public abstract class BaseAction extends SystemAction {
 	public void setDownloaddetail(TDownload downloaddetail) {
 		this.downloaddetail = downloaddetail;
 	}
+
 
 }

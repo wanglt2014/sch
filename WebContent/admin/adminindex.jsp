@@ -78,8 +78,8 @@
 	<style>
 	body{ font-size: 12px;}
 	body,p,div{ padding: 0; margin: 0;}
-	.wraper{ padding: 30px 0;}
-	.btn-wraper{ text-align: center;}
+	.wraper{ padding: 30px 0; text-align: left;}
+	.btn-wraper{ text-align: left;}
 	.btn-wraper input{ margin: 0 10px;}
 	#file-list{ width: 350px; margin: 20px auto;}
 	#file-list li{ margin-bottom: 10px;}

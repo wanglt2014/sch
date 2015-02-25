@@ -82,9 +82,8 @@
 <!-- 		</div> -->
 		
 		<form id="dictionaryfm" method="post" novalidate>
-		<div id="teacher_tab" class="easyui-tabs"
+		<div id="teacher_tab" class="easyui-tabs" style="height: 616px"
 			data-options="fit:true,border:false,plain:true">
-			
 			<div title="Tab1" style="padding:20px;" id="Tab1" > 
 					<div class="ftitle">基本信息</div>
 					
@@ -92,83 +91,78 @@
 							<label>姓名:</label> 
 							<input name="teachername" class="easyui-validatebox" required="true">
 						</div>
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>性别</label>  -->
-<!-- 							<select id="sex" class="easyui-combobox" panelHeight="auto" -->
-<!-- 								style="width: 100px"> -->
-<!-- 								<option value="0">男</option> -->
-<!-- 								<option value="1">女</option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>出生年月:</label>  -->
-<!-- 							<input name="birthday" type="text" class="easyui-datebox" id="birthday" required="true" /> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>所在专业:</label> -->
-<!-- 							<input -->
-<!-- 								class="easyui-combobox" id="department" -->
-<!-- 								data-options=" -->
-<!-- 				 					url:'Dictionary_queryDictionaryByType?type=department', -->
-<!-- 									method:'get',  -->
-<!-- 				 					valueField:'dictionarycode',  -->
-<!-- 				 					textField:'dictionaryvalue',  -->
-<!-- 									panelHeight:'auto'"> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>职称:</label> -->
-<!-- 							<input -->
-<!-- 								class="easyui-combobox" id="department" -->
-<!-- 								data-options=" -->
-<!-- 				 					url:'Dictionary_queryDictionaryByType?type=department', -->
-<!-- 									method:'get',  -->
-<!-- 				 					valueField:'dictionarycode',  -->
-<!-- 				 					textField:'dictionaryvalue',  -->
-<!-- 									panelHeight:'auto'"> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>职务:</label> -->
-<!-- 							<input -->
-<!-- 								class="easyui-combobox" id="department" -->
-<!-- 								data-options=" -->
-<!-- 				 					url:'Dictionary_queryDictionaryByType?type=department', -->
-<!-- 									method:'get',  -->
-<!-- 				 					valueField:'dictionarycode',  -->
-<!-- 				 					textField:'dictionaryvalue',  -->
-<!-- 									panelHeight:'auto'"> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>硕/博导:</label> -->
-<!-- 							<select id="sex" class="easyui-combobox" panelHeight="auto" -->
-<!-- 								style="width: 100px"> -->
-<!-- 								<option value="1">硕导</option> -->
-<!-- 								<option value="2">博导</option> -->
-<!-- 							</select> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>个人介绍:</label> -->
-<!-- 							<textarea id="introduction" rows=5 name="introduction"  class="textarea easyui-validatebox"></textarea> -->
-<!-- 						</div> -->
 						<div class="fitem">
-							<label>照片:</label>
-							<p class="tip2">注意：该demo把上传的地址设为了一个静态的html页面，所以文件并不会真正的上传到服务器，但这不会影响上传功能的演示！</p>
-	<div class="wraper">
-		<div class="btn-wraper">
-			<input type="button" value="选择文件..." id="browse" />
-			<input type="button" value="开始上传" id="upload-btn" />
-			<input type="button" value="停止上传" id="stopupload-btn" />
-			<input type="button" value="清空" id="clear-btn" />
-		</div>
-		<ul id="file-list">
-
-		</ul>
-	</div>
-	<div id="uploader">
-					<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p>
-				</div>
-				<input type="submit" value="完成"/>
+							<label>性别</label> 
+							<select id="sex" class="easyui-combobox" panelHeight="auto"
+								style="width: 100px">
+								<option value="0">男</option>
+								<option value="1">女</option>
+							</select>
 						</div>
-			
+						<div class="fitem">
+							<label>出生年月:</label> 
+							<input name="birthday" type="text" class="easyui-datebox" id="birthday" required="true" />
+						</div>
+						<div class="fitem">
+							<label>所在专业:</label>
+							<input
+								class="easyui-combobox" id="department"
+								data-options="
+ 				 					url:'Dictionary_queryDictionaryByType?type=department',
+ 									method:'get',
+ 				 					valueField:'dictionarycode',
+ 				 					textField:'dictionaryvalue',  
+ 									panelHeight:'auto'"> 
+						</div>
+						<div class="fitem">
+							<label>职称:</label>
+							<input
+								class="easyui-combobox" id="department"
+								data-options="
+ 				 					url:'Dictionary_queryDictionaryByType?type=department',
+ 									method:'get',  
+ 				 					valueField:'dictionarycode',  
+ 				 					textField:'dictionaryvalue',  
+ 									panelHeight:'auto'"> 
+						</div>
+						<div class="fitem">
+							<label>职务:</label>
+							<input
+								class="easyui-combobox" id="department"
+								data-options="
+			 						url:'Dictionary_queryDictionaryByType?type=department', 
+									method:'get',
+ 				 					valueField:'dictionarycode',
+				 					textField:'dictionaryvalue',
+ 									panelHeight:'auto'">
+						</div>
+						<div class="fitem">
+							<label>硕/博导:</label>
+							<select id="sex" class="easyui-combobox" panelHeight="auto"
+								style="width: 100px">
+								<option value="1">硕导</option>
+								<option value="2">博导</option>
+							</select>
+						</div>
+						<div class="fitem">
+							<label>个人介绍:</label>
+							<textarea id="introduction" rows=5 name="introduction"  class="textarea easyui-validatebox"></textarea>
+						</div><br>
+						<div class="fitem">
+							
+							<div class="wraper">
+							<label>照片:</label>
+								<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
+								</ul>
+								<div class="btn-wraper">
+									<input type="button" value="选择文件..." id="browse" />
+									<input type="button" value="开始上传" id="upload-btn" />
+									<input type="button" value="清空" id="clear-btn" />
+									<p class="tip2">注意：只能上传1M以内，格式为jpg,gif,png,bmp的照片</p>
+								</div>
+							</div>
+							
+						</div>
 			</div> 
 			<div title="Tab2" closable="false" style="overflow:auto;padding:20px;" id="Tab2" > 
 			<div class="ftitle">字典信息</div>
@@ -197,7 +191,6 @@
 				<div class="kk1"><a onclick="purT2();">上一步</a></div>
 				<div class="kk2"><a onclick="nextSubmit();">确定</a></div>
 			</div>
-		
 		</div>
 </form>
 	</div>
@@ -234,21 +227,32 @@
 		}
 	}
 	function saveTeacher() {
-		$('#dictionaryfm').form('submit', {
-			url : url,
-			onSubmit : function() {
-				alert($(this).form('validate'));
-				return $(this).form('validate');
-			},
-			success : function(result) {
-				if (result != "true") {
-					jAlert('系统错误，请联系管理员', '错误提示');
-				} else {
-					$('#dictionarydlg').dialog('close'); // close the dialog
-					$('#teacherdg').datagrid('reload'); // reload the user data
-				}
+	        if (uploader.files.length > 0) {
+	            // When all files are uploaded submit form
+	            uploader.bind('StateChanged', function() {
+	                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
+	            		$('#dictionaryfm').form('submit', {
+	            			url : url,
+	            			onSubmit : function() {
+	            				alert($(this).form('validate'));
+	            				return $(this).form('validate');
+	            			},
+	            			success : function(result) {
+	            				if (result != "true") {
+	            					jAlert('系统错误，请联系管理员', '错误提示');
+	            				} else {
+	            					$('#dictionarydlg').dialog('close'); // close the dialog
+	            					$('#teacherdg').datagrid('reload'); // reload the user data
+	            				}
+	            			}
+	            		});
+	                }
+	            });
+	            uploader.start();
+	        } else {
+				alert('请先上传数据文件.');
 			}
-		});
+		
 //			$('#teacher_tab').tabs('disableTab', 1);
 //			$('#teacher_tab').tabs('select', 'Tab2');
 	}
@@ -306,16 +310,25 @@
 	var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browse',
 		multi_selection: false,
- 		url : 'File_upload',
+ 		url : 'File_uploadForPic',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
         silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        multipart_params: {
+        	  filetype: 'pic'
+//         	  two: '2',
+//         	  three: { //值还可以是一个字面量对象
+//         	    a: '4',
+//         	    b: '5'
+//         	  },
+//         	  four: ['6', '7', '8']  //也可以是一个数组
+        	},
         filters: {
   		  mime_types : [ //只允许上传图片文件和rar压缩文件
   		    { title : "图片文件", extensions : "jpg,gif,png,bmp" }
   		  ],
-  		  max_file_size : '100kb', //最大只能上传100kb的文件
+  		  max_file_size : '1000kb', //最大只能上传100kb的文件
   		  prevent_duplicates : true //不允许队列中存在重复文件
         }
 	});
@@ -333,7 +346,8 @@
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
 			//构造html来更新UI
-			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+			var html = '<li id="file-' + files[i].id +'" style="text-align: left;"></li>';
 			$(html).appendTo('#file-list');
 			!function(i){
 				previewImage(files[i],function(imgsrc){
@@ -344,9 +358,9 @@
 	});
 	
 	//绑定文件上传进度事件
-	uploader.bind('UploadProgress',function(uploader,file){
-		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-	});
+// 	uploader.bind('UploadProgress',function(uploader,file){
+// 		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+// 	});
 	
 	//绑定文件上传进度事件
 	uploader.bind('FilesRemoved',function(uploader,file){

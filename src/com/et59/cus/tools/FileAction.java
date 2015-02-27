@@ -17,19 +17,33 @@ import com.et59.cus.action.BaseAction;
 public class FileAction extends BaseAction {
 
 	public static final int BUFFER_SIZE = 2 * 1024;
-	// public File upload;
-	public String upload;
+	public File upload;
 	public String name;
 	public List<String> names;
-	public String uploadFileName;
-	public String uploadContentType;
-	public String savePath;
 	public int chunk;
 	public int chunks;
 	public int id = -1;
 	public String result;
 	public File fileData;
 	public String filetype;
+	private String uploadFileName;
+	private String uploadContentType;
+
+	public String getUploadFileName() {
+		return uploadFileName;
+	}
+
+	public void setUploadFileName(String uploadFileName) {
+		this.uploadFileName = uploadFileName;
+	}
+
+	public String getUploadContentType() {
+		return uploadContentType;
+	}
+
+	public void setUploadContentType(String uploadContentType) {
+		this.uploadContentType = uploadContentType;
+	}
 
 	public String getFiletype() {
 		return filetype;
@@ -47,12 +61,20 @@ public class FileAction extends BaseAction {
 		this.fileData = fileData;
 	}
 
+	public File getUpload() {
+		return upload;
+	}
+
+	public void setUpload(File upload) {
+		this.upload = upload;
+	}
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private void copy(File src, File dst) {
+	public void copy(File src, File dst) {
 		InputStream in = null;
 		OutputStream out = null;
 		try {
@@ -93,24 +115,62 @@ public class FileAction extends BaseAction {
 	public String uploadForPic() throws Exception {
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		// System.out.println(isMultipart + "***************");
-		String dstPath = ServletActionContext.getServletContext().getRealPath(
-				"")
-				+ "\\" + Constant.PATH_PIC + "\\" + this.getName();
+		String dstPath = getSavePathForPic();
 		File dstFile = new File(dstPath);
-		// 文件已存在（上传了同名的文件）
-		if (chunk == 0 && dstFile.exists()) {
-			dstFile.delete();
-			dstFile = new File(dstPath);
+
+		if (!dstFile.exists()) {
+			dstFile.mkdirs();
 		}
-		copy(this.fileData, dstFile);
-		System.out.println("上传文件路径:" + dstPath + " 文件名：" + this.getName() + " "
-				+ chunk + " " + chunks);
-		// System.out.println("上传文件:" + uploadFileName + " 临时文件名："
-		// + uploadContentType + " " + chunk + " " + chunks);
+		dstPath = dstPath + "\\" + this.getName();
+		File dst = new File(dstPath);
+		copy(this.fileData, dst);
+		System.out.println("上传文件路径:" + dstPath + " " + " 临时文件名："
+				+ this.getName());
+		return SUCCESS;
+	}
+
+	public String uploadForOther() throws Exception {
+		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		// System.out.println(isMultipart + "***************");
+		String dstPath = getSavePathForPic();
+		File dstFile = new File(dstPath);
+
+		if (!dstFile.exists()) {
+			dstFile.mkdirs();
+		}
+		dstPath = dstPath + "\\" + this.getName();
+		File dst = new File(dstPath);
+		copy(this.upload, dst);
+
+		System.out.println("上传文件:" + uploadFileName + " 临时文件名："
+				+ uploadContentType + " " + chunk + " " + chunks);
 		if (chunk == chunks - 1) {
 			// 完成一整个文件;
 		}
+
 		return SUCCESS;
+	}
+
+	/**
+	 * 获取图片保存路径
+	 * 
+	 * @return
+	 */
+	public static String getSavePathForPic() {
+		return getSavePath() + Constant.PATH_PIC;
+	}
+
+	/**
+	 * 获取其他文件保存路径
+	 * 
+	 * @return
+	 */
+	public static String getSavePathForOther() {
+		return getSavePath() + Constant.PATH_OTHER;
+	}
+
+	private static String getSavePath() {
+		return ServletActionContext.getServletContext().getRealPath("") + "\\";
 	}
 
 	// public String submit() {
@@ -168,38 +228,6 @@ public class FileAction extends BaseAction {
 	// public void setUpload(File upload) {
 	// this.upload = upload;
 	// }
-
-	public String getUploadFileName() {
-		return uploadFileName;
-	}
-
-	public String getUpload() {
-		return upload;
-	}
-
-	public void setUpload(String upload) {
-		this.upload = upload;
-	}
-
-	public void setUploadFileName(String uploadFileName) {
-		this.uploadFileName = uploadFileName;
-	}
-
-	public String getUploadContentType() {
-		return uploadContentType;
-	}
-
-	public void setUploadContentType(String uploadContentType) {
-		this.uploadContentType = uploadContentType;
-	}
-
-	public String getSavePath() {
-		return savePath;
-	}
-
-	public void setSavePath(String savePath) {
-		this.savePath = savePath;
-	}
 
 	public int getChunk() {
 		return chunk;

@@ -142,10 +142,11 @@ public class FileAction extends BaseAction {
 		File dst = new File(dstPath);
 		copy(this.upload, dst);
 
-		System.out.println("上传文件:" + uploadFileName + " 临时文件名："
-				+ uploadContentType + " " + chunk + " " + chunks);
-		if (chunk == chunks - 1) {
+		if (chunk == chunks - 1) {// 将文件分成多少分，比如：25M的文件2M一个分成13个。chunk=12，chunks=13
 			// 完成一整个文件;
+			System.out.println("上传文件:" + uploadFileName + " 临时文件名："
+					+ uploadContentType + " " + chunk + " " + chunks + "路径："
+					+ dstPath);
 		}
 
 		return SUCCESS;

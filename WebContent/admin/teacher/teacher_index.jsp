@@ -19,13 +19,24 @@
 <head>
 <meta charset="UTF-8">
 <title>${sitename}--后台管理系统--师资队伍</title>
+<%-- <link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/jquery.plupload.queue.css"> --%>
+<%-- <script type="text/javascript" src="${js_path}/jquery.js"></script> --%>
+<%-- <script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script> --%>
+<%-- <script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script> --%>
+<%-- <script type="text/javascript" src="${js_path}/plupload/queue/jquery.plupload.queue.js"></script> --%>
+<%-- <script type="text/javascript" src="${js_path}/plupload/i18n/cn.js"></script> --%>
+
+<!-- <style type="text/css">@import url(${request_path}/plupload/js/jquery.plupload.queue/jquery.plupload.queue.css);</style> -->
+<link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/jquery.plupload.queue.css">
+<script type="text/javascript" src="${request_path}/js/jquery.js" ></script> 
+<script type="text/javascript" src="${request_path}/plupload/js/plupload.full.js"></script>
+<script type="text/javascript" src="${request_path}/js/plupload/queue/jquery.plupload.queue.js"></script>
+<script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script>
+<script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script>
 </head>
 <body>
 
 <div id="productcategorytb" style="padding: 5px; height: auto">
-		<div id="uploaderQueue">
-			<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p>
-		</div>
 		<div>
 			教师姓名:<input type="text" id="teachername"> 
 			所属专业:<input
@@ -61,33 +72,13 @@
 		<a href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true" onclick="destroyTeacher()">删除</a>
 	</div>
-
 	<div id="dictionarydlg" class="easyui-dialog"
-		style="width: 800px; height: 680px; padding: 10px 20px" closed="true"
+		style="width: 800px; height: 780px; padding: 10px 20px" closed="true"
 		buttons="#dictionarydlg-buttons">
-<!-- 		<div id="right_tab" class="easyui-tabs"  -->
-<!--  			data-options="fit:true,border:false,plain:true" id="tabs"> -->
-<!-- 		<div title="html" style="padding:10px" id="html"> -->
-<!-- 		<div class="kk2"><a onclick="nextBQ();">下一步</a></div> -->
-<!-- 		<button onclick="nextBQ();">下一步</button> -->
-<!-- 		<p>This is html</p> -->
-<!-- 		</div> -->
-<!-- 		<div title="css" style="padding:10px" id="css"> -->
-<!-- 		<div class="kk1"><a onclick="purHZ();">上一步</a></div> -->
-<!-- 		<div class="kk2"><a onclick="nextHZ();">下一步</a></div> -->
-<!-- 		<p>This is css</p> -->
-<!-- 		</div> -->
-<!-- 		<div title="js" style="padding:10px" id="js"> -->
-<!-- 		<div class="kk1"><a onclick="purGJ();">上一步</a></div> -->
-<!-- 		<div class="kk2"><a onclick="nextSubmit();">确定</a></div> -->
-<!-- 		<p>This is js</p> -->
-<!-- 		</div> -->
-<!-- 		</div> -->
-		
 		<form id="dictionaryfm" method="post" novalidate>
 		<div id="teacher_tab" class="easyui-tabs" style="height: 616px"
 			data-options="fit:true,border:false,plain:true">
-			<div title="Tab1" style="padding:20px;" id="Tab1" > 
+			<div title="基本信息" style="padding:20px;" id="Tab1" > 
 					<div class="ftitle">基本信息</div>
 					
 						<div class="fitem">
@@ -168,9 +159,8 @@
 							
 						</div>
 			</div> 
-			<div title="Tab2" closable="false" style="overflow:auto;padding:20px;" id="Tab2" > 
-			<div class="ftitle">讲授课程资料</div>
-			课程编号（文字自填）、课程名称（文字自填）、课程介绍（文字自填）、教学大纲（文档上传）、教学进度表（文档上传）、课程资料（逐项上传文档、音频、视频、压缩文件包等）
+			<div title="讲授课程资料" closable="false" style="overflow:auto;padding:20px;" id="Tab2" > 
+					<div class="ftitle">讲授课程资料</div>
 						<div class="fitem">
 							<label>课程性质:</label>
 							<input
@@ -196,17 +186,90 @@
 						</div>
 						<div class="fitem">
 							<label>课程资料:</label> 
-<!-- 							<div id="uploaderQueue"> -->
-<!-- 								<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p> -->
-<!-- 							</div> -->
+							<div id="uploaderQueue">
+								<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p>
+							</div>
 						</div>
-						
-						
 			</div> 
-			<div title="Tab3" iconCls="icon-reload" closable="false" style="padding:20px;" id="Tab3"> 
-				tab3 
-				<div class="kk1"><a onclick="purT2();">上一步</a></div>
-				<div class="kk2"><a onclick="nextSubmit();">确定</a></div>
+			<div title="科研资料"  closable="false" style="overflow:auto;padding:20px;" id="Tab3"> 
+				<div class="ftitle">立项</div>
+				<div class="fitem">
+					<label>项目级别:</label> <input name="researchlevel"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>项目名称:</label> <input name="researchname"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>项目编号:</label> <input name="researchno"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>项目资金:</label> <input name="researchmoney"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>配套资金:</label> <input name="researchmatchmoney"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>项目主持人:</label> <input name="researchhost"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>项目参与者:</label> <input name="researchactor"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>项目开始时间:</label> 
+					<input id="researchbegindate" name="researchbegindate" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  required="true" />
+				</div>
+				<div class="fitem">
+					<label>项目结束时间:</label> 
+					<input id="researchenddate" name="researchenddate" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  required="true" />
+				</div>
+				<div class="fitem">
+					<label>立项申请书电子版:</label> 
+					<div id="uploaderQueueProject">
+						<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p>
+					</div>
+				</div>
+				<div class="ftitle">论文</div>
+				<div class="fitem">
+					<label>论文名称:</label> <input name="papername"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>作者排序:</label> <input name="paperauthor"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>期刊名称:</label> <input name="papernotename"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>刊登年份:</label> <input name="papernoteyear"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>杂志期号:</label> <input name="papernoteno"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>论文电子版:</label> 
+					<div id="uploaderQueuePaper">
+						<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p>
+					</div>
+					<input name="subjectNO"
+						class="easyui-validatebox" required="true">
+				</div>
+<!-- 				<div class="ftitle">著作</div> -->
+			</div>
+			
+			<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab4"> 
+				<div class="ftitle">获奖</div>
+				包括教学获奖、科研获奖、社会服务获奖，以及若干可自定义的备选项
 			</div>
 		</div>
 </form>
@@ -244,7 +307,10 @@
 		}
 	}
 	function saveTeacher() {
-	        if (uploader.files.length > 0) {
+// 	        if (uploader.files.length > 0) {
+	var uploaderQueue = $('#uploaderQueue').pluploadQueue();
+		alert(uploaderQueue.files.length);
+			if (uploaderQueue.files.length > 0) {
 	            // When all files are uploaded submit form
 	            uploader.bind('StateChanged', function() {
 	                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
@@ -264,13 +330,11 @@
 	            		});
 	                }
 	            });
-	            uploader.start();
+	            uploaderQueue.start();
+	            //uploader.start();
 	        } else {
 				alert('请先上传数据文件.');
 			}
-		
-//			$('#teacher_tab').tabs('disableTab', 1);
-//			$('#teacher_tab').tabs('select', 'Tab2');
 	}
 	function destroyTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
@@ -404,22 +468,56 @@
 		uploader.splice(1,10); ////删除文件按钮
 	});
 	$(function() {
-		$("#uploaderQueue").pluploadQueue({
+		var uploaderQueue = $("#uploaderQueue").pluploadQueue({
 		runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
 		url : 'File_uploadForOther',
-		max_file_size : '10mb',
+		max_file_size : '30mb',
 		unique_names : true,
 		chunk_size: '2mb',
 		// Specify what files to browse for
-		filters : [
-			{title : "xls, xlsx文档", extensions : "xls,xlsx"}
-		],
+// 		filters : [
+// 			{title : "xls, xlsx文档", extensions : "xls,xlsx"}
+// 		],
 		// Flash settings
-		flash_swf_url : '${js_path}/plupload/Moxie.swf',
+		flash_swf_url : '${js_path}/plupload/plupload.flash.swf',
 		// Silverlight settings
-		silverlight_xap_url : '${js_path}/plupload/Moxie.xap'
+		silverlight_xap_url : '${js_path}/plupload/plupload.silverlight.xap'
 		});
+		
+		$("#uploaderQueueProject").pluploadQueue({
+			runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
+			url : 'File_uploadForOther',
+			max_file_size : '10mb',
+			unique_names : true,
+			chunk_size: '2mb',
+			// Specify what files to browse for
+//	 		filters : [
+//	 			{title : "xls, xlsx文档", extensions : "xls,xlsx"}
+//	 		],
+			// Flash settings
+			flash_swf_url : '${js_path}/plupload/plupload.flash.swf',
+			// Silverlight settings
+			silverlight_xap_url : '${js_path}/plupload/plupload.silverlight.xap'
+			});
+		
+		$("#uploaderQueuePaper").pluploadQueue({
+			runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
+			url : 'File_uploadForOther',
+			max_file_size : '10mb',
+			unique_names : true,
+			chunk_size: '2mb',
+			// Specify what files to browse for
+//	 		filters : [
+//	 			{title : "xls, xlsx文档", extensions : "xls,xlsx"}
+//	 		],
+			// Flash settings
+			flash_swf_url : '${js_path}/plupload/plupload.flash.swf',
+			// Silverlight settings
+			silverlight_xap_url : '${js_path}/plupload/plupload.silverlight.xap'
+			});
+		
 	});
+	
 	</script>
 	<style type="text/css">
 #dictionaryfm {

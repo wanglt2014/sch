@@ -37,8 +37,7 @@
 <script type="text/javascript" src="${js_path}/jquery.js"></script>
 <script type="text/javascript" src="${js_path}/menu.js"></script>
 <script type="text/javascript" src="${js_path}/jquery.json-2.4.min.js"></script>
-<script type="text/javascript"
-	src="${js_path}/easyui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="${js_path}/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${js_path}/jquery.alerts.js"></script>
 <link href="${request_path}/umeditor/themes/default/css/umeditor.css"
 	type="text/css" rel="stylesheet">
@@ -71,19 +70,19 @@
 <!--  <script type="text/javascript"  -->
 <%--  	src="${js_path}/swfobject.js"></script>  --%>
 <link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/css/jquery.plupload.queue.css">
-<script type="text/javascript" src="${request_path}/plupload/js/plupload.full.js"></script>
+<%-- <script type="text/javascript" src="${request_path}/plupload/js/plupload.full.js"></script> --%>
 <script type="text/javascript" src="${request_path}/js/plupload/queue/jquery.plupload.queue.js"></script>
-<script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script>
 
+<script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script>
 <script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script>
-<%-- <script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script> --%>
+<%-- <script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script> --%>
 
 <%-- <script type="text/javascript" src="${js_path}/plupload/queue/jquery.plupload.queue.js"></script> --%>
 <%-- <script type="text/javascript" src="${js_path}/plupload/i18n/cn.js"></script> --%>
 
 <script language="JavaScript" type="text/javascript"
 	src="${js_path}/util.js" charset="UTF-8"></script>
-
+<script type="text/javascript" src="${js_path}/easyui/easyui-lang-zh_CN.js"></script>
 	<style>
 	body{ font-size: 12px;}
 	body,p,div{ padding: 0; margin: 0;}

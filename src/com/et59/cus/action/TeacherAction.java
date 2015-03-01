@@ -26,6 +26,7 @@ public class TeacherAction extends BaseAction {
 	public File fileData;
 	public String fileType;
 	public String tampFileName;
+	public String fileCount;
 
 	public TTeacher tTeacher;
 
@@ -43,6 +44,38 @@ public class TeacherAction extends BaseAction {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getOldFileName() {
+		return oldFileName;
+	}
+
+	public void setOldFileName(String oldFileName) {
+		this.oldFileName = oldFileName;
+	}
+
+	public String getFileType() {
+		return fileType;
+	}
+
+	public void setFileType(String fileType) {
+		this.fileType = fileType;
+	}
+
+	public String getTampFileName() {
+		return tampFileName;
+	}
+
+	public void setTampFileName(String tampFileName) {
+		this.tampFileName = tampFileName;
+	}
+
+	public String getFileCount() {
+		return fileCount;
+	}
+
+	public void setFileCount(String fileCount) {
+		this.fileCount = fileCount;
 	}
 
 	/**
@@ -216,13 +249,28 @@ public class TeacherAction extends BaseAction {
 	public void save() {
 		String savePath = FileAction.getSavePathForPic();
 		TTeacher teacher = getTeacher();
+		String result="";
+		int count = Integer.parseInt(request.getParameter("uploader_project_count"));
+		for (int i = 1; i <= count; i++) {
+			name = request.getParameter("uploader_project_" + i + "_name");
+			tampFileName = request.getParameter("uploader_project_" + i + "_tmpname");
+			System.out.println(tampFileName + " " + name);
+			try {
+				//do something with file;
+				result += name + "导入完成. <br />";  
+			} catch(Exception e) {
+				result += name + "导入失败:" + e.getMessage() + ". <br />";
+				e.printStackTrace();
+			}
+			System.out.println(result);
+		}
+		
 		System.out.println(tTeacher.getTeachername()
 				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 				+ request.getParameter("name") + name + "***" + tampFileName
 				+ "*&&" + this.getName());
 
-		System.out.println(oldFileName + "*****"
-				+ request.getParameter("fileName"));
+		
 
 		//
 		// List fileList = null;

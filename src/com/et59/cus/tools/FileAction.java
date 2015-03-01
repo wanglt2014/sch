@@ -17,7 +17,7 @@ import com.et59.cus.action.BaseAction;
 public class FileAction extends BaseAction {
 
 	public static final int BUFFER_SIZE = 2 * 1024;
-	public File upload;
+//	public File upload;
 	public String name;
 	public List<String> names;
 	public int chunk;
@@ -28,6 +28,8 @@ public class FileAction extends BaseAction {
 	public String filetype;
 	private String uploadFileName;
 	private String uploadContentType;
+	public String uploader_pic_tmpname;
+	public String uploader_pic_name;
 
 	public String getUploadFileName() {
 		return uploadFileName;
@@ -61,13 +63,13 @@ public class FileAction extends BaseAction {
 		this.fileData = fileData;
 	}
 
-	public File getUpload() {
-		return upload;
-	}
-
-	public void setUpload(File upload) {
-		this.upload = upload;
-	}
+//	public File getUpload() {
+//		return upload;
+//	}
+//
+//	public void setUpload(File upload) {
+//		this.upload = upload;
+//	}
 
 	/**
 	 * 
@@ -140,7 +142,7 @@ public class FileAction extends BaseAction {
 		}
 		dstPath = dstPath + "\\" + this.getName();
 		File dst = new File(dstPath);
-		copy(this.upload, dst);
+//		copy(this.upload, dst);
 
 		if (chunk == chunks - 1) {// 将文件分成多少分，比如：25M的文件2M一个分成13个。chunk=12，chunks=13
 			// 完成一整个文件;

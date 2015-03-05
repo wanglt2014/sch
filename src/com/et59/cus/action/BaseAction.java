@@ -1,6 +1,5 @@
 package com.et59.cus.action;
 
-import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
@@ -60,7 +59,7 @@ public abstract class BaseAction extends SystemAction {
 	protected int totalPageCount;// 总页数
 	protected int totalCount;// 总记录数
 	protected int currentPage;// 当前页数
-	
+
 	/**
 	 * 资讯
 	 */
@@ -94,9 +93,6 @@ public abstract class BaseAction extends SystemAction {
 	 * 文件表
 	 */
 	protected TDownload downloaddetail;
-	
-	
-	
 
 	@Override
 	public String execute() {
@@ -141,13 +137,13 @@ public abstract class BaseAction extends SystemAction {
 	public void commonquery() {
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setType(Constant.ARTICLE_TYPE_MEDIA);
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_MEDIA);
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					9, 1);
 			if (ComonUtil.validateMapResult(map1)) {
 				medialist = (List<BsArticle>) map1.get(Constant.ARTICLE_LIST);
 			}
-			bsArticle.setType(Constant.ARTICLE_TYPE_NOTICE);
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			Map map2 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					5, 1);
 			if (ComonUtil.validateMapResult(map2)) {
@@ -185,9 +181,9 @@ public abstract class BaseAction extends SystemAction {
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
 			if (1 == type) {
-				bsArticle.setType(Constant.ARTICLE_TYPE_NOTICE);
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			} else if (2 == type) {
-				bsArticle.setType(Constant.ARTICLE_TYPE_REGULATION);
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
 			}
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					9, 1);
@@ -469,6 +465,5 @@ public abstract class BaseAction extends SystemAction {
 	public void setDownloaddetail(TDownload downloaddetail) {
 		this.downloaddetail = downloaddetail;
 	}
-
 
 }

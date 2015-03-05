@@ -150,4 +150,12 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		return subject;
 	}
 
+	/**
+	 * 保存资料
+	 */
+	@Override
+	public Long saveDownloadInfo(TDownload tDownload) throws Exception {
+		return tdownloadDAO.insert(tDownload);
+	}
+
 }

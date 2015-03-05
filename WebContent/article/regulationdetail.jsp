@@ -5,19 +5,21 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%
+String request_path = request.getContextPath();
 	// 当前导航栏位置
 	request.setAttribute("cur_nav", 2);
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>教务教学制度_${bsArticledetail.title}</title>
+<title>教务教学制度_${bsArticledetail.articletitle}</title>
 <meta http-equiv="Content-Type" name="description"
-	content="${bsArticledetail.summary}" />
+	content="${bsArticledetail.articlesummary}" />
 <link rel="shortcut icon" href="favicon.ico" />
 <jsp:include page="../pre.jsp"></jsp:include>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/fileUploadHandle.js"></script>
+<%-- <script language="JavaScript" type="text/javascript" --%>
+<%-- 	src="${js_path}/fileUploadHandle.js"></script> --%>
 </head>
 
 <body>
@@ -35,13 +37,13 @@
 					<div class="one_artic_detail">
 						<div class="title_detail" align="center">
 							<b style="font-size: 15px; font-family: sans-serif;"><c:out
-									value="${bsArticledetail.title}" /> </b>
+									value="${bsArticledetail.articletitle}" /> </b>
 						</div>
 						<div class="artic_author_detail" align="center">
 							作者:
 							<c:out value="${bsArticledetail.author}" />
 							时间:
-							<fmt:formatDate value="${bsArticledetail.createdate}" pattern="yyyy/MM/dd  HH:mm:ss" />
+							<c:out value="${bsArticledetail.createdate}" />
 							<div class="bdsharebuttonbox" style="text-align: right;">
 								<label for="fontsize">字体大小:</label> <select id="fontsize">
 									<option value="12px">小号</option>
@@ -55,13 +57,15 @@
 
 						<div class="normal_summary">
 							描述：
-							<c:out value="${bsArticledetail.summary}" escapeXml="false" />
+							<c:out value="${bsArticledetail.articlesummary}" escapeXml="false" />
 						</div> 
 						<div class="content_detail" id="articcontentdetail">
 							<c:out value="${bsArticledetail.content}" escapeXml="false" />
 						</div>
 						<div>
-						<a href="${bsArticledetail.download.filepath}/${bsArticledetail.download.filename}" id="filePath" title="" ><c:out value="${bsArticledetail.download.filename}" /></a>
+						<s:if test="bsArticledetail.download.fileshowpath!='' and bsArticledetail.download.fileshowpath!=null">
+						<a href="<%=request_path %>/${bsArticledetail.download.fileshowpath}" id="filePath" title="" ><c:out value="${bsArticledetail.download.filename}" /></a>
+						</s:if>
 						</div>
 					</div>
 

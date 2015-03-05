@@ -84,8 +84,8 @@
 							<div class="normal_content_top">
 								<ul class="news_content">
 									<s:iterator var="teach" value="teachList" status="st">
-										<li><a target="_blank" href="Article_teachDetail_${teach.id}.shtm"><s:property
-													value="#teach.title" /> </a>
+										<li><a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm"><s:property
+													value="#teach.articletitle" /> </a>
 										</li>
 									</s:iterator>
 								</ul>

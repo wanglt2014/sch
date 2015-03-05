@@ -17,7 +17,7 @@ import com.et59.cus.action.BaseAction;
 public class FileAction extends BaseAction {
 
 	public static final int BUFFER_SIZE = 2 * 1024;
-//	public File upload;
+	// public File upload;
 	public String name;
 	public List<String> names;
 	public int chunk;
@@ -63,13 +63,13 @@ public class FileAction extends BaseAction {
 		this.fileData = fileData;
 	}
 
-//	public File getUpload() {
-//		return upload;
-//	}
-//
-//	public void setUpload(File upload) {
-//		this.upload = upload;
-//	}
+	// public File getUpload() {
+	// return upload;
+	// }
+	//
+	// public void setUpload(File upload) {
+	// this.upload = upload;
+	// }
 
 	/**
 	 * 
@@ -134,7 +134,7 @@ public class FileAction extends BaseAction {
 	public String uploadForOther() throws Exception {
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		// System.out.println(isMultipart + "***************");
-		String dstPath = getSavePathForPic();
+		String dstPath = getSavePathForOther();
 		File dstFile = new File(dstPath);
 
 		if (!dstFile.exists()) {
@@ -142,13 +142,38 @@ public class FileAction extends BaseAction {
 		}
 		dstPath = dstPath + "\\" + this.getName();
 		File dst = new File(dstPath);
-//		copy(this.upload, dst);
-
+		copy(this.fileData, dst);
+		System.out.println("上传文件:" + uploadFileName + " 临时文件名："
+				+ uploadContentType + " " + chunk + " " + chunks + "路径："
+				+ dstPath);
 		if (chunk == chunks - 1) {// 将文件分成多少分，比如：25M的文件2M一个分成13个。chunk=12，chunks=13
 			// 完成一整个文件;
-			System.out.println("上传文件:" + uploadFileName + " 临时文件名："
-					+ uploadContentType + " " + chunk + " " + chunks + "路径："
-					+ dstPath);
+			// System.out.println("上传文件:" + uploadFileName + " 临时文件名："
+			// + uploadContentType + " " + chunk + " " + chunks + "路径："
+			// + dstPath);
+		}
+
+		return SUCCESS;
+	}
+
+	public String uploadForArticle() throws Exception {
+		String dstPath = getSavePathForArticle();
+		File dstFile = new File(dstPath);
+
+		if (!dstFile.exists()) {
+			dstFile.mkdirs();
+		}
+		dstPath = dstPath + "\\" + this.getName();
+		File dst = new File(dstPath);
+		copy(this.fileData, dst);
+		System.out.println("上传文件:" + uploadFileName + " 临时文件名："
+				+ uploadContentType + " " + chunk + " " + chunks + "路径："
+				+ dstPath);
+		if (chunk == chunks - 1) {// 将文件分成多少分，比如：25M的文件2M一个分成13个。chunk=12，chunks=13
+			// 完成一整个文件;
+			// System.out.println("上传文件:" + uploadFileName + " 临时文件名："
+			// + uploadContentType + " " + chunk + " " + chunks + "路径："
+			// + dstPath);
 		}
 
 		return SUCCESS;
@@ -170,6 +195,15 @@ public class FileAction extends BaseAction {
 	 */
 	public static String getSavePathForOther() {
 		return getSavePath() + Constant.PATH_OTHER;
+	}
+
+	/**
+	 * 获取文章文件保存路径
+	 * 
+	 * @return
+	 */
+	public static String getSavePathForArticle() {
+		return getSavePath() + Constant.PATH_ARTICLE;
 	}
 
 	private static String getSavePath() {

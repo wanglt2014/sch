@@ -17,7 +17,7 @@ var swfu;
 var serverName,serverIp,restorePath,pwd,account,wordName;
 var settings;
 $(document).ready(function(){		
-	alert(232355);
+	alert(111111111111111111);
 	//documentType = $jQuery("#documentType").val();
 //	initServerInfo();
 	//Init SWFUpload plugin

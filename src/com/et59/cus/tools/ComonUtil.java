@@ -13,18 +13,7 @@ import java.util.Map;
  * <p>
  * Title: ComonUtil.java
  * </p>
- * <p>
- * Description:
- * </p>
- * <p>
- * Copyright: 59et Software (c) 2011
- * </p>
- * <p>
- * Company: 点滴工作室
- * </p>
  * 
- * @author Liuhh(jxausea@gmail.com)
- * @date 2012-2-20
  * @version 2.0
  * 
  */
@@ -144,5 +133,20 @@ public class ComonUtil {
 	 */
 	public static String processSpecialChar(String inputStr) {
 		return inputStr.replace("\\", "");
+	}
+
+	/**
+	 * 空字符串转0
+	 * 
+	 * @param inputStr
+	 * @return
+	 */
+	public static String emptyToZero(String inputStr) {
+		if ("".equals(inputStr) || null == inputStr) {
+			return "0";
+		} else {
+			return inputStr;
+		}
+
 	}
 }

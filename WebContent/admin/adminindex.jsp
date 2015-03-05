@@ -148,7 +148,6 @@
 			style="height: 80px;background: url(${image_path}/body_bg.png) repeat-x scroll center 0 rgba(0, 0, 0, 0);">
 			<font style="font-size: 30px; line-height: 75px; font-style: italic;">后台管理系统</font>
 			<div style="float: right; margin-bottom: 5px; margin-top: 50px;">
-
 				<c:if test="${!empty(user)}">
 				管理员：<c:out value="${user.username}" />
 					<a href="Admin_logout">[退出]</a>

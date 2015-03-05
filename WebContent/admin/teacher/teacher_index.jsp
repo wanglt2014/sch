@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="/struts-tags" prefix="s" %>
 <%
 	String request_path = request.getContextPath();
 	String image_path = request_path + "/images/blue-themes";
@@ -40,6 +41,7 @@
 <script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script>
 
 <script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script>
+
 </head>
 <body>
 <div id="productcategorytb" style="padding: 5px; height: auto">
@@ -83,8 +85,8 @@
 		buttons="#dictionarydlg-buttons">
 		<form id="dictionaryfm" method="post" novalidate>
 		<div id="teacher_tab" class="easyui-tabs" style="height: 616px"
-			data-options="fit:true,border:false,plain:true">
-			<div title="基本信息" style="padding:20px;" id="Tab1" > 
+			data-options="fit:true,border:false,plain:true" >
+			<div title="基本信息" style="padding:20px;" id="Tab1"> 
 					<div class="ftitle">基本信息</div>
 					
 						<div class="fitem">
@@ -153,7 +155,7 @@
 							<label>照片:</label>
 <!-- 							<input id="oldfileName" name="oldfileName" value="" style="display: none;"/> -->
 <!-- 							<input id="tampFileName" name="tampFileName" value="" style="display: none;"/> -->
-								<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
+<!-- 								<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/> -->
 								<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
 								</ul>
 								<div class="btn-wraper">
@@ -163,122 +165,140 @@
 									<p class="tip2">注意：只能上传1M以内，格式为jpg,gif,png,bmp的照片</p>
 								</div>
 							</div>
-							
 						</div>
 			</div> 
-<!-- 			<div title="讲授课程资料" closable="false" style="overflow:auto;padding:20px;" id="Tab2" >  -->
-<!-- 					<div class="ftitle">讲授课程资料</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>课程性质:</label> -->
-<!-- 							<input -->
-<!-- 								class="easyui-combobox" id="subjectType" -->
-<!-- 								data-options=" -->
-<!--  				 					url:'Dictionary_queryDictionaryByType?type=subjectType', -->
-<!--  									method:'get',   -->
-<!--  				 					valueField:'dictionarycode',   -->
-<!--  				 					textField:'dictionaryvalue',   -->
-<!--  									panelHeight:'auto'">  -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>课程编号:</label> <input name="subjectNO" -->
-<!-- 								class="easyui-validatebox" required="true"> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>课程名称:</label> <input name="subjectName" -->
-<!-- 								class="easyui-validatebox" required="true"> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>课程介绍:</label> -->
-<!-- 							<textarea id="subjectText" rows=5 name="subjectText"  class="textarea easyui-validatebox"></textarea> -->
-<!-- 						</div> -->
-<!-- 						<div class="fitem"> -->
-<!-- 							<label>课程资料:</label>  -->
-<!-- 							<div id="uploaderQueue"> -->
-<!-- 								<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p> -->
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 			</div>  -->
-<!-- 			<div title="科研资料"  closable="false" style="overflow:auto;padding:20px;" id="Tab3">  -->
-<!-- 				<div class="ftitle">立项</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目级别:</label> <input name="researchlevel" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目名称:</label> <input name="researchname" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目编号:</label> <input name="researchno" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目资金:</label> <input name="researchmoney" -->
-<!-- 						class="easyui-validatebox" > -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>配套资金:</label> <input name="researchmatchmoney" -->
-<!-- 						class="easyui-validatebox" > -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目主持人:</label> <input name="researchhost" -->
-<!-- 						class="easyui-validatebox" > -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目参与者:</label> <input name="researchactor" -->
-<!-- 						class="easyui-validatebox" > -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目开始时间:</label>  -->
-<!-- 					<input id="researchbegindate" name="researchbegindate" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  required="true" /> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>项目结束时间:</label>  -->
-<!-- 					<input id="researchenddate" name="researchenddate" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  required="true" /> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>立项申请书电子版:</label>  -->
-<!-- 					<div id="uploaderQueueProject"> -->
-<!-- 						<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p> -->
-<!-- 					</div> -->
-<!-- 				</div> -->
-<!-- 				<div class="ftitle">论文</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>论文名称:</label> <input name="papername" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>作者排序:</label> <input name="paperauthor" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>期刊名称:</label> <input name="papernotename" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>刊登年份:</label> <input name="papernoteyear" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>杂志期号:</label> <input name="papernoteno" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="fitem"> -->
-<!-- 					<label>论文电子版:</label>  -->
-<!-- 					<div id="uploaderQueuePaper"> -->
-<!-- 						<p>您的浏览器未安装 Flash, Silverlight, Gears, BrowserPlus 或者支持 HTML5 .</p> -->
-<!-- 					</div> -->
-<!-- 					<input name="subjectNO" -->
-<!-- 						class="easyui-validatebox" required="true"> -->
-<!-- 				</div> -->
-<!-- 				<div class="ftitle">著作</div> -->
-<!-- 			</div> -->
+			<div title="讲授课程资料" closable="false" style="overflow:auto;padding:20px;" id="Tab2" > 
+					<div class="ftitle">讲授课程资料</div>
+						<div class="fitem">
+							<label>课程性质:</label>
+							<input
+								class="easyui-combobox" id="subjectType"
+								data-options="
+   				 					url:'Dictionary_queryDictionaryByType?type=subjectType',  
+   									method:'get',    
+   				 					valueField:'dictionarycode',    
+   				 					textField:'dictionaryvalue',    
+   									panelHeight:'auto'">   
+						</div>
+						<div class="fitem">
+							<label>课程编号:</label> <input name="subjectNO"
+								class="easyui-validatebox" required="true">
+						</div>
+						<div class="fitem">
+							<label>课程名称:</label> <input name="subjectName"
+								class="easyui-validatebox" required="true">
+						</div>
+						<div class="fitem">
+							<label>课程介绍:</label>
+							<textarea id="subjectText" rows=5 name="subjectText"  class="textarea easyui-validatebox"></textarea>
+						</div>
+						<div class="fitem">
+							<div class="wraper">
+							<label>课程资料:</label> 
+							<input id="uploader_subject_count" name="uploader_subject_count" value="0" style="display: none;"/>
+							<ul id="file-list-subject" style="text-align: left;margin:0px 0px 0px 30px; ">
+							</ul>
+							<div class="btn-wraper">
+								<input type="button" value="选择文件..." id="browseSubject" />
+								<input type="button" value="清空" id="subject-clear-btn" />
+								<p class="tip2">注意：只能上传20M以内的文件</p>
+							</div>
+							</div>
+						</div>
+			</div> 
+			<div title="立项"  closable="false" style="overflow:auto;padding:20px;" id="Tab3"> 
+				<div class="ftitle">立项</div>
+				<div class="fitem">
+					<label>项目级别:</label> <input name="researchlevel"
+						class="easyui-validatebox">
+				</div>
+				<div class="fitem">
+					<label>项目名称:</label> <input name="researchname"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>项目编号:</label> <input name="researchno"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>项目资金:</label> <input name="researchmoney"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>配套资金:</label> <input name="researchmatchmoney"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>项目主持人:</label> <input name="researchhost"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>项目参与者:</label> <input name="researchactor"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>项目开始时间:</label> 
+					<input id="researchbegindate" name="researchbegindate" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+				</div>
+				<div class="fitem">
+					<label>项目结束时间:</label> 
+					<input id="researchenddate" name="researchenddate" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+				</div>
+				<div class="fitem">
+					<div class="wraper">
+					<label>立项申请书电子版:</label> 
+					<input id="uploader_project_count" name="uploader_project_count" value="0" style="display: none;"/>
+					<ul id="file-list-project" style="text-align: left;margin:0px 0px 0px 30px; ">
+					</ul>
+					<div class="btn-wraper">
+						<input type="button" value="选择文件..." id="browseProject" />
+						<input type="button" value="清空" id="project-clear-btn" />
+						<p class="tip2">注意：只能上传20M以内的文件</p>
+					</div>
+					</div>
+				</div>
+				<div title="论文"  closable="false" style="overflow:auto;padding:20px;" id="Tab4"> 
+				<div class="ftitle">论文</div>
+				<div class="fitem">
+					<label>论文名称:</label> <input name="papername"
+						class="easyui-validatebox" required="true">
+				</div>
+				<div class="fitem">
+					<label>作者排序:</label> <input name="paperauthor"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>期刊名称:</label> <input name="papernotename"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>刊登年份:</label> <input name="papernoteyear"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>杂志期号:</label> <input name="papernoteno"
+						class="easyui-validatebox" >
+				</div>
+				<div class="fitem">
+					<label>论文电子版:</label> 
+					<input id="uploader_Paper_count" name="uploader_Paper_count" value="0" style="display: none;"/>
+					<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; ">
+					</ul>
+					<div class="btn-wraper">
+						<input type="button" value="选择文件..." id="browsePaper" />
+						<input type="button" value="清空" id="paper-clear-btn" />
+						<p class="tip2">注意：只能上传20M以内的文件</p>
+					</div>
+				</div>
+				<div class="ftitle">著作</div>
+				</div>
+			</div>
 			
-<!-- 			<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab4">  -->
-<!-- 				<div class="ftitle">获奖</div> -->
-<!-- 				包括教学获奖、科研获奖、社会服务获奖，以及若干可自定义的备选项 -->
-<!-- 			</div> -->
-<!-- 		</div> -->
+			<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab5"> 
+				<div class="ftitle">获奖</div>
+				包括教学获奖、科研获奖、社会服务获奖，以及若干可自定义的备选项
+			</div>
+		</div>
 </form>
 	</div>
 	<div id="dictionarydlg-buttons">
@@ -340,7 +360,8 @@
 	//         }
 	//     });
 	//     uploaderQueue.start();
-    	uploader.start();
+    	uploaderForPic.start();
+    	uploaderForSubject.start();
 		}else{
 			alert("信息填写不完整");
 		}
@@ -368,7 +389,7 @@
 		}
 	}
 	
-	
+	//照片 上传控件##########################################
 	var uploaderForPic = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browse',
 		multi_selection: false,
@@ -397,13 +418,20 @@
 	});
 	uploaderForPic.init(); //初始化
 	
+	//绑定文件上传删除事件
+	uploaderForPic.bind('FilesRemoved',function(uploader,file){
+		alert("删除");
+		$('#file-list').html("");
+	});
+	
 	//绑定文件添加进队列事件
 	uploaderForPic.bind('FilesAdded',function(uploader,files){
 		$.each(uploader.files, function (i, file) { 
-		        if (uploader.files.length <= 1) { 
+			alert(uploader.files.length);  
+			if (uploader.files.length <= 1) { 
 		            return; 
 		        } 
-		        uploader.removeFile(file); 
+		        uploaderForPic.removeFile(file); 
 		    });
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
@@ -422,36 +450,95 @@
 		}
 	});
 	
-	var uploaderForProject = new plupload.Uploader({ //实例化一个plupload上传对象
-		browse_button : 'browse',
+	//课程资料 上传控件##########################################
+	var uploaderForSubject = new plupload.Uploader({ //实例化一个plupload上传对象
+		browse_button : 'browseSubject',
 		multi_selection: false,
- 		url : 'File_uploadForPic',
+ 		url : 'File_uploadForOther',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
         silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
         unique_names : true,  // 上传的文件名是否唯一   
         multipart_params: {
-        	  filetype: 'pic'
-//         	  two: '2',
-//         	  three: { //值还可以是一个字面量对象
-//         	    a: '4',
-//         	    b: '5'
-//         	  },
-//         	  four: ['6', '7', '8']  //也可以是一个数组
-        	}
-//         filters: {
-//   		  mime_types : [ //只允许上传图片文件和rar压缩文件
-//   		    { title : "图片文件", extensions : "jpg,gif,png,bmp" }
-//   		  ],
-//   		  max_file_size : '1000kb', //最大只能上传100kb的文件
-//   		  prevent_duplicates : true //不允许队列中存在重复文件
-//         }
+        	  filetype: 'subject'
+        	},
+        filters: {
+  		  max_file_size : '20mb', //最大只能上传100kb的文件
+  		  prevent_duplicates : true //不允许队列中存在重复文件
+        }
 	});
-	uploaderForProject.init(); //初始化
+ 	
+// 	uploaderForSubject.init(); //初始化
+	
+	
 	
 	//绑定文件添加进队列事件
-	uploader.bind('FilesAdded',function(uploader,files){
+	uploaderForSubject.bind('FilesAdded',function(uploader,files){
+		var count = $("#uploader_subject_count").val();
+		for(var i = 0, len = files.length; i<len; i++){
+			var file_name = files[i].name; //文件名
+			var file_id = files[i].id;//ID,临时文件名
+			count++;
+			//构造html来更新UI
+// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+				html += '<input type="hiddent" name="uploader_subject_' + count + '_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" name="uploader_subject_' + count + '_name" value="' + file_name + '" /></li>';
+			$(html).appendTo('#file-list-subject');
+		}
+		$("#uploader_subject_count").val(count);
+	});
+	
+	//绑定文件上传进度事件
+	uploaderForSubject.bind('UploadProgress',function(uploader,file){
+		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+	});
+	
+	//绑定文件上传删除事件
+	uploaderForSubject.bind('FilesRemoved',function(uploader,file){
+		alert("删除");
+		$('#file-list-subject').html("");
+	});
+	
+	//清空按钮
+	$('#subject-clear-btn').click(function(){
+		uploaderForSubject.splice(0,10); ////删除文件按钮
+	});
+
+// 	//上传按钮
+// 	$('#upload-btn').click(function(){
+// 		uploader.start(); //开始上传
+// 	});
+	
+// 	//停止上传按钮
+// 	$('#stopupload-btn').click(function(){
+// 		uploader.stop(); //停止上传，停止后无法开始
+// 		uploader.refresh();
+// 	});
+
+	//立项上传控件###################################################
+	var uploaderForProject = new plupload.Uploader({ //实例化一个plupload上传对象
+		browse_button : 'browseProject',
+		multi_selection: false,
+ 		url : 'File_uploadForOther',
+ 		file_data_name : 'fileData',
+// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        unique_names : true,  // 上传的文件名是否唯一   
+        multipart_params: {
+        	  filetype: 'project'
+        	},
+        filters: {
+  		  max_file_size : '20mb', //最大只能上传20mb的文件
+  		  prevent_duplicates : true //不允许队列中存在重复文件
+        }
+	});
+// 	uploaderForProject.init(); //初始化
+	
+	//绑定文件添加进队列事件
+	uploaderForProject.bind('FilesAdded',function(uploader,files){
 		var count = $("#uploader_project_count").val();
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
@@ -467,63 +554,73 @@
 		$("#uploader_project_count").val(count);
 	});
 	
-// 	//绑定文件添加进队列事件
-// 	uploader.bind('FilesAdded',function(uploader,files){
-// 		for(var i = 0, len = files.length; i<len; i++){
-// 			var file_name = files[i].name; //文件名
-// 			//构造html来更新UI
-// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-// 			$(html).appendTo('#file-list');
-// 			!function(i){
-// 				previewImage(files[i],function(imgsrc){
-// 					$('#file-'+files[i].id).append('<img src="'+ imgsrc +'" />');
-// 				})
-// 		    }(i);
-// 		}
-// 	});
-	
-	
 	//绑定文件上传进度事件
-// 	uploader.bind('UploadProgress',function(uploader,file){
-// 		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-// 	});
+	uploaderForProject.bind('UploadProgress',function(uploader,file){
+		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+	});
 	
-	//绑定文件上传进度事件
-	uploader.bind('FilesRemoved',function(uploader,file){
+	//绑定文件上传删除事件
+	uploaderForProject.bind('FilesRemoved',function(uploader,file){
 		alert("删除");
-		$('#file-list').html("");
-	});
-
-	//上传按钮
-	$('#upload-btn').click(function(){
-		uploader.start(); //开始上传
+		$('#file-list-project').html("");
 	});
 	
-	//停止上传按钮
-	$('#stopupload-btn').click(function(){
-		uploader.stop(); //停止上传，停止后无法开始
-		uploader.refresh();
+	//清空按钮
+	$('#project-clear-btn').click(function(){
+		uploaderForProject.splice(0,10); ////删除文件按钮
+	});
+	
+	//论文上传控件###################################################
+	var uploaderForPaper = new plupload.Uploader({ //实例化一个plupload上传对象
+		browse_button : 'browsePaper',
+		multi_selection: false,
+ 		url : 'File_uploadForOther',
+ 		file_data_name : 'fileData',
+// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        unique_names : true,  // 上传的文件名是否唯一   
+        multipart_params: {
+        	  filetype: 'paper'
+        	},
+        filters: {
+  		  max_file_size : '20mb', //最大只能上传100kb的文件
+  		  prevent_duplicates : true //不允许队列中存在重复文件
+        }
+	});
+// 	uploaderForPaper.init(); //初始化
+	
+	//绑定文件添加进队列事件
+	uploaderForPaper.bind('FilesAdded',function(uploader,files){
+		var count = $("#uploader_paper_count").val();
+		for(var i = 0, len = files.length; i<len; i++){
+			var file_name = files[i].name; //文件名
+			var file_id = files[i].id;//ID,临时文件名
+			count++;
+			//构造html来更新UI
+// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+				html += '<input type="hiddent" name="uploader_paper_' + count + '_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" name="uploader_paper_' + count + '_name" value="' + file_name + '" /></li>';
+			$(html).appendTo('#file-list-paper');
+		}
+		$("#uploader_paper_count").val(count);
+	});
+	
+	//绑定文件上传进度事件
+	uploaderForPaper.bind('UploadProgress',function(uploader,file){
+		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+	});
+	
+	//绑定文件上传删除事件
+	uploaderForPaper.bind('FilesRemoved',function(uploader,file){
+		alert("删除");
+		$('#file-list-paper').html("");
 	});
 
 	//清空按钮
-	$('#clear-btn').click(function(){
-		uploader.splice(0,10); ////删除文件按钮
-	});
-	
-	function cancle(fileid){
-		alert(fileid);
-//  		uploader.removeFile(filename); ////删除文件按钮
-// 		uploader.removeFile(uploader.getFile(fileid));
-	};
-	function cancle2(fileid){
-		alert(fileid);
-// 		uploader.removeFile(filename); ////删除文件按钮
-// 		uploader.removeFile(uploader.getFile(fileid));
-	};
-	
-	//删除文件按钮
-	$('#clear-btn').click(function(){
-		uploader.splice(1,10); ////删除文件按钮
+	$('#paper-clear-btn').click(function(){
+		uploaderForPaper.splice(0,10); ////删除文件按钮
 	});
 // 	$(function() {
 // 		var uploaderQueue = $("#uploaderQueue").pluploadQueue({
@@ -575,7 +672,24 @@
 // 			});
 		
 // 	});
-	
+	$('#teacher_tab').tabs({ 
+	    border:false, 
+	    onSelect:function(title,index){ 
+// 	        alert(title+' is selected'+index); 
+	        if(index==0){
+	        	uploaderForPic.init();
+	        }
+			if(index==1){
+				uploaderForSubject.init(); //初始化
+	        }
+			if(index==2){
+				uploaderForProject.init();
+			}
+			if(index==3){
+				uploaderForPaper.init(); //初始化
+			}
+	    } 
+	});
 	</script>
 	<style type="text/css">
 #dictionaryfm {

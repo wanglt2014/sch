@@ -38,4 +38,10 @@ public interface LocalServiceEX {
 	 */
 	@SuppressWarnings("rawtypes")
 	public TSubject querySubjectById(long id) throws Exception;
+
+	/**
+	 * 保存资料
+	 */
+	@SuppressWarnings("rawtypes")
+	public Long saveDownloadInfo(TDownload tDownload) throws Exception;
 }

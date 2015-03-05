@@ -1,20 +1,13 @@
 package com.et59.cus.action;
 
-import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.alibaba.fastjson.JSON;
-import com.et59.cus.domain.entity.BsArticle;
 import com.et59.cus.domain.entity.TDownload;
-import com.et59.cus.domain.entity.ex.BsArticleQuery;
-import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
-import com.et59.cus.tools.DateUtil;
 
 /**
  * <p>
@@ -108,125 +101,125 @@ public class DownLoadInfoAction extends BaseAction {
 		return "index";
 	}
 
-	/**
-	 * 查询新闻
-	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public void query() {
-		String startdatacreatenew = request.getParameter("startdatacreatenew");
-		String enddatacreatenew = request.getParameter("enddatacreatenew");
-		String newtype = request.getParameter("newtype");
-		String newauthor = request.getParameter("newauthor");
-		String newtitle = request.getParameter("newtitle");
-		String page = request.getParameter("page"); // 当前页数
-		String rows = request.getParameter("rows"); // 每页显示行数
-		try {
-			BsArticleQuery bsArticle = new BsArticleQuery();
-			if (null != startdatacreatenew && !startdatacreatenew.equals("")) {
-				bsArticle.setStartdatacreatenew(DateUtil
-						.strToDate(startdatacreatenew));
-			}
-			if (null != enddatacreatenew && !enddatacreatenew.equals("")) {
-				bsArticle.setEnddatacreatenew(DateUtil
-						.strToDate(enddatacreatenew));
-			}
-			if (null != newtype && !newtype.equals("")) {
-				bsArticle.setType(newtype);
-			}
-			if (null != newauthor && !newauthor.equals("")) {
-				bsArticle.setAuthor(newauthor);
-			}
-			if (null != newtitle && !newtitle.equals("")) {
-				bsArticle.setTitle(newtitle);
-			}
-			Pager pager = new Pager();
-			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
-					Integer.valueOf(rows), Integer.valueOf(page));
-			if (ComonUtil.validateMapResult(map)) {
-				bsArticlelist = (List<BsArticle>) map
-						.get(Constant.ARTICLE_LIST);
-				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
-				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
-				pager.setTotal(totalCount);
-				pager.setRows(bsArticlelist);
-			}
-			super.reponseWriter(JSON.toJSONString(pager));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 保存文章
-	 */
-	public void save() {
-		boolean flag = false;
-		BsArticle bsArticle = getBsArticle();
-		try {
-			localServiceProxy.saveArticle(bsArticle);
-			flag = true;
-			super.reponseWriter(JSON.toJSONString(flag));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 编辑文章
-	 */
-	public void update() {
-		boolean flag = false;
-		String id = request.getParameter("id");
-		BsArticle bsArticle = getBsArticle();
-		bsArticle.setId(Long.valueOf(id));
-		try {
-			localServiceProxy.updateArticle(bsArticle);
-			flag = true;
-			super.reponseWriter(JSON.toJSONString(flag));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 公共方法
-	 * 
-	 * @return
-	 */
-	public BsArticle getBsArticle() {
-		String title = request.getParameter("title");
-		String createdate = request.getParameter("createdate");
-		String author = request.getParameter("author");
-		String type = request.getParameter("type");
-		String summary = request.getParameter("summary");
-		String content = request.getParameter("content");
-		BsArticle bsArticle = new BsArticle();
-		bsArticle.setTitle(title);
-		bsArticle.setSummary(summary);
-		bsArticle.setType(type);
-		bsArticle.setContent(content);
-		bsArticle.setUpdatedate(new Date());
-		bsArticle.setCreatedate(DateUtil.strToDate(createdate));
-		bsArticle.setAuthor(author);
-		return bsArticle;
-	}
-
-	/**
-	 * 删除文章
-	 */
-	public void deleteArticle() {
-		boolean flag = false;
-		String id = request.getParameter("id");
-		try {
-			localServiceProxy.deleteArticle(Long.valueOf(id));
-			flag = true;
-			super.reponseWriter(JSON.toJSONString(flag));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	// /**
+	// * 查询新闻
+	// */
+	// @SuppressWarnings({ "unchecked", "rawtypes" })
+	// public void query() {
+	// String startdatacreatenew = request.getParameter("startdatacreatenew");
+	// String enddatacreatenew = request.getParameter("enddatacreatenew");
+	// String newtype = request.getParameter("newtype");
+	// String newauthor = request.getParameter("newauthor");
+	// String newtitle = request.getParameter("newtitle");
+	// String page = request.getParameter("page"); // 当前页数
+	// String rows = request.getParameter("rows"); // 每页显示行数
+	// try {
+	// BsArticleQuery bsArticle = new BsArticleQuery();
+	// if (null != startdatacreatenew && !startdatacreatenew.equals("")) {
+	// bsArticle.setStartdatacreatenew(DateUtil
+	// .strToDate(startdatacreatenew));
+	// }
+	// if (null != enddatacreatenew && !enddatacreatenew.equals("")) {
+	// bsArticle.setEnddatacreatenew(DateUtil
+	// .strToDate(enddatacreatenew));
+	// }
+	// if (null != newtype && !newtype.equals("")) {
+	// bsArticle.setType(newtype);
+	// }
+	// if (null != newauthor && !newauthor.equals("")) {
+	// bsArticle.setAuthor(newauthor);
+	// }
+	// if (null != newtitle && !newtitle.equals("")) {
+	// bsArticle.setTitle(newtitle);
+	// }
+	// Pager pager = new Pager();
+	// Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+	// Integer.valueOf(rows), Integer.valueOf(page));
+	// if (ComonUtil.validateMapResult(map)) {
+	// bsArticlelist = (List<BsArticle>) map
+	// .get(Constant.ARTICLE_LIST);
+	// totalCount = (Integer) map.get(Constant.TOTALCOUNT);
+	// totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
+	// pager.setTotal(totalCount);
+	// pager.setRows(bsArticlelist);
+	// }
+	// super.reponseWriter(JSON.toJSONString(pager));
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// /**
+	// * 保存文章
+	// */
+	// public void save() {
+	// boolean flag = false;
+	// BsArticle bsArticle = getBsArticle();
+	// try {
+	// localServiceProxy.saveArticle(bsArticle);
+	// flag = true;
+	// super.reponseWriter(JSON.toJSONString(flag));
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// /**
+	// * 编辑文章
+	// */
+	// public void update() {
+	// boolean flag = false;
+	// String id = request.getParameter("id");
+	// BsArticle bsArticle = getBsArticle();
+	// bsArticle.setId(Long.valueOf(id));
+	// try {
+	// localServiceProxy.updateArticle(bsArticle);
+	// flag = true;
+	// super.reponseWriter(JSON.toJSONString(flag));
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
+	//
+	// /**
+	// * 公共方法
+	// *
+	// * @return
+	// */
+	// public BsArticle getBsArticle() {
+	// String title = request.getParameter("title");
+	// String createdate = request.getParameter("createdate");
+	// String author = request.getParameter("author");
+	// String type = request.getParameter("type");
+	// String summary = request.getParameter("summary");
+	// String content = request.getParameter("content");
+	// BsArticle bsArticle = new BsArticle();
+	// bsArticle.setTitle(title);
+	// bsArticle.setSummary(summary);
+	// bsArticle.setType(type);
+	// bsArticle.setContent(content);
+	// bsArticle.setUpdatedate(new Date());
+	// bsArticle.setCreatedate(DateUtil.strToDate(createdate));
+	// bsArticle.setAuthor(author);
+	// return bsArticle;
+	// }
+	//
+	// /**
+	// * 删除文章
+	// */
+	// public void deleteArticle() {
+	// boolean flag = false;
+	// String id = request.getParameter("id");
+	// try {
+	// localServiceProxy.deleteArticle(Long.valueOf(id));
+	// flag = true;
+	// super.reponseWriter(JSON.toJSONString(flag));
+	// } catch (Exception e) {
+	// e.printStackTrace();
+	// }
+	// }
 
 	public TDownload getDownloaddetail() {
 		return downloaddetail;

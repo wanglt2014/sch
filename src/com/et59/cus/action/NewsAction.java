@@ -1,7 +1,6 @@
 package com.et59.cus.action;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -57,7 +56,7 @@ public class NewsAction extends BaseAction {
 		}
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setType(Constant.ARTICLE_TYPE_NEWS);
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NEWS);
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Constant.PAGESIZE, currentPage);
 			if (ComonUtil.validateMapResult(map)) {
@@ -125,13 +124,13 @@ public class NewsAction extends BaseAction {
 						.strToDate(enddatacreatenew));
 			}
 			if (null != newtype && !newtype.equals("")) {
-				bsArticle.setType(newtype);
+				bsArticle.setArticletype(newtype);
 			}
 			if (null != newauthor && !newauthor.equals("")) {
 				bsArticle.setAuthor(newauthor);
 			}
 			if (null != newtitle && !newtitle.equals("")) {
-				bsArticle.setTitle(newtitle);
+				bsArticle.setArticletitle(newtitle);
 			}
 			Pager pager = new Pager();
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
@@ -174,7 +173,7 @@ public class NewsAction extends BaseAction {
 		boolean flag = false;
 		String id = request.getParameter("id");
 		BsArticle bsArticle = getBsArticle();
-		bsArticle.setId(Long.valueOf(id));
+		bsArticle.setArticleid(Long.valueOf(id));
 		try {
 			localServiceProxy.updateArticle(bsArticle);
 			flag = true;
@@ -197,12 +196,12 @@ public class NewsAction extends BaseAction {
 		String summary = request.getParameter("summary");
 		String content = request.getParameter("content");
 		BsArticle bsArticle = new BsArticle();
-		bsArticle.setTitle(title);
-		bsArticle.setSummary(summary);
-		bsArticle.setType(type);
+		bsArticle.setArticletitle(title);
+		bsArticle.setArticlesummary(summary);
+		bsArticle.setArticletype(type);
 		bsArticle.setContent(content);
-		bsArticle.setUpdatedate(new Date());
-		bsArticle.setCreatedate(DateUtil.strToDate(createdate));
+		bsArticle.setUpdatedate(DateUtil.getNowDate());
+		bsArticle.setCreatedate(createdate);
 		bsArticle.setAuthor(author);
 		return bsArticle;
 	}

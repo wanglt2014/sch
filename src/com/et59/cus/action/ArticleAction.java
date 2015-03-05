@@ -1,7 +1,7 @@
 package com.et59.cus.action;
 
+import java.io.File;
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -9,11 +9,14 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.BsArticle;
+import com.et59.cus.domain.entity.BsUser;
+import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
 import com.et59.cus.tools.DateUtil;
+import com.et59.cus.tools.FileAction;
 
 /**
  * <p>
@@ -31,6 +34,17 @@ public class ArticleAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	Logger log = Logger.getLogger(this.getClass());
+
+	// public TDownload tDownload;
+
+	/**
+	 * 文章后台首页
+	 * 
+	 * @return
+	 */
+	public String index() {
+		return "index";
+	}
 
 	/**
 	 * @Title: toNoticePage
@@ -57,7 +71,7 @@ public class ArticleAction extends BaseAction {
 	}
 
 	/**
-	 * 查询教学动态
+	 * 查询教务教学通知
 	 * 
 	 * @return
 	 */
@@ -68,7 +82,7 @@ public class ArticleAction extends BaseAction {
 		}
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setType(Constant.ARTICLE_TYPE_NOTICE);
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Constant.PAGESIZE, currentPage);
 			if (ComonUtil.validateMapResult(map)) {
@@ -95,7 +109,7 @@ public class ArticleAction extends BaseAction {
 		}
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setType(Constant.ARTICLE_TYPE_REGULATION);
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Constant.PAGESIZE, currentPage);
 			if (ComonUtil.validateMapResult(map)) {
@@ -162,24 +176,15 @@ public class ArticleAction extends BaseAction {
 	}
 
 	/**
-	 * 教学动态后台首页
-	 * 
-	 * @return
-	 */
-	public String index() {
-		return "index";
-	}
-
-	/**
 	 * 查询教学动态
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void query() {
 		String startdatacreatenew = request.getParameter("startdatacreatenew");
 		String enddatacreatenew = request.getParameter("enddatacreatenew");
-		String newtype = request.getParameter("newtype");
-		String newauthor = request.getParameter("newauthor");
-		String newtitle = request.getParameter("newtitle");
+		String newtype = request.getParameter("type");
+		String newauthor = request.getParameter("author");
+		String newtitle = request.getParameter("title");
 		String page = request.getParameter("page"); // 当前页数
 		String rows = request.getParameter("rows"); // 每页显示行数
 		try {
@@ -193,13 +198,13 @@ public class ArticleAction extends BaseAction {
 						.strToDate(enddatacreatenew));
 			}
 			if (null != newtype && !newtype.equals("")) {
-				bsArticle.setType(newtype);
+				bsArticle.setArticletype(newtype);
 			}
 			if (null != newauthor && !newauthor.equals("")) {
 				bsArticle.setAuthor(newauthor);
 			}
 			if (null != newtitle && !newtitle.equals("")) {
-				bsArticle.setTitle(newtitle);
+				bsArticle.setArticletitle(newtitle);
 			}
 			Pager pager = new Pager();
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
@@ -226,8 +231,29 @@ public class ArticleAction extends BaseAction {
 	public void save() {
 		boolean flag = false;
 		BsArticle bsArticle = getBsArticle();
+
+		String savePath = FileAction.getSavePathForArticle();
+		String name = request.getParameter("uploader_name");
+		String extName = name.substring(name.lastIndexOf("."));
+		String tampFileName = request.getParameter("uploader_tmpname");
+		BsUser user = getUser();
+		String filepath = savePath + "\\" + tampFileName + extName;
+		TDownload tDownload = new TDownload();
+		tDownload.setAuthor(user.getUsername());
+		tDownload.setCreatedate(DateUtil.getNowDate());
+		tDownload.setFilename(name);
+		tDownload.setFilepath(filepath);
+		tDownload.setFileshowpath(Constant.PATH_ARTICLE + "\\" + tampFileName
+				+ extName);
+		tDownload.setInfotype(bsArticle.getArticletype());
+		tDownload.setFileisvalid(Constant.ISVALID_1);
 		try {
+			Long downloadId = localServiceEXProxy.saveDownloadInfo(tDownload);
+			System.out.println(downloadId + "******downloadId" + "路径："
+					+ filepath);
+			bsArticle.setDownloadid(downloadId);
 			localServiceProxy.saveArticle(bsArticle);
+
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (Exception e) {
@@ -242,7 +268,7 @@ public class ArticleAction extends BaseAction {
 		boolean flag = false;
 		String id = request.getParameter("id");
 		BsArticle bsArticle = getBsArticle();
-		bsArticle.setId(Long.valueOf(id));
+		bsArticle.setArticleid(Long.valueOf(id));
 		try {
 			localServiceProxy.updateArticle(bsArticle);
 			flag = true;
@@ -258,19 +284,19 @@ public class ArticleAction extends BaseAction {
 	 * @return
 	 */
 	public BsArticle getBsArticle() {
-		String title = request.getParameter("title");
+		String title = request.getParameter("articletitle");
 		String createdate = request.getParameter("createdate");
 		String author = request.getParameter("author");
-		String type = request.getParameter("type");
-		String summary = request.getParameter("summary");
+		String type = request.getParameter("articletype");
+		String summary = request.getParameter("articlesummary");
 		String content = request.getParameter("content");
 		BsArticle bsArticle = new BsArticle();
-		bsArticle.setTitle(title);
-		bsArticle.setSummary(summary);
-		bsArticle.setType(type);
+		bsArticle.setArticletitle(title);
+		bsArticle.setArticlesummary(summary);
+		bsArticle.setArticletype(type);
 		bsArticle.setContent(content);
-		bsArticle.setUpdatedate(new Date());
-		bsArticle.setCreatedate(DateUtil.strToDate(createdate));
+		bsArticle.setUpdatedate(DateUtil.getNowDate());
+		bsArticle.setCreatedate(createdate);
 		bsArticle.setAuthor(author);
 		return bsArticle;
 	}
@@ -288,5 +314,20 @@ public class ArticleAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void main(String[] args) throws Exception {
+
+		System.out.println(Thread.currentThread().getContextClassLoader()
+				.getResource(""));
+
+		System.out
+				.println(ArticleAction.class.getClassLoader().getResource(""));
+
+		System.out.println(ClassLoader.getSystemResource(""));
+		System.out.println(ArticleAction.class.getResource(""));
+		System.out.println(ArticleAction.class.getResource("/")); // Class文件所在路径
+		System.out.println(new File("/").getAbsolutePath());
+		System.out.println(System.getProperty("user.dir"));
 	}
 }

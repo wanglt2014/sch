@@ -7,8 +7,13 @@ import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.BsProductcategory;
 import com.et59.cus.domain.entity.BsSupplier;
 import com.et59.cus.domain.entity.TDictionary;
+import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TPrize;
+import com.et59.cus.domain.entity.TResearch;
+import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.ex.Pager;
+import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.FileAction;
 
 /**
@@ -30,6 +35,46 @@ public class TeacherAction extends BaseAction {
 
 	public TTeacher tTeacher;
 
+	public TPrize tPrize;
+
+	public TResearch tResearch;
+
+	public TSubject tSubject;
+
+	public TPaper tPaper;
+
+	public TPrize gettPrize() {
+		return tPrize;
+	}
+
+	public void settPrize(TPrize tPrize) {
+		this.tPrize = tPrize;
+	}
+
+	public TResearch gettResearch() {
+		return tResearch;
+	}
+
+	public void settResearch(TResearch tResearch) {
+		this.tResearch = tResearch;
+	}
+
+	public TSubject gettSubject() {
+		return tSubject;
+	}
+
+	public void settSubject(TSubject tSubject) {
+		this.tSubject = tSubject;
+	}
+
+	public TPaper gettPaper() {
+		return tPaper;
+	}
+
+	public void settPaper(TPaper tPaper) {
+		this.tPaper = tPaper;
+	}
+
 	public TTeacher gettTeacher() {
 		return tTeacher;
 	}
@@ -45,7 +90,7 @@ public class TeacherAction extends BaseAction {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	public String getOldFileName() {
 		return oldFileName;
 	}
@@ -101,7 +146,7 @@ public class TeacherAction extends BaseAction {
 				tTeacher.setTeachername(teachernamequery);
 			}
 			if (null != departmentquery && !departmentquery.equals("")) {
-				tTeacher.setDepartment(Integer.valueOf(departmentquery));
+				tTeacher.setDepartment(Long.valueOf(departmentquery));
 			}
 			Pager pager = localServiceProxy.queryTeacherBypage(tTeacher,
 					Integer.valueOf(rows), Integer.valueOf(page));
@@ -249,29 +294,76 @@ public class TeacherAction extends BaseAction {
 	public void save() {
 		String savePath = FileAction.getSavePathForPic();
 		TTeacher teacher = getTeacher();
-		String result="";
-		int count = Integer.parseInt(request.getParameter("uploader_project_count"));
-		for (int i = 1; i <= count; i++) {
-			name = request.getParameter("uploader_project_" + i + "_name");
-			tampFileName = request.getParameter("uploader_project_" + i + "_tmpname");
+		String result = "";
+		String subjectCountStr = request.getParameter("uploader_subject_count");
+		String projectCountStr = request.getParameter("uploader_project_count");
+		String paperCountStr = request.getParameter("uploader_paper_count");
+		int subjectCount = Integer.parseInt(ComonUtil
+				.emptyToZero(subjectCountStr));
+		int projectCount = Integer.parseInt(ComonUtil
+				.emptyToZero(projectCountStr));
+		int paperCount = Integer.parseInt(ComonUtil.emptyToZero(paperCountStr));
+		for (int i = 1; i <= subjectCount; i++) {
+			name = request.getParameter("uploader_subject_" + i + "_name");
+			tampFileName = request.getParameter("uploader_subject_" + i
+					+ "_tmpname");
 			System.out.println(tampFileName + " " + name);
 			try {
-				//do something with file;
-				result += name + "导入完成. <br />";  
-			} catch(Exception e) {
+				// do something with file;
+				result += name + "导入完成. <br />";
+			} catch (Exception e) {
 				result += name + "导入失败:" + e.getMessage() + ". <br />";
 				e.printStackTrace();
 			}
 			System.out.println(result);
 		}
-		
+
+		for (int i = 1; i <= projectCount; i++) {
+			name = request.getParameter("uploader_subject_" + i + "_name");
+			tampFileName = request.getParameter("uploader_subject_" + i
+					+ "_tmpname");
+			System.out.println(tampFileName + " " + name);
+			try {
+				// do something with file;
+				result += name + "导入完成. <br />";
+			} catch (Exception e) {
+				result += name + "导入失败:" + e.getMessage() + ". <br />";
+				e.printStackTrace();
+			}
+			System.out.println(result);
+		}
+
+		for (int i = 1; i <= paperCount; i++) {
+			name = request.getParameter("uploader_subject_" + i + "_name");
+			tampFileName = request.getParameter("uploader_subject_" + i
+					+ "_tmpname");
+			System.out.println(tampFileName + " " + name);
+			try {
+				// do something with file;
+				result += name + "导入完成. <br />";
+			} catch (Exception e) {
+				result += name + "导入失败:" + e.getMessage() + ". <br />";
+				e.printStackTrace();
+			}
+			System.out.println(result);
+		}
+
 		System.out.println(tTeacher.getTeachername()
-				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-				+ request.getParameter("name") + name + "***" + tampFileName
-				+ "*&&" + this.getName());
-
-		
-
+				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PIC"
+				+ request.getParameter("uploader_pic_name")
+				+ request.getParameter("uploader_pic_tmpname")
+				+ "****OTHER,1:name:"
+				+ request.getParameter("uploader_subject_1_name")
+				+ "****tmpname:"
+				+ request.getParameter("uploader_subject_1_tmpname")
+				+ "&&&&,2:name:"
+				+ request.getParameter("uploader_subject_2_name")
+				+ "&&&&tmpname:"
+				+ request.getParameter("uploader_subject_2_tmpname")
+				+ "####,3:name:"
+				+ request.getParameter("uploader_subject_3_name")
+				+ "####tmpname:"
+				+ request.getParameter("uploader_subject_3_tmpname"));
 		//
 		// List fileList = null;
 		// try {

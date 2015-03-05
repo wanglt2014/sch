@@ -17,7 +17,7 @@ public class DateUtil {
 	public static Date strToDate(String str) {
 		if (null != str && !str.equals("")) {
 			Date date = null;
-			SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 			try {
 				date = format.parse(str);
 			} catch (ParseException e) {
@@ -40,7 +40,7 @@ public class DateUtil {
 		if (null != str && !str.equals("")) {
 			Date date = null;
 			SimpleDateFormat format = new SimpleDateFormat(
-					"MM/dd/yyyy HH:mm:ss");
+					"yyyy-MM-dd HH:mm:ss");
 			try {
 				date = format.parse(str);
 			} catch (ParseException e) {
@@ -52,7 +52,17 @@ public class DateUtil {
 		}
 	}
 
+	public static String getNowDate() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String str = sdf.format(new Date());
+		return str;
+	}
+
+	SimpleDateFormat sdf = new SimpleDateFormat(" yyyy年MM月dd日 ");
+
+	String str = sdf.format(new Date());
+
 	public static void main(String[] args) {
-		System.out.println(strToDateMMDDYYYYHHMMSS("4/9/2014 12:21:12"));
+		System.out.println(strToDateMMDDYYYYHHMMSS("2014-4-9 12:21:12"));
 	}
 }

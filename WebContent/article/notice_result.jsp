@@ -14,14 +14,14 @@
 	<s:iterator var="teachInfo" value="bsArticlelist" status="st">
 		<div class="one_artic">
 			<div class="artic_title">
-				<b><s:property value="#teachInfo.title" /> </b> 作者:
+				<b><s:property value="#teachInfo.articletitle" /> </b> 作者:
 				<s:property value="#teachInfo.author" />
 				日期：
 				<s:date name="#teachInfo.createdate" format="yyyy-MM-dd HH:mm" />
 			</div>
 			<div class="artic_content">
-				<s:property value="#teachInfo.summary" />
-				<a style="color: #524EA3; text-decoration: underline;" href="Article_teachDetail_<s:property value="#teachInfo.id"/>.shtm" target="_blank">[阅读全文]</a>
+				<s:property value="#teachInfo.articlesummary" />
+				<a style="color: #524EA3; text-decoration: underline;" href="Article_teachDetail_<s:property value="#teachInfo.articleid"/>.shtm" target="_blank">[阅读全文]</a>
 			</div>
 			<div class="split_spx"></div>
 		</div>

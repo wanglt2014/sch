@@ -301,7 +301,7 @@
 			<result name="to_download_index">/downloadInfo/downloadList.jsp</result>
 			<result name="download_detail">/downloadInfo/downloaddetail.jsp</result>
 			<result name="download_result">/downloadInfo/download_result.jsp</result>
-			<result name="index">/admin/news_index.jsp</result>
+			<result name="index">/admin/download_index.jsp</result>
 			<result type="json"></result>
 		</action>
 		
@@ -332,8 +332,7 @@
 			<result name="to_regulation_index">/article/regulationList.jsp</result>
 			<result name="regulation_detail">/article/regulationdetail.jsp</result>
 			<result name="regulation_result">/article/regulation_result.jsp</result>
-			<result name="index">/admin/news_index.jsp</result>
-			<result name="summary">/admin/news_index.jsp</result>
+			<result name="index">/admin/article_index.jsp</result>
 			<result type="json"></result>
 		</action>
 		
@@ -369,7 +368,7 @@
 			<result name="index">/admin/teacher/teacher_index.jsp</result>
 		</action>
 		
-		<!-- 师资队伍 -->
+		<!-- 文件上传 -->
 		<action name="File_*" class="FileAction"
 			method="{1}">
 			<result name="success">/admin/teacher/result.jsp</result>

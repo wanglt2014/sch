@@ -205,6 +205,17 @@ function expand() {
 		$('#menutg').treegrid('expand', node.id);
 	}
 }
+
+function formatterdateNOhour(val, row) {
+	if (val == null || val == "NaN") {
+		return "";
+	} else {
+		var date = new Date(val);
+		return date.getFullYear() + '-' + (date.getMonth() + 1) + '-'
+				+ date.getDate();
+	}
+}
+
 function formatterdate(val, row) {
 	if (val == null || val == "NaN") {
 		return "";
@@ -261,6 +272,19 @@ function formatproductcatagroycode(value, rowData, rowIndex) {
 	});
 	return suppliename;
 }
+//function timeStamp2String(time) {
+//	if (null == time || time == "NaN" || time == "") {
+//		return "";
+//	} else {
+//		var date = new Date();
+//		date.setTime(time);
+//		var y = date.getFullYear();
+//		var m = date.getMonth() + 1;
+//		var d = date.getDate();
+//		return m + '/' + d + '/' + y;
+//	}
+//}
+
 function timeStamp2String(time) {
 	if (null == time || time == "NaN" || time == "") {
 		return "";
@@ -270,7 +294,7 @@ function timeStamp2String(time) {
 		var y = date.getFullYear();
 		var m = date.getMonth() + 1;
 		var d = date.getDate();
-		return m + '/' + d + '/' + y;
+		return y + '-' + m + '-' + d;
 	}
 }
 

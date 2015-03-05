@@ -43,9 +43,10 @@ import com.opensymphony.xwork2.ActionContext;
  * 
  */
 public class MobileAction extends BaseAction {
-	public  String  client(){
+	public String client() {
 		return "mobile";
 	}
+
 	/**
 	 * 序列化
 	 */
@@ -131,7 +132,7 @@ public class MobileAction extends BaseAction {
 			} else {
 				BsArticleQuery bsArticle = new BsArticleQuery();
 				if (null != newtype && !newtype.equals("")) {
-					bsArticle.setType(newtype);
+					bsArticle.setArticletype(newtype);
 				}
 				Pager pager = new Pager();
 				Map map = localServiceProxy
@@ -476,23 +477,25 @@ public class MobileAction extends BaseAction {
 				order1.setOrderId(orderid);
 				order1.setOrderStatus(Constant.ORDER_STATUS_UNPAY);
 				order1.setOrderCreateTime(ComonUtil.getDate(0));
-				
+
 				if (null != getUser()) {
 					order1.setUserId(String.valueOf(getUser().getUserid()));
 				}
 				Map map = localServiceProxy.insertOrder(order1);
 				if (ComonUtil.validateMapResult(map)) {
-					Map map2  =localServiceProxy.queryOrderByorderId(orderid);
+					Map map2 = localServiceProxy.queryOrderByorderId(orderid);
 					if (ComonUtil.validateMapResult(map2)) {
 						order1 = (BsOrder) map2.get(Constant.ORDER_OBJ);
 						getSession().put(Constant.ORDER_OBJ, order1);
-						returnMsg.setAllReturnMsg(CodeMsgUtil.SUCCESS_CODE,CodeMsgUtil.SUCCESS_MSG, order1);
+						returnMsg.setAllReturnMsg(CodeMsgUtil.SUCCESS_CODE,
+								CodeMsgUtil.SUCCESS_MSG, order1);
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			returnMsg.setMsgAndCode(CodeMsgUtil.ERROR_CODE,CodeMsgUtil.ERROR_MSG);
+			returnMsg.setMsgAndCode(CodeMsgUtil.ERROR_CODE,
+					CodeMsgUtil.ERROR_MSG);
 		}
 		reponseWriterMobile(returnMsg);
 	}
@@ -507,23 +510,27 @@ public class MobileAction extends BaseAction {
 			String orderstatus = request.getParameter("orderstatus");
 			String orderid = request.getParameter("orderid");
 			if (ComonUtil.validateEmptyForString(orderstatus)) {
-				returnMsg.setMsgAndCode(CodeMsgUtil.ORDERSTATUS_NULL_CODE,CodeMsgUtil.ORDERSTATUS_NULL_MSG);
-			}else if (ComonUtil.validateEmptyForString(orderid)) {
-				returnMsg.setMsgAndCode(CodeMsgUtil.ORDERID_NULL_CODE,CodeMsgUtil.ORDERID_NULL_MSG);
-			}else {
-				Map map2  =localServiceProxy.queryOrderByorderId(orderid);
+				returnMsg.setMsgAndCode(CodeMsgUtil.ORDERSTATUS_NULL_CODE,
+						CodeMsgUtil.ORDERSTATUS_NULL_MSG);
+			} else if (ComonUtil.validateEmptyForString(orderid)) {
+				returnMsg.setMsgAndCode(CodeMsgUtil.ORDERID_NULL_CODE,
+						CodeMsgUtil.ORDERID_NULL_MSG);
+			} else {
+				Map map2 = localServiceProxy.queryOrderByorderId(orderid);
 				if (ComonUtil.validateMapResult(map2)) {
 					order = (BsOrder) map2.get(Constant.ORDER_OBJ);
 					order.setOrderStatus(Integer.valueOf(orderstatus));
 					Map map = localServiceProxy.updateOrder(order);
 					if (ComonUtil.validateMapResult(map)) {
-						returnMsg.setAllReturnMsg(CodeMsgUtil.SUCCESS_CODE,CodeMsgUtil.SUCCESS_MSG, order);
+						returnMsg.setAllReturnMsg(CodeMsgUtil.SUCCESS_CODE,
+								CodeMsgUtil.SUCCESS_MSG, order);
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			returnMsg.setMsgAndCode(CodeMsgUtil.ERROR_CODE,CodeMsgUtil.ERROR_MSG);
+			returnMsg.setMsgAndCode(CodeMsgUtil.ERROR_CODE,
+					CodeMsgUtil.ERROR_MSG);
 		}
 		reponseWriterMobile(returnMsg);
 	}

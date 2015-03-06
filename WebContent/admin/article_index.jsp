@@ -36,7 +36,7 @@
 		</div>
     <table id="newdg" title="文章列表" class="easyui-datagrid" style="width:auto;height:616px"
             url="Article_query"
-            toolbar="#toolbarnew" pagination="true"
+            toolbar="#articletoolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true" pageSize="20">
         <thead>
             <tr>
@@ -46,11 +46,11 @@
                 <th field="articletitle" width="100">标题</th>
                 <th field="articlesummary" width="250">概要</th>
                 <th field="updatedate" width="50" >更新日期</th>
-                <th field="id" width="30" formatter="formatpreview">预览</th>
+                <th field="articleid" width="30" formatter="formatpreview">预览</th>
             </tr>
         </thead>
     </table>
-    <div id="toolbarnew">
+    <div id="articletoolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="insertArticle()">新增</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editArticle()">编辑</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyArticle()">删除</a>
@@ -128,7 +128,7 @@
         	}else if("regulation" == type){
         		actionUrl = "Article_regulationDetail";
     		}
-    		var s ='<a href="'+actionUrl+'?id='+rowData.id+'" class="easyui-linkbutton" target="_blank"">预览</a>';
+    		var s ='<a href="'+actionUrl+'?id='+rowData.articleid+'" class="easyui-linkbutton" target="_blank"">预览</a>';
     		return s;
    	    }
         
@@ -159,6 +159,8 @@
         function insertArticle(){
             $('#newdlg').dialog('open').dialog('setTitle','发表文章');
             $('#newsfm').form('clear');
+            var str = result.articletype;
+            $("[value='" + str + "']").attr("checked", true);
             UM.getEditor('myEditornew').setContent('', false);
             url = 'Article_save';
         }
@@ -170,7 +172,7 @@
                 $('#newsfm').form('load',row);
 //                 $('#createdate').datebox('setValue', '2015-3-15');
                 UM.getEditor('myEditornew').setContent(row.content, false);
-                url = 'Article_update?id='+row.id;
+                url = 'Article_update?id='+row.articleid;
             }
         }
         function saveNews(){
@@ -202,9 +204,9 @@
         function destroyArticle(){
             var row = $('#newdg').datagrid('getSelected');
             if (row){
-                $.messager.confirm('确认','你想要删除这骗文章吗?',function(r){
+                $.messager.confirm('确认','是否要删除?',function(r){
                     if (r){
-                        $.post('News_deleteArticle',{id:row.id},function(result){
+                        $.post('Article_deleteArticle',{id:row.articleid},function(result){
                             if (result="true"){
                                 $('#newdg').datagrid('reload');    // reload the user data
                             } else {

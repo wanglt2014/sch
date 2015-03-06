@@ -4,6 +4,7 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
+	String request_path = request.getContextPath();
 	// 当前导航栏位置
 	request.setAttribute("cur_nav", 3);
 %>
@@ -34,7 +35,7 @@
 							作者:
 							<c:out value="${downloaddetail.author}" />
 							时间:
-							<fmt:formatDate value="${downloaddetail.createdate}" pattern="yyyy/MM/dd  HH:mm:ss" />
+							<c:out value="${downloaddetail.createdate}" />
 							<div class="bdsharebuttonbox" style="text-align: right;">
 							</div>
 						</div>
@@ -45,7 +46,7 @@
 						<div class="artic_content_detail" id="articcontentdetail">
 							<%-- 描述：
 							<c:out value="${downloaddetail.directions}" escapeXml="false" /> --%>
-						<a href="${downloaddetail.filepath}/${downloaddetail.filename}" id="filePath" title="" ><c:out value="${downloaddetail.filename}" /></a>
+						<a href="<%=request_path %>/${downloaddetail.fileshowpath}" id="filePath" title="" ><c:out value="${downloaddetail.filename}" /></a>
 						</div>
 					</div>
 				</div>

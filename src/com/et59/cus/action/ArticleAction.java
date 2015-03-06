@@ -238,13 +238,14 @@ public class ArticleAction extends BaseAction {
 		String tampFileName = request.getParameter("uploader_tmpname");
 		BsUser user = getUser();
 		String filepath = savePath + "\\" + tampFileName + extName;
+		String fileShowPath = Constant.PATH_ARTICLE + "\\" + tampFileName
+				+ extName;
 		TDownload tDownload = new TDownload();
 		tDownload.setAuthor(user.getUsername());
 		tDownload.setCreatedate(DateUtil.getNowDate());
 		tDownload.setFilename(name);
 		tDownload.setFilepath(filepath);
-		tDownload.setFileshowpath(Constant.PATH_ARTICLE + "\\" + tampFileName
-				+ extName);
+		tDownload.setFileshowpath(fileShowPath);
 		tDownload.setInfotype(bsArticle.getArticletype());
 		tDownload.setFileisvalid(Constant.ISVALID_1);
 		try {

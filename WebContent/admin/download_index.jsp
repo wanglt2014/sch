@@ -16,71 +16,40 @@
 <head>
 <meta charset="UTF-8">
 <title>${sitename}--后台管理系统--资料下载</title>
-   
 </head>
 <body>
-		<div id="newstb" style="padding: 5px; height: auto;width:auto;">
+		<div id="downloadtb" style="padding: 5px; height: auto;width:auto;">
 			<div>
-<!-- 				文章类型: <select id="articletype" class="easyui-combobox" panelHeight="auto" -->
-<!-- 					style="width: 100px"> -->
-<!-- 					<option value="">全部</option> -->
-<!-- 					<option value="regulation">教学规章制度</option> -->
-<!-- 					<option value="notice">教务教学通知</option> -->
-<!-- 				</select> -->
-				作者:<input type="text"  id="author">
-				资料名称:<input type="text"  id="filename">
+				作者:<input type="text"  id="authorQuery">
+				资料名称:<input type="text"  id="filenameQuery">
 				 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="querynews()">搜索</a>
 			</div>
 		</div>
-    <table id="newdg" title="文章列表" class="easyui-datagrid" style="width:auto;height:616px"
+    <table id="downloaddg" title="资料列表" class="easyui-datagrid" style="width:auto;height:616px"
             url="Download_query"
-            toolbar="#toolbarnew" pagination="true"
+            toolbar="#downloadtoolbar" pagination="true"
             rownumbers="true" fitColumns="true" singleSelect="true" pageSize="20">
         <thead>
             <tr>
+            	<th field="filename" width="50" >文件名称</th>
                 <th field="author" width="30">作者</th>
-                <th field="createdate" width="50" >创建日期</th>
-                <th field="filename" width="30" >文件名称</th>
-                <th field="directions" width="250">描述</th>
+                <th field="createdate" width="60" >创建日期</th>
+                <th field="directions" width="210">描述</th>
                 <th field="downloadid" width="30" formatter="formatpreview">预览</th>
             </tr>
         </thead>
     </table>
-    <div id="toolbarnew">
+    <div id="downloadtoolbar">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="insertDownload()">新增</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editDownload()">编辑</a>
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyDownload()">删除</a>
     </div>
     
-    <div id="newdlg" class="easyui-dialog" style="width:860px;height:auto;padding:10px 20px"
-            closed="true" buttons="#newdlg-buttons">
+    <div id="downloaddlg" class="easyui-dialog" style="width:860px;height:auto;padding:10px 20px"
+            closed="true" buttons="#downloaddlg-buttons">
         <div class="ftitle">资料信息</div>
-        <form id="newsfm" method="post" novalidate>
-<!--             <div class="fitem"> -->
-<!--                 <label>类型:</label> -->
-<!--                 <input type="radio" name="articletype"  value="regulation" checked="checked" />教学规章制度 -->
-<!--                 <input type="radio" name="articletype" value="notice"  />教务教学通知 -->
-<!--             </div> -->
-            <div class="fitem">
-                <label>文件名称</label>
-                <input id="articletitle" name="articletitle" class="easyui-validatebox" required="true" size="50px;">
-            </div>
-            <div class="fitem">
-                <label>作者:</label>
-                <input name="author" class="easyui-validatebox" required="true"/>
-            </div>
-            <div class="fitem">
-                <label>描述:</label>
-                <textarea name="articlesummary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
-            </div>
-            <div class="fitem">
-                <label>时间:</label>
-                <input name="createdate" type="text" class="easyui-datebox" id="createdate" required="true" />
-            </div>
-            <div  style="display: none;">
-           		 <textarea name="content" id="content" class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
-            </div>
-            <div class="fitem">
+        <form id="downloadfm" method="post" novalidate>
+		 	<div class="fitem">
                 <label>上传文件:</label>
             	<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
 				<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
@@ -91,79 +60,90 @@
 					<p class="tip2">注意：只能上传10M以内的文件</p>
 				</div>
 			</div>
+            <div class="fitem">
+                <label>文件名称</label>
+                <input id="filename" name="filename"  class="easyui-validatebox" required="true" size="50px;">
+            </div>
+            <div class="fitem">
+                <label>作者:</label>
+                <input id="author" name="author" class="easyui-validatebox" required="true"/>
+            </div>
+            <div class="fitem">
+                <label>描述:</label>
+                <textarea id="directions" name="directions" maxlength="500"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
+            </div>
+            <div class="fitem">
+                <label>时间:</label>
+                <input id="createdate"  name="createdate" type="text" class="easyui-datebox"  required="true" />
+            </div>
+<!--             <div  style="display: none;"> -->
+<!--            		 <textarea name="content" id="content" class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/> -->
+<!--             </div> -->
+           
         </form>
         
     </div>
-    <div id="newdlg-buttons">
+    <div id="downloaddlg-buttons">
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveDownload()">保存</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#newdlg').dialog('close')">取消</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#downloaddlg').dialog('close')">取消</a>
     </div>
     
     <script type="text/javascript">
         var url;
-        var allBox = $(":checkbox");
-        allBox.click(function () {
-            allBox.removeAttr("checked");
-            $(this).attr("checked", "checked");
-        });
+//         var allBox = $(":checkbox");
+//         allBox.click(function () {
+//             allBox.removeAttr("checked");
+//             $(this).attr("checked", "checked");
+//         });
         function formatpreview(value,rowData,rowIndex) {
-        	var type =rowData.articletype;
-        	var actionUrl = "";
-        	if("notice" == type){
-        		actionUrl = "Article_teachDetail";
-        	}else if("regulation" == type){
-        		actionUrl = "Article_regulationDetail";
-    		}
-    		var s ='<a href="'+actionUrl+'?id='+rowData.id+'" class="easyui-linkbutton" target="_blank"">预览</a>';
+    		var s ='<a href="Download_downloaddetail?id='+rowData.downloadid+'" class="easyui-linkbutton" target="_blank"">预览</a>';
     		return s;
    	    }
         
-        function formatnewstype(value,rowData,rowIndex) {
-        	var s="";
-    		if(value=="notice"){
-    			s ="教务教学通知";
-    		}else if(value=="regulation"){
-    			s ="教学规章制度";
-    		}
-    		return s;
-   	    }
+//         function formatnewstype(value,rowData,rowIndex) {
+//         	var s="";
+//     		if(value=="notice"){
+//     			s ="教务教学通知";
+//     		}else if(value=="regulation"){
+//     			s ="教学规章制度";
+//     		}
+//     		return s;
+//    	    }
         
         function querynews(){
 //         	var startdatacreatenew = $('#startdatacreatenew').datebox('getValue');
 //         	var enddatacreatenew = $('#enddatacreatenew').datebox('getValue');
-        	var newtype =  $('#articletype').combobox('getValue');
-        	var newauthor = $('#author').val();
-        	var newtitle = $('#articletitle').val();
-        	$('#newdg').datagrid('load', {
-        		startdatacreatenew:startdatacreatenew,
-        		enddatacreatenew:enddatacreatenew,
-        		newtype:newtype,
-        		newauthor:newauthor,
-        		newtitle:newtitle
+//         	var newtype =  $('#articletype').combobox('getValue');
+        	var downloadauthor = $('#authorQuery').val();
+        	var filename = $('#filenameQuery').val();
+        	$('#downloaddg').datagrid('load', {
+//         		startdatacreatenew:startdatacreatenew,
+//         		enddatacreatenew:enddatacreatenew,
+//         		newtype:newtype,
+        		downloadauthor:downloadauthor,
+        		filename:filename
         	});
         }
         function insertDownload(){
-            $('#newdlg').dialog('open').dialog('setTitle','发表文章');
-            $('#newsfm').form('clear');
+            $('#downloaddlg').dialog('open').dialog('setTitle','新增资料');
+            $('#downloadfm').form('clear');
 //             UM.getEditor('myEditornew').setContent('', false);
-            url = 'Article_save';
+            url = 'Download_save';
         }
         function editDownload(){
-            var row = $('#newdg').datagrid('getSelected');
+            var row = $('#downloaddg').datagrid('getSelected');
             if (row){
-                $('#newdlg').dialog('open').dialog('setTitle','编辑文章');
-                $('#newsfm').form('clear');
-                $('#newsfm').form('load',row);
-//                 $('#createdate').datebox('setValue', '2015-3-15');
-//                 UM.getEditor('myEditornew').setContent(row.content, false);
-                url = 'Article_update?id='+row.id;
+                $('#downloaddlg').dialog('open').dialog('setTitle','编辑资料');
+                $('#downloadfm').form('clear');
+                $('#downloadfm').form('load',row);
+                url = 'Download_update?id='+row.downloadid;
             }
         }
         function saveDownload(){
-        	$("#content").val(UM.getEditor('myEditornew').getContent());
-        	var valid = $('#newsfm').form('validate');
+//         	$("#content").val(UM.getEditor('myEditornew').getContent());
+        	var valid = $('#downloadfm').form('validate');
     		if(valid==true){
-            $('#newsfm').form('submit',{
+            $('#downloadfm').form('submit',{
                 url: url,
                 onSubmit: function(){
                     return $(this).form('validate');
@@ -175,8 +155,8 @@
                     } else {
                     	uploader.splice(0,10); 
                     	$('#file-list').html("");
-                        $('#newdlg').dialog('close');        // close the dialog
-                        $('#newdg').datagrid('reload');    // reload the user data
+                        $('#downloaddlg').dialog('close');        // close the dialog
+                        $('#downloaddg').datagrid('reload');    // reload the user data
                     }
                 }
             });
@@ -186,13 +166,13 @@
     		}
         }
         function destroyDownload(){
-            var row = $('#newdg').datagrid('getSelected');
+            var row = $('#downloaddg').datagrid('getSelected');
             if (row){
-                $.messager.confirm('确认','你想要删除这骗文章吗?',function(r){
+                $.messager.confirm('确认','是否要删除?',function(r){
                     if (r){
-                        $.post('News_deleteArticle',{id:row.id},function(result){
+                        $.post('Download_deleteDownloadInfo',{id:row.downloadid},function(result){
                             if (result="true"){
-                                $('#newdg').datagrid('reload');    // reload the user data
+                                $('#downloaddg').datagrid('reload');    // reload the user data
                             } else {
                             	jAlert('系统错误，请联系管理员','错误提示');
                             }
@@ -207,7 +187,7 @@
     	var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
     		browse_button : 'browse',
     		multi_selection: false,
-     		url : 'File_uploadForArticle',
+     		url : 'File_uploadForOther',
      		file_data_name : 'fileData',
 //     		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
             flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
@@ -249,11 +229,12 @@
     				html += '<input type="hidden" name="uploader_tmpname" value="' + file_id + '" />';
     				html += '<input type="hidden" name="uploader_name" value="' + file_name + '" /></li>';
     			$(html).appendTo('#file-list');
+    			$('#filename').val(file_name);
     		}
     	});
     </script>
     <style type="text/css">
-        #newsfm{
+        #downloadfm{
             margin:0;
             padding:10px 30px;
         }

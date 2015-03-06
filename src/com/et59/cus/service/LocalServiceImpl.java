@@ -40,8 +40,16 @@ import com.et59.cus.domain.dao.OpenLogDAO;
 import com.et59.cus.domain.dao.OpenOauthDAO;
 import com.et59.cus.domain.dao.TCollegeDAO;
 import com.et59.cus.domain.dao.TDictionaryDAO;
+import com.et59.cus.domain.dao.TPaperDAO;
+import com.et59.cus.domain.dao.TPrizeDAO;
+import com.et59.cus.domain.dao.TResearchDAO;
 import com.et59.cus.domain.dao.TRoleMenuDAO;
+import com.et59.cus.domain.dao.TSubjectDAO;
 import com.et59.cus.domain.dao.TTeacherDAO;
+import com.et59.cus.domain.dao.TTeacherPaperDAO;
+import com.et59.cus.domain.dao.TTeacherPrizeDAO;
+import com.et59.cus.domain.dao.TTeacherResearchDAO;
+import com.et59.cus.domain.dao.TTeacherSubjectDAO;
 import com.et59.cus.domain.dao.TjActiontimeDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
 import com.et59.cus.domain.entity.BsAddress;
@@ -93,10 +101,18 @@ import com.et59.cus.domain.entity.TCollege;
 import com.et59.cus.domain.entity.TCollegeExample;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
+import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TPrize;
+import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TRoleMenuExample;
+import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
+import com.et59.cus.domain.entity.TTeacherPaperExample;
+import com.et59.cus.domain.entity.TTeacherPrizeExample;
+import com.et59.cus.domain.entity.TTeacherResearchExample;
+import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.TjActiontimeExample;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
@@ -182,6 +198,24 @@ public class LocalServiceImpl implements LocalService {
 	private TDictionaryDAO tDictionaryDAO;
 	@Autowired
 	private TTeacherDAO tTeacherDAO;
+
+	@Autowired
+	private TTeacherPaperDAO tTeacherPaperDAO;
+	@Autowired
+	private TTeacherPrizeDAO tTeacherPrizeDAO;
+	@Autowired
+	private TTeacherResearchDAO tTeacherResearchDAO;
+	@Autowired
+	private TTeacherSubjectDAO tTeacherSubjectDAO;
+
+	@Autowired
+	private TPaperDAO tPaperDAO;
+	@Autowired
+	private TPrizeDAO tPrizeDAO;
+	@Autowired
+	private TResearchDAO tResearchDAO;
+	@Autowired
+	private TSubjectDAO tSubjectDAO;
 
 	/**
 	 * 查询用户信息
@@ -937,7 +971,44 @@ public class LocalServiceImpl implements LocalService {
 	 */
 	@Override
 	public void deleteArticle(long id) throws Exception {
-		bsArticleDAO.deleteByPrimaryKey(id);
+		//删除关联表和文件表
+		
+		TTeacherPaperExample e1 = new TTeacherPaperExample();
+		e1.createCriteria().andTeacheridEqualTo(id);
+		List paperList = tTeacherPaperDAO.selectByExample(e1);
+		for (Iterator iterator = paperList.iterator(); iterator.hasNext();) {
+			TPaper tPaper = (TPaper) iterator.next();
+			tPaperDAO.deleteByPrimaryKey(tPaper.getPaperid());
+		}
+		
+		TTeacherPrizeExample e2 = new TTeacherPrizeExample();
+		e2.createCriteria().andTeacheridEqualTo(id);
+		List prizeList = tTeacherPrizeDAO.selectByExample(e2);
+		for (Iterator iterator = prizeList.iterator(); iterator.hasNext();) {
+			TPrize tPrize = (TPrize) iterator.next();
+			tPrizeDAO.deleteByPrimaryKey(tPrize.getPrizeid());
+		}
+		
+		TTeacherResearchExample e3 = new TTeacherResearchExample();
+		e3.createCriteria().andTeacheridEqualTo(id);
+		List researchList = tTeacherResearchDAO.selectByExample(e3);
+		for (Iterator iterator = researchList.iterator(); iterator.hasNext();) {
+			TResearch tResearch = (TResearch) iterator.next();
+			tResearchDAO.deleteByPrimaryKey(tResearch.getResearchid());
+		}
+		
+		TTeacherSubjectExample e4 = new TTeacherSubjectExample();
+		e4.createCriteria().andTeacheridEqualTo(id);
+		List subjectList = tTeacherSubjectDAO.selectByExample(e4);
+		for (Iterator iterator = subjectList.iterator(); iterator.hasNext();) {
+			TSubject tSubject = (TSubject) iterator.next();
+			tSubjectDAO.deleteByPrimaryKey(tSubject.getSubjectid());
+		}
+		
+		
+		
+		
+		bsArticleDAO.deleteByPrimaryKey(id);333
 	}
 
 	/**

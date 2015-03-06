@@ -291,12 +291,6 @@
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
-	<!-- 课程列表 -->
-	<bean name="tSubjectDAO" class="com.et59.cus.domain.dao.TSubjectDAOImpl"
-		scope="prototype" autowire="byName">
-		<property name="sqlMapClient" ref="sqlMapClient" />
-	</bean>
-	
 	<!-- 角色菜单关联表 -->
 	<bean name="tRoleMenuDAO" class="com.et59.cus.domain.dao.TRoleMenuDAOImpl"
 		scope="prototype" autowire="byName">
@@ -314,6 +308,56 @@
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
+	
+	<!-- 论文表 -->
+	<bean name="tPaperDAO" class="com.et59.cus.domain.dao.TPaperDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 获奖表 -->
+	<bean name="tPrizeDAO" class="com.et59.cus.domain.dao.TPrizeDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 立项表 -->
+	<bean name="tResearchDAO" class="com.et59.cus.domain.dao.TResearchDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 课程表 -->
+	<bean name="tSubjectDAO" class="com.et59.cus.domain.dao.TSubjectDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 教师论文表 -->
+	<bean name="tTeacherPaperDAO" class="com.et59.cus.domain.dao.TTeacherPaperDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 教师获奖表 -->
+	<bean name="tTeacherPrizeDAO" class="com.et59.cus.domain.dao.TTeacherPrizeDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 教师立项表 -->
+	<bean name="tTeacherResearchDAO" class="com.et59.cus.domain.dao.TTeacherResearchDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 教师课程表 -->
+	<bean name="tTeacherSubjectDAO" class="com.et59.cus.domain.dao.TTeacherSubjectDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	
 	
 	
 	<!-- 动态多数据源支持 -->

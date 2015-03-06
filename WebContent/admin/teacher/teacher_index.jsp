@@ -46,9 +46,9 @@
 <body>
 <div id="productcategorytb" style="padding: 5px; height: auto">
 		<div>
-			教师姓名:<input type="text" id="teachername"> 
+			教师姓名:<input type="text" id="teachernameQuery"> 
 			所属专业:<input
-				class="easyui-combobox" id="department"
+				class="easyui-combobox" id="departmentQuery"
 				data-options="
  					url:'Dictionary_queryDictionaryByType?type=department',
 					method:'get', 
@@ -311,15 +311,15 @@
 	<script>
 	var url;
 	function queryTearcher() {
-		var teachernamequery = $('#teachername').val();
-		var departmentquery = $('#department').combobox('getValue');
+		var teachernamequery = $('#teachernameQuery').val();
+		var departmentquery = $('#departmentQuery').combobox('getValue');
 		$('#teacherdg').datagrid('load', {
 			teachernamequery : teachernamequery,
 			departmentquery : departmentquery
 		});
 	}
 	function newTeacher() {
-		$('#dictionarydlg').dialog('open').dialog('setTitle', '新增分类');
+		$('#dictionarydlg').dialog('open').dialog('setTitle', '新增教师');
 		$('#dictionaryfm').form('clear');
 		url = 'Teacher_save';
 	}
@@ -327,7 +327,7 @@
 		var row = $('#teacherdg').datagrid('getSelected');
 		if (row) {
 			$('#dictionarydlg').dialog('open').dialog('setTitle',
-					'编辑分类');
+					'编辑教师');
 			$('#dictionaryfm').form('clear');
 			$('#dictionaryfm').form('load', row);
 			url = 'Dictionary_update?id=' + row.dictionaryid;
@@ -373,7 +373,7 @@
 	function destroyTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
 		if (row) {
-			$.messager.confirm('确认', '你想要删除这个分类吗?', function(r) {
+			$.messager.confirm('确认', '是否要删除?', function(r) {
 				if (r) {
 					$.post('Dictionary_delete', {
 						id : row.dictionaryid

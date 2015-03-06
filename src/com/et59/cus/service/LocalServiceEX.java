@@ -44,4 +44,16 @@ public interface LocalServiceEX {
 	 */
 	@SuppressWarnings("rawtypes")
 	public Long saveDownloadInfo(TDownload tDownload) throws Exception;
+
+	/**
+	 * 修改资料
+	 */
+	@SuppressWarnings("rawtypes")
+	public void updateDownloadInfo(TDownload tDownload) throws Exception;
+
+	/**
+	 * 删除资料
+	 */
+	@SuppressWarnings("rawtypes")
+	public void deleteDownloadInfo(long id) throws Exception;
 }

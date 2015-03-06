@@ -132,8 +132,6 @@ public class FileAction extends BaseAction {
 	}
 
 	public String uploadForOther() throws Exception {
-		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-		// System.out.println(isMultipart + "***************");
 		String dstPath = getSavePathForOther();
 		File dstFile = new File(dstPath);
 

@@ -158,4 +158,20 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		return tdownloadDAO.insert(tDownload);
 	}
 
+	/**
+	 * 修改资料
+	 */
+	@Override
+	public void updateDownloadInfo(TDownload tDownload) throws Exception {
+		tdownloadDAO.updateByPrimaryKeySelective(tDownload);
+	}
+
+	/**
+	 * 删除资料
+	 */
+	@Override
+	public void deleteDownloadInfo(long id) throws Exception {
+		tdownloadDAO.deleteByPrimaryKey(id);
+	}
+
 }

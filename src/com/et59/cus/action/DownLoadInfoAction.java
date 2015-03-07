@@ -173,6 +173,7 @@ public class DownLoadInfoAction extends BaseAction {
 	public void update() {
 		boolean flag = false;
 		String id = request.getParameter("id");
+		TDownload downloaddetail = getTDownload();
 		downloaddetail.setDownloadid(Long.valueOf(id));
 		try {
 			localServiceEXProxy.updateDownloadInfo(downloaddetail);
@@ -183,30 +184,25 @@ public class DownLoadInfoAction extends BaseAction {
 		}
 	}
 
-	//
-	// /**
-	// * 公共方法
-	// *
-	// * @return
-	// */
-	// public BsArticle getBsArticle() {
-	// String title = request.getParameter("title");
-	// String createdate = request.getParameter("createdate");
-	// String author = request.getParameter("author");
-	// String type = request.getParameter("type");
-	// String summary = request.getParameter("summary");
-	// String content = request.getParameter("content");
-	// BsArticle bsArticle = new BsArticle();
-	// bsArticle.setTitle(title);
-	// bsArticle.setSummary(summary);
-	// bsArticle.setType(type);
-	// bsArticle.setContent(content);
-	// bsArticle.setUpdatedate(new Date());
-	// bsArticle.setCreatedate(DateUtil.strToDate(createdate));
-	// bsArticle.setAuthor(author);
-	// return bsArticle;
-	// }
-	//
+	
+	 /**
+	 * 公共方法
+	 *
+	 * @return
+	 */
+	 public TDownload getTDownload() {
+	 String filename = request.getParameter("filename");
+	 String author = request.getParameter("author");
+	 String directions = request.getParameter("directions");
+	 String createdate = request.getParameter("createdate");
+	 TDownload tDownload = new TDownload();
+	 tDownload.setAuthor(author);
+	 tDownload.setFilename(filename);
+	 tDownload.setCreatedate(createdate);
+	 tDownload.setDirections(directions);
+	 return tDownload;
+	 }
+	
 	/**
 	 * 删除资料
 	 */

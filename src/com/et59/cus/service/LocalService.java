@@ -352,4 +352,9 @@ public interface LocalService {
 	 */
 	public Pager queryTeacherBypage(TTeacher tTeacher,int pagesize, int currentpage)
 			throws Exception;
+	
+	/**
+	 * 师资队伍删除
+	 */
+	public void deleteTeacher(long id) throws Exception;
 }

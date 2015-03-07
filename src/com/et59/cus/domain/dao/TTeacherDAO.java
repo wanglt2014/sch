@@ -2,6 +2,7 @@ package com.et59.cus.domain.dao;
 
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
+
 import java.util.List;
 
 public interface TTeacherDAO {
@@ -71,4 +72,9 @@ public interface TTeacherDAO {
 	 * @ibatorgenerated  Wed Mar 04 16:24:24 CST 2015
 	 */
 	int updateByPrimaryKey(TTeacher record);
+	
+	/**通过存储过程删除教师及相关表信息
+	 * @param id
+	 */
+	public void deleteByProc(Long id);
 }

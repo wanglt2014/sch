@@ -49,7 +49,7 @@
             closed="true" buttons="#downloaddlg-buttons">
         <div class="ftitle">资料信息</div>
         <form id="downloadfm" method="post" novalidate>
-		 	<div class="fitem">
+		 	<div class="fitem" id="uploadFileDIV">
                 <label>上传文件:</label>
             	<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
 				<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
@@ -127,6 +127,7 @@
         function insertDownload(){
             $('#downloaddlg').dialog('open').dialog('setTitle','新增资料');
             $('#downloadfm').form('clear');
+            $('#uploadFileDIV').show();
 //             UM.getEditor('myEditornew').setContent('', false);
             url = 'Download_save';
         }
@@ -135,7 +136,9 @@
             if (row){
                 $('#downloaddlg').dialog('open').dialog('setTitle','编辑资料');
                 $('#downloadfm').form('clear');
+                $('#uploadFileDIV').hide();
                 $('#downloadfm').form('load',row);
+                
                 url = 'Download_update?id='+row.downloadid;
             }
         }
@@ -160,7 +163,9 @@
                     }
                 }
             });
-            uploader.start();
+            if(url.indexOf("save") > 0){
+            	uploader.start();
+            }
     		}else{
     			alert("信息填写不完整");
     		}

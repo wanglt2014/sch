@@ -40,6 +40,7 @@ import com.et59.cus.domain.dao.OpenLogDAO;
 import com.et59.cus.domain.dao.OpenOauthDAO;
 import com.et59.cus.domain.dao.TCollegeDAO;
 import com.et59.cus.domain.dao.TDictionaryDAO;
+import com.et59.cus.domain.dao.TDownloadDAO;
 import com.et59.cus.domain.dao.TPaperDAO;
 import com.et59.cus.domain.dao.TPrizeDAO;
 import com.et59.cus.domain.dao.TResearchDAO;
@@ -216,6 +217,9 @@ public class LocalServiceImpl implements LocalService {
 	private TResearchDAO tResearchDAO;
 	@Autowired
 	private TSubjectDAO tSubjectDAO;
+	
+	@Autowired
+	private TDownloadDAO tdownloadDAO;
 
 	/**
 	 * 查询用户信息
@@ -959,11 +963,11 @@ public class LocalServiceImpl implements LocalService {
 	}
 
 	/**
-	 * 边界文章
+	 * 编辑文章
 	 */
 	@Override
 	public void updateArticle(BsArticle bsArticle) throws Exception {
-		bsArticleDAO.updateByPrimaryKey(bsArticle);
+		bsArticleDAO.updateByPrimaryKeySelective(bsArticle);
 	}
 
 	/**
@@ -972,43 +976,18 @@ public class LocalServiceImpl implements LocalService {
 	@Override
 	public void deleteArticle(long id) throws Exception {
 		//删除关联表和文件表
-		
-		TTeacherPaperExample e1 = new TTeacherPaperExample();
-		e1.createCriteria().andTeacheridEqualTo(id);
-		List paperList = tTeacherPaperDAO.selectByExample(e1);
-		for (Iterator iterator = paperList.iterator(); iterator.hasNext();) {
-			TPaper tPaper = (TPaper) iterator.next();
-			tPaperDAO.deleteByPrimaryKey(tPaper.getPaperid());
+		try {
+			BsArticle bsArticle = bsArticleDAO.selectByPrimaryKey(id);
+			Long downloadId = bsArticle.getDownloadid();
+			if(downloadId!=null){
+				tdownloadDAO.deleteByPrimaryKey(downloadId);
+			}
+			
+			bsArticleDAO.deleteByPrimaryKey(id);
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
-		TTeacherPrizeExample e2 = new TTeacherPrizeExample();
-		e2.createCriteria().andTeacheridEqualTo(id);
-		List prizeList = tTeacherPrizeDAO.selectByExample(e2);
-		for (Iterator iterator = prizeList.iterator(); iterator.hasNext();) {
-			TPrize tPrize = (TPrize) iterator.next();
-			tPrizeDAO.deleteByPrimaryKey(tPrize.getPrizeid());
-		}
-		
-		TTeacherResearchExample e3 = new TTeacherResearchExample();
-		e3.createCriteria().andTeacheridEqualTo(id);
-		List researchList = tTeacherResearchDAO.selectByExample(e3);
-		for (Iterator iterator = researchList.iterator(); iterator.hasNext();) {
-			TResearch tResearch = (TResearch) iterator.next();
-			tResearchDAO.deleteByPrimaryKey(tResearch.getResearchid());
-		}
-		
-		TTeacherSubjectExample e4 = new TTeacherSubjectExample();
-		e4.createCriteria().andTeacheridEqualTo(id);
-		List subjectList = tTeacherSubjectDAO.selectByExample(e4);
-		for (Iterator iterator = subjectList.iterator(); iterator.hasNext();) {
-			TSubject tSubject = (TSubject) iterator.next();
-			tSubjectDAO.deleteByPrimaryKey(tSubject.getSubjectid());
-		}
-		
-		
-		
-		
-		bsArticleDAO.deleteByPrimaryKey(id);333
 	}
 
 	/**
@@ -2174,5 +2153,13 @@ public class LocalServiceImpl implements LocalService {
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;
+	}
+	
+	/**
+	 * 师资队伍删除
+	 */
+	@Override
+	public void deleteTeacher(long id) throws Exception {
+		tTeacherDAO.deleteByProc(id);
 	}
 }

@@ -105,7 +105,7 @@ $(function(){
 				<div class="normal_content_top">
 				<ul class="news_content">
 					<s:iterator var="notify" value="notifylist" status="st">
-										<li><a target="_blank" href="News_newsdetail_${notify.id}.shtm"/><s:property value="#notify.title" /><img src="${image_path}/hot1.gif" /> </a>
+										<li><a target="_blank" href="News_newsdetail_${notify.articleid}.shtm"/><s:property value="#notify.title" /><img src="${image_path}/hot1.gif" /> </a>
 										</li>
 									</s:iterator>
 				</ul>
@@ -122,7 +122,7 @@ $(function(){
 				<div class="normal_content_bottom">
 					<ul class="news_content">
 					<s:iterator var="media" value="medialist" status="st">
-										<li><a target="_blank" href="News_newsdetail_${media.id}.shtm"><s:property
+										<li><a target="_blank" href="News_newsdetail_${media.articleid}.shtm"><s:property
 													value="#media.title" /><img src="${image_path}/hot.gif" /></a>
 										</li>
 									</s:iterator>

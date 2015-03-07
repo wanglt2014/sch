@@ -84,7 +84,7 @@
             <div  style="display: none;">
            		 <textarea name="content" id="content" class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
             </div>
-            <div class="fitem">
+            <div class="fitem" id="uploadFileDIV">
                 <label>上传文件:</label>
             	<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
 				<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
@@ -94,7 +94,13 @@
 					<input type="button" value="清空" id="clear-btn" />
 					<p class="tip2">注意：只能上传10M以内的文件</p>
 				</div>
-				</div>
+			</div>
+<!-- 			<div class="fitem" id="queryFileDIV"> -->
+<!--                 <label>文件:</label> -->
+<!--             	<s:if test="fileshowpath!='' and fileshowpath!=null"> -->
+<!-- 					<a href="" id="filePath" title="" ></a> -->
+<!-- 				</s:if> -->
+<!-- 			</div> -->
              <div class="fitem" style="">
                 <label>文章内容:</label>
                 <br/>
@@ -171,6 +177,9 @@
                 $('#newsfm').form('clear');
                 $('#newsfm').form('load',row);
 //                 $('#createdate').datebox('setValue', '2015-3-15');
+// 				 $('#filePath').text(row.);
+				$('#uploadFileDIV').hide();
+
                 UM.getEditor('myEditornew').setContent(row.content, false);
                 url = 'Article_update?id='+row.articleid;
             }
@@ -196,7 +205,10 @@
                     }
                 }
             });
-            uploader.start();
+            if(url.indexOf("save") > 0){
+            	uploader.start();
+            }
+            
     		}else{
     			alert("信息填写不完整");
     		}

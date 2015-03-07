@@ -138,10 +138,12 @@ public class ArticleAction extends BaseAction {
 			bsArticledetail = localServiceProxy.queryArticleById(Long
 					.valueOf(id));
 
-			downloaddetail = localServiceEXProxy
+			if(bsArticledetail.getDownloadid()!=null){
+			TDownload download = localServiceEXProxy
 					.queryDownloadById(bsArticledetail.getDownloadid());
-
-			bsArticledetail.setDownload(downloaddetail);
+				bsArticledetail.setDownload(download);
+			}
+			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

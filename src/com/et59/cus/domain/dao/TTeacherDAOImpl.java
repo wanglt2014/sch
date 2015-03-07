@@ -2,7 +2,10 @@ package com.et59.cus.domain.dao;
 
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
+
+import java.util.HashMap;
 import java.util.List;
+
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
 
 public class TTeacherDAOImpl extends SqlMapClientDaoSupport implements TTeacherDAO {
@@ -145,5 +148,16 @@ public class TTeacherDAOImpl extends SqlMapClientDaoSupport implements TTeacherD
 		public Object getRecord() {
 			return record;
 		}
+	}
+	
+	
+
+	/**通过存储过程删除教师及相关表信息
+	 * @param id
+	 */
+	public void deleteByProc(Long id) {
+		HashMap<String, Object> map = new HashMap<String, Object>();  
+        map.put("teacherId", id);  
+        getSqlMapClientTemplate().queryForList("t_teacher.call_deleteTeacher", map);  
 	}
 }

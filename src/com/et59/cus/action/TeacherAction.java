@@ -200,7 +200,7 @@ public class TeacherAction extends BaseAction {
 		boolean flag = false;
 		String id = request.getParameter("id");
 		try {
-			localServiceProxy.deleteDictionary(Integer.valueOf(id));
+			localServiceProxy.deleteTeacher(Integer.valueOf(id));
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (NumberFormatException e) {

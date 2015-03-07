@@ -2,9 +2,6 @@ package com.et59.cus.domain.entity;
 
 import java.util.Date;
 
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.et59.cus.converter.JsonDateSerializer;
 public class BsArticle {
 
 	/**

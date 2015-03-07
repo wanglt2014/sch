@@ -404,4 +404,13 @@
       iimageURLl = #iimageurll:VARCHAR#
     where id = #id:BIGINT#
   </update>
+  
+     <parameterMap id="ParameterMap" class="map">  
+        <parameter property="teacherId" jdbcType="Long" javaType="java.lang.Long" mode="IN"/>  
+    </parameterMap>  
+  
+    <procedure id="call_deleteTeacher" parameterMap="ParameterMap" >  
+        {call deleteTeacher(?)}   
+    </procedure>
+  
 </sqlMap>

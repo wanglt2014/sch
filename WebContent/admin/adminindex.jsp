@@ -69,9 +69,9 @@
 <%-- <script type="text/javascript" src="${js_path}/uploadify/jquery.uploadify.js"></script> --%>
 <!--  <script type="text/javascript"  -->
 <%--  	src="${js_path}/swfobject.js"></script>  --%>
-<link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/css/jquery.plupload.queue.css">
+<%-- <link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/css/jquery.plupload.queue.css"> --%>
 <%-- <script type="text/javascript" src="${request_path}/plupload/js/plupload.full.js"></script> --%>
-<script type="text/javascript" src="${request_path}/js/plupload/queue/jquery.plupload.queue.js"></script>
+<%-- <script type="text/javascript" src="${request_path}/js/plupload/queue/jquery.plupload.queue.js"></script> --%>
 
 <script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script>
 <script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script>

@@ -2139,11 +2139,11 @@ public class LocalServiceImpl implements LocalService {
 		com.et59.cus.domain.entity.TTeacherExample.Criteria criteria = example
 				.createCriteria();
 		String teacherName = tTeacher.getTeachername();
-		Long department = tTeacher.getDepartment();
+		String department = tTeacher.getDepartment();
 		if (null != teacherName) {
 			criteria.andTeachernameLike(teacherName);
 		}
-		if (null != department && department != 0) {
+		if (null != department && department != "") {
 			criteria.andDepartmentEqualTo(department);
 		}
 		int startrecord = (currentpage - 1) * pagesize;

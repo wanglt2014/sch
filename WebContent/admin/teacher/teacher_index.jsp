@@ -20,34 +20,20 @@
 <head>
 <meta charset="UTF-8">
 <title>${sitename}--后台管理系统--师资队伍</title>
-<%-- <link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/jquery.plupload.queue.css"> --%>
-<%-- <script type="text/javascript" src="${js_path}/jquery.js"></script> --%>
-<%-- <script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script> --%>
+<%-- <script type="text/javascript" src="${request_path}/js/jquery.js" ></script>  --%>
+<%-- <link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/css/jquery.plupload.queue.css"> --%>
+<%-- <%-- <script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script> --%> 
+<%-- <script type="text/javascript" src="${request_path}/plupload/js/plupload.full.js"></script> --%>
+<%-- <script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script> --%>
+<%-- <script type="text/javascript" src="${request_path}/js/plupload/queue/jquery.plupload.queue.js"></script> --%>
+<%-- <script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script> --%>
 <%-- <script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script> --%>
-<%-- <script type="text/javascript" src="${js_path}/plupload/queue/jquery.plupload.queue.js"></script> --%>
-<%-- <script type="text/javascript" src="${js_path}/plupload/i18n/cn.js"></script> --%>
-
-<!-- <style type="text/css">@import url(${request_path}/plupload/js/jquery.plupload.queue/jquery.plupload.queue.css);</style> -->
-<script type="text/javascript" src="${request_path}/js/jquery.js" ></script> 
-
-<link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/css/jquery.plupload.queue.css">
-
-<%-- <script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script> --%>
-<script type="text/javascript" src="${request_path}/plupload/js/plupload.full.js"></script>
-
-
-<script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script>
-<script type="text/javascript" src="${request_path}/js/plupload/queue/jquery.plupload.queue.js"></script>
-<script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script>
-
-<script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script>
-
 </head>
 <body>
-<div id="productcategorytb" style="padding: 5px; height: auto">
+<div id="teachertb" style="padding: 5px; height: auto">
 		<div>
 			教师姓名:<input type="text" id="teachernameQuery"> 
-			所属专业:<input
+			所在专业:<input
 				class="easyui-combobox" id="departmentQuery"
 				data-options="
  					url:'Dictionary_queryDictionaryByType?type=department',
@@ -65,10 +51,12 @@
 		fitColumns="true" singleSelect="true" pageSize="20">
 		<thead>
 			<tr>
-				<th field="dictionarycode" width="50">编码</th>
-				<th field="dictionaryvalue" width="50">值</th>
-				<th field="dictionarytype" width="50">分类</th>
-				<th field="dictionaryremark" width="50">备注</th>
+				<th field="teachername" width="30">姓名</th>
+				<th field="department" width="50">所在专业</th>
+				<th field="title" width="30">职称</th>
+				<th field="job" width="30">职务</th>
+				<th field="tutortype" width="20" formatter="formatTutortype">硕/博导</th>
+				<th field="sex" width="20" formatter="formatSextype">性别</th>
 			</tr>
 		</thead>
 	</table>
@@ -80,10 +68,10 @@
 		<a href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-remove" plain="true" onclick="destroyTeacher()">删除</a>
 	</div>
-	<div id="dictionarydlg" class="easyui-dialog"
+	<div id="teacherdlg" class="easyui-dialog"
 		style="width: 800px; height: 780px; padding: 10px 20px" closed="true"
-		buttons="#dictionarydlg-buttons">
-		<form id="dictionaryfm" method="post" novalidate>
+		buttons="#teacherdlg-buttons">
+		<form id="teacherfm" method="post" novalidate>
 		<div id="teacher_tab" class="easyui-tabs" style="height: 616px"
 			data-options="fit:true,border:false,plain:true" >
 			<div title="基本信息" style="padding:20px;" id="Tab1"> 
@@ -91,11 +79,11 @@
 					
 						<div class="fitem">
 							<label>姓名:</label> 
-							<input id="teachername" name="tTeacher.teachername" class="easyui-validatebox" required="true">
+							<input id="teachername" name="teachername" class="easyui-validatebox" required="true">
 						</div>
 						<div class="fitem">
 							<label>性别</label> 
-							<select id="sex" name="tTeacher.sex" class="easyui-combobox" panelHeight="auto"
+							<select id="sex" name="sex" class="easyui-combobox" panelHeight="auto"
 								style="width: 100px">
 								<option value="0">男</option>
 								<option value="1">女</option>
@@ -103,7 +91,7 @@
 						</div>
 						<div class="fitem">
 							<label>出生年月:</label> 
-							<input id="birthday" name="tTeacher.birthday" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox" id="birthday" required="true" />
+							<input id="birthday" name="birthday" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox" id="birthday" required="true" />
 						</div>
 						<div class="fitem">
 							<label>所在专业:</label>
@@ -119,7 +107,7 @@
 						<div class="fitem">
 							<label>职称:</label>
 							<input
-								class="easyui-combobox" id="title"
+								class="easyui-combobox" id="title" name="title"
 								data-options="
  				 					url:'Dictionary_queryDictionaryByType?type=title',
  									method:'get',  
@@ -130,7 +118,7 @@
 						<div class="fitem">
 							<label>职务:</label>
 							<input
-								class="easyui-combobox" id="job"
+								class="easyui-combobox" id="job" name="job"
 								data-options="
 			 						url:'Dictionary_queryDictionaryByType?type=job', 
 									method:'get',
@@ -191,6 +179,30 @@
 						<div class="fitem">
 							<label>课程介绍:</label>
 							<textarea id="subjectText" rows=5 name="subjectText"  class="textarea easyui-validatebox"></textarea>
+						</div>
+						<div class="fitem">
+							<div class="wraper">
+							<label>教学大纲:</label> 
+							<ul id="file-list-outline" style="text-align: left;margin:0px 0px 0px 30px; ">
+							</ul>
+							<div class="btn-wraper">
+								<input type="button" value="选择文件..." id="browseOutline" />
+								<input type="button" value="清空" id="outline-clear-btn" />
+								<p class="tip2">注意：只能上传20M以内的文件</p>
+							</div>
+							</div>
+						</div>
+						<div class="fitem">
+							<div class="wraper">
+							<label>教学进度表:</label> 
+							<ul id="file-list-schedule" style="text-align: left;margin:0px 0px 0px 30px; ">
+							</ul>
+							<div class="btn-wraper">
+								<input type="button" value="选择文件..." id="browseSchedule" />
+								<input type="button" value="清空" id="schedule-clear-btn" />
+								<p class="tip2">注意：只能上传20M以内的文件</p>
+							</div>
+							</div>
 						</div>
 						<div class="fitem">
 							<div class="wraper">
@@ -257,58 +269,77 @@
 					</div>
 					</div>
 				</div>
+<!-- 				<div class="ftitle">著作</div> -->
+				</div>
 				<div title="论文"  closable="false" style="overflow:auto;padding:20px;" id="Tab4"> 
-				<div class="ftitle">论文</div>
-				<div class="fitem">
-					<label>论文名称:</label> <input name="papername"
-						class="easyui-validatebox" required="true">
-				</div>
-				<div class="fitem">
-					<label>作者排序:</label> <input name="paperauthor"
-						class="easyui-validatebox" >
-				</div>
-				<div class="fitem">
-					<label>期刊名称:</label> <input name="papernotename"
-						class="easyui-validatebox" >
-				</div>
-				<div class="fitem">
-					<label>刊登年份:</label> <input name="papernoteyear"
-						class="easyui-validatebox" >
-				</div>
-				<div class="fitem">
-					<label>杂志期号:</label> <input name="papernoteno"
-						class="easyui-validatebox" >
-				</div>
-				<div class="fitem">
-					<label>论文电子版:</label> 
-					<input id="uploader_Paper_count" name="uploader_Paper_count" value="0" style="display: none;"/>
-					<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; ">
-					</ul>
-					<div class="btn-wraper">
-						<input type="button" value="选择文件..." id="browsePaper" />
-						<input type="button" value="清空" id="paper-clear-btn" />
-						<p class="tip2">注意：只能上传20M以内的文件</p>
+					<div class="ftitle">论文</div>
+					<div class="fitem">
+						<label>论文名称:</label> <input name="papername"
+							class="easyui-validatebox" required="true">
+					</div>
+					<div class="fitem">
+						<label>作者排序:</label> <input name="paperauthor"
+							class="easyui-validatebox" >
+					</div>
+					<div class="fitem">
+						<label>期刊名称:</label> <input name="papernotename"
+							class="easyui-validatebox" >
+					</div>
+					<div class="fitem">
+						<label>刊登年份:</label> <input name="papernoteyear"
+							class="easyui-validatebox" >
+					</div>
+					<div class="fitem">
+						<label>杂志期号:</label> <input name="papernoteno"
+							class="easyui-validatebox" >
+					</div>
+					<div class="fitem">
+						<label>论文电子版:</label> 
+						<input id="uploader_Paper_count" name="uploader_Paper_count" value="0" style="display: none;"/>
+						<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; ">
+						</ul>
+						<div class="btn-wraper">
+							<input type="button" value="选择文件..." id="browsePaper" />
+							<input type="button" value="清空" id="paper-clear-btn" />
+							<p class="tip2">注意：只能上传20M以内的文件</p>
+						</div>
 					</div>
 				</div>
-				<div class="ftitle">著作</div>
+				<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab5"> 
+					<div class="ftitle">获奖</div>
+					包括教学获奖、科研获奖、社会服务获奖，以及若干可自定义的备选项
 				</div>
 			</div>
-			
-			<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab5"> 
-				<div class="ftitle">获奖</div>
-				包括教学获奖、科研获奖、社会服务获奖，以及若干可自定义的备选项
-			</div>
-		</div>
 </form>
 	</div>
-	<div id="dictionarydlg-buttons">
+	<div id="teacherdlg-buttons">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-ok" onclick="saveTeacher()">保存</a> <a
 			href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-cancel"
-			onclick="javascript:$('#dictionarydlg').dialog('close')">取消</a>
+			onclick="javascript:$('#teacherdlg').dialog('close')">取消</a>
 	</div>
 	<script>
+	function formatTutortype(value,rowData,rowIndex) {
+    	var s="";
+		if(value=="1"){
+			s ="硕导";
+		}else if(value=="2"){
+			s ="博导";
+		}
+		return s;
+	    }
+	
+	function formatSextype(value,rowData,rowIndex) {
+    	var s="";
+		if(value=="0"){
+			s ="男";
+		}else if(value=="1"){
+			s ="女";
+		}
+		return s;
+	    }
+	
 	var url;
 	function queryTearcher() {
 		var teachernamequery = $('#teachernameQuery').val();
@@ -319,18 +350,18 @@
 		});
 	}
 	function newTeacher() {
-		$('#dictionarydlg').dialog('open').dialog('setTitle', '新增教师');
-		$('#dictionaryfm').form('clear');
+		$('#teacherdlg').dialog('open').dialog('setTitle', '新增教师');
+		$('#teacherfm').form('clear');
 		url = 'Teacher_save';
 	}
 	function editTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
 		if (row) {
-			$('#dictionarydlg').dialog('open').dialog('setTitle',
+			$('#teacherdlg').dialog('open').dialog('setTitle',
 					'编辑教师');
-			$('#dictionaryfm').form('clear');
-			$('#dictionaryfm').form('load', row);
-			url = 'Dictionary_update?id=' + row.dictionaryid;
+			$('#teacherfm').form('clear');
+			$('#teacherfm').form('load', row);
+			url = 'teacher_update?id=' + row.teacherid;
 		}
 	}
 	function saveTeacher() {
@@ -341,9 +372,14 @@
 	            // When all files are uploaded submit form
 // 	            uploader.bind('StateChanged', function() {
 // 	                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
-	var valid = $('#dictionaryfm').form('validate');
+	var picLen = uploaderForPic.files.length;
+	var subjectLen = uploaderForSubject.files.length;
+	var probjectLen = uploaderForProject.files.length;
+	var paperLen = uploaderForPaper.files.length;
+	
+	var valid = $('#teacherfm').form('validate');
 		if(valid==true){
-			$('#dictionaryfm').form('submit', {
+			$('#teacherfm').form('submit', {
     			url : url,
     			onSubmit : function() {
     				return $(this).form('validate');
@@ -352,7 +388,7 @@
     				if (result != "true") {
     					jAlert('系统错误，请联系管理员', '错误提示');
     				} else {
-    					$('#dictionarydlg').dialog('close'); // close the dialog
+    					$('#teacherdlg').dialog('close'); // close the dialog
     					$('#teacherdg').datagrid('reload'); // reload the user data
     				}
     			}
@@ -450,6 +486,112 @@
 		}
 	});
 	
+	//教学大纲 上传控件##########################################
+	var uploaderForOutline = new plupload.Uploader({ //实例化一个plupload上传对象
+		browse_button : 'browseOutline',
+		multi_selection: false,
+ 		url : 'File_uploadForOther',
+ 		file_data_name : 'fileData',
+// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        unique_names : true,  // 上传的文件名是否唯一   
+        multipart_params: {
+        	  filetype: 'outline'
+        	},
+        filters: {
+  		  max_file_size : '20mb', //最大只能上传100kb的文件
+  		  prevent_duplicates : true //不允许队列中存在重复文件
+        }
+	});
+ 	
+// 	uploaderForSubject.init(); //初始化
+	//绑定文件添加进队列事件
+	uploaderForOutline.bind('FilesAdded',function(uploader,files){
+// 		var count = $("#uploader_subject_count").val();
+		for(var i = 0, len = files.length; i<len; i++){
+			var file_name = files[i].name; //文件名
+			var file_id = files[i].id;//ID,临时文件名
+			count++;
+			//构造html来更新UI
+// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+				html += '<input type="hiddent" name="uploader_outline_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" name="uploader_outline_name" value="' + file_name + '" /></li>';
+			$(html).appendTo('#file-list-outline');
+		}
+// 		$("#uploader_subject_count").val(count);
+	});
+	
+	//绑定文件上传进度事件
+	uploaderForOutline.bind('UploadProgress',function(uploader,file){
+		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+	});
+	
+	//绑定文件上传删除事件
+	uploaderForOutline.bind('FilesRemoved',function(uploader,file){
+		alert("删除");
+		$('#file-list-outline').html("");
+	});
+	
+	//清空按钮
+	$('#outline-clear-btn').click(function(){
+		uploaderForOutline.splice(0,10); ////删除文件按钮
+	});
+	
+	//教学进度表 上传控件##########################################
+	var uploaderForSchedule = new plupload.Uploader({ //实例化一个plupload上传对象
+		browse_button : 'browseSchedule',
+		multi_selection: false,
+ 		url : 'File_uploadForOther',
+ 		file_data_name : 'fileData',
+// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+        unique_names : true,  // 上传的文件名是否唯一   
+        multipart_params: {
+        	  filetype: 'schedule'
+        	},
+        filters: {
+  		  max_file_size : '20mb', //最大只能上传100kb的文件
+  		  prevent_duplicates : true //不允许队列中存在重复文件
+        }
+	});
+ 	
+// 	uploaderForSubject.init(); //初始化
+	//绑定文件添加进队列事件
+	uploaderForSchedule.bind('FilesAdded',function(uploader,files){
+// 		var count = $("#uploader_subject_count").val();
+		for(var i = 0, len = files.length; i<len; i++){
+			var file_name = files[i].name; //文件名
+			var file_id = files[i].id;//ID,临时文件名
+			count++;
+			//构造html来更新UI
+// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+				html += '<input type="hiddent" name="uploader_schedule_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" name="uploader_schedule_name" value="' + file_name + '" /></li>';
+			$(html).appendTo('#file-list-schedule');
+		}
+// 		$("#uploader_subject_count").val(count);
+	});
+	
+	//绑定文件上传进度事件
+	uploaderForSchedule.bind('UploadProgress',function(uploader,file){
+		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+	});
+	
+	//绑定文件上传删除事件
+	uploaderForSchedule.bind('FilesRemoved',function(uploader,file){
+		alert("删除");
+		$('#file-list-schedule').html("");
+	});
+	
+	//清空按钮
+	$('#schedule-clear-btn').click(function(){
+		uploaderForSchedule.splice(0,10); ////删除文件按钮
+	});
+	
 	//课程资料 上传控件##########################################
 	var uploaderForSubject = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browseSubject',
@@ -470,9 +612,6 @@
 	});
  	
 // 	uploaderForSubject.init(); //初始化
-	
-	
-	
 	//绑定文件添加进队列事件
 	uploaderForSubject.bind('FilesAdded',function(uploader,files){
 		var count = $("#uploader_subject_count").val();
@@ -506,16 +645,6 @@
 		uploaderForSubject.splice(0,10); ////删除文件按钮
 	});
 
-// 	//上传按钮
-// 	$('#upload-btn').click(function(){
-// 		uploader.start(); //开始上传
-// 	});
-	
-// 	//停止上传按钮
-// 	$('#stopupload-btn').click(function(){
-// 		uploader.stop(); //停止上传，停止后无法开始
-// 		uploader.refresh();
-// 	});
 
 	//立项上传控件###################################################
 	var uploaderForProject = new plupload.Uploader({ //实例化一个plupload上传对象
@@ -681,6 +810,8 @@
 	        }
 			if(index==1){
 				uploaderForSubject.init(); //初始化
+				uploaderForSchedule.init(); //初始化
+				uploaderForOutline.init(); //初始化
 	        }
 			if(index==2){
 				uploaderForProject.init();
@@ -692,7 +823,7 @@
 	});
 	</script>
 	<style type="text/css">
-#dictionaryfm {
+#teacherfm {
 	margin: 0;
 	padding: 10px 30px;
 }

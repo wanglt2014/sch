@@ -146,7 +146,7 @@ public class TeacherAction extends BaseAction {
 				tTeacher.setTeachername(teachernamequery);
 			}
 			if (null != departmentquery && !departmentquery.equals("")) {
-				tTeacher.setDepartment(Long.valueOf(departmentquery));
+				tTeacher.setDepartment(departmentquery);
 			}
 			Pager pager = localServiceProxy.queryTeacherBypage(tTeacher,
 					Integer.valueOf(rows), Integer.valueOf(page));

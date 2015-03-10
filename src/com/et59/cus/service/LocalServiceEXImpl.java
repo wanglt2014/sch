@@ -8,12 +8,26 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.et59.cus.domain.dao.TDownloadDAO;
+import com.et59.cus.domain.dao.TPaperDAO;
+import com.et59.cus.domain.dao.TPrizeDAO;
+import com.et59.cus.domain.dao.TResearchDAO;
 import com.et59.cus.domain.dao.TSubjectDAO;
+import com.et59.cus.domain.dao.TTeacherDAO;
+import com.et59.cus.domain.dao.TTeacherPaperDAO;
+import com.et59.cus.domain.dao.TTeacherPrizeDAO;
+import com.et59.cus.domain.dao.TTeacherResearchDAO;
+import com.et59.cus.domain.dao.TTeacherSubjectDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
+import com.et59.cus.domain.entity.TTeacherPaperKey;
+import com.et59.cus.domain.entity.TTeacherPrizeKey;
+import com.et59.cus.domain.entity.TTeacherResearchKey;
+import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
 
@@ -33,10 +47,28 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	private TDownloadDAO tdownloadDAO;
 
 	@Autowired
-	private TSubjectDAO tSubjectDAO;
+	private CommonDAOEx commonDAOEx;
 
 	@Autowired
-	private CommonDAOEx commonDAOEx;
+	private TTeacherDAO tTeacherDAO;
+
+	@Autowired
+	private TTeacherPaperDAO tTeacherPaperDAO;
+	@Autowired
+	private TTeacherPrizeDAO tTeacherPrizeDAO;
+	@Autowired
+	private TTeacherResearchDAO tTeacherResearchDAO;
+	@Autowired
+	private TTeacherSubjectDAO tTeacherSubjectDAO;
+
+	@Autowired
+	private TPaperDAO tPaperDAO;
+	@Autowired
+	private TPrizeDAO tPrizeDAO;
+	@Autowired
+	private TResearchDAO tResearchDAO;
+	@Autowired
+	private TSubjectDAO tSubjectDAO;
 
 	/**
 	 * 查询资料下载
@@ -172,6 +204,66 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public void deleteDownloadInfo(long id) throws Exception {
 		tdownloadDAO.deleteByPrimaryKey(id);
+	}
+
+	/**
+	 * 保存立项表
+	 */
+	@Override
+	public Long saveTResearch(TResearch tResearch) throws Exception {
+		return tResearchDAO.insert(tResearch);
+	}
+
+	/**
+	 * 保存课程表
+	 */
+	@Override
+	public Long saveTSubject(TSubject tSubject) throws Exception {
+		return tSubjectDAO.insert(tSubject);
+	}
+
+	/**
+	 * 保存论文表
+	 */
+	@Override
+	public Long saveTPaper(TPaper tPaper) throws Exception {
+		return tPaperDAO.insert(tPaper);
+	}
+
+	/**
+	 * 保存立项关联表
+	 */
+	@Override
+	public void saveTTeacherResearchKey(TTeacherResearchKey tTeacherResearchKey)
+			throws Exception {
+		tTeacherResearchDAO.insert(tTeacherResearchKey);
+	}
+
+	/**
+	 * 保存课程关联表
+	 */
+	@Override
+	public void saveTTeacherSubjectKey(TTeacherSubjectKey tTeacherSubjectKey)
+			throws Exception {
+		tTeacherSubjectDAO.insert(tTeacherSubjectKey);
+	}
+
+	/**
+	 * 保存论文关联表
+	 */
+	@Override
+	public void saveTTeacherPaperKey(TTeacherPaperKey tTeacherPaperKey)
+			throws Exception {
+		tTeacherPaperDAO.insert(tTeacherPaperKey);
+	}
+
+	/**
+	 * 保存获奖关联表
+	 */
+	@Override
+	public void saveTTeacherPrizeKey(TTeacherPrizeKey tTeacherPrizeKey)
+			throws Exception {
+		tTeacherPrizeDAO.insert(tTeacherPrizeKey);
 	}
 
 }

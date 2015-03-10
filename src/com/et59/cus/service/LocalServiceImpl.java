@@ -41,16 +41,8 @@ import com.et59.cus.domain.dao.OpenOauthDAO;
 import com.et59.cus.domain.dao.TCollegeDAO;
 import com.et59.cus.domain.dao.TDictionaryDAO;
 import com.et59.cus.domain.dao.TDownloadDAO;
-import com.et59.cus.domain.dao.TPaperDAO;
-import com.et59.cus.domain.dao.TPrizeDAO;
-import com.et59.cus.domain.dao.TResearchDAO;
 import com.et59.cus.domain.dao.TRoleMenuDAO;
-import com.et59.cus.domain.dao.TSubjectDAO;
 import com.et59.cus.domain.dao.TTeacherDAO;
-import com.et59.cus.domain.dao.TTeacherPaperDAO;
-import com.et59.cus.domain.dao.TTeacherPrizeDAO;
-import com.et59.cus.domain.dao.TTeacherResearchDAO;
-import com.et59.cus.domain.dao.TTeacherSubjectDAO;
 import com.et59.cus.domain.dao.TjActiontimeDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
 import com.et59.cus.domain.entity.BsAddress;
@@ -102,18 +94,10 @@ import com.et59.cus.domain.entity.TCollege;
 import com.et59.cus.domain.entity.TCollegeExample;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
-import com.et59.cus.domain.entity.TPaper;
-import com.et59.cus.domain.entity.TPrize;
-import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TRoleMenuExample;
-import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
-import com.et59.cus.domain.entity.TTeacherPaperExample;
-import com.et59.cus.domain.entity.TTeacherPrizeExample;
-import com.et59.cus.domain.entity.TTeacherResearchExample;
-import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.TjActiontimeExample;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
@@ -200,24 +184,6 @@ public class LocalServiceImpl implements LocalService {
 	@Autowired
 	private TTeacherDAO tTeacherDAO;
 
-	@Autowired
-	private TTeacherPaperDAO tTeacherPaperDAO;
-	@Autowired
-	private TTeacherPrizeDAO tTeacherPrizeDAO;
-	@Autowired
-	private TTeacherResearchDAO tTeacherResearchDAO;
-	@Autowired
-	private TTeacherSubjectDAO tTeacherSubjectDAO;
-
-	@Autowired
-	private TPaperDAO tPaperDAO;
-	@Autowired
-	private TPrizeDAO tPrizeDAO;
-	@Autowired
-	private TResearchDAO tResearchDAO;
-	@Autowired
-	private TSubjectDAO tSubjectDAO;
-	
 	@Autowired
 	private TDownloadDAO tdownloadDAO;
 
@@ -975,19 +941,19 @@ public class LocalServiceImpl implements LocalService {
 	 */
 	@Override
 	public void deleteArticle(long id) throws Exception {
-		//删除关联表和文件表
+		// 删除关联表和文件表
 		try {
 			BsArticle bsArticle = bsArticleDAO.selectByPrimaryKey(id);
 			Long downloadId = bsArticle.getDownloadid();
-			if(downloadId!=null){
+			if (downloadId != null) {
 				tdownloadDAO.deleteByPrimaryKey(downloadId);
 			}
-			
+
 			bsArticleDAO.deleteByPrimaryKey(id);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	/**
@@ -2154,12 +2120,23 @@ public class LocalServiceImpl implements LocalService {
 		page.setTotal(totalCount);
 		return page;
 	}
-	
+
 	/**
 	 * 师资队伍删除
 	 */
 	@Override
 	public void deleteTeacher(long id) throws Exception {
 		tTeacherDAO.deleteByProc(id);
+	}
+
+	/**
+	 * 保存教师信息
+	 * 
+	 * @param tTeacher
+	 * @return
+	 * @throws Exception
+	 */
+	public Long saveTeacher(TTeacher tTeacher) throws Exception {
+		return tTeacherDAO.insert(tTeacher);
 	}
 }

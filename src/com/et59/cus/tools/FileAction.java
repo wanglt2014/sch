@@ -114,10 +114,10 @@ public class FileAction extends BaseAction {
 		}
 	}
 
-	public String uploadForPic() throws Exception {
+	public String uploadForTeacher() throws Exception {
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		// System.out.println(isMultipart + "***************");
-		String dstPath = getSavePathForPic();
+		String dstPath = getSavePathForTeacher();
 		File dstFile = new File(dstPath);
 
 		if (!dstFile.exists()) {
@@ -178,12 +178,12 @@ public class FileAction extends BaseAction {
 	}
 
 	/**
-	 * 获取图片保存路径
+	 * 获取师资队伍保存路径
 	 * 
 	 * @return
 	 */
-	public static String getSavePathForPic() {
-		return getSavePath() + Constant.PATH_PIC;
+	public static String getSavePathForTeacher() {
+		return getSavePath() + Constant.PATH_TEACHER;
 	}
 
 	/**

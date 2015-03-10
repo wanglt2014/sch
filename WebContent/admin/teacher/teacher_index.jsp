@@ -52,9 +52,9 @@
 		<thead>
 			<tr>
 				<th field="teachername" width="30">姓名</th>
-				<th field="department" width="50">所在专业</th>
-				<th field="title" width="30">职称</th>
-				<th field="job" width="30">职务</th>
+				<th field="departmentname" width="50">所在专业</th>
+				<th field="titlename" width="30" >职称</th>
+				<th field="job" width="30"  formatter="formatJobtype">职务</th>
 				<th field="tutortype" width="20" formatter="formatTutortype">硕/博导</th>
 				<th field="sex" width="20" formatter="formatSextype">性别</th>
 			</tr>
@@ -85,8 +85,8 @@
 							<label>性别</label> 
 							<select id="sex" name="sex" class="easyui-combobox" panelHeight="auto"
 								style="width: 100px">
-								<option value="0">男</option>
-								<option value="1">女</option>
+								<option value="0" >男</option>
+								<option value="1" >女</option>
 							</select>
 						</div>
 						<div class="fitem">
@@ -103,6 +103,7 @@
  				 					valueField:'dictionarycode',
  				 					textField:'dictionaryvalue',  
  									panelHeight:'auto'"> 
+ 							<input id="departmentname" name="departmentname" type="hidden" />
 						</div>
 						<div class="fitem">
 							<label>职称:</label>
@@ -114,6 +115,7 @@
  				 					valueField:'dictionarycode',  
  				 					textField:'dictionaryvalue',  
  									panelHeight:'auto'"> 
+ 							<input id="titlename" name="titlename" type="hidden" />
 						</div>
 						<div class="fitem">
 							<label>职务:</label>
@@ -125,6 +127,7 @@
  				 					valueField:'dictionarycode',
 				 					textField:'dictionaryvalue',
  									panelHeight:'auto'">
+ 							<input id="jobname" name="jobname" type="hidden" />
 						</div>
 						<div class="fitem">
 							<label>硕/博导:</label>
@@ -160,7 +163,7 @@
 						<div class="fitem">
 							<label>课程性质:</label>
 							<input
-								class="easyui-combobox" id="subjectType"
+								class="easyui-combobox" id="subjectType" name="subjectType"
 								data-options="
    				 					url:'Dictionary_queryDictionaryByType?type=subjectType',  
    									method:'get',    
@@ -207,7 +210,7 @@
 						<div class="fitem">
 							<div class="wraper">
 							<label>课程资料:</label> 
-							<input id="uploader_subject_count" name="uploader_subject_count" value="0" style="display: none;"/>
+<!-- 							<input id="uploader_subject_count" name="uploader_subject_count" value="0" style="display: none;"/> -->
 							<ul id="file-list-subject" style="text-align: left;margin:0px 0px 0px 30px; ">
 							</ul>
 							<div class="btn-wraper">
@@ -234,11 +237,11 @@
 				</div>
 				<div class="fitem">
 					<label>项目资金:</label> <input name="researchmoney"
-						class="easyui-validatebox" >
+						class="easyui-numberbox" max="2000000000" >
 				</div>
 				<div class="fitem">
 					<label>配套资金:</label> <input name="researchmatchmoney"
-						class="easyui-validatebox" >
+						class="easyui-numberbox" max="2000000000" >
 				</div>
 				<div class="fitem">
 					<label>项目主持人:</label> <input name="researchhost"
@@ -259,7 +262,7 @@
 				<div class="fitem">
 					<div class="wraper">
 					<label>立项申请书电子版:</label> 
-					<input id="uploader_project_count" name="uploader_project_count" value="0" style="display: none;"/>
+<!-- 					<input id="uploader_project_count" name="uploader_project_count" value="0" style="display: none;"/> -->
 					<ul id="file-list-project" style="text-align: left;margin:0px 0px 0px 30px; ">
 					</ul>
 					<div class="btn-wraper">
@@ -287,7 +290,7 @@
 					</div>
 					<div class="fitem">
 						<label>刊登年份:</label> <input name="papernoteyear"
-							class="easyui-validatebox" >
+							class="easyui-numberbox"  maxlength="4">
 					</div>
 					<div class="fitem">
 						<label>杂志期号:</label> <input name="papernoteno"
@@ -295,7 +298,7 @@
 					</div>
 					<div class="fitem">
 						<label>论文电子版:</label> 
-						<input id="uploader_Paper_count" name="uploader_Paper_count" value="0" style="display: none;"/>
+<!-- 						<input id="uploader_Paper_count" name="uploader_Paper_count" value="0" style="display: none;"/> -->
 						<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; ">
 						</ul>
 						<div class="btn-wraper">
@@ -340,6 +343,28 @@
 		return s;
 	    }
 	
+	function formatJobtype(value,rowData,rowIndex) {
+		var s="";
+		$.ajax({
+			type : 'post',
+			url : 'Dictionary_queryDictionaryByType?type=job',
+			async:false,
+			success : function(datas) {
+				var datasArr=eval(datas);  
+				for(var i=0;i<datasArr.length;i++){
+					if(value==datasArr[i].dictionarycode){
+						s= datasArr[i].dictionaryvalue;
+					}
+				}  
+			},
+			error : function() {
+				jAlert('系统错误，请联系管理员','错误提示');
+			}
+		});
+		return s;
+	}
+	
+	
 	var url;
 	function queryTearcher() {
 		var teachernamequery = $('#teachernameQuery').val();
@@ -353,6 +378,18 @@
 		$('#teacherdlg').dialog('open').dialog('setTitle', '新增教师');
 		$('#teacherfm').form('clear');
 		url = 'Teacher_save';
+		$('#sex').combobox('select',0);
+		$('#tutortype').combobox('select',1);
+		
+		var data = $('#department').combobox('getData');
+		 $("#department ").combobox('select',data[0].dictionarycode);
+		 var data = $('#title').combobox('getData');
+		 $("#title ").combobox('select',data[0].dictionarycode);
+		 var data = $('#job').combobox('getData');
+		 $("#job ").combobox('select',data[0].dictionarycode);
+		 var data = $('#subjectType').combobox('getData');
+		 $("#subjectType ").combobox('select',data[0].dictionarycode);
+		 
 	}
 	function editTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
@@ -365,20 +402,16 @@
 		}
 	}
 	function saveTeacher() {
-// 	        if (uploader.files.length > 0) {
-// 	var uploaderQueue = $('#uploaderQueue').pluploadQueue();
-// 		alert(uploaderQueue.files.length);
-// 			if (uploaderQueue.files.length > 0) {
-	            // When all files are uploaded submit form
-// 	            uploader.bind('StateChanged', function() {
-// 	                if (uploader.files.length === (uploader.total.uploaded + uploader.total.failed)) {
 	var picLen = uploaderForPic.files.length;
+	var outlineLen = uploaderForOutline.files.length;
+	var scheduleLen = uploaderForSchedule.files.length;
 	var subjectLen = uploaderForSubject.files.length;
 	var probjectLen = uploaderForProject.files.length;
 	var paperLen = uploaderForPaper.files.length;
-	
+// 	alert(picLen+"&&"+outlineLen+"&&"+scheduleLen+"&&+"+subjectLen+"&&"+probjectLen+"&&"+paperLen);
 	var valid = $('#teacherfm').form('validate');
 		if(valid==true){
+			$('#departmentname').val($('#department').combobox('getText'));
 			$('#teacherfm').form('submit', {
     			url : url,
     			onSubmit : function() {
@@ -393,11 +426,25 @@
     				}
     			}
     		});
-	//         }
-	//     });
-	//     uploaderQueue.start();
-    	uploaderForPic.start();
-    	uploaderForSubject.start();
+		if (picLen > 0) {
+			uploaderForPic.start();
+		}
+		if (outlineLen > 0) {
+			uploaderForOutline.start();
+		}
+		if (scheduleLen > 0) {
+			uploaderForSchedule.start();
+		}
+		if (subjectLen > 0) {
+			uploaderForSubject.start();
+		}
+		if (probjectLen > 0) {
+			uploaderForProject.start();
+		}
+		if (paperLen > 0) {
+			uploaderForPaper.start();
+		}
+    	
 		}else{
 			alert("信息填写不完整");
 		}
@@ -429,7 +476,7 @@
 	var uploaderForPic = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browse',
 		multi_selection: false,
- 		url : 'File_uploadForPic',
+ 		url : 'File_uploadForTeacher',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
@@ -463,7 +510,6 @@
 	//绑定文件添加进队列事件
 	uploaderForPic.bind('FilesAdded',function(uploader,files){
 		$.each(uploader.files, function (i, file) { 
-			alert(uploader.files.length);  
 			if (uploader.files.length <= 1) { 
 		            return; 
 		        } 
@@ -490,7 +536,7 @@
 	var uploaderForOutline = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browseOutline',
 		multi_selection: false,
- 		url : 'File_uploadForOther',
+ 		url : 'File_uploadForTeacher',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
@@ -508,11 +554,17 @@
 // 	uploaderForSubject.init(); //初始化
 	//绑定文件添加进队列事件
 	uploaderForOutline.bind('FilesAdded',function(uploader,files){
+		$.each(uploader.files, function (i, file) { 
+			if (uploader.files.length <= 1) { 
+		            return; 
+		        } 
+			uploaderForOutline.removeFile(file); 
+		    });
 // 		var count = $("#uploader_subject_count").val();
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
 			var file_id = files[i].id;//ID,临时文件名
-			count++;
+// 			count++;
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
@@ -543,7 +595,7 @@
 	var uploaderForSchedule = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browseSchedule',
 		multi_selection: false,
- 		url : 'File_uploadForOther',
+ 		url : 'File_uploadForTeacher',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
@@ -561,11 +613,17 @@
 // 	uploaderForSubject.init(); //初始化
 	//绑定文件添加进队列事件
 	uploaderForSchedule.bind('FilesAdded',function(uploader,files){
+		$.each(uploader.files, function (i, file) { 
+			if (uploader.files.length <= 1) { 
+		            return; 
+		        } 
+			uploaderForSchedule.removeFile(file); 
+		    });
 // 		var count = $("#uploader_subject_count").val();
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
 			var file_id = files[i].id;//ID,临时文件名
-			count++;
+// 			count++;
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
@@ -596,7 +654,7 @@
 	var uploaderForSubject = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browseSubject',
 		multi_selection: false,
- 		url : 'File_uploadForOther',
+ 		url : 'File_uploadForTeacher',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
@@ -614,19 +672,25 @@
 // 	uploaderForSubject.init(); //初始化
 	//绑定文件添加进队列事件
 	uploaderForSubject.bind('FilesAdded',function(uploader,files){
-		var count = $("#uploader_subject_count").val();
+		$.each(uploader.files, function (i, file) {
+			if (uploader.files.length <= 1) { 
+		            return; 
+		        } 
+			uploaderForSubject.removeFile(file); 
+		    });
+// 		var count = $("#uploader_subject_count").val();
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
 			var file_id = files[i].id;//ID,临时文件名
-			count++;
+// 			count++;
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_subject_' + count + '_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_subject_' + count + '_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" name="uploader_subject_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" name="uploader_subject_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-subject');
 		}
-		$("#uploader_subject_count").val(count);
+// 		$("#uploader_subject_count").val(count);
 	});
 	
 	//绑定文件上传进度事件
@@ -650,7 +714,7 @@
 	var uploaderForProject = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browseProject',
 		multi_selection: false,
- 		url : 'File_uploadForOther',
+ 		url : 'File_uploadForTeacher',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
@@ -668,19 +732,25 @@
 	
 	//绑定文件添加进队列事件
 	uploaderForProject.bind('FilesAdded',function(uploader,files){
-		var count = $("#uploader_project_count").val();
+		$.each(uploader.files, function (i, file) { 
+			if (uploader.files.length <= 1) { 
+		            return; 
+		        } 
+			uploaderForProject.removeFile(file); 
+		    });
+// 		var count = $("#uploader_project_count").val();
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
 			var file_id = files[i].id;//ID,临时文件名
-			count++;
+// 			count++;
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_project_' + count + '_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_project_' + count + '_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" name="uploader_project_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" name="uploader_project_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-project');
 		}
-		$("#uploader_project_count").val(count);
+// 		$("#uploader_project_count").val(count);
 	});
 	
 	//绑定文件上传进度事件
@@ -703,7 +773,7 @@
 	var uploaderForPaper = new plupload.Uploader({ //实例化一个plupload上传对象
 		browse_button : 'browsePaper',
 		multi_selection: false,
- 		url : 'File_uploadForOther',
+ 		url : 'File_uploadForTeacher',
  		file_data_name : 'fileData',
 // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
@@ -721,19 +791,19 @@
 	
 	//绑定文件添加进队列事件
 	uploaderForPaper.bind('FilesAdded',function(uploader,files){
-		var count = $("#uploader_paper_count").val();
+// 		var count = $("#uploader_paper_count").val();
 		for(var i = 0, len = files.length; i<len; i++){
 			var file_name = files[i].name; //文件名
 			var file_id = files[i].id;//ID,临时文件名
-			count++;
+// 			count++;
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_paper_' + count + '_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_paper_' + count + '_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" name="uploader_paper_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" name="uploader_paper_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-paper');
 		}
-		$("#uploader_paper_count").val(count);
+// 		$("#uploader_paper_count").val(count);
 	});
 	
 	//绑定文件上传进度事件
@@ -754,7 +824,7 @@
 // 	$(function() {
 // 		var uploaderQueue = $("#uploaderQueue").pluploadQueue({
 // 		runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
-// 		url : 'File_uploadForOther',
+// 		url : 'File_uploadForTeacher',
 // 		max_file_size : '30mb',
 // 		unique_names : true,
 // 		chunk_size: '2mb',
@@ -770,7 +840,7 @@
 		
 // 		$("#uploaderQueueProject").pluploadQueue({
 // 			runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
-// 			url : 'File_uploadForOther',
+// 			url : 'File_uploadForTeacher',
 // 			max_file_size : '10mb',
 // 			unique_names : true,
 // 			chunk_size: '2mb',
@@ -786,7 +856,7 @@
 		
 // 		$("#uploaderQueuePaper").pluploadQueue({
 // 			runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
-// 			url : 'File_uploadForOther',
+// 			url : 'File_uploadForTeacher',
 // 			max_file_size : '10mb',
 // 			unique_names : true,
 // 			chunk_size: '2mb',

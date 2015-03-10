@@ -34,7 +34,7 @@ public class Constant {
 	public static String ISVALID_1 = "1";// 是，启用
 	public static String ISVALID_0 = "0";// 否，未启用
 
-	public static String PATH_PIC = "uploadFile\\pic";
+	public static String PATH_TEACHER = "uploadFile\\teacher";
 	public static String PATH_OTHER = "uploadFile\\other";
 	public static String PATH_ARTICLE = "uploadFile\\article";
 	public static String PATH_DOWNLOADINFO = "uploadFile\\downloadinfo";

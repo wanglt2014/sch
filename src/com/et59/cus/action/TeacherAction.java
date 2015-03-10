@@ -2,18 +2,24 @@ package com.et59.cus.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.BsProductcategory;
-import com.et59.cus.domain.entity.BsSupplier;
+import com.et59.cus.domain.entity.BsUser;
 import com.et59.cus.domain.entity.TDictionary;
+import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TTeacher;
+import com.et59.cus.domain.entity.TTeacherPaperKey;
+import com.et59.cus.domain.entity.TTeacherResearchKey;
+import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.ex.Pager;
-import com.et59.cus.tools.ComonUtil;
+import com.et59.cus.tools.Constant;
+import com.et59.cus.tools.DateUtil;
 import com.et59.cus.tools.FileAction;
 
 /**
@@ -211,34 +217,122 @@ public class TeacherAction extends BaseAction {
 	}
 
 	/**
-	 * 得到数据字典
+	 * 得到教师基本信息
 	 * 
 	 * @return
 	 */
 	public TTeacher getTeacher() {
-		String iimageurll = request.getParameter("iimageurll");
-		String dictionaryvalue = request.getParameter("dictionaryvalue");
-		String dictionarytype = request.getParameter("dictionarytype");
-		String dictionaryremark = request.getParameter("dictionaryremark");
-		TTeacher tTeacher = new TTeacher();
+		String teachername = request.getParameter("teachername");
+		String sex = request.getParameter("sex");
+		String birthday = request.getParameter("birthday");
+		String department = request.getParameter("department");
+		String title = request.getParameter("title");
+		String job = request.getParameter("job");
+		String tutortype = request.getParameter("tutortype");
+		String introduction = request.getParameter("introduction");
 
+		String departmentname = request.getParameter("departmentname");
+		String titlename = request.getParameter("titlename");
+		String jobname = request.getParameter("jobname");
+		TTeacher tTeacher = new TTeacher();
+		tTeacher.setTeachername(teachername);
+		tTeacher.setSex(sex);
+		tTeacher.setBirthday(birthday);
+		tTeacher.setDepartment(department);
+		tTeacher.setTitle(title);
+		tTeacher.setJob(job);
+		tTeacher.setTutortype(Integer.parseInt(tutortype));
+		tTeacher.setIntroduction(introduction);
+		tTeacher.setDepartmentname(departmentname);
+		tTeacher.setTitlename(titlename);
+		tTeacher.setJobname(jobname);
 		return tTeacher;
 	}
 
 	/**
-	 * 分页查询供应商
+	 * 得到教师课程信息
+	 * 
+	 * @return
 	 */
-	public void querySupplierCode() {
-		try {
-			BsSupplier bsSupplier = new BsSupplier();
-			Pager pager = localServiceProxy.querySupplierByPage(bsSupplier,
-					100000, 1);
-			super.reponseWriter(JSON.toJSONString(pager.getRows()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	public TSubject getSubject() {
+		String subjectType = request.getParameter("subjectType");
+		String subjectNO = request.getParameter("subjectNO");
+		String subjectName = request.getParameter("subjectName");
+		String subjectText = request.getParameter("subjectText");
+		TSubject tSubject = new TSubject();
+		tSubject.setSubjecttype(subjectType);
+		tSubject.setSubjectno(subjectNO);
+		tSubject.setSubjectname(subjectName);
+		tSubject.setSubjecttext(subjectText);
+		return tSubject;
+	}
+
+	/**
+	 * 得到教师立项信息
+	 * 
+	 * @return
+	 */
+	public TResearch getResearch() {
+		String researchlevel = request.getParameter("researchlevel");
+		String researchname = request.getParameter("researchname");
+		String researchno = request.getParameter("researchno");
+		String researchmoney = request.getParameter("researchmoney") == "" ? "0"
+				: request.getParameter("researchmoney");
+		String researchmatchmoney = request.getParameter("researchmatchmoney") == "" ? "0"
+				: request.getParameter("researchmatchmoney");
+		String researchhost = request.getParameter("researchhost");
+		String researchactor = request.getParameter("researchactor");
+		String researchbegindate = request.getParameter("researchbegindate");
+		String researchenddate = request.getParameter("researchenddate");
+		TResearch tResearch = new TResearch();
+		tResearch.setResearchlevel(researchlevel);
+		tResearch.setResearchname(researchname);
+		tResearch.setResearchno(researchno);
+		tResearch.setResearchmoney(Integer.parseInt(researchmoney));
+		tResearch.setResearchmatchmoney(Integer.parseInt(researchmatchmoney));
+		tResearch.setResearchhost(researchhost);
+		tResearch.setResearchactor(researchactor);
+		tResearch.setResearchbegindate(researchbegindate);
+		tResearch.setResearchenddate(researchenddate);
+
+		return tResearch;
+	}
+
+	/**
+	 * 得到教师论文信息
+	 * 
+	 * @return
+	 */
+	public TPaper getPaper() {
+		String papername = request.getParameter("papername");
+		String paperauthor = request.getParameter("paperauthor");
+		String papernotename = request.getParameter("papernotename");
+		String papernoteyear = request.getParameter("papernoteyear");
+		String papernoteno = request.getParameter("papernoteno");
+
+		TPaper tPaper = new TPaper();
+		tPaper.setPapername(papername);
+		tPaper.setPaperauthor(paperauthor);
+		tPaper.setPapernotename(papernotename);
+		tPaper.setPapernoteyear(papernoteyear);
+		tPaper.setPapernoteno(papernoteno);
+		return tPaper;
+	}
+
+	/**
+	 * 得到教师获奖信息
+	 * 
+	 * @return
+	 */
+	public TPrize getPrize() {
+		String papername = request.getParameter("papername");
+		String paperauthor = request.getParameter("paperauthor");
+		String papernotename = request.getParameter("papernotename");
+		String papernoteyear = request.getParameter("papernoteyear");
+		String papernoteno = request.getParameter("papernoteno");
+
+		TPrize tPrize = new TPrize();
+		return tPrize;
 	}
 
 	/**
@@ -292,118 +386,149 @@ public class TeacherAction extends BaseAction {
 	}
 
 	public void save() {
-		String savePath = FileAction.getSavePathForPic();
 		TTeacher teacher = getTeacher();
+		TSubject subject = getSubject();
+		TResearch tResearch = getResearch();
+		TPaper tPaper = getPaper();
 		String result = "";
-		String subjectCountStr = request.getParameter("uploader_subject_count");
-		String projectCountStr = request.getParameter("uploader_project_count");
-		String paperCountStr = request.getParameter("uploader_paper_count");
-		int subjectCount = Integer.parseInt(ComonUtil
-				.emptyToZero(subjectCountStr));
-		int projectCount = Integer.parseInt(ComonUtil
-				.emptyToZero(projectCountStr));
-		int paperCount = Integer.parseInt(ComonUtil.emptyToZero(paperCountStr));
-		for (int i = 1; i <= subjectCount; i++) {
-			name = request.getParameter("uploader_subject_" + i + "_name");
-			tampFileName = request.getParameter("uploader_subject_" + i
-					+ "_tmpname");
-			System.out.println(tampFileName + " " + name);
-			try {
-				// do something with file;
-				result += name + "导入完成. <br />";
-			} catch (Exception e) {
-				result += name + "导入失败:" + e.getMessage() + ". <br />";
-				e.printStackTrace();
-			}
-			System.out.println(result);
+		long downloadid = 0l;
+		String name = request.getParameter("uploader_pic_name");
+		if (name != null && !name.isEmpty()) {
+			String extName = name.substring(name.lastIndexOf("."));
+			String tampFileName = request.getParameter("uploader_pic_tmpname");
+			String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
+					+ extName;
+			teacher.setIimageurll(fileShowPath);
+		}
+		try {
+			// 新增教师表
+			long teacherId = localServiceProxy.saveTeacher(teacher);
+
+			// 新增附件表
+			HashMap downloadIdMap = saveAllDownloadTable();
+
+			// 新增立项，课程，论文，获奖表
+			// 1.保存立项表
+			tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
+			Long researchId = localServiceEXProxy.saveTResearch(tResearch);
+
+			// 2.保存课程表
+			subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
+			subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
+			subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
+			Long subjectId = localServiceEXProxy.saveTSubject(subject);
+
+			// 3.保存论文表
+			tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"));
+			Long paperId = localServiceEXProxy.saveTPaper(tPaper);
+
+			// 4.保存获奖表
+
+			// 新增教师关联表 立项，课程，论文，获奖
+			// 1.立项关联表
+			TTeacherResearchKey tTeacherResearchKey = new TTeacherResearchKey();
+			tTeacherResearchKey.setTeacherid(teacherId);
+			tTeacherResearchKey.setResearchid(researchId);
+			localServiceEXProxy.saveTTeacherResearchKey(tTeacherResearchKey);
+
+			// 2.课程关联表
+			TTeacherSubjectKey tTeacherSubjectKey = new TTeacherSubjectKey();
+			tTeacherSubjectKey.setTeacherid(teacherId);
+			tTeacherSubjectKey.setSubjectid(subjectId);
+			localServiceEXProxy.saveTTeacherSubjectKey(tTeacherSubjectKey);
+
+			// 3.论文关联表
+			TTeacherPaperKey tTeacherPaperKey = new TTeacherPaperKey();
+			tTeacherPaperKey.setPaperid(paperId);
+			tTeacherPaperKey.setTeacherid(teacherId);
+			localServiceEXProxy.saveTTeacherPaperKey(tTeacherPaperKey);
+
+			// 4.获奖关联表
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 
-		for (int i = 1; i <= projectCount; i++) {
-			name = request.getParameter("uploader_subject_" + i + "_name");
-			tampFileName = request.getParameter("uploader_subject_" + i
-					+ "_tmpname");
-			System.out.println(tampFileName + " " + name);
-			try {
-				// do something with file;
-				result += name + "导入完成. <br />";
-			} catch (Exception e) {
-				result += name + "导入失败:" + e.getMessage() + ". <br />";
-				e.printStackTrace();
-			}
-			System.out.println(result);
-		}
-
-		for (int i = 1; i <= paperCount; i++) {
-			name = request.getParameter("uploader_subject_" + i + "_name");
-			tampFileName = request.getParameter("uploader_subject_" + i
-					+ "_tmpname");
-			System.out.println(tampFileName + " " + name);
-			try {
-				// do something with file;
-				result += name + "导入完成. <br />";
-			} catch (Exception e) {
-				result += name + "导入失败:" + e.getMessage() + ". <br />";
-				e.printStackTrace();
-			}
-			System.out.println(result);
-		}
-
-		System.out.println(tTeacher.getTeachername()
-				+ "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@PIC"
-				+ request.getParameter("uploader_pic_name")
-				+ request.getParameter("uploader_pic_tmpname")
-				+ "****OTHER,1:name:"
-				+ request.getParameter("uploader_subject_1_name")
-				+ "****tmpname:"
-				+ request.getParameter("uploader_subject_1_tmpname")
-				+ "&&&&,2:name:"
-				+ request.getParameter("uploader_subject_2_name")
-				+ "&&&&tmpname:"
-				+ request.getParameter("uploader_subject_2_tmpname")
-				+ "####,3:name:"
-				+ request.getParameter("uploader_subject_3_name")
-				+ "####tmpname:"
-				+ request.getParameter("uploader_subject_3_tmpname"));
-		//
-		// List fileList = null;
-		// try {
-		// fileList = upload.parseRequest(request);
-		// } catch (FileUploadException ex) {
-		// }
-		// Iterator<FileItem> it = fileList.iterator();
-		// String name = "";
-		// String extName = "";
-		// while (it.hasNext()) {
-		// FileItem item = it.next();
-		// if (!item.isFormField()) {
-		// name = item.getName();
-		// long size = item.getSize();
-		// String type = item.getContentType();
-		// //System.out.println(size + " " + type);
-		// if (name == null || name.trim().equals("")) {
-		// continue;
-		// }
-		// // 扩展名格式：
-		// if (name.lastIndexOf(".") >= 0) {
-		// extName = name.substring(name.lastIndexOf("."));
-		// }
-		// File file = null;
-		// do {
-		// // 生成文件名：
-		// name = UUID.randomUUID().toString();
-		// file = new File(savePath + name + extName);
-		// //System.out.println(savePath + name + extName);
-		// } while (file.exists());
-		// File saveFile = new File(savePath + name + extName);
-		// try {
-		// item.write(saveFile);
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
-		// }
-		// }
-		//
-		// // return returnPath+name + extName+"#"+savePath+name+extName;
 	}
 
+	/**
+	 * 保存所有附件表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	private HashMap saveAllDownloadTable() throws Exception {
+		HashMap map = new HashMap();
+		HashMap returnmap = new HashMap();
+		// 1.保存立项附件
+		map.put("paraName", "uploader_project_name");
+		map.put("paraTmpname", "uploader_project_tmpname");
+		map.put("infotype", "project");
+		Long proDLId = saveTDownloadInfo(map);
+
+		// 2.保存教学大纲附件
+		map.put("paraName", "uploader_outline_name");
+		map.put("paraTmpname", "uploader_outline_tmpname");
+		map.put("infotype", "outline");
+		Long outlineDLId = saveTDownloadInfo(map);
+
+		// 3.保存教学进度附件
+		map.put("paraName", "uploader_schedule_name");
+		map.put("paraTmpname", "uploader_schedule_tmpname");
+		map.put("infotype", "schedule");
+		Long scheduleDLId = saveTDownloadInfo(map);
+
+		// 4.保存课程资料附件
+		map.put("paraName", "uploader_subject_name");
+		map.put("paraTmpname", "uploader_subject_tmpname");
+		map.put("infotype", "subject");
+		Long subjectDLId = saveTDownloadInfo(map);
+
+		// 5.保存论文附件
+		map.put("paraName", "uploader_paper_name");
+		map.put("paraTmpname", "uploader_paper_tmpname");
+		map.put("infotype", "paper");
+		Long paperDLId = saveTDownloadInfo(map);
+
+		returnmap.put("proDLId", proDLId);
+		returnmap.put("outlineDLId", outlineDLId);
+		returnmap.put("scheduleDLId", scheduleDLId);
+		returnmap.put("subjectDLId", subjectDLId);
+		returnmap.put("paperDLId", paperDLId);
+		return returnmap;
+	}
+
+	/**
+	 * 保存附件并返回ID
+	 * 
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	private Long saveTDownloadInfo(HashMap map) throws Exception {
+		String name = request.getParameter((String) map.get("paraName"));
+		if (name != null && !name.isEmpty()) {
+			String savePath = FileAction.getSavePathForTeacher();
+			String extName = name.substring(name.lastIndexOf("."));
+			String tampFileName = request.getParameter((String) map
+					.get("paraTmpname"));
+			BsUser user = getUser();
+			String filepath = savePath + "\\" + tampFileName + extName;
+			String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
+					+ extName;
+			TDownload tDownload = new TDownload();
+			tDownload.setAuthor(user.getUsername());
+			tDownload.setCreatedate(DateUtil.getNowDate());
+			tDownload.setFilename(name);
+			tDownload.setFilepath(filepath);
+			tDownload.setFileshowpath(fileShowPath);
+			tDownload.setInfotype((String) map.get("infotype"));
+			tDownload.setFileisvalid(Constant.ISVALID_1);
+			return localServiceEXProxy.saveDownloadInfo(tDownload);
+		} else {
+			return null;
+		}
+
+	}
 }

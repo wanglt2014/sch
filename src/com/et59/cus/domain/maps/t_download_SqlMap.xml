@@ -297,12 +297,12 @@
   </insert>
    <insert id="ibatorgenerated_insert" parameterClass="com.et59.cus.domain.entity.TDownload">
     insert into t_download (downloadid, filename, fileshowpath, filepath, fileisvalid, createdate,
-      author, directions, infotype, fileType)
-    values (#downloadid:BIGINT#, #filename:VARCHAR#, #fileshowpath:VARCHAR#, #filepath:VARCHAR#,
-      #fileisvalid:VARCHAR#, #createdate:VARCHAR#, #author:VARCHAR#, #directions:VARCHAR#,
-      #infotype:VARCHAR#, #filetype:VARCHAR#)
-      <selectKey resultClass="java.lang.Long" keyProperty="downloadid">
-		SELECT LAST_INSERT_ID()
+	      author, directions, infotype, fileType)
+	    values (#downloadid:BIGINT#, #filename:VARCHAR#, #fileshowpath:VARCHAR#, #filepath:VARCHAR#,
+	      #fileisvalid:VARCHAR#, #createdate:VARCHAR#, #author:VARCHAR#, #directions:VARCHAR#,
+	      #infotype:VARCHAR#, #filetype:VARCHAR#)
+      	<selectKey resultClass="java.lang.Long" keyProperty="downloadid">
+			SELECT LAST_INSERT_ID()
 		</selectKey>
   </insert>
   

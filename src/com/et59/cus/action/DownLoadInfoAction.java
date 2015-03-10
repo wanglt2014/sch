@@ -168,7 +168,7 @@ public class DownLoadInfoAction extends BaseAction {
 	}
 
 	/**
-	 * 编辑文章
+	 * 编辑资料
 	 */
 	public void update() {
 		boolean flag = false;
@@ -184,25 +184,24 @@ public class DownLoadInfoAction extends BaseAction {
 		}
 	}
 
-	
-	 /**
+	/**
 	 * 公共方法
 	 *
 	 * @return
 	 */
-	 public TDownload getTDownload() {
-	 String filename = request.getParameter("filename");
-	 String author = request.getParameter("author");
-	 String directions = request.getParameter("directions");
-	 String createdate = request.getParameter("createdate");
-	 TDownload tDownload = new TDownload();
-	 tDownload.setAuthor(author);
-	 tDownload.setFilename(filename);
-	 tDownload.setCreatedate(createdate);
-	 tDownload.setDirections(directions);
-	 return tDownload;
-	 }
-	
+	public TDownload getTDownload() {
+		String filename = request.getParameter("filename");
+		String author = request.getParameter("author");
+		String directions = request.getParameter("directions");
+		String createdate = request.getParameter("createdate");
+		TDownload tDownload = new TDownload();
+		tDownload.setAuthor(author);
+		tDownload.setFilename(filename);
+		tDownload.setCreatedate(createdate);
+		tDownload.setDirections(directions);
+		return tDownload;
+	}
+
 	/**
 	 * 删除资料
 	 */

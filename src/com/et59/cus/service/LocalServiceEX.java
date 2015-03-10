@@ -3,7 +3,13 @@ package com.et59.cus.service;
 import java.util.Map;
 
 import com.et59.cus.domain.entity.TDownload;
+import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
+import com.et59.cus.domain.entity.TTeacherPaperKey;
+import com.et59.cus.domain.entity.TTeacherPrizeKey;
+import com.et59.cus.domain.entity.TTeacherResearchKey;
+import com.et59.cus.domain.entity.TTeacherSubjectKey;
 
 /**
  * <p>
@@ -56,4 +62,50 @@ public interface LocalServiceEX {
 	 */
 	@SuppressWarnings("rawtypes")
 	public void deleteDownloadInfo(long id) throws Exception;
+
+	/**
+	 * 保存立项表
+	 */
+	@SuppressWarnings("rawtypes")
+	public Long saveTResearch(TResearch tResearch) throws Exception;
+
+	/**
+	 * 保存课程表
+	 */
+	@SuppressWarnings("rawtypes")
+	public Long saveTSubject(TSubject tSubject) throws Exception;
+
+	/**
+	 * 保存论文表
+	 */
+	@SuppressWarnings("rawtypes")
+	public Long saveTPaper(TPaper tPaper) throws Exception;
+
+	/**
+	 * 保存立项关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void saveTTeacherResearchKey(TTeacherResearchKey tTeacherResearchKey)
+			throws Exception;
+
+	/**
+	 * 保存课程关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void saveTTeacherSubjectKey(TTeacherSubjectKey tTeacherSubjectKey)
+			throws Exception;
+
+	/**
+	 * 保存论文关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void saveTTeacherPaperKey(TTeacherPaperKey tTeacherPaperKey)
+			throws Exception;
+
+	/**
+	 * 保存获奖关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void saveTTeacherPrizeKey(TTeacherPrizeKey tTeacherPrizeKey)
+			throws Exception;
 }

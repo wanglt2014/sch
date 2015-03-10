@@ -27,7 +27,6 @@ import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TTeacher;
-import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.BsEmailquery;
@@ -317,19 +316,18 @@ public interface LocalService {
 	 */
 	public Pager queryBsMenuByPage(BsMenu bsMenu, int pagesize,
 			int currentpage, BsUser user) throws Exception;
-	
+
 	/**
 	 * 查询角色对应的菜单
 	 */
-	public List<TRoleMenu> queryTRoleMenuByroleid(int roleid)
-			throws Exception;
-	
+	public List<TRoleMenu> queryTRoleMenuByroleid(int roleid) throws Exception;
+
 	/**
 	 * 数据字典查询
 	 */
-	public Pager queryDictionaryBypage(TDictionary tDictionary,int pagesize, int currentpage)
-			throws Exception;
-	
+	public Pager queryDictionaryBypage(TDictionary tDictionary, int pagesize,
+			int currentpage) throws Exception;
+
 	/**
 	 * 删除字典
 	 */
@@ -338,23 +336,30 @@ public interface LocalService {
 	/**
 	 * 保存字典
 	 */
-	public void saveDictionary(TDictionary tDictionary)
-			throws Exception;
+	public void saveDictionary(TDictionary tDictionary) throws Exception;
 
 	/**
 	 * 更新字典
 	 */
-	public void udateDictionary(TDictionary tDictionary)
-			throws Exception;
-	
+	public void udateDictionary(TDictionary tDictionary) throws Exception;
+
 	/**
 	 * 师资队伍查询
 	 */
-	public Pager queryTeacherBypage(TTeacher tTeacher,int pagesize, int currentpage)
-			throws Exception;
-	
+	public Pager queryTeacherBypage(TTeacher tTeacher, int pagesize,
+			int currentpage) throws Exception;
+
 	/**
 	 * 师资队伍删除
 	 */
 	public void deleteTeacher(long id) throws Exception;
+
+	/**
+	 * 保存教师信息
+	 * 
+	 * @param tTeacher
+	 * @return
+	 * @throws Exception
+	 */
+	public Long saveTeacher(TTeacher tTeacher) throws Exception;
 }

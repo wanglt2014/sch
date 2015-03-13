@@ -2123,10 +2123,12 @@ public class LocalServiceImpl implements LocalService {
 
 	/**
 	 * 师资队伍删除
+	 * 
+	 * @return
 	 */
 	@Override
-	public void deleteTeacher(long id) throws Exception {
-		tTeacherDAO.deleteByProc(id);
+	public Integer deleteTeacher(long id) throws Exception {
+		return tTeacherDAO.deleteByProc(id);
 	}
 
 	/**
@@ -2138,5 +2140,16 @@ public class LocalServiceImpl implements LocalService {
 	 */
 	public Long saveTeacher(TTeacher tTeacher) throws Exception {
 		return tTeacherDAO.insert(tTeacher);
+	}
+
+	/**
+	 * 更新教师信息
+	 * 
+	 * @param tTeacher
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateTeacher(TTeacher tTeacher) throws Exception {
+		return tTeacherDAO.updateByPrimaryKeySelective(tTeacher);
 	}
 }

@@ -163,7 +163,7 @@
 						<div class="fitem">
 							<label>课程性质:</label>
 							<input
-								class="easyui-combobox" id="subjectType" name="subjectType"
+								class="easyui-combobox" id="subjecttype" name="subjecttype"
 								data-options="
    				 					url:'Dictionary_queryDictionaryByType?type=subjectType',  
    									method:'get',    
@@ -172,16 +172,16 @@
    									panelHeight:'auto'">   
 						</div>
 						<div class="fitem">
-							<label>课程编号:</label> <input name="subjectNO"
+							<label>课程编号:</label> <input name="subjectno"
 								class="easyui-validatebox" required="true">
 						</div>
 						<div class="fitem">
-							<label>课程名称:</label> <input name="subjectName"
+							<label>课程名称:</label> <input name="subjectname"
 								class="easyui-validatebox" required="true">
 						</div>
 						<div class="fitem">
 							<label>课程介绍:</label>
-							<textarea id="subjectText" rows=5 name="subjectText"  class="textarea easyui-validatebox"></textarea>
+							<textarea id="subjectText" rows=5 name="subjecttext"  class="textarea easyui-validatebox"></textarea>
 						</div>
 						<div class="fitem">
 							<div class="wraper">
@@ -387,8 +387,8 @@
 		 $("#title ").combobox('select',data[0].dictionarycode);
 		 var data = $('#job').combobox('getData');
 		 $("#job ").combobox('select',data[0].dictionarycode);
-		 var data = $('#subjectType').combobox('getData');
-		 $("#subjectType ").combobox('select',data[0].dictionarycode);
+		 var data = $('#subjecttype').combobox('getData');
+		 $("#subjecttype ").combobox('select',data[0].dictionarycode);
 		 
 	}
 	function editTeacher() {
@@ -398,9 +398,32 @@
 					'编辑教师');
 			$('#teacherfm').form('clear');
 			$('#teacherfm').form('load', row);
-			url = 'teacher_update?id=' + row.teacherid;
+			var subjectid,paperid,researchid;
+// 			alert(JSON.stringify(row));
+			//从后台获取数据
+			$.ajax({
+				type : 'post',
+				url : 'Teacher_queryTeacherOtherInfo?teacherId='+row.id,
+				async:false,
+				success : function(datas) {
+					var json = eval('(' + datas + ')'); 
+//  					alert(JSON.stringify(json.subject.subjectid)+"!!!"+JSON.stringify(json.tPaper.paperid)+"@@@@"+JSON.stringify(json.tResearch.researchid));
+ 					subjectid = json.subject.subjectid;
+ 					paperid = json.tPaper.paperid;
+ 					researchid=json.tResearch.researchid;
+ 					$('#teacherfm').form('load', json.subject);
+					$('#teacherfm').form('load', json.tPaper);
+					$('#teacherfm').form('load', json.tResearch);
+				},
+				error : function() {
+					jAlert('系统错误，请联系管理员','错误提示');
+				}
+			});
+// 			alert(subjectid+"##"+paperid+"$$"+researchid);
+			url = 'Teacher_update?id=' + row.id+'&subjectid='+subjectid+'&paperid='+paperid+'&researchid='+researchid;
 		}
 	}
+	
 	function saveTeacher() {
 	var picLen = uploaderForPic.files.length;
 	var outlineLen = uploaderForOutline.files.length;
@@ -408,7 +431,7 @@
 	var subjectLen = uploaderForSubject.files.length;
 	var probjectLen = uploaderForProject.files.length;
 	var paperLen = uploaderForPaper.files.length;
-// 	alert(picLen+"&&"+outlineLen+"&&"+scheduleLen+"&&+"+subjectLen+"&&"+probjectLen+"&&"+paperLen);
+//  	alert(picLen+"&&"+outlineLen+"&&"+scheduleLen+"&&+"+subjectLen+"&&"+probjectLen+"&&"+paperLen);
 	var valid = $('#teacherfm').form('validate');
 		if(valid==true){
 			$('#departmentname').val($('#department').combobox('getText'));
@@ -421,6 +444,7 @@
     				if (result != "true") {
     					jAlert('系统错误，请联系管理员', '错误提示');
     				} else {
+    					destroyAllUploader();
     					$('#teacherdlg').dialog('close'); // close the dialog
     					$('#teacherdg').datagrid('reload'); // reload the user data
     				}
@@ -458,18 +482,35 @@
 		if (row) {
 			$.messager.confirm('确认', '是否要删除?', function(r) {
 				if (r) {
-					$.post('Dictionary_delete', {
-						id : row.dictionaryid
+					$.post('Teacher_delete', {
+						id : row.id
 					}, function(result) {
+// 						alert(result);
 						if (result = "true") {
-							$('#teacherdg').datagrid('reload'); // reload the user data
+							
 						} else {
 							jAlert('系统错误，请联系管理员', '错误提示');
 						}
 					}, 'json');
+					$('#teacherdg').datagrid('reload'); // reload the user data
 				}
 			});
 		}
+	}
+	
+	function destroyAllUploader(){
+		uploaderForPic.splice(0,10);
+		uploaderForOutline.splice(0,10);
+		uploaderForSchedule.splice(0,10);
+		uploaderForSubject.splice(0,10);
+		uploaderForProject.splice(0,10);
+		uploaderForPaper.splice(0,10);
+		uploaderForPic.destroy();
+		uploaderForOutline.destroy();
+		uploaderForSchedule.destroy();
+		uploaderForSubject.destroy();
+		uploaderForProject.destroy();
+		uploaderForPaper.destroy();
 	}
 	
 	//照片 上传控件##########################################
@@ -503,7 +544,6 @@
 	
 	//绑定文件上传删除事件
 	uploaderForPic.bind('FilesRemoved',function(uploader,file){
-		alert("删除");
 		$('#file-list').html("");
 	});
 	
@@ -582,7 +622,6 @@
 	
 	//绑定文件上传删除事件
 	uploaderForOutline.bind('FilesRemoved',function(uploader,file){
-		alert("删除");
 		$('#file-list-outline').html("");
 	});
 	
@@ -641,7 +680,6 @@
 	
 	//绑定文件上传删除事件
 	uploaderForSchedule.bind('FilesRemoved',function(uploader,file){
-		alert("删除");
 		$('#file-list-schedule').html("");
 	});
 	
@@ -700,7 +738,6 @@
 	
 	//绑定文件上传删除事件
 	uploaderForSubject.bind('FilesRemoved',function(uploader,file){
-		alert("删除");
 		$('#file-list-subject').html("");
 	});
 	
@@ -760,7 +797,6 @@
 	
 	//绑定文件上传删除事件
 	uploaderForProject.bind('FilesRemoved',function(uploader,file){
-		alert("删除");
 		$('#file-list-project').html("");
 	});
 	
@@ -813,7 +849,6 @@
 	
 	//绑定文件上传删除事件
 	uploaderForPaper.bind('FilesRemoved',function(uploader,file){
-		alert("删除");
 		$('#file-list-paper').html("");
 	});
 

@@ -24,9 +24,12 @@ import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
+import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
 import com.et59.cus.domain.entity.TTeacherPrizeKey;
+import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
+import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
@@ -264,6 +267,49 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void saveTTeacherPrizeKey(TTeacherPrizeKey tTeacherPrizeKey)
 			throws Exception {
 		tTeacherPrizeDAO.insert(tTeacherPrizeKey);
+	}
+
+	/**
+	 * 查询课程关联表
+	 */
+	@Override
+	public List queryTTeacherSubjectKey(TTeacherSubjectExample example)
+			throws Exception {
+		return tTeacherSubjectDAO.selectByExample(example);
+	}
+
+	/**
+	 * 查询立项关联表
+	 */
+	@Override
+	public List queryTTeacherResearchKey(TTeacherResearchExample example)
+			throws Exception {
+		return tTeacherResearchDAO.selectByExample(example);
+	}
+
+	/**
+	 * 查询立项表
+	 */
+	@Override
+	public TResearch queryTResearch(Long researchid) throws Exception {
+		return tResearchDAO.selectByPrimaryKey(researchid);
+	}
+
+	/**
+	 * 查询论文关联表
+	 */
+	@Override
+	public List queryTTeacherPaperKey(TTeacherPaperExample example)
+			throws Exception {
+		return tTeacherPaperDAO.selectByExample(example);
+	}
+
+	/**
+	 * 查询论文表
+	 */
+	@Override
+	public TPaper queryTPaper(Long paperid) throws Exception {
+		return tPaperDAO.selectByPrimaryKey(paperid);
 	}
 
 }

@@ -77,6 +77,10 @@ public abstract class BaseAction extends SystemAction {
 	 */
 	protected List<BsArticle> teachList;
 	/**
+	 * 教务教学制度
+	 */
+	protected List<BsArticle> regulationList;
+	/**
 	 * 课程列表
 	 */
 	protected List<TSubject> subjectList;
@@ -131,23 +135,33 @@ public abstract class BaseAction extends SystemAction {
 	}
 
 	/**
-	 * 公共查询新闻中心左侧信息
+	 * 公共查询新闻中心左侧信息,首页使用
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void commonquery() {
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setArticletype(Constant.ARTICLE_TYPE_MEDIA);
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					9, 1);
 			if (ComonUtil.validateMapResult(map1)) {
-				medialist = (List<BsArticle>) map1.get(Constant.ARTICLE_LIST);
+				regulationList = (List<BsArticle>) map1
+						.get(Constant.ARTICLE_LIST);
 			}
 			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			Map map2 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					5, 1);
 			if (ComonUtil.validateMapResult(map2)) {
 				notifylist = (List<BsArticle>) map2.get(Constant.ARTICLE_LIST);
+			}
+
+			TDownload download = new TDownload();
+			download.setFileisvalid(Constant.ISVALID_1);// 可用
+			Map map3 = localServiceEXProxy.queryDownloadInfoForLimit(download,
+					5, 1);
+			if (ComonUtil.validateMapResult(map3)) {
+				downloadlist = (List<TDownload>) map3
+						.get(Constant.DOWNLOAD_LIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -464,6 +478,14 @@ public abstract class BaseAction extends SystemAction {
 
 	public void setDownloaddetail(TDownload downloaddetail) {
 		this.downloaddetail = downloaddetail;
+	}
+
+	public List<BsArticle> getRegulationList() {
+		return regulationList;
+	}
+
+	public void setRegulationList(List<BsArticle> regulationList) {
+		this.regulationList = regulationList;
 	}
 
 }

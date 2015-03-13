@@ -15,4 +15,4 @@
 	</ul>
 </div>
 <!-- nav导航 -->
-<jsp:include page="common/customer.jsp"></jsp:include>
+<%-- <jsp:include page="common/customer.jsp"></jsp:include> --%>

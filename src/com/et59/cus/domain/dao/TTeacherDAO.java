@@ -100,5 +100,5 @@ public interface TTeacherDAO {
 	 * 
 	 * @param id
 	 */
-	public void deleteByProc(Long id);
+	Integer deleteByProc(Long id);
 }

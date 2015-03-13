@@ -171,11 +171,11 @@ public class TTeacherDAOImpl extends SqlMapClientDaoSupport implements
 	 * 
 	 * @param id
 	 */
-	public void deleteByProc(Long id) {
+	public Integer deleteByProc(Long id) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("teacherId", id);
-		getSqlMapClientTemplate().queryForList("t_teacher.call_deleteTeacher",
-				map);
+		return (Integer) getSqlMapClientTemplate().queryForList(
+				"t_teacher.call_deleteTeacher", map).get(0);
 	}
 
 	/**

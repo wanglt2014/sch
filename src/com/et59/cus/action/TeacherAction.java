@@ -3,6 +3,7 @@ package com.et59.cus.action;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.BsProductcategory;
@@ -14,8 +15,11 @@ import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TTeacher;
+import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
+import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
+import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.Constant;
@@ -165,54 +169,74 @@ public class TeacherAction extends BaseAction {
 	}
 
 	/**
-	 * 更新产品分类
+	 * 查询教师相关信息
 	 */
-	public void update() {
-		// boolean flag = false;
-		// String id = request.getParameter("id");
-		// TDictionary tDictionary = getTeacher();
-		// try {
-		// tDictionary.setDictionaryid(Integer.valueOf(id));
-		// localServiceProxy.udateDictionary(tDictionary);
-		// flag = true;
-		// super.reponseWriter(JSON.toJSONString(flag));
-		// } catch (NumberFormatException e) {
-		// e.printStackTrace();
-		// } catch (Exception e) {
-		// e.printStackTrace();
-		// }
+	public void queryTeacherOtherInfo() {
+		String teacherId = request.getParameter("teacherId");
+		HashMap map = new HashMap();
+		try {
+			Long teacherIdLong = Long.parseLong(teacherId);
+			// 加载课程
+			TSubject subject = new TSubject();
+			TTeacherSubjectExample example = new TTeacherSubjectExample();
+			example.createCriteria().andTeacheridEqualTo(teacherIdLong);
+			List<TTeacherSubjectKey> tsList = localServiceEXProxy
+					.queryTTeacherSubjectKey(example);
+			if (tsList != null && tsList.size() > 0) {
+				subject = localServiceEXProxy.querySubjectById(tsList.get(0)
+						.getSubjectid());
+			}
+
+			// 加载立项
+			TResearch tResearch = new TResearch();
+			TTeacherResearchExample trexample = new TTeacherResearchExample();
+			trexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
+			List<TTeacherResearchKey> trList = localServiceEXProxy
+					.queryTTeacherResearchKey(trexample);
+			if (trList != null && trList.size() > 0) {
+				tResearch = localServiceEXProxy.queryTResearch(trList.get(0)
+						.getResearchid());
+			}
+
+			// 加载论文
+			TPaper tPaper = new TPaper();
+			TTeacherPaperExample tpexample = new TTeacherPaperExample();
+			tpexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
+			List<TTeacherPaperKey> tpList = localServiceEXProxy
+					.queryTTeacherPaperKey(tpexample);
+
+			if (tpList != null && tpList.size() > 0) {
+				tPaper = localServiceEXProxy.queryTPaper(tpList.get(0)
+						.getPaperid());
+			}
+
+			map.put("subject", subject);
+			map.put("tPaper", tPaper);
+			map.put("tResearch", tResearch);
+
+			super.reponseWriter(JSON.toJSONString(map));
+			// } catch (IOException e) {
+			// e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	// /**
-	// * 新增数据字典
-	// */
-	// public void save(){
-	// boolean flag =false ;
-	// TDictionary tDictionary = getDictionary();
-	// try {
-	// localServiceProxy.saveDictionary(tDictionary);
-	// flag = true;
-	// super.reponseWriter(JSON.toJSONString(flag));
-	// } catch (NumberFormatException e) {
-	// e.printStackTrace();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
 	/**
-	 * 删除数据字典
+	 * 删除
 	 */
 	public void delete() {
 		boolean flag = false;
 		String id = request.getParameter("id");
 		try {
-			localServiceProxy.deleteTeacher(Integer.valueOf(id));
-			flag = true;
-			super.reponseWriter(JSON.toJSONString(flag));
+			Integer i = localServiceProxy.deleteTeacher(Integer.valueOf(id));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
 
@@ -255,10 +279,10 @@ public class TeacherAction extends BaseAction {
 	 * @return
 	 */
 	public TSubject getSubject() {
-		String subjectType = request.getParameter("subjectType");
-		String subjectNO = request.getParameter("subjectNO");
-		String subjectName = request.getParameter("subjectName");
-		String subjectText = request.getParameter("subjectText");
+		String subjectType = request.getParameter("subjecttype");
+		String subjectNO = request.getParameter("subjectno");
+		String subjectName = request.getParameter("subjectname");
+		String subjectText = request.getParameter("subjecttext");
 		TSubject tSubject = new TSubject();
 		tSubject.setSubjecttype(subjectType);
 		tSubject.setSubjectno(subjectNO);
@@ -385,7 +409,33 @@ public class TeacherAction extends BaseAction {
 		}
 	}
 
+	/**
+	 * 更新
+	 */
+	public void update() {
+		boolean flag = false;
+		String id = request.getParameter("id");
+		String subjectid = request.getParameter("subjectid");
+		String paperid = request.getParameter("paperid");
+		String researchid = request.getParameter("researchid");
+
+		TTeacher teacher = getTeacher();
+		TSubject subject = getSubject();
+		TResearch tResearch = getResearch();
+		TPaper tPaper = getPaper();
+		try {
+			localServiceProxy.updateTeacher(teacher);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	public void save() {
+		boolean flag = false;
 		TTeacher teacher = getTeacher();
 		TSubject subject = getSubject();
 		TResearch tResearch = getResearch();
@@ -445,6 +495,8 @@ public class TeacherAction extends BaseAction {
 
 			// 4.获奖关联表
 
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

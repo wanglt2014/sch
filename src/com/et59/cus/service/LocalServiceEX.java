@@ -1,14 +1,18 @@
 package com.et59.cus.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
+import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
 import com.et59.cus.domain.entity.TTeacherPrizeKey;
+import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
+import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 
 /**
@@ -108,4 +112,38 @@ public interface LocalServiceEX {
 	@SuppressWarnings("rawtypes")
 	public void saveTTeacherPrizeKey(TTeacherPrizeKey tTeacherPrizeKey)
 			throws Exception;
+
+	/**
+	 * 查询论文表
+	 */
+	@SuppressWarnings("rawtypes")
+	public TPaper queryTPaper(Long paperid) throws Exception;
+
+	/**
+	 * 查询立项关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List queryTTeacherResearchKey(TTeacherResearchExample example)
+			throws Exception;
+
+	/**
+	 * 查询课程关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List queryTTeacherSubjectKey(TTeacherSubjectExample example)
+			throws Exception;
+
+	/**
+	 * 查询立项表
+	 */
+	@SuppressWarnings("rawtypes")
+	public TResearch queryTResearch(Long researchid) throws Exception;
+
+	/**
+	 * 查询论文关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List queryTTeacherPaperKey(TTeacherPaperExample example)
+			throws Exception;
+
 }

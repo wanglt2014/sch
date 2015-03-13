@@ -16,15 +16,15 @@
 			target="_blank">人才招聘</a> | <a
 			href="Login_linkus.shtm" target="_blank">联系我们</a> | <a
 			href="Login_question.shtm" target="_blank">帮助中心</a> | <a id="ico_pp_a"
-			target="_blank">意见反馈</a> | <a href="http://tongji.baidu.com/web/welcome/ico?s=6a248053a41b78ea041a4230f4bee164"
+			target="_blank">意见反馈</a> | <a href="#"
 			target="_blank">流量统计</a> | <a href="Login_team.shtm"" target="_blank">团队介绍</a>
 				
 
 	</div>
 
 	<div style="margin-bottom: 5px; margin-top: 5px;"">
-		Copyright 59ET Software &copy; 2012-2022 <a
-			href="http://www.miibeian.gov.cn/" target="_blank">京ICP备102183229</a>
+		Copyright Software &copy; 2012-2022 <a
+			href="http://www.miibeian.gov.cn/" target="_blank">辽ICP备10000000</a>
 	</div>
 
 </div>

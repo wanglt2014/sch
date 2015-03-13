@@ -6,12 +6,12 @@
 }
 
 #right_content_top{
-	width:210px;
+	width:240px;
 	height:180px;
 	float:left;
 }
 #right_content_bottom{
-	width:210px;
+	width:240px;
 	height:300px;
 	float:left;
 }
@@ -20,8 +20,8 @@
 }
 #service_div{
 	position:relative;
-	width:730px;
-	height:199px;
+	width:800px;
+	height:210px;
 	margin:10px 0 0 0;
 	border:1px solid #ABB1D5;
 }
@@ -280,9 +280,9 @@
 
 #banner
 {
-	width:720px;
+	width:800px;
 	margin:0px auto;
-	height:252px;
+	height:262px;
 	overflow:hidden;
 	z-index:-1;
 }
@@ -291,7 +291,7 @@
 	width:110px;
 	hegiht:18px;
 	float:left;
-	margin:-30px 0px 0px 610px;
+	margin:-30px 0px 0px 690px;
 	position:absolute;
 	z-index:1;
 }
@@ -321,7 +321,7 @@
 .user_show {
     border: 1px solid #ABB1D5;
     height: 90px;
-    width: 947px;
+    width: 1120px;
 }
 .user_show_title {
     font-size: 15px;

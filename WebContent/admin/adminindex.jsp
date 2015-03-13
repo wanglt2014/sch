@@ -39,20 +39,15 @@
 <script type="text/javascript" src="${js_path}/jquery.json-2.4.min.js"></script>
 <script type="text/javascript" src="${js_path}/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${js_path}/jquery.alerts.js"></script>
-<link href="${request_path}/umeditor/themes/default/css/umeditor.css"
-	type="text/css" rel="stylesheet">
-<script type="text/javascript" charset="utf-8"
-	src="${request_path}/umeditor/umeditor.config.js"></script>
-<script type="text/javascript" charset="utf-8"
-	src="${request_path}/umeditor/umeditor.min.js"></script>
-<script type="text/javascript"
-	src="${request_path}/umeditor/lang/zh-cn/zh-cn.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/footer.js" charset="UTF-8"></script>
-	<%--引入SWFUpload控制文件 --%>
-	<script type="text/javascript">
-		var request_path ="<%=request_path%>";
-	</script>
+<link type="text/css" rel="stylesheet" href="${request_path}/umeditor/themes/default/css/umeditor.css" >
+<script type="text/javascript" charset="utf-8" src="${request_path}/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="${request_path}/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="${request_path}/umeditor/lang/zh-cn/zh-cn.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/footer.js" charset="UTF-8"></script>
+<%--引入SWFUpload控制文件 --%>
+<script type="text/javascript">
+	var request_path ="<%=request_path%>";
+</script>
 <%-- <link rel="stylesheet" href="${js_path}/swfupload/swfupload.css" type="text/css" media="screen" /> --%>
 <%-- <script type="text/javascript"	src="${js_path}/swfupload/fileprogress.js"></script> --%>
 <%-- <script type="text/javascript"	src="${js_path}/swfupload/singlefileprogress.js"></script> --%>
@@ -80,8 +75,7 @@
 <%-- <script type="text/javascript" src="${js_path}/plupload/queue/jquery.plupload.queue.js"></script> --%>
 <%-- <script type="text/javascript" src="${js_path}/plupload/i18n/cn.js"></script> --%>
 
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/util.js" charset="UTF-8"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/util.js" charset="UTF-8"></script>
 <script type="text/javascript" src="${js_path}/easyui/easyui-lang-zh_CN.js"></script>
 	<style>
 	body{ font-size: 12px;}

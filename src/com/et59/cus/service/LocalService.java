@@ -352,7 +352,7 @@ public interface LocalService {
 	/**
 	 * 师资队伍删除
 	 */
-	public void deleteTeacher(long id) throws Exception;
+	public Integer deleteTeacher(long id) throws Exception;
 
 	/**
 	 * 保存教师信息
@@ -362,4 +362,13 @@ public interface LocalService {
 	 * @throws Exception
 	 */
 	public Long saveTeacher(TTeacher tTeacher) throws Exception;
+
+	/**
+	 * 更新教师信息
+	 * 
+	 * @param tTeacher
+	 * @return
+	 * @throws Exception
+	 */
+	public int updateTeacher(TTeacher tTeacher) throws Exception;
 }

@@ -429,8 +429,8 @@
         <parameter javaType="java.lang.Long" jdbcType="Long" mode="IN" property="teacherId" />  
     </parameterMap>  
   
-    <procedure id="call_deleteTeacher" parameterMap="ParameterMap">  
-        {call deleteTeacher(?)}   
+    <procedure id="call_deleteTeacher" parameterMap="ParameterMap" resultClass="int">  
+        {call deleteTeacher(?,?)}   
     </procedure>
     <!-- 新增并返回ID -->
      <insert id="ibatorgenerated_insert" parameterClass="com.et59.cus.domain.entity.TTeacher">
@@ -442,7 +442,7 @@
       #picpath:VARCHAR#, #content:VARCHAR#, #isshow:VARCHAR#, #birthday:VARCHAR#, #job:VARCHAR#,
       #tutortype:INTEGER#, #introduction:VARCHAR#, #iimageurll:VARCHAR#, #titlename:VARCHAR#,
       #jobname:VARCHAR#)
-      <selectKey resultClass="java.lang.Long" keyProperty="id">
+      <selectKey resultClass="java.lang.Long" keyProperty="id" >
 			SELECT LAST_INSERT_ID()
 	  </selectKey>
   </insert>

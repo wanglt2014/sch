@@ -31,7 +31,7 @@
 <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.cookie.js" ></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/etUtil.js" ></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/flash.js" ></script>
-<!--<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.min.js" ></script>-->
+<%-- <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.min.js" ></script> --%>
 <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.jScroll.js" ></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.cycle.js" ></script>
 
@@ -39,18 +39,18 @@
 $(function(){
 	$(".scroll_three").jScroll({speed: 2000, scroll: 2});//底部logo滚动
 	$('#banner').cycle({fx:'scrollLeft',pager:'#btn'});//顶部图片滚动
-	
+// 	$('#banner').cycle('fade'); 
 });
 </script>
 
 </head>
-
+<!-- <body > -->
 <body onload="slideDown('#hudong',4000)">
 <div id="hudong" style="display: none;width: 100%;height:300px;background-image: url('${image_path}/huodong.jpg');background-size:cover;" >
  <a href="#" onclick="slideUp('#hudong',0)"> <img src="${image_path}/close.png" width="30" height="30" style="float: right" /> </a>
 </div>
 
-<div id="fade" class="black_overlay"></div>
+<!-- <div id="fade" class="black_overlay"></div> -->
 <div class="container" style="position: relative;">
 
 <jsp:include page="top.jsp"></jsp:include>
@@ -64,10 +64,10 @@ $(function(){
 					<div class="flash_left"></div>
 					<div class="flash_content">
 						<div id="banner">
-						    	<img  src="${image_path}/ibanner1.jpg" width="720" height="252"/>
-						        <img  src="${image_path}/ibanner2.jpg" width="720" height="252"/>
-						        <img  src="${image_path}/ibanner3.jpg" width="720" height="252"/>
-						        <img  src="${image_path}/ibanner4.jpg" width="720" height="252"/>
+						    	<img  src="${image_path}/ibanner1.jpg" width="800" height="252"/>
+						        <img  src="${image_path}/ibanner2.jpg" width="800" height="252"/>
+						        <img  src="${image_path}/ibanner3.jpg" width="800" height="252"/>
+						        <img  src="${image_path}/ibanner4.jpg" width="800" height="252"/>
 						</div>
 						<div id="btn"></div>
 					</div>
@@ -75,20 +75,27 @@ $(function(){
 				</div>
 				
 				<div id="service_div">
-					<div class="service_title">产品服务</div>
+					<div class="service_title">教学教务通知</div>
 					<div class="split_1px"></div>
 					<div >
 						<table  width="730px" >
-						<tr>
-							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_26.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云主机</td></tr><tr><td>销售和代购云主机</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table> </td></tr></table></div></div></td>
-							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_28.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云运维</td></tr><tr><td>搭建系统运行环境</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td>
-							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_30.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">软件服务</td></tr><tr><td>根据需求定制软件开发</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td>
-						</tr>
-						<tr>
-							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_39.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">TinyERP</td></tr><tr><td>进销存管理系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td>
-							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_40.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">TinyOA</td></tr><tr><td>自动化办公系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td>
-							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_41.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">sch</td></tr><tr><td>企业建站系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td>
-						</tr>
+						<ul class="news_content">
+							<s:iterator var="notify" value="notifylist" status="st">
+								<li><a target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm"><s:property
+											value="#notify.articletitle" /><img src="${image_path}/hot.gif" /></a>
+								</li>
+							</s:iterator>
+						</ul>
+<!-- 						<tr> -->
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_26.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云主机</td></tr><tr><td>销售和代购云主机</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table> </td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_28.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云运维</td></tr><tr><td>搭建系统运行环境</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_30.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">软件服务</td></tr><tr><td>根据需求定制软件开发</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_39.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">TinyERP</td></tr><tr><td>进销存管理系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_40.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">TinyOA</td></tr><tr><td>自动化办公系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_41.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">sch</td></tr><tr><td>企业建站系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<!-- 						</tr> -->
 					</table>
 					</div>
 				</div>
@@ -99,15 +106,15 @@ $(function(){
 					<li class="normal_title_left"></li>
 					<li class="normal_title_right"></li>
 					<li class="normal_title_content">
-						网站公告&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						资料下载&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</li>
 				</ul>
 				<div class="normal_content_top">
 				<ul class="news_content">
-					<s:iterator var="notify" value="notifylist" status="st">
-										<li><a target="_blank" href="News_newsdetail_${notify.articleid}.shtm"/><s:property value="#notify.title" /><img src="${image_path}/hot1.gif" /> </a>
-										</li>
-									</s:iterator>
+					<s:iterator var="download" value="downloadlist" status="st">
+						<li><a target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm"/><s:property value="#download.filename" /><img src="${image_path}/hot1.gif" /> </a>
+						</li>
+					</s:iterator>
 				</ul>
 				</div>
 			</div>
@@ -116,16 +123,15 @@ $(function(){
 					<li class="normal_title_left"></li>
 					<li class="normal_title_right"></li>
 					<li class="normal_title_content">
-						媒体报道&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						教务教学制度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					</li>
 				</ul>
 				<div class="normal_content_bottom">
 					<ul class="news_content">
-					<s:iterator var="media" value="medialist" status="st">
-										<li><a target="_blank" href="News_newsdetail_${media.articleid}.shtm"><s:property
-													value="#media.title" /><img src="${image_path}/hot.gif" /></a>
-										</li>
-									</s:iterator>
+					<s:iterator var="regulation" value="regulationList" status="st">
+						<li><a target="_blank" href="Article_regulationDetail_${regulation.articleid}.shtm"/><s:property value="#regulation.articletitle" /><img src="${image_path}/hot1.gif" /> </a>
+						</li>
+					</s:iterator>
 				</ul>
 				</div>
 			</div>

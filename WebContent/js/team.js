@@ -1,70 +1,70 @@
 var team_info = [ {
 id : "Harries",
-name : "华哥",
+name : "XX",
 ename : "Harries",
 title : "项目经理",
 pic : "/services_picture.png",
 say : "走自己的路，让别人去说吧！"
 }, {
-id : "liumingzhi",
-name : "刘明智",
+id : "XX",
+name : "XX",
 ename : "MingZhi.Liu",
 title : "Ios开发工程师",
 pic : "/services_picture.png",
 say : "我容易吗我?o(︶︿︶)o"
 }, {
-id : "denglonghua",
-name : "邓龙华",
-ename : "LongHua.Deng",
+id : "XXX",
+name : "XXX",
+ename : "X",
 title : "开发工程师",
 pic : "/services_picture.png",
 say : "保持微笑！"
 }, {
-id : "JunDa.Chen",
-name : "陈俊达",
-ename : "JunDa.Chen",
+id : "X",
+name : "X",
+ename : "X",
 title : "Android工程师",
 pic : "/services_picture.png",
-say : "我最自豪的是，没人比我更天真了!(～ o ～)Y"
+say : "(～ o ～)Y"
 }, {
-id : "gaoguoren",
-name : "高国仁",
-ename : "GuoRen.Gao",
+id : "X",
+name : "XX",
+ename : "X",
 title : "运维工程师",
 pic : "/services_picture.png",
 say : "~\(≧▽≦)/~"
 }, {
-id : "linxiaomin",
+id : "X",
 name : "xxx",
-ename : "Tony Lin",
+ename : "XX",
 title : "开发工程师",
 pic : "/services_picture.png",
-say : "最近买了几部MacBook Air，其实也不咋地o(︶︿︶)o唉"
+say : "XXXX"
 }, {
-id : "licongping",
+id : "XX",
 name : "xxx",
 ename : "Chris",
 title : "产品经理",
 pic : "/services_picture.png",
-say : "最近没钱花。囧rz"
+say : "XXXXXXXXXXX"
 }, {
-id : "luoyegang",
+id : "XXXXX",
 name : "xxx",
-ename : "Luo Ye Gang",
+ename : "XXXXX",
 title : "开发工程师",
 pic : "/services_picture.png",
-say : "其实我很温柔的。( ⊙o⊙ )千真万确"
+say : "XX千真万确"
 }, {
-id : "chenjie",
+id : "XX",
 name : "xxx",
-ename : "Nickel",
+ename : "XXX",
 title : "测试工程师",
 pic : "/services_picture.png",
-say : "我是你界哥。-_-!"
+say : "XX"
 }, {
-id : "zhangwen",
+id : "XX",
 name : "xxx",
-ename : "Zhang Wen",
+ename : "XXXXXX",
 title : "测试工程师",
 pic : "/services_picture.png",
 say : "我觉得这个问题应该分三个层面来看，一、....( ^_^ )"

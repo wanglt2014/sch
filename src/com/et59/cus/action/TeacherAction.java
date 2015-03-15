@@ -4,8 +4,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
+import com.et59.cus.domain.entity.BsArticle;
 import com.et59.cus.domain.entity.BsProductcategory;
 import com.et59.cus.domain.entity.BsUser;
 import com.et59.cus.domain.entity.TDictionary;
@@ -21,7 +23,9 @@ import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
+import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.Pager;
+import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
 import com.et59.cus.tools.DateUtil;
 import com.et59.cus.tools.FileAction;
@@ -140,6 +144,18 @@ public class TeacherAction extends BaseAction {
 	 */
 	public String index() {
 		return "index";
+	}
+	
+	/**
+	 * @Title: toTeacherPage
+	 * @Description: 跳转到教务教学通知
+	 * @return String 返回类型
+	 * @throws
+	 */
+
+	public String toTeacherPage() {
+		super.commonQueryForTeacher("");
+		return "to_teacher_index";
 	}
 
 	/**
@@ -444,11 +460,13 @@ public class TeacherAction extends BaseAction {
 		long downloadid = 0l;
 		String name = request.getParameter("uploader_pic_name");
 		if (name != null && !name.isEmpty()) {
+			String savePath = FileAction.getSavePathForTeacher();
 			String extName = name.substring(name.lastIndexOf("."));
 			String tampFileName = request.getParameter("uploader_pic_tmpname");
 			String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
 					+ extName;
-			teacher.setIimageurll(fileShowPath);
+			String filepath = savePath + "\\" + tampFileName + extName;
+			teacher.setIimageurll(filepath);
 		}
 		try {
 			// 新增教师表
@@ -502,6 +520,63 @@ public class TeacherAction extends BaseAction {
 			e.printStackTrace();
 		}
 
+	}
+	
+	/**
+	 * @Title: teacherDetail
+	 * @Description: 跳转到教务教学通知详细页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String teacherDetail() {
+		super.commonquery();
+		String id = request.getParameter("id");
+		try {
+			tTeacherdetail = localServiceProxy.queryTeacherById(Long
+					.valueOf(id));
+			Long teacherIdLong = Long.parseLong(id);
+			// 加载课程
+			TSubject subject = new TSubject();
+			TTeacherSubjectExample example = new TTeacherSubjectExample();
+			example.createCriteria().andTeacheridEqualTo(teacherIdLong);
+			List<TTeacherSubjectKey> tsList = localServiceEXProxy
+					.queryTTeacherSubjectKey(example);
+			if (tsList != null && tsList.size() > 0) {
+				subject = localServiceEXProxy.querySubjectById(tsList.get(0)
+						.getSubjectid());
+			}
+
+			// 加载立项
+			TResearch tResearch = new TResearch();
+			TTeacherResearchExample trexample = new TTeacherResearchExample();
+			trexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
+			List<TTeacherResearchKey> trList = localServiceEXProxy
+					.queryTTeacherResearchKey(trexample);
+			if (trList != null && trList.size() > 0) {
+				tResearch = localServiceEXProxy.queryTResearch(trList.get(0)
+						.getResearchid());
+			}
+
+			// 加载论文
+			TPaper tPaper = new TPaper();
+			TTeacherPaperExample tpexample = new TTeacherPaperExample();
+			tpexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
+			List<TTeacherPaperKey> tpList = localServiceEXProxy
+					.queryTTeacherPaperKey(tpexample);
+
+			if (tpList != null && tpList.size() > 0) {
+				tPaper = localServiceEXProxy.queryTPaper(tpList.get(0)
+						.getPaperid());
+			}
+
+			
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "teacher_detail";
 	}
 
 	/**
@@ -581,6 +656,36 @@ public class TeacherAction extends BaseAction {
 		} else {
 			return null;
 		}
-
 	}
+	
+	/**
+	 * 查询师资队伍
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryTeacher() {
+		if (log.isDebugEnabled()) {
+			log.debug("查询交易信息currentPage>>>>:" + currentPage);
+		}
+		try {
+			TTeacher tTeacher = new TTeacher();
+			Map map = localServiceProxy.queryTeacherByTypeForPage(tTeacher,
+					Constant.PAGESIZE, currentPage);
+			TDictionary tDictionary = new TDictionary();
+			tDictionary.setDictionarytype("department");
+			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,100000,1);
+			dictionaryList = (List<TDictionary>) pager.getRows();
+			if (ComonUtil.validateMapResult(map)) {
+				teacherList = (List<TTeacher>) map
+						.get(Constant.TEACHER_LIST);
+				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
+				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "teacher_result";
+	}
+
 }

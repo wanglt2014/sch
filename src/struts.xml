@@ -366,6 +366,9 @@
 			<interceptor-ref name="timerInterceptor" />
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/teacher/teacher_index.jsp</result>
+			<result name="to_teacher_index">/teacher/teacherList.jsp</result>
+			<result name="teacher_detail">/teacher/teacherdetail.jsp</result>
+			<result name="teacher_result">/teacher/teacher_result.jsp</result>
 		</action>
 		
 		<!-- 文件上传 -->

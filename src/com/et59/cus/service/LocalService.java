@@ -371,4 +371,15 @@ public interface LocalService {
 	 * @throws Exception
 	 */
 	public int updateTeacher(TTeacher tTeacher) throws Exception;
+	
+	/**
+	 * 按师资队伍查询 (分页)
+	 */
+	public Map queryTeacherByTypeForPage(TTeacher tTeacher,
+			int pagesize, int currentpage) throws Exception;
+	
+	/**
+	 * 查询教师byid
+	 */
+	public TTeacher queryTeacherById(long id) throws Exception;
 }

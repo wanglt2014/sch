@@ -10,6 +10,7 @@ package com.et59.cus.tools;
  *
  */
 public class Constant {
+	public static String FILE_SAVE_PATH = "C:\\schoolfile";
 	public static String ACTION_RESULT = "ACTION_RESULT"; // 结果
 	public static int RESULT_SUCCESS = 0; // 结果为成功
 	public static int RESULT_FAIL = 1; // 结果为失败
@@ -76,6 +77,12 @@ public class Constant {
 	 * 文章类表
 	 */
 	public static String ARTICLE_LIST = "ARTICLE_LIST";
+	
+	/**
+	 * 师资队伍
+	 */
+	public static String TEACHER_LIST = "TEACHER_LIST";
+	
 	/**
 	 * 文章详情
 	 */

@@ -205,7 +205,8 @@ public class FileAction extends BaseAction {
 	}
 
 	private static String getSavePath() {
-		return ServletActionContext.getServletContext().getRealPath("") + "\\";
+//		return ServletActionContext.getServletContext().getRealPath("") + "\\";
+		return Constant.FILE_SAVE_PATH+"\\";
 	}
 
 	// public String submit() {

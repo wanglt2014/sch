@@ -19,8 +19,10 @@ import com.et59.cus.domain.entity.BsArticle;
 import com.et59.cus.domain.entity.BsOrder;
 import com.et59.cus.domain.entity.BsProduct;
 import com.et59.cus.domain.entity.BsUser;
+import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TSubject;
+import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.ReturnMsg;
 import com.et59.cus.domain.entity.ex.Shopcart;
@@ -97,6 +99,21 @@ public abstract class BaseAction extends SystemAction {
 	 * 文件表
 	 */
 	protected TDownload downloaddetail;
+	
+	/**
+	 * 教师列表
+	 */
+	protected List<TTeacher> teacherList;
+	
+	/**
+	 * 文章详情
+	 */
+	protected TTeacher tTeacherdetail;
+	
+	/**
+	 * 数据字典列表
+	 */
+	protected List<TDictionary> dictionaryList;
 
 	@Override
 	public String execute() {
@@ -287,6 +304,25 @@ public abstract class BaseAction extends SystemAction {
 			reponseWriterXml(XMLUtil.ReturnMsgChangeTOXml(returnMsg));
 		} else {
 			reponseWriter(JSON.toJSONString(returnMsg));
+		}
+	}
+	
+	/**
+	 * 公共查询教师
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void commonQueryForTeacher(String department) {
+		try {
+			TTeacher tTeacher = new TTeacher();
+//			if (department!=null && !department.equals("")) {
+//				tTeacher.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+//			}
+			Map map1 = localServiceProxy.queryTeacherByTypeForPage(tTeacher,9,1);
+			if (ComonUtil.validateMapResult(map1)) {
+				teacherList = (List<TTeacher>) map1.get(Constant.TEACHER_LIST);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
@@ -488,4 +524,28 @@ public abstract class BaseAction extends SystemAction {
 		this.regulationList = regulationList;
 	}
 
+	public List<TTeacher> getTeacherList() {
+		return teacherList;
+	}
+
+	public void setTeacherList(List<TTeacher> teacherList) {
+		this.teacherList = teacherList;
+	}
+
+	public List<TDictionary> getDictionaryList() {
+		return dictionaryList;
+	}
+
+	public void setDictionaryList(List<TDictionary> dictionaryList) {
+		this.dictionaryList = dictionaryList;
+	}
+
+	public TTeacher gettTeacherdetail() {
+		return tTeacherdetail;
+	}
+
+	public void settTeacherdetail(TTeacher tTeacherdetail) {
+		this.tTeacherdetail = tTeacherdetail;
+	}
+	
 }

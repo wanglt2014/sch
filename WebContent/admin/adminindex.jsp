@@ -147,10 +147,7 @@
 					<a href="Admin_logout">[退出]</a>
 				&nbsp;|&nbsp;
 			</c:if>
-
-				<a href="#" target="_blank">Android</a> &nbsp;|&nbsp; <a href="#"
-					target="_blank">Iphone</a> &nbsp;|&nbsp; <a href="OpenApi_index"
-					target="_blank">OpenApi</a> &nbsp;|&nbsp; <a href="${request_path}"
+					<a href="${request_path}"
 					target="_blank">网站前台</a> &nbsp;|&nbsp;
 			</div>
 		</div>

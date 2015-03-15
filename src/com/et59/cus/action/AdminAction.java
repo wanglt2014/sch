@@ -41,11 +41,13 @@ public class AdminAction extends BaseAction {
 				userobj.setIsadmin(usertype);
 				String randomcode = (String) session.get("RANDOMIMAGES");
 				log.info("checkcode|randomcode:"+checkcode+"|"+randomcode);
+				//临时注释 验证码
 //				if(randomcode.equalsIgnoreCase(checkcode)){
 						Map map = localServiceProxy.queryUsername(userobj);
 						if (ComonUtil.validateMapResult(map)) {
 							BsUser user1 = (BsUser) map.get(Constant.USER);
 								log.debug("登录成功");
+								//admin用户跳转
 //								if(user1.getIsadmin().equals("yes")){
 //									str = "adminindex";
 //								}else{

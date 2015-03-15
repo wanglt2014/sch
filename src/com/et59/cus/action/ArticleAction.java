@@ -47,7 +47,7 @@ public class ArticleAction extends BaseAction {
 	}
 
 	/**
-	 * @Title: toNoticePage
+	 * @Title: toTeacherPage
 	 * @Description: 跳转到教务教学通知
 	 * @return String 返回类型
 	 * @throws

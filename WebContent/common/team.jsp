@@ -52,14 +52,14 @@ $(function(){
 	var $div = $('<div id="' + personData.id + '" class="om-ui-team-person"><div>');
 	$div.append('<div class="card-bg card-style-' + (i%4+1) + '">');
 	$div.append('<div class="intro"><div class="name">' + personData.name + '</div><div class="e-name">' + personData.ename + '</div><div class="title">'+personData.title+'</div></div>');
-	$div.append('<div class="person-pic"><img alt="' + personData.name + '" src="${image_path}' + personData.pic + '" /></div>');
+	$div.append('<div class="person-pic"><a href="#"><img alt="' + personData.name + '" src="${image_path}' + personData.pic + '" /></a></div>');
 	$('#om-ui-team').append($div);
-	var $dialogbox = $('<div target="' + personData.id + '" class="dialog-box"><span class="content">' + personData.say + '</span><div class="dialog-box-before"></div><div class="dialog-box-after"></div></div>');
-	$('body').append($dialogbox);
-	}
+// 	var $dialogbox = $('<div target="' + personData.id + '" class="dialog-box"><span class="content">' + personData.say + '</span><div class="dialog-box-before"></div><div class="dialog-box-after"></div></div>');
+// 	$('body').append($dialogbox);
+	} 
 	$('#om-ui-team').append($('<div class="clear-float"></div>'));
 	$('.om-ui-team-person').each(function(n){
-	$(this).append('<div class="team-info">59ET Software</div>');
+	$(this).append('<div class="team-info">Software</div>');
 	});
 	// bind event
 	$('.dialog-box').hover(function(){

@@ -28,13 +28,13 @@ $(document).ready(function(){
 		}else if (id == 'nav_link_download') {
 			location.href = 'Download_toDownloadPage.shtm';
 		}else if (id == 'nav_link_teacher') {
-			location.href = 'Article_toTeachPage.shtm';
+			location.href = 'Teacher_toTeacherPage.shtm';
 		}else if (id == 'nav_link_plan') {
 			location.href = 'News_toNewsPage.shtm';
 		}else if (id == 'nav_link_result') {
-			location.href = 'http://bbs.59et.com';
+			location.href = '';
 		}else if (id == 'nav_link_bbs') {
-			location.href = 'http://bbs.59et.com';
+			location.href = 'http://localhost:8080/schoolbbs';
 		}else if (id == 'nav_link_downloadinfo') {
 			location.href = 'Download_toDownloadPage.shtm';
 		}

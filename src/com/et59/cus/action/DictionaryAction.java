@@ -134,7 +134,7 @@ public class DictionaryAction extends BaseAction{
 	public void queryDictionaryByType(){
 		String type = request.getParameter("type"); 
 		try {
-			String name = localServiceProxy.querySupplierNameByCode(type);
+//			String name = localServiceProxy.querySupplierNameByCode(type);
 			TDictionary tDictionary = new TDictionary();
 			tDictionary.setDictionarytype(type);
 			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,100000,1);

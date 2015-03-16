@@ -17,9 +17,24 @@ String request_path = request.getContextPath();
 <jsp:include page="../pre.jsp"></jsp:include>
 <%-- <script language="JavaScript" type="text/javascript" --%>
 <%-- 	src="${js_path}/fileUploadHandle.js"></script> --%>
+  <script type="text/javascript">
+//   $(document).ready(function(){
+//     $("#dialog").dialog();
+//   });
+  </script>
+<style type="text/css">
+.container {width: 100%;}
+.photo { width: 40%;position:absolute; text-align: right;height: 300px;height:auto;}
+.content {float: left; width: 45%;text-align: center; position: absolute;margin-left: 45%;margin-top: 50%;}
+.img_photo{ WIDTH:300px; HEIGHT:300px; BORDER:0; }
+.base_info{margin-top: 10px;}
+.title_teacher{text-align: left;margin-left: 10%;}
+.div_baseinfo{font-size: 14px;height: 100%;height: auto;min-height: 200px;}
+.baseInfo{width: 100%;height: 100%;height: auto;}
+</style>
 </head>
 
-<body>
+<body >
 	<div id="fade" class="black_overlay"></div>
 	<div class="container" style="position: relative;">
 
@@ -27,16 +42,16 @@ String request_path = request.getContextPath();
 		<jsp:include page="../nav.jsp"></jsp:include>
 
 
-		<div style="position: relative; margin: 5px 0px 10px 0px;">
-			<div id="index_top">
+		<div style="position: relative; margin: 5px 0px 10px 0px; height: auto;height:100%;" >
+			<div id="index_top" style="height: auto;height:100%;">
 
-				<div id="news_right_content_detail">
-					<div class="one_artic_detail">
-						<div class="title_detail" align="center">
-							<b style="font-size: 15px; font-family: sans-serif;"><c:out
-									value="${tTeacherdetail.teachername}" /> </b>
-						</div>
-						<div class="artic_author_detail" align="center">
+				<div id="news_right_content_detail" style="height: auto;height:100%;">
+					<div class="one_artic_detail" style="height: auto;height:100%;">
+<!-- 						<div class="title_detail_nolist" align="center"> -->
+<%-- 							<b style="font-size: 15px; font-family: sans-serif;"><c:out --%>
+<%-- 									value="${tTeacherdetail.teachername}" /> </b> --%>
+<!-- 						</div> -->
+<!-- 						<div class="artic_author_detail" align="center"> -->
 <!-- 							作者: -->
 <%-- 							<c:out value="${tTeacherdetail.author}" /> --%>
 <!-- 							时间: -->
@@ -50,29 +65,56 @@ String request_path = request.getContextPath();
 <!-- 									<option value="24px">大号</option> -->
 <%-- 								</select> --%>
 <!-- 							</div> -->
-						</div>
+<!-- 						</div> -->
 
 <!-- 						<div class="normal_summary"> -->
 <!-- 							描述： -->
 <%-- 							<c:out value="${bsArticledetail.articlesummary}" escapeXml="false" /> --%>
 <!-- 						</div>  -->
-						<div class="content_detail" id="articcontentdetail">
-							<h3 align="center">基本信息</h3>
+						<div class="div_baseinfo" id="articcontentdetail">
+							<h3 class="title_teacher">基本信息</h3>
 							<hr color="#bbbbbb" width="80%" />
 <%-- 							<c:out value="${bsArticledetail.content}" escapeXml="false" /> --%>
-							<img alt="' + tTeacherdetail.teachername + '" src="<s:property value="tTeacherdetail.iimageurll"/>" />
+<%-- 							<s:property value="tTeacherdetail.iimageurll"/> --%>
+<%-- 							<div align="center" style="width: 100%"><img src="<s:property value="tTeacherdetail.iimageurll"/>" WIDTH="200" HEIGHT="200" BORDER="0" alt=""/></div> --%>
+							<div id="baseInfo" class="baseInfo">
+								<div id="content" class="content">
+								<div style="margin-top: 20px;height: auto;width: 100%;" >
+	<!-- 							<label>姓名:</label>  -->
+								<h1><s:property value="tTeacherdetail.teachername"/></h1>
+								<div class="base_info">
+								<s:property value="tTeacherdetail.titlename"/>,
+								<s:if test="tTeacherdetail.tutorType==1">硕导</s:if>
+								<s:else>博导</s:else>
+								</div>
+								<div class="base_info"><s:property value="tTeacherdetail.departmentname"/> 专业</div>
+								<div class="base_info" style="width: 100%;text-align: center;">
+								<s:property value="tTeacherdetail.introduction"/>
+								</div>
+	<%-- 							<div><s:property value="tTeacherdetail.birthday"/></div> --%>
+								</div>
+								</div>
+								<div id="photo" class="photo">
+								<img class="img_photo" src="<s:property value="tTeacherdetail.iimageurll"/>" alt=""/>
+								<div style="height:1px; margin-top:-1px;clear: both;overflow:hidden;"></div>
+								</div>
+								<div style="height:1px; margin-top:-1px;clear: both;overflow:hidden;"></div>
+							</div>
+<!-- 							<div id="dialog" title="Dialog Title">I'm in a dialog</div> -->
+						<div style="height:1px; margin-top:-1px;clear: both;overflow:hidden;"></div>
 						</div>
+						<div class="">
+						123123
+						</div>
+
 						<div>
 <%-- 						<s:if test="bsArticledetail.download.fileshowpath!='' and bsArticledetail.download.fileshowpath!=null"> --%>
 <%-- 						<a href="<%=request_path %>/${bsArticledetail.download.fileshowpath}" id="filePath" title="" ><c:out value="${bsArticledetail.download.filename}" /></a> --%>
 <%-- 						</s:if> --%>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
 		</div>
 			<%-- <input type="text" id="wordName" name="wordName"  style="display:none">
 			 <input type="text" id="documentType" name="documentType" style="display:none">

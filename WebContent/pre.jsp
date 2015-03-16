@@ -11,8 +11,7 @@
 	request.setAttribute("css_path", css_path);
 	request.setAttribute("js_path", js_path);
 %>
-<link rel="stylesheet" type="text/css"
-	href="${css_path}/jquery.alerts.css" />
+<link rel="stylesheet" type="text/css" href="${css_path}/jquery.alerts.css" />
 <link rel="stylesheet" type="text/css" href="${css_path}/global.css" />
 <link rel="stylesheet" type="text/css" href="${css_path}/1200.css" />
 <link rel="stylesheet" type="text/css" href="${css_path}/comments.css"/>
@@ -22,28 +21,17 @@
 <link rel="stylesheet" type="text/css" href="${css_path}/common.css" />
 <link rel="stylesheet" type="text/css" href="${css_path}/news.css" />
 <link rel="stylesheet" type="text/css" href="${css_path}/schoolEX.css" />
-<link rel="stylesheet" type="text/css"
-	href="${css_path}/jqueryUi/jquery-ui.css" />
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/jquery.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/jquery-ui.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/jquery.blockUI.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/jquery.cookie.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/etUtil.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/jquery.alerts.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/jquery.ui.draggable.js"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/top.js" charset="UTF-8"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/footer.js" charset="UTF-8"></script>
-<script language="JavaScript" type="text/javascript"
-	src="${js_path}/Calculation.js" charset="UTF-8"></script>
+<link rel="stylesheet" type="text/css" href="${css_path}/jqueryUi/jquery-ui.css" />
+<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/jquery-ui.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.blockUI.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.cookie.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/etUtil.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.alerts.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.ui.draggable.js"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/top.js" charset="UTF-8"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/footer.js" charset="UTF-8"></script>
+<script language="JavaScript" type="text/javascript" src="${js_path}/Calculation.js" charset="UTF-8"></script>
 <script>
 $(document).ready(function() {
      $("#fontsize").change(

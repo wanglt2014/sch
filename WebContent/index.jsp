@@ -44,11 +44,11 @@ $(function(){
 </script>
 
 </head>
-<!-- <body > -->
-<body onload="slideDown('#hudong',4000)">
-<div id="hudong" style="display: none;width: 100%;height:300px;background-image: url('${image_path}/huodong.jpg');background-size:cover;" >
- <a href="#" onclick="slideUp('#hudong',0)"> <img src="${image_path}/close.png" width="30" height="30" style="float: right" /> </a>
-</div>
+<body >
+<!-- <body onload="slideDown('#hudong',4000)"> -->
+<%-- <div id="hudong" style="display: none;width: 100%;height:300px;background-image: url('${image_path}/huodong.jpg');background-size:cover;" > --%>
+<%--  <a href="#" onclick="slideUp('#hudong',0)"> <img src="${image_path}/close.png" width="30" height="30" style="float: right" /> </a> --%>
+<!-- </div> -->
 
 <!-- <div id="fade" class="black_overlay"></div> -->
 <div class="container" style="position: relative;">

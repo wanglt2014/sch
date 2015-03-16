@@ -20,3 +20,14 @@
 .content_detail2{height:58px;background:gray; repeat-x; width:80%; 
 margin:0px auto; min-width:1000px; float:none; 
 *width:expression((this.offsetWidth < 1000) ? (this.width = 1000 +'px') : true); }
+
+.title_detail_nolist{
+	margin-left: 0px;
+	margin-right: 20px;
+	margin-top: 15px;
+	float:center;
+	width: 100%;
+	font-size: 22px;
+	font-weight: bold;
+	text-align: center;
+}

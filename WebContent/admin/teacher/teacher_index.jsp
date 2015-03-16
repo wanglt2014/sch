@@ -911,7 +911,7 @@
 	    onSelect:function(title,index){ 
 // 	        alert(title+' is selected'+index); 
 	        if(index==0){
-// 	        	uploaderForPic.init();
+	        	uploaderForPic.init();
 	        }
 			if(index==1){
 				uploaderForSubject.init(); //初始化

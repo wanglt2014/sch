@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
-import com.et59.cus.domain.entity.BsArticle;
 import com.et59.cus.domain.entity.BsProductcategory;
 import com.et59.cus.domain.entity.BsUser;
 import com.et59.cus.domain.entity.TDictionary;
@@ -23,7 +22,6 @@ import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
-import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
@@ -145,7 +143,7 @@ public class TeacherAction extends BaseAction {
 	public String index() {
 		return "index";
 	}
-	
+
 	/**
 	 * @Title: toTeacherPage
 	 * @Description: 跳转到教务教学通知
@@ -521,7 +519,7 @@ public class TeacherAction extends BaseAction {
 		}
 
 	}
-	
+
 	/**
 	 * @Title: teacherDetail
 	 * @Description: 跳转到教务教学通知详细页面
@@ -537,18 +535,16 @@ public class TeacherAction extends BaseAction {
 					.valueOf(id));
 			Long teacherIdLong = Long.parseLong(id);
 			// 加载课程
-			TSubject subject = new TSubject();
 			TTeacherSubjectExample example = new TTeacherSubjectExample();
 			example.createCriteria().andTeacheridEqualTo(teacherIdLong);
 			List<TTeacherSubjectKey> tsList = localServiceEXProxy
 					.queryTTeacherSubjectKey(example);
 			if (tsList != null && tsList.size() > 0) {
-				subject = localServiceEXProxy.querySubjectById(tsList.get(0)
+				tSubject = localServiceEXProxy.querySubjectById(tsList.get(0)
 						.getSubjectid());
 			}
 
 			// 加载立项
-			TResearch tResearch = new TResearch();
 			TTeacherResearchExample trexample = new TTeacherResearchExample();
 			trexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
 			List<TTeacherResearchKey> trList = localServiceEXProxy
@@ -559,7 +555,6 @@ public class TeacherAction extends BaseAction {
 			}
 
 			// 加载论文
-			TPaper tPaper = new TPaper();
 			TTeacherPaperExample tpexample = new TTeacherPaperExample();
 			tpexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
 			List<TTeacherPaperKey> tpList = localServiceEXProxy
@@ -570,7 +565,6 @@ public class TeacherAction extends BaseAction {
 						.getPaperid());
 			}
 
-			
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -657,7 +651,7 @@ public class TeacherAction extends BaseAction {
 			return null;
 		}
 	}
-	
+
 	/**
 	 * 查询师资队伍
 	 * 
@@ -674,11 +668,11 @@ public class TeacherAction extends BaseAction {
 					Constant.PAGESIZE, currentPage);
 			TDictionary tDictionary = new TDictionary();
 			tDictionary.setDictionarytype("department");
-			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,100000,1);
+			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,
+					100000, 1);
 			dictionaryList = (List<TDictionary>) pager.getRows();
 			if (ComonUtil.validateMapResult(map)) {
-				teacherList = (List<TTeacher>) map
-						.get(Constant.TEACHER_LIST);
+				teacherList = (List<TTeacher>) map.get(Constant.TEACHER_LIST);
 				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
 				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
 			}

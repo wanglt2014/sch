@@ -49,6 +49,7 @@ String request_path = request.getContextPath();
 		  </s:if>
 		  <td>                
 		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><i class="point">•</i>&nbsp;<s:property value="#teacher.teachername" /></a>
+<%-- 		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img alt="' + teacher.teachername + '" src="file://<s:property value="#teacher.iimageurll"/>" /></a> --%>
 		  </td>            
 		  <s:if test="#st.index % 4 == 3">                
 		  </tr>

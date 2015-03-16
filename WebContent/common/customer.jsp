@@ -42,14 +42,14 @@ String request_path = website+request.getContextPath();
 		<div class="services_act" style="display: none;">
 
 			<div class="title">
-				让企业，更简单！<a href="javascript:;"></a>
+				让生活，更简单！<a href="javascript:;"></a>
 			</div>
 			<div class="content">
 				<div class="picture">
 					<img alt="" src="${image_path}/services_picture.png">
 				</div>
 				<div class="stitle">
-					<span>企业信息化建设服务</span>
+					<span>学校信息化建设服务</span>
 				</div>
 				<div class="im">
 					<p>
@@ -75,11 +75,11 @@ String request_path = website+request.getContextPath();
 					
 				</div>
 				<ul>
-					<li>联 系：刘先生</li>
-					<li>手 机：15001327397</li>
+					<li>联 系：王先生</li>
+					<li>手 机：10000000000</li>
 					<li>电 话：010-xxxxxxxx</li>
 				</ul>
-				<div class="foot">ET59 software</div>
+				<div class="foot">BBS software</div>
 			</div>
 		</div>
 	</div>

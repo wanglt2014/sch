@@ -93,7 +93,7 @@
 <!-- 						</div> -->
 <%-- 					</c:if> --%>
 <!-- 				</div> -->
-				<div id="news_right_content"></div>
+				<div id="news_right_content" style="width: 100%;"></div>
 			</div>
 		</div>
 		<jsp:include page="../bottom.jsp"></jsp:include>

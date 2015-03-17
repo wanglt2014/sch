@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.BsProductcategory;
 import com.et59.cus.domain.entity.BsUser;
@@ -23,6 +25,9 @@ import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.ex.Pager;
+import com.et59.cus.dto.TPaperDTO;
+import com.et59.cus.dto.TResearchDTO;
+import com.et59.cus.dto.TSubjectDTO;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
 import com.et59.cus.tools.DateUtil;
@@ -54,6 +59,36 @@ public class TeacherAction extends BaseAction {
 	public TSubject tSubject;
 
 	public TPaper tPaper;
+
+	public TSubjectDTO tSubjectDTO;
+
+	public TResearchDTO tResearchDTO;
+
+	public TPaperDTO tPaperDTO;
+
+	public TPaperDTO gettPaperDTO() {
+		return tPaperDTO;
+	}
+
+	public void settPaperDTO(TPaperDTO tPaperDTO) {
+		this.tPaperDTO = tPaperDTO;
+	}
+
+	public TResearchDTO gettResearchDTO() {
+		return tResearchDTO;
+	}
+
+	public void settResearchDTO(TResearchDTO tResearchDTO) {
+		this.tResearchDTO = tResearchDTO;
+	}
+
+	public TSubjectDTO gettSubjectDTO() {
+		return tSubjectDTO;
+	}
+
+	public void settSubjectDTO(TSubjectDTO tSubjectDTO) {
+		this.tSubjectDTO = tSubjectDTO;
+	}
 
 	public TPrize gettPrize() {
 		return tPrize;
@@ -539,9 +574,33 @@ public class TeacherAction extends BaseAction {
 			example.createCriteria().andTeacheridEqualTo(teacherIdLong);
 			List<TTeacherSubjectKey> tsList = localServiceEXProxy
 					.queryTTeacherSubjectKey(example);
+			TSubject tSubject = new TSubject();
 			if (tsList != null && tsList.size() > 0) {
 				tSubject = localServiceEXProxy.querySubjectById(tsList.get(0)
 						.getSubjectid());
+				tSubjectDTO = new TSubjectDTO();
+				BeanUtils.copyProperties(tSubjectDTO, tSubject);
+			}
+			TDownload outlineFile = localServiceEXProxy
+					.queryDownloadById(tSubject.getSubjectoutline());
+			if (outlineFile != null) {
+				tSubjectDTO
+						.setSubjectoutlinePath(outlineFile.getFileshowpath());
+				tSubjectDTO.setSubjectoutlineName(outlineFile.getFilename());
+			}
+
+			TDownload scheduleFile = localServiceEXProxy
+					.queryDownloadById(tSubject.getSubjectschedule());
+
+			if (scheduleFile != null) {
+				tSubjectDTO.setSubjectschedulePath(scheduleFile
+						.getFileshowpath());
+			}
+
+			TDownload infoFile = localServiceEXProxy.queryDownloadById(tSubject
+					.getSubjectinfo());
+			if (infoFile != null) {
+				tSubjectDTO.setSubjectinfoPath(infoFile.getFileshowpath());
 			}
 
 			// 加载立项
@@ -549,9 +608,20 @@ public class TeacherAction extends BaseAction {
 			trexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
 			List<TTeacherResearchKey> trList = localServiceEXProxy
 					.queryTTeacherResearchKey(trexample);
+			TResearch tResearch = new TResearch();
 			if (trList != null && trList.size() > 0) {
 				tResearch = localServiceEXProxy.queryTResearch(trList.get(0)
 						.getResearchid());
+				tResearchDTO = new TResearchDTO();
+				BeanUtils.copyProperties(tResearchDTO, tResearch);
+
+			}
+
+			TDownload researchFile = localServiceEXProxy
+					.queryDownloadById(tResearch.getDownloadid());
+			if (researchFile != null) {
+				tResearchDTO
+						.setDownloadShowPath(researchFile.getFileshowpath());
 			}
 
 			// 加载论文
@@ -559,10 +629,17 @@ public class TeacherAction extends BaseAction {
 			tpexample.createCriteria().andTeacheridEqualTo(teacherIdLong);
 			List<TTeacherPaperKey> tpList = localServiceEXProxy
 					.queryTTeacherPaperKey(tpexample);
-
+			TPaper tPaper = new TPaper();
 			if (tpList != null && tpList.size() > 0) {
 				tPaper = localServiceEXProxy.queryTPaper(tpList.get(0)
 						.getPaperid());
+				tPaperDTO = new TPaperDTO();
+				BeanUtils.copyProperties(tPaperDTO, tPaper);
+			}
+			TDownload paperFile = localServiceEXProxy.queryDownloadById(tPaper
+					.getPaperdownloadid());
+			if (paperFile != null) {
+				tPaperDTO.setPaperdownloadPath(paperFile.getFileshowpath());
 			}
 
 		} catch (NumberFormatException e) {

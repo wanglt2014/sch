@@ -8,14 +8,7 @@
 String request_path = request.getContextPath();
 %>
 <style type="text/css">
-.point{
-	color: #5c307d;
-	font-family: inherit;
-	font-size: 14px;
-	font-weight: normal;
-	text-align: left;
-	
-}
+
 .teacher_list{
 	width: 100%;
 	text-align: center;

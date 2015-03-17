@@ -169,7 +169,8 @@
    									method:'get',    
    				 					valueField:'dictionarycode',    
    				 					textField:'dictionaryvalue',    
-   									panelHeight:'auto'">   
+   									panelHeight:'auto'">
+   							<input id="subjecttypename" name="subjecttypename" type="hidden" />   
 						</div>
 						<div class="fitem">
 							<label>课程编号:</label> <input name="subjectno"
@@ -435,6 +436,9 @@
 	var valid = $('#teacherfm').form('validate');
 		if(valid==true){
 			$('#departmentname').val($('#department').combobox('getText'));
+			$('#titlename').val($('#title').combobox('getText'));
+			$('#jobname').val($('#job').combobox('getText'));
+			$('#subjecttypename').val($('#subjecttype').combobox('getText'));
 			$('#teacherfm').form('submit', {
     			url : url,
     			onSubmit : function() {

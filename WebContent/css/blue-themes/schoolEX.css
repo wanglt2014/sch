@@ -31,3 +31,11 @@ margin:0px auto; min-width:1000px; float:none;
 	font-weight: bold;
 	text-align: center;
 }
+.point{
+	color: #5c307d;
+	font-family: inherit;
+	font-size: 14px;
+	font-weight: normal;
+	text-align: left;
+	
+}

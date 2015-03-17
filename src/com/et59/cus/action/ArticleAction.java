@@ -138,12 +138,12 @@ public class ArticleAction extends BaseAction {
 			bsArticledetail = localServiceProxy.queryArticleById(Long
 					.valueOf(id));
 
-			if(bsArticledetail.getDownloadid()!=null){
-			TDownload download = localServiceEXProxy
-					.queryDownloadById(bsArticledetail.getDownloadid());
+			if (bsArticledetail.getDownloadid() != null) {
+				TDownload download = localServiceEXProxy
+						.queryDownloadById(bsArticledetail.getDownloadid());
 				bsArticledetail.setDownload(download);
 			}
-			
+
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -233,30 +233,31 @@ public class ArticleAction extends BaseAction {
 	public void save() {
 		boolean flag = false;
 		BsArticle bsArticle = getBsArticle();
-
-		String savePath = FileAction.getSavePathForArticle();
-		String name = request.getParameter("uploader_name");
-		String extName = name.substring(name.lastIndexOf("."));
-		String tampFileName = request.getParameter("uploader_tmpname");
-		BsUser user = getUser();
-		String filepath = savePath + "\\" + tampFileName + extName;
-		String fileShowPath = Constant.PATH_ARTICLE + "\\" + tampFileName
-				+ extName;
-		TDownload tDownload = new TDownload();
-		tDownload.setAuthor(user.getUsername());
-		tDownload.setCreatedate(DateUtil.getNowDate());
-		tDownload.setFilename(name);
-		tDownload.setFilepath(filepath);
-		tDownload.setFileshowpath(fileShowPath);
-		tDownload.setInfotype(bsArticle.getArticletype());
-		tDownload.setFileisvalid(Constant.ISVALID_1);
 		try {
-			Long downloadId = localServiceEXProxy.saveDownloadInfo(tDownload);
-			System.out.println(downloadId + "******downloadId" + "路径："
-					+ filepath);
-			bsArticle.setDownloadid(downloadId);
+			String savePath = FileAction.getSavePathForArticle();
+			String name = request.getParameter("uploader_name");
+			if (name != null) {
+				String extName = name.substring(name.lastIndexOf("."));
+				String tampFileName = request.getParameter("uploader_tmpname");
+				BsUser user = getUser();
+				String filepath = savePath + "\\" + tampFileName + extName;
+				String fileShowPath = Constant.PATH_ARTICLE + "\\"
+						+ tampFileName + extName;
+				TDownload tDownload = new TDownload();
+				tDownload.setAuthor(user.getUsername());
+				tDownload.setCreatedate(DateUtil.getNowDate());
+				tDownload.setFilename(name);
+				tDownload.setFilepath(filepath);
+				tDownload.setFileshowpath(fileShowPath);
+				tDownload.setInfotype(bsArticle.getArticletype());
+				tDownload.setFileisvalid(Constant.ISVALID_1);
+				Long downloadId = localServiceEXProxy
+						.saveDownloadInfo(tDownload);
+				System.out.println(downloadId + "******downloadId" + "路径："
+						+ filepath);
+				bsArticle.setDownloadid(downloadId);
+			}
 			localServiceProxy.saveArticle(bsArticle);
-
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (Exception e) {

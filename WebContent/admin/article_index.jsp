@@ -165,8 +165,8 @@
         function insertArticle(){
             $('#newdlg').dialog('open').dialog('setTitle','发表文章');
             $('#newsfm').form('clear');
-            var str = result.articletype;
-            $("[value='" + str + "']").attr("checked", true);
+//             var str = result.articletype;
+//             $("[value='" + str + "']").attr("checked", true);
             UM.getEditor('myEditornew').setContent('', false);
             url = 'Article_save';
         }

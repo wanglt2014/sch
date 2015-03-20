@@ -69,7 +69,7 @@
 			iconCls="icon-remove" plain="true" onclick="destroyTeacher()">删除</a>
 	</div>
 	<div id="teacherdlg" class="easyui-dialog"
-		style="width: 800px; height: 780px; padding: 10px 20px" closed="true"
+		style="width: 800px; height: 720px; padding: 10px 20px" closed="true"
 		buttons="#teacherdlg-buttons">
 		<form id="teacherfm" method="post" novalidate>
 		<div id="teacher_tab" class="easyui-tabs" style="height: 616px"
@@ -149,6 +149,7 @@
 <!-- 								<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/> -->
 								<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
 								</ul>
+								<img class="img_photo" id="img_photo" src="" alt=""/>
 								<div class="btn-wraper">
 									<input type="button" value="选择文件..." id="browse" />
 									<input type="button" value="开始上传" id="upload-btn" />
@@ -184,7 +185,7 @@
 							<label>课程介绍:</label>
 							<textarea id="subjectText" rows=5 name="subjecttext"  class="textarea easyui-validatebox"></textarea>
 						</div>
-						<div class="fitem">
+						<div class="fitem" id="outlineObj" >
 							<div class="wraper">
 							<label>教学大纲:</label> 
 							<ul id="file-list-outline" style="text-align: left;margin:0px 0px 0px 30px; ">
@@ -196,7 +197,7 @@
 							</div>
 							</div>
 						</div>
-						<div class="fitem">
+						<div class="fitem" id="scheduleObj">
 							<div class="wraper">
 							<label>教学进度表:</label> 
 							<ul id="file-list-schedule" style="text-align: left;margin:0px 0px 0px 30px; ">
@@ -208,7 +209,7 @@
 							</div>
 							</div>
 						</div>
-						<div class="fitem">
+						<div class="fitem" id="subjectObj">
 							<div class="wraper">
 							<label>课程资料:</label> 
 <!-- 							<input id="uploader_subject_count" name="uploader_subject_count" value="0" style="display: none;"/> -->
@@ -260,7 +261,7 @@
 					<label>项目结束时间:</label> 
 					<input id="researchenddate" name="researchenddate" type="text" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
 				</div>
-				<div class="fitem">
+				<div class="fitem" id="projectObj">
 					<div class="wraper">
 					<label>立项申请书电子版:</label> 
 <!-- 					<input id="uploader_project_count" name="uploader_project_count" value="0" style="display: none;"/> -->
@@ -297,7 +298,7 @@
 						<label>杂志期号:</label> <input name="papernoteno"
 							class="easyui-validatebox" >
 					</div>
-					<div class="fitem">
+					<div class="fitem" id="paperObj">
 						<label>论文电子版:</label> 
 <!-- 						<input id="uploader_Paper_count" name="uploader_Paper_count" value="0" style="display: none;"/> -->
 						<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; ">
@@ -381,6 +382,7 @@
 		url = 'Teacher_save';
 		$('#sex').combobox('select',0);
 		$('#tutortype').combobox('select',1);
+		$('#img_photo').hide();
 		
 		var data = $('#department').combobox('getData');
 		 $("#department ").combobox('select',data[0].dictionarycode);
@@ -399,6 +401,9 @@
 					'编辑教师');
 			$('#teacherfm').form('clear');
 			$('#teacherfm').form('load', row);
+			$('#img_photo').show();
+			$('#img_photo').attr('src',row.iimageurll);
+			dispalyAllUploader();
 			var subjectid,paperid,researchid;
 // 			alert(JSON.stringify(row));
 			//从后台获取数据
@@ -502,6 +507,7 @@
 		}
 	}
 	
+	//销毁所有上传控件
 	function destroyAllUploader(){
 		uploaderForPic.splice(0,10);
 		uploaderForOutline.splice(0,10);
@@ -515,6 +521,15 @@
 		uploaderForSubject.destroy();
 		uploaderForProject.destroy();
 		uploaderForPaper.destroy();
+	}
+	
+	//隐藏所有上传控件
+	function dispalyAllUploader(){
+		$('#outlineObj').hide();
+		$('#scheduleObj').hide();
+		$('#subjectObj').hide();
+		$('#projectObj').hide();
+		$('#paperObj').hide();
 	}
 	
 	//照片 上传控件##########################################
@@ -573,6 +588,7 @@
 					$('#file-'+files[i].id).append('<img src="'+ imgsrc +'" />');
 				})
 		    }(i);
+		    $('#img_photo').hide();
 		}
 	});
 	

@@ -65,24 +65,44 @@ public class Constant {
 	public static String ARTICLE_TYPE_MEDIA = "media";
 
 	/**
-	 * 教学动态
+	 * 教学获奖
 	 */
 	public static String ARTICLE_TYPE_TEACH = "teach";
 
 	/**
-	 * 学生动态
+	 * 教改立项
+	 */
+	public static String ARTICLE_TYPE_REFORM = "reform";
+
+	/**
+	 * 教材建设
+	 */
+	public static String ARTICLE_TYPE_CONSTRUCTION = "construction";
+
+	/**
+	 * 精品课程
+	 */
+	public static String ARTICLE_TYPE_COURSE = "course";
+
+	/**
+	 * 国际共建课程
+	 */
+	public static String ARTICLE_TYPE_BUILD_COURSE = "build_course";
+
+	/**
+	 * 学生展示（含历届学生保送学校、获得奖学金等）
 	 */
 	public static String ARTICLE_TYPE_STUDENT = "student";
 	/**
 	 * 文章类表
 	 */
 	public static String ARTICLE_LIST = "ARTICLE_LIST";
-	
+
 	/**
 	 * 师资队伍
 	 */
 	public static String TEACHER_LIST = "TEACHER_LIST";
-	
+
 	/**
 	 * 文章详情
 	 */

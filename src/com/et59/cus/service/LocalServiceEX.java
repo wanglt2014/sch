@@ -146,4 +146,22 @@ public interface LocalServiceEX {
 	public List queryTTeacherPaperKey(TTeacherPaperExample example)
 			throws Exception;
 
+	/**
+	 * 更新立项表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void updateTResearch(TResearch tResearch) throws Exception;
+
+	/**
+	 * 更新课程表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void updateTSubject(TSubject tSubject) throws Exception;
+
+	/**
+	 * 更新论文表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void updateTPaper(TPaper tPaper) throws Exception;
+
 }

@@ -218,6 +218,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	}
 
 	/**
+	 * 更新立项表
+	 */
+	@Override
+	public void updateTResearch(TResearch tResearch) throws Exception {
+		tResearchDAO.updateByPrimaryKeySelective(tResearch);
+	}
+
+	/**
 	 * 保存课程表
 	 */
 	@Override
@@ -226,11 +234,27 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	}
 
 	/**
+	 * 更新课程表
+	 */
+	@Override
+	public void updateTSubject(TSubject tSubject) throws Exception {
+		tSubjectDAO.updateByPrimaryKeySelective(tSubject);
+	}
+
+	/**
 	 * 保存论文表
 	 */
 	@Override
 	public Long saveTPaper(TPaper tPaper) throws Exception {
 		return tPaperDAO.insert(tPaper);
+	}
+
+	/**
+	 * 更新论文表
+	 */
+	@Override
+	public void updateTPaper(TPaper tPaper) throws Exception {
+		tPaperDAO.updateByPrimaryKeySelective(tPaper);
 	}
 
 	/**

@@ -320,7 +320,7 @@
 			<result type="json"></result>
 		</action>
 		
-		<!-- 文章（教务教学通知，教学规章制度） -->
+		<!-- 文章（教务教学通知，教学规章制度）(人才培养成果) -->
 		<action name="Article_*" class="ArticleAction" method="{1}">
 			<interceptor-ref name="json" />
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
@@ -333,6 +333,7 @@
 			<result name="regulation_detail">/article/regulationdetail.jsp</result>
 			<result name="regulation_result">/article/regulation_result.jsp</result>
 			<result name="index">/admin/article_index.jsp</result>
+			<result name="trainingResults_index">/admin/trainingResults_index.jsp</result>
 			<result type="json"></result>
 		</action>
 		

@@ -20,7 +20,8 @@ import com.et59.cus.tools.FileAction;
 
 /**
  * <p>
- * Title: 文章（教务教学通知，教学规章制度）
+ * Title: 文章（教务教学通知，教学规章制度）,
+ * 人才培养成果（教学获奖、教改立项、教材建设、精品课程、国际共建课程、学生展示（含历届学生保送学校、获得奖学金等））
  * </p>
  * <p>
  * Description:
@@ -44,6 +45,15 @@ public class ArticleAction extends BaseAction {
 	 */
 	public String index() {
 		return "index";
+	}
+
+	/**
+	 * 人才培养成果后台首页
+	 * 
+	 * @return
+	 */
+	public String trainingResultsIndex() {
+		return "trainingResults_index";
 	}
 
 	/**
@@ -178,7 +188,7 @@ public class ArticleAction extends BaseAction {
 	}
 
 	/**
-	 * 查询教学动态
+	 * 查询文章
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void query() {
@@ -208,6 +218,7 @@ public class ArticleAction extends BaseAction {
 			if (null != newtitle && !newtitle.equals("")) {
 				bsArticle.setArticletitle(newtitle);
 			}
+
 			Pager pager = new Pager();
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Integer.valueOf(rows), Integer.valueOf(page));

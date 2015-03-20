@@ -696,6 +696,8 @@ public class LocalServiceImpl implements LocalService {
 		if (null != bsArticle.getArticletype()
 				&& !bsArticle.getArticletype().equals("")) {
 			criteria.andArticletypeEqualTo(bsArticle.getArticletype());
+		} else {
+			// 只查询通知和制度
 		}
 		// if (null != bsArticle.getStartdatacreatenew()
 		// && null == bsArticle.getEnddatacreatenew()) {
@@ -2152,23 +2154,23 @@ public class LocalServiceImpl implements LocalService {
 	public int updateTeacher(TTeacher tTeacher) throws Exception {
 		return tTeacherDAO.updateByPrimaryKeySelective(tTeacher);
 	}
-	
+
 	/**
 	 * 按师资队伍查询 (分页)
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
-	public Map queryTeacherByTypeForPage(TTeacher tTeacher,
-			int pagesize, int currentpage) throws Exception {
+	public Map queryTeacherByTypeForPage(TTeacher tTeacher, int pagesize,
+			int currentpage) throws Exception {
 		Map map = new HashMap();
 		TTeacherExample example = new TTeacherExample();
 		com.et59.cus.domain.entity.TTeacherExample.Criteria criteria = example
 				.createCriteria();
 		example.setOrderByClause(" department ");
-//		if (null != tTeacher.getArticletype()
-//				&& !tTeacher.getArticletype().equals("")) {
-//			criteria.andArticletypeEqualTo(tTeacher.getArticletype());
-//		}
+		// if (null != tTeacher.getArticletype()
+		// && !tTeacher.getArticletype().equals("")) {
+		// criteria.andArticletypeEqualTo(tTeacher.getArticletype());
+		// }
 		// if (null != bsArticle.getStartdatacreatenew()
 		// && null == bsArticle.getEnddatacreatenew()) {
 		// criteria.andCreatedateGreaterThan(bsArticle.getStartdatacreatenew());
@@ -2180,13 +2182,13 @@ public class LocalServiceImpl implements LocalService {
 		// && null != bsArticle.getEnddatacreatenew()) {
 		// criteria.andCreatedateLessThan(bsArticle.getEnddatacreatenew());
 		// }
-//		if (null != bsArticle.getAuthor()) {
-//			criteria.andAuthorLike("%" + bsArticle.getAuthor() + "%");
-//		}
-//		if (null != bsArticle.getArticletitle()) {
-//			criteria.andArticletitleLike("%" + bsArticle.getArticletitle()
-//					+ "%");
-//		}
+		// if (null != bsArticle.getAuthor()) {
+		// criteria.andAuthorLike("%" + bsArticle.getAuthor() + "%");
+		// }
+		// if (null != bsArticle.getArticletitle()) {
+		// criteria.andArticletitleLike("%" + bsArticle.getArticletitle()
+		// + "%");
+		// }
 		int startrecord = (currentpage - 1) * pagesize;
 		List<TTeacher> list = commonDAOEx.selectTeacherForPage(example,
 				startrecord, pagesize);
@@ -2198,7 +2200,7 @@ public class LocalServiceImpl implements LocalService {
 		map.put(Constant.TEACHER_LIST, list);
 		return map;
 	}
-	
+
 	/**
 	 * 查询教师byid
 	 */
@@ -2221,5 +2223,5 @@ public class LocalServiceImpl implements LocalService {
 		}
 		return tTeacher;
 	}
-	
+
 }

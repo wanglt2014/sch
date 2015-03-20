@@ -463,7 +463,7 @@ public class TeacherAction extends BaseAction {
 	 */
 	public void update() {
 		boolean flag = false;
-		String id = request.getParameter("id");
+		String id = request.getParameter("id");// 教师ID
 		String subjectid = request.getParameter("subjectid");
 		String paperid = request.getParameter("paperid");
 		String researchid = request.getParameter("researchid");
@@ -473,7 +473,23 @@ public class TeacherAction extends BaseAction {
 		TResearch tResearch = getResearch();
 		TPaper tPaper = getPaper();
 		try {
+			teacher.setId(Long.valueOf(id));
 			localServiceProxy.updateTeacher(teacher);
+			if (subjectid != null && !subjectid.isEmpty()) {
+				subject.setSubjectid(Long.valueOf(subjectid));
+				localServiceEXProxy.updateTSubject(subject);
+			}
+
+			if (paperid != null && !paperid.isEmpty()) {
+				tPaper.setPaperid(Long.valueOf(paperid));
+				localServiceEXProxy.updateTPaper(tPaper);
+			}
+
+			if (researchid != null && !researchid.isEmpty()) {
+				tResearch.setResearchid(Long.valueOf(researchid));
+				localServiceEXProxy.updateTResearch(tResearch);
+			}
+
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (NumberFormatException e) {

@@ -334,6 +334,9 @@
 			<result name="regulation_result">/article/regulation_result.jsp</result>
 			<result name="index">/admin/article_index.jsp</result>
 			<result name="trainingResults_index">/admin/trainingResults_index.jsp</result>
+			<result name="to_trainingResult_index">/article/trainingResultList.jsp</result>
+			<result name="trainingResult_detail">/article/trainingdetail.jsp</result>
+			<result name="trainingResult_result">/article/training_result.jsp</result>
 			<result type="json"></result>
 		</action>
 		

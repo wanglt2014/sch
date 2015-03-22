@@ -79,6 +79,18 @@ public class ArticleAction extends BaseAction {
 		super.commonQueryForArticle(2);
 		return "to_regulation_index";
 	}
+	
+	/**
+	 * @Title: toRegulationPage
+	 * @Description: 跳转到教务教学制度
+	 * @return String 返回类型
+	 * @throws
+	 */
+
+	public String toTrainingResultPage() {
+		super.commonQueryForArticle(2);
+		return "to_trainingResult_index";
+	}
 
 	/**
 	 * 查询教务教学通知
@@ -381,6 +393,34 @@ public class ArticleAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 人才培养成果
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryTrainingResult() {
+		if (log.isDebugEnabled()) {
+			log.debug("查询交易信息currentPage>>>>:" + currentPage);
+		}
+		try {
+			BsArticleQuery bsArticle = new BsArticleQuery();
+//			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+			bsArticle.setMenuType("result");
+			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+					Constant.PAGESIZE, currentPage);
+			if (ComonUtil.validateMapResult(map)) {
+				bsArticlelist = (List<BsArticle>) map
+						.get(Constant.ARTICLE_LIST);
+				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
+				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "trainingResult_result";
 	}
 
 	public static void main(String[] args) throws Exception {

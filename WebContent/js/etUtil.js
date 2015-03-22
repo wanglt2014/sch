@@ -32,7 +32,7 @@ $(document).ready(function(){
 		}else if (id == 'nav_link_plan') {
 			location.href = 'News_toNewsPage.shtm';
 		}else if (id == 'nav_link_result') {
-			location.href = '';
+			location.href = 'Article_toTrainingResultPage.shtm';
 		}else if (id == 'nav_link_bbs') {
 			location.href = 'http://localhost:8080/schoolbbs';
 		}else if (id == 'nav_link_downloadinfo') {

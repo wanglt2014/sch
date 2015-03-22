@@ -16,6 +16,19 @@ public class BsArticleQuery extends BsArticle {
 	 * 结束日期
 	 */
 	private Date enddatacreatenew;
+	
+	/**
+	 * 类型，判断是文章菜单还是人才培养成果菜单调用。
+	 */
+	private String menuType;
+	
+	
+	public String getMenuType() {
+		return menuType;
+	}
+	public void setMenuType(String menuType) {
+		this.menuType = menuType;
+	}
 	public Date getStartdatacreatenew() {
 		return startdatacreatenew;
 	}

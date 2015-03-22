@@ -42,7 +42,7 @@
             <tr>
                 <th field="author" width="30">作者</th>
                 <th field="createdate" width="50" >创建日期</th>
-                <th field="articletype" width="30" formatter="formatnewstype">类型</th>
+                <th field="articletype" width="50" formatter="formatnewstype">类型</th>
                 <th field="articletitle" width="100">标题</th>
                 <th field="articlesummary" width="250">概要</th>
                 <th field="updatedate" width="50" >更新日期</th>

@@ -218,7 +218,7 @@ public class ArticleAction extends BaseAction {
 			if (null != newtitle && !newtitle.equals("")) {
 				bsArticle.setArticletitle(newtitle);
 			}
-
+			bsArticle.setMenuType("article");
 			Pager pager = new Pager();
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Integer.valueOf(rows), Integer.valueOf(page));
@@ -326,6 +326,58 @@ public class ArticleAction extends BaseAction {
 			localServiceProxy.deleteArticle(Long.valueOf(id));
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * 查询人才培养成果
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public void queryTrainingResults() {
+		String startdatacreatenew = request.getParameter("startdatacreatenew");
+		String enddatacreatenew = request.getParameter("enddatacreatenew");
+		String newtype = request.getParameter("type");
+		String newauthor = request.getParameter("author");
+		String newtitle = request.getParameter("title");
+		String page = request.getParameter("page"); // 当前页数
+		String rows = request.getParameter("rows"); // 每页显示行数
+		try {
+			BsArticleQuery bsArticle = new BsArticleQuery();
+			if (null != startdatacreatenew && !startdatacreatenew.equals("")) {
+				bsArticle.setStartdatacreatenew(DateUtil
+						.strToDate(startdatacreatenew));
+			}
+			if (null != enddatacreatenew && !enddatacreatenew.equals("")) {
+				bsArticle.setEnddatacreatenew(DateUtil
+						.strToDate(enddatacreatenew));
+			}
+			if (null != newtype && !newtype.equals("")) {
+				bsArticle.setArticletype(newtype);
+			}
+			if (null != newauthor && !newauthor.equals("")) {
+				bsArticle.setAuthor(newauthor);
+			}
+			if (null != newtitle && !newtitle.equals("")) {
+				bsArticle.setArticletitle(newtitle);
+			}
+
+			bsArticle.setMenuType("result");
+			Pager pager = new Pager();
+			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+					Integer.valueOf(rows), Integer.valueOf(page));
+			if (ComonUtil.validateMapResult(map)) {
+				bsArticlelist = (List<BsArticle>) map
+						.get(Constant.ARTICLE_LIST);
+				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
+				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
+				pager.setTotal(totalCount);
+				pager.setRows(bsArticlelist);
+			}
+			super.reponseWriter(JSON.toJSONString(pager));
+		} catch (IOException e) {
+			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

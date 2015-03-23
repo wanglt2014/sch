@@ -23,14 +23,20 @@
 			<div>
 				创建起始日期: <input id="startdatacreatenew" class="easyui-datebox" style="width: 80px">
 				创建结束日期: <input id="enddatacreatenew" class="easyui-datebox" style="width: 80px">
-				文章类型: <select id="articletype" class="easyui-combobox" panelHeight="auto"
+				文章类型: <select id="articletypeQuery" class="easyui-combobox" panelHeight="auto"
 					style="width: 100px">
 					<option value="">全部</option>
 					<option value="regulation">教学规章制度</option>
 					<option value="notice">教务教学通知</option>
+					<option value="teach">教学获奖</option>
+					<option value="reform">教改立项</option>
+					<option value="construction">教材建设</option>
+					<option value="course">精品课程</option>
+					<option value="build_course">国际共建课程</option>
+					<option value="student">学生展示</option>
 				</select>
-				作者:<input type="text"  id="author">
-				标题:<input type="text"  id="articletitle">
+				作者:<input type="text"  id="authorQuery">
+				标题:<input type="text"  id="articletitleQuery">
 				 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="querynews()">搜索</a>
 			</div>
 		</div>
@@ -62,8 +68,20 @@
         <form id="newsfm" method="post" novalidate>
             <div class="fitem">
                 <label>类型:</label>
-                <input type="radio" name="articletype"  value="regulation" checked="checked" />教学规章制度
-                <input type="radio" name="articletype" value="notice"  />教务教学通知
+<!--                 <input type="radio" name="articletypeInsert"  value="regulation" checked="checked" />教学规章制度 -->
+<!--                 <input type="radio" name="articletypeInsert" value="notice"  />教务教学通知 -->
+                <select id="articletypeInsert" name="articletypeInsert" class="easyui-combobox" panelHeight="auto"
+					style="width: 100px">
+					<option value="regulation" >教学规章制度</option>
+					<option value="notice">教务教学通知</option>
+					<option value="teach" >教学获奖</option>
+					<option value="reform">教改立项</option>
+					<option value="construction">教材建设</option>
+					<option value="course">精品课程</option>
+					<option value="build_course">国际共建课程</option>
+					<option value="student">学生展示</option>
+				</select>
+                
             </div>
             <div class="fitem">
                 <label>标题</label>
@@ -86,11 +104,11 @@
             </div>
             <div class="fitem" id="uploadFileDIV">
                 <label>上传文件:</label>
-            	<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
-				<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
+            	<input id="uploader_countForArticle" name="uploader_countForArticle" value="0" style="display: none;"/>
+				<ul id="file-listForArticle" style="text-align: left;margin:0px 0px 0px 30px; ">
 				</ul>
 				<div class="btn-wraper">
-					<input type="button" value="选择文件..." id="browse" />
+					<input type="button" value="选择文件..." id="browseForArticle" />
 					<input type="button" value="清空" id="clear-btn" />
 					<p class="tip2">注意：只能上传10M以内的文件</p>
 				</div>
@@ -133,6 +151,8 @@
         		actionUrl = "Article_teachDetail";
         	}else if("regulation" == type){
         		actionUrl = "Article_regulationDetail";
+    		}else{
+    			actionUrl = "Article_trainingResultDetail";
     		}
     		var s ='<a href="'+actionUrl+'?id='+rowData.articleid+'" class="easyui-linkbutton" target="_blank"">预览</a>';
     		return s;
@@ -144,6 +164,18 @@
     			s ="教务教学通知";
     		}else if(value=="regulation"){
     			s ="教学规章制度";
+    		}else if(value=="construction"){
+    			s ="教材建设";
+    		}else if(value=="teach"){
+    			s ="教学获奖";
+    		}else if(value=="reform"){
+    			s ="教改立项";
+    		}else if(value=="course"){
+    			s ="精品课程";
+    		}else if(value=="build_course"){
+    			s ="国际共建课程";
+    		}else if(value=="student"){
+    			s ="学生展示";
     		}
     		return s;
    	    }
@@ -151,15 +183,15 @@
         function querynews(){
         	var startdatacreatenew = $('#startdatacreatenew').datebox('getValue');
         	var enddatacreatenew = $('#enddatacreatenew').datebox('getValue');
-        	var newtype =  $('#articletype').combobox('getValue');
-        	var newauthor = $('#author').val();
-        	var newtitle = $('#articletitle').val();
+        	var newtypeQuery =  $('#articletypeQuery').combobox('getValue');
+        	var newauthorQuery = $('#authorQuery').val();
+        	var newtitleQuery = $('#articletitleQuery').val();
         	$('#newdg').datagrid('load', {
         		startdatacreatenew:startdatacreatenew,
         		enddatacreatenew:enddatacreatenew,
-        		newtype:newtype,
-        		newauthor:newauthor,
-        		newtitle:newtitle
+        		newtype:newtypeQuery,
+        		newauthor:newauthorQuery,
+        		newtitle:newtitleQuery
         	});
         }
         function insertArticle(){
@@ -167,8 +199,11 @@
             $('#newsfm').form('clear');
 //             var str = result.articletype;
 //             $("[value='" + str + "']").attr("checked", true);
+			$('#articletypeInsert').combobox('select', 'regulation');
             UM.getEditor('myEditornew').setContent('', false);
             url = 'Article_save';
+            uploaderForArticle.init(); //初始化
+            uploaderForArticle.splice(0,10);
         }
         function editArticle(){
             var row = $('#newdg').datagrid('getSelected');
@@ -195,18 +230,18 @@
                 },
                 success: function(result){
                     if (result!="true"){
-                    	uploader.refresh();
+                    	uploaderForArticle.refresh();
                     	jAlert('系统错误，请联系管理员','错误提示');
                     } else {
-                    	uploader.splice(0,10); 
-                    	$('#file-list').html("");
+                    	uploaderForArticle.splice(0,10); 
+                    	$('#file-listForArticle').html("");
                         $('#newdlg').dialog('close');        // close the dialog
                         $('#newdg').datagrid('reload');    // reload the user data
                     }
                 }
             });
             if(url.indexOf("save") > 0){
-            	uploader.start();
+            	uploaderForArticle.start();
             }
             
     		}else{
@@ -232,8 +267,8 @@
         
         
       //上传控件##########################################
-    	var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
-    		browse_button : 'browse',
+    	var uploaderForArticle = new plupload.Uploader({ //实例化一个plupload上传对象
+    		browse_button : 'browseForArticle',
     		multi_selection: false,
      		url : 'File_uploadForArticle',
      		file_data_name : 'fileData',
@@ -252,21 +287,21 @@
       		  prevent_duplicates : true //不允许队列中存在重复文件
             }
     	});
-    	uploader.init(); //初始化
+//     	uploaderForArticle.init(); //初始化
     	
     	//绑定文件上传删除事件
-    	uploader.bind('FilesRemoved',function(uploader,file){
+    	uploaderForArticle.bind('FilesRemoved',function(uploader,file){
 //     		alert("删除");
-    		$('#file-list').html("");
+    		$('#file-listForArticle').html("");
     	});
     	
     	//绑定文件添加进队列事件
-    	uploader.bind('FilesAdded',function(uploader,files){
+    	uploaderForArticle.bind('FilesAdded',function(uploader,files){
     		$.each(uploader.files, function (i, file) { 
     			if (uploader.files.length <= 1) { 
     		            return; 
     		        } 
-    		        uploader.removeFile(file); 
+    		        uploaderForArticle.removeFile(file); 
     		    });
     		for(var i = 0, len = files.length; i<len; i++){
     			var file_name = files[i].name; //文件名
@@ -276,7 +311,7 @@
 //     			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
     				html += '<input type="hidden" name="uploader_tmpname" value="' + file_id + '" />';
     				html += '<input type="hidden" name="uploader_name" value="' + file_name + '" /></li>';
-    			$(html).appendTo('#file-list');
+    			$(html).appendTo('#file-listForArticle');
     		}
     	});
     </script>

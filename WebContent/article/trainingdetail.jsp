@@ -7,12 +7,12 @@
 <%
 String request_path = request.getContextPath();
 	// 当前导航栏位置
-	request.setAttribute("cur_nav", 1);
+	request.setAttribute("cur_nav", 6);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>教务教学通知_${bsArticledetail.articletitle}</title>
+<title>人才培养成果_${bsArticledetail.articletitle}</title>
 <meta http-equiv="Content-Type" name="description"
 	content="${bsArticledetail.articlesummary}" />
 <link rel="shortcut icon" href="favicon.ico" />

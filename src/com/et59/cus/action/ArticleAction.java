@@ -79,7 +79,7 @@ public class ArticleAction extends BaseAction {
 		super.commonQueryForArticle(2);
 		return "to_regulation_index";
 	}
-	
+
 	/**
 	 * @Title: toRegulationPage
 	 * @Description: 跳转到教务教学制度
@@ -200,15 +200,15 @@ public class ArticleAction extends BaseAction {
 	}
 
 	/**
-	 * 查询文章
+	 * 查询文章-后台
 	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public void query() {
 		String startdatacreatenew = request.getParameter("startdatacreatenew");
 		String enddatacreatenew = request.getParameter("enddatacreatenew");
-		String newtype = request.getParameter("type");
-		String newauthor = request.getParameter("author");
-		String newtitle = request.getParameter("title");
+		String newtype = request.getParameter("newtype");
+		String newauthor = request.getParameter("newauthor");
+		String newtitle = request.getParameter("newtitle");
 		String page = request.getParameter("page"); // 当前页数
 		String rows = request.getParameter("rows"); // 每页显示行数
 		try {
@@ -230,7 +230,7 @@ public class ArticleAction extends BaseAction {
 			if (null != newtitle && !newtitle.equals("")) {
 				bsArticle.setArticletitle(newtitle);
 			}
-			bsArticle.setMenuType("article");
+			// bsArticle.setMenuType("article");
 			Pager pager = new Pager();
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Integer.valueOf(rows), Integer.valueOf(page));
@@ -314,7 +314,7 @@ public class ArticleAction extends BaseAction {
 		String title = request.getParameter("articletitle");
 		String createdate = request.getParameter("createdate");
 		String author = request.getParameter("author");
-		String type = request.getParameter("articletype");
+		String type = request.getParameter("articletypeInsert");
 		String summary = request.getParameter("articlesummary");
 		String content = request.getParameter("content");
 		BsArticle bsArticle = new BsArticle();
@@ -342,7 +342,7 @@ public class ArticleAction extends BaseAction {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 查询人才培养成果
 	 */
@@ -375,7 +375,7 @@ public class ArticleAction extends BaseAction {
 				bsArticle.setArticletitle(newtitle);
 			}
 
-			bsArticle.setMenuType("result");
+			// bsArticle.setMenuType("result");
 			Pager pager = new Pager();
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Integer.valueOf(rows), Integer.valueOf(page));
@@ -394,7 +394,7 @@ public class ArticleAction extends BaseAction {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 人才培养成果
 	 * 
@@ -407,7 +407,7 @@ public class ArticleAction extends BaseAction {
 		}
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-//			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+			// bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			bsArticle.setMenuType("result");
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Constant.PAGESIZE, currentPage);
@@ -421,6 +421,113 @@ public class ArticleAction extends BaseAction {
 			e.printStackTrace();
 		}
 		return "trainingResult_result";
+	}
+
+	/**
+	 * @Title: trainingResultDetail
+	 * @Description: 跳转到人才培养成果详细页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String trainingResultDetail() {
+		super.commonquery();
+		String id = request.getParameter("id");
+		try {
+			bsArticledetail = localServiceProxy.queryArticleById(Long
+					.valueOf(id));
+
+			if (bsArticledetail.getDownloadid() != null) {
+				TDownload download = localServiceEXProxy
+						.queryDownloadById(bsArticledetail.getDownloadid());
+				bsArticledetail.setDownload(download);
+			}
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "trainingResult_detail";
+	}
+
+	/**
+	 * 保存人才培养成果
+	 */
+	public void saveTrainingResult() {
+		boolean flag = false;
+		BsArticle bsArticle = getBsArticleForResult();
+		try {
+			String savePath = FileAction.getSavePathForArticle();
+			String name = request.getParameter("uploader_nameForResult");
+			if (name != null) {
+				String extName = name.substring(name.lastIndexOf("."));
+				String tampFileName = request
+						.getParameter("uploader_tmpnameForResult");
+				BsUser user = getUser();
+				String filepath = savePath + "\\" + tampFileName + extName;
+				String fileShowPath = Constant.PATH_ARTICLE + "\\"
+						+ tampFileName + extName;
+				TDownload tDownload = new TDownload();
+				tDownload.setAuthor(user.getUsername());
+				tDownload.setCreatedate(DateUtil.getNowDate());
+				tDownload.setFilename(name);
+				tDownload.setFilepath(filepath);
+				tDownload.setFileshowpath(fileShowPath);
+				tDownload.setInfotype(bsArticle.getArticletype());
+				tDownload.setFileisvalid(Constant.ISVALID_1);
+				Long downloadId = localServiceEXProxy
+						.saveDownloadInfo(tDownload);
+				System.out.println(downloadId + "******downloadId" + "路径："
+						+ filepath);
+				bsArticle.setDownloadid(downloadId);
+			}
+			localServiceProxy.saveArticle(bsArticle);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 编辑人才培养成果
+	 */
+	public void updateTrainingResult() {
+		boolean flag = false;
+		String id = request.getParameter("id");
+		BsArticle bsArticle = getBsArticleForResult();
+		bsArticle.setArticleid(Long.valueOf(id));
+		try {
+			localServiceProxy.updateArticle(bsArticle);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 公共方法
+	 * 
+	 * @return
+	 */
+	public BsArticle getBsArticleForResult() {
+		String title = request.getParameter("articletitleForResult");
+		String createdate = request.getParameter("createdateForResult");
+		String author = request.getParameter("authorForResult");
+		String type = request.getParameter("articletypeInsert");
+		String summary = request.getParameter("articlesummaryForResult");
+		String content = request.getParameter("contentForResult");
+		BsArticle bsArticle = new BsArticle();
+		bsArticle.setArticletitle(title);
+		bsArticle.setArticlesummary(summary);
+		bsArticle.setArticletype(type);
+		bsArticle.setContent(content);
+		bsArticle.setUpdatedate(DateUtil.getNowDate());
+		bsArticle.setCreatedate(createdate);
+		bsArticle.setAuthor(author);
+		return bsArticle;
 	}
 
 	public static void main(String[] args) throws Exception {

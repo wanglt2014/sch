@@ -24,7 +24,7 @@
 <script language="JavaScript" type="text/javascript" src="${js_path}/etUtil.js"></script>
 <!-- header -->
 <div id="header">
-	<div id="logo">
+	<div id="logo" style="height: 35px;">
 <%-- 		<a href="${request_path}/index.shtm"> <img src="${image_path}/logo.gif" --%>
 <!-- 			alt="logo" />  </a> -->
 	</div>

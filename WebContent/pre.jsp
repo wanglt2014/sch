@@ -29,7 +29,7 @@
 <script language="JavaScript" type="text/javascript" src="${js_path}/etUtil.js"></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.alerts.js"></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.ui.draggable.js"></script>
-<script language="JavaScript" type="text/javascript" src="${js_path}/top.js" charset="UTF-8"></script>
+<%-- <script language="JavaScript" type="text/javascript" src="${js_path}/top.js" charset="UTF-8"></script> --%>
 <script language="JavaScript" type="text/javascript" src="${js_path}/footer.js" charset="UTF-8"></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/Calculation.js" charset="UTF-8"></script>
 <script>

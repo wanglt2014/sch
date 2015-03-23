@@ -17,7 +17,7 @@
 				<b><s:property value="#teachInfo.articletitle" /> </b> 作者:
 				<s:property value="#teachInfo.author" />
 				日期：
-				<s:date name="#teachInfo.createdate" format="yyyy-MM-dd HH:mm" />
+				<s:property value="#teachInfo.createdate" />
 			</div>
 			<div class="artic_content">
 				<s:property value="#teachInfo.articlesummary" />

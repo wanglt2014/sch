@@ -52,10 +52,10 @@
 		 	<div class="fitem" id="uploadFileDIV">
                 <label>上传文件:</label>
             	<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
-				<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
+				<ul id="file-listForDownload" style="text-align: left;margin:0px 0px 0px 30px; ">
 				</ul>
 				<div class="btn-wraper">
-					<input type="button" value="选择文件..." id="browse" />
+					<input type="button" value="选择文件..." id="browseForDownload" />
 					<input type="button" value="清空" id="clear-btn" />
 					<p class="tip2">注意：只能上传10M以内的文件</p>
 				</div>
@@ -130,6 +130,8 @@
             $('#uploadFileDIV').show();
 //             UM.getEditor('myEditornew').setContent('', false);
             url = 'Download_save';
+            uploaderForDownload.init(); //初始化
+            uploaderForDownload.splice(0,10);
         }
         function editDownload(){
             var row = $('#downloaddg').datagrid('getSelected');
@@ -153,18 +155,18 @@
                 },
                 success: function(result){
                     if (result!="true"){
-                    	uploader.refresh();
+                    	uploaderForDownload.refresh();
                     	jAlert('系统错误，请联系管理员','错误提示');
                     } else {
-                    	uploader.splice(0,10); 
-                    	$('#file-list').html("");
+                    	uploaderForDownload.splice(0,10); 
+                    	$('#file-listForDownload').html("");
                         $('#downloaddlg').dialog('close');        // close the dialog
                         $('#downloaddg').datagrid('reload');    // reload the user data
                     }
                 }
             });
             if(url.indexOf("save") > 0){
-            	uploader.start();
+            	uploaderForDownload.start();
             }
     		}else{
     			alert("信息填写不完整");
@@ -189,8 +191,8 @@
         
         
       //上传控件##########################################
-    	var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
-    		browse_button : 'browse',
+    	var uploaderForDownload = new plupload.Uploader({ //实例化一个plupload上传对象
+    		browse_button : 'browseForDownload',
     		multi_selection: false,
      		url : 'File_uploadForOther',
      		file_data_name : 'fileData',
@@ -209,21 +211,21 @@
       		  prevent_duplicates : true //不允许队列中存在重复文件
             }
     	});
-    	uploader.init(); //初始化
+//     	uploaderForDownload.init(); //初始化
     	
     	//绑定文件上传删除事件
-    	uploader.bind('FilesRemoved',function(uploader,file){
+    	uploaderForDownload.bind('FilesRemoved',function(uploader,file){
 //     		alert("删除");
-    		$('#file-list').html("");
+    		$('#file-listForDownload').html("");
     	});
     	
     	//绑定文件添加进队列事件
-    	uploader.bind('FilesAdded',function(uploader,files){
+    	uploaderForDownload.bind('FilesAdded',function(uploader,files){
     		$.each(uploader.files, function (i, file) { 
     			if (uploader.files.length <= 1) { 
     		            return; 
     		        } 
-    		        uploader.removeFile(file); 
+    		        uploaderForDownload.removeFile(file); 
     		    });
     		for(var i = 0, len = files.length; i<len; i++){
     			var file_name = files[i].name; //文件名
@@ -233,7 +235,7 @@
 //     			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
     				html += '<input type="hidden" name="uploader_tmpname" value="' + file_id + '" />';
     				html += '<input type="hidden" name="uploader_name" value="' + file_name + '" /></li>';
-    			$(html).appendTo('#file-list');
+    			$(html).appendTo('#file-listForDownload');
     			$('#filename').val(file_name);
     		}
     	});

@@ -55,9 +55,9 @@
         </thead>
     </table>
     <div id="resulttoolbar">
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="insertArticle()">新增</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editArticle()">编辑</a>
-        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyArticle()">删除</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="insertTraining()">新增</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editTraining()">编辑</a>
+        <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyTraining()">删除</a>
     </div>
     
     <div id="resultdlg" class="easyui-dialog" style="width:860px;height:auto;padding:10px 20px"
@@ -66,10 +66,9 @@
         <form id="resultfm" method="post" novalidate>
             <div class="fitem">
                 <label>类型:</label>
-                <select id="articletype" class="easyui-combobox" panelHeight="auto"
+                <select id="articletypeInsert" name="articletypeInsert" class="easyui-combobox" panelHeight="auto"
 					style="width: 100px">
-					<option value="">全部</option>
-					<option value="teach">教学获奖</option>
+					<option value="teach" >教学获奖</option>
 					<option value="reform">教改立项</option>
 					<option value="construction">教材建设</option>
 					<option value="course">精品课程</option>
@@ -79,31 +78,31 @@
             </div>
             <div class="fitem">
                 <label>标题</label>
-                <input id="articletitle" name="articletitle" class="easyui-validatebox" required="true" size="50px;">
+                <input id="articletitleForResult" name="articletitleForResult" class="easyui-validatebox" required="true" size="50px;">
             </div>
             <div class="fitem">
                 <label>作者:</label>
-                <input name="author" class="easyui-validatebox" required="true"/>
+                <input name="authorForResult" class="easyui-validatebox" required="true"/>
             </div>
             <div class="fitem">
                 <label>概要:</label>
-                <textarea name="articlesummary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
+                <textarea name="articlesummaryForResult"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
             </div>
             <div class="fitem">
                 <label>时间:</label>
-                <input name="createdate" type="text" class="easyui-datebox" id="createdate" required="true" />
+                <input name="createdateForResult" type="text" class="easyui-datebox" id="createdateForResult" required="true" />
             </div>
             <div  style="display: none;">
-           		 <textarea name="content" id="content" class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
+           		 <textarea name="contentForResult" id="contentForResult" class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
             </div>
-            <div class="fitem" id="uploadFileDIV">
+            <div class="fitem" id="uploadFileDIVForResult">
                 <label>上传文件:</label>
-            	<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
-				<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
+            	<input id="uploader_countForResult" name="uploader_countForResult" value="0" style="display: none;"/>
+				<ul id="file-listForResult" style="text-align: left;margin:0px 0px 0px 30px; ">
 				</ul>
 				<div class="btn-wraper">
-					<input type="button" value="选择文件..." id="browse" />
-					<input type="button" value="清空" id="clear-btn" />
+					<input type="button" value="选择文件..." id="browseForResult" />
+					<input type="button" value="清空" id="clear-btnForResult" />
 					<p class="tip2">注意：只能上传10M以内的文件</p>
 				</div>
 			</div>
@@ -117,7 +116,7 @@
                 <label>文章内容:</label>
                 <br/>
                 <!--style给定宽度可以影响编辑器的最终宽度-->
-				<script type="text/plain" id="myEditorresult" name="myEditorresult" style="width:750px;height:240px;">
+				<script type="text/plain" id="myEditorresultForResult" name="myEditorresultForResult" style="width:750px;height:240px;">
     				<p>这里我可以写一些输入提示</p>
 				</script>
             </div>
@@ -137,26 +136,36 @@
             allBox.removeAttr("checked");
             $(this).attr("checked", "checked");
         });
-        var um = UM.getEditor('myEditorresult');
+        var um = UM.getEditor('myEditorresultForResult');
         function formatpreview(value,rowData,rowIndex) {
         	var type =rowData.articletype;
-        	var actionUrl = "";
-        	if("notice" == type){
-        		actionUrl = "Article_teachDetail";
-        	}else if("regulation" == type){
-        		actionUrl = "Article_regulationDetail";
-    		}
+        	var actionUrl = "Article_trainingResultDetail";
+//         	if("notice" == type){
+//         		actionUrl = "Article_teachDetail";
+//         	}else if("regulation" == type){
+//         		actionUrl = "Article_regulationDetail";
+//     		}
     		var s ='<a href="'+actionUrl+'?id='+rowData.articleid+'" class="easyui-linkbutton" target="_blank"">预览</a>';
     		return s;
    	    }
         
         function formatnewstype(value,rowData,rowIndex) {
         	var s="";
-    		if(value=="notice"){
-    			s ="教务教学通知";
-    		}else if(value=="regulation"){
-    			s ="教学规章制度";
+    		if(value=="construction"){
+    			s ="教材建设";
+    		}else if(value=="teach"){
+    			s ="教学获奖";
+    		}else if(value=="reform"){
+    			s ="教改立项";
+    		}else if(value=="course"){
+    			s ="精品课程";
+    		}else if(value=="build_course"){
+    			s ="国际共建课程";
+    		}else if(value=="student"){
+    			s ="学生展示";
     		}
+    		
+    		
     		return s;
    	    }
         
@@ -174,15 +183,17 @@
         		newtitle:newtitle
         	});
         }
-        function insertArticle(){
+        function insertTraining(){
             $('#resultdlg').dialog('open').dialog('setTitle','发表文章');
             $('#resultfm').form('clear');
 //             var str = result.articletype;
-//             $("[value='" + str + "']").attr("checked", true);
-            UM.getEditor('myEditorresult').setContent('', false);
-            url = 'Article_save';
+//              $("[value='teach']").attr("checked", true);
+			$('#articletypeInsert').combobox('select', 'teach');
+// 			alert(JSON.stringify(data[0]));
+            UM.getEditor('myEditorresultForResult').setContent('', false);
+            url = 'Article_saveTrainingResult';
         }
-        function editArticle(){
+        function editTraining(){
             var row = $('#resultdg').datagrid('getSelected');
             if (row){
                 $('#resultdlg').dialog('open').dialog('setTitle','编辑文章');
@@ -190,14 +201,14 @@
                 $('#resultfm').form('load',row);
 //                 $('#createdate').datebox('setValue', '2015-3-15');
 // 				 $('#filePath').text(row.);
-				$('#uploadFileDIV').hide();
+				$('#uploadFileDIVForResult').hide();
 
-                UM.getEditor('myEditorresult').setContent(row.content, false);
-                url = 'Article_update?id='+row.articleid;
+                UM.getEditor('myEditorresultForResult').setContent(row.content, false);
+                url = 'Article_updateTrainingResult?id='+row.articleid;
             }
         }
         function saveresult(){
-        	$("#content").val(UM.getEditor('myEditorresult').getContent());
+        	$("#contentForResult").val(UM.getEditor('myEditorresultForResult').getContent());
         	var valid = $('#resultfm').form('validate');
     		if(valid==true){
             $('#resultfm').form('submit',{
@@ -207,25 +218,25 @@
                 },
                 success: function(result){
                     if (result!="true"){
-                    	uploader.refresh();
+                    	uploaderForResult.refresh();
                     	jAlert('系统错误，请联系管理员','错误提示');
                     } else {
-                    	uploader.splice(0,10); 
-                    	$('#file-list').html("");
+                    	uploaderForResult.splice(0,10); 
+                    	$('#file-listForResult').html("");
                         $('#resultdlg').dialog('close');        // close the dialog
                         $('#resultdg').datagrid('reload');    // reload the user data
                     }
                 }
             });
             if(url.indexOf("save") > 0){
-            	uploader.start();
+            	uploaderForResult.start();
             }
             
     		}else{
     			alert("信息填写不完整");
     		}
         }
-        function destroyArticle(){
+        function destroyTraining(){
             var row = $('#resultdg').datagrid('getSelected');
             if (row){
                 $.messager.confirm('确认','是否要删除?',function(r){
@@ -244,8 +255,8 @@
         
         
       //上传控件##########################################
-    	var uploader = new plupload.Uploader({ //实例化一个plupload上传对象
-    		browse_button : 'browse',
+    	var uploaderForResult = new plupload.Uploader({ //实例化一个plupload上传对象
+    		browse_button : 'browseForResult',
     		multi_selection: false,
      		url : 'File_uploadForArticle',
      		file_data_name : 'fileData',
@@ -264,21 +275,21 @@
       		  prevent_duplicates : true //不允许队列中存在重复文件
             }
     	});
-    	uploader.init(); //初始化
+    	uploaderForResult.init(); //初始化
     	
     	//绑定文件上传删除事件
-    	uploader.bind('FilesRemoved',function(uploader,file){
+    	uploaderForResult.bind('FilesRemoved',function(uploader,file){
 //     		alert("删除");
-    		$('#file-list').html("");
+    		$('#file-listForResult').html("");
     	});
     	
     	//绑定文件添加进队列事件
-    	uploader.bind('FilesAdded',function(uploader,files){
+    	uploaderForResult.bind('FilesAdded',function(uploader,files){
     		$.each(uploader.files, function (i, file) { 
     			if (uploader.files.length <= 1) { 
     		            return; 
     		        } 
-    		        uploader.removeFile(file); 
+    		        uploaderForResult.removeFile(file); 
     		    });
     		for(var i = 0, len = files.length; i<len; i++){
     			var file_name = files[i].name; //文件名
@@ -286,9 +297,9 @@
     			//构造html来更新UI
     			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
 //     			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
-    				html += '<input type="hidden" name="uploader_tmpname" value="' + file_id + '" />';
-    				html += '<input type="hidden" name="uploader_name" value="' + file_name + '" /></li>';
-    			$(html).appendTo('#file-list');
+    				html += '<input type="hidden" name="uploader_tmpnameForResult" value="' + file_id + '" />';
+    				html += '<input type="hidden" name="uploader_nameForResult" value="' + file_name + '" /></li>';
+    			$(html).appendTo('#file-listForResult');
     		}
     	});
     </script>

@@ -377,6 +377,8 @@
 		});
 	}
 	function newTeacher() {
+		uploaderForPic.init();
+		deleteAllUploader();
 		$('#teacherdlg').dialog('open').dialog('setTitle', '新增教师');
 		$('#teacherfm').form('clear');
 		url = 'Teacher_save';
@@ -392,7 +394,9 @@
 		 $("#job ").combobox('select',data[0].dictionarycode);
 		 var data = $('#subjecttype').combobox('getData');
 		 $("#subjecttype ").combobox('select',data[0].dictionarycode);
-		 
+// 		 $('#file-list').html("");
+// 		 uploaderForPic.destroy();
+		
 	}
 	function editTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
@@ -453,7 +457,8 @@
     				if (result != "true") {
     					jAlert('系统错误，请联系管理员', '错误提示');
     				} else {
-    					destroyAllUploader();
+    					deleteAllUploader();
+//     					destroyAllUploader();
     					$('#teacherdlg').dialog('close'); // close the dialog
     					$('#teacherdg').datagrid('reload'); // reload the user data
     				}
@@ -508,13 +513,17 @@
 	}
 	
 	//销毁所有上传控件
-	function destroyAllUploader(){
+	function deleteAllUploader(){
 		uploaderForPic.splice(0,10);
 		uploaderForOutline.splice(0,10);
 		uploaderForSchedule.splice(0,10);
 		uploaderForSubject.splice(0,10);
 		uploaderForProject.splice(0,10);
 		uploaderForPaper.splice(0,10);
+	}
+	
+	//销毁所有上传控件
+	function destroyAllUploader(){
 		uploaderForPic.destroy();
 		uploaderForOutline.destroy();
 		uploaderForSchedule.destroy();

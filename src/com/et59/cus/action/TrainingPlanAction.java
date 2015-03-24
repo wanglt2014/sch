@@ -37,7 +37,7 @@ import com.et59.cus.tools.FileAction;
  * 师资队伍
  *
  */
-public class TeacherAction extends BaseAction {
+public class TrainingPlanAction extends BaseAction {
 	/**
 	 * 序列化
 	 */

@@ -147,8 +147,13 @@
 		scope="prototype" autowire="byName">
 	</bean>
 	
-	<!-- 师资队伍 -->
+	<!-- 文件下载 -->
 	<bean name="FileAction" class="com.et59.cus.tools.FileAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	
+	<!-- 人才培养方案 -->
+	<bean name="TrainingPlanAction" class="com.et59.cus.action.TrainingPlanAction"
 		scope="prototype" autowire="byName">
 	</bean>
 	
@@ -353,6 +358,18 @@
 	
 	<!-- 教师课程表 -->
 	<bean name="tTeacherSubjectDAO" class="com.et59.cus.domain.dao.TTeacherSubjectDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 专业表（人才培养方案） -->
+	<bean name="tDepartmentDAOImpl" class="com.et59.cus.domain.dao.TDepartmentDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 培养方案表（人才培养方案） -->
+	<bean name="tTrainingplanDAOImpl" class="com.et59.cus.domain.dao.TTrainingplanDAOImpl"
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>

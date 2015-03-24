@@ -380,6 +380,18 @@
 			method="{1}">
 			<result name="success">/admin/teacher/result.jsp</result>
 		</action>
+		
+		<!-- 人才培养方案 -->
+		<action name="TrainingPlan_*" class="TrainingPlanAction"
+			method="{1}">
+			<interceptor-ref name="loginInterceptor"></interceptor-ref>
+			<interceptor-ref name="timerInterceptor" />
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="index">/admin/trainingPlan_index.jsp</result>
+			<result name="to_teacher_index">/teacher/teacherList.jsp</result>
+			<result name="teacher_detail">/teacher/teacherdetail.jsp</result>
+			<result name="teacher_result">/teacher/teacher_result.jsp</result>
+		</action>
 	</package>
 
 </struts>    

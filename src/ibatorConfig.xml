@@ -25,6 +25,6 @@
 <!-- <table schema="schoolweb" tableName="t_teacher_subject" ></table> -->
 <!-- <table schema="schoolweb" tableName="t_subject" ></table> -->
 <!-- <table schema="schoolweb" tableName="t_trainingPlan" ></table> -->
-<!-- <table schema="schoolweb" tableName="t_department" ></table> -->
+<table schema="schoolweb" tableName="t_department" ></table>
   </ibatorContext>
 </ibatorConfiguration>

@@ -3,6 +3,8 @@ package com.et59.cus.service;
 import java.util.List;
 import java.util.Map;
 
+import com.et59.cus.domain.entity.TDepartment;
+import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TResearch;
@@ -14,6 +16,8 @@ import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
+import com.et59.cus.domain.entity.TTrainingplanExample;
+import com.et59.cus.domain.entity.ex.Pager;
 
 /**
  * <p>
@@ -163,5 +167,45 @@ public interface LocalServiceEX {
 	 */
 	@SuppressWarnings("rawtypes")
 	public void updateTPaper(TPaper tPaper) throws Exception;
+
+	/**
+	 * 专业查询--（人才培养方案）
+	 */
+	@SuppressWarnings("rawtypes")
+	public Pager queryTDepartmentBypage(TDepartment tDepartment, int pagesize,
+			int currentpage) throws Exception;
+
+	/**
+	 * 保存专业表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void saveTDepartmentWithBLOBs(
+			TDepartmentWithBLOBs tDepartmentWithBLOBs) throws Exception;
+
+	/**
+	 * 编辑专业表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void updateTDepartmentWithBLOBs(
+			TDepartmentWithBLOBs tDepartmentWithBLOBs) throws Exception;
+
+	/**
+	 * 删除专业表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void deleteTDepartment(long id) throws Exception;
+
+	/**
+	 * 删除方案表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void deleteTTrainingplan(TTrainingplanExample example)
+			throws Exception;
+
+	/**
+	 * 查询专业表
+	 */
+	@SuppressWarnings("rawtypes")
+	public TDepartmentWithBLOBs queryTDepartment(long id) throws Exception;
 
 }

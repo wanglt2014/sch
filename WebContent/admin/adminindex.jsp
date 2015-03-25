@@ -40,6 +40,13 @@
 <script type="text/javascript" src="${js_path}/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${js_path}/jquery.alerts.js"></script>
 <link type="text/css" rel="stylesheet" href="${request_path}/umeditor/themes/default/css/umeditor.css" >
+<script language="JavaScript"> 
+function getMyName(){ 
+   var image_accessurl_upload="<%=session.getAttribute("image_accessurl_upload")%>"; 
+   alert(image_accessurl_upload); 
+} 
+</script> 
+
 <script type="text/javascript" charset="utf-8" src="${request_path}/umeditor/umeditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="${request_path}/umeditor/umeditor.min.js"></script>
 <script type="text/javascript" src="${request_path}/umeditor/lang/zh-cn/zh-cn.js"></script>

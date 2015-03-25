@@ -77,12 +77,12 @@ $(function(){
 				<div id="service_div">
 					<div class="service_title">教学教务通知</div>
 					<div class="split_1px"></div>
-					<div >
+					<div style="margin-left: 30px;">
 						<table  width="730px" >
-						<ul class="news_content">
+						<ul class="news_main_content">
 							<s:iterator var="notify" value="notifylist" status="st">
 								<li><a target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm"><s:property
-											value="#notify.articletitle" /><img src="${image_path}/hot.gif" /></a>
+											value="#notify.articletitle" /><img style="margin-left: 50px;"  src="${image_path}/hot.gif" /></a>
 								</li>
 							</s:iterator>
 						</ul>
@@ -112,7 +112,7 @@ $(function(){
 				<div class="normal_content_top">
 				<ul class="news_content">
 					<s:iterator var="download" value="downloadlist" status="st">
-						<li><a target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm"/><s:property value="#download.filename" /><img src="${image_path}/hot1.gif" /> </a>
+						<li><a target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm"/><s:property value="#download.filename" /><img style="margin-left: 20px;" src="${image_path}/hot1.gif" /> </a>
 						</li>
 					</s:iterator>
 				</ul>
@@ -129,7 +129,7 @@ $(function(){
 				<div class="normal_content_bottom">
 					<ul class="news_content">
 					<s:iterator var="regulation" value="regulationList" status="st">
-						<li><a target="_blank" href="Article_regulationDetail_${regulation.articleid}.shtm"/><s:property value="#regulation.articletitle" /><img src="${image_path}/hot1.gif" /> </a>
+						<li><a target="_blank" href="Article_regulationDetail_${regulation.articleid}.shtm"/><s:property value="#regulation.articletitle" /><img style="margin-left: 20px;" src="${image_path}/hot1.gif" /> </a>
 						</li>
 					</s:iterator>
 				</ul>

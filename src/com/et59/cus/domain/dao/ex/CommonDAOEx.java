@@ -1,6 +1,5 @@
 package com.et59.cus.domain.dao.ex;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.et59.cus.domain.entity.BsAddress;
@@ -38,6 +37,8 @@ import com.et59.cus.domain.entity.OpenLog;
 import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
+import com.et59.cus.domain.entity.TDepartmentExample;
+import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
@@ -124,18 +125,26 @@ public interface CommonDAOEx {
 	/**
 	 * 分页查询Menu列表
 	 */
-	public List<BsResource> selectBsMenuForPage(BsMenuExample example,int startrecord,
-			int endrecord) throws Exception;
-	
+	public List<BsResource> selectBsMenuForPage(BsMenuExample example,
+			int startrecord, int endrecord) throws Exception;
+
 	/**
 	 * 分页查询数据字典
 	 */
-	public List<TDictionary> selectDictionaryForPage(TDictionaryExample example,int startrecord, int endrecord)
+	public List<TDictionary> selectDictionaryForPage(
+			TDictionaryExample example, int startrecord, int endrecord)
 			throws Exception;
-	
+
 	/**
 	 * 分页查询师资队伍
 	 */
-	public List<TTeacher> selectTeacherForPage(TTeacherExample example,int startrecord, int endrecord)
+	public List<TTeacher> selectTeacherForPage(TTeacherExample example,
+			int startrecord, int endrecord) throws Exception;
+
+	/**
+	 * 分页查询专业
+	 */
+	public List<TDepartmentWithBLOBs> selectTDepartmentForPage(
+			TDepartmentExample example, int startrecord, int endrecord)
 			throws Exception;
 }

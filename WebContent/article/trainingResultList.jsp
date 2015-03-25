@@ -72,19 +72,19 @@
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">
 				<div id="news_left_content">
-					<c:if test="${!empty(teachList)}">
+					<c:if test="${!empty(notifylist)}">
 						<div id="right_content_top">
 							<ul>
 								<li class="normal_title_left"></li>
 								<li class="normal_title_right"></li>
 								<li class="normal_title_content">
-									教学动态&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									人才培养成果&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</li>
 							</ul>
 							<div class="normal_content_top">
 								<ul class="news_content">
-									<s:iterator var="teach" value="teachList" status="st">
-										<li><a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm"><s:property
+									<s:iterator var="teach" value="notifylist" status="st">
+										<li><a target="_blank" href="Article_trainingResultDetail_${teach.articleid}.shtm"><s:property
 													value="#teach.articletitle" /> </a>
 										</li>
 									</s:iterator>

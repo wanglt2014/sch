@@ -9,7 +9,7 @@
 		if(cpage == 1){
 			jAlert('已经是第一页啦.','提示');
 		}else if(cpage>0 && tpc >0){
-			newsSearch(1);
+			search(1);
 		}else{
 			return -1;
 		}
@@ -20,7 +20,7 @@
 		if(cpage == 1){
 			jAlert('已经是第一页啦.','提示');
 		}else if(cpage>=2 && tpc>0){
-			newsSearch((cpage-1));
+			search((cpage-1));
 		}else{
 			return -1;
 		}
@@ -29,10 +29,10 @@
 		var cpage = parseInt(curPage);
 		var tpc = parseInt(totalPageCount);
 		if(cpage<tpc && tpc>0){
-			newsSearch((cpage+1));
+			search((cpage+1));
 		}else if(cpage == tpc){
 			jAlert('已经是最后一页啦.','提示');
-			//newsSearch(cpage);
+			//search(cpage);
 		}else{
 			return -1;
 		}
@@ -41,7 +41,7 @@
 		var cpage = parseInt(curPage);
 		var tpc = parseInt(totalPageCount);
 		if(cpage<tpc && tpc>0){
-			newsSearch(tpc);
+			search(tpc);
 		}else if(cpage=tpc){
 			jAlert('已经是最后一页啦.','提示');				
 		}else{

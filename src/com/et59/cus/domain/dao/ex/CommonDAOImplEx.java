@@ -1,6 +1,5 @@
 package com.et59.cus.domain.dao.ex;
 
-import java.util.HashMap;
 import java.util.List;
 
 import com.et59.cus.domain.entity.BsAddress;
@@ -38,6 +37,8 @@ import com.et59.cus.domain.entity.OpenLog;
 import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
+import com.et59.cus.domain.entity.TDepartmentExample;
+import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
@@ -320,46 +321,62 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<BsResource> selectBsMenuForPage(BsMenuExample example,int startrecord,
-			int endrecord) throws Exception {
-//		String isAdmin = (String) map.get("isAdmin");
-//		String sql = null;
+	public List<BsResource> selectBsMenuForPage(BsMenuExample example,
+			int startrecord, int endrecord) throws Exception {
+		// String isAdmin = (String) map.get("isAdmin");
+		// String sql = null;
 		List<BsResource> list = null;
-//		if ("yes".equals(isAdmin)) {
-//			list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
-//					"bs_menu.selectMenuByUserId", map, startrecord, endrecord);
-//		} else {
-			list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
-					"bs_menu.abatorgenerated_selectByExample",
-					example, startrecord, endrecord);
-//		}
+		// if ("yes".equals(isAdmin)) {
+		// list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
+		// "bs_menu.selectMenuByUserId", map, startrecord, endrecord);
+		// } else {
+		list = (List<BsResource>) getSqlMapClientTemplate().queryForList(
+				"bs_menu.abatorgenerated_selectByExample", example,
+				startrecord, endrecord);
+		// }
 
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询数据字典
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TDictionary> selectDictionaryForPage(TDictionaryExample example,int startrecord, int endrecord)
+	public List<TDictionary> selectDictionaryForPage(
+			TDictionaryExample example, int startrecord, int endrecord)
 			throws Exception {
 		List<TDictionary> list = (List<TDictionary>) getSqlMapClientTemplate()
-				.queryForList(
-						"t_dictionary.ibatorgenerated_selectByExample",example,startrecord, endrecord);
+				.queryForList("t_dictionary.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询师资队伍
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TTeacher> selectTeacherForPage(TTeacherExample example,int startrecord, int endrecord)
-			throws Exception {
+	public List<TTeacher> selectTeacherForPage(TTeacherExample example,
+			int startrecord, int endrecord) throws Exception {
 		List<TTeacher> list = (List<TTeacher>) getSqlMapClientTemplate()
+				.queryForList("t_teacher.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+
+	/**
+	 * 分页查询专业
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TDepartmentWithBLOBs> selectTDepartmentForPage(
+			TDepartmentExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TDepartmentWithBLOBs> list = (List<TDepartmentWithBLOBs>) getSqlMapClientTemplate()
 				.queryForList(
-						"t_teacher.ibatorgenerated_selectByExample",example,startrecord, endrecord);
+						"t_department.ibatorgenerated_selectByExampleWithBLOBs",
+						example, startrecord, endrecord);
 		return list;
 	}
 }

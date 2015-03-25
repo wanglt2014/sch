@@ -1809,7 +1809,6 @@ public class LocalServiceImpl implements LocalService {
 				Cache.getInstance().put(row.getSystemKey(),
 						row.getSystemValue());
 			}
-
 			TCollegeExample example = new TCollegeExample();
 			example.createCriteria().andCollegelevelEqualTo("1");
 			TCollege college = (TCollege) Cache.getInstance().get("summary");

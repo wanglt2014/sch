@@ -88,7 +88,7 @@ public class ArticleAction extends BaseAction {
 	 */
 
 	public String toTrainingResultPage() {
-		super.commonQueryForArticle(2);
+		super.commonQueryForArticle(3);
 		return "to_trainingResult_index";
 	}
 

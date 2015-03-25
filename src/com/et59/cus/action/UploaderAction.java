@@ -22,12 +22,13 @@ import org.apache.commons.fileupload.util.Streams;
 import org.apache.log4j.Logger;
 
 import sun.misc.BASE64Decoder;
+
 /**
  * UEditor文件上传辅助类
  *
  */
 public class UploaderAction extends BaseAction {
-	private Logger log =Logger.getLogger(UploaderAction.class);
+	private Logger log = Logger.getLogger(UploaderAction.class);
 	/**
 	 * 序列化
 	 */
@@ -45,23 +46,24 @@ public class UploaderAction extends BaseAction {
 	// 文件大小
 	private long size = 0;
 
-	//private HttpServletRequest request = null;
+	// private HttpServletRequest request = null;
 	private String title = "";
-	private String realpath_image="\\cus\\image\\";
-	private File upfile; 
+	private String realpath_image = "\\cus\\image\\";
+	private File upfile;
 
 	// 保存路径
 	private String savePath = "upload";
 	// 文件允许格式
-	private String[] allowFiles = { ".rar", ".doc", ".docx", ".zip", ".pdf",".txt", ".swf", ".wmv", ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
+	private String[] allowFiles = { ".rar", ".doc", ".docx", ".zip", ".pdf",
+			".txt", ".swf", ".wmv", ".gif", ".png", ".jpg", ".jpeg", ".bmp" };
 	// 文件大小限制，单位KB
 	private int maxSize = 10000;
-	
+
 	private HashMap<String, String> errorInfo = new HashMap<String, String>();
 
 	public void init() {
 		HashMap<String, String> tmp = this.errorInfo;
-		tmp.put("SUCCESS", "SUCCESS"); //默认成功
+		tmp.put("SUCCESS", "SUCCESS"); // 默认成功
 		tmp.put("NOFILE", "未包含文件上传域");
 		tmp.put("TYPE", "不允许的文件格式");
 		tmp.put("SIZE", "文件大小超出限制");
@@ -70,38 +72,45 @@ public class UploaderAction extends BaseAction {
 		tmp.put("IO", "IO异常");
 		tmp.put("DIR", "目录创建失败");
 		tmp.put("UNKNOWN", "未知错误");
-		
+
 	}
+
 	/**
 	 * 执行上传操作
 	 */
-	public  void excuteupLoad(){
-        try {
-        	log.info("upfile:"+upfile);
+	public void excuteupLoad() {
+		try {
+			log.info("upfile:" + upfile);
 			request.setCharacterEncoding("utf-8");
-	    	response.setCharacterEncoding("utf-8");
-	    	init();
-	        upload(request);
-	        String callback = request.getParameter("callback");
-	        log.info("callback:"+callback);
-	        String result = "{\"name\":\""+ getFileName() +"\", \"originalName\": \""+ getOriginalName() +"\", \"size\": "+ getSize() +", \"state\": \""+ getState() +"\", \"type\": \""+ getType() +"\", \"url\": \""+ getUrl() +"\"}";
-	        log.info("result:"+result);
-	        result = result.replaceAll( "\\\\", "\\\\" );
-	        response.setContentType("text/html");
-	        if( callback == null ){
-	            response.getWriter().print( result );
-	        }else{
-	            response.getWriter().print("<script>"+ callback +"(" + result + ")</script>");
-	        }
-        } catch (UnsupportedEncodingException e) {
+			response.setCharacterEncoding("utf-8");
+			init();
+			upload(request);
+			String callback = request.getParameter("callback");
+			log.info("callback:" + callback);
+			String result = "{\"name\":\"" + getFileName()
+					+ "\", \"originalName\": \"" + getOriginalName()
+					+ "\", \"size\": " + getSize() + ", \"state\": \""
+					+ getState() + "\", \"type\": \"" + getType()
+					+ "\", \"url\": \"" + getUrl() + "\"}";
+			log.info("result:" + result);
+			result = result.replaceAll("\\\\", "\\\\");
+			response.setContentType("text/html");
+			if (callback == null) {
+				response.getWriter().print(result);
+			} else {
+				response.getWriter().print(
+						"<script>" + callback + "(" + result + ")</script>");
+			}
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * 上传图片chu
+	 * 
 	 * @param request
 	 * @throws Exception
 	 */
@@ -112,47 +121,51 @@ public class UploaderAction extends BaseAction {
 			return;
 		}
 		String savePath = this.getFolder(this.savePath);
-		log.info("savePath:"+savePath);
+		log.info("savePath:" + savePath);
 		try {
-				if (null!=upfile) {
-					this.originalName = upfile.getName().substring(upfile.getName().lastIndexOf(System.getProperty("file.separator")) + 1);
-					if (!this.checkFileType(this.originalName)) {
-						this.state = this.errorInfo.get("TYPE");
-					}
-					this.fileName = this.getName(this.originalName);
-					this.type = this.getFileExt(this.fileName);
-					this.url = savePath + "/" + this.fileName;
-					log.info("url:"+url);
-					FileInputStream in = new FileInputStream(upfile);
-					File file = new File(this.getPhysicalPath(this.url));
-					FileOutputStream out = new FileOutputStream( file );
-					BufferedOutputStream output = new BufferedOutputStream(out);
-					Streams.copy(in, output, true);
-					this.state=this.errorInfo.get("SUCCESS");
-					this.size = file.length();
-					//UE中只会处理单张上传，完成后即退出
-				} else {
-					String fname = upfile.getName();					//只处理title，其余表单请自行处理
-					FileInputStream in = new FileInputStream(upfile);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                    StringBuffer result = new StringBuffer();  
-                    while (reader.ready()) {  
-                        result.append((char)reader.read());  
-                    }
-                    this.title = new String(result.toString().getBytes(),"utf-8");
-                    reader.close();  
-                    
+			if (null != upfile) {
+				this.originalName = upfile.getName().substring(
+						upfile.getName().lastIndexOf(
+								System.getProperty("file.separator")) + 1);
+				if (!this.checkFileType(this.originalName)) {
+					this.state = this.errorInfo.get("TYPE");
 				}
+				this.fileName = this.getName(this.originalName);
+				this.type = this.getFileExt(this.fileName);
+				this.url = savePath + "/" + this.fileName;
+				log.info("url:" + url);
+				FileInputStream in = new FileInputStream(upfile);
+				File file = new File(this.getPhysicalPath(this.url));
+				FileOutputStream out = new FileOutputStream(file);
+				BufferedOutputStream output = new BufferedOutputStream(out);
+				Streams.copy(in, output, true);
+				this.state = this.errorInfo.get("SUCCESS");
+				this.size = file.length();
+				// UE中只会处理单张上传，完成后即退出
+			} else {
+				String fname = upfile.getName(); // 只处理title，其余表单请自行处理
+				FileInputStream in = new FileInputStream(upfile);
+				BufferedReader reader = new BufferedReader(
+						new InputStreamReader(in));
+				StringBuffer result = new StringBuffer();
+				while (reader.ready()) {
+					result.append((char) reader.read());
+				}
+				this.title = new String(result.toString().getBytes(), "utf-8");
+				reader.close();
+
+			}
 		} catch (Exception e) {
 			this.state = this.errorInfo.get("UNKNOWN");
 		}
 	}
-	
+
 	/**
 	 * 接受并保存以base64格式上传的文件
+	 * 
 	 * @param fieldName
 	 */
-	public void uploadBase64(String fieldName){
+	public void uploadBase64(String fieldName) {
 		String savePath = this.getFolder(this.savePath);
 		String base64Data = this.request.getParameter(fieldName);
 		this.fileName = this.getName("test.png");
@@ -170,7 +183,7 @@ public class UploaderAction extends BaseAction {
 			ro.write(b);
 			ro.flush();
 			ro.close();
-			this.state=this.errorInfo.get("SUCCESS");
+			this.state = this.errorInfo.get("SUCCESS");
 		} catch (Exception e) {
 			this.state = this.errorInfo.get("IO");
 		}
@@ -204,6 +217,7 @@ public class UploaderAction extends BaseAction {
 
 	/**
 	 * 依据原始文件名生成新文件名
+	 * 
 	 * @return
 	 */
 	private String getName(String fileName) {
@@ -214,8 +228,9 @@ public class UploaderAction extends BaseAction {
 
 	/**
 	 * 根据字符串创建本地目录 并按照日期建立子目录返回
-	 * @param path 
-	 * @return 
+	 * 
+	 * @param path
+	 * @return
 	 */
 	private String getFolder(String path) {
 		SimpleDateFormat formater = new SimpleDateFormat("yyyyMMdd");
@@ -242,9 +257,9 @@ public class UploaderAction extends BaseAction {
 		String servletPath = this.request.getServletPath();
 		String realPath = this.request.getSession().getServletContext()
 				.getRealPath(servletPath);
-		log.info("realPath："+realPath);
-		//return new File(realPath).getParent() +"/" +path;
-		return  new File(realpath_image) +"/" +path;
+		log.info("realPath：" + realPath);
+		return new File(realPath).getParent() + "/" + path;
+		// return new File(realpath_image) +"/" +path;
 	}
 
 	public void setSavePath(String savePath) {
@@ -274,7 +289,7 @@ public class UploaderAction extends BaseAction {
 	public String getState() {
 		return this.state;
 	}
-	
+
 	public String getTitle() {
 		return this.title;
 	}
@@ -286,11 +301,13 @@ public class UploaderAction extends BaseAction {
 	public String getOriginalName() {
 		return this.originalName;
 	}
+
 	public File getUpfile() {
 		return upfile;
 	}
+
 	public void setUpfile(File upfile) {
 		this.upfile = upfile;
 	}
-	
+
 }

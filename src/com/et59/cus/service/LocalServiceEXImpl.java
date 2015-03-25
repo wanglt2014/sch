@@ -7,6 +7,7 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.et59.cus.domain.dao.TDepartmentDAO;
 import com.et59.cus.domain.dao.TDownloadDAO;
 import com.et59.cus.domain.dao.TPaperDAO;
 import com.et59.cus.domain.dao.TPrizeDAO;
@@ -17,7 +18,11 @@ import com.et59.cus.domain.dao.TTeacherPaperDAO;
 import com.et59.cus.domain.dao.TTeacherPrizeDAO;
 import com.et59.cus.domain.dao.TTeacherResearchDAO;
 import com.et59.cus.domain.dao.TTeacherSubjectDAO;
+import com.et59.cus.domain.dao.TTrainingplanDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
+import com.et59.cus.domain.entity.TDepartment;
+import com.et59.cus.domain.entity.TDepartmentExample;
+import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TPaper;
@@ -31,6 +36,8 @@ import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
+import com.et59.cus.domain.entity.TTrainingplanExample;
+import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
 
@@ -72,6 +79,12 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	private TResearchDAO tResearchDAO;
 	@Autowired
 	private TSubjectDAO tSubjectDAO;
+
+	@Autowired
+	private TDepartmentDAO tDepartmentDAO;
+
+	@Autowired
+	private TTrainingplanDAO tTrainingplanDAO;
 
 	/**
 	 * 查询资料下载
@@ -334,6 +347,68 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public TPaper queryTPaper(Long paperid) throws Exception {
 		return tPaperDAO.selectByPrimaryKey(paperid);
+	}
+
+	/**
+	 * 专业查询--（人才培养方案）
+	 */
+	@Override
+	public Pager queryTDepartmentBypage(TDepartment tDepartment, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		TDepartmentExample example = new TDepartmentExample();
+		com.et59.cus.domain.entity.TDepartmentExample.Criteria criteria = example
+				.createCriteria();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TDepartmentWithBLOBs> list = commonDAOEx.selectTDepartmentForPage(
+				example, startrecord, pagesize);
+		int totalCount = tDepartmentDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 * 保存专业表
+	 */
+	@Override
+	public void saveTDepartmentWithBLOBs(
+			TDepartmentWithBLOBs tDepartmentWithBLOBs) throws Exception {
+		tDepartmentDAO.insert(tDepartmentWithBLOBs);
+	}
+
+	/**
+	 * 编辑专业表
+	 */
+	@Override
+	public void updateTDepartmentWithBLOBs(
+			TDepartmentWithBLOBs tDepartmentWithBLOBs) throws Exception {
+		tDepartmentDAO.updateByPrimaryKeySelective(tDepartmentWithBLOBs);
+	}
+
+	/**
+	 * 删除专业表
+	 */
+	@Override
+	public void deleteTDepartment(long id) throws Exception {
+		tDepartmentDAO.deleteByPrimaryKey(id);
+	}
+
+	/**
+	 * 查询专业表
+	 */
+	@Override
+	public TDepartmentWithBLOBs queryTDepartment(long id) throws Exception {
+		return tDepartmentDAO.selectByPrimaryKey(id);
+	}
+
+	/**
+	 * 删除方案表
+	 */
+	@Override
+	public void deleteTTrainingplan(TTrainingplanExample example)
+			throws Exception {
+		tTrainingplanDAO.deleteByExample(example);
 	}
 
 }

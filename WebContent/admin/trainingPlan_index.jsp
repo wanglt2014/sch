@@ -38,8 +38,8 @@
 <!-- 				iconCls="icon-search" onclick="querytrainingPlan()">搜索</a> -->
 <!-- 		</div> -->
 	</div>
-	<table id="trainingPlandg" title="列表" class="easyui-datagrid"
-		style="width: auto; height: 616px" url="Teacher_query"
+	<table id="trainingPlandg" title="专业列表" class="easyui-datagrid"
+		style="width: auto; height: 616px" url="TrainingPlan_query"
 		toolbar="#trainingPlantoolbar" pagination="true" rownumbers="true"
 		fitColumns="true" singleSelect="true" pageSize="20">
 		<thead>
@@ -71,13 +71,14 @@
 			<div id="trainingPlan_tab" class="easyui-tabs" style="height: 616px"
 				data-options="fit:true,border:false,plain:true" >
 				<div title="专业介绍" style="padding:20px;" id="Tab1"> 
-					<div class="ftitle">专业基本信息</div>
-						<div class="fitem">
-			                <label>专业名称</label>
+					<div class="ftitle" style="font-size: 14px;font-weight: bold;padding: 5px 0;margin-bottom: 10px;border-bottom: 1px solid #ccc;">
+					专业基本信息</div>
+						<div class="fitem" style="margin-bottom: 5px;">
+			                <label style="display: inline-block;width: 80px;">专业名称:</label>
 			                <input id="departmentname" name="departmentname" class="easyui-validatebox" required="true" size="50px;" />
 			            </div>
-			            <div class="fitem">
-							<label>专业:</label>
+			            <div class="fitem" style="margin-bottom: 5px;">
+							<label style="display: inline-block;width: 80px;">专业:</label>
 							<input
 								class="easyui-combobox" id="departmenttype" name="departmenttype"
 								data-options="
@@ -95,12 +96,12 @@
 			                <br/>
 			                <!--style给定宽度可以影响编辑器的最终宽度-->
  							<script type="text/plain" id="departmentMyEditornew" name="departmentMyEditornew" style="width:750px;height:240px;">
-    						<p>这里我可以写一些输入提示</p> 
  							</script> 
 			            </div>
 				</div> 
 				<div title="学科方向" closable="false" style="overflow:auto;padding:20px;" id="Tab2" > 
-				<div class="ftitle">学科方向</div>
+				<div class="ftitle" style="font-size: 14px;font-weight: bold;padding: 5px 0;margin-bottom: 10px;border-bottom: 1px solid #ccc;">
+				学科方向</div>
 						<div class="fitem" >
 			                <label>学科方向内容:</label>
 			                <br/>
@@ -109,7 +110,6 @@
 				           		 <textarea name="directionContent" id="directionContent" class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
 				            </div>
 							<script type="text/plain" id="directionMyEditornew" name="directionMyEditornew" style="width:750px;height:240px;">
-    						<p>这里我可以写一些输入提示</p>
 							</script>
 			            </div>
 				</div> 
@@ -140,10 +140,11 @@
 			iconCls="icon-ok" onclick="savetrainingPlan()">保存</a> <a
 			href="javascript:void(0)" class="easyui-linkbutton"
 			iconCls="icon-cancel"
-			onclick="javascript:$('#plandlg').dialog('close')">取消</a>
+			onclick="javascript:$('#plandlg').dialog('close');">取消</a>
 	</div>
 	<script>
-	
+	var um1 = UM.getEditor('departmentMyEditornew');
+	var um1 = UM.getEditor('directionMyEditornew');
 	var url;
 	function querytrainingPlan() {
 		var teachernamequery = $('#teachernameQuery').val();
@@ -156,7 +157,9 @@
 	function newtrainingPlan() {
 		$('#trainingPlandlg').dialog('open').dialog('setTitle', '新增专业信息');
 		$('#trainingPlanfm').form('clear');
-		url = 'Teacher_save';
+		url = 'TrainingPlan_save';
+// 		UM.getEditor('departmentMyEditornew').setContent('', false);
+// 		UM.getEditor('directionMyEditornew').setContent('', false);
 	}
 	function edittrainingPlan() {
 		var row = $('#trainingPlandg').datagrid('getSelected');
@@ -165,7 +168,7 @@
 					'编辑教师');
 			$('#trainingPlanfm').form('clear');
 			$('#trainingPlanfm').form('load', row);
-			url = 'Teacher_update?id=' + row.id;
+			url = 'TrainingPlan_update?id=' + row.departmentid;
 			UM.getEditor('directionMyEditornew').setContent(row.departmentdirection, false);
 			UM.getEditor('departmentMyEditornew').setContent(row.departmentintroduction, false);
 		}
@@ -178,7 +181,7 @@
 					'编辑本科培养方案');
 			$('#trainingPlanfm').form('clear');
 // 			$('#trainingPlanfm').form('load', row);
-			url = 'Teacher_update?id=' + row.id;
+			url = 'Teacher_update?id=' + row.departmentid;
 		}
 	}
 	
@@ -189,7 +192,7 @@
 					'编辑硕士培养方案');
 			$('#trainingPlanfm').form('clear');
 // 			$('#trainingPlanfm').form('load', row);
-			url = 'Teacher_update?id=' + row.id;
+			url = 'Teacher_update?id=' + row.departmentid;
 		}
 	}
 	
@@ -200,7 +203,7 @@
 					'编辑博士培养方案');
 			$('#trainingPlanfm').form('clear');
 // 			$('#trainingPlanfm').form('load', row);
-			url = 'Teacher_update?id=' + row.id;
+			url = 'Teacher_update?id=' + row.departmentid;
 		}
 	}
 	
@@ -211,13 +214,14 @@
 					'编辑专硕培养方案');
 			$('#trainingPlanfm').form('clear');
 // 			$('#trainingPlanfm').form('load', row);
-			url = 'Teacher_update?id=' + row.id;
+			url = 'Teacher_update?id=' + row.departmentid;
 		}
 	}
 	
 	function savetrainingPlan() {
 		$("#departmentContent").val(UM.getEditor('departmentMyEditornew').getContent());
 		$("#directionContent").val(UM.getEditor('directionMyEditornew').getContent());
+// 		alert($("#departmentContent").val()+"@@@@@@@@@@"+$("#directionContent").val());
     	var valid = $('#trainingPlanfm').form('validate');
 		if(valid==true){
         $('#trainingPlanfm').form('submit',{
@@ -227,7 +231,6 @@
             },
             success: function(result){
                 if (result!="true"){
-                	uploaderForArticle.refresh();
                 	jAlert('系统错误，请联系管理员','错误提示');
                 } else {
                     $('#trainingPlandlg').dialog('close');        // close the dialog
@@ -244,17 +247,17 @@
 		if (row) {
 			$.messager.confirm('确认', '是否要删除?', function(r) {
 				if (r) {
-					$.post('Teacher_delete', {
-						id : row.id
+					$.post('TrainingPlan_deleteTDepartment', {
+						id : row.departmentid
 					}, function(result) {
 // 						alert(result);
 						if (result = "true") {
-							
+							$('#trainingPlandg').datagrid('reload'); // reload the user data
 						} else {
 							jAlert('系统错误，请联系管理员', '错误提示');
 						}
 					}, 'json');
-					$('#trainingPlandg').datagrid('reload'); // reload the user data
+					
 				}
 			});
 		}
@@ -264,12 +267,12 @@
 	    onSelect:function(title,index){ 
 // 	        alert(title+' is selected'+index); 
 	        if(index==0){
-	        	var um = UM.getEditor('departmentMyEditornew');
-				UM.getEditor('departmentMyEditornew').setContent('', false);
+// 	        	var um = UM.getEditor('departmentMyEditornew');
+// 				UM.getEditor('departmentMyEditornew').setContent('', false);
 	        }
 			if(index==1){
-				var um = UM.getEditor('directionMyEditornew');
-	        	UM.getEditor('directionMyEditornew').setContent('', false);
+// 				var um1 = UM.getEditor('directionMyEditornew');
+// 	        	UM.getEditor('directionMyEditornew').setContent('', false);
 				
 	        }
 	    } 

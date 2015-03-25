@@ -72,7 +72,7 @@
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">
 				<div id="news_left_content">
-					<c:if test="${!empty(teachList)}">
+					<c:if test="${!empty(notifylist)}">
 						<div id="right_content_top">
 							<ul>
 								<li class="normal_title_left"></li>
@@ -83,7 +83,7 @@
 							</ul>
 							<div class="normal_content_top">
 								<ul class="news_content">
-									<s:iterator var="teach" value="teachList" status="st">
+									<s:iterator var="teach" value="notifylist" status="st">
 										<li><a target="_blank" href="Article_regulationDetail_${teach.articleid}.shtm"><s:property
 													value="#teach.articletitle" /> </a>
 										</li>

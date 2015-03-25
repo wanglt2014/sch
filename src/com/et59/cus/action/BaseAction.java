@@ -99,17 +99,17 @@ public abstract class BaseAction extends SystemAction {
 	 * 文件表
 	 */
 	protected TDownload downloaddetail;
-	
+
 	/**
 	 * 教师列表
 	 */
 	protected List<TTeacher> teacherList;
-	
+
 	/**
 	 * 文章详情
 	 */
 	protected TTeacher tTeacherdetail;
-	
+
 	/**
 	 * 数据字典列表
 	 */
@@ -197,7 +197,7 @@ public abstract class BaseAction extends SystemAction {
 					5, 1);
 			if (ComonUtil.validateMapResult(map1)) {
 				downloadlist = (List<TDownload>) map1
-						.get(Constant.ARTICLE_LIST);
+						.get(Constant.DOWNLOAD_LIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -215,9 +215,10 @@ public abstract class BaseAction extends SystemAction {
 				bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			} else if (2 == type) {
 				bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
+			} else if (3 == type) {
 			}
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
-					9, 1);
+					5, 1);
 			if (ComonUtil.validateMapResult(map1)) {
 				notifylist = (List<BsArticle>) map1.get(Constant.ARTICLE_LIST);
 			}
@@ -306,7 +307,7 @@ public abstract class BaseAction extends SystemAction {
 			reponseWriter(JSON.toJSONString(returnMsg));
 		}
 	}
-	
+
 	/**
 	 * 公共查询教师
 	 */
@@ -314,10 +315,11 @@ public abstract class BaseAction extends SystemAction {
 	public void commonQueryForTeacher(String department) {
 		try {
 			TTeacher tTeacher = new TTeacher();
-//			if (department!=null && !department.equals("")) {
-//				tTeacher.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
-//			}
-			Map map1 = localServiceProxy.queryTeacherByTypeForPage(tTeacher,9,1);
+			// if (department!=null && !department.equals("")) {
+			// tTeacher.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+			// }
+			Map map1 = localServiceProxy.queryTeacherByTypeForPage(tTeacher, 9,
+					1);
 			if (ComonUtil.validateMapResult(map1)) {
 				teacherList = (List<TTeacher>) map1.get(Constant.TEACHER_LIST);
 			}
@@ -547,5 +549,5 @@ public abstract class BaseAction extends SystemAction {
 	public void settTeacherdetail(TTeacher tTeacherdetail) {
 		this.tTeacherdetail = tTeacherdetail;
 	}
-	
+
 }

@@ -403,12 +403,12 @@ $(document)
 									if (data != "") {
 										html = '欢迎您：'
 												+ data
-												+ '<a href="Login_logout">[退出]</a>&nbsp;|&nbsp;';
+												+ '<a href="Login_logout">[退出]</a>&nbsp;';
 									} else {
-										html = '<a href="#" onclick="showlogindiv()">登录</a>&nbsp;|&nbsp;<a href="#" onclick="showreguserdiv()">注册</a>&nbsp;|&nbsp;';
+										html = '<a href="#" onclick="showlogindiv()">登录</a>&nbsp;|&nbsp;<a href="#" onclick="showreguserdiv()">注册</a>&nbsp;';
 									}
-									html = html
-											+ '<a href="Mobile_client.shtm" target="_blank">手机客户端</a>&nbsp;|&nbsp;<a href="OpenApi_index.shtm" target="_blank">开放平台</a>';
+//									html = html
+//											+ '|&nbsp;<a href="Mobile_client.shtm" target="_blank">手机客户端</a>&nbsp;|&nbsp;<a href="OpenApi_index.shtm" target="_blank">开放平台</a>';
 									$("#user-header-link").prepend(html);
 								},
 								error : function() {

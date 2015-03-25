@@ -363,13 +363,13 @@
 	</bean>
 	
 	<!-- 专业表（人才培养方案） -->
-	<bean name="tDepartmentDAOImpl" class="com.et59.cus.domain.dao.TDepartmentDAOImpl"
+	<bean name="tDepartmentDAO" class="com.et59.cus.domain.dao.TDepartmentDAOImpl"
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
 	<!-- 培养方案表（人才培养方案） -->
-	<bean name="tTrainingplanDAOImpl" class="com.et59.cus.domain.dao.TTrainingplanDAOImpl"
+	<bean name="tTrainingplanDAO" class="com.et59.cus.domain.dao.TTrainingplanDAOImpl"
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>

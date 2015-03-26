@@ -23,7 +23,7 @@
 			<div>
 				创建起始日期: <input id="startdatacreatenew" class="easyui-datebox" style="width: 80px">
 				创建结束日期: <input id="enddatacreatenew" class="easyui-datebox" style="width: 80px">
-				内容类型: <select id="articletype" class="easyui-combobox" panelHeight="auto"
+				内容类型: <select id="articletype" class="easyui-combobox" panelHeight="auto" editable="false"
 					style="width: 100px">
 					<option value="">全部</option>
 					<option value="teach">教学获奖</option>
@@ -66,7 +66,7 @@
         <form id="resultfm" method="post" novalidate>
             <div class="fitem">
                 <label>类型:</label>
-                <select id="articletypeInsert" name="articletypeInsert" class="easyui-combobox" panelHeight="auto"
+                <select id="articletypeInsert" name="articletypeInsert" class="easyui-combobox" panelHeight="auto" editable="false"
 					style="width: 100px">
 					<option value="teach" >教学获奖</option>
 					<option value="reform">教改立项</option>
@@ -78,15 +78,15 @@
             </div>
             <div class="fitem">
                 <label>标题</label>
-                <input id="articletitleForResult" name="articletitleForResult" class="easyui-validatebox" required="true" size="50px;">
+                <input id="articletitleForResult" name="articletitleForResult" maxlength="20" class="easyui-validatebox" required="true" size="50px;">
             </div>
             <div class="fitem">
                 <label>作者:</label>
-                <input name="authorForResult" class="easyui-validatebox" required="true"/>
+                <input name="authorForResult" class="easyui-validatebox" required="true" maxlength="20"/>
             </div>
             <div class="fitem">
                 <label>概要:</label>
-                <textarea name="articlesummaryForResult"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
+                <textarea name="articlesummaryForResult"  class="easyui-validatebox" maxlength="500" required="true" style="width: 500px;height: 100px;"/>
             </div>
             <div class="fitem">
                 <label>时间:</label>

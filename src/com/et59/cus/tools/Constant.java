@@ -32,8 +32,15 @@ public class Constant {
 	public static String DEFAULT_PASSWORD = "123456";
 	public static String ISACTIVE_YES = "yes";
 	public static String ISACTIVE_NO = "no";
-	public static String ISVALID_1 = "1";// 是，启用
-	public static String ISVALID_0 = "0";// 否，未启用
+	/**
+	 * 是，启用
+	 */
+	public static String ISVALID_1 = "1";//
+
+	/**
+	 * 否，未启用
+	 */
+	public static String ISVALID_0 = "0";//
 
 	public static String PATH_TEACHER = "uploadFile\\teacher";
 	public static String PATH_OTHER = "uploadFile\\other";

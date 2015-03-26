@@ -2,8 +2,9 @@ package com.et59.cus.action;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.TDepartment;
@@ -128,33 +129,11 @@ public class TrainingPlanAction extends BaseAction {
 		boolean flag = false;
 		String id = request.getParameter("id");
 		try {
-			TDepartmentWithBLOBs tdepartment = localServiceEXProxy
-					.queryTDepartment(Long.valueOf(id));
 			TTrainingplanExample example = new TTrainingplanExample();
-			List ids = new ArrayList();
-			if (tdepartment != null) {
-				Long id1 = tdepartment.getDepartmentplanforone();
-				Long id2 = tdepartment.getDepartmentplanfortwo();
-				Long id3 = tdepartment.getDepartmentplanforthree();
-				Long id4 = tdepartment.getDepartmentplanforfour();
-				if (id1 != null) {
-					ids.add(id1);
-				}
-				if (id2 != null) {
-					ids.add(id2);
-				}
-				if (id3 != null) {
-					ids.add(id3);
-				}
-				if (id4 != null) {
-					ids.add(id4);
-				}
-			}
-			if (ids.size() > 0) {
-				example.createCriteria().andTrainingplanidIn(ids);
-				// 删除专业对应的方案表数据
-				localServiceEXProxy.deleteTTrainingplan(example);
-			}
+			example.createCriteria().andTrainingplandepidEqualTo(
+					Long.valueOf(id));
+			// 删除专业对应的方案表数据
+			localServiceEXProxy.deleteTTrainingplan(example);
 			// 删除专业表
 			localServiceEXProxy.deleteTDepartment(Long.valueOf(id));
 			flag = true;
@@ -182,6 +161,104 @@ public class TrainingPlanAction extends BaseAction {
 		tDepartment.setDepartmentdirection(directionContent);
 
 		return tDepartment;
+	}
+
+	/**
+	 * 编辑培养方案
+	 */
+	public void updatePlan() {
+		boolean flag = false;
+		String id = request.getParameter("id");
+		String planType = request.getParameter("planType");
+		try {
+			TTrainingplan tTrainingplan = getTTrainingplan();
+			TTrainingplanExample example = new TTrainingplanExample();
+			example.createCriteria()
+					.andTrainingplandepidEqualTo(Long.valueOf(id))
+					.andTrainingplantypeEqualTo(planType);
+
+			localServiceEXProxy.deleteTTrainingplan(example);
+
+			tTrainingplan.setTrainingplandepid(Long.valueOf(id));
+			tTrainingplan.setTrainingplantype(planType);
+			localServiceEXProxy.saveTTrainingplan(tTrainingplan);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 公共方法
+	 * 
+	 * @return
+	 */
+	public TTrainingplan getTTrainingplan() {
+		String trplansubidsforoneId = request
+				.getParameter("trplansubidsforoneId");
+		String trplansubidsfortwoId = request
+				.getParameter("trplansubidsfortwoId");
+		String trplansubidsforthreeId = request
+				.getParameter("trplansubidsforthreeId");
+		String trplansubidsforfourId = request
+				.getParameter("trplansubidsforfourId");
+		String trplansubidsforfiveId = request
+				.getParameter("trplansubidsforfiveId");
+		String trplansubidsforsixId = request
+				.getParameter("trplansubidsforsixId");
+		String trplansubidsforsevenId = request
+				.getParameter("trplansubidsforsevenId");
+		String trplansubidsforeightId = request
+				.getParameter("trplansubidsforeightId");
+
+		TTrainingplan tTrainingplan = new TTrainingplan();
+		tTrainingplan.setTrplansubidsforone(trplansubidsforoneId);
+		tTrainingplan.setTrplansubidsfortwo(trplansubidsfortwoId);
+		tTrainingplan.setTrplansubidsforthree(trplansubidsforthreeId);
+		tTrainingplan.setTrplansubidsforfour(trplansubidsforfourId);
+		tTrainingplan.setTrplansubidsforfive(trplansubidsforfiveId);
+		tTrainingplan.setTrplansubidsfosix(trplansubidsforsixId);
+		tTrainingplan.setTrplansubidsforseven(trplansubidsforsevenId);
+		tTrainingplan.setTrplansubidsforeight(trplansubidsforeightId);
+
+		return tTrainingplan;
+	}
+
+	/**
+	 * 
+	 */
+	public void queryTrainingPlanByDepId() {
+		String departmentid = request.getParameter("departmentid");
+		String planType = request.getParameter("planType");
+
+		try {
+			TTrainingplanExample example = new TTrainingplanExample();
+			example.createCriteria()
+					.andTrainingplandepidEqualTo(Long.valueOf(departmentid))
+					.andTrainingplantypeEqualTo(planType);
+
+			List<TTrainingplan> list = localServiceEXProxy
+					.queryTTrainingplan(example);
+			String json = "";
+			Map map = new HashMap();
+			if (null != list && list.size() > 0) {
+				TTrainingplan row = list.get(0);
+				map.put("trplansubidsforone", row.getTrplansubidsforone());
+				map.put("trplansubidsfortwo", row.getTrplansubidsfortwo());
+				map.put("trplansubidsforthree", row.getTrplansubidsforthree());
+				map.put("trplansubidsforfour", row.getTrplansubidsforfour());
+				map.put("trplansubidsforfive", row.getTrplansubidsforfive());
+				map.put("trplansubidsfosix", row.getTrplansubidsfosix());
+				map.put("trplansubidsforseven", row.getTrplansubidsforseven());
+				map.put("trplansubidsforeight", row.getTrplansubidsforeight());
+			}
+			super.reponseWriter(JSON.toJSONString(map));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -68,20 +68,20 @@
 		<form id="dictionaryfm" method="post" novalidate>
 			<div class="fitem">
 				<label>编码:</label> <input name="dictionarycode"
-					class="easyui-validatebox" required="true">
+					class="easyui-validatebox" required="true" maxlength="20">
 			</div>
 			<div class="fitem">
 				<label>值</label> <input name="dictionaryvalue"
-					class="easyui-validatebox" required="true">
+					class="easyui-validatebox" required="true" maxlength="20">
 			</div>
 			<div class="fitem">
 				<label>分类:</label> <input name="dictionarytype"
-					class="easyui-validatebox" required="true">
+					class="easyui-validatebox" required="true" maxlength="20">
 			</div>
 			<div class="fitem">
 				<label>备注:</label>
 				 <input name="dictionaryremark"
-					class="easyui-validatebox" required="true">
+					class="easyui-validatebox" required="true" maxlength="50">
 			</div>
 
 		</form>

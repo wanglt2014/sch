@@ -332,11 +332,13 @@ public class TeacherAction extends BaseAction {
 		String subjectNO = request.getParameter("subjectno");
 		String subjectName = request.getParameter("subjectname");
 		String subjectText = request.getParameter("subjecttext");
+		String subjecttypename = request.getParameter("subjecttypename");
 		TSubject tSubject = new TSubject();
 		tSubject.setSubjecttype(subjectType);
 		tSubject.setSubjectno(subjectNO);
 		tSubject.setSubjectname(subjectName);
 		tSubject.setSubjecttext(subjectText);
+		tSubject.setSubjecttypename(subjecttypename);
 		return tSubject;
 	}
 
@@ -534,6 +536,7 @@ public class TeacherAction extends BaseAction {
 			subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
 			subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
 			subject.setSubjectteachername(teacher.getTeachername());
+			subject.setSubjectisvalid(Constant.ISVALID_1);
 			Long subjectId = localServiceEXProxy.saveTSubject(subject);
 
 			// 3.保存论文表

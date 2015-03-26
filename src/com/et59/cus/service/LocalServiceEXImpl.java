@@ -36,6 +36,7 @@ import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
+import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
@@ -152,7 +153,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		TSubjectExample bae = new TSubjectExample();
 		com.et59.cus.domain.entity.TSubjectExample.Criteria criteria = bae
 				.createCriteria();
-		bae.setOrderByClause(" createdate desc ");
+		bae.setOrderByClause(" subjectNO desc ");
 		criteria.andSubjectisvalidEqualTo(Constant.ISVALID_1);
 
 		// if (null != bsUserservice.getOrderIccard()
@@ -409,6 +410,23 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deleteTTrainingplan(TTrainingplanExample example)
 			throws Exception {
 		tTrainingplanDAO.deleteByExample(example);
+	}
+
+	/**
+	 * 保存方案表
+	 */
+	@Override
+	public void saveTTrainingplan(TTrainingplan tTrainingplan) throws Exception {
+		tTrainingplanDAO.insert(tTrainingplan);
+	}
+
+	/**
+	 * 查询方案表
+	 */
+	@Override
+	public List<TTrainingplan> queryTTrainingplan(TTrainingplanExample example)
+			throws Exception {
+		return tTrainingplanDAO.selectByExample(example);
 	}
 
 }

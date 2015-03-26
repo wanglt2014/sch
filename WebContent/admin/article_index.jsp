@@ -23,7 +23,7 @@
 			<div>
 				创建起始日期: <input id="startdatacreatenew" class="easyui-datebox" style="width: 80px">
 				创建结束日期: <input id="enddatacreatenew" class="easyui-datebox" style="width: 80px">
-				文章类型: <select id="articletypeQuery" class="easyui-combobox" panelHeight="auto"
+				文章类型: <select id="articletypeQuery" class="easyui-combobox" panelHeight="auto" editable="false"
 					style="width: 100px">
 					<option value="">全部</option>
 					<option value="regulation">教学规章制度</option>
@@ -70,7 +70,7 @@
                 <label>类型:</label>
 <!--                 <input type="radio" name="articletypeInsert"  value="regulation" checked="checked" />教学规章制度 -->
 <!--                 <input type="radio" name="articletypeInsert" value="notice"  />教务教学通知 -->
-                <select id="articletypeInsert" name="articletypeInsert" class="easyui-combobox" panelHeight="auto"
+                <select id="articletypeInsert" name="articletypeInsert" class="easyui-combobox" panelHeight="auto" editable="false"
 					style="width: 100px">
 					<option value="regulation" >教学规章制度</option>
 					<option value="notice">教务教学通知</option>
@@ -85,15 +85,15 @@
             </div>
             <div class="fitem">
                 <label>标题</label>
-                <input id="articletitle" name="articletitle" class="easyui-validatebox" required="true" size="50px;">
+                <input id="articletitle" name="articletitle" class="easyui-validatebox" required="true" size="50px;" maxlength="20">
             </div>
             <div class="fitem">
                 <label>作者:</label>
-                <input name="author" class="easyui-validatebox" required="true"/>
+                <input name="author" class="easyui-validatebox" required="true" maxlength="20"/>
             </div>
             <div class="fitem">
                 <label>概要:</label>
-                <textarea name="articlesummary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
+                <textarea name="articlesummary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;" maxlength="500"/>
             </div>
             <div class="fitem">
                 <label>时间:</label>

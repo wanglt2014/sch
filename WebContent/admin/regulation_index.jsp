@@ -23,7 +23,7 @@
 			<div>
 				创建起始日期: <input id="startdatacreatenew" class="easyui-datebox" style="width: 80px">
 				创建结束日期: <input id="enddatacreatenew" class="easyui-datebox" style="width: 80px">
-				文章类型: <select id="newtype" class="easyui-combobox" panelHeight="auto"
+				文章类型: <select id="newtype" class="easyui-combobox" panelHeight="auto" editable="false"
 					style="width: 100px">
 					<option value="">全部</option>
 					<option value="regulation">教学规章制度</option>
@@ -68,15 +68,15 @@
             </div>
             <div class="fitem">
                 <label>标题</label>
-                <input name="title" class="easyui-validatebox" required="true" size="50px;">
+                <input name="title" class="easyui-validatebox" required="true" size="50px;" maxlength="20"/>
             </div>
             <div class="fitem">
                 <label>作者:</label>
-                <input name="author" class="easyui-validatebox" required="true"/>
+                <input name="author" class="easyui-validatebox" required="true" maxlength="20"/>
             </div>
             <div class="fitem">
                 <label>概要:</label>
-                <textarea name="summary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;"/>
+                <textarea name="summary"  class="easyui-validatebox" maxlength="500"  required="true" style="width: 500px;height: 100px;"/>
             </div>
             <div class="fitem">
                 <label>时间:</label>

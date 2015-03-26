@@ -40,7 +40,7 @@
 					method:'get', 
  					valueField:'dictionarycode', 
  					textField:'dictionaryvalue', 
-					panelHeight:'auto'"> 
+					panelHeight:'auto',editable:false"> 
 			<a href="javascript:void(0)" class="easyui-linkbutton"
 				iconCls="icon-search" onclick="queryTearcher()">搜索</a>
 		</div>
@@ -79,11 +79,11 @@
 					
 						<div class="fitem">
 							<label>姓名:</label> 
-							<input id="teachername" name="teachername" class="easyui-validatebox" required="true">
+							<input id="teachername" name="teachername" class="easyui-validatebox" required="true" maxlength="20">
 						</div>
 						<div class="fitem">
 							<label>性别</label> 
-							<select id="sex" name="sex" class="easyui-combobox" panelHeight="auto"
+							<select id="sex" name="sex" class="easyui-combobox" panelHeight="auto" editable="false"
 								style="width: 100px">
 								<option value="0" >男</option>
 								<option value="1" >女</option>
@@ -102,13 +102,13 @@
  									method:'get',
  				 					valueField:'dictionarycode',
  				 					textField:'dictionaryvalue',  
- 									panelHeight:'auto'"> 
+ 									panelHeight:'auto',editable:false"> 
  							<input id="departmentname" name="departmentname" type="hidden" />
 						</div>
 						<div class="fitem">
 							<label>职称:</label>
 							<input
-								class="easyui-combobox" id="title" name="title"
+								class="easyui-combobox" id="title" name="title" editable="false"
 								data-options="
  				 					url:'Dictionary_queryDictionaryByType?type=title',
  									method:'get',  
@@ -126,12 +126,12 @@
 									method:'get',
  				 					valueField:'dictionarycode',
 				 					textField:'dictionaryvalue',
- 									panelHeight:'auto'">
+ 									panelHeight:'auto',editable:false">
  							<input id="jobname" name="jobname" type="hidden" />
 						</div>
 						<div class="fitem">
 							<label>硕/博导:</label>
-							<select id="tutortype" name="tutortype" class="easyui-combobox" panelHeight="auto"
+							<select id="tutortype" name="tutortype" class="easyui-combobox" panelHeight="auto" editable="false"
 								style="width: 100px">
 								<option value="1">硕导</option>
 								<option value="2">博导</option>
@@ -170,20 +170,20 @@
    									method:'get',    
    				 					valueField:'dictionarycode',    
    				 					textField:'dictionaryvalue',    
-   									panelHeight:'auto'">
+   									panelHeight:'auto',editable:false">
    							<input id="subjecttypename" name="subjecttypename" type="hidden" />   
 						</div>
 						<div class="fitem">
 							<label>课程编号:</label> <input name="subjectno"
-								class="easyui-validatebox" required="true">
+								class="easyui-validatebox" required="true" maxlength="20">
 						</div>
 						<div class="fitem">
 							<label>课程名称:</label> <input name="subjectname"
-								class="easyui-validatebox" required="true">
+								class="easyui-validatebox" required="true" maxlength="20">
 						</div>
 						<div class="fitem">
 							<label>课程介绍:</label>
-							<textarea id="subjectText" rows=5 name="subjecttext"  class="textarea easyui-validatebox"></textarea>
+							<textarea id="subjectText" rows=5 name="subjecttext"  class="textarea easyui-validatebox" maxlength="500"></textarea>
 						</div>
 						<div class="fitem" id="outlineObj" >
 							<div class="wraper">
@@ -227,14 +227,14 @@
 				<div class="ftitle">立项</div>
 				<div class="fitem">
 					<label>项目级别:</label> <input name="researchlevel"
-						class="easyui-validatebox">
+						class="easyui-validatebox" maxlength="20">
 				</div>
 				<div class="fitem">
 					<label>项目名称:</label> <input name="researchname"
-						class="easyui-validatebox" required="true">
+						class="easyui-validatebox" required="true" maxlength="20">
 				</div>
 				<div class="fitem">
-					<label>项目编号:</label> <input name="researchno"
+					<label>项目编号:</label> <input name="researchno" maxlength="20"
 						class="easyui-validatebox" >
 				</div>
 				<div class="fitem">
@@ -247,11 +247,11 @@
 				</div>
 				<div class="fitem">
 					<label>项目主持人:</label> <input name="researchhost"
-						class="easyui-validatebox" >
+						class="easyui-validatebox" maxlength="20">
 				</div>
 				<div class="fitem">
 					<label>项目参与者:</label> <input name="researchactor"
-						class="easyui-validatebox" >
+						class="easyui-validatebox" maxlength="40">
 				</div>
 				<div class="fitem">
 					<label>项目开始时间:</label> 
@@ -280,14 +280,14 @@
 					<div class="ftitle">论文</div>
 					<div class="fitem">
 						<label>论文名称:</label> <input name="papername"
-							class="easyui-validatebox" required="true">
+							class="easyui-validatebox" required="true" maxlength="20">
 					</div>
 					<div class="fitem">
-						<label>作者排序:</label> <input name="paperauthor"
+						<label>作者排序:</label> <input name="paperauthor" maxlength="20"
 							class="easyui-validatebox" >
 					</div>
 					<div class="fitem">
-						<label>期刊名称:</label> <input name="papernotename"
+						<label>期刊名称:</label> <input name="papernotename" maxlength="20"
 							class="easyui-validatebox" >
 					</div>
 					<div class="fitem">
@@ -295,7 +295,7 @@
 							class="easyui-numberbox"  maxlength="4">
 					</div>
 					<div class="fitem">
-						<label>杂志期号:</label> <input name="papernoteno"
+						<label>杂志期号:</label> <input name="papernoteno" maxlength="20"
 							class="easyui-validatebox" >
 					</div>
 					<div class="fitem" id="paperObj">

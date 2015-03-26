@@ -1,11 +1,14 @@
 package com.et59.cus.action;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
 
+import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.TSubject;
+import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
 
@@ -81,7 +84,8 @@ public class SubjectAction extends BaseAction {
 		super.commonQueryForSubject();
 		String id = request.getParameter("id");
 		try {
-			subject = localServiceEXProxy.queryDownloadById(Long.valueOf(id));
+			// subject =
+			// localServiceEXProxy.queryDownloadById(Long.valueOf(id));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -99,56 +103,32 @@ public class SubjectAction extends BaseAction {
 		return "index";
 	}
 
-	// /**
-	// * 查询新闻
-	// */
-	// @SuppressWarnings({ "unchecked", "rawtypes" })
-	// public void query() {
-	// String startdatacreatenew = request.getParameter("startdatacreatenew");
-	// String enddatacreatenew = request.getParameter("enddatacreatenew");
-	// String newtype = request.getParameter("newtype");
-	// String newauthor = request.getParameter("newauthor");
-	// String newtitle = request.getParameter("newtitle");
-	// String page = request.getParameter("page"); // 当前页数
-	// String rows = request.getParameter("rows"); // 每页显示行数
-	// try {
-	// BsArticleQuery bsArticle = new BsArticleQuery();
-	// if (null != startdatacreatenew && !startdatacreatenew.equals("")) {
-	// bsArticle.setStartdatacreatenew(DateUtil
-	// .strToDate(startdatacreatenew));
-	// }
-	// if (null != enddatacreatenew && !enddatacreatenew.equals("")) {
-	// bsArticle.setEnddatacreatenew(DateUtil
-	// .strToDate(enddatacreatenew));
-	// }
-	// if (null != newtype && !newtype.equals("")) {
-	// bsArticle.setType(newtype);
-	// }
-	// if (null != newauthor && !newauthor.equals("")) {
-	// bsArticle.setAuthor(newauthor);
-	// }
-	// if (null != newtitle && !newtitle.equals("")) {
-	// bsArticle.setTitle(newtitle);
-	// }
-	// Pager pager = new Pager();
-	// Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
-	// Integer.valueOf(rows), Integer.valueOf(page));
-	// if (ComonUtil.validateMapResult(map)) {
-	// bsArticlelist = (List<BsArticle>) map
-	// .get(Constant.ARTICLE_LIST);
-	// totalCount = (Integer) map.get(Constant.TOTALCOUNT);
-	// totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
-	// pager.setTotal(totalCount);
-	// pager.setRows(bsArticlelist);
-	// }
-	// super.reponseWriter(JSON.toJSONString(pager));
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
+	/**
+	 * 查询课程-分页
+	 */
+	public void query() {
+		String page = request.getParameter("page"); // 当前页数
+		String rows = request.getParameter("rows"); // 每页显示行数
+		// String roleNamequery = request.getParameter("roleNamequery");
+		if (page == null || rows == null) {
+			page = "1";
+			rows = "1000";
+		}
+		Pager pager = new Pager();
+		try {
+			// TSubject tSubject = new TSubject();
+			Map map = localServiceEXProxy.querySubjectForLimit(new TSubject(),
+					Integer.valueOf(rows), Integer.valueOf(page));
+			pager.setRows(map.get(Constant.SUBJECT_LIST));
+			pager.setTotal((Integer) map.get(Constant.TOTALCOUNT));
+			super.reponseWriter(JSON.toJSONString(pager));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	// /**
 	// * 保存文章
 	// */

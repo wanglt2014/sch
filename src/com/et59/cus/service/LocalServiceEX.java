@@ -16,6 +16,7 @@ import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
+import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
 import com.et59.cus.domain.entity.ex.Pager;
 
@@ -207,5 +208,18 @@ public interface LocalServiceEX {
 	 */
 	@SuppressWarnings("rawtypes")
 	public TDepartmentWithBLOBs queryTDepartment(long id) throws Exception;
+
+	/**
+	 * 保存方案表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void saveTTrainingplan(TTrainingplan tTrainingplan) throws Exception;
+
+	/**
+	 * 查询方案表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List<TTrainingplan> queryTTrainingplan(TTrainingplanExample example)
+			throws Exception;
 
 }

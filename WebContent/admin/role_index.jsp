@@ -60,11 +60,11 @@
 		<form id="rolefm" method="post" novalidate>
 		
 			<div class="fitem">
-				<label>名字</label> <input name="name" class="easyui-validatebox"
+				<label>名字</label> <input name="name" class="easyui-validatebox" maxlength="20"
 					required="true">
 			</div>
 			<div class="fitem">
-				<label>是否激活:</label> <select id="isactive" name ="isactive" class="easyui-combobox" panelHeight="auto"
+				<label>是否激活:</label> <select id="isactive" name ="isactive" class="easyui-combobox" panelHeight="auto" editable="false"
 					style="width: 100px">
 					<option value="yes">已激活</option>
 					<option value="no">未激活</option>

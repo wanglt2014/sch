@@ -28,7 +28,7 @@
 	<div id="usertb" style="padding: 5px; height: auto">
 		<div>
 			邮件接受者:<input type="text" id="usermailto"> 是否管理员:<select
-				id="isadminquery" name="isadminquery" class="easyui-combobox"
+				id="isadminquery" name="isadminquery" class="easyui-combobox" editable="false"
 				panelHeight="auto" style="width: 100px">
 				<option value="yes">管理员</option>
 				<option value="no">普通会员</option>
@@ -42,12 +42,12 @@
 		fitColumns="true" singleSelect="true" pageSize="20">
 		<thead>
 			<tr>
-				<th field="iccard" width="50">会员卡号</th>
+<!-- 				<th field="iccard" width="50">会员卡号</th> -->
 				<th field="username" width="50">登陆账号</th>
 				<th field="realname" width="50">真实姓名</th>
 				<th field="mobilephone" width="50">手机号</th>
 				<th field="email" width="50">邮箱</th>
-				<th field="tokenid" width="50">令牌号</th>
+<!-- 				<th field="tokenid" width="50">令牌号</th> -->
 				<th field="isadmin" width="50" formatter="formatterIsAdmin">是否为管理员</th>
 			</tr>
 		</thead>
@@ -70,15 +70,15 @@
 		<form id="userfm" method="post" novalidate>
 			<div class="fitem">
 				<label>登陆账号:</label> <input name="username"
-					class="easyui-validatebox" required="true">
+					class="easyui-validatebox" required="true" maxlength="20">
 			</div>
 			<div class="fitem">
 				<label>真实姓名</label> <input name="realname"
-					class="easyui-validatebox" required="true">
+					class="easyui-validatebox" required="true" maxlength="20">
 			</div>
 			<div class="fitem">
 				<label>手机号:</label> <input name="mobilephone"
-					class="easyui-validatebox" required="true">
+					class="easyui-validatebox" required="true" maxlength="11">
 			</div>
 			<div class="fitem">
 				<label>密码:</label> <input id="password" name="password"
@@ -87,17 +87,17 @@
 			</div>
 			<div class="fitem">
 				<label>邮箱:</label> <input name="email" class="easyui-validatebox"
-					validType="email" required="true">
+					validType="email" required="true" maxlength="20">
 			</div>
-			<div class="fitem">
-				<label>会员卡号:</label> <input name="iccard">
-			</div>
-			<div class="fitem">
-				<label>令牌号:</label> <input name="tokenid">
-			</div>
+<!-- 			<div class="fitem"> -->
+<!-- 				<label>会员卡号:</label> <input name="iccard"> -->
+<!-- 			</div> -->
+<!-- 			<div class="fitem"> -->
+<!-- 				<label>令牌号:</label> <input name="tokenid"> -->
+<!-- 			</div> -->
 			<div class="fitem">
 				<label>是否为管理员:</label> <select id="isadmin" name="isadmin"
-					class="easyui-combobox" panelHeight="auto" style="width: 100px">
+					class="easyui-combobox" editable="false" panelHeight="auto" style="width: 100px">
 					<option value="yes">管理员</option>
 					<option value="no">普通会员</option>
 				</select>

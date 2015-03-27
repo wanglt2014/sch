@@ -30,8 +30,29 @@ public class TrainingPlanAction extends BaseAction {
 	public String tampFileName;
 	public String fileCount;
 
+	public String defultId;
+
 	public TTrainingplan tTrainingplan;
 	public TDepartment tDepartment;
+
+	public TDepartmentWithBLOBs tDepartmentWithBLOBs;
+
+	public String getDefultId() {
+		return defultId;
+	}
+
+	public void setDefultId(String defultId) {
+		this.defultId = defultId;
+	}
+
+	public TDepartmentWithBLOBs gettDepartmentWithBLOBs() {
+		return tDepartmentWithBLOBs;
+	}
+
+	public void settDepartmentWithBLOBs(
+			TDepartmentWithBLOBs tDepartmentWithBLOBs) {
+		this.tDepartmentWithBLOBs = tDepartmentWithBLOBs;
+	}
 
 	public TDepartment gettDepartment() {
 		return tDepartment;
@@ -50,7 +71,7 @@ public class TrainingPlanAction extends BaseAction {
 	}
 
 	/**
-	 * 数据字典首页
+	 * 首页
 	 * 
 	 * @return
 	 */
@@ -65,13 +86,28 @@ public class TrainingPlanAction extends BaseAction {
 	 * @throws
 	 */
 
-	public String toTeacherPage() {
-		super.commonQueryForTeacher("");
-		return "to_teacher_index";
+	public String toPlanPage() {
+		// super.commonQueryForTeacher("");
+		TDepartment tDepartment = new TDepartment();
+		try {
+			Pager pager = localServiceEXProxy.queryTDepartmentBypage(
+					tDepartment, 9, 1);
+			tdepartmentList = (List<TDepartmentWithBLOBs>) pager.getRows();
+			if (tdepartmentList != null && tdepartmentList.size() > 0) {
+				defultId = String.valueOf(tdepartmentList.get(0)
+						.getDepartmentid());
+			} else {
+				defultId = "0";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "to_plan_index";
 	}
 
 	/**
-	 * 分页查询师资队伍
+	 * 分页查询专业信息
 	 */
 	public void query() {
 		// String teachernamequery = request.getParameter("teachernamequery");
@@ -259,6 +295,50 @@ public class TrainingPlanAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	 * @Title: trainingPlanDetail
+	 * @Description: 跳转到详细页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String showDepDetail() {
+		// super.commonquery();
+		String id = request.getParameter("id");
+		try {
+			tDepartmentWithBLOBs = localServiceEXProxy.queryTDepartment(Long
+					.valueOf(id));
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "plan_result";
+	}
+
+	/**
+	 * @Title: trainingPlanDetail
+	 * @Description: 跳转到详细页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String trainingPlanDetail() {
+		// super.commonquery();
+		String id = request.getParameter("id");
+		try {
+			tDepartmentWithBLOBs = localServiceEXProxy.queryTDepartment(Long
+					.valueOf(id));
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "plan_detail";
 	}
 
 }

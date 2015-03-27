@@ -27,12 +27,9 @@ String request_path = request.getContextPath();
 .photo { width: 40%;position:absolute; text-align: right;height: 300px;height:auto;}
 .content_left {float: left;text-align: center; margin-left: 45%; width: 45%;}
 .content_all {width: 80%;text-align: center; position: absolute;margin-left: 10%;}
-.img_photo{ WIDTH:300px; HEIGHT:300px; BORDER:0; }
 .base_info{margin-top: 10px;text-align: center;}
-.title_teacher{text-align: left;margin-left: 10%;}
 .div_baseinfo{font-size: 14px;height: 100%;height: auto;min-height: 350px;}
 .baseInfo{width: 100%;height: 100%;height: auto;}
-.line_teacher{color:#bbbbbb; width:80%;}
 .ul_teacher{list-style:disc; !important;}
 td.p20{width: 20%;height: 30px;}
 td.p15{width: 15%;height: 30px;}

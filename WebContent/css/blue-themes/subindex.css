@@ -18,11 +18,10 @@
 #news_right_content_detail{
 	float:left;
 	border: 1px solid #ABB1D5;
-    margin-left: 5px;
     padding-bottom: 20px;
     padding-top: 10px;
     min-height: 432px;
-    
+    width: 100%;
 }
 #right_content_top{
 	width:300px;

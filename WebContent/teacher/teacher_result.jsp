@@ -38,11 +38,12 @@ String request_path = request.getContextPath();
 <%-- 		<s:property value="#st.index" /> --%>
 		<s:if test="#dictionary.dictionarycode==#teacher.department">
 		  <s:if test="#st.index % 4 == 0">
-			<tr>
+		<tr>
 		  </s:if>
 		  <td>                
+		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img class="img_thunmb" alt="' + teacher.teachername + '" src="file://<s:property value="#teacher.iimageurll"/>" /></a>
+		  	<br>
 		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><i class="point">•</i>&nbsp;<s:property value="#teacher.teachername" /></a>
-<%-- 		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img alt="' + teacher.teachername + '" src="file://<s:property value="#teacher.iimageurll"/>" /></a> --%>
 		  </td>            
 		  <s:if test="#st.index % 4 == 3">                
 		  </tr>

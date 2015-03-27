@@ -341,8 +341,8 @@
 		url = 'TrainingPlan_save';
 		var data = $('#departmenttype').combobox('getData');
 		 $("#departmenttype").combobox('select',data[0].dictionarycode);
-// 		UM.getEditor('departmentMyEditornew').setContent('', false);
-// 		UM.getEditor('directionMyEditornew').setContent('', false);
+		UM.getEditor('departmentMyEditornew').setContent('', false);
+		UM.getEditor('directionMyEditornew').setContent('', false);
 	}
 	function edittrainingPlan() {
 		var row = $('#trainingPlandg').datagrid('getSelected');

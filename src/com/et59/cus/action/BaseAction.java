@@ -19,6 +19,7 @@ import com.et59.cus.domain.entity.BsArticle;
 import com.et59.cus.domain.entity.BsOrder;
 import com.et59.cus.domain.entity.BsProduct;
 import com.et59.cus.domain.entity.BsUser;
+import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TSubject;
@@ -114,6 +115,11 @@ public abstract class BaseAction extends SystemAction {
 	 * 数据字典列表
 	 */
 	protected List<TDictionary> dictionaryList;
+
+	/**
+	 * 专业列表
+	 */
+	protected List<TDepartmentWithBLOBs> tdepartmentList;
 
 	@Override
 	public String execute() {
@@ -548,6 +554,14 @@ public abstract class BaseAction extends SystemAction {
 
 	public void settTeacherdetail(TTeacher tTeacherdetail) {
 		this.tTeacherdetail = tTeacherdetail;
+	}
+
+	public List<TDepartmentWithBLOBs> getTdepartmentList() {
+		return tdepartmentList;
+	}
+
+	public void setTdepartmentList(List<TDepartmentWithBLOBs> tdepartmentList) {
+		this.tdepartmentList = tdepartmentList;
 	}
 
 }

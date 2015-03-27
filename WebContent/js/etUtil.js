@@ -30,7 +30,7 @@ $(document).ready(function(){
 		}else if (id == 'nav_link_teacher') {
 			location.href = 'Teacher_toTeacherPage.shtm';
 		}else if (id == 'nav_link_plan') {
-			location.href = 'News_toNewsPage.shtm';
+			location.href = 'TrainingPlan_toPlanPage.shtm';
 		}else if (id == 'nav_link_result') {
 			location.href = 'Article_toTrainingResultPage.shtm';
 		}else if (id == 'nav_link_bbs') {
@@ -38,7 +38,6 @@ $(document).ready(function(){
 		}else if (id == 'nav_link_downloadinfo') {
 			location.href = 'Download_toDownloadPage.shtm';
 		}
-		
 	});
 	
 	var $accountMenu = $('.menu_item');

@@ -49,12 +49,11 @@
 	float:center;
 	align:center;
 	border-bottom: 1px solid #ABB1D5;
-	
 }
 .one_artic_detail{
 	float:left;
 	margin-left: 5px;
-
+	width: 100%;
 }
 
 .artic_content_detail{

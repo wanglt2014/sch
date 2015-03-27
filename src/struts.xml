@@ -388,9 +388,9 @@
 			<interceptor-ref name="timerInterceptor" />
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/trainingPlan_index.jsp</result>
-			<result name="to_teacher_index">/teacher/teacherList.jsp</result>
-			<result name="teacher_detail">/teacher/teacherdetail.jsp</result>
-			<result name="teacher_result">/teacher/teacher_result.jsp</result>
+			<result name="to_plan_index">/trainingplan/planList.jsp</result>
+			<result name="plan_detail">/trainingplan/plandetail.jsp</result>
+			<result name="plan_result">/trainingplan/plan_result.jsp</result>
 		</action>
 	</package>
 

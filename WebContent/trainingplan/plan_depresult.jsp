@@ -21,8 +21,7 @@
 			</div>
 			<div class="artic_content">
 				<s:property value="#teachInfo.articlesummary" />
-				<a style="color: #524EA3; text-decoration: underline;" 
-				href="Article_teachDetail_<s:property value="#teachInfo.articleid"/>.shtm" target="_blank">[阅读全文]</a>
+				<a style="color: #524EA3; text-decoration: underline;" href="Article_teachDetail_<s:property value="#teachInfo.articleid"/>.shtm" target="_blank">[阅读全文]</a>
 			</div>
 			<div class="split_spx"></div>
 		</div>

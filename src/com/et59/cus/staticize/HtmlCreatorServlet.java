@@ -110,8 +110,10 @@ public class HtmlCreatorServlet extends HttpServlet {
 			for (int i = 1; i < urls.length; i++) {
 				if (i == 1) {
 					uri += "_" + urls[i];
-				} else {
+				} else if(i == 2){
 					uri += "?id=" + urls[i];
+				} else {
+					uri += "&para=" + urls[i];
 				}
 			}
 		}

@@ -37,7 +37,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$(".scroll_three").jScroll({speed: 2000, scroll: 2});//底部logo滚动
+	$(".scroll_three").jScroll({speed: 2000, scroll: 2});//底部logo滚动1
 	$('#banner').cycle({fx:'scrollLeft',pager:'#btn'});//顶部图片滚动
 // 	$('#banner').cycle('fade'); 
 });

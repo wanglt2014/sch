@@ -7,18 +7,6 @@
 <%
 String request_path = request.getContextPath();
 %>
-<style type="text/css">
-
-.teacher_list{
-	width: 100%;
-	text-align: center;
-}
-.span_title{
-	width: 80%;
-	text-align: left;
-	
-}
-</style>
 <jsp:include page="../pre.jsp"></jsp:include>
 <c:if test="${empty(teacherList)}">
 	<tr>

@@ -391,6 +391,10 @@
 			<result name="to_plan_index">/trainingplan/planList.jsp</result>
 			<result name="plan_detail">/trainingplan/plandetail.jsp</result>
 			<result name="plan_result">/trainingplan/plan_result.jsp</result>
+			
+			<result name="plan_table">/trainingplan/plan_table.jsp</result>
+			<result name="plan_table_result">/trainingplan/plan_table_result.jsp</result>
+			<result name="plan_table_subject">/trainingplan/subjectdetail.jsp</result>
 		</action>
 	</package>
 

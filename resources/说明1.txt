@@ -1,0 +1,174 @@
+TrainingPlanAction
+/**
+	 * @Title: toTablePage
+	 * @Description: 跳转到培养方案
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String toTablePage() {
+		String id = request.getParameter("id");// 专业ID
+		// TDepartment tDepartment = new TDepartment();
+		// try {
+		// // Pager pager = localServiceEXProxy.queryTDepartmentBypage(
+		// // tDepartment, 9, 1);
+		// // tdepartmentList = (List<TDepartmentWithBLOBs>) pager.getRows();
+		// // if (tdepartmentList != null && tdepartmentList.size() > 0) {
+		// // defultId = String.valueOf(tdepartmentList.get(0)
+		// // .getDepartmentid());
+		// // } else {
+		// // defultId = "0";
+		// // }
+		// defultId = id;
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		defultId = id;
+		return "plan_table";
+	}
+
+	/**
+	 * @Title: trainingPlanTable
+	 * @Description: 跳转到表格页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String trainingPlanTable() {
+		String departmentid = request.getParameter("id");// 专业ID
+		String planType = request.getParameter("planType");// 方案类型（本科1，硕士2，博士3，专硕4）
+		try {
+			TTrainingplanExample example = new TTrainingplanExample();
+			example.createCriteria()
+					.andTrainingplandepidEqualTo(Long.valueOf(departmentid))
+					.andTrainingplantypeEqualTo(planType);
+
+			List<TTrainingplan> list = localServiceEXProxy
+					.queryTTrainingplan(example);
+			if (null != list && list.size() > 0) {
+				TSubjectExample subjectExample = new TSubjectExample();
+				StringBuffer subIds = new StringBuffer();
+				HashSet hs = new HashSet();
+				TTrainingplan row = list.get(0);
+				subIds = subIds.append(row.getTrplansubidsforone()).append(",")
+						.append(row.getTrplansubidsfortwo()).append(",")
+						.append(row.getTrplansubidsforthree()).append(",")
+						.append(row.getTrplansubidsforfour()).append(",")
+						.append(row.getTrplansubidsforfive()).append(",")
+						.append(row.getTrplansubidsfosix()).append(",")
+						.append(row.getTrplansubidsforseven()).append(",")
+						.append(row.getTrplansubidsforeight());
+				String[] arr = subIds.toString().split(",");
+				hs.addAll(Arrays.asList(arr));
+				subjectExample.createCriteria().andSubjectidIn(
+						new ArrayList(hs));
+				subjectList = localServiceEXProxy.queryTSubject(subjectExample);
+
+				for (Iterator iterator = subjectList.iterator(); iterator
+						.hasNext();) {
+					TSubject temp = (TSubject) iterator.next();
+					String subjectId = String.valueOf(temp.getSubjectid());
+					if (row.getTrplansubidsforone().indexOf(subjectId) >= 0) {
+						oneList.add(temp);
+					}
+					if (row.getTrplansubidsfortwo().indexOf(subjectId) >= 0) {
+						twoList.add(temp);
+					}
+					if (row.getTrplansubidsforthree().indexOf(subjectId) >= 0) {
+						threeList.add(temp);
+					}
+					if (row.getTrplansubidsforfour().indexOf(subjectId) >= 0) {
+						fourList.add(temp);
+					}
+					if (row.getTrplansubidsforfive().indexOf(subjectId) >= 0) {
+						fiveList.add(temp);
+					}
+					if (row.getTrplansubidsfosix().indexOf(subjectId) >= 0) {
+						sixList.add(temp);
+					}
+					if (row.getTrplansubidsforseven().indexOf(subjectId) >= 0) {
+						sevenList.add(temp);
+					}
+					if (row.getTrplansubidsforeight().indexOf(subjectId) >= 0) {
+						eightList.add(temp);
+					}
+				}
+			}
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "plan_table_result";
+	}
+
+	/**
+	 * @Title: downloaddetail
+	 * @Description: 跳转到资料下载详细页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String subjectDetail() {
+		String id = request.getParameter("id");
+		try {
+			tSubject = localServiceEXProxy.querySubjectById(Long.valueOf(id));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "download_detail";
+	}
+
+----------------------------
+LocalServiceEX
+	/**
+	 * 查询课程表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List<TSubject> queryTSubject(TSubjectExample example)
+			throws Exception;
+
+LocalServiceEXImpl
+	/**
+	 * 查询课程表
+	 */
+	@Override
+	public List<TSubject> queryTSubject(TSubjectExample example)
+			throws Exception {
+		return tSubjectDAO.selectByExample(example);
+	}
+
+----------------------------------
+struts.xml
+			<result name="plan_table">/trainingplan/plan_table.jsp</result>
+			<result name="plan_table_result">/trainingplan/plan_table_result.jsp</result>
+			<result name="plan_table_subject">/trainingplan/subjectdetail.jsp</result>
+
+
+--------------------------------
+schoolEX.css
+
+.teacher_list{
+	width: 100%;
+	text-align: center;
+	vertical-align: top;
+}
+.span_title{
+	width: 80%;
+	text-align: left;
+	
+}
+
+
+---------------------
+plan_result.jsp
+<button onclick="window.open('TrainingPlan_toTablePage_${tDepartmentWithBLOBs.departmentid}.shtm')">培养方案</button>
+
+plan_table_result.jsp
+plan_table.jsp
+subjectdetail.jsp
+
+
+

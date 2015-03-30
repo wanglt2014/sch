@@ -14,7 +14,6 @@
 	request.setAttribute("image_path", image_path);
 	request.setAttribute("css_path", css_path);
 	request.setAttribute("js_path", js_path);
-	
 	// 当前导航栏位置
 	request.setAttribute("cur_nav", 0);
 %>
@@ -37,7 +36,7 @@
 
 <script type="text/javascript">
 $(function(){
-	$(".scroll_three").jScroll({speed: 2000, scroll: 2});//底部logo滚动1
+	$(".scroll_three").jScroll({speed: 2000, scroll: 2});//底部logo滚动
 	$('#banner').cycle({fx:'scrollLeft',pager:'#btn'});//顶部图片滚动
 // 	$('#banner').cycle('fade'); 
 });

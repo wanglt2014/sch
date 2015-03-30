@@ -9,6 +9,7 @@ import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
+import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
 import com.et59.cus.domain.entity.TTeacherPrizeKey;
@@ -220,6 +221,13 @@ public interface LocalServiceEX {
 	 */
 	@SuppressWarnings("rawtypes")
 	public List<TTrainingplan> queryTTrainingplan(TTrainingplanExample example)
+			throws Exception;
+
+	/**
+	 * 查询课程表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List<TSubject> queryTSubject(TSubjectExample example)
 			throws Exception;
 
 }

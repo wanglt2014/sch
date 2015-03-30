@@ -2,13 +2,19 @@ package com.et59.cus.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
+import com.et59.cus.domain.entity.TSubject;
+import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
 import com.et59.cus.domain.entity.ex.Pager;
@@ -34,8 +40,90 @@ public class TrainingPlanAction extends BaseAction {
 
 	public TTrainingplan tTrainingplan;
 	public TDepartment tDepartment;
+	public TSubject tSubject;
 
 	public TDepartmentWithBLOBs tDepartmentWithBLOBs;
+
+	public List<TSubject> oneList = new ArrayList<TSubject>();
+	public List<TSubject> twoList = new ArrayList<TSubject>();
+	public List<TSubject> threeList = new ArrayList<TSubject>();
+	public List<TSubject> fourList = new ArrayList<TSubject>();
+	public List<TSubject> fiveList = new ArrayList<TSubject>();
+	public List<TSubject> sixList = new ArrayList<TSubject>();
+	public List<TSubject> sevenList = new ArrayList<TSubject>();
+	public List<TSubject> eightList = new ArrayList<TSubject>();
+
+	public TSubject gettSubject() {
+		return tSubject;
+	}
+
+	public void settSubject(TSubject tSubject) {
+		this.tSubject = tSubject;
+	}
+
+	public List<TSubject> getOneList() {
+		return oneList;
+	}
+
+	public void setOneList(List<TSubject> oneList) {
+		this.oneList = oneList;
+	}
+
+	public List<TSubject> getTwoList() {
+		return twoList;
+	}
+
+	public void setTwoList(List<TSubject> twoList) {
+		this.twoList = twoList;
+	}
+
+	public List<TSubject> getThreeList() {
+		return threeList;
+	}
+
+	public void setThreeList(List<TSubject> threeList) {
+		this.threeList = threeList;
+	}
+
+	public List<TSubject> getFourList() {
+		return fourList;
+	}
+
+	public void setFourList(List<TSubject> fourList) {
+		this.fourList = fourList;
+	}
+
+	public List<TSubject> getFiveList() {
+		return fiveList;
+	}
+
+	public void setFiveList(List<TSubject> fiveList) {
+		this.fiveList = fiveList;
+	}
+
+	public List<TSubject> getSixList() {
+		return sixList;
+	}
+
+	public void setSixList(List<TSubject> sixList) {
+		this.sixList = sixList;
+	}
+
+	public List<TSubject> getSevenList() {
+		return sevenList;
+	}
+
+	public void setSevenList(List<TSubject> sevenList) {
+		this.sevenList = sevenList;
+	}
+
+	public List<TSubject> getEightList() {
+		return eightList;
+	}
+
+	public void setEightList(List<TSubject> eightList) {
+		this.eightList = eightList;
+	}
 
 	public String getDefultId() {
 		return defultId;
@@ -341,4 +429,125 @@ public class TrainingPlanAction extends BaseAction {
 		return "plan_detail";
 	}
 
+	/**
+	 * @Title: toTablePage
+	 * @Description: 跳转到培养方案
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String toTablePage() {
+		String id = request.getParameter("id");// 专业ID
+		// TDepartment tDepartment = new TDepartment();
+		// try {
+		// // Pager pager = localServiceEXProxy.queryTDepartmentBypage(
+		// // tDepartment, 9, 1);
+		// // tdepartmentList = (List<TDepartmentWithBLOBs>) pager.getRows();
+		// // if (tdepartmentList != null && tdepartmentList.size() > 0) {
+		// // defultId = String.valueOf(tdepartmentList.get(0)
+		// // .getDepartmentid());
+		// // } else {
+		// // defultId = "0";
+		// // }
+		// defultId = id;
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		defultId = id;
+		return "plan_table";
+	}
+
+	/**
+	 * @Title: trainingPlanTable
+	 * @Description: 跳转到表格页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String trainingPlanTable() {
+		String departmentid = request.getParameter("id");// 专业ID
+		String planType = request.getParameter("planType");// 方案类型（本科1，硕士2，博士3，专硕4）
+		try {
+			TTrainingplanExample example = new TTrainingplanExample();
+			example.createCriteria()
+					.andTrainingplandepidEqualTo(Long.valueOf(departmentid))
+					.andTrainingplantypeEqualTo(planType);
+
+			List<TTrainingplan> list = localServiceEXProxy
+					.queryTTrainingplan(example);
+			if (null != list && list.size() > 0) {
+				TSubjectExample subjectExample = new TSubjectExample();
+				StringBuffer subIds = new StringBuffer();
+				HashSet hs = new HashSet();
+				TTrainingplan row = list.get(0);
+				subIds = subIds.append(row.getTrplansubidsforone()).append(",")
+						.append(row.getTrplansubidsfortwo()).append(",")
+						.append(row.getTrplansubidsforthree()).append(",")
+						.append(row.getTrplansubidsforfour()).append(",")
+						.append(row.getTrplansubidsforfive()).append(",")
+						.append(row.getTrplansubidsfosix()).append(",")
+						.append(row.getTrplansubidsforseven()).append(",")
+						.append(row.getTrplansubidsforeight());
+				String[] arr = subIds.toString().split(",");
+				hs.addAll(Arrays.asList(arr));
+				subjectExample.createCriteria().andSubjectidIn(
+						new ArrayList(hs));
+				subjectList = localServiceEXProxy.queryTSubject(subjectExample);
+
+				for (Iterator iterator = subjectList.iterator(); iterator
+						.hasNext();) {
+					TSubject temp = (TSubject) iterator.next();
+					String subjectId = String.valueOf(temp.getSubjectid());
+					if (row.getTrplansubidsforone().indexOf(subjectId) >= 0) {
+						oneList.add(temp);
+					}
+					if (row.getTrplansubidsfortwo().indexOf(subjectId) >= 0) {
+						twoList.add(temp);
+					}
+					if (row.getTrplansubidsforthree().indexOf(subjectId) >= 0) {
+						threeList.add(temp);
+					}
+					if (row.getTrplansubidsforfour().indexOf(subjectId) >= 0) {
+						fourList.add(temp);
+					}
+					if (row.getTrplansubidsforfive().indexOf(subjectId) >= 0) {
+						fiveList.add(temp);
+					}
+					if (row.getTrplansubidsfosix().indexOf(subjectId) >= 0) {
+						sixList.add(temp);
+					}
+					if (row.getTrplansubidsforseven().indexOf(subjectId) >= 0) {
+						sevenList.add(temp);
+					}
+					if (row.getTrplansubidsforeight().indexOf(subjectId) >= 0) {
+						eightList.add(temp);
+					}
+				}
+			}
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "plan_table_result";
+	}
+
+	/**
+	 * @Title: downloaddetail
+	 * @Description: 跳转到资料下载详细页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String subjectDetail() {
+		String id = request.getParameter("id");
+		try {
+			tSubject = localServiceEXProxy.querySubjectById(Long.valueOf(id));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "download_detail";
+	}
 }

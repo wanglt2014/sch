@@ -83,3 +83,15 @@ margin:0px auto; min-width:1000px; float:none;
 
 .img_photo{ WIDTH:300px; HEIGHT:300px; BORDER:0; }
 .img_thunmb{ WIDTH:150px; HEIGHT:150px; BORDER:0; }
+
+
+.teacher_list{
+	width: 100%;
+	text-align: center;
+	vertical-align: top;
+}
+.span_title{
+	width: 80%;
+	text-align: left;
+	
+}

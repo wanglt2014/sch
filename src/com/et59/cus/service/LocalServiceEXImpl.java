@@ -429,4 +429,13 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		return tTrainingplanDAO.selectByExample(example);
 	}
 
+	/**
+	 * 查询课程表
+	 */
+	@Override
+	public List<TSubject> queryTSubject(TSubjectExample example)
+			throws Exception {
+		return tSubjectDAO.selectByExample(example);
+	}
+
 }

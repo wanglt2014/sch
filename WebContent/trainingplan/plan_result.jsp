@@ -14,7 +14,7 @@
 		<div style="width: 100%;" align="center">
 		<button onclick="window.open('TrainingPlan_trainingPlanDetail_${tDepartmentWithBLOBs.departmentid}.shtm')">学科方向</button>
 		<button onclick="window.open('TrainingPlan_toTablePage_${tDepartmentWithBLOBs.departmentid}.shtm')">培养方案</button>
-		<button onclick="window.open('TrainingPlan_trainingPlanDetail_${tDepartmentWithBLOBs.departmentid}.shtm')">教师简介</button>
+		<button onclick="window.open('TrainingPlan_doQueryTeacher_${tDepartmentWithBLOBs.departmentid}_${tDepartmentWithBLOBs.departmenttype}.shtm')">教师简介</button>
 		</div>
 		
 		</div>

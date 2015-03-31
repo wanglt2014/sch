@@ -86,16 +86,16 @@
 							<div class="normal_content_top">
 								<ul class="news_content">
 									<li>
-									<a href="javascript:void(0);"  onclick="showContent(${department.departmentid},1);">本科生</a>
+									<a href="javascript:void(0);"  onclick="showTable(${defultId},1);">本科生</a>
 									</li>
 									<li>
-									<a href="javascript:void(0);"  onclick="showContent(${department.departmentid},2);">硕士研究生</a>
+									<a href="javascript:void(0);"  onclick="showTable(${defultId},2);">硕士研究生</a>
 									</li>
 									<li>
-									<a href="javascript:void(0);"  onclick="showContent(${department.departmentid},3);">博士研究生</a>
+									<a href="javascript:void(0);"  onclick="showTable(${defultId},3);">博士研究生</a>
 									</li>
 									<li>
-									<a href="javascript:void(0);"  onclick="showContent(${department.departmentid},4);">专业硕士</a>
+									<a href="javascript:void(0);"  onclick="showTable(${defultId},4);">专业硕士</a>
 									</li>
 								</ul>
 							</div>

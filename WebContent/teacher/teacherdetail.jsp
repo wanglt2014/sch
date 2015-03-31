@@ -28,8 +28,6 @@ String request_path = request.getContextPath();
 .content_left {float: left;text-align: center; margin-left: 45%; width: 45%;}
 .content_all {width: 80%;text-align: center; position: absolute;margin-left: 10%;}
 .base_info{margin-top: 10px;text-align: center;}
-.div_baseinfo{font-size: 14px;height: 100%;height: auto;min-height: 400px;}
-.baseInfo{width: 100%;height: 100%;height: auto;}
 .ul_teacher{list-style:disc; !important;}
 td.p20{width: 20%;height: 30px;}
 td.p15{width: 15%;height: 30px;}

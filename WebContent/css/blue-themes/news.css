@@ -17,14 +17,16 @@
 .normal_summary {
     background-color:#CFCFCF
     height:auto;
-    min-height:50px;
+    min-height:80px;
     margin-top: 5px;
     margin-bottom:5px;
-    margin-right:5px;
+    margin-right:2%;
+    margin-left:2%;
     font-size: 14px;
     border: 1px solid  #ABB1D5;
     font-style: italic;
-    min-width: 925px;
+    min-width: 825px;
+    width: 96%;
     
 }
 .news_page{

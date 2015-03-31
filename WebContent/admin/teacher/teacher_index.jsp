@@ -379,6 +379,7 @@
 	function newTeacher() {
 		uploaderForPic.init();
 		deleteAllUploader();
+		showAllUploader();
 		$('#teacherdlg').dialog('open').dialog('setTitle', '新增教师');
 		$('#teacherfm').form('clear');
 		url = 'Teacher_save';
@@ -539,6 +540,15 @@
 		$('#subjectObj').hide();
 		$('#projectObj').hide();
 		$('#paperObj').hide();
+	}
+	
+	//显示所有上传控件
+	function showAllUploader(){
+		$('#outlineObj').show();
+		$('#scheduleObj').show();
+		$('#subjectObj').show();
+		$('#projectObj').show();
+		$('#paperObj').show();
 	}
 	
 	//照片 上传控件##########################################

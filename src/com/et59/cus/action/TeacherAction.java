@@ -600,27 +600,30 @@ public class TeacherAction extends BaseAction {
 						.getSubjectid());
 				tSubjectDTO = new TSubjectDTO();
 				BeanUtils.copyProperties(tSubjectDTO, tSubject);
-			}
-			TDownload outlineFile = localServiceEXProxy
-					.queryDownloadById(tSubject.getSubjectoutline());
-			if (outlineFile != null) {
-				tSubjectDTO
-						.setSubjectoutlinePath(outlineFile.getFileshowpath());
-				tSubjectDTO.setSubjectoutlineName(outlineFile.getFilename());
-			}
 
-			TDownload scheduleFile = localServiceEXProxy
-					.queryDownloadById(tSubject.getSubjectschedule());
+				Long outlineId = tSubject.getSubjectoutline();
+				if (outlineId != null) {
+					TDownload outlineFile = localServiceEXProxy
+							.queryDownloadById(outlineId);
+					tSubjectDTO.setSubjectoutlinePath(outlineFile
+							.getFileshowpath());
+					tSubjectDTO
+							.setSubjectoutlineName(outlineFile.getFilename());
+				}
 
-			if (scheduleFile != null) {
-				tSubjectDTO.setSubjectschedulePath(scheduleFile
-						.getFileshowpath());
-			}
-
-			TDownload infoFile = localServiceEXProxy.queryDownloadById(tSubject
-					.getSubjectinfo());
-			if (infoFile != null) {
-				tSubjectDTO.setSubjectinfoPath(infoFile.getFileshowpath());
+				Long scheduleId = tSubject.getSubjectschedule();
+				if (scheduleId != null) {
+					TDownload scheduleFile = localServiceEXProxy
+							.queryDownloadById(scheduleId);
+					tSubjectDTO.setSubjectschedulePath(scheduleFile
+							.getFileshowpath());
+				}
+				Long infoId = tSubject.getSubjectinfo();
+				if (infoId != null) {
+					TDownload infoFile = localServiceEXProxy
+							.queryDownloadById(infoId);
+					tSubjectDTO.setSubjectinfoPath(infoFile.getFileshowpath());
+				}
 			}
 
 			// 加载立项

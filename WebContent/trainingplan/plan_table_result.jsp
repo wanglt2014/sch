@@ -15,7 +15,7 @@
 	<div align="center" style="width: 100%;">
 	<h3 class="span_title">课程配置流程图</h3>
 	<hr color="#bbbbbb" width="80%" />
-	<table class="teacher_list">
+	<table class="plan_table_list">
 		<tbody>
 		<tr>
 		<th>第一学期</th>
@@ -35,37 +35,37 @@
 			</td>
 			<td valign="top"><br>
 			<s:iterator var="two" id="two" value="twoList" status="tw">
-			<a href="TrainingPlan_subjectDetail_${one.subjectid}.shtm" title="<s:property value="#two.subjecttext" />"><s:property value="#two.subjectname" /><br><br>
+			<a href="TrainingPlan_subjectDetail_${two.subjectid}.shtm" title="<s:property value="#two.subjecttext" />"><s:property value="#two.subjectname" /><br><br>
 			</s:iterator>
 			</td>
 			<td><br>
 			<s:iterator var="three" id="three" value="threeList" status="th">
-			<a href="TrainingPlan_subjectDetail_${one.subjectid}.shtm" title="<s:property value="#three.subjecttext" />"><s:property value="#three.subjectname" /><br><br>
+			<a href="TrainingPlan_subjectDetail_${three.subjectid}.shtm" title="<s:property value="#three.subjecttext" />"><s:property value="#three.subjectname" /><br><br>
 			</s:iterator>
 			</td>
 			<td><br>
 			<s:iterator var="four" id="four" value="fourList" status="fo">
-			<a href="TrainingPlan_subjectDetail_${one.subjectid}.shtm" title="<s:property value="#four.subjecttext" />"><s:property value="#four.subjectname" /><br><br>
+			<a href="TrainingPlan_subjectDetail_${four.subjectid}.shtm" title="<s:property value="#four.subjecttext" />"><s:property value="#four.subjectname" /><br><br>
 			</s:iterator>
 			</td>
 			<td><br>
 			<s:iterator var="five" id="five" value="fiveList" status="fi">
-			<a href="#" title="<s:property value="#five.subjecttext" />"><s:property value="#five.subjectname" /><br><br>
+			<a href="TrainingPlan_subjectDetail_${five.subjectid}.shtm" title="<s:property value="#five.subjecttext" />"><s:property value="#five.subjectname" /><br><br>
 			</s:iterator>
 			</td>
 			<td><br>
 			<s:iterator var="six" id="six" value="sixList" status="si">
-			<a href="#" title="<s:property value="#six.subjecttext" />"><s:property value="#six.subjectname" /><br><br>
+			<a href="TrainingPlan_subjectDetail_${six.subjectid}.shtm" title="<s:property value="#six.subjecttext" />"><s:property value="#six.subjectname" /><br><br>
 			</s:iterator>
 			</td>
 			<td><br>
 			<s:iterator var="seven" id="seven" value="sevenList" status="se">
-			<a href="#" title="<s:property value="#seven.subjecttext" />"><s:property value="#seven.subjectname" /><br><br>
+			<a href="TrainingPlan_subjectDetail_${seven.subjectid}.shtm" title="<s:property value="#seven.subjecttext" />"><s:property value="#seven.subjectname" /><br><br>
 			</s:iterator>
 			</td>
 			<td><br>
 			<s:iterator var="eight" id="eight" value="eightList" status="ei">
-			<a href="#" title="<s:property value="#eight.subjecttext" />"><s:property value="#eight.subjectname" /><br><br>
+			<a href="TrainingPlan_subjectDetail_${eight.subjectid}.shtm" title="<s:property value="#eight.subjecttext" />"><s:property value="#eight.subjectname" /><br><br>
 			</s:iterator>
 			</td>
 		</tr>

@@ -10,14 +10,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.beanutils.BeanUtils;
+
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
+import com.et59.cus.domain.entity.TDictionary;
+import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
+import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
 import com.et59.cus.domain.entity.ex.Pager;
+import com.et59.cus.dto.TSubjectDTO;
+import com.et59.cus.tools.ComonUtil;
+import com.et59.cus.tools.Constant;
 
 /**
  * 人才培养方案
@@ -44,6 +52,8 @@ public class TrainingPlanAction extends BaseAction {
 
 	public TDepartmentWithBLOBs tDepartmentWithBLOBs;
 
+	public TSubjectDTO tSubjectDTO;
+
 	public List<TSubject> oneList = new ArrayList<TSubject>();
 	public List<TSubject> twoList = new ArrayList<TSubject>();
 	public List<TSubject> threeList = new ArrayList<TSubject>();
@@ -52,6 +62,14 @@ public class TrainingPlanAction extends BaseAction {
 	public List<TSubject> sixList = new ArrayList<TSubject>();
 	public List<TSubject> sevenList = new ArrayList<TSubject>();
 	public List<TSubject> eightList = new ArrayList<TSubject>();
+
+	public TSubjectDTO gettSubjectDTO() {
+		return tSubjectDTO;
+	}
+
+	public void settSubjectDTO(TSubjectDTO tSubjectDTO) {
+		this.tSubjectDTO = tSubjectDTO;
+	}
 
 	public TSubject gettSubject() {
 		return tSubject;
@@ -543,11 +561,74 @@ public class TrainingPlanAction extends BaseAction {
 		String id = request.getParameter("id");
 		try {
 			tSubject = localServiceEXProxy.querySubjectById(Long.valueOf(id));
+
+			tSubjectDTO = new TSubjectDTO();
+			BeanUtils.copyProperties(tSubjectDTO, tSubject);
+			Long outlineId = tSubject.getSubjectoutline();
+			if (outlineId != null) {
+				TDownload outlineFile = localServiceEXProxy
+						.queryDownloadById(outlineId);
+				tSubjectDTO
+						.setSubjectoutlinePath(outlineFile.getFileshowpath());
+				tSubjectDTO.setSubjectoutlineName(outlineFile.getFilename());
+			}
+
+			Long scheduleId = tSubject.getSubjectschedule();
+			if (scheduleId != null) {
+				TDownload scheduleFile = localServiceEXProxy
+						.queryDownloadById(scheduleId);
+				tSubjectDTO.setSubjectschedulePath(scheduleFile
+						.getFileshowpath());
+				tSubjectDTO.setSubjectscheduleName(scheduleFile.getFilename());
+			}
+
+			Long infoId = tSubject.getSubjectinfo();
+			if (infoId != null) {
+				TDownload infoFile = localServiceEXProxy
+						.queryDownloadById(infoId);
+				tSubjectDTO.setSubjectinfoPath(infoFile.getFileshowpath());
+				tSubjectDTO.setSubjectinfoName(infoFile.getFilename());
+			}
+
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return "download_detail";
+		return "plan_table_subject";
+	}
+
+	/**
+	 * 查询专业教师列表
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryTeacher() {
+		if (log.isDebugEnabled()) {
+			log.debug("查询交易信息currentPage>>>>:" + currentPage);
+		}
+		try {
+			String id = request.getParameter("id");
+			String departmentCode = request.getParameter("para");
+			TTeacher tTeacher = new TTeacher();
+			tTeacher.setDepartment(departmentCode);
+			Map map = localServiceProxy.queryTeacherByTypeForPage(tTeacher,
+					Constant.PAGESIZE, currentPage);
+			TDictionary tDictionary = new TDictionary();
+			tDictionary.setDictionarycode(departmentCode);
+			tDictionary.setDictionarytype("department");
+			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,
+					100000, 1);
+			dictionaryList = (List<TDictionary>) pager.getRows();
+			if (ComonUtil.validateMapResult(map)) {
+				teacherList = (List<TTeacher>) map.get(Constant.TEACHER_LIST);
+				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
+				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "teacher_result";
 	}
 }

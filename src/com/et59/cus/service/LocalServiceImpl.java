@@ -2066,12 +2066,13 @@ public class LocalServiceImpl implements LocalService {
 		com.et59.cus.domain.entity.TDictionaryExample.Criteria criteria = example
 				.createCriteria();
 		String type = tDictionary.getDictionarytype();
-		if (null != tDictionary.getDictionarytype()) {
+		if (null != type) {
 			criteria.andDictionarytypeEqualTo(type);
 		}
-		// if (null != bsProductcategory.getSupplierCode()) {
-		// criteria.andSupplierCodeEqualTo(bsProductcategory.getSupplierCode());
-		// }
+		String code = tDictionary.getDictionarycode();
+		if (null != code) {
+			criteria.andDictionarycodeEqualTo(code);
+		}
 		int startrecord = (currentpage - 1) * pagesize;
 		List<TDictionary> list = commonDAOEx.selectDictionaryForPage(example,
 				startrecord, pagesize);
@@ -2176,10 +2177,10 @@ public class LocalServiceImpl implements LocalService {
 		com.et59.cus.domain.entity.TTeacherExample.Criteria criteria = example
 				.createCriteria();
 		example.setOrderByClause(" department ");
-		// if (null != tTeacher.getArticletype()
-		// && !tTeacher.getArticletype().equals("")) {
-		// criteria.andArticletypeEqualTo(tTeacher.getArticletype());
-		// }
+		String dep = tTeacher.getDepartment();
+		if (null != dep && !dep.equals("")) {
+			criteria.andDepartmentEqualTo(dep);
+		}
 		// if (null != bsArticle.getStartdatacreatenew()
 		// && null == bsArticle.getEnddatacreatenew()) {
 		// criteria.andCreatedateGreaterThan(bsArticle.getStartdatacreatenew());

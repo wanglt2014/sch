@@ -79,7 +79,37 @@ public class TSubjectDTO {
 
 	private String subjectschedulePath;
 
+	private String subjectscheduleName;
+
 	private String subjectinfoPath;
+
+	private String subjectinfoName;
+
+	private String subjectteachername;
+
+	public String getSubjectteachername() {
+		return subjectteachername;
+	}
+
+	public void setSubjectteachername(String subjectteachername) {
+		this.subjectteachername = subjectteachername;
+	}
+
+	public String getSubjectscheduleName() {
+		return subjectscheduleName;
+	}
+
+	public void setSubjectscheduleName(String subjectscheduleName) {
+		this.subjectscheduleName = subjectscheduleName;
+	}
+
+	public String getSubjectinfoName() {
+		return subjectinfoName;
+	}
+
+	public void setSubjectinfoName(String subjectinfoName) {
+		this.subjectinfoName = subjectinfoName;
+	}
 
 	public String getSubjectschedulePath() {
 		return subjectschedulePath;

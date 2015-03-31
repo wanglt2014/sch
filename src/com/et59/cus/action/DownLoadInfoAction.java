@@ -155,6 +155,7 @@ public class DownLoadInfoAction extends BaseAction {
 		String filepath = savePath + "\\" + tampFileName + extName;
 		String fileShowPath = Constant.PATH_OTHER + "\\" + tampFileName
 				+ extName;
+		TDownload downloaddetail = getTDownload();
 		try {
 			downloaddetail.setFilepath(filepath);
 			downloaddetail.setFileshowpath(fileShowPath);

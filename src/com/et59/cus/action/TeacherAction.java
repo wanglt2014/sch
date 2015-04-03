@@ -9,7 +9,6 @@ import java.util.Map;
 import org.apache.commons.beanutils.BeanUtils;
 
 import com.alibaba.fastjson.JSON;
-import com.et59.cus.domain.entity.BsProductcategory;
 import com.et59.cus.domain.entity.BsUser;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
@@ -430,37 +429,6 @@ public class TeacherAction extends BaseAction {
 	}
 
 	/**
-	 * 查询产品分类名字
-	 */
-	public void queryproductcategroyNameByCode() {
-		String code = request.getParameter("code");
-		try {
-			String name = localServiceProxy.queryBsProductcategoryByCode(code);
-			super.reponseWriter(name);
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * 查询所有产品分类
-	 */
-	public void queryproductcategory() {
-		try {
-			BsProductcategory bsProductcategory = new BsProductcategory();
-			Pager pager = localServiceProxy.queryProductcategoryBypage(
-					bsProductcategory, 10000, 1);
-			super.reponseWriter(JSON.toJSONString(pager.getRows()));
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
 	 * 更新
 	 */
 	public void update() {
@@ -519,59 +487,59 @@ public class TeacherAction extends BaseAction {
 			String filepath = savePath + "\\" + tampFileName + extName;
 			teacher.setIimageurll(filepath);
 		}
-		try {
-			// 新增教师表
-			long teacherId = localServiceProxy.saveTeacher(teacher);
-
-			// 新增附件表
-			HashMap downloadIdMap = saveAllDownloadTable();
-
-			// 新增立项，课程，论文，获奖表
-			// 1.保存立项表
-			tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
-			Long researchId = localServiceEXProxy.saveTResearch(tResearch);
-
-			// 2.保存课程表
-			subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
-			subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
-			subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
-			subject.setSubjectteachername(teacher.getTeachername());
-			subject.setSubjectisvalid(Constant.ISVALID_1);
-			Long subjectId = localServiceEXProxy.saveTSubject(subject);
-
-			// 3.保存论文表
-			tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"));
-			Long paperId = localServiceEXProxy.saveTPaper(tPaper);
-
-			// 4.保存获奖表
-
-			// 新增教师关联表 立项，课程，论文，获奖
-			// 1.立项关联表
-			TTeacherResearchKey tTeacherResearchKey = new TTeacherResearchKey();
-			tTeacherResearchKey.setTeacherid(teacherId);
-			tTeacherResearchKey.setResearchid(researchId);
-			localServiceEXProxy.saveTTeacherResearchKey(tTeacherResearchKey);
-
-			// 2.课程关联表
-			TTeacherSubjectKey tTeacherSubjectKey = new TTeacherSubjectKey();
-			tTeacherSubjectKey.setTeacherid(teacherId);
-			tTeacherSubjectKey.setSubjectid(subjectId);
-			localServiceEXProxy.saveTTeacherSubjectKey(tTeacherSubjectKey);
-
-			// 3.论文关联表
-			TTeacherPaperKey tTeacherPaperKey = new TTeacherPaperKey();
-			tTeacherPaperKey.setPaperid(paperId);
-			tTeacherPaperKey.setTeacherid(teacherId);
-			localServiceEXProxy.saveTTeacherPaperKey(tTeacherPaperKey);
-
-			// 4.获奖关联表
-
-			flag = true;
-			super.reponseWriter(JSON.toJSONString(flag));
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// try {
+		// // 新增教师表
+		// long teacherId = localServiceProxy.saveTeacher(teacher);
+		//
+		// // 新增附件表
+		// HashMap downloadIdMap = saveAllDownloadTable();
+		//
+		// // 新增立项，课程，论文，获奖表
+		// // 1.保存立项表
+		// tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
+		// Long researchId = localServiceEXProxy.saveTResearch(tResearch);
+		//
+		// // 2.保存课程表
+		// subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
+		// subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
+		// subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
+		// subject.setSubjectteachername(teacher.getTeachername());
+		// subject.setSubjectisvalid(Constant.ISVALID_1);
+		// Long subjectId = localServiceEXProxy.saveTSubject(subject);
+		//
+		// // 3.保存论文表
+		// tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"));
+		// Long paperId = localServiceEXProxy.saveTPaper(tPaper);
+		//
+		// // 4.保存获奖表
+		//
+		// // 新增教师关联表 立项，课程，论文，获奖
+		// // 1.立项关联表
+		// TTeacherResearchKey tTeacherResearchKey = new TTeacherResearchKey();
+		// tTeacherResearchKey.setTeacherid(teacherId);
+		// tTeacherResearchKey.setResearchid(researchId);
+		// localServiceEXProxy.saveTTeacherResearchKey(tTeacherResearchKey);
+		//
+		// // 2.课程关联表
+		// TTeacherSubjectKey tTeacherSubjectKey = new TTeacherSubjectKey();
+		// tTeacherSubjectKey.setTeacherid(teacherId);
+		// tTeacherSubjectKey.setSubjectid(subjectId);
+		// localServiceEXProxy.saveTTeacherSubjectKey(tTeacherSubjectKey);
+		//
+		// // 3.论文关联表
+		// TTeacherPaperKey tTeacherPaperKey = new TTeacherPaperKey();
+		// tTeacherPaperKey.setPaperid(paperId);
+		// tTeacherPaperKey.setTeacherid(teacherId);
+		// localServiceEXProxy.saveTTeacherPaperKey(tTeacherPaperKey);
+		//
+		// // 4.获奖关联表
+		//
+		// flag = true;
+		// super.reponseWriter(JSON.toJSONString(flag));
+		// } catch (Exception e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
 
 	}
 

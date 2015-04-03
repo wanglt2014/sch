@@ -78,6 +78,7 @@
 						
 						</div>
 						<div class="div_planInfo">
+						<hr class="line_teacher" />
 							<div class="planInfo" style="margin-left: 10%;">
 							<strong>任课教师：</strong><c:out value="${tSubjectDTO.subjectteachername}" escapeXml="false" />
 							</div>

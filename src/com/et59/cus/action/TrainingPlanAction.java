@@ -631,4 +631,13 @@ public class TrainingPlanAction extends BaseAction {
 		}
 		return "teacher_result";
 	}
+
+	/**
+	 * 测试
+	 * 
+	 * @return
+	 */
+	public String testindex() {
+		return "testindex";
+	}
 }

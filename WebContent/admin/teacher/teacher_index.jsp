@@ -20,14 +20,6 @@
 <head>
 <meta charset="UTF-8">
 <title>${sitename}--后台管理系统--师资队伍</title>
-<%-- <script type="text/javascript" src="${request_path}/js/jquery.js" ></script>  --%>
-<%-- <link rel="stylesheet" type="text/css" href="${js_path}/plupload/queue/css/jquery.plupload.queue.css"> --%>
-<%-- <%-- <script type="text/javascript" src="${js_path}/plupload/plupload.full.min.js"></script> --%> 
-<%-- <script type="text/javascript" src="${request_path}/plupload/js/plupload.full.js"></script> --%>
-<%-- <script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script> --%>
-<%-- <script type="text/javascript" src="${request_path}/js/plupload/queue/jquery.plupload.queue.js"></script> --%>
-<%-- <script type="text/javascript" src="${request_path}/plupload/js/i18n/cn.js"></script> --%>
-<%-- <script type="text/javascript" src="${js_path}/plupload/pluploadEXT.js"></script> --%>
 </head>
 <body>
 <div id="teachertb" style="padding: 5px; height: auto">
@@ -312,7 +304,23 @@
 				</div>
 				<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab5"> 
 					<div class="ftitle">获奖</div>
-					包括教学获奖、科研获奖、社会服务获奖，以及若干可自定义的备选项
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addPrize()">新增获奖信息</a><br><br>
+					<div id="prizeDiv">
+					<div class="fitem">
+						<label>奖项性质:</label>
+						<select id="prizetype0" name="prizetype0" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 100px" >
+							<option value="teach">教学获奖</option>
+							<option value="science">科研获奖</option>
+							<option value="social" >社会服务获奖</option>
+						</select>
+   					</div>
+					<div class="fitem">
+					<label>获奖说明:</label>
+   					<textarea id="prizeinfo0" rows=3 style="width: 400px;" name="prizeinfo0"  class="textarea easyui-validatebox" maxlength="1000"></textarea>
+					</div>
+<%-- 					<span id="deletePrizeDiv"><a id="deleteA" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" style="display: none" onclick="removePrize('+addIndex+')">删除获奖信息</a></span> --%>
+					</div>
 				</div>
 			</div>
 </form>
@@ -325,6 +333,38 @@
 			onclick="javascript:$('#teacherdlg').dialog('close')">取消</a>
 	</div>
 	<script>
+	var addIndex = 1;
+	 var temp = $("#prizeDiv").html();//保存渲染前的模板
+	function addPrize() {
+// 		alert("#prize"+(parseInt(addIndex)-1));
+// 		  $("#prize0").clone(true).attr("id",'prize'+addIndex).insertAfter("#prize"+(parseInt(addIndex)-1));
+		  
+		  $("#deletePrizeDiv").remove();
+		  $(temp).html().replace(/"prizetype0"/g,'prizetype'+addIndex).replace(/"prizeinfo0"/g,'prizeinfo'+addIndex)
+// 		  $('').appendTo($("#prizeDiv"));
+		  $(temp).appendTo($("#prizeDiv"));
+		  $("#prizeDiv select").combobox({panelHeight:"auto"});//渲染
+		  $('#prizetype0').last().attr("id",'prizetype'+addIndex);
+		  $('#prizeinfo0').last().attr("id",'prizeinfo'+addIndex);
+//  		  alert($("select[id='prizetype0']").attr("id"));
+		 
+// 		  $("#prize"+addIndex+" input[name='prizetype0']").attr("name",'prizetype'+addIndex);
+		  // 		  alert($("#prize"+addIndex+" select").attr("id"));
+// 		  $("#prize"+addIndex+ " div[id='prizeSelect0']").attr("id",'prizeSelect'+addIndex);
+// 		  $("#prize"+addIndex+ " select").combobox({panelHeight:"auto"});//渲染
+// 		  $("#prize"+addIndex+" select[id='prizetype0']").remove();
+// 		  $("#prizeSelect"+addIndex).append('<select id="prizetype'+addIndex+'" name="prizetype'+addIndex+'" class="easyui-combobox" panelHeight="auto" editable="false"style="width: 100px" ><option value="teach">教学获奖</option><option value="science">科研获奖</option><option value="social" >社会服务获奖</option></select>');
+		  
+// 		   $("#prize"+addIndex+" select[id='prizetype0']").attr("id",'prizetype'+addIndex).attr("name",'prizetype'+addIndex);
+// 		  $("#prize"+addIndex+ " textarea[id='prizeinfo0']").attr("id",'prizeinfo'+addIndex).attr("name",'prizeinfo'+addIndex);
+// 		  $("#deletePrizeDiv").remove();
+		  $("#prizeDiv").append('<span id="deletePrizeDiv"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePrize('+addIndex+')">删除获奖信息</a></span>');
+		  addIndex++;
+	}
+	function removePrize(infoIndex) {
+		alert(infoIndex);
+		$("#prize"+infoIndex).remove();
+	}
 	function formatTutortype(value,rowData,rowIndex) {
     	var s="";
 		if(value=="1"){
@@ -385,6 +425,7 @@
 		url = 'Teacher_save';
 		$('#sex').combobox('select',0);
 		$('#tutortype').combobox('select',1);
+		$('#prizetype').combobox('select','teach');
 		$('#img_photo').hide();
 		
 		var data = $('#department').combobox('getData');

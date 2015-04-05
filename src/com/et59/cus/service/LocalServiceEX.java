@@ -7,11 +7,14 @@ import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TPrize;
+import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
+import com.et59.cus.domain.entity.TTeacherPrizeExample;
 import com.et59.cus.domain.entity.TTeacherPrizeKey;
 import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
@@ -230,4 +233,35 @@ public interface LocalServiceEX {
 	public List<TSubject> queryTSubject(TSubjectExample example)
 			throws Exception;
 
+	/**
+	 * 保存获奖信息表
+	 */
+	@SuppressWarnings("rawtypes")
+	public Long saveTPrize(TPrize tPrize) throws Exception;
+	
+	/**
+	 * 查询获奖关联表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List queryTTeacherPrizeKey(TTeacherPrizeExample example)
+			throws Exception;
+	
+	/**
+	 * 查询获奖表
+	 */
+	@SuppressWarnings("rawtypes")
+	public List queryTPrizeList(TPrizeExample example) throws Exception;
+	
+	/**
+	 * 更新获奖表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void updateTPrize(TPrize tPrize) throws Exception;
+	
+	/**
+	 * 删除获奖表
+	 */
+	@SuppressWarnings("rawtypes")
+	public void deleteTPrize(TPrizeExample example)
+			throws Exception;
 }

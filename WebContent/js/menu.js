@@ -303,3 +303,21 @@ function secondcollapseAll(row, data) {
 		$('#menutg').treegrid('collapseAll', data[i].id);
 	});
 }
+
+function clearArticle(){
+	$.ajax({
+		type : 'post',
+		async : false,
+		url : 'Cache_clearArticle',
+		success : function(data) {
+			if(data=="true"){
+				jAlert('清除成功！','提示');
+			}else{
+				jAlert('清除失败！','提示');
+			}
+		},
+		error : function() {
+			jAlert('系统错误，请联系管理员','错误提示');
+		}
+	});
+}

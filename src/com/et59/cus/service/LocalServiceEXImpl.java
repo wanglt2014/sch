@@ -26,11 +26,14 @@ import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TPrize;
+import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
+import com.et59.cus.domain.entity.TTeacherPrizeExample;
 import com.et59.cus.domain.entity.TTeacherPrizeKey;
 import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
@@ -270,6 +273,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTPaper(TPaper tPaper) throws Exception {
 		tPaperDAO.updateByPrimaryKeySelective(tPaper);
 	}
+	
+	/**
+	 * 保存获奖信息表
+	 */
+	@Override
+	public Long saveTPrize(TPrize tPrize) throws Exception {
+		return tPrizeDAO.insertReturnId(tPrize);
+	}
 
 	/**
 	 * 保存立项关联表
@@ -436,6 +447,40 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public List<TSubject> queryTSubject(TSubjectExample example)
 			throws Exception {
 		return tSubjectDAO.selectByExample(example);
+	}
+	
+	/**
+	 * 查询获奖关联表
+	 */
+	@Override
+	public List queryTTeacherPrizeKey(TTeacherPrizeExample example)
+			throws Exception {
+		return tTeacherPrizeDAO.selectByExample(example);
+	}
+	
+	/**
+	 * 查询获奖表
+	 */
+	@Override
+	public List queryTPrizeList(TPrizeExample example) throws Exception {
+		return tPrizeDAO.selectByExample(example);
+	}
+
+	/**
+	 * 更新获奖表
+	 */
+	@Override
+	public void updateTPrize(TPrize tPrize) throws Exception {
+		tPrizeDAO.updateByPrimaryKeySelective(tPrize);
+	}
+	
+	/**
+	 * 删除获奖表
+	 */
+	@Override
+	public void deleteTPrize(TPrizeExample example)
+			throws Exception {
+		tPrizeDAO.deleteByExample(example);
 	}
 
 }

@@ -112,7 +112,7 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 	public List<BsArticle> queryArticleByTypeForPage(BsArticleExample example,
 			int startrecord, int endrecord) throws Exception {
 		List<BsArticle> list = (List<BsArticle>) getSqlMapClientTemplate()
-				.queryForList("bs_article.ibatorgenerated_selectByExample",
+				.queryForList("bs_article.ibatorgenerated_selectByExampleWithBLOBs",
 						example, startrecord, endrecord);
 		return list;
 	}

@@ -79,7 +79,7 @@
     <dispatcher>REQUEST</dispatcher> 
   </filter-mapping>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>cache/index.html</welcome-file>
   </welcome-file-list>
   <error-page>
     <error-code>401</error-code>

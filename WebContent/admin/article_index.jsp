@@ -85,7 +85,7 @@
             </div>
             <div class="fitem">
                 <label>标题</label>
-                <input id="articletitle" name="articletitle" class="easyui-validatebox" required="true" size="50px;" maxlength="20">
+                <input id="articletitle" name="articletitle" class="easyui-validatebox" required="true" size="50px;" maxlength="50">
             </div>
             <div class="fitem">
                 <label>作者:</label>
@@ -93,7 +93,7 @@
             </div>
             <div class="fitem">
                 <label>概要:</label>
-                <textarea name="articlesummary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;" maxlength="500"/>
+                <textarea name="articlesummary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;" maxlength="1000"/>
             </div>
             <div class="fitem">
                 <label>时间:</label>
@@ -138,11 +138,11 @@
     
     <script type="text/javascript">
         var url;
-        var allBox = $(":checkbox");
-        allBox.click(function () {
-            allBox.removeAttr("checked");
-            $(this).attr("checked", "checked");
-        });
+//         var allBox = $(":checkbox");
+//         allBox.click(function () {
+//             allBox.removeAttr("checked");
+//             $(this).attr("checked", "checked");
+//         });
         var um = UM.getEditor('myEditornew');
         function formatpreview(value,rowData,rowIndex) {
         	var type =rowData.articletype;
@@ -214,7 +214,7 @@
 //                 $('#createdate').datebox('setValue', '2015-3-15');
 // 				 $('#filePath').text(row.);
 				$('#uploadFileDIV').hide();
-
+				$('#articletypeInsert').combobox('select', row.articletype);
                 UM.getEditor('myEditornew').setContent(row.content, false);
                 url = 'Article_update?id='+row.articleid;
             }

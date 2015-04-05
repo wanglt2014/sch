@@ -305,8 +305,8 @@
 				<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab5"> 
 					<div class="ftitle">获奖</div>
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addPrize()">新增获奖信息</a><br><br>
-					<div id="prizeDiv">
-					<div class="fitem">
+					<div id="templeate" style="display: none;">
+					<div id="row0" class="fitem">
 						<label>奖项性质:</label>
 						<select id="prizetype0" name="prizetype0" class="easyui-combobox" panelHeight="auto" editable="false"
 							style="width: 100px" >
@@ -314,13 +314,15 @@
 							<option value="science">科研获奖</option>
 							<option value="social" >社会服务获奖</option>
 						</select>
-   					</div>
-					<div class="fitem">
+   					<br><br>
 					<label>获奖说明:</label>
    					<textarea id="prizeinfo0" rows=3 style="width: 400px;" name="prizeinfo0"  class="textarea easyui-validatebox" maxlength="1000"></textarea>
+					<span id="deletePrizeDiv0"></span>
+<!-- 					<input id="prizeId0" name="prizeId0" /> -->
 					</div>
-<%-- 					<span id="deletePrizeDiv"><a id="deleteA" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" style="display: none" onclick="removePrize('+addIndex+')">删除获奖信息</a></span> --%>
+					<hr  style="border-bottom:1px dashed;"><br>
 					</div>
+					<div id="prizeDiv" ></div>
 				</div>
 			</div>
 </form>
@@ -333,37 +335,24 @@
 			onclick="javascript:$('#teacherdlg').dialog('close')">取消</a>
 	</div>
 	<script>
-	var addIndex = 1;
-	 var temp = $("#prizeDiv").html();//保存渲染前的模板
+	var prizeNum = 0;
+	var temp = $("#templeate").html();//保存渲染前的模板
 	function addPrize() {
-// 		alert("#prize"+(parseInt(addIndex)-1));
-// 		  $("#prize0").clone(true).attr("id",'prize'+addIndex).insertAfter("#prize"+(parseInt(addIndex)-1));
-		  
-		  $("#deletePrizeDiv").remove();
-		  $(temp).html().replace(/"prizetype0"/g,'prizetype'+addIndex).replace(/"prizeinfo0"/g,'prizeinfo'+addIndex)
-// 		  $('').appendTo($("#prizeDiv"));
-		  $(temp).appendTo($("#prizeDiv"));
-		  $("#prizeDiv select").combobox({panelHeight:"auto"});//渲染
-		  $('#prizetype0').last().attr("id",'prizetype'+addIndex);
-		  $('#prizeinfo0').last().attr("id",'prizeinfo'+addIndex);
-//  		  alert($("select[id='prizetype0']").attr("id"));
-		 
-// 		  $("#prize"+addIndex+" input[name='prizetype0']").attr("name",'prizetype'+addIndex);
-		  // 		  alert($("#prize"+addIndex+" select").attr("id"));
-// 		  $("#prize"+addIndex+ " div[id='prizeSelect0']").attr("id",'prizeSelect'+addIndex);
-// 		  $("#prize"+addIndex+ " select").combobox({panelHeight:"auto"});//渲染
-// 		  $("#prize"+addIndex+" select[id='prizetype0']").remove();
-// 		  $("#prizeSelect"+addIndex).append('<select id="prizetype'+addIndex+'" name="prizetype'+addIndex+'" class="easyui-combobox" panelHeight="auto" editable="false"style="width: 100px" ><option value="teach">教学获奖</option><option value="science">科研获奖</option><option value="social" >社会服务获奖</option></select>');
-		  
-// 		   $("#prize"+addIndex+" select[id='prizetype0']").attr("id",'prizetype'+addIndex).attr("name",'prizetype'+addIndex);
-// 		  $("#prize"+addIndex+ " textarea[id='prizeinfo0']").attr("id",'prizeinfo'+addIndex).attr("name",'prizeinfo'+addIndex);
-// 		  $("#deletePrizeDiv").remove();
-		  $("#prizeDiv").append('<span id="deletePrizeDiv"><a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePrize('+addIndex+')">删除获奖信息</a></span>');
-		  addIndex++;
+		prizeNum++;
+		$("#deletePrizeBtn").remove();
+		var html = temp.replace(new RegExp("prizetype0","gm"),'prizetype'+prizeNum).replace(new RegExp("prizeinfo0","gm"),'prizeinfo'+prizeNum).replace(new RegExp("deletePrizeDiv0","gm"),'deletePrizeDiv'+prizeNum).replace(new RegExp("row0","gm"),'row'+prizeNum);
+		$("#prizeDiv").append(html);
+		$("#prizeDiv select").combobox({panelHeight:"auto"});//渲染
+		$("#deletePrizeDiv"+prizeNum).append('<a id="deletePrizeBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePrize('+prizeNum+')">删除获奖信息</a>');
+		
 	}
+	
 	function removePrize(infoIndex) {
-		alert(infoIndex);
-		$("#prize"+infoIndex).remove();
+		$("#row"+infoIndex).remove();
+		if(parseInt(infoIndex)>1){
+			$("#deletePrizeDiv"+(parseInt(infoIndex)-1)).append('<a id="deletePrizeBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePrize('+(parseInt(infoIndex)-1)+')">删除获奖信息</a>');
+		}
+		prizeNum--;
 	}
 	function formatTutortype(value,rowData,rowIndex) {
     	var s="";
@@ -420,12 +409,14 @@
 		uploaderForPic.init();
 		deleteAllUploader();
 		showAllUploader();
+		prizeNum = 0;
+		$("#prizeDiv").html("");
 		$('#teacherdlg').dialog('open').dialog('setTitle', '新增教师');
 		$('#teacherfm').form('clear');
-		url = 'Teacher_save';
+		url = 'Teacher_save?temp=0';
 		$('#sex').combobox('select',0);
 		$('#tutortype').combobox('select',1);
-		$('#prizetype').combobox('select','teach');
+		$('#prizetype0').combobox('select','teach');
 		$('#img_photo').hide();
 		
 		var data = $('#department').combobox('getData');
@@ -443,6 +434,8 @@
 	function editTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
 		if (row) {
+			prizeNum = 0;
+			$("#prizeDiv").html("");
 			$('#teacherdlg').dialog('open').dialog('setTitle',
 					'编辑教师');
 			$('#teacherfm').form('clear');
@@ -451,6 +444,7 @@
 			$('#img_photo').attr('src',row.iimageurll);
 			dispalyAllUploader();
 			var subjectid,paperid,researchid;
+			var prizeList;
 // 			alert(JSON.stringify(row));
 			//从后台获取数据
 			$.ajax({
@@ -463,9 +457,22 @@
  					subjectid = json.subject.subjectid;
  					paperid = json.tPaper.paperid;
  					researchid=json.tResearch.researchid;
+ 					prizeList = json.tPrize;
+//   					alert(JSON.stringify(prizeList[0]));
  					$('#teacherfm').form('load', json.subject);
 					$('#teacherfm').form('load', json.tPaper);
 					$('#teacherfm').form('load', json.tResearch);
+					for(var i = 0; i < prizeList.length; i++){
+// 						alert(prizeList[i].prizetype);
+						addPrize();
+						$('#prizetype'+(parseInt(i)+1)).combobox('select',prizeList[i].prizetype);
+						$('#prizeinfo'+(parseInt(i)+1)).val(prizeList[i].prizeinfo);
+// 						$('#prizeId'+(parseInt(i)+1)).val(prizeList[i].prizeid);
+// 						alert(prizeList[i].prizeid);
+					}
+// 					for(var tmp in prizeList){   
+// 						alert(tmp.prizetype);
+// 					}
 				},
 				error : function() {
 					jAlert('系统错误，请联系管理员','错误提示');
@@ -490,8 +497,9 @@
 			$('#titlename').val($('#title').combobox('getText'));
 			$('#jobname').val($('#job').combobox('getText'));
 			$('#subjecttypename').val($('#subjecttype').combobox('getText'));
+			
 			$('#teacherfm').form('submit', {
-    			url : url,
+    			url : url+"&prizeNum="+prizeNum,
     			onSubmit : function() {
     				return $(this).form('validate');
     			},
@@ -543,7 +551,7 @@
 					}, function(result) {
 // 						alert(result);
 						if (result = "true") {
-							
+							$('#teacherdg').datagrid('reload'); // reload the user data
 						} else {
 							jAlert('系统错误，请联系管理员', '错误提示');
 						}
@@ -640,8 +648,8 @@
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
-				html += '<input type="hiddent" name="uploader_pic_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_pic_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" style="display: none;" name="uploader_pic_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" style="display: none;" name="uploader_pic_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list');
 			!function(i){
 				previewImage(files[i],function(imgsrc){
@@ -688,8 +696,8 @@
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_outline_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_outline_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" style="display: none;" name="uploader_outline_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" style="display: none;" name="uploader_outline_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-outline');
 		}
 // 		$("#uploader_subject_count").val(count);
@@ -746,8 +754,8 @@
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_schedule_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_schedule_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" style="display: none;" name="uploader_schedule_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" style="display: none;" name="uploader_schedule_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-schedule');
 		}
 // 		$("#uploader_subject_count").val(count);
@@ -804,8 +812,8 @@
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_subject_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_subject_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" style="display: none;" name="uploader_subject_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" style="display: none;" name="uploader_subject_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-subject');
 		}
 // 		$("#uploader_subject_count").val(count);
@@ -863,8 +871,8 @@
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_project_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_project_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" style="display: none;" name="uploader_project_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" style="display: none;" name="uploader_project_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-project');
 		}
 // 		$("#uploader_project_count").val(count);
@@ -915,8 +923,8 @@
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" name="uploader_paper_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" name="uploader_paper_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" style="display: none;" name="uploader_paper_tmpname" value="' + file_id + '" />';
+				html += '<input type="hiddent" style="display: none;" name="uploader_paper_name" value="' + file_name + '" /></li>';
 			$(html).appendTo('#file-list-paper');
 		}
 // 		$("#uploader_paper_count").val(count);

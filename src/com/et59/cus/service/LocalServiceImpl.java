@@ -955,8 +955,10 @@ public class LocalServiceImpl implements LocalService {
 	public void deleteArticle(long id) throws Exception {
 		// 删除关联表和文件表
 		try {
-			BsArticle bsArticle = bsArticleDAO.selectByPrimaryKey(id);
-			Long downloadId = bsArticle.getDownloadid();
+			BsArticleExample example = new BsArticleExample();
+			example.createCriteria().andArticleidEqualTo(id);
+			List<BsArticle> bsArticle = bsArticleDAO.selectByExampleWithoutBLOBs(example);
+			Long downloadId = bsArticle.get(0).getDownloadid();
 			if (downloadId != null) {
 				tdownloadDAO.deleteByPrimaryKey(downloadId);
 			}
@@ -2118,12 +2120,18 @@ public class LocalServiceImpl implements LocalService {
 				.createCriteria();
 		String teacherName = tTeacher.getTeachername();
 		String department = tTeacher.getDepartment();
+		String longinName = tTeacher.getTeacherlonginname();
 		if (null != teacherName) {
 			criteria.andTeachernameLike(teacherName);
 		}
 		if (null != department && department != "") {
 			criteria.andDepartmentEqualTo(department);
 		}
+		
+		if (null != longinName && longinName != "") {
+			criteria.andTeacherlonginnameEqualTo(longinName);
+		}
+		
 		int startrecord = (currentpage - 1) * pagesize;
 		List<TTeacher> list = commonDAOEx.selectTeacherForPage(example,
 				startrecord, pagesize);
@@ -2151,7 +2159,7 @@ public class LocalServiceImpl implements LocalService {
 	 * @throws Exception
 	 */
 	public Long saveTeacher(TTeacher tTeacher) throws Exception {
-		return tTeacherDAO.insert(tTeacher);
+		return tTeacherDAO.insertSelectiveReturnId(tTeacher);
 	}
 
 	/**

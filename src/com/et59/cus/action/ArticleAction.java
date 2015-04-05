@@ -276,8 +276,8 @@ public class ArticleAction extends BaseAction {
 				tDownload.setFileisvalid(Constant.ISVALID_1);
 				Long downloadId = localServiceEXProxy
 						.saveDownloadInfo(tDownload);
-				System.out.println(downloadId + "******downloadId" + "路径："
-						+ filepath);
+//				System.out.println(downloadId + "******downloadId" + "路径："
+//						+ filepath);
 				bsArticle.setDownloadid(downloadId);
 			}
 			localServiceProxy.saveArticle(bsArticle);

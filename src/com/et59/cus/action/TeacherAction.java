@@ -2,7 +2,9 @@ package com.et59.cus.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,11 +16,14 @@ import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPrize;
+import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
+import com.et59.cus.domain.entity.TTeacherPrizeExample;
+import com.et59.cus.domain.entity.TTeacherPrizeKey;
 import com.et59.cus.domain.entity.TTeacherResearchExample;
 import com.et59.cus.domain.entity.TTeacherResearchKey;
 import com.et59.cus.domain.entity.TTeacherSubjectExample;
@@ -199,12 +204,17 @@ public class TeacherAction extends BaseAction {
 		String page = request.getParameter("page"); // 当前页数
 		String rows = request.getParameter("rows"); // 每页显示行数
 		try {
+			Map<String, Object> session =context.getSession();
+			BsUser sessionuser = (BsUser) session.get("user");
 			TTeacher tTeacher = new TTeacher();
 			if (null != teachernamequery && !teachernamequery.equals("")) {
 				tTeacher.setTeachername(teachernamequery);
 			}
 			if (null != departmentquery && !departmentquery.equals("")) {
 				tTeacher.setDepartment(departmentquery);
+			}
+			if(null!=sessionuser&&sessionuser.getIsadmin().equals("no")){
+				tTeacher.setTeacherlonginname(sessionuser.getUsername());
 			}
 			Pager pager = localServiceProxy.queryTeacherBypage(tTeacher,
 					Integer.valueOf(rows), Integer.valueOf(page));
@@ -257,10 +267,17 @@ public class TeacherAction extends BaseAction {
 				tPaper = localServiceEXProxy.queryTPaper(tpList.get(0)
 						.getPaperid());
 			}
-
+			
+			//加载获奖信息
+			List<TPrize> tPrizeList = new ArrayList<TPrize>();
+			TPrizeExample tPrizeExample = new TPrizeExample();
+			tPrizeExample.createCriteria().andPrizeteacheridEqualTo(teacherIdLong);
+			tPrizeList=localServiceEXProxy.queryTPrizeList(tPrizeExample);
+			
 			map.put("subject", subject);
 			map.put("tPaper", tPaper);
 			map.put("tResearch", tResearch);
+			map.put("tPrize", tPrizeList);
 
 			super.reponseWriter(JSON.toJSONString(map));
 			// } catch (IOException e) {
@@ -275,9 +292,12 @@ public class TeacherAction extends BaseAction {
 	 */
 	public void delete() {
 		boolean flag = false;
-		String id = request.getParameter("id");
+		String id = request.getParameter("id");//教师ID
 		try {
 			Integer i = localServiceProxy.deleteTeacher(Integer.valueOf(id));
+			TPrizeExample example = new TPrizeExample();
+			example.createCriteria().andPrizeteacheridEqualTo(Long.parseLong(id));
+			localServiceEXProxy.deleteTPrize(example);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -398,15 +418,18 @@ public class TeacherAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public TPrize getPrize() {
-		String papername = request.getParameter("papername");
-		String paperauthor = request.getParameter("paperauthor");
-		String papernotename = request.getParameter("papernotename");
-		String papernoteyear = request.getParameter("papernoteyear");
-		String papernoteno = request.getParameter("papernoteno");
-
-		TPrize tPrize = new TPrize();
-		return tPrize;
+	public List<TPrize> getPrize() {
+		List<TPrize> list = new ArrayList<TPrize>();
+		TPrize tPrize = null;
+		String prizeNum = request.getParameter("prizeNum");
+		String prizeId = null;
+		for (int i = 1; i <= Integer.parseInt(prizeNum); i++) {
+			tPrize = new TPrize();
+			tPrize.setPrizeinfo(request.getParameter("prizeinfo"+i));
+			tPrize.setPrizetype(request.getParameter("prizetype"+i));
+			list.add(tPrize);
+		}
+		return list;
 	}
 
 	/**
@@ -442,6 +465,7 @@ public class TeacherAction extends BaseAction {
 		TSubject subject = getSubject();
 		TResearch tResearch = getResearch();
 		TPaper tPaper = getPaper();
+		List<TPrize> tPrizeList = getPrize();
 		try {
 			teacher.setId(Long.valueOf(id));
 			localServiceProxy.updateTeacher(teacher);
@@ -459,7 +483,18 @@ public class TeacherAction extends BaseAction {
 				tResearch.setResearchid(Long.valueOf(researchid));
 				localServiceEXProxy.updateTResearch(tResearch);
 			}
-
+			
+			if (tPrizeList != null && tPrizeList.size()>0) {
+				TPrizeExample example = new TPrizeExample();
+				example.createCriteria().andPrizeteacheridEqualTo(Long.valueOf(id));
+				localServiceEXProxy.deleteTPrize(example);
+				for (Iterator iterator = tPrizeList.iterator(); iterator.hasNext();) {
+					TPrize tPrize = (TPrize) iterator.next();
+					tPrize.setPrizeteacherid(Long.valueOf(id));
+					localServiceEXProxy.saveTPrize(tPrize);
+					
+				}
+			}
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (NumberFormatException e) {
@@ -475,6 +510,7 @@ public class TeacherAction extends BaseAction {
 		TSubject subject = getSubject();
 		TResearch tResearch = getResearch();
 		TPaper tPaper = getPaper();
+		List<TPrize> tPrizeList = getPrize();
 		String result = "";
 		long downloadid = 0l;
 		String name = request.getParameter("uploader_pic_name");
@@ -487,60 +523,66 @@ public class TeacherAction extends BaseAction {
 			String filepath = savePath + "\\" + tampFileName + extName;
 			teacher.setIimageurll(filepath);
 		}
-		// try {
-		// // 新增教师表
-		// long teacherId = localServiceProxy.saveTeacher(teacher);
-		//
-		// // 新增附件表
-		// HashMap downloadIdMap = saveAllDownloadTable();
-		//
-		// // 新增立项，课程，论文，获奖表
-		// // 1.保存立项表
-		// tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
-		// Long researchId = localServiceEXProxy.saveTResearch(tResearch);
-		//
-		// // 2.保存课程表
-		// subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
-		// subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
-		// subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
-		// subject.setSubjectteachername(teacher.getTeachername());
-		// subject.setSubjectisvalid(Constant.ISVALID_1);
-		// Long subjectId = localServiceEXProxy.saveTSubject(subject);
-		//
-		// // 3.保存论文表
-		// tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"));
-		// Long paperId = localServiceEXProxy.saveTPaper(tPaper);
-		//
-		// // 4.保存获奖表
-		//
-		// // 新增教师关联表 立项，课程，论文，获奖
-		// // 1.立项关联表
-		// TTeacherResearchKey tTeacherResearchKey = new TTeacherResearchKey();
-		// tTeacherResearchKey.setTeacherid(teacherId);
-		// tTeacherResearchKey.setResearchid(researchId);
-		// localServiceEXProxy.saveTTeacherResearchKey(tTeacherResearchKey);
-		//
-		// // 2.课程关联表
-		// TTeacherSubjectKey tTeacherSubjectKey = new TTeacherSubjectKey();
-		// tTeacherSubjectKey.setTeacherid(teacherId);
-		// tTeacherSubjectKey.setSubjectid(subjectId);
-		// localServiceEXProxy.saveTTeacherSubjectKey(tTeacherSubjectKey);
-		//
-		// // 3.论文关联表
-		// TTeacherPaperKey tTeacherPaperKey = new TTeacherPaperKey();
-		// tTeacherPaperKey.setPaperid(paperId);
-		// tTeacherPaperKey.setTeacherid(teacherId);
-		// localServiceEXProxy.saveTTeacherPaperKey(tTeacherPaperKey);
-		//
-		// // 4.获奖关联表
-		//
-		// flag = true;
-		// super.reponseWriter(JSON.toJSONString(flag));
-		// } catch (Exception e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-
+		 try {
+			 Map<String, Object> session =context.getSession();
+			BsUser sessionuser = (BsUser) session.get("user");
+			teacher.setTeacherlonginname(sessionuser.getUsername());
+		 // 新增教师表
+		 long teacherId = localServiceProxy.saveTeacher(teacher);
+		
+		 // 新增附件表
+		 HashMap downloadIdMap = saveAllDownloadTable();
+		
+		 // 新增立项，课程，论文，获奖表
+		 // 1.保存立项表
+		 tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
+		 Long researchId = localServiceEXProxy.saveTResearch(tResearch);
+		
+		 // 2.保存课程表
+		 subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
+		 subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
+		 subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
+		 subject.setSubjectteachername(teacher.getTeachername());
+		 subject.setSubjectisvalid(Constant.ISVALID_1);
+		 Long subjectId = localServiceEXProxy.saveTSubject(subject);
+		
+		 // 3.保存论文表
+		 tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"));
+		 Long paperId = localServiceEXProxy.saveTPaper(tPaper);
+		 
+		 int prizeSize = tPrizeList.size();
+		 // 4.保存获奖表
+		for (int i = 0; i < prizeSize; i++) {
+			TPrize tPrize = (TPrize) tPrizeList.get(i);
+			tPrize.setPrizeteacherid(teacherId);
+			localServiceEXProxy.saveTPrize(tPrize);
+		}
+		
+		 // 新增教师关联表 立项，课程，论文，获奖
+		 // 1.立项关联表
+		 TTeacherResearchKey tTeacherResearchKey = new TTeacherResearchKey();
+		 tTeacherResearchKey.setTeacherid(teacherId);
+		 tTeacherResearchKey.setResearchid(researchId);
+		 localServiceEXProxy.saveTTeacherResearchKey(tTeacherResearchKey);
+		
+		 // 2.课程关联表
+		 TTeacherSubjectKey tTeacherSubjectKey = new TTeacherSubjectKey();
+		 tTeacherSubjectKey.setTeacherid(teacherId);
+		 tTeacherSubjectKey.setSubjectid(subjectId);
+		 localServiceEXProxy.saveTTeacherSubjectKey(tTeacherSubjectKey);
+		
+		 // 3.论文关联表
+		 TTeacherPaperKey tTeacherPaperKey = new TTeacherPaperKey();
+		 tTeacherPaperKey.setPaperid(paperId);
+		 tTeacherPaperKey.setTeacherid(teacherId);
+		 localServiceEXProxy.saveTTeacherPaperKey(tTeacherPaperKey);
+		
+		 flag = true;
+		 super.reponseWriter(JSON.toJSONString(flag));
+		 } catch (Exception e) {
+		 // TODO Auto-generated catch block
+		 e.printStackTrace();
+		 }
 	}
 
 	/**

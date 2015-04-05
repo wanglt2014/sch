@@ -1,5 +1,6 @@
 package com.et59.cus.action;
 
+import java.io.File;
 import java.util.List;
 
 import com.alibaba.fastjson.JSON;
@@ -47,4 +48,41 @@ public class CacheAction extends BaseAction {
 		}
 
 	}
+	
+	/**
+	 * 清除通知，
+	 */
+	public void clearArticle() {
+		boolean flag = false;
+		try {
+			String realPath = request.getSession().getServletContext().getRealPath("/");
+				log.info("***清除缓存***key[]");
+				File file = new File(realPath);
+				delete(file);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+	
+	private void delete(File file){  
+		if(file.isDirectory()){   
+			 File[] files = file.listFiles();   
+			 for (File file2 : files) {  
+				 if(file2.isFile()){
+					 String name=file2.getName();   
+					 //Download_,Teacher_,TrainingPlan_
+					 if(name.endsWith(".htm")){    
+						System.out.println(file2.getAbsolutePath());    
+						file2.delete();   
+					}  
+				 }
+				
+			}
+			
+		}
+	}
+	
 }

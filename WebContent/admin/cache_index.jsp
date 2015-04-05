@@ -35,20 +35,20 @@
 			</td>
 		</tr>
 		<tr>
-			<td>新闻缓存</td>
-			<td><a  style="color: blue;" >清除</a>
+			<td>前台页面缓存</td>
+			<td><a  onclick="clearArticle()"  style="color: blue;" >清除</a>
 			</td>
 		</tr>
-		<tr>
-			<td>产品缓存</td>
-			<td><a  style="color: blue;" >清除</a>
-			</td>
-		</tr>
-		<tr>
-			<td>权限缓存</td>
-			<td><a  style="color: blue;" >清除</a>
-			</td>
-		</tr>
+<!-- 		<tr> -->
+<!-- 			<td>产品缓存</td> -->
+<!-- 			<td><a  style="color: blue;" >清除</a> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
+<!-- 		<tr> -->
+<!-- 			<td>权限缓存</td> -->
+<!-- 			<td><a  style="color: blue;" >清除</a> -->
+<!-- 			</td> -->
+<!-- 		</tr> -->
 	</table>
 </body>
 </html>

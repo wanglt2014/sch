@@ -14,8 +14,8 @@
 		<interceptors>
 			<interceptor name="loginInterceptor"
 				class="com.et59.cus.interceptor.LoginInterceptor"></interceptor>
-			<interceptor name="timerInterceptor"
-				class="com.et59.cus.interceptor.TimerInterceptor"></interceptor>
+<!-- 			<interceptor name="timerInterceptor" -->
+<!-- 				class="com.et59.cus.interceptor.TimerInterceptor"></interceptor> -->
 		</interceptors>
 
 		<global-results>
@@ -26,14 +26,14 @@
 		</global-results>
 
 		<action name="index" class="LoginAction" method="init">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/index.jsp</result>
 		</action>
 		<!-- 后台登陆 -->
 		<action name="Admin_*" class="AdminAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="adminindex">/admin/adminindex.jsp</result>
 			<result name="login">/admin/admin_login.jsp</result>
@@ -42,12 +42,12 @@
 		<!-- 资源管理 -->
 		<action name="Resource_*" class="ResourceAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/resource_index.jsp</result>
 		</action>
 		<action name="OpenApi_*" class="OpenApiAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/openapi/open_index.jsp</result>
 			<result name="apiindex">/openapi/openapi_index.jsp</result>
@@ -57,32 +57,32 @@
 		</action>
 		<!-- 移动客户端接口 -->
 		<action name="Mobile_*" class="MobileAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<result name="mobile">/common/mobile.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		<action name="Address_*" class="AddressAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<result name="index">/admin/address_index.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		<action name="LeaveMessage_*" class="LeaveMessageAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<result name="index">/admin/message_index.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		<action name="ExcuteTime_*" class="ExcuteTimeAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<result name="index">/admin/actionexcutetime.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		<action name="Cache_*" class="CacheAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<result name="index">/admin/cache_index.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
 		<action name="ShopCart_*" class="ShopCartAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<result name="commit">/pay/order.jsp</result>
 			<result name="pay">/pay/pay.jsp</result>
@@ -90,48 +90,48 @@
 		</action>
 		<action name="OpenApp_*" class="OpenAppAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/openapi/openapp_index.jsp</result>
 			<result name="adminindex">/openapi/openapp_adminindex.jsp</result>
 		</action>
 		<action name="OpenLog_*" class="OpenLogAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/openapi/openlog_index.jsp</result>
 		</action>
 		<action name="OpenOauth_*" class="OpenOauthAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/openapi/openoauth_index.jsp</result>
 		</action>
 		<!-- 角色管理 -->
 		<action name="Role_*" class="RoleAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/role_index.jsp</result>
 		</action>
 		<!-- 市场合作 -->
 		<action name="Marking_*" class="MarkingAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/marking_index.jsp</result>
 		</action>
 		<!-- 供应商管理 -->
 		<action name="Supplier_*" class="SupplierAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/supplier_index.jsp</result>
 		</action>
 		<!-- 菜单管理 -->
 		<action name="Menu_*" class="MenuAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="menu_show">/admin/menu.jsp</result>
 		</action>
@@ -139,20 +139,20 @@
 		<action name="Productcategory_*" class="ProductcategoryAction"
 			method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/productcategory_index.jsp</result>
 		</action>
 		<!-- 邮件管理 -->
 		<action name="Email_*" class="EmailAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/mailquery.jsp</result>
 		</action>
 		<action name="Login_*" class="LoginAction" method="{1}">
 			<interceptor-ref name="json" />
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="to_login">/index.jsp</result>
 			<result name="directSumapay">/loginauth/loginauth.jsp</result>
@@ -177,7 +177,7 @@
 		<!-- 商务合作 -->
 		<action name="Bussiness_*" class="BussinessAction" method="{1}">
 			<interceptor-ref name="json" />
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="to_bussiness">/bussiness/bussiness.jsp</result>
 			<result type="json"></result>
@@ -186,7 +186,7 @@
 
 		<!-- 产品订购 -->
 		<action name="Ordering_*" class="OrderingAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="toSubIndex">/ordering/orderingindex.jsp</result>
@@ -197,7 +197,7 @@
 			<result type="json"></result>
 		</action>
 		<action name="Pay_*" class="PayAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="return_success">/common/common_success.jsp</result>
 			<result name="return_fail">/common/common_fail.jsp</result>
@@ -205,7 +205,7 @@
 		</action>
 		<!-- 产品续费 -->
 		<action name="RepeatOrder_*" class="RepeatOrderAction" method="{1}">
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="toSubIndex">/repeatorder/repeatorderindex.jsp</result>
 			<result name="repeatOrder_query">/repeatorder/repeatorder_query.jsp</result>
@@ -221,7 +221,7 @@
 		<!-- 用户中心 -->
 		<action name="UserCenter_*" class="UserCenterAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="toUserInfo">/usercenter/userinfo.jsp</result>
 			<result name="order_detail">/usercenter/orderdetail.jsp</result>
@@ -233,7 +233,7 @@
 		<!-- 用户管理 -->
 		<action name="User_*" class="UserAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/userlist.jsp</result>
 			<result type="json"></result>
@@ -241,7 +241,7 @@
 		<!--交易查询 -->
 		<action name="Trade_*" class="TradeAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 
 			<result name="toTradeSearch">/usercenter/trade_search.jsp</result>
@@ -257,7 +257,7 @@
 		<!--product action -->
 		<action name="Product_*" class="ProductAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/product_index.jsp</result>
 			<result type="json"></result>
@@ -265,7 +265,7 @@
 		<!-- 用户服务 -->
 		<action name="UserService_*" class="UserServiceAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/userservice_index.jsp</result>
 			<result type="json"></result>
@@ -273,7 +273,7 @@
 		<!-- 订单管理 -->
 		<action name="Order_*" class="OrderAction" method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/order_index.jsp</result>
 			<result type="json"></result>
@@ -283,7 +283,7 @@
 		<action name="News_*" class="NewsAction" method="{1}">
 			<interceptor-ref name="json" />
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="to_news_index">/news/news.jsp</result>
 			<result name="news_detail">/news/newsdetail.jsp</result>
@@ -296,7 +296,7 @@
 		<action name="Download_*" class="DownLoadInfoAction" method="{1}">
 			<interceptor-ref name="json" />
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="to_download_index">/downloadInfo/downloadList.jsp</result>
 			<result name="download_detail">/downloadInfo/downloaddetail.jsp</result>
@@ -309,7 +309,7 @@
 		<action name="College_*" class="CollegeAction" method="{1}">
 			<interceptor-ref name="json" />
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="to_college_summary">/college/collegeSummary.jsp</result>
 			<result name="to_college_index">/college/collegeList.jsp</result>
@@ -324,7 +324,7 @@
 		<action name="Article_*" class="ArticleAction" method="{1}">
 			<interceptor-ref name="json" />
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="to_notice_index">/article/noticeList.jsp</result>
 			<result name="notice_detail">/article/noticedetail.jsp</result>
@@ -344,7 +344,7 @@
 		<action name="Subject_*" class="SubjectAction" method="{1}">
 			<interceptor-ref name="json" />
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="to_subject_index">/subject/subjectList.jsp</result>
 			<result name="subject_detail">/subject/subjectdetail.jsp</result>
@@ -358,7 +358,7 @@
 		<action name="Dictionary_*" class="DictionaryAction"
 			method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/dictionary_index.jsp</result>
 		</action>
@@ -367,7 +367,7 @@
 		<action name="Teacher_*" class="TeacherAction"
 			method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/teacher/teacher_index.jsp</result>
 			<result name="to_teacher_index">/teacher/teacherList.jsp</result>
@@ -385,7 +385,7 @@
 		<action name="TrainingPlan_*" class="TrainingPlanAction"
 			method="{1}">
 			<interceptor-ref name="loginInterceptor"></interceptor-ref>
-			<interceptor-ref name="timerInterceptor" />
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/trainingPlan_index.jsp</result>
 			<result name="to_plan_index">/trainingplan/planList.jsp</result>

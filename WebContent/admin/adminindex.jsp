@@ -154,8 +154,8 @@ function getMyName(){
 					<a href="Admin_logout">[退出]</a>
 				&nbsp;|&nbsp;
 			</c:if>
-					<a href="${request_path}"
-					target="_blank">网站前台</a> &nbsp;|&nbsp;
+<%-- 					<a href="${request_path}" --%>
+<!-- 					target="_blank">网站前台</a> &nbsp;|&nbsp; -->
 			</div>
 		</div>
 		<div data-options="region:'west',split:true" title="系统菜单"

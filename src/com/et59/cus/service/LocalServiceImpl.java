@@ -2148,7 +2148,7 @@ public class LocalServiceImpl implements LocalService {
 	 */
 	@Override
 	public Integer deleteTeacher(long id) throws Exception {
-		return tTeacherDAO.deleteByProc(id);
+		return tTeacherDAO.deleteByPrimaryKey(id);
 	}
 
 	/**

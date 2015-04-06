@@ -454,14 +454,15 @@
 				success : function(datas) {
 					var json = eval('(' + datas + ')'); 
 //  					alert(JSON.stringify(json.subject.subjectid)+"!!!"+JSON.stringify(json.tPaper.paperid)+"@@@@"+JSON.stringify(json.tResearch.researchid));
- 					subjectid = json.subject.subjectid;
- 					paperid = json.tPaper.paperid;
- 					researchid=json.tResearch.researchid;
+//  					subjectid = json.subject.subjectid;
+//  					paperid = json.tPaper.paperid;
+//  					researchid=json.tResearch.researchid;
+// 					alert(JSON.stringify(json));
  					prizeList = json.tPrize;
-//   					alert(JSON.stringify(prizeList[0]));
- 					$('#teacherfm').form('load', json.subject);
-					$('#teacherfm').form('load', json.tPaper);
-					$('#teacherfm').form('load', json.tResearch);
+//  					alert(JSON.stringify(datas.subject));
+ 					$('#teacherfm').form('load', json.subject[0]);
+					$('#teacherfm').form('load', json.tPaper[0]);
+					$('#teacherfm').form('load', json.tResearch[0]);
 					for(var i = 0; i < prizeList.length; i++){
 // 						alert(prizeList[i].prizetype);
 						addPrize();
@@ -479,7 +480,8 @@
 				}
 			});
 // 			alert(subjectid+"##"+paperid+"$$"+researchid);
-			url = 'Teacher_update?id=' + row.id+'&subjectid='+subjectid+'&paperid='+paperid+'&researchid='+researchid;
+// 			url = 'Teacher_update?id=' + row.id+'&subjectid='+subjectid+'&paperid='+paperid+'&researchid='+researchid;
+			url = 'Teacher_update?id=' + row.id;
 		}
 	}
 	

@@ -26,9 +26,11 @@ import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TPaperExample;
 import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
+import com.et59.cus.domain.entity.TResearchExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
@@ -241,6 +243,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTResearch(TResearch tResearch) throws Exception {
 		tResearchDAO.updateByPrimaryKeySelective(tResearch);
 	}
+	
+	/**
+	 * 删除立项表
+	 */
+	@Override
+	public void deleteTResearch(TResearchExample example) throws Exception {
+		tResearchDAO.deleteByExample(example);
+	}
 
 	/**
 	 * 保存课程表
@@ -257,6 +267,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTSubject(TSubject tSubject) throws Exception {
 		tSubjectDAO.updateByPrimaryKeySelective(tSubject);
 	}
+	
+	/**
+	 * 删除课程表
+	 */
+	@Override
+	public void deleteTSubject(TSubjectExample example) throws Exception {
+		tSubjectDAO.deleteByExample(example);
+	}
 
 	/**
 	 * 保存论文表
@@ -272,6 +290,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public void updateTPaper(TPaper tPaper) throws Exception {
 		tPaperDAO.updateByPrimaryKeySelective(tPaper);
+	}
+	
+	/**
+	 * 删除论文表
+	 */
+	@Override
+	public void deleteTPaper(TPaperExample example) throws Exception {
+		tPaperDAO.deleteByExample(example);
 	}
 	
 	/**
@@ -343,6 +369,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public TResearch queryTResearch(Long researchid) throws Exception {
 		return tResearchDAO.selectByPrimaryKey(researchid);
 	}
+	
+	/**
+	 * 查询立项表
+	 */
+	@Override
+	public List<TResearch> queryTResearchList(TResearchExample example) throws Exception {
+		return tResearchDAO.selectByExample(example);
+	}
 
 	/**
 	 * 查询论文关联表
@@ -359,6 +393,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public TPaper queryTPaper(Long paperid) throws Exception {
 		return tPaperDAO.selectByPrimaryKey(paperid);
+	}
+	
+	/**
+	 * 查询论文表
+	 */
+	@Override
+	public List<TPaper> queryTPaperList(TPaperExample example) throws Exception {
+		return tPaperDAO.selectByExample(example);
 	}
 
 	/**

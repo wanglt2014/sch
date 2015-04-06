@@ -7,9 +7,11 @@ import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TPaperExample;
 import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
+import com.et59.cus.domain.entity.TResearchExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
@@ -145,7 +147,6 @@ public interface LocalServiceEX {
 	/**
 	 * 查询立项表
 	 */
-	@SuppressWarnings("rawtypes")
 	public TResearch queryTResearch(Long researchid) throws Exception;
 
 	/**
@@ -158,85 +159,72 @@ public interface LocalServiceEX {
 	/**
 	 * 更新立项表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void updateTResearch(TResearch tResearch) throws Exception;
 
 	/**
 	 * 更新课程表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void updateTSubject(TSubject tSubject) throws Exception;
 
 	/**
 	 * 更新论文表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void updateTPaper(TPaper tPaper) throws Exception;
 
 	/**
 	 * 专业查询--（人才培养方案）
 	 */
-	@SuppressWarnings("rawtypes")
 	public Pager queryTDepartmentBypage(TDepartment tDepartment, int pagesize,
 			int currentpage) throws Exception;
 
 	/**
 	 * 保存专业表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void saveTDepartmentWithBLOBs(
 			TDepartmentWithBLOBs tDepartmentWithBLOBs) throws Exception;
 
 	/**
 	 * 编辑专业表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void updateTDepartmentWithBLOBs(
 			TDepartmentWithBLOBs tDepartmentWithBLOBs) throws Exception;
 
 	/**
 	 * 删除专业表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void deleteTDepartment(long id) throws Exception;
 
 	/**
 	 * 删除方案表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void deleteTTrainingplan(TTrainingplanExample example)
 			throws Exception;
 
 	/**
 	 * 查询专业表
 	 */
-	@SuppressWarnings("rawtypes")
 	public TDepartmentWithBLOBs queryTDepartment(long id) throws Exception;
 
 	/**
 	 * 保存方案表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void saveTTrainingplan(TTrainingplan tTrainingplan) throws Exception;
 
 	/**
 	 * 查询方案表
 	 */
-	@SuppressWarnings("rawtypes")
 	public List<TTrainingplan> queryTTrainingplan(TTrainingplanExample example)
 			throws Exception;
 
 	/**
 	 * 查询课程表
 	 */
-	@SuppressWarnings("rawtypes")
 	public List<TSubject> queryTSubject(TSubjectExample example)
 			throws Exception;
 
 	/**
 	 * 保存获奖信息表
 	 */
-	@SuppressWarnings("rawtypes")
 	public Long saveTPrize(TPrize tPrize) throws Exception;
 	
 	/**
@@ -255,13 +243,36 @@ public interface LocalServiceEX {
 	/**
 	 * 更新获奖表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void updateTPrize(TPrize tPrize) throws Exception;
 	
 	/**
 	 * 删除获奖表
 	 */
-	@SuppressWarnings("rawtypes")
 	public void deleteTPrize(TPrizeExample example)
 			throws Exception;
+	
+	/**
+	 * 查询立项表
+	 */
+	public List<TResearch> queryTResearchList(TResearchExample example) throws Exception;
+	
+	/**
+	 * 查询论文表
+	 */
+	public List<TPaper> queryTPaperList(TPaperExample example) throws Exception;
+	
+	/**
+	 * 删除立项表
+	 */
+	public void deleteTResearch(TResearchExample example) throws Exception;
+	
+	/**
+	 * 删除论文表
+	 */
+	public void deleteTPaper(TPaperExample example) throws Exception;
+	
+	/**
+	 * 删除课程表
+	 */
+	public void deleteTSubject(TSubjectExample example) throws Exception;
 }

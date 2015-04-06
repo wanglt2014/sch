@@ -31,6 +31,7 @@ String request_path = request.getContextPath();
 .ul_teacher{list-style:disc; !important;}
 td.p20{width: 20%;height: 30px;}
 td.p15{width: 15%;height: 30px;}
+td.p80{width: 80%;height: 30px;}
 </style>
 </head>
 
@@ -177,7 +178,7 @@ td.p15{width: 15%;height: 30px;}
 						</div>
 						</s:if>
 						
-						<s:if test="tResearchDTO.researchname!=null">
+						<s:if test="tPaperDTO.papername!=null">
 						<div class="div_baseinfo" >
 							<h3 class="title_teacher">论文信息</h3>
 							<hr class="line_teacher" />
@@ -207,6 +208,33 @@ td.p15{width: 15%;height: 30px;}
 						</div>
 						</s:if>
 						
+						
+						<s:if test="tPrizeList!=null">
+						<div class="div_baseinfo" >
+							<h3 class="title_teacher">获奖信息</h3>
+							<hr class="line_teacher" />
+							<div  class="baseInfo">
+								<div class="content_all">
+								<div style="margin-top: 20px;" >
+								<table style="width: 100%;">
+								<tr><th class="p20">奖项性质</th><th colspan="3">获奖说明</th></tr>
+								<s:iterator var="tprize" value="tPrizeList" status="tpr">
+								<tr>
+								<td style="width: 100px;">
+								<i class="point">•</i>&nbsp;
+								<s:if test="#tprize.prizetype=='teach'">教学获奖</s:if>
+								<s:elseif test="#tprize.prizetype==science">科研获奖</s:elseif>
+								<s:else>社会服务获奖</s:else>
+								</td>
+								<td class="p80" colspan="3"><s:property value="#tprize.prizeinfo"/></td>
+								</tr>
+								</s:iterator>
+								</table>
+								</div>
+								</div>
+							</div>
+						</div>
+						</s:if>
 						
 						<div>
 <%-- 						<s:if test="bsArticledetail.download.fileshowpath!='' and bsArticledetail.download.fileshowpath!=null"> --%>

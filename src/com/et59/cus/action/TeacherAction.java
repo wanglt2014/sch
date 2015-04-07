@@ -23,14 +23,6 @@ import com.et59.cus.domain.entity.TResearchExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacher;
-import com.et59.cus.domain.entity.TTeacherPaperExample;
-import com.et59.cus.domain.entity.TTeacherPaperKey;
-import com.et59.cus.domain.entity.TTeacherPrizeExample;
-import com.et59.cus.domain.entity.TTeacherPrizeKey;
-import com.et59.cus.domain.entity.TTeacherResearchExample;
-import com.et59.cus.domain.entity.TTeacherResearchKey;
-import com.et59.cus.domain.entity.TTeacherSubjectExample;
-import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.dto.TPaperDTO;
 import com.et59.cus.dto.TResearchDTO;
@@ -72,9 +64,9 @@ public class TeacherAction extends BaseAction {
 	public TResearchDTO tResearchDTO;
 
 	public TPaperDTO tPaperDTO;
-	
+
 	public List<TPrize> tPrizeList;
-	
+
 	public List<TPrize> gettPrizeList() {
 		return tPrizeList;
 	}
@@ -217,7 +209,7 @@ public class TeacherAction extends BaseAction {
 		String page = request.getParameter("page"); // 当前页数
 		String rows = request.getParameter("rows"); // 每页显示行数
 		try {
-			Map<String, Object> session =context.getSession();
+			Map<String, Object> session = context.getSession();
 			BsUser sessionuser = (BsUser) session.get("user");
 			TTeacher tTeacher = new TTeacher();
 			if (null != teachernamequery && !teachernamequery.equals("")) {
@@ -226,7 +218,7 @@ public class TeacherAction extends BaseAction {
 			if (null != departmentquery && !departmentquery.equals("")) {
 				tTeacher.setDepartment(departmentquery);
 			}
-			if(null!=sessionuser&&sessionuser.getIsadmin().equals("no")){
+			if (null != sessionuser && sessionuser.getIsadmin().equals("no")) {
 				tTeacher.setTeacherlonginname(sessionuser.getUsername());
 			}
 			Pager pager = localServiceProxy.queryTeacherBypage(tTeacher,
@@ -256,25 +248,27 @@ public class TeacherAction extends BaseAction {
 			// 加载立项
 			List<TResearch> tResearchList = new ArrayList<TResearch>();
 			TResearchExample trexample = new TResearchExample();
-			trexample.createCriteria().andResearchteacheridEqualTo(teacherIdLong);
+			trexample.createCriteria().andResearchteacheridEqualTo(
+					teacherIdLong);
 			tResearchList = localServiceEXProxy.queryTResearchList(trexample);
-	
+
 			// 加载论文
 			TPaper tPaper = new TPaper();
 			List<TPaper> tPaperList = new ArrayList<TPaper>();
 			TPaperExample tpexample = new TPaperExample();
 			tpexample.createCriteria().andPaperteacheridEqualTo(teacherIdLong);
 			tPaperList = localServiceEXProxy.queryTPaperList(tpexample);
-			
-			//加载获奖信息
+
+			// 加载获奖信息
 			List<TPrize> tPrizeList = new ArrayList<TPrize>();
 			TPrizeExample tPrizeExample = new TPrizeExample();
-			tPrizeExample.createCriteria().andPrizeteacheridEqualTo(teacherIdLong);
-			tPrizeList=localServiceEXProxy.queryTPrizeList(tPrizeExample);
-			
-//			map.put("subject", tSubject);
-//			map.put("tPaper", tPaper);
-//			map.put("tResearch", tResearch);
+			tPrizeExample.createCriteria().andPrizeteacheridEqualTo(
+					teacherIdLong);
+			tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
+
+			// map.put("subject", tSubject);
+			// map.put("tPaper", tPaper);
+			// map.put("tResearch", tResearch);
 			map.put("subject", subList);
 			map.put("tPaper", tPaperList);
 			map.put("tResearch", tResearchList);
@@ -293,23 +287,23 @@ public class TeacherAction extends BaseAction {
 	 */
 	public void delete() {
 		boolean flag = false;
-		String id = request.getParameter("id");//教师ID
+		String id = request.getParameter("id");// 教师ID
 		try {
 			Long idL = Long.parseLong(id);
 			Integer i = localServiceProxy.deleteTeacher(idL);
-			
+
 			TSubjectExample tsexample = new TSubjectExample();
 			tsexample.createCriteria().andSubjectteacheridEqualTo(idL);
 			localServiceEXProxy.deleteTSubject(tsexample);
-			
+
 			TPaperExample tpexample = new TPaperExample();
 			tpexample.createCriteria().andPaperteacheridEqualTo(idL);
 			localServiceEXProxy.deleteTPaper(tpexample);
-			
+
 			TResearchExample trexample = new TResearchExample();
 			trexample.createCriteria().andResearchteacheridEqualTo(idL);
 			localServiceEXProxy.deleteTResearch(trexample);
-			
+
 			TPrizeExample example = new TPrizeExample();
 			example.createCriteria().andPrizeteacheridEqualTo(idL);
 			localServiceEXProxy.deleteTPrize(example);
@@ -439,8 +433,8 @@ public class TeacherAction extends BaseAction {
 		String prizeNum = request.getParameter("prizeNum");
 		for (int i = 1; i <= Integer.parseInt(prizeNum); i++) {
 			tPrize = new TPrize();
-			tPrize.setPrizeinfo(request.getParameter("prizeinfo"+i));
-			tPrize.setPrizetype(request.getParameter("prizetype"+i));
+			tPrize.setPrizeinfo(request.getParameter("prizeinfo" + i));
+			tPrize.setPrizetype(request.getParameter("prizetype" + i));
 			list.add(tPrize);
 		}
 		return list;
@@ -470,9 +464,9 @@ public class TeacherAction extends BaseAction {
 	public void update() {
 		boolean flag = false;
 		Long id = Long.valueOf(request.getParameter("id"));// 教师ID
-//		String subjectid = request.getParameter("subjectid");
-//		String paperid = request.getParameter("paperid");
-//		String researchid = request.getParameter("researchid");
+		// String subjectid = request.getParameter("subjectid");
+		// String paperid = request.getParameter("paperid");
+		// String researchid = request.getParameter("researchid");
 
 		TTeacher teacher = getTeacher();
 		TSubject subject = getSubject();
@@ -505,16 +499,17 @@ public class TeacherAction extends BaseAction {
 				tResearch.setResearchteacherid(id);
 				localServiceEXProxy.saveTResearch(tResearch);
 			}
-			
-			if (tPrizeList != null && tPrizeList.size()>0) {
+
+			if (tPrizeList != null && tPrizeList.size() > 0) {
 				TPrizeExample example = new TPrizeExample();
 				example.createCriteria().andPrizeteacheridEqualTo(id);
 				localServiceEXProxy.deleteTPrize(example);
-				for (Iterator iterator = tPrizeList.iterator(); iterator.hasNext();) {
+				for (Iterator iterator = tPrizeList.iterator(); iterator
+						.hasNext();) {
 					TPrize tPrize = (TPrize) iterator.next();
 					tPrize.setPrizeteacherid(id);
 					localServiceEXProxy.saveTPrize(tPrize);
-					
+
 				}
 			}
 			flag = true;
@@ -543,49 +538,49 @@ public class TeacherAction extends BaseAction {
 			String filepath = savePath + "\\" + tampFileName + extName;
 			teacher.setIimageurll(filepath);
 		}
-		 try {
-			 Map<String, Object> session =context.getSession();
+		try {
+			Map<String, Object> session = context.getSession();
 			BsUser sessionuser = (BsUser) session.get("user");
 			teacher.setTeacherlonginname(sessionuser.getUsername());
-		 // 新增教师表
-		 long teacherId = localServiceProxy.saveTeacher(teacher);
-		
-		 // 新增附件表
-		 HashMap downloadIdMap = saveAllDownloadTable();
-		
-		 // 新增立项，课程，论文，获奖表
-		 // 1.保存立项表
-		 tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
-		 tResearch.setResearchteacherid(teacherId);
-		 Long researchId = localServiceEXProxy.saveTResearch(tResearch);
-		
-		 // 2.保存课程表
-		 subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
-		 subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
-		 subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
-		 subject.setSubjectteachername(teacher.getTeachername());
-		 subject.setSubjectisvalid(Constant.ISVALID_1);
-		 subject.setSubjectteacherid(teacherId);
-		 Long subjectId = localServiceEXProxy.saveTSubject(subject);
-		
-		 // 3.保存论文表
-		 tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"));
-		 tPaper.setPaperteacherid(teacherId);
-		 Long paperId = localServiceEXProxy.saveTPaper(tPaper);
-		 
-		 int prizeSize = tPrizeList.size();
-		 // 4.保存获奖表
-		for (int i = 0; i < prizeSize; i++) {
-			TPrize tPrize = (TPrize) tPrizeList.get(i);
-			tPrize.setPrizeteacherid(teacherId);
-			localServiceEXProxy.saveTPrize(tPrize);
+			// 新增教师表
+			long teacherId = localServiceProxy.saveTeacher(teacher);
+
+			// 新增附件表
+			HashMap downloadIdMap = saveAllDownloadTable();
+
+			// 新增立项，课程，论文，获奖表
+			// 1.保存立项表
+			tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
+			tResearch.setResearchteacherid(teacherId);
+			Long researchId = localServiceEXProxy.saveTResearch(tResearch);
+
+			// 2.保存课程表
+			subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
+			subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
+			subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
+			subject.setSubjectteachername(teacher.getTeachername());
+			subject.setSubjectisvalid(Constant.ISVALID_1);
+			subject.setSubjectteacherid(teacherId);
+			Long subjectId = localServiceEXProxy.saveTSubject(subject);
+
+			// 3.保存论文表
+			tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"));
+			tPaper.setPaperteacherid(teacherId);
+			Long paperId = localServiceEXProxy.saveTPaper(tPaper);
+
+			int prizeSize = tPrizeList.size();
+			// 4.保存获奖表
+			for (int i = 0; i < prizeSize; i++) {
+				TPrize tPrize = (TPrize) tPrizeList.get(i);
+				tPrize.setPrizeteacherid(teacherId);
+				localServiceEXProxy.saveTPrize(tPrize);
+			}
+
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		 flag = true;
-		 super.reponseWriter(JSON.toJSONString(flag));
-		 } catch (Exception e) {
-		 e.printStackTrace();
-		 }
 	}
 
 	/**
@@ -602,11 +597,13 @@ public class TeacherAction extends BaseAction {
 			tTeacherdetail = localServiceProxy.queryTeacherById(Long
 					.valueOf(id));
 			Long teacherIdLong = Long.parseLong(id);
-			// 加载课程 
-			//TODO 改为list
+			// 加载课程
+			// TODO 改为list
 			TSubjectExample tsexample = new TSubjectExample();
-			tsexample.createCriteria().andSubjectteacheridEqualTo(teacherIdLong);
-			TSubject tSubject = localServiceEXProxy.queryTSubject(tsexample).get(0);
+			tsexample.createCriteria()
+					.andSubjectteacheridEqualTo(teacherIdLong);
+			TSubject tSubject = localServiceEXProxy.queryTSubject(tsexample)
+					.get(0);
 			if (tSubject != null) {
 				tSubjectDTO = new TSubjectDTO();
 				BeanUtils.copyProperties(tSubjectDTO, tSubject);
@@ -636,10 +633,12 @@ public class TeacherAction extends BaseAction {
 				}
 			}
 
-			// 加载立项//TODO  改为list
+			// 加载立项//TODO 改为list
 			TResearchExample trexample = new TResearchExample();
-			trexample.createCriteria().andResearchteacheridEqualTo(teacherIdLong);
-			TResearch tResearch = localServiceEXProxy.queryTResearchList(trexample).get(0);
+			trexample.createCriteria().andResearchteacheridEqualTo(
+					teacherIdLong);
+			TResearch tResearch = localServiceEXProxy.queryTResearchList(
+					trexample).get(0);
 			if (tResearch != null) {
 				tResearchDTO = new TResearchDTO();
 				BeanUtils.copyProperties(tResearchDTO, tResearch);
@@ -648,30 +647,31 @@ public class TeacherAction extends BaseAction {
 				if (trDownid != null) {
 					TDownload researchFile = localServiceEXProxy
 							.queryDownloadById(trDownid);
-					tResearchDTO
-							.setDownloadShowPath(researchFile.getFileshowpath());
+					tResearchDTO.setDownloadShowPath(researchFile
+							.getFileshowpath());
 				}
 			}
 
 			// 加载论文//TODO 改为list
 			TPaperExample tpexample = new TPaperExample();
 			tpexample.createCriteria().andPaperteacheridEqualTo(teacherIdLong);
-			TPaper tPaper = localServiceEXProxy.queryTPaperList(tpexample).get(0);
+			TPaper tPaper = localServiceEXProxy.queryTPaperList(tpexample).get(
+					0);
 			if (tPaper != null) {
 				tPaperDTO = new TPaperDTO();
 				BeanUtils.copyProperties(tPaperDTO, tPaper);
 				Long paperDowId = tPaper.getPaperdownloadid();
 				if (paperDowId != null) {
-					TDownload paperFile = localServiceEXProxy.queryDownloadById(paperDowId);
+					TDownload paperFile = localServiceEXProxy
+							.queryDownloadById(paperDowId);
 					tPaperDTO.setPaperdownloadPath(paperFile.getFileshowpath());
 				}
 			}
-			
+
 			// 加载获奖信息
 			TPrizeExample tprexample = new TPrizeExample();
 			tprexample.createCriteria().andPrizeteacheridEqualTo(teacherIdLong);
 			tPrizeList = localServiceEXProxy.queryTPrizeList(tprexample);
-
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -767,9 +767,9 @@ public class TeacherAction extends BaseAction {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String doQueryTeacher() {
-		if (log.isDebugEnabled()) {
-			log.debug("查询交易信息currentPage>>>>:" + currentPage);
-		}
+		// if (log.isDebugEnabled()) {
+		// log.debug("查询交易信息currentPage>>>>:" + currentPage);
+		// }
 		try {
 			TTeacher tTeacher = new TTeacher();
 			Map map = localServiceProxy.queryTeacherByTypeForPage(tTeacher,

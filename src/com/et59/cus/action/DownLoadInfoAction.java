@@ -56,9 +56,9 @@ public class DownLoadInfoAction extends BaseAction {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String doqueryDownload() {
-		if (log.isDebugEnabled()) {
-			log.debug("查询交易信息currentPage>>>>:" + currentPage);
-		}
+		// if (log.isDebugEnabled()) {
+		// log.debug("查询交易信息currentPage>>>>:" + currentPage);
+		// }
 		try {
 			// TDownload download = new TDownload();
 			// download.setFileisvalid(Constant.ISVALID_1);

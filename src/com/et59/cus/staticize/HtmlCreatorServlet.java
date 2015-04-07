@@ -53,8 +53,7 @@ public class HtmlCreatorServlet extends HttpServlet {
 			throws ServletException, IOException {
 		response.setContentType("text/html");
 		response.setCharacterEncoding("UTF-8");
-		// 得到真实的请求地址
-		String templatePath = simpleURLReWrite(request);
+
 		String realPath = request.getSession().getServletContext()
 				.getRealPath("/");
 		File realPathFile = new File(realPath);
@@ -70,12 +69,14 @@ public class HtmlCreatorServlet extends HttpServlet {
 		boolean load = true;
 		// 如果静态html 存在，就直接显示html，否则，我们就生成它。
 		// wlt WLT注释掉 --------------------------------------------
-//		 if (cacheFile.exists()) {
-//		 load = false;
-//		 }
+		if (cacheFile.exists()) {
+			load = false;
+		}
 		// 注释掉 --------------------------------------------
 		RequestDispatcher dispatcher = null;
 		if (load) {
+			// 得到真实的请求地址
+			String templatePath = simpleURLReWrite(request);
 			// 例如 index.shtm ，则转发到 index
 			dispatcher = request.getRequestDispatcher(templatePath);
 			try {
@@ -114,7 +115,7 @@ public class HtmlCreatorServlet extends HttpServlet {
 			for (int i = 1; i < urls.length; i++) {
 				if (i == 1) {
 					uri += "_" + urls[i];
-				} else if(i == 2){
+				} else if (i == 2) {
 					uri += "?id=" + urls[i];
 				} else {
 					uri += "&para=" + urls[i];

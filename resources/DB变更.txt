@@ -1,0 +1,12 @@
+1.t_download
+filename  长度100
+
+
+2.t_teacher
+修改 content，introduction 类型为text
+
+
+
+
+
+http://121.42.199.93:8080/sch/Login_init.shtm

@@ -98,6 +98,7 @@ import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TRoleMenuExample;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
+import com.et59.cus.domain.entity.TTeacherWithBLOBs;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.TjActiontimeExample;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
@@ -957,7 +958,8 @@ public class LocalServiceImpl implements LocalService {
 		try {
 			BsArticleExample example = new BsArticleExample();
 			example.createCriteria().andArticleidEqualTo(id);
-			List<BsArticle> bsArticle = bsArticleDAO.selectByExampleWithoutBLOBs(example);
+			List<BsArticle> bsArticle = bsArticleDAO
+					.selectByExampleWithoutBLOBs(example);
 			Long downloadId = bsArticle.get(0).getDownloadid();
 			if (downloadId != null) {
 				tdownloadDAO.deleteByPrimaryKey(downloadId);
@@ -2127,11 +2129,11 @@ public class LocalServiceImpl implements LocalService {
 		if (null != department && department != "") {
 			criteria.andDepartmentEqualTo(department);
 		}
-		
+
 		if (null != longinName && longinName != "") {
 			criteria.andTeacherlonginnameEqualTo(longinName);
 		}
-		
+
 		int startrecord = (currentpage - 1) * pagesize;
 		List<TTeacher> list = commonDAOEx.selectTeacherForPage(example,
 				startrecord, pagesize);
@@ -2158,7 +2160,7 @@ public class LocalServiceImpl implements LocalService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Long saveTeacher(TTeacher tTeacher) throws Exception {
+	public Long saveTeacher(TTeacherWithBLOBs tTeacher) throws Exception {
 		return tTeacherDAO.insertSelectiveReturnId(tTeacher);
 	}
 
@@ -2169,7 +2171,7 @@ public class LocalServiceImpl implements LocalService {
 	 * @return
 	 * @throws Exception
 	 */
-	public int updateTeacher(TTeacher tTeacher) throws Exception {
+	public int updateTeacher(TTeacherWithBLOBs tTeacher) throws Exception {
 		return tTeacherDAO.updateByPrimaryKeySelective(tTeacher);
 	}
 

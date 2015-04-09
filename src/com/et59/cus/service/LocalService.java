@@ -27,6 +27,7 @@ import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TRoleMenu;
 import com.et59.cus.domain.entity.TTeacher;
+import com.et59.cus.domain.entity.TTeacherWithBLOBs;
 import com.et59.cus.domain.entity.TjActiontime;
 import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.BsEmailquery;
@@ -361,7 +362,7 @@ public interface LocalService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Long saveTeacher(TTeacher tTeacher) throws Exception;
+	public Long saveTeacher(TTeacherWithBLOBs tTeacher) throws Exception;
 
 	/**
 	 * 更新教师信息
@@ -370,14 +371,14 @@ public interface LocalService {
 	 * @return
 	 * @throws Exception
 	 */
-	public int updateTeacher(TTeacher tTeacher) throws Exception;
-	
+	public int updateTeacher(TTeacherWithBLOBs tTeacher) throws Exception;
+
 	/**
 	 * 按师资队伍查询 (分页)
 	 */
-	public Map queryTeacherByTypeForPage(TTeacher tTeacher,
-			int pagesize, int currentpage) throws Exception;
-	
+	public Map queryTeacherByTypeForPage(TTeacher tTeacher, int pagesize,
+			int currentpage) throws Exception;
+
 	/**
 	 * 查询教师byid
 	 */

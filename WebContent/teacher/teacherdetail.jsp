@@ -165,8 +165,8 @@ td.p80{width: 80%;height: 30px;}
 								<td class="p15"><s:property value="tResearchDTO.researchhost"/></td>
 								<td class="p15"><s:property value="tResearchDTO.researchactor"/></td>
 								<td class="p15">
-								<s:if test="tSubjectDTO.subjectinfoPath!=null">
-								<a href="<%=request_path %>/${tSubjectDTO.subjectinfoPath}">[立项申请书电子版]</a>
+								<s:if test="tResearchDTO.downloadShowPath!=null">
+								<a href="<%=request_path %>/${tResearchDTO.downloadShowPath}">[立项申请书电子版]</a>
 								</s:if>
 								<s:else></s:else>
 								</td>
@@ -178,7 +178,7 @@ td.p80{width: 80%;height: 30px;}
 						</div>
 						</s:if>
 						
-						<s:if test="tPaperDTO.papername!=null">
+						<s:if test="tPaperList!=null">
 						<div class="div_baseinfo" >
 							<h3 class="title_teacher">论文信息</h3>
 							<hr class="line_teacher" />
@@ -187,20 +187,22 @@ td.p80{width: 80%;height: 30px;}
 								<div style="margin-top: 20px;" >
 								<table style="width: 100%;">
 								<tr><th>论文名称</th><th>作者排序</th><th>期刊名称</th><th>刊登年份</th><th>杂志期号</th><th>论文电子版</th></tr>
+								<s:iterator var="tPaperDetail" value="tPaperList" status="tpa">
 								<tr>
 								<td class="p15">
-								<i class="point">•</i>&nbsp;<s:property value="tPaperDTO.papername"/></td>
-								<td class="p15"><s:property value="tPaperDTO.paperauthor"/></td>
-								<td class="p15"><s:property value="tPaperDTO.papernotename"/></td>
-								<td class="p15"><s:property value="tPaperDTO.papernoteyear"/></td>
-								<td class="p15"><s:property value="tPaperDTO.papernoteno"/></td>
+								<i class="point">•</i>&nbsp;<s:property value="#tPaperDetail.papername"/></td>
+								<td class="p15"><s:property value="#tPaperDetail.paperauthor"/></td>
+								<td class="p15"><s:property value="#tPaperDetail.papernotename"/></td>
+								<td class="p15"><s:property value="#tPaperDetail.papernoteyear"/></td>
+								<td class="p15"><s:property value="#tPaperDetail.papernoteno"/></td>
 								<td class="p15">
-								<s:if test="tPaperDTO.paperdownloadPath!=null">
-								<a href="<%=request_path %>/${tPaperDTO.paperdownloadPath}">[论文电子版]</a>
+								<s:if test="#tPaperDetail.paperdownloadPath!=null">
+								<a href="<%=request_path %>/${tPaperDetail.paperdownloadPath}">[论文电子版]</a>
 								</s:if>
 								<s:else></s:else>
 								</td>
 								</tr>
+								</s:iterator>
 								</table>
 								</div>
 								</div>

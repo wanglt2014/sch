@@ -22,6 +22,14 @@
 <title>${sitename}--后台管理系统--师资队伍</title>
 </head>
 <body>
+<style type="text/css">
+.span_column{ 
+			text-align:left;
+			display:-moz-inline-box;
+			display:inline-block;
+			width:300px; }
+
+</style>
 <div id="teachertb" style="padding: 5px; height: auto">
 		<div>
 			教师姓名:<input type="text" id="teachernameQuery"> 
@@ -139,12 +147,14 @@
 <!-- 							<input id="oldfileName" name="oldfileName" value="" style="display: none;"/> -->
 <!-- 							<input id="tampFileName" name="tampFileName" value="" style="display: none;"/> -->
 <!-- 								<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/> -->
-								<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; ">
-								</ul>
-								<img class="img_photo" id="img_photo" src="" alt=""/>
+<!-- 								<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; "> -->
+<!-- 								</ul> -->
+								<div id="file-list" style="text-align: left;margin:0px 0px 0px 60px; "></div>
+								<img style="WIDTH:200px; HEIGHT:150px; BORDER:0;margin-left: 60px;" id="img_photo" src="" alt=""/>
+								
 								<div class="btn-wraper">
 									<input type="button" value="选择文件..." id="browse" />
-									<input type="button" value="开始上传" id="upload-btn" />
+<!-- 									<input type="button" value="开始上传" id="upload-btn" /> -->
 									<input type="button" value="清空" id="clear-btn" />
 									<p class="tip2">注意：只能上传1M以内，格式为jpg,gif,png,bmp的照片</p>
 								</div>
@@ -270,37 +280,46 @@
 				</div>
 				<div title="论文"  closable="false" style="overflow:auto;padding:20px;" id="Tab4"> 
 					<div class="ftitle">论文</div>
-					<div class="fitem">
-						<label>论文名称:</label> <input name="papername"
-							class="easyui-validatebox" required="true" maxlength="20">
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addPaper()">新增论文信息</a><br><br>
+					<div id="paperTempleate" style="display: none;">
+					<div id="paperRow0" class="fitem">
+						<span class="span_column" ><label>论文名称:</label> <input id="papername0" name="papername0"
+								class="easyui-validatebox"  maxlength="20"></span>
+								<span class="span_column"><label>作者排序:</label> <input id="paperauthor0" name="paperauthor0" maxlength="20"
+								class="easyui-validatebox" ></span><br><br>
+						<span class="span_column" ><label>期刊名称:</label> <input id="papernotename0" name="papernotename0" maxlength="20"
+								class="easyui-validatebox" ></span>
+						<span class="span_column" ><label>刊登年份:</label> <input id="papernoteyear0" name="papernoteyear0"
+								class="easyui-numberbox"  maxlength="4"></span><br><br>
+						<span class="span_column" ><label>杂志期号:</label> <input id="papernoteno0" name="papernoteno0" maxlength="20"
+								class="easyui-validatebox" ></span><br><br>
+								<!-- 动态增加上传控件 -->
+						<span class="span_column" style="width:100%;" id="paperObj0"> <label>论文电子版:</label> 
+<!-- 							<a href="javascript:void(0)" class="easyui-linkbutton"  id="browsePaper0">选择文件...</a> -->
+<!-- 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="paper-clear-btn0">清空</a> -->
+							<input type="button" value="选择文件..." id="browsePaper0" />
+							<input type="button" value="清空" id="paper-clear-btn0" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span>
+						</span>
+						<span id="file-list-paper0"></span>
+	 						<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; "> 
+	 						</ul> 
+						<span id="deletePaperDiv0"></span>
+						<hr  style="border-bottom:1px dashed;"><br>
 					</div>
-					<div class="fitem">
-						<label>作者排序:</label> <input name="paperauthor" maxlength="20"
-							class="easyui-validatebox" >
+					
 					</div>
-					<div class="fitem">
-						<label>期刊名称:</label> <input name="papernotename" maxlength="20"
-							class="easyui-validatebox" >
-					</div>
-					<div class="fitem">
-						<label>刊登年份:</label> <input name="papernoteyear"
-							class="easyui-numberbox"  maxlength="4">
-					</div>
-					<div class="fitem">
-						<label>杂志期号:</label> <input name="papernoteno" maxlength="20"
-							class="easyui-validatebox" >
-					</div>
-					<div class="fitem" id="paperObj">
-						<label>论文电子版:</label> 
-<!-- 						<input id="uploader_Paper_count" name="uploader_Paper_count" value="0" style="display: none;"/> -->
-						<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; ">
-						</ul>
-						<div class="btn-wraper">
-							<input type="button" value="选择文件..." id="browsePaper" />
-							<input type="button" value="清空" id="paper-clear-btn" />
-							<p class="tip2">注意：只能上传20M以内的文件</p>
-						</div>
-					</div>
+					<div id="paperDiv" ></div>
+<!-- 					<div class="fitem" id="paperObj"> -->
+<!-- 						<div class="wraper"> -->
+<!-- 						<label>论文电子版:</label>  -->
+<!-- 						<input id="uploader_paper_count" name="uploader_paper_count" value="0" style="display: none;"/> -->
+<!-- 						<div class="btn-wraper"> -->
+<!-- 							<a href="javascript:void(0)" class="easyui-linkbutton"  id="browsePaper">选择文件...</a> -->
+<%-- 							<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" id="paper-clear-btn">清空</a>&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span> --%>
+<!-- 						</div> -->
+<!-- 						<ul id="file-list-paper" style="text-align: left;margin:0px 0px 0px 30px; "></ul> -->
+<!-- 						</div> -->
+<!-- 					</div> -->
 				</div>
 				<div title="获奖"  closable="false" style="overflow:auto;padding:20px;" id="Tab5"> 
 					<div class="ftitle">获奖</div>
@@ -319,8 +338,9 @@
    					<textarea id="prizeinfo0" rows=3 style="width: 400px;" name="prizeinfo0"  class="textarea easyui-validatebox" maxlength="1000"></textarea>
 					<span id="deletePrizeDiv0"></span>
 <!-- 					<input id="prizeId0" name="prizeId0" /> -->
-					</div>
 					<hr  style="border-bottom:1px dashed;"><br>
+					</div>
+					
 					</div>
 					<div id="prizeDiv" ></div>
 				</div>
@@ -336,7 +356,10 @@
 	</div>
 	<script>
 	var prizeNum = 0;
+	var paperNum = 0;
 	var temp = $("#templeate").html();//保存渲染前的模板
+	var paperTemp = $("#paperTempleate").html();//保存渲染前的模板
+	//动态添加获奖信息
 	function addPrize() {
 		prizeNum++;
 		$("#deletePrizeBtn").remove();
@@ -346,7 +369,6 @@
 		$("#deletePrizeDiv"+prizeNum).append('<a id="deletePrizeBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePrize('+prizeNum+')">删除获奖信息</a>');
 		
 	}
-	
 	function removePrize(infoIndex) {
 		$("#row"+infoIndex).remove();
 		if(parseInt(infoIndex)>1){
@@ -354,47 +376,88 @@
 		}
 		prizeNum--;
 	}
-	function formatTutortype(value,rowData,rowIndex) {
-    	var s="";
-		if(value=="1"){
-			s ="硕导";
-		}else if(value=="2"){
-			s ="博导";
-		}
-		return s;
-	    }
-	
-	function formatSextype(value,rowData,rowIndex) {
-    	var s="";
-		if(value=="0"){
-			s ="男";
-		}else if(value=="1"){
-			s ="女";
-		}
-		return s;
-	    }
-	
-	function formatJobtype(value,rowData,rowIndex) {
-		var s="";
-		$.ajax({
-			type : 'post',
-			url : 'Dictionary_queryDictionaryByType?type=job',
-			async:false,
-			success : function(datas) {
-				var datasArr=eval(datas);  
-				for(var i=0;i<datasArr.length;i++){
-					if(value==datasArr[i].dictionarycode){
-						s= datasArr[i].dictionaryvalue;
-					}
-				}  
-			},
-			error : function() {
-				jAlert('系统错误，请联系管理员','错误提示');
+	//动态添加获奖信息
+	function addPaper() {
+		paperNum++;
+		$("#deletePaperBtn").remove();
+		var html = paperTemp.replace(new RegExp("papername0","gm"),'papername'+paperNum)
+		.replace(new RegExp("paperauthor0","gm"),'paperauthor'+paperNum)
+		.replace(new RegExp("papernotename0","gm"),'papernotename'+paperNum)
+		.replace(new RegExp("papernoteyear0","gm"),'papernoteyear'+paperNum)
+		.replace(new RegExp("papernoteno0","gm"),'papernoteno'+paperNum)
+		.replace(new RegExp("deletePaperDiv0","gm"),'deletePaperDiv'+paperNum)
+		.replace(new RegExp("paperRow0","gm"),'paperRow'+paperNum)
+		.replace(new RegExp("browsePaper0","gm"),'browsePaper'+paperNum)
+		.replace(new RegExp("paperObj0","gm"),'paperObj'+paperNum)
+		.replace(new RegExp("file-list-paper0","gm"),'file-list-paper'+paperNum)
+		.replace(new RegExp("paper-clear-btn0","gm"),'paper-clear-btn'+paperNum);
+		$("#paperDiv").append(html);
+		$("#paperDiv select").combobox({panelHeight:"auto"});//渲染
+		$("#deletePaperDiv"+paperNum).append('<a id="deletePaperBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePaper('+paperNum+')">删除论文信息</a>');
+		//动态增加上传控件
+		window["browsePaperTemp"+paperNum] = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browsePaper'+paperNum,
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'paper'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        },
+	        para:paperNum
+		});
+		window["browsePaperTemp"+paperNum].init();
+		//绑定文件添加进队列事件
+		window["browsePaperTemp"+paperNum].bind('FilesAdded',function(uploader,files){
+// 			alert(JSON.stringify(uploader));
+			$.each(uploader.files, function (i, file) { 
+			if (uploader.files.length <= 1) { 
+		            return; 
+		        } 
+			window["browsePaperTemp"+uploader.settings.para].removeFile(file); 
+		    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				var para = uploader.settings.para;
+				//构造html来更新UI
+				var html = '<span id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_paper_tmpname_'+para+'" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_paper_name_'+para+'" value="' + file_name + '" /></span>';
+					$(html).appendTo('#file-list-paper'+para);
 			}
 		});
-		return s;
+		//绑定文件上传进度事件
+		window["browsePaperTemp"+paperNum].bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		//绑定文件上传删除事件
+		window["browsePaperTemp"+paperNum].bind('FilesRemoved',function(uploader,file){
+			$('#file-list-paper'+uploader.settings.para).html("");
+		});
+		//清空按钮
+		$('#paper-clear-btn'+paperNum).click(function(event){
+			event = event ? event : window.event; //判断触发对象，兼容FF。
+			var obj = event.srcElement ? event.srcElement : event.target; 
+			var id = obj.id;
+			window["browsePaperTemp"+id.substr(id.length-1,1)].splice(0,10); ////删除文件按钮
+		});
 	}
 	
+	function removePaper(infoIndex) {
+		$("#paperRow"+infoIndex).remove();
+		if(parseInt(infoIndex)>1){
+			$("#deletePaperDiv"+(parseInt(infoIndex)-1)).append('<a id="deletePaperBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePaper('+(parseInt(infoIndex)-1)+')">删除论文信息</a>');
+		}
+		paperNum--;
+	}
 	
 	var url;
 	function queryTearcher() {
@@ -410,7 +473,9 @@
 		deleteAllUploader();
 		showAllUploader();
 		prizeNum = 0;
+		paperNum = 0;
 		$("#prizeDiv").html("");
+		$("#paperDiv").html("");
 		$('#teacherdlg').dialog('open').dialog('setTitle', '新增教师');
 		$('#teacherfm').form('clear');
 		url = 'Teacher_save?temp=0';
@@ -435,16 +500,18 @@
 		var row = $('#teacherdg').datagrid('getSelected');
 		if (row) {
 			prizeNum = 0;
+			paperNum = 0;
 			$("#prizeDiv").html("");
+			$("#paperDiv").html("");
 			$('#teacherdlg').dialog('open').dialog('setTitle',
 					'编辑教师');
+			deleteAllUploader();
 			$('#teacherfm').form('clear');
 			$('#teacherfm').form('load', row);
 			$('#img_photo').show();
 			$('#img_photo').attr('src',row.iimageurll);
-			dispalyAllUploader();
 			var subjectid,paperid,researchid;
-			var prizeList;
+			var prizeList,paperList;
 // 			alert(JSON.stringify(row));
 			//从后台获取数据
 			$.ajax({
@@ -458,11 +525,21 @@
 //  					paperid = json.tPaper.paperid;
 //  					researchid=json.tResearch.researchid;
 // 					alert(JSON.stringify(json));
+					paperList = json.tPaper;
  					prizeList = json.tPrize;
-//  					alert(JSON.stringify(datas.subject));
+//  				alert(JSON.stringify(datas.subject));
  					$('#teacherfm').form('load', json.subject[0]);
-					$('#teacherfm').form('load', json.tPaper[0]);
+// 					$('#teacherfm').form('load', json.tPaper[0]);
 					$('#teacherfm').form('load', json.tResearch[0]);
+					for(var i = 0; i < paperList.length; i++){
+						addPaper();
+						$('#papername'+(parseInt(i)+1)).val(paperList[i].papername);
+						$('#paperauthor'+(parseInt(i)+1)).val(paperList[i].paperauthor);
+						$('#papernotename'+(parseInt(i)+1)).val(paperList[i].papernotename);
+						$('#papernoteyear'+(parseInt(i)+1)).val(paperList[i].papernoteyear);
+						$('#papernoteno'+(parseInt(i)+1)).val(paperList[i].papernoteno);
+					}
+					
 					for(var i = 0; i < prizeList.length; i++){
 // 						alert(prizeList[i].prizetype);
 						addPrize();
@@ -479,6 +556,7 @@
 					jAlert('系统错误，请联系管理员','错误提示');
 				}
 			});
+			dispalyAllUploader(paperList.length);
 // 			alert(subjectid+"##"+paperid+"$$"+researchid);
 // 			url = 'Teacher_update?id=' + row.id+'&subjectid='+subjectid+'&paperid='+paperid+'&researchid='+researchid;
 			url = 'Teacher_update?id=' + row.id;
@@ -491,7 +569,7 @@
 	var scheduleLen = uploaderForSchedule.files.length;
 	var subjectLen = uploaderForSubject.files.length;
 	var probjectLen = uploaderForProject.files.length;
-	var paperLen = uploaderForPaper.files.length;
+// 	var paperLen = uploaderForPaper.files.length;
 //  	alert(picLen+"&&"+outlineLen+"&&"+scheduleLen+"&&+"+subjectLen+"&&"+probjectLen+"&&"+paperLen);
 	var valid = $('#teacherfm').form('validate');
 		if(valid==true){
@@ -501,7 +579,7 @@
 			$('#subjecttypename').val($('#subjecttype').combobox('getText'));
 			
 			$('#teacherfm').form('submit', {
-    			url : url+"&prizeNum="+prizeNum,
+    			url : url+"&prizeNum="+prizeNum+"&paperNum="+paperNum,
     			onSubmit : function() {
     				return $(this).form('validate');
     			},
@@ -531,9 +609,13 @@
 		if (probjectLen > 0) {
 			uploaderForProject.start();
 		}
-		if (paperLen > 0) {
-			uploaderForPaper.start();
-		}
+// 		if (paperLen > 0) {
+			//动态增加上传控件
+			for(var i = 1; i<=paperNum; i++){
+			window["browsePaperTemp"+i].start();
+			}
+// 			uploaderForPaper.start();
+// 		}
     	
 		}else{
 			alert("信息填写不完整");
@@ -571,7 +653,13 @@
 		uploaderForSchedule.splice(0,10);
 		uploaderForSubject.splice(0,10);
 		uploaderForProject.splice(0,10);
-		uploaderForPaper.splice(0,10);
+// 		uploaderForPaper.splice(0,10);
+		//动态增加上传控件
+// 		if (paperNum > 0) {
+			for(var i = 1; i<=paperNum; i++){
+			window["browsePaperTemp"+i].splice(0,10);
+			}
+// 		}
 	}
 	
 	//销毁所有上传控件
@@ -581,16 +669,18 @@
 		uploaderForSchedule.destroy();
 		uploaderForSubject.destroy();
 		uploaderForProject.destroy();
-		uploaderForPaper.destroy();
+// 		uploaderForPaper.destroy();
 	}
 	
 	//隐藏所有上传控件
-	function dispalyAllUploader(){
+	function dispalyAllUploader(paperSize){
 		$('#outlineObj').hide();
 		$('#scheduleObj').hide();
 		$('#subjectObj').hide();
 		$('#projectObj').hide();
-		$('#paperObj').hide();
+		for(var i = 1; i<=paperSize; i++){
+			$(window["paperObj"+i]).hide();
+			}
 	}
 	
 	//显示所有上传控件
@@ -599,7 +689,7 @@
 		$('#scheduleObj').show();
 		$('#subjectObj').show();
 		$('#projectObj').show();
-		$('#paperObj').show();
+// 		$('#paperObj').show();
 	}
 	
 	//照片 上传控件##########################################
@@ -649,9 +739,10 @@
 			var file_id = files[i].id;//ID,临时文件名
 			//构造html来更新UI
 // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
+// 			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
+			var	html = '<span id="file-' + file_id +'" style="text-align: left;">';
 				html += '<input type="hiddent" style="display: none;" name="uploader_pic_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" style="display: none;" name="uploader_pic_name" value="' + file_name + '" /></li>';
+				html += '<input type="hiddent" style="display: none;" name="uploader_pic_name" value="' + file_name + '" /></span>';
 			$(html).appendTo('#file-list');
 			!function(i){
 				previewImage(files[i],function(imgsrc){
@@ -896,56 +987,99 @@
 	});
 	
 	//论文上传控件###################################################
-	var uploaderForPaper = new plupload.Uploader({ //实例化一个plupload上传对象
-		browse_button : 'browsePaper',
-		multi_selection: false,
- 		url : 'File_uploadForTeacher',
- 		file_data_name : 'fileData',
-// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-        unique_names : true,  // 上传的文件名是否唯一   
-        multipart_params: {
-        	  filetype: 'paper'
-        	},
-        filters: {
-  		  max_file_size : '20mb', //最大只能上传100kb的文件
-  		  prevent_duplicates : true //不允许队列中存在重复文件
-        }
-	});
-// 	uploaderForPaper.init(); //初始化
+// 	var uploaderForPaper = new plupload.Uploader({ //实例化一个plupload上传对象
+// 		browse_button : 'browsePaper',
+// 		multi_selection: false,
+//  		url : 'File_uploadForTeacher',
+//  		file_data_name : 'fileData',
+// // 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+//         flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+//         silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+//         unique_names : true,  // 上传的文件名是否唯一   
+//         multipart_params: {
+//         	  filetype: 'paper'
+//         	},
+//         filters: {
+//   		  max_file_size : '20mb', //最大只能上传100kb的文件
+//   		  prevent_duplicates : true //不允许队列中存在重复文件
+//         }
+// 	});
+// // 	uploaderForPaper.init(); //初始化
 	
-	//绑定文件添加进队列事件
-	uploaderForPaper.bind('FilesAdded',function(uploader,files){
+// 	//绑定文件添加进队列事件
+// 	uploaderForPaper.bind('FilesAdded',function(uploader,files){
 // 		var count = $("#uploader_paper_count").val();
-		for(var i = 0, len = files.length; i<len; i++){
-			var file_name = files[i].name; //文件名
-			var file_id = files[i].id;//ID,临时文件名
+// 		for(var i = 0, len = files.length; i<len; i++){
+// 			var file_name = files[i].name; //文件名
+// 			var file_id = files[i].id;//ID,临时文件名
 // 			count++;
-			//构造html来更新UI
-// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" style="display: none;" name="uploader_paper_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" style="display: none;" name="uploader_paper_name" value="' + file_name + '" /></li>';
-			$(html).appendTo('#file-list-paper');
-		}
+// 			//构造html来更新UI
+// // 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+// 			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+// 				html += '<input type="hiddent" style="display: none;" name="uploader_paper_tmpname_'+count+'" value="' + file_id + '" />';
+// 				html += '<input type="hiddent" style="display: none;" name="uploader_paper_name_'+count+'" value="' + file_name + '" /></li>';
+// 			$(html).appendTo('#file-list-paper');
+// 		}
 // 		$("#uploader_paper_count").val(count);
-	});
+// 	});
 	
-	//绑定文件上传进度事件
-	uploaderForPaper.bind('UploadProgress',function(uploader,file){
-		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-	});
+// 	//绑定文件上传进度事件
+// 	uploaderForPaper.bind('UploadProgress',function(uploader,file){
+// 		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+// 	});
 	
-	//绑定文件上传删除事件
-	uploaderForPaper.bind('FilesRemoved',function(uploader,file){
-		$('#file-list-paper').html("");
-	});
+// 	//绑定文件上传删除事件
+// 	uploaderForPaper.bind('FilesRemoved',function(uploader,file){
+// 		$('#file-list-paper').html("");
+// 	});
 
-	//清空按钮
-	$('#paper-clear-btn').click(function(){
-		uploaderForPaper.splice(0,10); ////删除文件按钮
-	});
+// 	//清空按钮
+// 	$('#paper-clear-btn').click(function(){
+// 		uploaderForPaper.splice(0,10); ////删除文件按钮
+// 	});
+	
+	function formatTutortype(value,rowData,rowIndex) {
+    	var s="";
+		if(value=="1"){
+			s ="硕导";
+		}else if(value=="2"){
+			s ="博导";
+		}
+		return s;
+	    }
+	
+	function formatSextype(value,rowData,rowIndex) {
+    	var s="";
+		if(value=="0"){
+			s ="男";
+		}else if(value=="1"){
+			s ="女";
+		}
+		return s;
+	    }
+	
+	function formatJobtype(value,rowData,rowIndex) {
+		var s="";
+		$.ajax({
+			type : 'post',
+			url : 'Dictionary_queryDictionaryByType?type=job',
+			async:false,
+			success : function(datas) {
+				var datasArr=eval(datas);  
+				for(var i=0;i<datasArr.length;i++){
+					if(value==datasArr[i].dictionarycode){
+						s= datasArr[i].dictionaryvalue;
+					}
+				}  
+			},
+			error : function() {
+				jAlert('系统错误，请联系管理员','错误提示');
+			}
+		});
+		return s;
+	}
+	
+	
 // 	$(function() {
 // 		var uploaderQueue = $("#uploaderQueue").pluploadQueue({
 // 		runtimes : 'gears,flash,silverlight,browserplus,html5,html4',
@@ -1012,7 +1146,7 @@
 				uploaderForProject.init();
 			}
 			if(index==3){
-				uploaderForPaper.init(); //初始化
+// 				uploaderForPaper.init(); //初始化
 			}
 	    } 
 	});

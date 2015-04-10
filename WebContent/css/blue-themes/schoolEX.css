@@ -122,3 +122,17 @@ margin:0px auto; min-width:1000px; float:none;
 .div_planInfo{font-size: 14px;height: 100%;height: auto;min-height: 120px;margin-top: 30px;}
 .planInfo{width: 90%;height: 100%;height: auto;margin-left: 5%;}
 
+.separatorLine{
+	    clear: both;
+    height: 1px;
+    line-height: 1px;
+    margin: 0px;
+    font-size: 0px;
+    border-width: 0px 0px 1px medium;
+    border-style: none none dashed;
+    border-top: 0px none;
+    border-left: medium none;
+    border-right: 0px none;
+    border-color: #DDD;
+}
+}

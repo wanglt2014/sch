@@ -77,14 +77,25 @@ $(function(){
 					<div class="service_title">教学教务通知</div>
 					<div class="split_1px"></div>
 					<div style="margin-left: 30px;">
-						<table  width="730px" >
-						<ul class="news_main_content">
+						
+<!-- 						<ul > -->
+					
 							<s:iterator var="notify" value="notifylist" status="st">
-								<li><a target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm"><s:property
-											value="#notify.articletitle" /><img style="margin-left: 50px;"  src="${image_path}/hot.gif" /></a>
-								</li>
+							<div style="padding: 3px 5px;">
+							<table class="news_main_content" width="730px" >
+							<tr>
+							<td style="width: 100%;">
+							<a target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm"><s:property
+											value="#notify.articletitle" /></a>
+							</td>
+							<td style="width: 65px;"><s:property value="#notify.createdate" /></td>
+							</tr>
+							</table>
+							</div>		
+					<div class='separatorLine'></div>
 							</s:iterator>
-						</ul>
+					
+<!-- 						</ul> -->
 <!-- 						<tr> -->
 <%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_26.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云主机</td></tr><tr><td>销售和代购云主机</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table> </td></tr></table></div></div></td> --%>
 <%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_28.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云运维</td></tr><tr><td>搭建系统运行环境</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
@@ -95,7 +106,7 @@ $(function(){
 <%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_40.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">TinyOA</td></tr><tr><td>自动化办公系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
 <%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_41.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">sch</td></tr><tr><td>企业建站系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
 <!-- 						</tr> -->
-					</table>
+					
 					</div>
 				</div>
 			

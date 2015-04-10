@@ -22,8 +22,8 @@ input {
 }
 
 body {
-	font: 12px Tahoma, Helvetica, Arial, Simsun, sans-serif;
-	color: #4d4d4d;
+	font: 12px "宋体","新宋体",sans-serif;
+	color: #494949;
 	background:url("../../images/blue-themes/body_bg.png") repeat-x;
 }
 

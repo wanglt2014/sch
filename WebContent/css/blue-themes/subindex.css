@@ -262,12 +262,11 @@
 
 .news_main_content{
 	list-style:none;
-	color:#4F5393;
+	color:#494949;
 	padding:0px;
-	font-size: 14px;
 }
 .news_main_content a{
-	color:#4F5393;
+	color:#494949;
 }
 .news_main_content li{
 	background:url(../../images/blue-themes/li_style.gif) no-repeat center left;

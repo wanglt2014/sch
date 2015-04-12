@@ -126,7 +126,7 @@ margin:0px auto; min-width:1000px; float:none;
 	    clear: both;
     height: 1px;
     line-height: 1px;
-    margin: 0px;
+    margin: 0px 0px;
     font-size: 0px;
     border-width: 0px 0px 1px medium;
     border-style: none none dashed;
@@ -135,4 +135,17 @@ margin:0px auto; min-width:1000px; float:none;
     border-right: 0px none;
     border-color: #DDD;
 }
+.first_line_info{ margin:0px 0px 0px 0px; padding: 7px 5px;}
+.first_line_info:hover { background:#FFFCC9; }
+
+.first_center_td{
+	margin:5px 20px 0px 20px;
 }
+.first_line_info a{
+	width: 100%;
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+

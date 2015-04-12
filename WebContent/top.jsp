@@ -24,8 +24,11 @@
 <script language="JavaScript" type="text/javascript" src="${js_path}/etUtil.js"></script>
 <!-- header -->
 <div id="header">
-	<div id="logo" style="height: 35px;">
+	<div id="logo" style="height: 88px;">
+	<h1>哈尔滨工程大学</h1>
 <%-- 		<a href="${request_path}/index.shtm"> <img src="${image_path}/logo.gif" --%>
+<!-- 			alt="logo" />  </a> -->
+<%-- 			<a href="${request_path}/index.shtm"> <img src="${image_path}/LOGO4.jpg" --%>
 <!-- 			alt="logo" />  </a> -->
 	</div>
 

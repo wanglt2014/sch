@@ -1,8 +1,10 @@
-
+#left_left_content{
+	width:200px;height:480px;float:left;
+	
+}
 
 #left_content{
-	width:810px;float:left;
-	
+	width:610px;float:left;
 }
 
 #news_right_content{

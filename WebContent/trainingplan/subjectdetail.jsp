@@ -19,13 +19,11 @@
 
 <style type="text/css">
 .div_info{font-size: 14px;height: 100%;height: auto;min-height: 200px;margin-top: 20px;width: 90%;margin-left: 5%;}</style>
-
 </head>
-
 <body>
 	<div id="fade" class="black_overlay"></div>
+			<jsp:include page="../top.jsp"></jsp:include>
 	<div class="container" style="position: relative;">
-		<jsp:include page="../top.jsp"></jsp:include>
 		<jsp:include page="../nav.jsp"></jsp:include>
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">

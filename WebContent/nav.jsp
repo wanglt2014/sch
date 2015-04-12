@@ -4,6 +4,7 @@
 <!-- nav导航  etUtil.js-->
 <div id="nav">
 	<ul>
+	<li class="nav_title_pre"></li>
 		<li class="nav_title ${cur_nav eq 0 ? 'nav_focus' : ''}" id="nav_link_index">首页</li><li class="nav_split"></li>
 		<li class="nav_title ${cur_nav eq 1 ? 'nav_focus' : ''}" id="nav_link_tongzhi">教务教学通知</li><li class="nav_split"></li>
 		<li class="nav_title ${cur_nav eq 2 ? 'nav_focus' : ''}" id="nav_link_zhidu">教学规章制度</li><li class="nav_split"></li>

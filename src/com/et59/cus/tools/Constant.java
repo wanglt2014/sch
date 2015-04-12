@@ -80,6 +80,11 @@ public class Constant {
 	 * 教改立项
 	 */
 	public static String ARTICLE_TYPE_REFORM = "reform";
+	
+	/**
+	 * 资料下载
+	 */
+	public static String ARTICLE_TYPE_DOWNLOAD = "download";
 
 	/**
 	 * 教材建设

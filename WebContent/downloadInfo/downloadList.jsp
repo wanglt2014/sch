@@ -81,12 +81,9 @@
 
 <body>
 	<div id="fade" class="black_overlay"></div>
-	<div class="container" style="position: relative;">
-
 		<jsp:include page="../top.jsp"></jsp:include>
+	<div class="container" style="position: relative;">
 		<jsp:include page="../nav.jsp"></jsp:include>
-
-
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 
 			<div id="index_top">

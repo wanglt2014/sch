@@ -60,10 +60,11 @@ public class DownLoadInfoAction extends BaseAction {
 		// log.debug("查询交易信息currentPage>>>>:" + currentPage);
 		// }
 		try {
-			// TDownload download = new TDownload();
-			// download.setFileisvalid(Constant.ISVALID_1);
+			 TDownload download = new TDownload();
+			 download.setFileisvalid(Constant.ISVALID_1);
+			 download.setInfotype(Constant.ARTICLE_TYPE_DOWNLOAD);
 			Map map = localServiceEXProxy.queryDownloadInfoForLimit(
-					new TDownload(), Constant.PAGESIZE, currentPage);
+					download, Constant.PAGESIZE, currentPage);
 			if (ComonUtil.validateMapResult(map)) {
 				downloadlist = (List<TDownload>) map
 						.get(Constant.DOWNLOAD_LIST);
@@ -123,6 +124,7 @@ public class DownLoadInfoAction extends BaseAction {
 			if (null != filename && !filename.equals("")) {
 				tDownload.setFilename(filename);
 			}
+			tDownload.setInfotype(Constant.ARTICLE_TYPE_DOWNLOAD);
 			Pager pager = new Pager();
 			Map map = localServiceEXProxy.queryDownloadInfoForLimit(tDownload,
 					Integer.valueOf(rows), Integer.valueOf(page));
@@ -149,16 +151,19 @@ public class DownLoadInfoAction extends BaseAction {
 		boolean flag = false;
 		String savePath = FileAction.getSavePathForOther();
 		String name = request.getParameter("uploader_name");
-		String extName = name.substring(name.lastIndexOf("."));
-		String tampFileName = request.getParameter("uploader_tmpname");
-		BsUser user = getUser();
-		String filepath = savePath + "\\" + tampFileName + extName;
-		String fileShowPath = Constant.PATH_OTHER + "\\" + tampFileName
-				+ extName;
 		TDownload downloaddetail = getTDownload();
-		try {
+		if(name!=null){
+			String extName = name.substring(name.lastIndexOf("."));
+			String tampFileName = request.getParameter("uploader_tmpname");
+//			BsUser user = getUser();
+			String filepath = savePath + "\\" + tampFileName + extName;
+			String fileShowPath = Constant.PATH_OTHER + "\\" + tampFileName
+					+ extName;
 			downloaddetail.setFilepath(filepath);
 			downloaddetail.setFileshowpath(fileShowPath);
+		}
+		try {
+			downloaddetail.setFiletype(Constant.ARTICLE_TYPE_DOWNLOAD);
 			downloaddetail.setFileisvalid(Constant.ISVALID_1);
 			localServiceEXProxy.saveDownloadInfo(downloaddetail);
 			flag = true;
@@ -166,6 +171,7 @@ public class DownLoadInfoAction extends BaseAction {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
 
 	/**

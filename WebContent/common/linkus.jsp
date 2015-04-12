@@ -36,7 +36,8 @@ String request_path = website+request.getContextPath();
 
 <body>
 <div id="fade" class="black_overlay"></div>
-<div class="container"><jsp:include page="../top.jsp"></jsp:include>
+<jsp:include page="../top.jsp"></jsp:include>
+<div class="container">
 <jsp:include page="../nav.jsp"></jsp:include>
 
 <div id="content">

@@ -166,7 +166,7 @@ public abstract class BaseAction extends SystemAction {
 			BsArticleQuery bsArticle = new BsArticleQuery();
 			bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
-					9, 1);
+					10, 1);
 			if (ComonUtil.validateMapResult(map1)) {
 				regulationList = (List<BsArticle>) map1
 						.get(Constant.ARTICLE_LIST);
@@ -180,6 +180,7 @@ public abstract class BaseAction extends SystemAction {
 
 			TDownload download = new TDownload();
 			download.setFileisvalid(Constant.ISVALID_1);// 可用
+			download.setInfotype(Constant.ARTICLE_TYPE_DOWNLOAD);
 			Map map3 = localServiceEXProxy.queryDownloadInfoForLimit(download,
 					5, 1);
 			if (ComonUtil.validateMapResult(map3)) {
@@ -199,6 +200,7 @@ public abstract class BaseAction extends SystemAction {
 		try {
 			TDownload download = new TDownload();
 			download.setFileisvalid(Constant.ISVALID_1);// 可用
+			download.setInfotype(Constant.ARTICLE_TYPE_DOWNLOAD);
 			Map map1 = localServiceEXProxy.queryDownloadInfoForLimit(download,
 					5, 1);
 			if (ComonUtil.validateMapResult(map1)) {

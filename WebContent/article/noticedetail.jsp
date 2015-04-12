@@ -23,9 +23,9 @@ String request_path = request.getContextPath();
 
 <body>
 	<div id="fade" class="black_overlay"></div>
+	<jsp:include page="../top.jsp"></jsp:include>
 	<div class="container" style="position: relative;">
 
-		<jsp:include page="../top.jsp"></jsp:include>
 		<jsp:include page="../nav.jsp"></jsp:include>
 
 

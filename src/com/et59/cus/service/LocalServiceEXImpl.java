@@ -104,7 +104,10 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 				.createCriteria();
 		bae.setOrderByClause(" createdate desc ");
 		criteria.andFileisvalidEqualTo(Constant.ISVALID_1);
-
+		if(download.getInfotype()!=null && !download.getInfotype().equals("")){
+			criteria.andInfotypeEqualTo(download.getInfotype());
+		}
+		
 		// if (null != bsUserservice.getOrderIccard()
 		// && !bsUserservice.getOrderIccard().equals("")) {
 		// criteria.andOrderIccardEqualTo(bsUserservice.getOrderIccard());

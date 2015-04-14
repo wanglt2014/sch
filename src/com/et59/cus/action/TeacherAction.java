@@ -69,6 +69,15 @@ public class TeacherAction extends BaseAction {
 	public List<TPaperDTO> tPaperList;
 
 	public List<TPrize> tPrizeList;
+	public String defultId;
+
+	public String getDefultId() {
+		return defultId;
+	}
+
+	public void setDefultId(String defultId) {
+		this.defultId = defultId;
+	}
 
 	public List<TPaperDTO> gettPaperList() {
 		return tPaperList;
@@ -201,13 +210,29 @@ public class TeacherAction extends BaseAction {
 
 	/**
 	 * @Title: toTeacherPage
-	 * @Description: 跳转到教务教学通知
+	 * @Description: 跳转到
 	 * @return String 返回类型
 	 * @throws
 	 */
 
 	public String toTeacherPage() {
-		super.commonQueryForTeacher("");
+		// super.commonQueryForTeacher("");
+		try {
+			TDictionary tDictionary = new TDictionary();
+			tDictionary.setDictionarytype("department");
+			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,
+					10, 1);
+			dictionaryList = (List<TDictionary>) pager.getRows();
+			if (dictionaryList != null && dictionaryList.size() > 0) {
+				defultId = String.valueOf(dictionaryList.get(0)
+						.getDictionarycode());
+			} else {
+				defultId = "0";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return "to_teacher_index";
 	}
 
@@ -617,9 +642,16 @@ public class TeacherAction extends BaseAction {
 	 * @throws
 	 */
 	public String teacherDetail() {
-		super.commonquery();
+		// super.commonquery();
 		String id = request.getParameter("id");
 		try {
+			// TDictionary tDictionary = new TDictionary();
+			// tDictionary.setDictionarytype("department");
+			// Pager pager =
+			// localServiceProxy.queryDictionaryBypage(tDictionary,
+			// 10, 1);
+			// dictionaryList = (List<TDictionary>) pager.getRows();
+
 			tTeacherdetail = localServiceProxy.queryTeacherById(Long
 					.valueOf(id));
 			Long teacherIdLong = Long.parseLong(id);
@@ -806,15 +838,18 @@ public class TeacherAction extends BaseAction {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String doQueryTeacher() {
+		String depCode = request.getParameter("depCode");
 		// if (log.isDebugEnabled()) {
 		// log.debug("查询交易信息currentPage>>>>:" + currentPage);
 		// }
 		try {
 			TTeacher tTeacher = new TTeacher();
+			tTeacher.setDepartment(depCode);
 			Map map = localServiceProxy.queryTeacherByTypeForPage(tTeacher,
-					Constant.PAGESIZE, currentPage);
+					100, currentPage);
 			TDictionary tDictionary = new TDictionary();
 			tDictionary.setDictionarytype("department");
+			tDictionary.setDictionarycode(depCode);
 			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,
 					10, 1);
 			dictionaryList = (List<TDictionary>) pager.getRows();

@@ -15,23 +15,25 @@
 	float:left;
 }
 #index_top{
-	height:480px;
+	height:500px;
 	background-color: white;
 /* 	z-index: 0; */
 }
 #introduce_div{
 	position:relative;
 	width:195px;
-	height:473px;
+	height:493px;
 	margin:0 0 0 0;
 	border:1px solid #cfcfcf;
+	line-height: 20px;
+/* 	letter-spacing:2px; */
 }
 #introduce_div_img{
 	text-align:center;
 	position:relative;
 	width:185px;
-	height:160px;
-	margin:25px 5px;
+	height:150px;
+	margin:15px 5px;
 	float:none;
 	display: block;
 }
@@ -39,9 +41,9 @@
 	position:relative;
 	width:180px;
 	height:280px;
-	margin:20px 15px;
+	margin:10px 12px;
 	overflow: hidden;
-	font-size:13px;
+	font-size:12px;
 /* 	overflow-x: hidden; */
 /* 	overflow-y: hidden; */
 /* 	text-alignleftwhite-space: normal; */
@@ -58,7 +60,7 @@
 #service_div{
 	position:relative;
 	width:603px;
-	height:210px;
+	height:230px;
 	margin:10px 0 0 0;
 	border:1px solid #cfcfcf;
 }
@@ -95,15 +97,16 @@
 }
 .service_title{
 	margin:5px 20px 0px 20px;
-	font-weight: bold;
+/* 	font-weight: bold; */
 	word-break: keep-all;
 	white-space: nowrap;
     font-size: 14px;
-/* 	font-family: "����",Arial,Helvetica,sans-serif; */
+/* 	font-family: "����",Arial,Helvetica,sans-serif; */
     color: #000000;
     height: 30px;
     line-height:30px;
     vertical-align: text-bottom;
+    font-family: "微软雅黑",Arial,Helvetica,sans-serif;
 }
 .service_table{
 	border:1px solid #ABB1D5;
@@ -362,19 +365,20 @@
 	background:url(../../images/blue-themes/ibhbtn.gif) no-repeat;
 }
 .user_show {
-    border: 1px solid #ABB1D5;
+    border: 1px solid #cfcfcf;
     height: 90px;
     width: 1110px;
 }
 .user_show_title {
     font-size: 15px;
     color: #000000;
-    font-weight: bold;
+/*     font-weight: bold; */
     margin: 5px 0 0 20px;
+    font-family: "微软雅黑",Arial,Helvetica,sans-serif;
 }
 
 .split_spx {
-    background-color: #ABB1D5;
+    background-color: #cfcfcf;
     font-size: 0;
     height: 1px;
     margin: 5px 20px;

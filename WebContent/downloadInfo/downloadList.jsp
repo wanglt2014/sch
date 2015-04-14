@@ -91,20 +91,31 @@
 					<c:if test="${!empty(downloadlist)}">
 						<div id="right_content_top">
 							<ul>
-								<li class="normal_title_left"></li>
-								<li class="normal_title_right"></li>
 								<li class="normal_title_content">
 									资料下载&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</li>
 							</ul>
 							<div class="normal_content_top">
-								<ul class="news_content">
+								<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
 									<s:iterator var="download" value="downloadlist" status="st">
-										<li><a target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm"><s:property
-													value="#download.filename" /> </a>
-										</li>
+									<div class="first_line_info" >
+										<table class="news_main_content" width="100%" >
+										<tr>
+										<td  style="width: 100%;">
+										<a target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm" title="<s:property value="#download.filename" />">
+										<s:property value="#download.filename" /> </a>
+										</td>
+										<td style="width: 65px;">
+										<a  target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm" title="<s:property value="#download.filename" />"/>
+										<s:property value="#download.createdate" />
+										</a>
+										</td>
+										</tr>
+										</table>
+									</div>		
+									<div class='separatorLine'></div>
 									</s:iterator>
-								</ul>
+								</div>
 							</div>
 						</div>
 					</c:if>

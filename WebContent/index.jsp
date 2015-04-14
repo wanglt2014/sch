@@ -52,8 +52,6 @@ $(function(){
 <!-- <div id="fade" class="black_overlay"></div> -->
 <jsp:include page="top.jsp"></jsp:include>
 <div class="container" style="position: relative;">
-
-
 <jsp:include page="nav.jsp"></jsp:include>
 <div style="position:relative;margin:5px 0px 0px 0px;height:570px;">
    		<div  id="index_top">
@@ -61,7 +59,12 @@ $(function(){
    			<div id="introduce_div">
    			<div class="normal_title_content">学院简介</div>
    			<div id="introduce_div_img"><img  src="${request_path}/images/img/school2.jpg" width="185" height="133"/></div>
-   			<div id="introduce_div_word">&nbsp;&nbsp;人文社会科学学院是在“哈军工”时期马列教研室基础上发展而来的，经历了上世纪80年代的社科部和90年代的社科系发展时期，2001年成立人文社会科学学院。2010年，根据学校党委关于成立思政教研部的文件精神，新人文学院正式组建。人文学院现有法学系、社会学系和应用心理学系，设有船舶与海洋法律研究所、应用心理学研究所、黑龙江省心理咨询师培训基地和信息资料中心。</div>
+   			<div id="introduce_div_word">&nbsp;&nbsp;
+   			人文社会科学学院是在“哈军工”时期马列教研室基础上发展而来的，
+   			经历了上世纪80年代的社科部和90年代的社科系发展时期，
+   			2001年成立人文社会科学学院。2010年，根据学校党委关于成立思政教研部的文件精神，
+   			新人文学院正式组建。人文学院现有法学系、社会学系和应用心理学系，
+   			设有船舶与海洋法律研究所、应用心理学研究所、黑龙江省心理咨询师培训基地和信息资料中心。</div>
    			</div>
    			</div>
 			<div id="left_content">
@@ -80,7 +83,7 @@ $(function(){
 				</div>
 				
 				<div id="service_div">
-					<div  class="service_title" style="vertical-align: bottom;">教学教务通知</div>
+					<div class="service_title" style="vertical-align: bottom;">教学教务通知</div>
 					<div class="split_1px"></div>
 					<div class="first_center_td" style="margin-left: 20px;margin-right: 20px;">
 <!-- 						<ul > -->
@@ -132,7 +135,7 @@ $(function(){
 <!-- 				<ul class="news_content"> -->
 					<s:iterator var="download" value="downloadlist" status="st">
 <!-- 						<li> -->
-						<div class="first_line_info"  style="padding: 3px 9px;">
+						<div class="first_line_info" >
 							<table class="news_main_content" width="100%" >
 							<tr>
 							<td  style="width: 100%;">
@@ -167,7 +170,7 @@ $(function(){
 <!-- 					<ul class="news_content"> -->
 					<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
 					<s:iterator var="regulation" value="regulationList" status="st">
-					<div class="first_line_info"  style="padding: 3px 9px;">
+					<div class="first_line_info" >
 							<table class="news_main_content" width="100%" >
 							<tr>
 							<td  style="width: 100%;">

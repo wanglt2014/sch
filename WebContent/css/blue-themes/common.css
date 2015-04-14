@@ -138,7 +138,7 @@ font-size: 22px;
 	font-family: "微软雅黑",Arial,Helvetica,sans-serif;
 	color: #333;
 	font-size: 14px;
-	width: 120px;
+	width: 124px;
 	height: 42px;
 	line-height: 42px;
 	text-align: center;
@@ -160,7 +160,7 @@ font-size: 22px;
 }
 .nav_title_pre{
 	background: url(../../images/img/navMiddle.jpg) repeat-x;
-	width: 10px;
+	width: 8px;
 	position: relative;
 	margin: 10px 0 0 0;
 	float: left;
@@ -175,7 +175,7 @@ font-size: 22px;
 
 .container {
 	margin: 0 auto;
-	width: 1120px;
+	width: 1112px;
 	background-color: white;
 }
 
@@ -199,7 +199,7 @@ font-size: 22px;
 
 .split_2px {
 	height: 2px;
-	background-color: #9390D3;
+	background-color: #B31102;
 	margin: 10px;;
 	font-size: 0px;
 }
@@ -241,7 +241,7 @@ font-size: 22px;
 
 .normal_title_content {
 	background: url(../../images/img/side.jpg) repeat-x;
-	font-weight: bold;
+/* 	font-weight: bold; */
 	font-size: 14px;
 	line-height: 32px;
 	padding-left: 20px;
@@ -250,6 +250,7 @@ font-size: 22px;
 	border-width: 1px;
 	border-style: solid;
 	border-color: #cecece;
+	font-family: "微软雅黑",Arial,Helvetica,sans-serif;
 }
 
 .normal_content {
@@ -259,14 +260,17 @@ font-size: 22px;
 
 .normal_content_top {
 	border: 1px solid #CFCFCF;
-	height: 140px;
+	height: 160px;
 	background-color: white;
+	padding:0px 15px;
+	overflow: hidden;
 }
 
 .normal_content_bottom {
 	border: 1px solid #CFCFCF;
 	height: 260px;
 	background-color: white;
+	padding:0px 15px;
 }
 
 .normal_new_bussiness_bottom {

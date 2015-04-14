@@ -173,7 +173,7 @@ public abstract class BaseAction extends SystemAction {
 			}
 			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			Map map2 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
-					5, 1);
+					6, 1);
 			if (ComonUtil.validateMapResult(map2)) {
 				notifylist = (List<BsArticle>) map2.get(Constant.ARTICLE_LIST);
 			}
@@ -224,6 +224,7 @@ public abstract class BaseAction extends SystemAction {
 			} else if (2 == type) {
 				bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
 			} else if (3 == type) {
+				// bsArticle.setArticletype(Constant.art);
 			}
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					5, 1);

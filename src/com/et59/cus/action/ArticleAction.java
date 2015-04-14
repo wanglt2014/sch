@@ -154,7 +154,7 @@ public class ArticleAction extends BaseAction {
 	 * @throws
 	 */
 	public String teachDetail() {
-		super.commonquery();
+		super.commonQueryForArticle(1);
 		String id = request.getParameter("id");
 		try {
 			bsArticledetail = localServiceProxy.queryArticleById(Long
@@ -181,7 +181,7 @@ public class ArticleAction extends BaseAction {
 	 * @throws
 	 */
 	public String regulationDetail() {
-		super.commonquery();
+		super.commonQueryForArticle(2);
 		String id = request.getParameter("id");
 		try {
 			bsArticledetail = localServiceProxy.queryArticleById(Long
@@ -276,8 +276,8 @@ public class ArticleAction extends BaseAction {
 				tDownload.setFileisvalid(Constant.ISVALID_1);
 				Long downloadId = localServiceEXProxy
 						.saveDownloadInfo(tDownload);
-//				System.out.println(downloadId + "******downloadId" + "路径："
-//						+ filepath);
+				// System.out.println(downloadId + "******downloadId" + "路径："
+				// + filepath);
 				bsArticle.setDownloadid(downloadId);
 			}
 			localServiceProxy.saveArticle(bsArticle);
@@ -431,7 +431,7 @@ public class ArticleAction extends BaseAction {
 	 * @throws
 	 */
 	public String trainingResultDetail() {
-		super.commonquery();
+		super.commonQueryForArticle(3);
 		String id = request.getParameter("id");
 		try {
 			bsArticledetail = localServiceProxy.queryArticleById(Long

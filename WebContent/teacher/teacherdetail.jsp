@@ -42,9 +42,8 @@ td.p80{width: 80%;height: 30px;}
 		<jsp:include page="../nav.jsp"></jsp:include>
 		<div style="position: relative; margin: 5px 0px 10px 0px; height: auto;height:100%;" >
 			<div id="index_top">
-
-				<div id="news_right_content_detail" >
-					<div class="one_artic_detail" >
+				<div id="news_right_content_detail" style="width: 100%;margin-left: 0px;" >
+					<div class="one_artic_detail" style="width: 100%;">
 <!-- 						<div class="title_detail_nolist" align="center"> -->
 <%-- 							<b style="font-size: 15px; font-family: sans-serif;"><c:out --%>
 <%-- 									value="${tTeacherdetail.teachername}" /> </b> --%>

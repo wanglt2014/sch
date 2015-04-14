@@ -75,20 +75,37 @@
 					<c:if test="${!empty(notifylist)}">
 						<div id="right_content_top">
 							<ul>
-								<li class="normal_title_left"></li>
-								<li class="normal_title_right"></li>
+<!-- 								<li class="normal_title_left"></li> -->
+<!-- 								<li class="normal_title_right"></li> -->
 								<li class="normal_title_content">
 									教务教学通知&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</li>
 							</ul>
 							<div class="normal_content_top">
-								<ul class="news_content">
+							<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
+<!-- 								<ul class="news_content"> -->
 									<s:iterator var="teach" value="notifylist" status="st">
-										<li><a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm"><s:property
-													value="#teach.articletitle" /> </a>
-										</li>
+									<div class="first_line_info" >
+									<table class="news_main_content" width="100%" >
+									<tr>
+									<td  style="width: 100%;">
+										<a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
+										<s:property value="#teach.articletitle" />
+										</a>
+									</td>
+									<td style="width: 65px;">
+										<a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
+										<s:property value="#teach.createdate" />
+										</a>
+									</td>
+									</tr>
+									</table>
+									</div>
+									<div class='separatorLine'></div>
 									</s:iterator>
-								</ul>
+<!-- 								</ul> -->
+							
+							</div>
 							</div>
 						</div>
 					</c:if>

@@ -194,16 +194,21 @@ public class TrainingPlanAction extends BaseAction {
 
 	public String toPlanPage() {
 		// super.commonQueryForTeacher("");
+		String departmentid = request.getParameter("id"); // 每页显示行数
 		TDepartment tDepartment = new TDepartment();
 		try {
 			Pager pager = localServiceEXProxy.queryTDepartmentBypage(
 					tDepartment, 9, 1);
 			tdepartmentList = (List<TDepartmentWithBLOBs>) pager.getRows();
-			if (tdepartmentList != null && tdepartmentList.size() > 0) {
-				defultId = String.valueOf(tdepartmentList.get(0)
-						.getDepartmentid());
+			if (departmentid != null && !departmentid.isEmpty()) {
+				defultId = departmentid;
 			} else {
-				defultId = "0";
+				if (tdepartmentList != null && tdepartmentList.size() > 0) {
+					defultId = String.valueOf(tdepartmentList.get(0)
+							.getDepartmentid());
+				} else {
+					defultId = "0";
+				}
 			}
 
 		} catch (Exception e) {
@@ -404,7 +409,7 @@ public class TrainingPlanAction extends BaseAction {
 	}
 
 	/**
-	 * @Title: trainingPlanDetail
+	 * @Title: showDepDetail
 	 * @Description: 跳转到详细页面
 	 * @param @return 设定文件
 	 * @return String 返回类型
@@ -438,6 +443,16 @@ public class TrainingPlanAction extends BaseAction {
 		try {
 			tDepartmentWithBLOBs = localServiceEXProxy.queryTDepartment(Long
 					.valueOf(id));
+			TDepartment tDepartment = new TDepartment();
+			Pager pager = localServiceEXProxy.queryTDepartmentBypage(
+					tDepartment, 9, 1);
+			tdepartmentList = (List<TDepartmentWithBLOBs>) pager.getRows();
+			if (tdepartmentList != null && tdepartmentList.size() > 0) {
+				defultId = String.valueOf(tdepartmentList.get(0)
+						.getDepartmentid());
+			} else {
+				defultId = "0";
+			}
 
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
@@ -551,7 +566,7 @@ public class TrainingPlanAction extends BaseAction {
 	}
 
 	/**
-	 * @Title: downloaddetail
+	 * @Title: subjectDetail
 	 * @Description: 跳转到资料下载详细页面
 	 * @param @return 设定文件
 	 * @return String 返回类型
@@ -559,7 +574,11 @@ public class TrainingPlanAction extends BaseAction {
 	 */
 	public String subjectDetail() {
 		String id = request.getParameter("id");
+		TDepartment tDepartment = new TDepartment();
 		try {
+			Pager pager = localServiceEXProxy.queryTDepartmentBypage(
+					tDepartment, 9, 1);
+			tdepartmentList = (List<TDepartmentWithBLOBs>) pager.getRows();
 			tSubject = localServiceEXProxy.querySubjectById(Long.valueOf(id));
 
 			tSubjectDTO = new TSubjectDTO();
@@ -608,7 +627,11 @@ public class TrainingPlanAction extends BaseAction {
 		if (log.isDebugEnabled()) {
 			log.debug("查询交易信息currentPage>>>>:" + currentPage);
 		}
+		TDepartment tDepartment = new TDepartment();
 		try {
+			Pager pagerdep = localServiceEXProxy.queryTDepartmentBypage(
+					tDepartment, 9, 1);
+			tdepartmentList = (List<TDepartmentWithBLOBs>) pagerdep.getRows();
 			String id = request.getParameter("id");
 			String departmentCode = request.getParameter("para");
 			TTeacher tTeacher = new TTeacher();
@@ -619,7 +642,7 @@ public class TrainingPlanAction extends BaseAction {
 			tDictionary.setDictionarycode(departmentCode);
 			tDictionary.setDictionarytype("department");
 			Pager pager = localServiceProxy.queryDictionaryBypage(tDictionary,
-					100000, 1);
+					100, 1);
 			dictionaryList = (List<TDictionary>) pager.getRows();
 			if (ComonUtil.validateMapResult(map)) {
 				teacherList = (List<TTeacher>) map.get(Constant.TEACHER_LIST);

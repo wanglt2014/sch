@@ -698,14 +698,14 @@ public class LocalServiceImpl implements LocalService {
 				&& !bsArticle.getArticletype().equals("")) {
 			criteria.andArticletypeEqualTo(bsArticle.getArticletype());
 		} else {
-			// 只查询通知和制度
+			// 查询除通知和制度以外的内容
 			List typeList = new ArrayList();
-			String menuType = bsArticle.getMenuType();
+			// String menuType = bsArticle.getMenuType();
 			typeList.add(Constant.ARTICLE_TYPE_NOTICE);
 			typeList.add(Constant.ARTICLE_TYPE_REGULATION);
-			if (menuType != null && "result".equals(menuType)) {
-				criteria.andArticletypeNotIn(typeList);
-			}
+			// if (menuType != null && "result".equals(menuType)) {
+			criteria.andArticletypeNotIn(typeList);
+			// }
 			// else {
 			// criteria.andArticletypeIn(typeList);
 			// }

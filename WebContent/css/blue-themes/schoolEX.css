@@ -13,7 +13,7 @@
 .content_detail{
 	margin-top: 25px;
 	font-size:15px;
-	min-width: 925px;
+	min-width: 780px;
 	
 }
 
@@ -139,7 +139,9 @@ margin:0px auto; min-width:1000px; float:none;
 .first_line_info:hover { background:#FFFCC9; }
 
 .first_center_td{
-	margin:5px 20px 0px 20px;
+	margin:0px 20px 0px 20px;
+	overflow: hidden;
+	height: 255px;
 }
 .first_line_info a{
 	width: 100%;

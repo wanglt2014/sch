@@ -74,26 +74,30 @@
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">
 				<div id="news_left_content">
-<%-- 					<c:if test="${!empty(notifylist)}"> --%>
-						<div id="right_content_top">
-							<ul>
-								<li class="normal_title_left"></li>
-								<li class="normal_title_right"></li>
-								<li class="normal_title_content">
-									人才培养方案&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								</li>
-							</ul>
-							<div class="normal_content_top">
-								<ul class="news_content">
-									<s:iterator var="department" value="tdepartmentList" status="st">
-										<li><a href="javascript:void(0);"  onclick="showContent(${department.departmentid});"><s:property
-													value="#department.departmentname" /> </a>
-										</li>
-									</s:iterator>
-								</ul>
-							</div>
+					<div id="right_content_top">
+						<ul>
+							<li class="normal_title_content">
+								人才培养方案&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							</li>
+						</ul>
+						<div class="normal_content_top">
+						<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
+							<s:iterator var="department" value="tdepartmentList" status="st">
+							<div class="first_line_info" >
+									<table class="news_main_content" width="100%" >
+									<tr>
+									<td  style="width: 100%;">
+									<a href="javascript:void(0);"  onclick="showContent(${department.departmentid});" title="<s:property value="#department.departmentname" />">
+									<s:property value="#department.departmentname" /> </a>
+									</td>
+									</tr>
+									</table>
+								</div>		
+								<div class='separatorLine'></div>
+							</s:iterator>
 						</div>
-<%-- 					</c:if> --%>
+						</div>
+					</div>
 				</div>
 				<div id="news_right_content"></div>
 			</div>

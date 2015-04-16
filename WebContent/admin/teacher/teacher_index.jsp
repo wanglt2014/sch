@@ -151,7 +151,6 @@
 <!-- 								</ul> -->
 								<div id="file-list" style="text-align: left;margin:0px 0px 0px 60px; "></div>
 								<img style="WIDTH:200px; HEIGHT:150px; BORDER:0;margin-left: 60px;" id="img_photo" src="" alt=""/>
-								
 								<div class="btn-wraper">
 									<input type="button" value="选择文件..." id="browse" />
 <!-- 									<input type="button" value="开始上传" id="upload-btn" /> -->
@@ -190,13 +189,13 @@
 						<div class="fitem" id="outlineObj" >
 							<div class="wraper">
 							<label>教学大纲:</label> 
-							<ul id="file-list-outline" style="text-align: left;margin:0px 0px 0px 30px; ">
-							</ul>
 							<div class="btn-wraper">
 								<input type="button" value="选择文件..." id="browseOutline" />
 								<input type="button" value="清空" id="outline-clear-btn" />
 								<p class="tip2">注意：只能上传20M以内的文件</p>
 							</div>
+							<ul id="file-list-outline" style="text-align: left;margin:0px 0px 0px 30px; ">
+							</ul>
 							</div>
 						</div>
 						<div class="fitem" id="scheduleObj">
@@ -215,13 +214,13 @@
 							<div class="wraper">
 							<label>课程资料:</label> 
 <!-- 							<input id="uploader_subject_count" name="uploader_subject_count" value="0" style="display: none;"/> -->
-							<ul id="file-list-subject" style="text-align: left;margin:0px 0px 0px 30px; ">
-							</ul>
 							<div class="btn-wraper">
 								<input type="button" value="选择文件..." id="browseSubject" />
 								<input type="button" value="清空" id="subject-clear-btn" />
 								<p class="tip2">注意：只能上传20M以内的文件</p>
 							</div>
+							<ul id="file-list-subject" style="text-align: left;margin:0px 0px 0px 30px; ">
+							</ul>
 							</div>
 						</div>
 			</div> 
@@ -267,13 +266,13 @@
 					<div class="wraper">
 					<label>立项申请书电子版:</label> 
 <!-- 					<input id="uploader_project_count" name="uploader_project_count" value="0" style="display: none;"/> -->
-					<ul id="file-list-project" style="text-align: left;margin:0px 0px 0px 30px; ">
-					</ul>
 					<div class="btn-wraper">
 						<input type="button" value="选择文件..." id="browseProject" />
 						<input type="button" value="清空" id="project-clear-btn" />
 						<p class="tip2">注意：只能上传20M以内的文件</p>
 					</div>
+					<ul id="file-list-project" style="text-align: left;margin:0px 0px 0px 30px; ">
+					</ul>
 					</div>
 				</div>
 <!-- 				<div class="ftitle">著作</div> -->

@@ -83,7 +83,11 @@ $(function(){
 				</div>
 				
 				<div id="service_div">
-					<div class="service_title" style="vertical-align: bottom;">教学教务通知</div>
+					<div class="service_title" style="vertical-align: bottom;">
+						<span style="display: block;float: left;">教学教务通知</span>
+						<span style="display: block;margin-right:10px;float: right;">
+						<a href="Article_toNoticePage.shtm" style="font-size: 11px;">更多>></a></span>
+					</div>
 					<div class="split_1px"></div>
 					<div class="first_center_td" style="margin-left: 20px;margin-right: 20px;">
 <!-- 						<ul > -->
@@ -120,17 +124,16 @@ $(function(){
 					
 					</div>
 				</div>
-			
 			</div>
 			<div id="right_content_top" >
 				<ul>
-<!-- 					<li class="normal_title_left"></li> -->
-<!-- 					<li class="normal_title_right"></li> -->
 					<li class="normal_title_content">
-						资料下载
+						<span style="display: block;float: left;">资料下载</span>
+						<span style="display: block;margin-right:10px;float: right;">
+						<a href="Download_toDownloadPage.shtm" style="font-size: 11px;">更多>></a></span>
 					</li>
 				</ul>
-				<div class="normal_content_top">
+				<div class="normal_content_top" >
 				<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
 <!-- 				<ul class="news_content"> -->
 					<s:iterator var="download" value="downloadlist" status="st">
@@ -160,10 +163,10 @@ $(function(){
 				</div>
 				<div id="right_content_bottom" >
 				<ul>
-<!-- 					<li class="normal_title_left"></li> -->
-<!-- 					<li class="normal_title_right"></li> -->
 					<li class="normal_title_content">
-						教务教学制度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span style="display: block;float: left;">教务教学制度</span>
+						<span style="display: block;margin-right:10px;float: right;">
+						<a href="Article_toRegulationPage.shtm" style="font-size: 11px;">更多>></a></span>
 					</li>
 				</ul>
 				<div class="normal_content_bottom">

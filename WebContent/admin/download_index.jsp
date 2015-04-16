@@ -52,13 +52,13 @@
 		 	<div class="fitem" id="uploadFileDIV">
                 <label>上传文件:</label>
             	<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/>
-				<ul id="file-listForDownload" style="text-align: left;margin:0px 0px 0px 30px; ">
-				</ul>
 				<div class="btn-wraper">
 					<input type="button" value="选择文件..." id="browseForDownload" />
 					<input type="button" value="清空" id="clear-btn" />
 					<p class="tip2">注意：只能上传10M以内的文件</p>
 				</div>
+				<ul id="file-listForDownload" style="text-align: left;margin:0px 0px 0px 30px; ">
+				</ul>
 			</div>
             <div class="fitem">
                 <label>文件名称</label>

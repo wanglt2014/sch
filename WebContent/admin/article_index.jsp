@@ -105,13 +105,13 @@
             <div class="fitem" id="uploadFileDIV">
                 <label>上传文件:</label>
             	<input id="uploader_countForArticle" name="uploader_countForArticle" value="0" style="display: none;"/>
-				<ul id="file-listForArticle" style="text-align: left;margin:0px 0px 0px 30px; ">
-				</ul>
 				<div class="btn-wraper">
 					<input type="button" value="选择文件..." id="browseForArticle" />
 					<input type="button" value="清空" id="clear-btn" />
 					<p class="tip2">注意：只能上传10M以内的文件</p>
 				</div>
+				<ul id="file-listForArticle" style="text-align: left;margin:0px 0px 0px 30px; ">
+				</ul>
 			</div>
 <!-- 			<div class="fitem" id="queryFileDIV"> -->
 <!--                 <label>文件:</label> -->

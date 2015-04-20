@@ -37,7 +37,6 @@ String request_path = request.getContextPath();
 		  </tr>
 		  </s:if>
 <!-- 		<div class="artic_content"> -->
-		
 <!-- 		</div> -->
 <!-- 			<div class="one_artic"> -->
 <!-- 				<div class="artic_content"> -->

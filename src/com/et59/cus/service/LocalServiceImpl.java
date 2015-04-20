@@ -694,9 +694,12 @@ public class LocalServiceImpl implements LocalService {
 		com.et59.cus.domain.entity.BsArticleExample.Criteria criteria = bae
 				.createCriteria();
 		bae.setOrderByClause(" createdate desc ");
-		if (null != bsArticle.getArticletype()
-				&& !bsArticle.getArticletype().equals("")) {
+		String type = bsArticle.getArticletype();
+		if (null != type
+				&& !type.equals("") && !type.equals("0")) {
 			criteria.andArticletypeEqualTo(bsArticle.getArticletype());
+		}else if(type.equals("0")){
+			//查询全部类型的文章
 		} else {
 			// 查询除通知和制度以外的内容
 			List typeList = new ArrayList();
@@ -1813,14 +1816,14 @@ public class LocalServiceImpl implements LocalService {
 				Cache.getInstance().put(row.getSystemKey(),
 						row.getSystemValue());
 			}
-			TCollegeExample example = new TCollegeExample();
-			example.createCriteria().andCollegelevelEqualTo("1");
-			TCollege college = (TCollege) Cache.getInstance().get("summary");
-			if (null == college) {
-				college = (TCollege) tCollegeDAO.selectByExample(example)
-						.get(0);
-				Cache.getInstance().put("summary", college);
-			}
+//			TCollegeExample example = new TCollegeExample();
+//			example.createCriteria().andCollegelevelEqualTo("1");
+//			TCollege college = (TCollege) Cache.getInstance().get("summary");
+//			if (null == college) {
+//				college = (TCollege) tCollegeDAO.selectByExample(example)
+//						.get(0);
+//				Cache.getInstance().put("summary", college);
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

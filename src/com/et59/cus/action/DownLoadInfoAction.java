@@ -163,7 +163,7 @@ public class DownLoadInfoAction extends BaseAction {
 			downloaddetail.setFileshowpath(fileShowPath);
 		}
 		try {
-			downloaddetail.setFiletype(Constant.ARTICLE_TYPE_DOWNLOAD);
+			downloaddetail.setInfotype(Constant.ARTICLE_TYPE_DOWNLOAD);
 			downloaddetail.setFileisvalid(Constant.ISVALID_1);
 			localServiceEXProxy.saveDownloadInfo(downloaddetail);
 			flag = true;

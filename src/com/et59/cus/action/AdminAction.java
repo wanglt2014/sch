@@ -41,8 +41,8 @@ public class AdminAction extends BaseAction {
 				userobj.setIsadmin(usertype);
 				String randomcode = (String) session.get("RANDOMIMAGES");
 				log.info("checkcode|randomcode:"+checkcode+"|"+randomcode);
-				//临时注释 验证码
-//				if(randomcode.equalsIgnoreCase(checkcode)){
+				//临时注释 验证码 WLT
+				if(randomcode.equalsIgnoreCase(checkcode)){
 						Map map = localServiceProxy.queryUsername(userobj);
 						if (ComonUtil.validateMapResult(map)) {
 							BsUser user1 = (BsUser) map.get(Constant.USER);
@@ -72,9 +72,9 @@ public class AdminAction extends BaseAction {
 							 log.debug("登陆失败!");
 							 showMessage = "用户名或者密码不正确!";
 						}
-//					}else{
-//						showMessage = "验证码不正确!";
-//					}
+					}else{
+						showMessage = "验证码不正确!";
+					}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

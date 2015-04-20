@@ -88,7 +88,7 @@
 
 			<div id="index_top">
 				<div id="news_left_content">
-					<c:if test="${!empty(downloadlist)}">
+<%-- 					<c:if test="${!empty(downloadlist)}"> --%>
 						<div id="right_content_top">
 							<ul>
 								<li class="normal_title_content">
@@ -118,7 +118,7 @@
 								</div>
 							</div>
 						</div>
-					</c:if>
+<%-- 					</c:if> --%>
 				</div>
 				<div id="news_right_content"></div>
 			</div>

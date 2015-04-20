@@ -29,7 +29,7 @@ String request_path = request.getContextPath();
 		<tr>
 		  </s:if>
 		  <td>
-		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img class="img_thunmb" alt="' + teacher.teachername + '" src="file://<s:property value="#teacher.iimageurll"/>" /></a>
+		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img class="img_thunmb" alt="' + teacher.teachername + '" src="file:///<s:property value="#teacher.iimageurll"/>" /></a>
 		  	<br>
 		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><i class="point">•</i>&nbsp;<s:property value="#teacher.teachername" /></a>
 		  </td>

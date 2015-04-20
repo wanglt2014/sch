@@ -72,10 +72,10 @@ $(function(){
 					<div class="flash_left"></div>
 					<div class="flash_content">
 						<div id="banner">
-						    	<img  src="${image_path}/ibanner1.jpg" width="600" height="252"/>
-						        <img  src="${image_path}/ibanner2.jpg" width="600" height="252"/>
-						        <img  src="${image_path}/ibanner3.jpg" width="600" height="252"/>
-						        <img  src="${image_path}/ibanner4.jpg" width="600" height="252"/>
+						    	<img  src="${image_path}/indexpic1.jpg" width="600" height="252"/>
+						        <img  src="${image_path}/indexpic2.jpg" width="600" height="252"/>
+						        <img  src="${image_path}/indexpic3.jpg" width="600" height="252"/>
+						        <img  src="${image_path}/indexpic4.jpg" width="600" height="252"/>
 						</div>
 						<div id="btn"></div>
 					</div>
@@ -199,33 +199,48 @@ $(function(){
 		<div  class="user_show">
 		<div class="user_show_title">友情链接</div>
 		<div class="split_spx"></div>
-			<div id="bank_icon"  class="box scroll_three">
-				<ul>  
-					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-				</ul>
+			<div id="bank_icon"  class="box scroll_three" style="vertical-align: middle;line-height: 40px;" align="center">
+			<span><a href="#">哈尔滨工程大学</a></span>
+			<span><a href="#">实验平台</a></span>
+			<span><a href="#">调查平台</a></span>
+			<span><a href="#">图书馆</a></span>
+			<span><a href="#">船舶工程学院</a></span>
+			<span><a href="#">自动化学院</a></span>
+			<span><a href="#">水声工程学院</a></span>
+			<span><a href="#">理学院</a></span>
+			
+<!-- 				<ul>   -->
+<!-- 					<li><a href="#">哈尔滨工程大学</a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 					<li><a href="#">船舶工程学院</a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 					<li><a href="#">自动化学院</a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 					<li><a href="#">水声工程学院</a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/logo01.jpg" width="135" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 					<li><a href="#"></a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 					<li><a href="#"></a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 					<li><a href="#"></a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 					<li><a href="#"></a></li> -->
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li> --%>
+<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
+<!-- 				</ul> -->
 			</div>
 		</div>
 </div>

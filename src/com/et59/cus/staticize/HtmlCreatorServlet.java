@@ -69,9 +69,9 @@ public class HtmlCreatorServlet extends HttpServlet {
 		boolean load = true;
 		// 如果静态html 存在，就直接显示html，否则，我们就生成它。
 		// wlt WLT注释掉 --------------------------------------------
-		 if (cacheFile.exists()) {
-		 load = false;
-		 }
+		// if (cacheFile.exists()) {
+		// load = false;
+		// }
 		// 注释掉 --------------------------------------------
 		RequestDispatcher dispatcher = null;
 		if (load) {

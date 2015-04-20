@@ -3,21 +3,19 @@
 <div id="footer">
 	<div class="split_2px"></div>
 		<p>
-		<a target="_blank" href="#"><img src="${image_path}/rz01.jpg" width="120px" height="50px">
-		</a> <a target="_blank" href="#"><img src="${image_path}/rz02.png" width="120px" height="50px">
-		</a> <a target="_blank" href="#"><img src="${image_path}/rz03.png" width="120px" height="50px">
-		</a> <a target="_blank" href="#"><img src="${image_path}/rz04.png" width="120px" height="50px">
-		</a> <a target="_blank" href="#"><img src="${image_path}/rz05.png" width="120px" height="50px">
-		</a> <a target="_blank" href="#"><img src="${image_path}/hy_124x47.png" width="120px" height="50px"> </a>
+<%-- 		<a target="_blank" href="#"><img src="${image_path}/rz01.jpg" width="120px" height="50px"> --%>
+<%-- 		</a> <a target="_blank" href="#"><img src="${image_path}/rz02.png" width="120px" height="50px"> --%>
+<%-- 		</a> <a target="_blank" href="#"><img src="${image_path}/rz03.png" width="120px" height="50px"> --%>
+<%-- 		</a> <a target="_blank" href="#"><img src="${image_path}/rz04.png" width="120px" height="50px"> --%>
+<%-- 		</a> <a target="_blank" href="#"><img src="${image_path}/rz05.png" width="120px" height="50px"> --%>
+<%-- 		</a> <a target="_blank" href="#"><img src="${image_path}/hy_124x47.png" width="120px" height="50px"> </a> --%>
 		
 	</p>
 	<div class="footer-link">
-		<a href="#">${sitename}</a> | <a href="Login_job.shtm"
-			target="_blank">人才招聘</a> | <a
+		<a href="#">${sitename}</a> | <a
 			href="Login_linkus.shtm" target="_blank">联系我们</a> | <a
 			href="Login_question.shtm" target="_blank">帮助中心</a> | <a id="ico_pp_a"
-			target="_blank">意见反馈</a> | <a href="#"
-			target="_blank">流量统计</a> | <a href="Login_team.shtm"" target="_blank">团队介绍</a>
+			target="_blank">意见反馈</a> | <a href="Login_team.shtm"" target="_blank">团队介绍</a>
 				
 
 	</div>

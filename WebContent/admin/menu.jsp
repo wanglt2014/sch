@@ -19,10 +19,10 @@
 <body>
 	<div style="margin: 10px 0;">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="edit()">Edit</a> <a href="javascript:void(0)"
-			class="easyui-linkbutton" onclick="save()">Save</a> <a
+			onclick="edit()">修改</a> <a href="javascript:void(0)"
+			class="easyui-linkbutton" onclick="save()">保存</a> <a
 			href="javascript:void(0)" class="easyui-linkbutton"
-			onclick="cancel()">Cancel</a>
+			onclick="cancel()">取消</a>
 	</div>
 	<table title="菜单管理" class="easyui-treegrid" id="menutg"
 		data-options="url: '${request_path}/Menu_query',method: 'get',rownumbers: true,idField: 'id', fit:true,treeField: 'text',iconCls: 'icon-ok',animate: true, fitColumns: true,onContextMenu: onContextMenu">

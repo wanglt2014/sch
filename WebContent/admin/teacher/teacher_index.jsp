@@ -69,12 +69,12 @@
 			iconCls="icon-remove" plain="true" onclick="destroyTeacher()">删除</a>
 	</div>
 	<div id="teacherdlg" class="easyui-dialog"
-		style="width: 800px; height: 720px; padding: 10px 20px" closed="true"
+		style="width: 800px; height: 720px; padding: 10px 20px;overflow: visible;" closed="true"
 		buttons="#teacherdlg-buttons">
 		<form id="teacherfm" method="post" novalidate>
 		<div id="teacher_tab" class="easyui-tabs" style="height: 616px"
 			data-options="fit:true,border:false,plain:true" >
-			<div title="基本信息" style="padding:20px;" id="Tab1"> 
+			<div title="基本信息" style="padding:50px;" id="Tab1"> 
 					<div class="ftitle">基本信息</div>
 					
 						<div class="fitem">
@@ -149,14 +149,15 @@
 <!-- 								<input id="uploader_count" name="uploader_count" value="0" style="display: none;"/> -->
 <!-- 								<ul id="file-list" style="text-align: left;margin:0px 0px 0px 30px; "> -->
 <!-- 								</ul> -->
-								<div id="file-list" style="text-align: left;margin:0px 0px 0px 60px; "></div>
-								<img style="WIDTH:200px; HEIGHT:150px; BORDER:0;margin-left: 60px;" id="img_photo" src="" alt=""/>
 								<div class="btn-wraper">
 									<input type="button" value="选择文件..." id="browse" />
 <!-- 									<input type="button" value="开始上传" id="upload-btn" /> -->
 									<input type="button" value="清空" id="clear-btn" />
 									<p class="tip2">注意：只能上传1M以内，格式为jpg,gif,png,bmp的照片</p>
 								</div>
+								<div id="file-list" style="text-align: left;margin:0px 0px 0px 60px; "></div>
+								<img style="WIDTH:200px; HEIGHT:190px; BORDER:0;margin-left: 60px;" id="img_photo" src="" alt=""/>
+								
 							</div>
 						</div>
 			</div> 
@@ -201,13 +202,13 @@
 						<div class="fitem" id="scheduleObj">
 							<div class="wraper">
 							<label>教学进度表:</label> 
-							<ul id="file-list-schedule" style="text-align: left;margin:0px 0px 0px 30px; ">
-							</ul>
 							<div class="btn-wraper">
 								<input type="button" value="选择文件..." id="browseSchedule" />
 								<input type="button" value="清空" id="schedule-clear-btn" />
 								<p class="tip2">注意：只能上传20M以内的文件</p>
 							</div>
+							<ul id="file-list-schedule" style="text-align: left;margin:0px 0px 0px 30px; ">
+							</ul>
 							</div>
 						</div>
 						<div class="fitem" id="subjectObj">
@@ -468,8 +469,27 @@
 		});
 	}
 	function newTeacher() {
-		uploaderForPic.init();
-		deleteAllUploader();
+		$('#teacher_tab').tabs('select',0);
+// 		alert(JSON.stringify(uploaderForPic));
+// 	alert(uploaderForOutline);
+// 		alert(uploaderForOutline==undefined);
+		if(uploaderForPic==null || uploaderForPic==undefined){
+			createUploaderPic();
+			createSubjectUpload();
+			createProject();
+		}else{
+			uploaderForPic.destroy();
+			uploaderForOutline.destroy();
+			uploaderForSchedule.destroy();
+			uploaderForSubject.destroy();
+			uploaderForProject.destroy();
+			createUploaderPic();
+			createSubjectUpload();
+			createProject();
+			deleteAllUploader();
+		}
+// 		alert(JSON.stringify(uploaderForPic));
+		
 		showAllUploader();
 		prizeNum = 0;
 		paperNum = 0;
@@ -498,13 +518,27 @@
 	function editTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
 		if (row) {
+			if(uploaderForPic==null || uploaderForPic==undefined){
+				createUploaderPic();
+				createSubjectUpload();
+				createProject();
+			}else{
+				uploaderForPic.destroy();
+				uploaderForOutline.destroy();
+				uploaderForSchedule.destroy();
+				uploaderForSubject.destroy();
+				uploaderForProject.destroy();
+				createUploaderPic();
+				createSubjectUpload();
+				createProject();
+				deleteAllUploader();
+			}
 			prizeNum = 0;
 			paperNum = 0;
 			$("#prizeDiv").html("");
 			$("#paperDiv").html("");
 			$('#teacherdlg').dialog('open').dialog('setTitle',
 					'编辑教师');
-			deleteAllUploader();
 			$('#teacherfm').form('clear');
 			$('#teacherfm').form('load', row);
 			$('#img_photo').show();
@@ -690,300 +724,340 @@
 		$('#projectObj').show();
 // 		$('#paperObj').show();
 	}
+	var uploaderForPic;
+	function createUploaderPic(){
+		//照片 上传控件##########################################
+		uploaderForPic = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browse',
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'pic'
+//	         	  two: '2',
+//	         	  three: { //值还可以是一个字面量对象
+//	         	    a: '4',
+//	         	    b: '5'
+//	         	  },
+//	         	  four: ['6', '7', '8']  //也可以是一个数组
+	        	},
+	        filters: {
+	  		  mime_types : [ //只允许上传图片文件和rar压缩文件
+	  		    { title : "图片文件", extensions : "jpg,gif,png,bmp" }
+	  		  ],
+	  		  max_file_size : '1000kb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+		uploaderForPic.init(); //初始化
+		//绑定文件上传删除事件
+		uploaderForPic.bind('FilesRemoved',function(uploader,file){
+			$('#file-list').html("");
+		});
+		
+		//绑定文件添加进队列事件
+		uploaderForPic.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+			        uploaderForPic.removeFile(file); 
+			    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				//构造html来更新UI
+//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+//	 			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
+				var	html = '<span id="file-' + file_id +'" style="text-align: left;">';
+					html += '<input type="hiddent" style="display: none;" name="uploader_pic_tmpname" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_pic_name" value="' + file_name + '" /></span>';
+				$(html).appendTo('#file-list');
+				!function(i){
+					previewImage(files[i],function(imgsrc){
+						$('#file-'+files[i].id).append('<img src="'+ imgsrc +'" />');
+					})
+			    }(i);
+			    $('#img_photo').hide();
+			}
+		});
+	}
 	
-	//照片 上传控件##########################################
-	var uploaderForPic = new plupload.Uploader({ //实例化一个plupload上传对象
-		browse_button : 'browse',
-		multi_selection: false,
- 		url : 'File_uploadForTeacher',
- 		file_data_name : 'fileData',
-// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-        unique_names : true,  // 上传的文件名是否唯一   
-        multipart_params: {
-        	  filetype: 'pic'
-//         	  two: '2',
-//         	  three: { //值还可以是一个字面量对象
-//         	    a: '4',
-//         	    b: '5'
-//         	  },
-//         	  four: ['6', '7', '8']  //也可以是一个数组
-        	},
-        filters: {
-  		  mime_types : [ //只允许上传图片文件和rar压缩文件
-  		    { title : "图片文件", extensions : "jpg,gif,png,bmp" }
-  		  ],
-  		  max_file_size : '1000kb', //最大只能上传100kb的文件
-  		  prevent_duplicates : true //不允许队列中存在重复文件
-        }
-	});
-	uploaderForPic.init(); //初始化
+// 	uploaderForPic.init(); //初始化
 	
-	//绑定文件上传删除事件
-	uploaderForPic.bind('FilesRemoved',function(uploader,file){
-		$('#file-list').html("");
-	});
+	var uploaderForOutline,uploaderForSchedule,uploaderForSubject;
+	function createSubjectUpload() {
+		//教学大纲 上传控件##########################################
+		uploaderForOutline = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browseOutline',
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'outline'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传20mb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+		
+		uploaderForOutline.bind('Error',function(uploader,errObject){
+			if(errObject.code=='-600'){
+				alert("上传文件过大");
+			}
+		});
+	 	
+//	 	uploaderForSubject.init(); //初始化
+		//绑定文件添加进队列事件
+		uploaderForOutline.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+				uploaderForOutline.removeFile(file); 
+			    });
+//	 		var count = $("#uploader_subject_count").val();
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+//	 			count++;
+				//构造html来更新UI
+//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_outline_tmpname" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_outline_name" value="' + file_name + '" /></li>';
+				$(html).appendTo('#file-list-outline');
+			}
+//	 		$("#uploader_subject_count").val(count);
+		});
+		
+		//绑定文件上传进度事件
+		uploaderForOutline.bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		
+		//绑定文件上传删除事件
+		uploaderForOutline.bind('FilesRemoved',function(uploader,file){
+			$('#file-list-outline').html("");
+		});
+		
+		//清空按钮
+		$('#outline-clear-btn').click(function(){
+			uploaderForOutline.splice(0,10); ////删除文件按钮
+		});
+		
+		
+		//教学进度表 上传控件##########################################
+		uploaderForSchedule = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browseSchedule',
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'schedule'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+		
+		uploaderForSchedule.bind('Error',function(uploader,errObject){
+			if(errObject.code=='-600'){
+				alert("上传文件过大");
+			}
+		});
+	 	
+//	 	uploaderForSubject.init(); //初始化
+		//绑定文件添加进队列事件
+		uploaderForSchedule.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+				uploaderForSchedule.removeFile(file); 
+			    });
+//	 		var count = $("#uploader_subject_count").val();
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+//	 			count++;
+				//构造html来更新UI
+//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_schedule_tmpname" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_schedule_name" value="' + file_name + '" /></li>';
+				$(html).appendTo('#file-list-schedule');
+			}
+//	 		$("#uploader_subject_count").val(count);
+		});
+		
+		//绑定文件上传进度事件
+		uploaderForSchedule.bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		
+		//绑定文件上传删除事件
+		uploaderForSchedule.bind('FilesRemoved',function(uploader,file){
+			$('#file-list-schedule').html("");
+		});
+		
+		//清空按钮
+		$('#schedule-clear-btn').click(function(){
+			uploaderForSchedule.splice(0,10); ////删除文件按钮
+		});
+		
+		
+		//课程资料 上传控件##########################################
+		uploaderForSubject = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browseSubject',
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'subject'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+		
+		uploaderForSubject.bind('Error',function(uploader,errObject){
+			if(errObject.code=='-600'){
+				alert("上传文件过大");
+			}
+		});
+	 	
+//	 	uploaderForSubject.init(); //初始化
+		//绑定文件添加进队列事件
+		uploaderForSubject.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) {
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+				uploaderForSubject.removeFile(file); 
+			    });
+//	 		var count = $("#uploader_subject_count").val();
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+//	 			count++;
+				//构造html来更新UI
+//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_subject_tmpname" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_subject_name" value="' + file_name + '" /></li>';
+				$(html).appendTo('#file-list-subject');
+			}
+//	 		$("#uploader_subject_count").val(count);
+		});
+		
+		//绑定文件上传进度事件
+		uploaderForSubject.bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		
+		//绑定文件上传删除事件
+		uploaderForSubject.bind('FilesRemoved',function(uploader,file){
+			$('#file-list-subject').html("");
+		});
+		
+		//清空按钮
+		$('#subject-clear-btn').click(function(){
+			uploaderForSubject.splice(0,10); ////删除文件按钮
+		});
+		
+		uploaderForSubject.init(); //初始化
+		uploaderForSchedule.init(); //初始化
+		uploaderForOutline.init(); //初始化
+	}
+	var uploaderForProject;
+	function createProject(){
+		//立项上传控件###################################################
+		uploaderForProject = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browseProject',
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'project'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传20mb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+	 	uploaderForProject.init(); //初始化
+		
+	 	
+	 	uploaderForProject.bind('Error',function(uploader,errObject){
+			if(errObject.code=='-600'){
+				alert("上传文件过大");
+			}
+		});
+	 	
+		//绑定文件添加进队列事件
+		uploaderForProject.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+				uploaderForProject.removeFile(file); 
+			    });
+//	 		var count = $("#uploader_project_count").val();
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+//	 			count++;
+				//构造html来更新UI
+//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_project_tmpname" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_project_name" value="' + file_name + '" /></li>';
+				$(html).appendTo('#file-list-project');
+			}
+//	 		$("#uploader_project_count").val(count);
+		});
+		
+		//绑定文件上传进度事件
+		uploaderForProject.bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		
+		//绑定文件上传删除事件
+		uploaderForProject.bind('FilesRemoved',function(uploader,file){
+			$('#file-list-project').html("");
+		});
+		
+		//清空按钮
+		$('#project-clear-btn').click(function(){
+			uploaderForProject.splice(0,10); ////删除文件按钮
+		});
+		
+	}
 	
-	//绑定文件添加进队列事件
-	uploaderForPic.bind('FilesAdded',function(uploader,files){
-		$.each(uploader.files, function (i, file) { 
-			if (uploader.files.length <= 1) { 
-		            return; 
-		        } 
-		        uploaderForPic.removeFile(file); 
-		    });
-		for(var i = 0, len = files.length; i<len; i++){
-			var file_name = files[i].name; //文件名
-			var file_id = files[i].id;//ID,临时文件名
-			//构造html来更新UI
-// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-// 			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
-			var	html = '<span id="file-' + file_id +'" style="text-align: left;">';
-				html += '<input type="hiddent" style="display: none;" name="uploader_pic_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" style="display: none;" name="uploader_pic_name" value="' + file_name + '" /></span>';
-			$(html).appendTo('#file-list');
-			!function(i){
-				previewImage(files[i],function(imgsrc){
-					$('#file-'+files[i].id).append('<img src="'+ imgsrc +'" />');
-				})
-		    }(i);
-		    $('#img_photo').hide();
-		}
-	});
-	
-	//教学大纲 上传控件##########################################
-	var uploaderForOutline = new plupload.Uploader({ //实例化一个plupload上传对象
-		browse_button : 'browseOutline',
-		multi_selection: false,
- 		url : 'File_uploadForTeacher',
- 		file_data_name : 'fileData',
-// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-        unique_names : true,  // 上传的文件名是否唯一   
-        multipart_params: {
-        	  filetype: 'outline'
-        	},
-        filters: {
-  		  max_file_size : '20mb', //最大只能上传100kb的文件
-  		  prevent_duplicates : true //不允许队列中存在重复文件
-        }
-	});
- 	
-// 	uploaderForSubject.init(); //初始化
-	//绑定文件添加进队列事件
-	uploaderForOutline.bind('FilesAdded',function(uploader,files){
-		$.each(uploader.files, function (i, file) { 
-			if (uploader.files.length <= 1) { 
-		            return; 
-		        } 
-			uploaderForOutline.removeFile(file); 
-		    });
-// 		var count = $("#uploader_subject_count").val();
-		for(var i = 0, len = files.length; i<len; i++){
-			var file_name = files[i].name; //文件名
-			var file_id = files[i].id;//ID,临时文件名
-// 			count++;
-			//构造html来更新UI
-// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" style="display: none;" name="uploader_outline_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" style="display: none;" name="uploader_outline_name" value="' + file_name + '" /></li>';
-			$(html).appendTo('#file-list-outline');
-		}
-// 		$("#uploader_subject_count").val(count);
-	});
-	
-	//绑定文件上传进度事件
-	uploaderForOutline.bind('UploadProgress',function(uploader,file){
-		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-	});
-	
-	//绑定文件上传删除事件
-	uploaderForOutline.bind('FilesRemoved',function(uploader,file){
-		$('#file-list-outline').html("");
-	});
-	
-	//清空按钮
-	$('#outline-clear-btn').click(function(){
-		uploaderForOutline.splice(0,10); ////删除文件按钮
-	});
-	
-	//教学进度表 上传控件##########################################
-	var uploaderForSchedule = new plupload.Uploader({ //实例化一个plupload上传对象
-		browse_button : 'browseSchedule',
-		multi_selection: false,
- 		url : 'File_uploadForTeacher',
- 		file_data_name : 'fileData',
-// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-        unique_names : true,  // 上传的文件名是否唯一   
-        multipart_params: {
-        	  filetype: 'schedule'
-        	},
-        filters: {
-  		  max_file_size : '20mb', //最大只能上传100kb的文件
-  		  prevent_duplicates : true //不允许队列中存在重复文件
-        }
-	});
- 	
-// 	uploaderForSubject.init(); //初始化
-	//绑定文件添加进队列事件
-	uploaderForSchedule.bind('FilesAdded',function(uploader,files){
-		$.each(uploader.files, function (i, file) { 
-			if (uploader.files.length <= 1) { 
-		            return; 
-		        } 
-			uploaderForSchedule.removeFile(file); 
-		    });
-// 		var count = $("#uploader_subject_count").val();
-		for(var i = 0, len = files.length; i<len; i++){
-			var file_name = files[i].name; //文件名
-			var file_id = files[i].id;//ID,临时文件名
-// 			count++;
-			//构造html来更新UI
-// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" style="display: none;" name="uploader_schedule_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" style="display: none;" name="uploader_schedule_name" value="' + file_name + '" /></li>';
-			$(html).appendTo('#file-list-schedule');
-		}
-// 		$("#uploader_subject_count").val(count);
-	});
-	
-	//绑定文件上传进度事件
-	uploaderForSchedule.bind('UploadProgress',function(uploader,file){
-		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-	});
-	
-	//绑定文件上传删除事件
-	uploaderForSchedule.bind('FilesRemoved',function(uploader,file){
-		$('#file-list-schedule').html("");
-	});
-	
-	//清空按钮
-	$('#schedule-clear-btn').click(function(){
-		uploaderForSchedule.splice(0,10); ////删除文件按钮
-	});
-	
-	//课程资料 上传控件##########################################
-	var uploaderForSubject = new plupload.Uploader({ //实例化一个plupload上传对象
-		browse_button : 'browseSubject',
-		multi_selection: false,
- 		url : 'File_uploadForTeacher',
- 		file_data_name : 'fileData',
-// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-        unique_names : true,  // 上传的文件名是否唯一   
-        multipart_params: {
-        	  filetype: 'subject'
-        	},
-        filters: {
-  		  max_file_size : '20mb', //最大只能上传100kb的文件
-  		  prevent_duplicates : true //不允许队列中存在重复文件
-        }
-	});
- 	
-// 	uploaderForSubject.init(); //初始化
-	//绑定文件添加进队列事件
-	uploaderForSubject.bind('FilesAdded',function(uploader,files){
-		$.each(uploader.files, function (i, file) {
-			if (uploader.files.length <= 1) { 
-		            return; 
-		        } 
-			uploaderForSubject.removeFile(file); 
-		    });
-// 		var count = $("#uploader_subject_count").val();
-		for(var i = 0, len = files.length; i<len; i++){
-			var file_name = files[i].name; //文件名
-			var file_id = files[i].id;//ID,临时文件名
-// 			count++;
-			//构造html来更新UI
-// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" style="display: none;" name="uploader_subject_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" style="display: none;" name="uploader_subject_name" value="' + file_name + '" /></li>';
-			$(html).appendTo('#file-list-subject');
-		}
-// 		$("#uploader_subject_count").val(count);
-	});
-	
-	//绑定文件上传进度事件
-	uploaderForSubject.bind('UploadProgress',function(uploader,file){
-		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-	});
-	
-	//绑定文件上传删除事件
-	uploaderForSubject.bind('FilesRemoved',function(uploader,file){
-		$('#file-list-subject').html("");
-	});
-	
-	//清空按钮
-	$('#subject-clear-btn').click(function(){
-		uploaderForSubject.splice(0,10); ////删除文件按钮
-	});
-
-
-	//立项上传控件###################################################
-	var uploaderForProject = new plupload.Uploader({ //实例化一个plupload上传对象
-		browse_button : 'browseProject',
-		multi_selection: false,
- 		url : 'File_uploadForTeacher',
- 		file_data_name : 'fileData',
-// 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-        unique_names : true,  // 上传的文件名是否唯一   
-        multipart_params: {
-        	  filetype: 'project'
-        	},
-        filters: {
-  		  max_file_size : '20mb', //最大只能上传20mb的文件
-  		  prevent_duplicates : true //不允许队列中存在重复文件
-        }
-	});
-// 	uploaderForProject.init(); //初始化
-	
-	//绑定文件添加进队列事件
-	uploaderForProject.bind('FilesAdded',function(uploader,files){
-		$.each(uploader.files, function (i, file) { 
-			if (uploader.files.length <= 1) { 
-		            return; 
-		        } 
-			uploaderForProject.removeFile(file); 
-		    });
-// 		var count = $("#uploader_project_count").val();
-		for(var i = 0, len = files.length; i<len; i++){
-			var file_name = files[i].name; //文件名
-			var file_id = files[i].id;//ID,临时文件名
-// 			count++;
-			//构造html来更新UI
-// 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-			var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-				html += '<input type="hiddent" style="display: none;" name="uploader_project_tmpname" value="' + file_id + '" />';
-				html += '<input type="hiddent" style="display: none;" name="uploader_project_name" value="' + file_name + '" /></li>';
-			$(html).appendTo('#file-list-project');
-		}
-// 		$("#uploader_project_count").val(count);
-	});
-	
-	//绑定文件上传进度事件
-	uploaderForProject.bind('UploadProgress',function(uploader,file){
-		$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-	});
-	
-	//绑定文件上传删除事件
-	uploaderForProject.bind('FilesRemoved',function(uploader,file){
-		$('#file-list-project').html("");
-	});
-	
-	//清空按钮
-	$('#project-clear-btn').click(function(){
-		uploaderForProject.splice(0,10); ////删除文件按钮
-	});
 	
 	//论文上传控件###################################################
 // 	var uploaderForPaper = new plupload.Uploader({ //实例化一个plupload上传对象
@@ -1129,26 +1203,34 @@
 // 			});
 		
 // 	});
-	$('#teacher_tab').tabs({ 
-	    border:false, 
-	    onSelect:function(title,index){ 
-// 	        alert(title+' is selected'+index); 
-	        if(index==0){
-	        	uploaderForPic.init();
-	        }
-			if(index==1){
-				uploaderForSubject.init(); //初始化
-				uploaderForSchedule.init(); //初始化
-				uploaderForOutline.init(); //初始化
-	        }
-			if(index==2){
-				uploaderForProject.init();
-			}
-			if(index==3){
-// 				uploaderForPaper.init(); //初始化
-			}
-	    } 
-	});
+// 	$('#teacher_tab').tabs({ 
+// 	    border:false, 
+// 	    onSelect:function(title,index){ 
+// // 	        alert(title+' is selected'+index); 
+// 	        if(index==0){
+// // 	        	uploaderForPic.init();
+// 	        }
+// 			if(index==1){
+// // 				if(uploaderForOutline==null || uploaderForOutline==undefined){
+// // 					createSubjectUpload();
+// // 				}else{
+// // 					uploaderForOutline.destroy();
+// // 					uploaderForSchedule.destroy();
+// // 					uploaderForSubject.destroy();
+// // 					createSubjectUpload();
+// // 				}
+// // 				uploaderForSubject.init(); //初始化
+// // 				uploaderForSchedule.init(); //初始化
+// // 				uploaderForOutline.init(); //初始化
+// 	        }
+// 			if(index==2){
+// // 				uploaderForProject.init();
+// 			}
+// 			if(index==3){
+// // 				uploaderForPaper.init(); //初始化
+// 			}
+// 	    } 
+// 	});
 	</script>
 	<style type="text/css">
 #teacherfm {

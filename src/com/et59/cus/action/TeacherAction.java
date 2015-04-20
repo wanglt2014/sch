@@ -382,6 +382,17 @@ public class TeacherAction extends BaseAction {
 		tTeacher.setDepartmentname(departmentname);
 		tTeacher.setTitlename(titlename);
 		tTeacher.setJobname(jobname);
+
+		String name = request.getParameter("uploader_pic_name");
+		if (name != null && !name.isEmpty()) {
+			String savePath = FileAction.getSavePathForTeacher();
+			String extName = name.substring(name.lastIndexOf("."));
+			String tampFileName = request.getParameter("uploader_pic_tmpname");
+			String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
+					+ extName;
+			String filepath = savePath + "\\" + tampFileName + extName;
+			tTeacher.setIimageurll(filepath);
+		}
 		return tTeacher;
 	}
 
@@ -570,16 +581,16 @@ public class TeacherAction extends BaseAction {
 		TResearch tResearch = getResearch();
 		List<TPaper> tPaperList = getPaper();
 		List<TPrize> tPrizeList = getPrize();
-		String name = request.getParameter("uploader_pic_name");
-		if (name != null && !name.isEmpty()) {
-			String savePath = FileAction.getSavePathForTeacher();
-			String extName = name.substring(name.lastIndexOf("."));
-			String tampFileName = request.getParameter("uploader_pic_tmpname");
-			String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
-					+ extName;
-			String filepath = savePath + "\\" + tampFileName + extName;
-			teacher.setIimageurll(filepath);
-		}
+		// String name = request.getParameter("uploader_pic_name");
+		// if (name != null && !name.isEmpty()) {
+		// String savePath = FileAction.getSavePathForTeacher();
+		// String extName = name.substring(name.lastIndexOf("."));
+		// String tampFileName = request.getParameter("uploader_pic_tmpname");
+		// String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
+		// + extName;
+		// String filepath = savePath + "\\" + tampFileName + extName;
+		// teacher.setIimageurll(filepath);
+		// }
 		try {
 			int paperSize = tPaperList.size();
 			Map<String, Object> session = context.getSession();

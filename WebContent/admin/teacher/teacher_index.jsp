@@ -28,6 +28,11 @@
 			display:-moz-inline-box;
 			display:inline-block;
 			width:300px; }
+.span_column_sm{ 
+			text-align:left;
+			display:-moz-inline-box;
+			display:inline-block;
+			width:180px; }
 
 </style>
 <div id="teachertb" style="padding: 5px; height: auto">
@@ -163,67 +168,54 @@
 			</div> 
 			<div title="讲授课程资料" closable="false" style="overflow:auto;padding:20px;" id="Tab2" > 
 					<div class="ftitle">讲授课程资料</div>
-						<div class="fitem">
-							<label>课程性质:</label>
-							<input
-								class="easyui-combobox" id="subjecttype" name="subjecttype"
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addSubject()">新增课程信息</a><br><br>
+					<div id="subjectTempleate" style="display: none;">
+					<div id="subjectRow0" class="fitem">
+						<span class="span_column_sm" ><label style="width: 55px">课程编号:</label>
+						<input id="subjectno0" name="subjectno0" class="easyui-validatebox" style="width: 110px"  maxlength="20">
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="span_column_sm" ><label style="width: 55px">课程名称:</label>
+						<input id="subjectname0" name="subjectname0" class="easyui-validatebox" style="width: 110px" maxlength="20">
+						</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						<span class="span_column_sm" ><label style="width: 55px">课程性质:</label>
+						<select class="easyui-combobox" id="subjecttype0" name="subjecttype0"
 								data-options="
    				 					url:'Dictionary_queryDictionaryByType?type=subjectType',  
    									method:'get',    
    				 					valueField:'dictionarycode',    
-   				 					textField:'dictionaryvalue',    
-   									panelHeight:'auto',editable:false">
-   							<input id="subjecttypename" name="subjecttypename" type="hidden" />   
+   				 					textField:'dictionaryvalue'"
+							style="width: 110px" panelHeight="auto" editable="false"/>
+   							<input id="subjecttypename0" name="subjecttypename0" type="hidden" />   
+						</span><br><br>
+						<span class="span_column" style="width: 600px"><label style="width: 55px">课程介绍:</label>
+						<textarea id="subjecttext0" rows=5 name="subjecttext0"  class="textarea easyui-validatebox" maxlength="500" style="width: 505px"></textarea>
+						</span><br><br>
+						<span class="span_column" style="width:100%;" id="outlineObj0"> <label>教学大纲:</label> 
+							<input type="button" value="选择文件..." id="browseOutline0" />
+							<input type="button" value="清空" id="outline-clear-btn0" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span>
+						</span>
+						<span id="file-list-outline0"></span>
+	 						<ul id="file-list-outline" style="text-align: left;margin:0px 0px 0px 30px; "> 
+	 						</ul> 
+						<span class="span_column" style="width:100%;" id="scheduleObj0"> <label>教学进度表:</label> 
+							<input type="button" value="选择文件..." id="browseSchedule0" />
+							<input type="button" value="清空" id="schedule-clear-btn0" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span>
+						</span>
+						<span id="file-list-schedule0"></span>
+	 						<ul id="file-list-schedule" style="text-align: left;margin:0px 0px 0px 30px; "> 
+	 						</ul> 
+						<span class="span_column" style="width:100%;" id="subjectObj0"> <label>课程资料:</label> 
+							<input type="button" value="选择文件..." id="browseSubject0" />
+							<input type="button" value="清空" id="subject-clear-btn0" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span>
+						</span>
+						<span id="file-list-subject0"></span>
+	 						<ul id="file-list-subject" style="text-align: left;margin:0px 0px 0px 30px; "> 
+	 						</ul> 
+						<span id="deleteSubjectDiv0"></span>
+						<hr  style="border-bottom:1px dashed;"><br>
 						</div>
-						<div class="fitem">
-							<label>课程编号:</label> <input name="subjectno"
-								class="easyui-validatebox" required="true" maxlength="20">
-						</div>
-						<div class="fitem">
-							<label>课程名称:</label> <input name="subjectname"
-								class="easyui-validatebox" required="true" maxlength="20">
-						</div>
-						<div class="fitem">
-							<label>课程介绍:</label>
-							<textarea id="subjectText" rows=5 name="subjecttext"  class="textarea easyui-validatebox" maxlength="500"></textarea>
-						</div>
-						<div class="fitem" id="outlineObj" >
-							<div class="wraper">
-							<label>教学大纲:</label> 
-							<div class="btn-wraper">
-								<input type="button" value="选择文件..." id="browseOutline" />
-								<input type="button" value="清空" id="outline-clear-btn" />
-								<p class="tip2">注意：只能上传20M以内的文件</p>
-							</div>
-							<ul id="file-list-outline" style="text-align: left;margin:0px 0px 0px 30px; ">
-							</ul>
-							</div>
-						</div>
-						<div class="fitem" id="scheduleObj">
-							<div class="wraper">
-							<label>教学进度表:</label> 
-							<div class="btn-wraper">
-								<input type="button" value="选择文件..." id="browseSchedule" />
-								<input type="button" value="清空" id="schedule-clear-btn" />
-								<p class="tip2">注意：只能上传20M以内的文件</p>
-							</div>
-							<ul id="file-list-schedule" style="text-align: left;margin:0px 0px 0px 30px; ">
-							</ul>
-							</div>
-						</div>
-						<div class="fitem" id="subjectObj">
-							<div class="wraper">
-							<label>课程资料:</label> 
-<!-- 							<input id="uploader_subject_count" name="uploader_subject_count" value="0" style="display: none;"/> -->
-							<div class="btn-wraper">
-								<input type="button" value="选择文件..." id="browseSubject" />
-								<input type="button" value="清空" id="subject-clear-btn" />
-								<p class="tip2">注意：只能上传20M以内的文件</p>
-							</div>
-							<ul id="file-list-subject" style="text-align: left;margin:0px 0px 0px 30px; ">
-							</ul>
-							</div>
-						</div>
+					</div>
+					<div id="subjectDiv" ></div>
 			</div> 
 			<div title="立项"  closable="false" style="overflow:auto;padding:20px;" id="Tab3"> 
 				<div class="ftitle">立项</div>
@@ -285,7 +277,7 @@
 					<div id="paperRow0" class="fitem">
 						<span class="span_column" ><label>论文名称:</label> <input id="papername0" name="papername0"
 								class="easyui-validatebox"  maxlength="20"></span>
-								<span class="span_column"><label>作者排序:</label> <input id="paperauthor0" name="paperauthor0" maxlength="20"
+						<span class="span_column"><label>作者排序:</label> <input id="paperauthor0" name="paperauthor0" maxlength="20"
 								class="easyui-validatebox" ></span><br><br>
 						<span class="span_column" ><label>期刊名称:</label> <input id="papernotename0" name="papernotename0" maxlength="20"
 								class="easyui-validatebox" ></span>
@@ -306,7 +298,6 @@
 						<span id="deletePaperDiv0"></span>
 						<hr  style="border-bottom:1px dashed;"><br>
 					</div>
-					
 					</div>
 					<div id="paperDiv" ></div>
 <!-- 					<div class="fitem" id="paperObj"> -->
@@ -357,8 +348,10 @@
 	<script>
 	var prizeNum = 0;
 	var paperNum = 0;
+	var subjectNum = 0;
 	var temp = $("#templeate").html();//保存渲染前的模板
-	var paperTemp = $("#paperTempleate").html();//保存渲染前的模板
+	var paperTemp = $("#paperTempleate").html();
+	var subjectTemp = $("#subjectTempleate").html();
 	//动态添加获奖信息
 	function addPrize() {
 		prizeNum++;
@@ -458,6 +451,226 @@
 		}
 		paperNum--;
 	}
+	var subjecttypeInit;
+	//动态添加课程信息
+	function addSubject() {
+		subjectNum++;
+		$("#deleteSubjectBtn").remove();
+		var html = subjectTemp.replace(new RegExp("subjecttype0","gm"),'subjecttype'+subjectNum)
+		.replace(new RegExp("subjecttypename0","gm"),'subjecttypename'+subjectNum)
+		.replace(new RegExp("subjectno0","gm"),'subjectno'+subjectNum)
+		.replace(new RegExp("subjectname0","gm"),'subjectname'+subjectNum)
+		.replace(new RegExp("subjecttext0","gm"),'subjecttext'+subjectNum)
+		.replace(new RegExp("deleteSubjectDiv0","gm"),'deleteSubjectDiv'+subjectNum)
+		.replace(new RegExp("subjectRow0","gm"),'subjectRow'+subjectNum)
+		.replace(new RegExp("browseOutline0","gm"),'browseOutline'+subjectNum)
+		.replace(new RegExp("outlineObj0","gm"),'outlineObj'+subjectNum)
+		.replace(new RegExp("file-list-outline0","gm"),'file-list-outline'+subjectNum)
+		.replace(new RegExp("outline-clear-btn0","gm"),'outline-clear-btn'+subjectNum)
+		.replace(new RegExp("browseSchedule0","gm"),'browseSchedule'+subjectNum)
+		.replace(new RegExp("scheduleObj0","gm"),'scheduleObj'+subjectNum)
+		.replace(new RegExp("file-list-schedule0","gm"),'file-list-schedule'+subjectNum)
+		.replace(new RegExp("schedule-clear-btn0","gm"),'schedule-clear-btn'+subjectNum)
+		.replace(new RegExp("browseSubject0","gm"),'browseSubject'+subjectNum)
+		.replace(new RegExp("subjectObj0","gm"),'subjectObj'+subjectNum)
+		.replace(new RegExp("file-list-subject0","gm"),'file-list-subject'+subjectNum)
+		.replace(new RegExp("subject-clear-btn0","gm"),'subject-clear-btn'+subjectNum);
+		$("#subjectDiv").append(html);
+		$("#subjecttype"+subjectNum).combobox({panelHeight:"auto"});//渲染
+		$("#deleteSubjectDiv"+subjectNum).append('<a id="deleteSubjectBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removeSubject('+subjectNum+')">删除课程信息</a>');
+		//动态增加上传控件
+		createSubjectUpload();
+// 		setTimeout("var data = $('#subjecttype'+subjectNum).combobox('getData');$('#subjecttype'+subjectNum).combobox('select',data[0].dictionarycode);",300);   
+		$('#subjecttype'+subjectNum).combobox('select',subjecttypeInit);//
+	}
+	
+	function createSubjectUpload() {
+		//教学大纲 上传控件##########################################
+		window["browseOutlineTemp"+subjectNum]  = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browseOutline'+subjectNum,
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'outline'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传20mb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        },
+	        para:subjectNum
+		});
+		window["browseOutlineTemp"+subjectNum].init();
+		window["browseOutlineTemp"+subjectNum].bind('Error',function(uploader,errObject){
+			if(errObject.code=='-600'){
+				alert("上传文件过大");
+			}
+		});
+		//绑定文件添加进队列事件
+		window["browseOutlineTemp"+subjectNum].bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+				window["browseOutlineTemp"+uploader.settings.para].removeFile(file); 
+			    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				var para = uploader.settings.para;
+				//构造html来更新UI
+				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_outline_tmpname_'+para+'" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_outline_name_'+para+'" value="' + file_name + '" /></li>';
+				$(html).appendTo('#file-list-outline'+para);
+			}
+		});
+		//绑定文件上传进度事件
+		window["browseOutlineTemp"+subjectNum].bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		
+		//绑定文件上传删除事件
+		window["browseOutlineTemp"+subjectNum].bind('FilesRemoved',function(uploader,file){
+			$('#file-list-outline'+uploader.settings.para).html("");
+		});
+		//清空按钮
+		$('#outline-clear-btn').click(function(){
+			event = event ? event : window.event; //判断触发对象，兼容FF。
+			var obj = event.srcElement ? event.srcElement : event.target; 
+			var id = obj.id;
+			window["browseOutlineTemp"+id.substr(id.length-1,1)].splice(0,10); ////删除文件按钮
+		});
+		
+		//教学进度表 上传控件##########################################
+		window["browseScheduleTemp"+subjectNum] = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browseSchedule'+subjectNum,
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'schedule'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        },
+	        para:subjectNum
+		});
+		window["browseScheduleTemp"+subjectNum].init();
+		window["browseScheduleTemp"+subjectNum].bind('Error',function(uploader,errObject){
+			if(errObject.code=='-600'){
+				alert("上传文件过大");
+			}
+		});
+		//绑定文件添加进队列事件
+		window["browseScheduleTemp"+subjectNum].bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+				window["browseScheduleTemp"+uploader.settings.para].removeFile(file); 
+			    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				var para = uploader.settings.para;
+				//构造html来更新UI
+				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_schedule_tmpname_'+para+'" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_schedule_name_'+para+'" value="' + file_name + '" /></li>';
+				$(html).appendTo('#file-list-schedule'+para);
+			}
+		});
+		//绑定文件上传进度事件
+		window["browseScheduleTemp"+subjectNum].bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		//绑定文件上传删除事件
+		window["browseScheduleTemp"+subjectNum].bind('FilesRemoved',function(uploader,file){
+			$('#file-list-schedule'+uploader.settings.para).html("");
+		});
+		//清空按钮
+		$('#schedule-clear-btn').click(function(){
+			event = event ? event : window.event; //判断触发对象，兼容FF。
+			var obj = event.srcElement ? event.srcElement : event.target; 
+			var id = obj.id;
+			window["browseScheduleTemp"+id.substr(id.length-1,1)].splice(0,10); ////删除文件按钮
+		});
+		
+		//课程资料 上传控件##########################################
+		window["browseSubjectTemp"+subjectNum] = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browseSubject'+subjectNum,
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'subject'
+	        	},
+	        filters: {
+	  		  max_file_size : '20mb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        },
+	        para:subjectNum
+		});
+		window["browseSubjectTemp"+subjectNum].init();
+		window["browseSubjectTemp"+subjectNum].bind('Error',function(uploader,errObject){
+			if(errObject.code=='-600'){
+				alert("上传文件过大");
+			}
+		});
+		//绑定文件添加进队列事件
+		window["browseSubjectTemp"+subjectNum].bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) {
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+				window["browseSubjectTemp"+uploader.settings.para].removeFile(file); 
+			    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				var para = uploader.settings.para;
+				//构造html来更新UI
+				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_subject_tmpname_'+para+'" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_subject_name_'+para+'" value="' + file_name + '" /></li>';
+				$(html).appendTo('#file-list-subject'+para);
+			}
+		});
+		//绑定文件上传进度事件
+		window["browseSubjectTemp"+subjectNum].bind('UploadProgress',function(uploader,file){
+			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
+		});
+		//绑定文件上传删除事件
+		window["browseSubjectTemp"+subjectNum].bind('FilesRemoved',function(uploader,file){
+			$('#file-list-subject'+uploader.settings.para).html("");
+		});
+		//清空按钮
+		$('#subject-clear-btn').click(function(){
+			event = event ? event : window.event; //判断触发对象，兼容FF。
+			var obj = event.srcElement ? event.srcElement : event.target; 
+			var id = obj.id;
+			window["browseSubjectTemp"+id.substr(id.length-1,1)].splice(0,10); ////删除文件按钮
+		});
+	}
+	
+	function removeSubject(infoIndex) {
+		$("#subjectRow"+infoIndex).remove();
+		if(parseInt(infoIndex)>1){
+			$("#deleteSubjectDiv"+(parseInt(infoIndex)-1)).append('<a id="deleteSubjectBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removeSubject('+(parseInt(infoIndex)-1)+')">删除课程信息</a>');
+		}
+		subjectNum--;
+	}
 	
 	var url;
 	function queryTearcher() {
@@ -471,30 +684,26 @@
 	function newTeacher() {
 		$('#teacher_tab').tabs('select',0);
 // 		alert(JSON.stringify(uploaderForPic));
-// 	alert(uploaderForOutline);
+// 		alert(uploaderForOutline);
 // 		alert(uploaderForOutline==undefined);
 		if(uploaderForPic==null || uploaderForPic==undefined){
 			createUploaderPic();
-			createSubjectUpload();
 			createProject();
 		}else{
 			uploaderForPic.destroy();
-			uploaderForOutline.destroy();
-			uploaderForSchedule.destroy();
-			uploaderForSubject.destroy();
 			uploaderForProject.destroy();
 			createUploaderPic();
-			createSubjectUpload();
 			createProject();
 			deleteAllUploader();
 		}
 // 		alert(JSON.stringify(uploaderForPic));
-		
 		showAllUploader();
 		prizeNum = 0;
 		paperNum = 0;
+		subjectNum = 0;
 		$("#prizeDiv").html("");
 		$("#paperDiv").html("");
+		$("#subjectDiv").html("");
 		$('#teacherdlg').dialog('open').dialog('setTitle', '新增教师');
 		$('#teacherfm').form('clear');
 		url = 'Teacher_save?temp=0';
@@ -509,8 +718,9 @@
 		 $("#title ").combobox('select',data[0].dictionarycode);
 		 var data = $('#job').combobox('getData');
 		 $("#job ").combobox('select',data[0].dictionarycode);
-		 var data = $('#subjecttype').combobox('getData');
-		 $("#subjecttype ").combobox('select',data[0].dictionarycode);
+		 var data = $('#subjecttype0').combobox('getData');
+		 subjecttypeInit = data[0].dictionarycode;
+// 		 $("#subjecttype0").combobox('select',data[0].dictionarycode);
 // 		 $('#file-list').html("");
 // 		 uploaderForPic.destroy();
 		
@@ -520,23 +730,20 @@
 		if (row) {
 			if(uploaderForPic==null || uploaderForPic==undefined){
 				createUploaderPic();
-				createSubjectUpload();
 				createProject();
 			}else{
 				uploaderForPic.destroy();
-				uploaderForOutline.destroy();
-				uploaderForSchedule.destroy();
-				uploaderForSubject.destroy();
 				uploaderForProject.destroy();
 				createUploaderPic();
-				createSubjectUpload();
 				createProject();
 				deleteAllUploader();
 			}
 			prizeNum = 0;
 			paperNum = 0;
+			subjectNum = 0;
 			$("#prizeDiv").html("");
 			$("#paperDiv").html("");
+			$("#subjectDiv").html("");
 			$('#teacherdlg').dialog('open').dialog('setTitle',
 					'编辑教师');
 			$('#teacherfm').form('clear');
@@ -544,7 +751,7 @@
 			$('#img_photo').show();
 			$('#img_photo').attr('src',row.iimageurll);
 			var subjectid,paperid,researchid;
-			var prizeList,paperList;
+			var prizeList,paperList,subjectList;
 // 			alert(JSON.stringify(row));
 			//从后台获取数据
 			$.ajax({
@@ -560,10 +767,21 @@
 // 					alert(JSON.stringify(json));
 					paperList = json.tPaper;
  					prizeList = json.tPrize;
+ 					subjectList = json.subject;
 //  				alert(JSON.stringify(datas.subject));
- 					$('#teacherfm').form('load', json.subject[0]);
+//  					$('#teacherfm').form('load', json.subject[0]);
 // 					$('#teacherfm').form('load', json.tPaper[0]);
 					$('#teacherfm').form('load', json.tResearch[0]);
+					
+					for(var i = 0; i < subjectList.length; i++){
+						addSubject();
+						$('#subjectno'+(parseInt(i)+1)).val(subjectList[i].subjectno);
+						$('#subjectname'+(parseInt(i)+1)).val(subjectList[i].subjectname);
+						$('#subjecttype'+(parseInt(i)+1)).combobox('select',subjectList[i].subjecttype);
+						$('#subjecttypename'+(parseInt(i)+1)).val(subjectList[i].subjecttypename);
+						$('#subjecttext'+(parseInt(i)+1)).val(subjectList[i].subjecttext);
+					}
+					
 					for(var i = 0; i < paperList.length; i++){
 						addPaper();
 						$('#papername'+(parseInt(i)+1)).val(paperList[i].papername);
@@ -589,7 +807,7 @@
 					jAlert('系统错误，请联系管理员','错误提示');
 				}
 			});
-			dispalyAllUploader(paperList.length);
+			dispalyAllUploader(paperList.length,subjectList.length);
 // 			alert(subjectid+"##"+paperid+"$$"+researchid);
 // 			url = 'Teacher_update?id=' + row.id+'&subjectid='+subjectid+'&paperid='+paperid+'&researchid='+researchid;
 			url = 'Teacher_update?id=' + row.id;
@@ -598,9 +816,9 @@
 	
 	function saveTeacher() {
 	var picLen = uploaderForPic.files.length;
-	var outlineLen = uploaderForOutline.files.length;
-	var scheduleLen = uploaderForSchedule.files.length;
-	var subjectLen = uploaderForSubject.files.length;
+// 	var outlineLen = uploaderForOutline.files.length;
+// 	var scheduleLen = uploaderForSchedule.files.length;
+// 	var subjectLen = uploaderForSubject.files.length;
 	var probjectLen = uploaderForProject.files.length;
 // 	var paperLen = uploaderForPaper.files.length;
 //  	alert(picLen+"&&"+outlineLen+"&&"+scheduleLen+"&&+"+subjectLen+"&&"+probjectLen+"&&"+paperLen);
@@ -609,10 +827,11 @@
 			$('#departmentname').val($('#department').combobox('getText'));
 			$('#titlename').val($('#title').combobox('getText'));
 			$('#jobname').val($('#job').combobox('getText'));
-			$('#subjecttypename').val($('#subjecttype').combobox('getText'));
-			
+			for(var i = 1; i<=subjectNum; i++){
+			$('#subjecttypename'+i).val($('#subjecttype'+i).combobox('getText'));
+			}
 			$('#teacherfm').form('submit', {
-    			url : url+"&prizeNum="+prizeNum+"&paperNum="+paperNum,
+    			url : url+"&prizeNum="+prizeNum+"&paperNum="+paperNum+"&subjectNum="+subjectNum,
     			onSubmit : function() {
     				return $(this).form('validate');
     			},
@@ -630,23 +849,28 @@
 		if (picLen > 0) {
 			uploaderForPic.start();
 		}
-		if (outlineLen > 0) {
-			uploaderForOutline.start();
-		}
-		if (scheduleLen > 0) {
-			uploaderForSchedule.start();
-		}
-		if (subjectLen > 0) {
-			uploaderForSubject.start();
-		}
+// 		if (outlineLen > 0) {
+// 			uploaderForOutline.start();
+// 		}
+// 		if (scheduleLen > 0) {
+// 			uploaderForSchedule.start();
+// 		}
+// 		if (subjectLen > 0) {
+// 			uploaderForSubject.start();
+// 		}
 		if (probjectLen > 0) {
 			uploaderForProject.start();
 		}
+		for(var i = 1; i<=subjectNum; i++){
+			window["browseOutlineTemp"+i].start();
+			window["browseScheduleTemp"+i].start();
+			window["browseSubjectTemp"+i].start();
+		}
 // 		if (paperLen > 0) {
 			//动态增加上传控件
-			for(var i = 1; i<=paperNum; i++){
+		for(var i = 1; i<=paperNum; i++){
 			window["browsePaperTemp"+i].start();
-			}
+		}
 // 			uploaderForPaper.start();
 // 		}
     	
@@ -682,10 +906,15 @@
 	//销毁所有上传控件
 	function deleteAllUploader(){
 		uploaderForPic.splice(0,10);
-		uploaderForOutline.splice(0,10);
-		uploaderForSchedule.splice(0,10);
-		uploaderForSubject.splice(0,10);
+// 		uploaderForOutline.splice(0,10);
+// 		uploaderForSchedule.splice(0,10);
+// 		uploaderForSubject.splice(0,10);
 		uploaderForProject.splice(0,10);
+		for(var i = 1; i<=subjectNum; i++){
+			window["browseOutlineTemp"+i].splice(0,10);
+			window["browseScheduleTemp"+i].splice(0,10);
+			window["browseSubjectTemp"+i].splice(0,10);
+			}
 // 		uploaderForPaper.splice(0,10);
 		//动态增加上传控件
 // 		if (paperNum > 0) {
@@ -706,11 +935,16 @@
 	}
 	
 	//隐藏所有上传控件
-	function dispalyAllUploader(paperSize){
-		$('#outlineObj').hide();
-		$('#scheduleObj').hide();
-		$('#subjectObj').hide();
+	function dispalyAllUploader(paperSize,subjectSize){
+// 		$('#outlineObj').hide();
+// 		$('#scheduleObj').hide();
+// 		$('#subjectObj').hide();
 		$('#projectObj').hide();
+		for(var i = 1; i<=subjectSize; i++){
+			$(window["scheduleObj"+i]).hide();
+			$(window["subjectObj"+i]).hide();
+			$(window["outlineObj"+i]).hide();
+			}
 		for(var i = 1; i<=paperSize; i++){
 			$(window["paperObj"+i]).hide();
 			}
@@ -718,9 +952,9 @@
 	
 	//显示所有上传控件
 	function showAllUploader(){
-		$('#outlineObj').show();
-		$('#scheduleObj').show();
-		$('#subjectObj').show();
+// 		$('#outlineObj').show();
+// 		$('#scheduleObj').show();
+// 		$('#subjectObj').show();
 		$('#projectObj').show();
 // 		$('#paperObj').show();
 	}
@@ -789,206 +1023,7 @@
 	
 // 	uploaderForPic.init(); //初始化
 	
-	var uploaderForOutline,uploaderForSchedule,uploaderForSubject;
-	function createSubjectUpload() {
-		//教学大纲 上传控件##########################################
-		uploaderForOutline = new plupload.Uploader({ //实例化一个plupload上传对象
-			browse_button : 'browseOutline',
-			multi_selection: false,
-	 		url : 'File_uploadForTeacher',
-	 		file_data_name : 'fileData',
-//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-	        unique_names : true,  // 上传的文件名是否唯一   
-	        multipart_params: {
-	        	  filetype: 'outline'
-	        	},
-	        filters: {
-	  		  max_file_size : '20mb', //最大只能上传20mb的文件
-	  		  prevent_duplicates : true //不允许队列中存在重复文件
-	        }
-		});
-		
-		uploaderForOutline.bind('Error',function(uploader,errObject){
-			if(errObject.code=='-600'){
-				alert("上传文件过大");
-			}
-		});
-	 	
-//	 	uploaderForSubject.init(); //初始化
-		//绑定文件添加进队列事件
-		uploaderForOutline.bind('FilesAdded',function(uploader,files){
-			$.each(uploader.files, function (i, file) { 
-				if (uploader.files.length <= 1) { 
-			            return; 
-			        } 
-				uploaderForOutline.removeFile(file); 
-			    });
-//	 		var count = $("#uploader_subject_count").val();
-			for(var i = 0, len = files.length; i<len; i++){
-				var file_name = files[i].name; //文件名
-				var file_id = files[i].id;//ID,临时文件名
-//	 			count++;
-				//构造html来更新UI
-//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-					html += '<input type="hiddent" style="display: none;" name="uploader_outline_tmpname" value="' + file_id + '" />';
-					html += '<input type="hiddent" style="display: none;" name="uploader_outline_name" value="' + file_name + '" /></li>';
-				$(html).appendTo('#file-list-outline');
-			}
-//	 		$("#uploader_subject_count").val(count);
-		});
-		
-		//绑定文件上传进度事件
-		uploaderForOutline.bind('UploadProgress',function(uploader,file){
-			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-		});
-		
-		//绑定文件上传删除事件
-		uploaderForOutline.bind('FilesRemoved',function(uploader,file){
-			$('#file-list-outline').html("");
-		});
-		
-		//清空按钮
-		$('#outline-clear-btn').click(function(){
-			uploaderForOutline.splice(0,10); ////删除文件按钮
-		});
-		
-		
-		//教学进度表 上传控件##########################################
-		uploaderForSchedule = new plupload.Uploader({ //实例化一个plupload上传对象
-			browse_button : 'browseSchedule',
-			multi_selection: false,
-	 		url : 'File_uploadForTeacher',
-	 		file_data_name : 'fileData',
-//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-	        unique_names : true,  // 上传的文件名是否唯一   
-	        multipart_params: {
-	        	  filetype: 'schedule'
-	        	},
-	        filters: {
-	  		  max_file_size : '20mb', //最大只能上传100kb的文件
-	  		  prevent_duplicates : true //不允许队列中存在重复文件
-	        }
-		});
-		
-		uploaderForSchedule.bind('Error',function(uploader,errObject){
-			if(errObject.code=='-600'){
-				alert("上传文件过大");
-			}
-		});
-	 	
-//	 	uploaderForSubject.init(); //初始化
-		//绑定文件添加进队列事件
-		uploaderForSchedule.bind('FilesAdded',function(uploader,files){
-			$.each(uploader.files, function (i, file) { 
-				if (uploader.files.length <= 1) { 
-			            return; 
-			        } 
-				uploaderForSchedule.removeFile(file); 
-			    });
-//	 		var count = $("#uploader_subject_count").val();
-			for(var i = 0, len = files.length; i<len; i++){
-				var file_name = files[i].name; //文件名
-				var file_id = files[i].id;//ID,临时文件名
-//	 			count++;
-				//构造html来更新UI
-//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-					html += '<input type="hiddent" style="display: none;" name="uploader_schedule_tmpname" value="' + file_id + '" />';
-					html += '<input type="hiddent" style="display: none;" name="uploader_schedule_name" value="' + file_name + '" /></li>';
-				$(html).appendTo('#file-list-schedule');
-			}
-//	 		$("#uploader_subject_count").val(count);
-		});
-		
-		//绑定文件上传进度事件
-		uploaderForSchedule.bind('UploadProgress',function(uploader,file){
-			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-		});
-		
-		//绑定文件上传删除事件
-		uploaderForSchedule.bind('FilesRemoved',function(uploader,file){
-			$('#file-list-schedule').html("");
-		});
-		
-		//清空按钮
-		$('#schedule-clear-btn').click(function(){
-			uploaderForSchedule.splice(0,10); ////删除文件按钮
-		});
-		
-		
-		//课程资料 上传控件##########################################
-		uploaderForSubject = new plupload.Uploader({ //实例化一个plupload上传对象
-			browse_button : 'browseSubject',
-			multi_selection: false,
-	 		url : 'File_uploadForTeacher',
-	 		file_data_name : 'fileData',
-//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
-	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
-	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
-	        unique_names : true,  // 上传的文件名是否唯一   
-	        multipart_params: {
-	        	  filetype: 'subject'
-	        	},
-	        filters: {
-	  		  max_file_size : '20mb', //最大只能上传100kb的文件
-	  		  prevent_duplicates : true //不允许队列中存在重复文件
-	        }
-		});
-		
-		uploaderForSubject.bind('Error',function(uploader,errObject){
-			if(errObject.code=='-600'){
-				alert("上传文件过大");
-			}
-		});
-	 	
-//	 	uploaderForSubject.init(); //初始化
-		//绑定文件添加进队列事件
-		uploaderForSubject.bind('FilesAdded',function(uploader,files){
-			$.each(uploader.files, function (i, file) {
-				if (uploader.files.length <= 1) { 
-			            return; 
-			        } 
-				uploaderForSubject.removeFile(file); 
-			    });
-//	 		var count = $("#uploader_subject_count").val();
-			for(var i = 0, len = files.length; i<len; i++){
-				var file_name = files[i].name; //文件名
-				var file_id = files[i].id;//ID,临时文件名
-//	 			count++;
-				//构造html来更新UI
-//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
-				var html = '<li id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
-					html += '<input type="hiddent" style="display: none;" name="uploader_subject_tmpname" value="' + file_id + '" />';
-					html += '<input type="hiddent" style="display: none;" name="uploader_subject_name" value="' + file_name + '" /></li>';
-				$(html).appendTo('#file-list-subject');
-			}
-//	 		$("#uploader_subject_count").val(count);
-		});
-		
-		//绑定文件上传进度事件
-		uploaderForSubject.bind('UploadProgress',function(uploader,file){
-			$('#file-'+file.id+' .progress').css('width',file.percent + '%');//控制进度条
-		});
-		
-		//绑定文件上传删除事件
-		uploaderForSubject.bind('FilesRemoved',function(uploader,file){
-			$('#file-list-subject').html("");
-		});
-		
-		//清空按钮
-		$('#subject-clear-btn').click(function(){
-			uploaderForSubject.splice(0,10); ////删除文件按钮
-		});
-		
-		uploaderForSubject.init(); //初始化
-		uploaderForSchedule.init(); //初始化
-		uploaderForOutline.init(); //初始化
-	}
+	
 	var uploaderForProject;
 	function createProject(){
 		//立项上传控件###################################################

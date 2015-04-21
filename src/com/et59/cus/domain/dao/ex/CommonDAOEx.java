@@ -45,8 +45,8 @@ import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
-import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
+import com.et59.cus.domain.entity.TTeacherWithBLOBs;
 
 /**
  * <p>
@@ -138,8 +138,9 @@ public interface CommonDAOEx {
 	/**
 	 * 分页查询师资队伍
 	 */
-	public List<TTeacher> selectTeacherForPage(TTeacherExample example,
-			int startrecord, int endrecord) throws Exception;
+	public List<TTeacherWithBLOBs> selectTeacherForPage(
+			TTeacherExample example, int startrecord, int endrecord)
+			throws Exception;
 
 	/**
 	 * 分页查询专业

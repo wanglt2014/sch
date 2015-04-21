@@ -100,7 +100,7 @@ td.p80{width: 80%;height: 30px;}
 <!-- 							<div id="dialog" title="Dialog Title">I'm in a dialog</div> -->
 <!-- 						<div style="height:1px; margin-top:-1px;clear: both;overflow:hidden;"></div> -->
 						</div>
-						<s:if test="tSubjectDTO.subjectname!=null">
+						<s:if test="tSubjectDtoList!=null">
 						<div class="div_baseinfo">
 							<h3 class="title_teacher">讲授课程资料</h3>
 							<hr class="line_teacher" />
@@ -109,29 +109,31 @@ td.p80{width: 80%;height: 30px;}
 								<div style="margin-top: 20px;" >
 								<table style="width: 100%;">
 								<tr><th>课程名称</th><th>课程性质</th><th>教学大纲</th><th>教学进度表</th><th>课程资料</th></tr>
+								<s:iterator var="subjectDTO" value="tSubjectDtoList" status="tps">
 								<tr>
 								<td class="p20">
-								<i class="point">•</i>&nbsp;<s:property value="tSubjectDTO.subjectname"/></td>
-								<td class="p20"><s:property value="tSubjectDTO.subjecttypename"/></td>
+								<i class="point">•</i>&nbsp;<s:property value="#subjectDTO.subjectname"/></td>
+								<td class="p20"><s:property value="#subjectDTO.subjecttypename"/></td>
 								<td class="p20">
-								<s:if test="tSubjectDTO.subjectoutlinePath!=null">
-								<a href="<%=request_path %>/${tSubjectDTO.subjectoutlinePath}">[教学大纲]</a>
+								<s:if test="#subjectDTO.subjectoutlinePath!=null">
+								<a href="<%=request_path %>/${subjectDTO.subjectoutlinePath}">[教学大纲]</a>
 								</s:if>
 								<s:else></s:else>
 								</td>
 								<td class="p20">
-								<s:if test="tSubjectDTO.subjectschedulePath!=null">
-								<a href="<%=request_path %>/${tSubjectDTO.subjectschedulePath}">[教学进度表]</a>
+								<s:if test="#subjectDTO.subjectschedulePath!=null">
+								<a href="<%=request_path %>/${subjectDTO.subjectschedulePath}">[教学进度表]</a>
 								</s:if>
 								<s:else></s:else>
 								</td>
 								<td class="p20">
-								<s:if test="tSubjectDTO.subjectinfoPath!=null">
-								<a href="<%=request_path %>/${tSubjectDTO.subjectinfoPath}">[课程资料]</a>
+								<s:if test="#subjectDTO.subjectinfoPath!=null">
+								<a href="<%=request_path %>/${subjectDTO.subjectinfoPath}">[课程资料]</a>
 								</s:if>
 								<s:else></s:else>
 								</td>
 								</tr>
+								</s:iterator>
 								</table>
 <!-- 								<ul class="ul_teacher"> -->
 <%-- 								<li><i class="point">•</i>&nbsp;<s:property value="tSubject.subjectname"/>&nbsp;<s:property value="tSubject.subjecttypename"/>&nbsp;<a href="">[教学大纲]</a><a href="">[教学进度表]</a><a href="">[课程资料]</a></li> --%>

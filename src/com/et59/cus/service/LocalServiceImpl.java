@@ -2136,8 +2136,8 @@ public class LocalServiceImpl implements LocalService {
 		}
 
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TTeacher> list = commonDAOEx.selectTeacherForPage(example,
-				startrecord, pagesize);
+		List<TTeacherWithBLOBs> list = commonDAOEx.selectTeacherForPage(
+				example, startrecord, pagesize);
 		int totalCount = tTeacherDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
@@ -2211,8 +2211,8 @@ public class LocalServiceImpl implements LocalService {
 		// + "%");
 		// }
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TTeacher> list = commonDAOEx.selectTeacherForPage(example,
-				startrecord, pagesize);
+		List<TTeacherWithBLOBs> list = commonDAOEx.selectTeacherForPage(
+				example, startrecord, pagesize);
 		int totalCount = tTeacherDAO.countByExample(example);
 		map.put(Constant.TOTALCOUNT, totalCount);
 		map.put(Constant.TOTALPAGECOUNT,

@@ -69,7 +69,17 @@ public class TeacherAction extends BaseAction {
 	public List<TPaperDTO> tPaperList;
 
 	public List<TPrize> tPrizeList;
+
+	public List<TSubjectDTO> tSubjectDtoList;
 	public String defultId;
+
+	public List<TSubjectDTO> gettSubjectDtoList() {
+		return tSubjectDtoList;
+	}
+
+	public void settSubjectDtoList(List<TSubjectDTO> tSubjectDtoList) {
+		this.tSubjectDtoList = tSubjectDtoList;
+	}
 
 	public String getDefultId() {
 		return defultId;
@@ -401,19 +411,21 @@ public class TeacherAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public TSubject getSubject() {
-		String subjectType = request.getParameter("subjecttype");
-		String subjectNO = request.getParameter("subjectno");
-		String subjectName = request.getParameter("subjectname");
-		String subjectText = request.getParameter("subjecttext");
-		String subjecttypename = request.getParameter("subjecttypename");
-		TSubject tSubject = new TSubject();
-		tSubject.setSubjecttype(subjectType);
-		tSubject.setSubjectno(subjectNO);
-		tSubject.setSubjectname(subjectName);
-		tSubject.setSubjecttext(subjectText);
-		tSubject.setSubjecttypename(subjecttypename);
-		return tSubject;
+	public List<TSubject> getSubject() {
+		List<TSubject> list = new ArrayList<TSubject>();
+		String subjectNum = request.getParameter("subjectNum");
+		TSubject tSubject = null;
+		for (int i = 1; i <= Integer.parseInt(subjectNum); i++) {
+			tSubject = new TSubject();
+			tSubject.setSubjecttype(request.getParameter("subjecttype" + i));
+			tSubject.setSubjectno(request.getParameter("subjectno" + i));
+			tSubject.setSubjectname(request.getParameter("subjectname" + i));
+			tSubject.setSubjecttext(request.getParameter("subjecttext" + i));
+			tSubject.setSubjecttypename(request.getParameter("subjecttypename"
+					+ i));
+			list.add(tSubject);
+		}
+		return list;
 	}
 
 	/**
@@ -516,7 +528,7 @@ public class TeacherAction extends BaseAction {
 		// String researchid = request.getParameter("researchid");
 
 		TTeacherWithBLOBs teacher = getTeacher();
-		TSubject subject = getSubject();
+		List<TSubject> subjectList = getSubject();
 		TResearch tResearch = getResearch();
 		// TODO
 		List<TPaper> tPaperList = getPaper();
@@ -524,12 +536,17 @@ public class TeacherAction extends BaseAction {
 		try {
 			teacher.setId(id);
 			localServiceProxy.updateTeacher(teacher);
-			if (subject != null && !subject.getSubjectno().equals("")) {
+			if (subjectList != null && subjectList.size() > 0) {
 				TSubjectExample tsexample = new TSubjectExample();
 				tsexample.createCriteria().andSubjectteacheridEqualTo(id);
 				localServiceEXProxy.deleteTSubject(tsexample);
-				subject.setSubjectteacherid(id);
-				localServiceEXProxy.saveTSubject(subject);
+				TSubject tSubject = null;
+				for (Iterator iterator = subjectList.iterator(); iterator
+						.hasNext();) {
+					tSubject = (TSubject) iterator.next();
+					tSubject.setSubjectteacherid(id);
+					localServiceEXProxy.saveTSubject(tSubject);
+				}
 			}
 
 			if (tResearch != null && !tResearch.getResearchname().equals("")) {
@@ -577,7 +594,7 @@ public class TeacherAction extends BaseAction {
 	public void save() {
 		boolean flag = false;
 		TTeacherWithBLOBs teacher = getTeacher();
-		TSubject subject = getSubject();
+		List<TSubject> subjectList = getSubject();
 		TResearch tResearch = getResearch();
 		List<TPaper> tPaperList = getPaper();
 		List<TPrize> tPrizeList = getPrize();
@@ -593,11 +610,15 @@ public class TeacherAction extends BaseAction {
 		// }
 		try {
 			int paperSize = tPaperList.size();
+			int subjectSize = subjectList.size();
 			Map<String, Object> session = context.getSession();
 			BsUser sessionuser = (BsUser) session.get("user");
 			teacher.setTeacherlonginname(sessionuser.getUsername());
+			Map<String, Integer> sizeMap = new HashMap<String, Integer>();
+			sizeMap.put("paperSize", paperSize);
+			sizeMap.put("subjectSize", subjectSize);
 			// 新增附件表
-			HashMap downloadIdMap = saveAllDownloadTable(paperSize);
+			HashMap downloadIdMap = saveAllDownloadTable(sizeMap);
 			// StringBuffer paperIDs = new StringBuffer();
 			// for (int i = 1; i <= paperSize; i++) {
 			// paperIDs.append(downloadIdMap.get("paperDLId" + i));
@@ -612,13 +633,20 @@ public class TeacherAction extends BaseAction {
 			Long researchId = localServiceEXProxy.saveTResearch(tResearch);
 
 			// 2.保存课程表
-			subject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
-			subject.setSubjectschedule((Long) downloadIdMap.get("scheduleDLId"));
-			subject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
-			subject.setSubjectteachername(teacher.getTeachername());
-			subject.setSubjectisvalid(Constant.ISVALID_1);
-			subject.setSubjectteacherid(teacherId);
-			Long subjectId = localServiceEXProxy.saveTSubject(subject);
+			TSubject tSubject = null;
+			for (int i = 0; i < subjectSize; i++) {
+				tSubject = subjectList.get(i);
+				tSubject.setSubjectoutline((Long) downloadIdMap
+						.get("outlineDLId" + (i + 1)));
+				tSubject.setSubjectschedule((Long) downloadIdMap
+						.get("scheduleDLId" + (i + 1)));
+				tSubject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"
+						+ (i + 1)));
+				tSubject.setSubjectteachername(teacher.getTeachername());
+				tSubject.setSubjectisvalid(Constant.ISVALID_1);
+				tSubject.setSubjectteacherid(teacherId);
+				localServiceEXProxy.saveTSubject(tSubject);
+			}
 
 			// 3.保存论文表
 			TPaper tPaper = null;
@@ -667,39 +695,46 @@ public class TeacherAction extends BaseAction {
 					.valueOf(id));
 			Long teacherIdLong = Long.parseLong(id);
 			// 加载课程
-			// TODO 改为list
 			TSubjectExample tsexample = new TSubjectExample();
 			tsexample.createCriteria()
 					.andSubjectteacheridEqualTo(teacherIdLong);
-			TSubject tSubject = localServiceEXProxy.queryTSubject(tsexample)
-					.get(0);
-			if (tSubject != null) {
-				tSubjectDTO = new TSubjectDTO();
-				BeanUtils.copyProperties(tSubjectDTO, tSubject);
+			List<TSubject> tSubjectList = localServiceEXProxy
+					.queryTSubject(tsexample);
+			if (tSubjectList != null && tSubjectList.size() > 0) {
+				tSubjectDtoList = new ArrayList<TSubjectDTO>();
+				for (Iterator iterator = tSubjectList.iterator(); iterator
+						.hasNext();) {
+					TSubject tSubject = (TSubject) iterator.next();
+					tSubjectDTO = new TSubjectDTO();
+					BeanUtils.copyProperties(tSubjectDTO, tSubject);
 
-				Long outlineId = tSubject.getSubjectoutline();
-				if (outlineId != null) {
-					TDownload outlineFile = localServiceEXProxy
-							.queryDownloadById(outlineId);
-					tSubjectDTO.setSubjectoutlinePath(outlineFile
-							.getFileshowpath());
-					tSubjectDTO
-							.setSubjectoutlineName(outlineFile.getFilename());
+					Long outlineId = tSubject.getSubjectoutline();
+					if (outlineId != null) {
+						TDownload outlineFile = localServiceEXProxy
+								.queryDownloadById(outlineId);
+						tSubjectDTO.setSubjectoutlinePath(outlineFile
+								.getFileshowpath());
+						tSubjectDTO.setSubjectoutlineName(outlineFile
+								.getFilename());
+					}
+
+					Long scheduleId = tSubject.getSubjectschedule();
+					if (scheduleId != null) {
+						TDownload scheduleFile = localServiceEXProxy
+								.queryDownloadById(scheduleId);
+						tSubjectDTO.setSubjectschedulePath(scheduleFile
+								.getFileshowpath());
+					}
+					Long infoId = tSubject.getSubjectinfo();
+					if (infoId != null) {
+						TDownload infoFile = localServiceEXProxy
+								.queryDownloadById(infoId);
+						tSubjectDTO.setSubjectinfoPath(infoFile
+								.getFileshowpath());
+					}
+					tSubjectDtoList.add(tSubjectDTO);
 				}
 
-				Long scheduleId = tSubject.getSubjectschedule();
-				if (scheduleId != null) {
-					TDownload scheduleFile = localServiceEXProxy
-							.queryDownloadById(scheduleId);
-					tSubjectDTO.setSubjectschedulePath(scheduleFile
-							.getFileshowpath());
-				}
-				Long infoId = tSubject.getSubjectinfo();
-				if (infoId != null) {
-					TDownload infoFile = localServiceEXProxy
-							.queryDownloadById(infoId);
-					tSubjectDTO.setSubjectinfoPath(infoFile.getFileshowpath());
-				}
 			}
 
 			// 加载立项//TODO 改为list
@@ -764,32 +799,41 @@ public class TeacherAction extends BaseAction {
 	 * @return
 	 * @throws Exception
 	 */
-	private HashMap saveAllDownloadTable(int paperSize) throws Exception {
+	private HashMap saveAllDownloadTable(Map<String, Integer> sizeMap)
+			throws Exception {
 		HashMap map = new HashMap();
 		HashMap returnmap = new HashMap();
+		int paperSize = sizeMap.get("paperSize");
+		int subjectSize = sizeMap.get("subjectSize");
 		// 1.保存立项附件
 		map.put("paraName", "uploader_project_name");
 		map.put("paraTmpname", "uploader_project_tmpname");
 		map.put("infotype", "project");
 		Long proDLId = saveTDownloadInfo(map);
 
-		// 2.保存教学大纲附件
-		map.put("paraName", "uploader_outline_name");
-		map.put("paraTmpname", "uploader_outline_tmpname");
-		map.put("infotype", "outline");
-		Long outlineDLId = saveTDownloadInfo(map);
+		for (int i = 1; i <= subjectSize; i++) {
+			// 2.保存教学大纲附件
+			map.put("paraName", "uploader_outline_name_" + i);
+			map.put("paraTmpname", "uploader_outline_tmpname_" + i);
+			map.put("infotype", "outline");
+			Long outlineDLId = saveTDownloadInfo(map);
 
-		// 3.保存教学进度附件
-		map.put("paraName", "uploader_schedule_name");
-		map.put("paraTmpname", "uploader_schedule_tmpname");
-		map.put("infotype", "schedule");
-		Long scheduleDLId = saveTDownloadInfo(map);
+			// 3.保存教学进度附件
+			map.put("paraName", "uploader_schedule_name_" + i);
+			map.put("paraTmpname", "uploader_schedule_tmpname_" + i);
+			map.put("infotype", "schedule");
+			Long scheduleDLId = saveTDownloadInfo(map);
 
-		// 4.保存课程资料附件
-		map.put("paraName", "uploader_subject_name");
-		map.put("paraTmpname", "uploader_subject_tmpname");
-		map.put("infotype", "subject");
-		Long subjectDLId = saveTDownloadInfo(map);
+			// 4.保存课程资料附件
+			map.put("paraName", "uploader_subject_name_" + i);
+			map.put("paraTmpname", "uploader_subject_tmpname_" + i);
+			map.put("infotype", "subject");
+			Long subjectDLId = saveTDownloadInfo(map);
+
+			returnmap.put("outlineDLId" + i, outlineDLId);
+			returnmap.put("scheduleDLId" + i, scheduleDLId);
+			returnmap.put("subjectDLId" + i, subjectDLId);
+		}
 
 		// 5.保存论文附件
 		// if (paperSize != null && !"".endsWith(paperDLcount)) {
@@ -803,10 +847,6 @@ public class TeacherAction extends BaseAction {
 		// }
 
 		returnmap.put("proDLId", proDLId);
-		returnmap.put("outlineDLId", outlineDLId);
-		returnmap.put("scheduleDLId", scheduleDLId);
-		returnmap.put("subjectDLId", subjectDLId);
-
 		return returnmap;
 	}
 

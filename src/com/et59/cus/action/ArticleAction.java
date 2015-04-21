@@ -407,8 +407,8 @@ public class ArticleAction extends BaseAction {
 		}
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			// bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
-			bsArticle.setMenuType("result");
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_RESULT);
+			// bsArticle.setMenuType("result");
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Constant.PAGESIZE, currentPage);
 			if (ComonUtil.validateMapResult(map)) {

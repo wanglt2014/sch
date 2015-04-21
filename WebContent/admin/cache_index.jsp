@@ -24,31 +24,25 @@
 	src="${js_path}/easyui/jquery.easyui.min.js"></script>
 </head>
 <body>
-	<table border="1" width="60%">
-		<tr>
-			<td><b>key</b></td>
-			<td><b>操作</b></td>
-		</tr>
-		<tr>
-			<td>系统变量</td>
-			<td><a onclick="clearSystemConstant()" style="color: blue;" >清除</a>
-			</td>
-		</tr>
-		<tr>
-			<td>前台页面缓存</td>
-			<td><a  onclick="clearArticle()"  style="color: blue;" >清除</a>
-			</td>
-		</tr>
+<!-- 	<table border="1" width="60%"> -->
 <!-- 		<tr> -->
-<!-- 			<td>产品缓存</td> -->
-<!-- 			<td><a  style="color: blue;" >清除</a> -->
+<!-- 			<td><b>key</b></td> -->
+<!-- 			<td><b>操作</b></td> -->
+<!-- 		</tr> -->
+<!-- 		<tr> -->
+<!-- 			<td>系统变量</td> -->
+<!-- 			<td><a onclick="clearSystemConstant()" style="color: blue;" >清除</a> -->
 <!-- 			</td> -->
 <!-- 		</tr> -->
 <!-- 		<tr> -->
-<!-- 			<td>权限缓存</td> -->
-<!-- 			<td><a  style="color: blue;" >清除</a> -->
+<!-- 			<td>前台页面缓存</td> -->
+<!-- 			<td><a  onclick="clearArticle()"  style="color: blue;" >清除</a> -->
 <!-- 			</td> -->
 <!-- 		</tr> -->
-	</table>
+<!-- 	</table> -->
+	<div style="width: 100%;margin-top: 10%;" align="center">				
+	<h1>发布内容、修改内容时需要执行此操作。</h1>
+		<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok"  onclick="clearArticle()">清除前台页面缓存</a><br><br>
+	</div>
 </body>
 </html>

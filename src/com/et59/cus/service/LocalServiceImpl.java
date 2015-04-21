@@ -90,8 +90,6 @@ import com.et59.cus.domain.entity.OpenLog;
 import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
-import com.et59.cus.domain.entity.TCollege;
-import com.et59.cus.domain.entity.TCollegeExample;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TRoleMenu;
@@ -695,12 +693,10 @@ public class LocalServiceImpl implements LocalService {
 				.createCriteria();
 		bae.setOrderByClause(" createdate desc ");
 		String type = bsArticle.getArticletype();
-		if (null != type
-				&& !type.equals("") && !type.equals("0")) {
+		if (Constant.ARTICLE_TYPE_NOTICE.equals(type)
+				|| Constant.ARTICLE_TYPE_REGULATION.equals(type)) {// 通知和制度
 			criteria.andArticletypeEqualTo(bsArticle.getArticletype());
-		}else if(type.equals("0")){
-			//查询全部类型的文章
-		} else {
+		} else if (Constant.ARTICLE_TYPE_RESULT.equals(type)) {
 			// 查询除通知和制度以外的内容
 			List typeList = new ArrayList();
 			// String menuType = bsArticle.getMenuType();
@@ -712,6 +708,8 @@ public class LocalServiceImpl implements LocalService {
 			// else {
 			// criteria.andArticletypeIn(typeList);
 			// }
+		} else {
+			// 查询全部类型的文章
 		}
 		// if (null != bsArticle.getStartdatacreatenew()
 		// && null == bsArticle.getEnddatacreatenew()) {
@@ -1816,14 +1814,14 @@ public class LocalServiceImpl implements LocalService {
 				Cache.getInstance().put(row.getSystemKey(),
 						row.getSystemValue());
 			}
-//			TCollegeExample example = new TCollegeExample();
-//			example.createCriteria().andCollegelevelEqualTo("1");
-//			TCollege college = (TCollege) Cache.getInstance().get("summary");
-//			if (null == college) {
-//				college = (TCollege) tCollegeDAO.selectByExample(example)
-//						.get(0);
-//				Cache.getInstance().put("summary", college);
-//			}
+			// TCollegeExample example = new TCollegeExample();
+			// example.createCriteria().andCollegelevelEqualTo("1");
+			// TCollege college = (TCollege) Cache.getInstance().get("summary");
+			// if (null == college) {
+			// college = (TCollege) tCollegeDAO.selectByExample(example)
+			// .get(0);
+			// Cache.getInstance().put("summary", college);
+			// }
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

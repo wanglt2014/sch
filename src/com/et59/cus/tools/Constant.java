@@ -80,7 +80,7 @@ public class Constant {
 	 * 教改立项
 	 */
 	public static String ARTICLE_TYPE_REFORM = "reform";
-	
+
 	/**
 	 * 资料下载
 	 */
@@ -105,6 +105,11 @@ public class Constant {
 	 * 学生展示（含历届学生保送学校、获得奖学金等）
 	 */
 	public static String ARTICLE_TYPE_STUDENT = "student";
+
+	/**
+	 * 培养方案成果
+	 */
+	public static String ARTICLE_TYPE_RESULT = "planResult";
 	/**
 	 * 文章类表
 	 */

@@ -224,7 +224,7 @@ public abstract class BaseAction extends SystemAction {
 			} else if (2 == type) {
 				bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
 			} else if (3 == type) {
-				// bsArticle.setArticletype(Constant.art);
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_RESULT);
 			}
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					5, 1);

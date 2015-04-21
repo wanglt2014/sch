@@ -25,7 +25,7 @@
 				创建结束日期: <input id="enddatacreatenew" class="easyui-datebox" style="width: 80px">
 				文章类型: <select id="articletypeQuery" class="easyui-combobox" panelHeight="auto" editable="false"
 					style="width: 100px">
-					<option value="0">全部</option>
+					<option value="">全部</option>
 					<option value="regulation">教学规章制度</option>
 					<option value="notice">教务教学通知</option>
 					<option value="teach">教学获奖</option>

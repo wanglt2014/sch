@@ -200,47 +200,43 @@ $(function(){
 		<div class="user_show_title">友情链接</div>
 		<div class="split_spx"></div>
 			<div id="bank_icon"  class="box scroll_three" style="vertical-align: middle;line-height: 40px;" align="center">
-			<span><a href="#">哈尔滨工程大学</a></span>
-			<span><a href="#">实验平台</a></span>
-			<span><a href="#">调查平台</a></span>
-			<span><a href="#">图书馆</a></span>
-			<span><a href="#">船舶工程学院</a></span>
-			<span><a href="#">自动化学院</a></span>
-			<span><a href="#">水声工程学院</a></span>
-			<span><a href="#">理学院</a></span>
+<%-- 			<span><a href="#">哈尔滨工程大学</a></span> --%>
+<%-- 			<span><a href="#">实验平台</a></span> --%>
+<%-- 			<span><a href="#">调查平台</a></span> --%>
+<%-- 			<span><a href="#">图书馆</a></span> --%>
+<%-- 			<span><a href="#">船舶工程学院</a></span> --%>
+<%-- 			<span><a href="#">自动化学院</a></span> --%>
+<%-- 			<span><a href="#">水声工程学院</a></span> --%>
+<%-- 			<span><a href="#">理学院</a></span> --%>
 			
-<!-- 				<ul>   -->
-<!-- 					<li><a href="#">哈尔滨工程大学</a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 					<li><a href="#">船舶工程学院</a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 					<li><a href="#">自动化学院</a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 					<li><a href="#">水声工程学院</a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/logo01.jpg" width="135" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 					<li><a href="#"></a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 					<li><a href="#"></a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 					<li><a href="#"></a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 					<li><a href="#"></a></li> -->
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li> --%>
-<%-- 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li> --%>
-<!-- 				</ul> -->
+				<ul>  
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
+				</ul>
 			</div>
 		</div>
 </div>

@@ -538,7 +538,7 @@
 			$('#file-list-outline'+uploader.settings.para).html("");
 		});
 		//清空按钮
-		$('#outline-clear-btn').click(function(){
+		$('#outline-clear-btn'+subjectNum).click(function(){
 			event = event ? event : window.event; //判断触发对象，兼容FF。
 			var obj = event.srcElement ? event.srcElement : event.target; 
 			var id = obj.id;
@@ -597,7 +597,7 @@
 			$('#file-list-schedule'+uploader.settings.para).html("");
 		});
 		//清空按钮
-		$('#schedule-clear-btn').click(function(){
+		$('#schedule-clear-btn'+subjectNum).click(function(){
 			event = event ? event : window.event; //判断触发对象，兼容FF。
 			var obj = event.srcElement ? event.srcElement : event.target; 
 			var id = obj.id;
@@ -656,7 +656,7 @@
 			$('#file-list-subject'+uploader.settings.para).html("");
 		});
 		//清空按钮
-		$('#subject-clear-btn').click(function(){
+		$('#subject-clear-btn'+subjectNum).click(function(){
 			event = event ? event : window.event; //判断触发对象，兼容FF。
 			var obj = event.srcElement ? event.srcElement : event.target; 
 			var id = obj.id;
@@ -991,6 +991,11 @@
 		//绑定文件上传删除事件
 		uploaderForPic.bind('FilesRemoved',function(uploader,file){
 			$('#file-list').html("");
+		});
+		
+		//清空按钮
+		$('#clear-btn').click(function(){
+			uploaderForPic.splice(0,10); 
 		});
 		
 		//绑定文件添加进队列事件

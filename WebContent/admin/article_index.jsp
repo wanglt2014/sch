@@ -85,15 +85,15 @@
             </div>
             <div class="fitem">
                 <label>标题</label>
-                <input id="articletitle" name="articletitle" class="easyui-validatebox" required="true" size="50px;" maxlength="50">
-            </div>
-            <div class="fitem">
-                <label>作者:</label>
-                <input name="author" class="easyui-validatebox" required="true" maxlength="20"/>
+                <input id="articletitle" name="articletitle" class="easyui-validatebox" style="width: 500px;" required="true"  maxlength="50">
             </div>
             <div class="fitem">
                 <label>概要:</label>
                 <textarea name="articlesummary"  class="easyui-validatebox"  required="true" style="width: 500px;height: 100px;" maxlength="1000"/>
+            </div>
+            <div class="fitem">
+                <label>作者:</label>
+                <input name="author" class="easyui-validatebox" required="true" maxlength="20"/>
             </div>
             <div class="fitem">
                 <label>时间:</label>

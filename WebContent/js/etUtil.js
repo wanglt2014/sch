@@ -34,7 +34,8 @@ $(document).ready(function(){
 		}else if (id == 'nav_link_result') {
 			location.href = 'Article_toTrainingResultPage.shtm';
 		}else if (id == 'nav_link_bbs') {
-			location.href = 'http://121.42.199.93:8080/schoolbbs';
+//			location.href = 'http://121.42.199.93:8080/schoolbbs';
+			location.href = 'http://127.0.0.1:8080/schoolbbs';
 		}else if (id == 'nav_link_downloadinfo') {
 			location.href = 'Download_toDownloadPage.shtm';
 		}

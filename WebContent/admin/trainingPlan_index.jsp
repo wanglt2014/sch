@@ -65,7 +65,7 @@
 			iconCls="icon-remove" plain="true" onclick="destroytrainingPlan()">删除</a>
 	</div>
 	<div id="trainingPlandlg" class="easyui-dialog"
-		style="width: 850px; height: 620px; padding: 10px 20px" closed="true"
+		style="width: 900px; height: 620px; padding: 10px 20px" closed="true"
 		buttons="#trainingPlandlg-buttons">
 		<form id="trainingPlanfm" method="post" novalidate>
 			<div id="trainingPlan_tab" class="easyui-tabs" style="height: 516px"

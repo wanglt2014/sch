@@ -74,7 +74,7 @@
 			iconCls="icon-remove" plain="true" onclick="destroyTeacher()">删除</a>
 	</div>
 	<div id="teacherdlg" class="easyui-dialog"
-		style="width: 800px; height: 720px; padding: 10px 20px;overflow: visible;" closed="true"
+		style="width: 800px; height: 720px; padding: 60px 20px;overflow: visible;" closed="true"
 		buttons="#teacherdlg-buttons">
 		<form id="teacherfm" method="post" novalidate>
 		<div id="teacher_tab" class="easyui-tabs" style="height: 616px"

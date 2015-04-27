@@ -62,7 +62,7 @@
 			</div>
             <div class="fitem">
                 <label>文件名称</label>
-                <input id="filename" name="filename"  class="easyui-validatebox" required="true" size="50px;" maxlength="20"/>
+                <input id="filename" name="filename"  class="easyui-validatebox" required="true" style="width: 500px;" maxlength="20"/>
             </div>
             <div class="fitem">
                 <label>作者:</label>

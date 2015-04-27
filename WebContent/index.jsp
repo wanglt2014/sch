@@ -211,30 +211,30 @@ $(function(){
 			
 				<ul>  
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo11.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo12.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo13.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo14.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo15.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo16.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo0.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo11.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo1.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo12.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo2.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo13.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo3.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo14.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo4.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo15.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
-					<li><a href="#"><img src="${image_path}/logo5.png" width="135" height="40" alt="" /></a></li>
+					<li><a href="#"><img src="${image_path}/logo16.jpg" width="135" height="40" alt="" /></a></li>
 					<li><a href="#"><img src="${image_path}/normal_bg.gif" width="1" height="40" alt="" /></a></li>
 				</ul>
 			</div>

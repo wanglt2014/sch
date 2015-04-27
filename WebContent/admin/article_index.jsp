@@ -62,7 +62,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyArticle()">删除</a>
     </div>
     
-    <div id="newdlg" class="easyui-dialog" style="width:860px;height:auto;padding:10px 20px"
+    <div id="newdlg" class="easyui-dialog" style="width:860px;height:800px;padding:40px 20px 10px 20px"
             closed="true" buttons="#newdlg-buttons">
         <div class="ftitle">文章详细信息</div>
         <form id="newsfm" method="post" novalidate>

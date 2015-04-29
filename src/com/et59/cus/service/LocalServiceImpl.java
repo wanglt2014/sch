@@ -691,7 +691,7 @@ public class LocalServiceImpl implements LocalService {
 		BsArticleExample bae = new BsArticleExample();
 		com.et59.cus.domain.entity.BsArticleExample.Criteria criteria = bae
 				.createCriteria();
-		bae.setOrderByClause(" createdate desc ");
+		bae.setOrderByClause(" articleIsTop desc,createdate desc ");
 		String type = bsArticle.getArticletype();
 		if (Constant.ARTICLE_TYPE_NOTICE.equals(type)
 				|| Constant.ARTICLE_TYPE_REGULATION.equals(type)) {// 通知和制度

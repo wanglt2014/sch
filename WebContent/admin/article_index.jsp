@@ -81,8 +81,12 @@
 					<option value="build_course">国际共建课程</option>
 					<option value="student">学生展示</option>
 				</select>
-                
             </div>
+             <div class="fitem">
+                <label>置顶</label>
+                <input type="radio" name="articleistop"  value="1" checked="checked" />是
+                <input type="radio" name="articleistop" value="0"  />否
+             </div>
             <div class="fitem">
                 <label>标题</label>
                 <input id="articletitle" name="articletitle" class="easyui-validatebox" style="width: 500px;" required="true"  maxlength="50">

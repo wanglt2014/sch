@@ -154,7 +154,7 @@ td.p80{width: 80%;height: 30px;}
 								<div class="content_all">
 								<div style="margin-top: 20px;" >
 								<table style="width: 100%;">
-								<tr><th>项目名称</th><th>项目编号</th><th>项目级别</th><th>项目主持人</th><th>项目参与者</th><th>立项申请书电子版</th></tr>
+								<tr><th>项目名称</th><th>项目编号</th><th>项目级别</th><th>项目主持人</th><th>项目参与者</th></tr>
 								<tr>
 								<td class="p15">
 								<i class="point">•</i>&nbsp;<s:property value="tResearchDTO.researchname"/></td>
@@ -162,12 +162,6 @@ td.p80{width: 80%;height: 30px;}
 								<td class="p15"><s:property value="tResearchDTO.researchlevel"/></td>
 								<td class="p15"><s:property value="tResearchDTO.researchhost"/></td>
 								<td class="p15"><s:property value="tResearchDTO.researchactor"/></td>
-								<td class="p15">
-								<s:if test="tResearchDTO.downloadShowPath!=null">
-								<a href="<%=request_path %>/${tResearchDTO.downloadShowPath}">[立项申请书电子版]</a>
-								</s:if>
-								<s:else></s:else>
-								</td>
 								</tr>
 								</table>
 								</div>

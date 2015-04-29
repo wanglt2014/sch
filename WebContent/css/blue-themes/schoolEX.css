@@ -151,3 +151,15 @@ margin:0px auto; min-width:1000px; float:none;
 	white-space: nowrap;
 }
 
+.span_column{ 
+			text-align:left;
+			display:-moz-inline-box;
+			display:inline-block;
+			width:300px;}
+.span_column_sm{ 
+			text-align:right;
+			display:-moz-inline-box;
+			display:inline-block;
+			width:200px; }
+
+

@@ -1,6 +1,7 @@
 package com.et59.cus.action;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,6 +9,7 @@ import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.TSubject;
+import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
@@ -95,7 +97,7 @@ public class SubjectAction extends BaseAction {
 	}
 
 	/**
-	 * 新闻后台首页
+	 * 后台首页
 	 * 
 	 * @return
 	 */
@@ -129,37 +131,136 @@ public class SubjectAction extends BaseAction {
 		}
 	}
 
-	// /**
-	// * 保存文章
-	// */
-	// public void save() {
-	// boolean flag = false;
-	// BsArticle bsArticle = getBsArticle();
-	// try {
-	// localServiceProxy.saveArticle(bsArticle);
-	// flag = true;
-	// super.reponseWriter(JSON.toJSONString(flag));
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
-	//
-	// /**
-	// * 编辑文章
-	// */
-	// public void update() {
-	// boolean flag = false;
-	// String id = request.getParameter("id");
-	// BsArticle bsArticle = getBsArticle();
-	// bsArticle.setId(Long.valueOf(id));
-	// try {
-	// localServiceProxy.updateArticle(bsArticle);
-	// flag = true;
-	// super.reponseWriter(JSON.toJSONString(flag));
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
+	public TSubject getTSubject() {
+		String subjectno = request.getParameter("subjectno");
+		String subjectname = request.getParameter("subjectname");
+		String subjecttype = request.getParameter("subjecttype");
+		String subjecttypename = request.getParameter("subjecttypename");
+		String subjecttext = request.getParameter("subjecttext");
+
+		String subjectcredit = request.getParameter("subjectcredit");
+		String subjectyear = request.getParameter("subjectyear");
+		String subjectdepartment = request.getParameter("subjectdepartment");
+		String subjectdepartmentname = request
+				.getParameter("subjectdepartmentname");
+		String classhourfortheory = request.getParameter("classhourfortheory");
+		String classhourfortest = request.getParameter("classhourfortest");
+		String classhourformachine = request
+				.getParameter("classhourformachine");
+		String classhourforother = request.getParameter("classhourforother");
+		String termclasshourforone = request
+				.getParameter("termclasshourforone");
+		String termclasshourfortwo = request
+				.getParameter("termclasshourfortwo");
+		String termclasshourforthree = request
+				.getParameter("termclasshourforthree");
+		String termclasshourforfour = request
+				.getParameter("termclasshourforfour");
+		String termclasshourforfive = request
+				.getParameter("termclasshourforfive");
+		String termclasshourforsix = request
+				.getParameter("termclasshourforsix");
+		String termclasshourforseven = request
+				.getParameter("termclasshourforseven");
+		String termclasshourforeight = request
+				.getParameter("termclasshourforeight");
+		String subjectremark = request.getParameter("subjectremark");
+		TSubject tSubject = new TSubject();
+		tSubject.setSubjecttype(subjecttype);
+		tSubject.setSubjectno(subjectno);
+		tSubject.setSubjectname(subjectname);
+		tSubject.setSubjecttext(subjecttext);
+		tSubject.setSubjecttypename(subjecttypename);
+		tSubject.setClasshourfortheory(classhourfortheory);
+		tSubject.setClasshourformachine(classhourformachine);
+		tSubject.setClasshourforother(classhourforother);
+		tSubject.setClasshourfortest(classhourfortest);
+		tSubject.setSubjectcredit(subjectcredit);
+		tSubject.setSubjectdepartment(subjectdepartment);
+		tSubject.setSubjectdepartmentname(subjectdepartmentname);
+		tSubject.setSubjectremark(subjectremark);
+		tSubject.setTermclasshourfortwo(termclasshourfortwo);
+		tSubject.setTermclasshourforthree(termclasshourforthree);
+		tSubject.setTermclasshourforeight(termclasshourforeight);
+		tSubject.setTermclasshourforfive(termclasshourforfive);
+		tSubject.setTermclasshourforfour(termclasshourforfour);
+		tSubject.setTermclasshourforone(termclasshourforone);
+		tSubject.setTermclasshourforseven(termclasshourforseven);
+		tSubject.setTermclasshourforsix(termclasshourforsix);
+		tSubject.setSubjectyear(subjectyear);
+		return tSubject;
+	}
+
+	/**
+	 * 保存课程
+	 */
+	public void save() {
+		boolean flag = false;
+		TSubject tSubject = getTSubject();
+
+		try {
+			HashMap downloadIdMap = saveDownloadInfo();
+			tSubject.setSubjectoutline((Long) downloadIdMap.get("outlineDLId"));
+			tSubject.setSubjectschedule((Long) downloadIdMap
+					.get("scheduleDLId"));
+			tSubject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"));
+			localServiceEXProxy.saveTSubject(tSubject);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public HashMap saveDownloadInfo() {
+		HashMap map = new HashMap();
+		HashMap returnmap = new HashMap();
+		try {
+			// 1.保存教学大纲附件
+			map.put("paraName", "uploader_outline_name");
+			map.put("paraTmpname", "uploader_outline_tmpname");
+			map.put("infotype", "outline");
+			Long outlineDLId = saveTDownloadInfo(map);
+
+			// 2.保存教学进度附件
+			map.put("paraName", "uploader_schedule_name");
+			map.put("paraTmpname", "uploader_schedule_tmpname");
+			map.put("infotype", "schedule");
+			Long scheduleDLId = saveTDownloadInfo(map);
+
+			// 3.保存课程资料附件
+			map.put("paraName", "uploader_subject_name");
+			map.put("paraTmpname", "uploader_subject_tmpname");
+			map.put("infotype", "subject");
+			Long subjectDLId = saveTDownloadInfo(map);
+
+			returnmap.put("outlineDLId", outlineDLId);
+			returnmap.put("scheduleDLId", scheduleDLId);
+			returnmap.put("subjectDLId", subjectDLId);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return returnmap;
+	}
+
+	/**
+	 * 编辑课程
+	 */
+	public void update() {
+		boolean flag = false;
+		String id = request.getParameter("id");
+		TSubject tSubject = getTSubject();
+		tSubject.setSubjectid(Long.valueOf(id));
+		try {
+			localServiceEXProxy.updateTSubject(tSubject);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	//
 	// /**
 	// * 公共方法
@@ -184,20 +285,22 @@ public class SubjectAction extends BaseAction {
 	// return bsArticle;
 	// }
 	//
-	// /**
-	// * 删除文章
-	// */
-	// public void deleteArticle() {
-	// boolean flag = false;
-	// String id = request.getParameter("id");
-	// try {
-	// localServiceProxy.deleteArticle(Long.valueOf(id));
-	// flag = true;
-	// super.reponseWriter(JSON.toJSONString(flag));
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	// }
+	/**
+	 * 删除
+	 */
+	public void delete() {
+		boolean flag = false;
+		String id = request.getParameter("id");
+		try {
+			TSubjectExample tsexample = new TSubjectExample();
+			tsexample.createCriteria().andSubjectidEqualTo(Long.valueOf(id));
+			localServiceEXProxy.deleteTSubject(tsexample);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	public TSubject getSubject() {
 		return subject;

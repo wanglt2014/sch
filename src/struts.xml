@@ -61,11 +61,11 @@
 			<result name="mobile">/common/mobile.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
-		<action name="Address_*" class="AddressAction" method="{1}">
+<!-- 		<action name="Address_*" class="AddressAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<result name="index">/admin/address_index.jsp</result>
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-		</action>
+<!-- 			<result name="index">/admin/address_index.jsp</result> -->
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 		</action> -->
 		<action name="LeaveMessage_*" class="LeaveMessageAction" method="{1}">
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<result name="index">/admin/message_index.jsp</result>
@@ -81,13 +81,13 @@
 			<result name="index">/admin/cache_index.jsp</result>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
-		<action name="ShopCart_*" class="ShopCartAction" method="{1}">
+<!-- 		<action name="ShopCart_*" class="ShopCartAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
-			<result name="commit">/pay/order.jsp</result>
-			<result name="pay">/pay/pay.jsp</result>
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-		</action>
+<!-- 			<result name="commit">/pay/order.jsp</result> -->
+<!-- 			<result name="pay">/pay/pay.jsp</result> -->
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 		</action> -->
 		<action name="OpenApp_*" class="OpenAppAction" method="{1}">
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
@@ -115,19 +115,19 @@
 			<result name="index">/admin/role_index.jsp</result>
 		</action>
 		<!-- 市场合作 -->
-		<action name="Marking_*" class="MarkingAction" method="{1}">
+<!-- 		<action name="Marking_*" class="MarkingAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="index">/admin/marking_index.jsp</result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="index">/admin/marking_index.jsp</result> -->
+<!-- 		</action> -->
 		<!-- 供应商管理 -->
-		<action name="Supplier_*" class="SupplierAction" method="{1}">
+<!-- 		<action name="Supplier_*" class="SupplierAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="index">/admin/supplier_index.jsp</result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="index">/admin/supplier_index.jsp</result> -->
+<!-- 		</action> -->
 		<!-- 菜单管理 -->
 		<action name="Menu_*" class="MenuAction" method="{1}">
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
@@ -136,13 +136,13 @@
 			<result name="menu_show">/admin/menu.jsp</result>
 		</action>
 		<!-- 产品分类 -->
-		<action name="Productcategory_*" class="ProductcategoryAction"
-			method="{1}">
+<!-- 		<action name="Productcategory_*" class="ProductcategoryAction" -->
+<!-- 			method="{1}"> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="index">/admin/productcategory_index.jsp</result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="index">/admin/productcategory_index.jsp</result> -->
+<!-- 		</action> -->
 		<!-- 邮件管理 -->
 		<action name="Email_*" class="EmailAction" method="{1}">
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
@@ -175,48 +175,48 @@
 		</action>
 
 		<!-- 商务合作 -->
-		<action name="Bussiness_*" class="BussinessAction" method="{1}">
-			<interceptor-ref name="json" />
+<!-- 		<action name="Bussiness_*" class="BussinessAction" method="{1}"> -->
+<!-- 			<interceptor-ref name="json" /> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="to_bussiness">/bussiness/bussiness.jsp</result>
-			<result type="json"></result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="to_bussiness">/bussiness/bussiness.jsp</result> -->
+<!-- 			<result type="json"></result> -->
+<!-- 		</action> -->
 
 
 		<!-- 产品订购 -->
-		<action name="Ordering_*" class="OrderingAction" method="{1}">
+<!-- 		<action name="Ordering_*" class="OrderingAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="toSubIndex">/ordering/orderingindex.jsp</result>
-			<result name="toProductSearch">/ordering/product_search.jsp</result>
-			<result name="search_result">/ordering/product_result.jsp</result>
-			<result name="product_detailInfo">/ordering/product_detailinfo.jsp</result>
-			<result name="product_choose">/pay/order.jsp</result>
-			<result type="json"></result>
-		</action>
-		<action name="Pay_*" class="PayAction" method="{1}">
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="toSubIndex">/ordering/orderingindex.jsp</result> -->
+<!-- 			<result name="toProductSearch">/ordering/product_search.jsp</result> -->
+<!-- 			<result name="search_result">/ordering/product_result.jsp</result> -->
+<!-- 			<result name="product_detailInfo">/ordering/product_detailinfo.jsp</result> -->
+<!-- 			<result name="product_choose">/pay/order.jsp</result> -->
+<!-- 			<result type="json"></result> -->
+<!-- 		</action> -->
+<!-- 		<action name="Pay_*" class="PayAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="return_success">/common/common_success.jsp</result>
-			<result name="return_fail">/common/common_fail.jsp</result>
-			<result type="json"></result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="return_success">/common/common_success.jsp</result> -->
+<!-- 			<result name="return_fail">/common/common_fail.jsp</result> -->
+<!-- 			<result type="json"></result> -->
+<!-- 		</action> -->
 		<!-- 产品续费 -->
-		<action name="RepeatOrder_*" class="RepeatOrderAction" method="{1}">
+<!-- 		<action name="RepeatOrder_*" class="RepeatOrderAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="toSubIndex">/repeatorder/repeatorderindex.jsp</result>
-			<result name="repeatOrder_query">/repeatorder/repeatorder_query.jsp</result>
-			<result name="repeatOrder_querypre">/repeatorder/repeatorder_search.jsp</result>
-			<result name="excute_productquery">/repeatorder/repeatorder_result.jsp</result>
-			<result name="repeatOrder_detailInfo">/repeatorder/repeatorder_detailinfo.jsp</result>
-			<result name="repeatOrder_choose">/repeatorder/repeatorder_choose.jsp</result>
-			<result name="repeatOrder_confirm">/repeatorder/repeatorder_confirm.jsp</result>
-			<result name="repeatOrder_pay">/repeatorder/repeatorder_pay.jsp</result>
-			<result type="json"></result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="toSubIndex">/repeatorder/repeatorderindex.jsp</result> -->
+<!-- 			<result name="repeatOrder_query">/repeatorder/repeatorder_query.jsp</result> -->
+<!-- 			<result name="repeatOrder_querypre">/repeatorder/repeatorder_search.jsp</result> -->
+<!-- 			<result name="excute_productquery">/repeatorder/repeatorder_result.jsp</result> -->
+<!-- 			<result name="repeatOrder_detailInfo">/repeatorder/repeatorder_detailinfo.jsp</result> -->
+<!-- 			<result name="repeatOrder_choose">/repeatorder/repeatorder_choose.jsp</result> -->
+<!-- 			<result name="repeatOrder_confirm">/repeatorder/repeatorder_confirm.jsp</result> -->
+<!-- 			<result name="repeatOrder_pay">/repeatorder/repeatorder_pay.jsp</result> -->
+<!-- 			<result type="json"></result> -->
+<!-- 		</action> -->
 
 		<!-- 用户中心 -->
 		<action name="UserCenter_*" class="UserCenterAction" method="{1}">
@@ -239,29 +239,27 @@
 			<result type="json"></result>
 		</action>
 		<!--交易查询 -->
-		<action name="Trade_*" class="TradeAction" method="{1}">
+<!-- 		<action name="Trade_*" class="TradeAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-
-			<result name="toTradeSearch">/usercenter/trade_search.jsp</result>
-			<result name="search_result">/usercenter/trade_result.jsp</result>
-
-			<result type="json"></result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="toTradeSearch">/usercenter/trade_search.jsp</result> -->
+<!-- 			<result name="search_result">/usercenter/trade_result.jsp</result> -->
+<!-- 			<result type="json"></result> -->
+<!-- 		</action> -->
 		<!--上传action -->
 		<action name="Uploader_*" class="UploaderAction" method="{1}">
 		<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result type="json"></result>
 		</action>
 		<!--product action -->
-		<action name="Product_*" class="ProductAction" method="{1}">
+<!-- 		<action name="Product_*" class="ProductAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="index">/admin/product_index.jsp</result>
-			<result type="json"></result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="index">/admin/product_index.jsp</result> -->
+<!-- 			<result type="json"></result> -->
+<!-- 		</action> -->
 		<!-- 用户服务 -->
 		<action name="UserService_*" class="UserServiceAction" method="{1}">
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
@@ -271,13 +269,13 @@
 			<result type="json"></result>
 		</action>
 		<!-- 订单管理 -->
-		<action name="Order_*" class="OrderAction" method="{1}">
+<!-- 		<action name="Order_*" class="OrderAction" method="{1}"> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
-			<interceptor-ref name="defaultStack"></interceptor-ref>
-			<result name="index">/admin/order_index.jsp</result>
-			<result type="json"></result>
-		</action>
+<!-- 			<interceptor-ref name="defaultStack"></interceptor-ref> -->
+<!-- 			<result name="index">/admin/order_index.jsp</result> -->
+<!-- 			<result type="json"></result> -->
+<!-- 		</action> -->
 		
 		<!-- 新闻中心 -->
 		<action name="News_*" class="NewsAction" method="{1}">
@@ -349,8 +347,7 @@
 			<result name="to_subject_index">/subject/subjectList.jsp</result>
 			<result name="subject_detail">/subject/subjectdetail.jsp</result>
 			<result name="subject_result">/subject/subject_result.jsp</result>
-			<result name="index">/admin/news_index.jsp</result>
-			<result name="summary">/admin/news_index.jsp</result>
+			<result name="index">/admin/subject_index.jsp</result>
 			<result type="json"></result>
 		</action>
 

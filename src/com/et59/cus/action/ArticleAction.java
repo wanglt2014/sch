@@ -317,6 +317,7 @@ public class ArticleAction extends BaseAction {
 		String type = request.getParameter("articletypeInsert");
 		String summary = request.getParameter("articlesummary");
 		String content = request.getParameter("content");
+		String articleistop = request.getParameter("articleistop");
 		BsArticle bsArticle = new BsArticle();
 		bsArticle.setArticletitle(title);
 		bsArticle.setArticlesummary(summary);
@@ -325,6 +326,7 @@ public class ArticleAction extends BaseAction {
 		bsArticle.setUpdatedate(DateUtil.getNowDate());
 		bsArticle.setCreatedate(createdate);
 		bsArticle.setAuthor(author);
+		bsArticle.setArticleistop(articleistop);
 		return bsArticle;
 	}
 

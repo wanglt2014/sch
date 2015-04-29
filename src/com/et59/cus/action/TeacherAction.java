@@ -30,7 +30,6 @@ import com.et59.cus.dto.TResearchDTO;
 import com.et59.cus.dto.TSubjectDTO;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
-import com.et59.cus.tools.DateUtil;
 import com.et59.cus.tools.FileAction;
 
 /**
@@ -71,7 +70,18 @@ public class TeacherAction extends BaseAction {
 	public List<TPrize> tPrizeList;
 
 	public List<TSubjectDTO> tSubjectDtoList;
+
+	public List<TResearchDTO> tResearchList;
+
 	public String defultId;
+
+	public List<TResearchDTO> gettResearchList() {
+		return tResearchList;
+	}
+
+	public void settResearchList(List<TResearchDTO> tResearchList) {
+		this.tResearchList = tResearchList;
+	}
 
 	public List<TSubjectDTO> gettSubjectDtoList() {
 		return tSubjectDtoList;
@@ -290,7 +300,11 @@ public class TeacherAction extends BaseAction {
 			TSubjectExample example = new TSubjectExample();
 			example.createCriteria().andSubjectteacheridEqualTo(teacherIdLong);
 			subList = localServiceEXProxy.queryTSubject(example);
-
+			StringBuffer subjectIds = new StringBuffer();
+			for (Iterator iterator = subList.iterator(); iterator.hasNext();) {
+				TSubject tSubject = (TSubject) iterator.next();
+				subjectIds.append(tSubject.getSubjectid()).append(",");
+			}
 			// 加载立项
 			List<TResearch> tResearchList = new ArrayList<TResearch>();
 			TResearchExample trexample = new TResearchExample();
@@ -314,7 +328,8 @@ public class TeacherAction extends BaseAction {
 			// map.put("subject", tSubject);
 			// map.put("tPaper", tPaper);
 			// map.put("tResearch", tResearch);
-			map.put("subject", subList);
+			map.put("subject",
+					subjectIds.substring(0, subjectIds.lastIndexOf(",")));
 			map.put("tPaper", tPaperList);
 			map.put("tResearch", tResearchList);
 			map.put("tPrize", tPrizeList);
@@ -433,30 +448,36 @@ public class TeacherAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public TResearch getResearch() {
-		String researchlevel = request.getParameter("researchlevel");
-		String researchname = request.getParameter("researchname");
-		String researchno = request.getParameter("researchno");
-		String researchmoney = request.getParameter("researchmoney") == "" ? "0"
-				: request.getParameter("researchmoney");
-		String researchmatchmoney = request.getParameter("researchmatchmoney") == "" ? "0"
-				: request.getParameter("researchmatchmoney");
-		String researchhost = request.getParameter("researchhost");
-		String researchactor = request.getParameter("researchactor");
-		String researchbegindate = request.getParameter("researchbegindate");
-		String researchenddate = request.getParameter("researchenddate");
-		TResearch tResearch = new TResearch();
-		tResearch.setResearchlevel(researchlevel);
-		tResearch.setResearchname(researchname);
-		tResearch.setResearchno(researchno);
-		tResearch.setResearchmoney(Integer.parseInt(researchmoney));
-		tResearch.setResearchmatchmoney(Integer.parseInt(researchmatchmoney));
-		tResearch.setResearchhost(researchhost);
-		tResearch.setResearchactor(researchactor);
-		tResearch.setResearchbegindate(researchbegindate);
-		tResearch.setResearchenddate(researchenddate);
+	public List<TResearch> getResearch() {
+		List<TResearch> list = new ArrayList<TResearch>();
+		String projectNum = request.getParameter("projectNum");
+		TResearch tResearch = null;
+		for (int i = 1; i <= Integer.parseInt(projectNum); i++) {
+			tResearch = new TResearch();
+			tResearch.setResearchlevel(request
+					.getParameter("researchlevel" + i));
+			tResearch.setResearchname(request.getParameter("researchname" + i));
+			tResearch.setResearchno(request.getParameter("researchno" + i));
 
-		return tResearch;
+			String researchmoney = request.getParameter("researchmoney" + i) == "" ? "0"
+					: request.getParameter("researchmoney" + i);
+			tResearch.setResearchmoney(Integer.parseInt(researchmoney));
+			String researchmatchmoney = request
+					.getParameter("researchmatchmoney" + i) == "" ? "0"
+					: request.getParameter("researchmatchmoney" + i);
+			tResearch.setResearchmatchmoney(Integer
+					.parseInt(researchmatchmoney));
+			tResearch.setResearchhost(request.getParameter("researchhost" + i));
+			tResearch.setResearchactor(request
+					.getParameter("researchactor" + i));
+			tResearch.setResearchbegindate(request
+					.getParameter("researchbegindate" + i));
+			tResearch.setResearchenddate(request.getParameter("researchenddate"
+					+ i));
+			list.add(tResearch);
+		}
+
+		return list;
 	}
 
 	/**
@@ -528,33 +549,51 @@ public class TeacherAction extends BaseAction {
 		// String researchid = request.getParameter("researchid");
 
 		TTeacherWithBLOBs teacher = getTeacher();
-		List<TSubject> subjectList = getSubject();
-		TResearch tResearch = getResearch();
-		// TODO
+		// List<TSubject> subjectList = getSubject();
+		String subjectIds = request.getParameter("subjectIds");
+		List<TResearch> tResearchList = getResearch();
 		List<TPaper> tPaperList = getPaper();
 		List<TPrize> tPrizeList = getPrize();
 		try {
 			teacher.setId(id);
 			localServiceProxy.updateTeacher(teacher);
-			if (subjectList != null && subjectList.size() > 0) {
-				TSubjectExample tsexample = new TSubjectExample();
-				tsexample.createCriteria().andSubjectteacheridEqualTo(id);
-				localServiceEXProxy.deleteTSubject(tsexample);
-				TSubject tSubject = null;
-				for (Iterator iterator = subjectList.iterator(); iterator
-						.hasNext();) {
-					tSubject = (TSubject) iterator.next();
-					tSubject.setSubjectteacherid(id);
-					localServiceEXProxy.saveTSubject(tSubject);
-				}
+
+			// 2.保存课程表
+			TSubject tSubject = null;
+			String[] idArr = subjectIds.split(",");
+			String tempID = null;
+			for (int i = 0; i < idArr.length; i++) {
+				tempID = idArr[i];
+				tSubject = new TSubject();
+				tSubject.setSubjectid(Long.valueOf(tempID));
+				tSubject.setSubjectteacherid(teacher.getId());
+				tSubject.setSubjectteachername(teacher.getTeachername());
+				localServiceEXProxy.updateTSubject(tSubject);
 			}
 
-			if (tResearch != null && !tResearch.getResearchname().equals("")) {
+			// if (subjectList != null && subjectList.size() > 0) {
+			// TSubjectExample tsexample = new TSubjectExample();
+			// tsexample.createCriteria().andSubjectteacheridEqualTo(id);
+			// localServiceEXProxy.deleteTSubject(tsexample);
+			// TSubject tSubject = null;
+			// for (Iterator iterator = subjectList.iterator(); iterator
+			// .hasNext();) {
+			// tSubject = (TSubject) iterator.next();
+			// tSubject.setSubjectteacherid(id);
+			// localServiceEXProxy.saveTSubject(tSubject);
+			// }
+			// }
+
+			if (tResearchList != null && tResearchList.size() > 0) {
 				TResearchExample trexample = new TResearchExample();
 				trexample.createCriteria().andResearchteacheridEqualTo(id);
 				localServiceEXProxy.deleteTResearch(trexample);
-				tResearch.setResearchteacherid(id);
-				localServiceEXProxy.saveTResearch(tResearch);
+				for (Iterator iterator = tResearchList.iterator(); iterator
+						.hasNext();) {
+					TResearch tResearch = (TResearch) iterator.next();
+					tResearch.setResearchteacherid(id);
+					localServiceEXProxy.saveTResearch(tResearch);
+				}
 			}
 
 			if (tPaperList != null && tPaperList.size() > 0) {
@@ -594,8 +633,10 @@ public class TeacherAction extends BaseAction {
 	public void save() {
 		boolean flag = false;
 		TTeacherWithBLOBs teacher = getTeacher();
-		List<TSubject> subjectList = getSubject();
-		TResearch tResearch = getResearch();
+		// List<TSubject> subjectList = getSubject();
+
+		String subjectIds = request.getParameter("subjectIds");
+		List<TResearch> tResearchList = getResearch();
 		List<TPaper> tPaperList = getPaper();
 		List<TPrize> tPrizeList = getPrize();
 		// String name = request.getParameter("uploader_pic_name");
@@ -610,13 +651,15 @@ public class TeacherAction extends BaseAction {
 		// }
 		try {
 			int paperSize = tPaperList.size();
-			int subjectSize = subjectList.size();
+			// int subjectSize = subjectList.size();
+			int tResearchSize = tResearchList.size();
 			Map<String, Object> session = context.getSession();
 			BsUser sessionuser = (BsUser) session.get("user");
 			teacher.setTeacherlonginname(sessionuser.getUsername());
 			Map<String, Integer> sizeMap = new HashMap<String, Integer>();
 			sizeMap.put("paperSize", paperSize);
-			sizeMap.put("subjectSize", subjectSize);
+			// sizeMap.put("subjectSize", subjectSize);
+			// sizeMap.put("tResearchSize", tResearchSize);
 			// 新增附件表
 			HashMap downloadIdMap = saveAllDownloadTable(sizeMap);
 			// StringBuffer paperIDs = new StringBuffer();
@@ -628,25 +671,40 @@ public class TeacherAction extends BaseAction {
 
 			// 新增立项，课程，论文，获奖表
 			// 1.保存立项表
-			tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"));
-			tResearch.setResearchteacherid(teacherId);
-			Long researchId = localServiceEXProxy.saveTResearch(tResearch);
+			TResearch tResearch = null;
+			for (int i = 0; i < tResearchSize; i++) {
+				tResearch = tResearchList.get(i);
+				tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"
+						+ (i + 1)));
+				tResearch.setResearchteacherid(teacherId);
+				localServiceEXProxy.saveTResearch(tResearch);
+			}
 
 			// 2.保存课程表
 			TSubject tSubject = null;
-			for (int i = 0; i < subjectSize; i++) {
-				tSubject = subjectList.get(i);
-				tSubject.setSubjectoutline((Long) downloadIdMap
-						.get("outlineDLId" + (i + 1)));
-				tSubject.setSubjectschedule((Long) downloadIdMap
-						.get("scheduleDLId" + (i + 1)));
-				tSubject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"
-						+ (i + 1)));
+			String[] idArr = subjectIds.split(",");
+			String tempID = null;
+			for (int i = 0; i < idArr.length; i++) {
+				tempID = idArr[i];
+				tSubject = new TSubject();
+				tSubject.setSubjectid(Long.valueOf(tempID));
+				tSubject.setSubjectteacherid(teacher.getId());
 				tSubject.setSubjectteachername(teacher.getTeachername());
-				tSubject.setSubjectisvalid(Constant.ISVALID_1);
-				tSubject.setSubjectteacherid(teacherId);
-				localServiceEXProxy.saveTSubject(tSubject);
+				localServiceEXProxy.updateTSubject(tSubject);
 			}
+			// for (int i = 0; i < subjectSize; i++) {
+			// tSubject = subjectList.get(i);
+			// tSubject.setSubjectoutline((Long) downloadIdMap
+			// .get("outlineDLId" + (i + 1)));
+			// tSubject.setSubjectschedule((Long) downloadIdMap
+			// .get("scheduleDLId" + (i + 1)));
+			// tSubject.setSubjectinfo((Long) downloadIdMap.get("subjectDLId"
+			// + (i + 1)));
+			// tSubject.setSubjectteachername(teacher.getTeachername());
+			// tSubject.setSubjectisvalid(Constant.ISVALID_1);
+			// tSubject.setSubjectteacherid(teacherId);
+			// localServiceEXProxy.saveTSubject(tSubject);
+			// }
 
 			// 3.保存论文表
 			TPaper tPaper = null;
@@ -737,22 +795,28 @@ public class TeacherAction extends BaseAction {
 
 			}
 
-			// 加载立项//TODO 改为list
+			// 加载立项
 			TResearchExample trexample = new TResearchExample();
 			trexample.createCriteria().andResearchteacheridEqualTo(
 					teacherIdLong);
-			TResearch tResearch = localServiceEXProxy.queryTResearchList(
-					trexample).get(0);
-			if (tResearch != null) {
-				tResearchDTO = new TResearchDTO();
-				BeanUtils.copyProperties(tResearchDTO, tResearch);
+			List<TResearch> researchList = localServiceEXProxy
+					.queryTResearchList(trexample);
+			if (researchList != null && researchList.size() > 0) {
+				tResearchList = new ArrayList<TResearchDTO>();
+				for (Iterator iterator = researchList.iterator(); iterator
+						.hasNext();) {
+					tResearchDTO = new TResearchDTO();
+					TResearch research = (TResearch) iterator.next();
+					BeanUtils.copyProperties(tResearchDTO, research);
 
-				Long trDownid = tResearch.getDownloadid();
-				if (trDownid != null) {
-					TDownload researchFile = localServiceEXProxy
-							.queryDownloadById(trDownid);
-					tResearchDTO.setDownloadShowPath(researchFile
-							.getFileshowpath());
+					Long trDownid = research.getDownloadid();
+					if (trDownid != null) {
+						TDownload researchFile = localServiceEXProxy
+								.queryDownloadById(trDownid);
+						tResearchDTO.setDownloadShowPath(researchFile
+								.getFileshowpath());
+					}
+					tResearchList.add(tResearchDTO);
 				}
 			}
 
@@ -804,36 +868,40 @@ public class TeacherAction extends BaseAction {
 		HashMap map = new HashMap();
 		HashMap returnmap = new HashMap();
 		int paperSize = sizeMap.get("paperSize");
-		int subjectSize = sizeMap.get("subjectSize");
+		// int subjectSize = sizeMap.get("subjectSize");
+		// int tResearchSize = sizeMap.get("tResearchSize");
 		// 1.保存立项附件
-		map.put("paraName", "uploader_project_name");
-		map.put("paraTmpname", "uploader_project_tmpname");
-		map.put("infotype", "project");
-		Long proDLId = saveTDownloadInfo(map);
+		// for (int i = 1; i <= tResearchSize; i++) {
+		// map.put("paraName", "uploader_project_name_" + i);
+		// map.put("paraTmpname", "uploader_project_tmpname_" + i);
+		// map.put("infotype", "project");
+		// Long proDLId = saveTDownloadInfo(map);
+		// returnmap.put("proDLId" + i, proDLId);
+		// }
 
-		for (int i = 1; i <= subjectSize; i++) {
-			// 2.保存教学大纲附件
-			map.put("paraName", "uploader_outline_name_" + i);
-			map.put("paraTmpname", "uploader_outline_tmpname_" + i);
-			map.put("infotype", "outline");
-			Long outlineDLId = saveTDownloadInfo(map);
-
-			// 3.保存教学进度附件
-			map.put("paraName", "uploader_schedule_name_" + i);
-			map.put("paraTmpname", "uploader_schedule_tmpname_" + i);
-			map.put("infotype", "schedule");
-			Long scheduleDLId = saveTDownloadInfo(map);
-
-			// 4.保存课程资料附件
-			map.put("paraName", "uploader_subject_name_" + i);
-			map.put("paraTmpname", "uploader_subject_tmpname_" + i);
-			map.put("infotype", "subject");
-			Long subjectDLId = saveTDownloadInfo(map);
-
-			returnmap.put("outlineDLId" + i, outlineDLId);
-			returnmap.put("scheduleDLId" + i, scheduleDLId);
-			returnmap.put("subjectDLId" + i, subjectDLId);
-		}
+		// for (int i = 1; i <= subjectSize; i++) {
+		// // 2.保存教学大纲附件
+		// map.put("paraName", "uploader_outline_name_" + i);
+		// map.put("paraTmpname", "uploader_outline_tmpname_" + i);
+		// map.put("infotype", "outline");
+		// Long outlineDLId = saveTDownloadInfo(map);
+		//
+		// // 3.保存教学进度附件
+		// map.put("paraName", "uploader_schedule_name_" + i);
+		// map.put("paraTmpname", "uploader_schedule_tmpname_" + i);
+		// map.put("infotype", "schedule");
+		// Long scheduleDLId = saveTDownloadInfo(map);
+		//
+		// // 4.保存课程资料附件
+		// map.put("paraName", "uploader_subject_name_" + i);
+		// map.put("paraTmpname", "uploader_subject_tmpname_" + i);
+		// map.put("infotype", "subject");
+		// Long subjectDLId = saveTDownloadInfo(map);
+		//
+		// returnmap.put("outlineDLId" + i, outlineDLId);
+		// returnmap.put("scheduleDLId" + i, scheduleDLId);
+		// returnmap.put("subjectDLId" + i, subjectDLId);
+		// }
 
 		// 5.保存论文附件
 		// if (paperSize != null && !"".endsWith(paperDLcount)) {
@@ -845,41 +913,7 @@ public class TeacherAction extends BaseAction {
 			returnmap.put("paperDLId" + i, paperDLId);
 		}
 		// }
-
-		returnmap.put("proDLId", proDLId);
 		return returnmap;
-	}
-
-	/**
-	 * 保存附件并返回ID
-	 * 
-	 * @param map
-	 * @return
-	 * @throws Exception
-	 */
-	private Long saveTDownloadInfo(HashMap map) throws Exception {
-		String name = request.getParameter((String) map.get("paraName"));
-		if (name != null && !name.isEmpty()) {
-			String savePath = FileAction.getSavePathForTeacher();
-			String extName = name.substring(name.lastIndexOf("."));
-			String tampFileName = request.getParameter((String) map
-					.get("paraTmpname"));
-			BsUser user = getUser();
-			String filepath = savePath + "\\" + tampFileName + extName;
-			String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
-					+ extName;
-			TDownload tDownload = new TDownload();
-			tDownload.setAuthor(user.getUsername());
-			tDownload.setCreatedate(DateUtil.getNowDate());
-			tDownload.setFilename(name);
-			tDownload.setFilepath(filepath);
-			tDownload.setFileshowpath(fileShowPath);
-			tDownload.setInfotype((String) map.get("infotype"));
-			tDownload.setFileisvalid(Constant.ISVALID_1);
-			return localServiceEXProxy.saveDownloadInfo(tDownload);
-		} else {
-			return null;
-		}
 	}
 
 	/**

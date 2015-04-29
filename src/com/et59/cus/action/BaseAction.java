@@ -3,6 +3,7 @@ package com.et59.cus.action;
 import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,6 +32,8 @@ import com.et59.cus.domain.entity.ex.SuccessFailPage;
 import com.et59.cus.mail.MailSenderInfo;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
+import com.et59.cus.tools.DateUtil;
+import com.et59.cus.tools.FileAction;
 import com.et59.cus.tools.XMLUtil;
 import com.opensymphony.xwork2.ActionContext;
 
@@ -565,6 +568,38 @@ public abstract class BaseAction extends SystemAction {
 
 	public void setTdepartmentList(List<TDepartmentWithBLOBs> tdepartmentList) {
 		this.tdepartmentList = tdepartmentList;
+	}
+
+	/**
+	 * 保存附件并返回ID
+	 * 
+	 * @param map
+	 * @return
+	 * @throws Exception
+	 */
+	public Long saveTDownloadInfo(HashMap map) throws Exception {
+		String name = request.getParameter((String) map.get("paraName"));
+		if (name != null && !name.isEmpty()) {
+			String savePath = FileAction.getSavePathForTeacher();
+			String extName = name.substring(name.lastIndexOf("."));
+			String tampFileName = request.getParameter((String) map
+					.get("paraTmpname"));
+			BsUser user = getUser();
+			String filepath = savePath + "\\" + tampFileName + extName;
+			String fileShowPath = Constant.PATH_TEACHER + "\\" + tampFileName
+					+ extName;
+			TDownload tDownload = new TDownload();
+			tDownload.setAuthor(user.getUsername());
+			tDownload.setCreatedate(DateUtil.getNowDate());
+			tDownload.setFilename(name);
+			tDownload.setFilepath(filepath);
+			tDownload.setFileshowpath(fileShowPath);
+			tDownload.setInfotype((String) map.get("infotype"));
+			tDownload.setFileisvalid(Constant.ISVALID_1);
+			return localServiceEXProxy.saveDownloadInfo(tDownload);
+		} else {
+			return null;
+		}
 	}
 
 }

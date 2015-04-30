@@ -84,20 +84,48 @@
 								</li>
 							</ul>
 							<div class="normal_content_top">
-								<ul class="news_content">
-									<li>
+								<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
+								<div class="first_line_info" >
+									<table class="news_main_content" width="100%" >
+									<tr>
+									<td  style="width: 100%;">
 									<a href="javascript:void(0);"  onclick="showTable(${defultId},1);">本科生</a>
-									</li>
-									<li>
+									</td>
+									</tr>
+									</table>
+								</div>		
+								<div class='separatorLine'></div>
+								<div class="first_line_info" >
+									<table class="news_main_content" width="100%" >
+									<tr>
+									<td  style="width: 100%;">
 									<a href="javascript:void(0);"  onclick="showTable(${defultId},2);">硕士研究生</a>
-									</li>
-									<li>
+									</td>
+									</tr>
+									</table>
+								</div>	
+								<div class='separatorLine'></div>
+								<div class="first_line_info" >
+									<table class="news_main_content" width="100%" >
+									<tr>
+									<td  style="width: 100%;">
 									<a href="javascript:void(0);"  onclick="showTable(${defultId},3);">博士研究生</a>
-									</li>
-									<li>
+									</td>
+									</tr>
+									</table>
+								</div>	
+								<div class='separatorLine'></div>
+								<div class="first_line_info" >
+									<table class="news_main_content" width="100%" >
+									<tr>
+									<td  style="width: 100%;">
 									<a href="javascript:void(0);"  onclick="showTable(${defultId},4);">专业硕士</a>
-									</li>
-								</ul>
+									</td>
+									</tr>
+									</table>
+								</div>	
+								<div class='separatorLine'></div>
+							</div>
 							</div>
 						</div>
 <%-- 					</c:if> --%>

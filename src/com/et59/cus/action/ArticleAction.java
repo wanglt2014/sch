@@ -186,11 +186,13 @@ public class ArticleAction extends BaseAction {
 		try {
 			bsArticledetail = localServiceProxy.queryArticleById(Long
 					.valueOf(id));
+			Long downloadId = bsArticledetail.getDownloadid();
+			if (downloadId != null) {
+				downloaddetail = localServiceEXProxy
+						.queryDownloadById(downloadId);
+				bsArticledetail.setDownload(downloaddetail);
+			}
 
-			downloaddetail = localServiceEXProxy
-					.queryDownloadById(bsArticledetail.getDownloadid());
-
-			bsArticledetail.setDownload(downloaddetail);
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {

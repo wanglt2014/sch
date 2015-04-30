@@ -84,8 +84,8 @@
             </div>
              <div class="fitem">
                 <label>置顶</label>
-                <input type="radio" name="articleistop"  value="1" checked="checked" />是
-                <input type="radio" name="articleistop" value="0"  />否
+                <input type="radio" id="articleistop1" name="articleistop"  value="1" />是
+                <input type="radio" id="articleistop0" name="articleistop" value="0"  />否
              </div>
             <div class="fitem">
                 <label>标题</label>
@@ -201,6 +201,7 @@
         function insertArticle(){
             $('#newdlg').dialog('open').dialog('setTitle','发表文章');
             $('#newsfm').form('clear');
+            $('#articleistop0').attr("checked", true);
 //             var str = result.articletype;
 //             $("[value='" + str + "']").attr("checked", true);
 			$('#articletypeInsert').combobox('select', 'regulation');
@@ -220,6 +221,7 @@
 				$('#uploadFileDIV').hide();
 				$('#articletypeInsert').combobox('select', row.articletype);
                 UM.getEditor('myEditornew').setContent(row.content, false);
+                alert(6);
                 url = 'Article_update?id='+row.articleid;
             }
         }

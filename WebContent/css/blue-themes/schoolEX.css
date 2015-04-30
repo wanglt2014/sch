@@ -161,5 +161,14 @@ margin:0px auto; min-width:1000px; float:none;
 			display:-moz-inline-box;
 			display:inline-block;
 			width:200px; }
-
+.plan_table_list_new{
+	width: 80%;
+	text-align: center;
+	vertical-align: top;
+	border:1px;
+	border-left: 1px dotted;
+	border-right:1px dotted;
+	border-bottom: 1px dotted;
+	border-top: 1px dotted;
+}
 

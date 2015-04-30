@@ -240,7 +240,7 @@
 								class="easyui-validatebox" ></span>
 						<span class="span_column" ><label>刊登年份:</label> <input id="papernoteyear0" name="papernoteyear0"
 								class="easyui-numberbox"  maxlength="4"></span><br><br>
-						<span class="span_column" ><label>杂志期号:</label> <input id="papernoteno0" name="papernoteno0" maxlength="20"
+						<span class="span_column" ><label>刊登期号:</label> <input id="papernoteno0" name="papernoteno0" maxlength="20"
 								class="easyui-validatebox" ></span><br><br>
 						<!-- 动态增加上传控件 -->
 						<span class="span_column" style="width:100%;" id="paperObj0"> <label>论文电子版:</label> 

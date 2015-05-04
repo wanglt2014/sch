@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -512,49 +511,57 @@ public class TrainingPlanAction extends BaseAction {
 				StringBuffer subIds = new StringBuffer();
 				HashSet hs = new HashSet();
 				TTrainingplan row = list.get(0);
-				subIds = subIds.append(row.getTrplansubidsforone()).append(",")
-						.append(row.getTrplansubidsfortwo()).append(",")
-						.append(row.getTrplansubidsforthree()).append(",")
-						.append(row.getTrplansubidsforfour()).append(",")
-						.append(row.getTrplansubidsforfive()).append(",")
-						.append(row.getTrplansubidsfosix()).append(",")
-						.append(row.getTrplansubidsforseven()).append(",")
-						.append(row.getTrplansubidsforeight());
-				String[] arr = subIds.toString().split(",");
+				// subIds =
+				// subIds.append(row.getTrplansubidsforone()).append(",")
+				// .append(row.getTrplansubidsfortwo()).append(",")
+				// .append(row.getTrplansubidsforthree()).append(",")
+				// .append(row.getTrplansubidsforfour()).append(",")
+				// .append(row.getTrplansubidsforfive()).append(",")
+				// .append(row.getTrplansubidsfosix()).append(",")
+				// .append(row.getTrplansubidsforseven()).append(",")
+				// .append(row.getTrplansubidsforeight());
+				// String[] arr = subIds.toString().split(",");
+
+				String[] arr = row.getTrplansubidsforone().split(",");
 				hs.addAll(Arrays.asList(arr));
 				subjectExample.createCriteria().andSubjectidIn(
 						new ArrayList(hs));
 				subjectList = localServiceEXProxy.queryTSubject(subjectExample);
 
-				for (Iterator iterator = subjectList.iterator(); iterator
-						.hasNext();) {
-					TSubject temp = (TSubject) iterator.next();
-					String subjectId = String.valueOf(temp.getSubjectid());
-					if (row.getTrplansubidsforone().indexOf(subjectId) >= 0) {
-						oneList.add(temp);
-					}
-					if (row.getTrplansubidsfortwo().indexOf(subjectId) >= 0) {
-						twoList.add(temp);
-					}
-					if (row.getTrplansubidsforthree().indexOf(subjectId) >= 0) {
-						threeList.add(temp);
-					}
-					if (row.getTrplansubidsforfour().indexOf(subjectId) >= 0) {
-						fourList.add(temp);
-					}
-					if (row.getTrplansubidsforfive().indexOf(subjectId) >= 0) {
-						fiveList.add(temp);
-					}
-					if (row.getTrplansubidsfosix().indexOf(subjectId) >= 0) {
-						sixList.add(temp);
-					}
-					if (row.getTrplansubidsforseven().indexOf(subjectId) >= 0) {
-						sevenList.add(temp);
-					}
-					if (row.getTrplansubidsforeight().indexOf(subjectId) >= 0) {
-						eightList.add(temp);
-					}
-				}
+				TDictionary tDictionary = new TDictionary();
+				tDictionary.setDictionarytype("subjectType");
+				Pager pager = localServiceProxy.queryDictionaryBypage(
+						tDictionary, 100, 1);
+				dictionaryList = (List<TDictionary>) pager.getRows();
+				// for (Iterator iterator = subjectList.iterator(); iterator
+				// .hasNext();) {
+				// TSubject temp = (TSubject) iterator.next();
+				// String subjectId = String.valueOf(temp.getSubjectid());
+				// if (row.getTrplansubidsforone().indexOf(subjectId) >= 0) {
+				// oneList.add(temp);
+				// }
+				// if (row.getTrplansubidsfortwo().indexOf(subjectId) >= 0) {
+				// twoList.add(temp);
+				// }
+				// if (row.getTrplansubidsforthree().indexOf(subjectId) >= 0) {
+				// threeList.add(temp);
+				// }
+				// if (row.getTrplansubidsforfour().indexOf(subjectId) >= 0) {
+				// fourList.add(temp);
+				// }
+				// if (row.getTrplansubidsforfive().indexOf(subjectId) >= 0) {
+				// fiveList.add(temp);
+				// }
+				// if (row.getTrplansubidsfosix().indexOf(subjectId) >= 0) {
+				// sixList.add(temp);
+				// }
+				// if (row.getTrplansubidsforseven().indexOf(subjectId) >= 0) {
+				// sevenList.add(temp);
+				// }
+				// if (row.getTrplansubidsforeight().indexOf(subjectId) >= 0) {
+				// eightList.add(temp);
+				// }
+				// }
 			}
 
 		} catch (NumberFormatException e) {

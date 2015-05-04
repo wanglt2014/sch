@@ -129,8 +129,8 @@
 		buttons="#plandlg-buttons">
 		<form id="planfm" method="post" novalidate>
 			<div class="ftitle" style="font-size: 14px;font-weight: bold;padding: 5px 0;margin-bottom: 10px;border-bottom: 1px solid #ccc;">课程绑定</div>
-			<div class="fitem" style="">
-                <label>第一学期课程:</label>
+			<div  style="text-align: center;vertical-align: middle;">
+                <label>选择课程:</label>
                 <input name="trplansubidsforoneId" id="trplansubidsforoneId"
 					class="easyui-validatebox" style="display: none;">
 				<select
@@ -152,168 +152,6 @@
 			            ]],fitColumns: true">
 				</select><br><br>
             </div>
-            <div class="fitem" style="">
-                <label>第二学期课程:</label>
-                <input name="trplansubidsfortwoId" id="trplansubidsfortwoId"
-					class="easyui-validatebox" style="display: none;">
-				<select
-					class="easyui-combogrid" id="trplansubidsfortwo" name="trplansubidsfortwo"
-					style="width: 500px"
-					data-options="
-			            panelWidth: 500,multiple: true,singleSelect:false, idField: 'subjectid',panelHeight:300,
-			            textField: 'subjectname',url: 'Subject_query',method: 'get',
-			            pageSize: 10,//每页显示的记录条数，默认为10  
-			             pageList: [10,20],//可以设置每页记录条数的列表 
-			              pagination : false,//是否分页  
-			               rownumbers:true,//序号  
-			            columns: [[
-			                {field:'ck',checkbox:true},
-			                {field:'subjectname',title:'课程名称',width:40,align:'right'},
-			                {field:'subjecttypename',title:'课程性质',width:40},
-			                {field:'subjectno',title:'课程编号',width:40},
-			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select><br><br>
-            </div>
-            <div class="fitem" style="">
-                <label>第三学期课程:</label>
-                <input name="trplansubidsforthreeId" id="trplansubidsforthreeId"
-					class="easyui-validatebox" style="display: none;">
-				<select
-					class="easyui-combogrid" id="trplansubidsforthree" name="trplansubidsforthree"
-					style="width: 500px"
-					data-options="
-			            panelWidth: 500,multiple: true,singleSelect:false, idField: 'subjectid',panelHeight:300,
-			            textField: 'subjectname',url: 'Subject_query',method: 'get',
-			            pageSize: 10,//每页显示的记录条数，默认为10  
-			             pageList: [10,20],//可以设置每页记录条数的列表 
-			              pagination : false,//是否分页  
-			               rownumbers:true,//序号  
-			            columns: [[
-			                {field:'ck',checkbox:true},
-			                {field:'subjectname',title:'课程名称',width:40,align:'right'},
-			                {field:'subjecttypename',title:'课程性质',width:40},
-			                {field:'subjectno',title:'课程编号',width:40},
-			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select><br><br>
-            </div>
-            <div class="fitem" style="">
-                <label>第四学期课程:</label>
-                <input name="trplansubidsforfourId" id="trplansubidsforfourId"
-					class="easyui-validatebox" style="display: none;">
-				<select
-					class="easyui-combogrid" id="trplansubidsforfour" name="trplansubidsforfour"
-					style="width: 500px"
-					data-options="
-			            panelWidth: 500,multiple: true,singleSelect:false, idField: 'subjectid',panelHeight:300,
-			            textField: 'subjectname',url: 'Subject_query',method: 'get',
-			            pageSize: 10,//每页显示的记录条数，默认为10  
-			             pageList: [10,20],//可以设置每页记录条数的列表 
-			              pagination : false,//是否分页  
-			               rownumbers:true,//序号  
-			            columns: [[
-			                {field:'ck',checkbox:true},
-			                {field:'subjectname',title:'课程名称',width:40,align:'right'},
-			                {field:'subjecttypename',title:'课程性质',width:40},
-			                {field:'subjectno',title:'课程编号',width:40},
-			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select><br><br>
-            </div>
-            <div class="fitem" style="">
-                <label>第五学期课程:</label>
-                <input name="trplansubidsforfiveId" id="trplansubidsforfiveId"
-					class="easyui-validatebox" style="display: none;">
-				<select
-					class="easyui-combogrid" id="trplansubidsforfive" name="trplansubidsforfive"
-					style="width: 500px"
-					data-options="
-			            panelWidth: 500,multiple: true,singleSelect:false, idField: 'subjectid',panelHeight:300,
-			            textField: 'subjectname',url: 'Subject_query',method: 'get',
-			            pageSize: 10,//每页显示的记录条数，默认为10  
-			             pageList: [10,20],//可以设置每页记录条数的列表 
-			              pagination : false,//是否分页  
-			               rownumbers:true,//序号  
-			            columns: [[
-			                {field:'ck',checkbox:true},
-			                {field:'subjectname',title:'课程名称',width:40,align:'right'},
-			                {field:'subjecttypename',title:'课程性质',width:40},
-			                {field:'subjectno',title:'课程编号',width:40},
-			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select><br><br>
-            </div>
-            <div class="fitem" style="">
-                <label>第六学期课程:</label>
-                <input name="trplansubidsforsixId" id="trplansubidsforsixId"
-					class="easyui-validatebox" style="display: none;">
-				<select
-					class="easyui-combogrid" id="trplansubidsforsix" name="trplansubidsforsix"
-					style="width: 500px"
-					data-options="
-			            panelWidth: 500,multiple: true,singleSelect:false, idField: 'subjectid',panelHeight:300,
-			            textField: 'subjectname',url: 'Subject_query',method: 'get',
-			            pageSize: 10,//每页显示的记录条数，默认为10  
-			             pageList: [10,20],//可以设置每页记录条数的列表 
-			              pagination : false,//是否分页  
-			               rownumbers:true,//序号  
-			            columns: [[
-			                {field:'ck',checkbox:true},
-			                {field:'subjectname',title:'课程名称',width:40,align:'right'},
-			                {field:'subjecttypename',title:'课程性质',width:40},
-			                {field:'subjectno',title:'课程编号',width:40},
-			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select><br><br>
-            </div>
-            <div class="fitem" style="">
-                <label>第七学期课程:</label>
-                <input name="trplansubidsforsevenId" id="trplansubidsforsevenId"
-					class="easyui-validatebox" style="display: none;">
-				<select
-					class="easyui-combogrid" id="trplansubidsforseven" name="trplansubidsforseven"
-					style="width: 500px"
-					data-options="
-			            panelWidth: 500,multiple: true,singleSelect:false, idField: 'subjectid',panelHeight:300,
-			            textField: 'subjectname',url: 'Subject_query',method: 'get',
-			            pageSize: 10,//每页显示的记录条数，默认为10  
-			             pageList: [10,20],//可以设置每页记录条数的列表 
-			              pagination : false,//是否分页  
-			               rownumbers:true,//序号  
-			            columns: [[
-			                {field:'ck',checkbox:true},
-			                {field:'subjectname',title:'课程名称',width:40,align:'right'},
-			                {field:'subjecttypename',title:'课程性质',width:40},
-			                {field:'subjectno',title:'课程编号',width:40},
-			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select><br><br>
-            </div>
-            <div class="fitem" style="">
-                <label>第八学期课程:</label>
-                <input name="trplansubidsforeightId" id="trplansubidsforeightId"
-					class="easyui-validatebox" style="display: none;">
-				<select
-					class="easyui-combogrid" id="trplansubidsforeight" name="trplansubidsforeight"
-					style="width: 500px"
-					data-options="
-			            panelWidth: 500,multiple: true,singleSelect:false, idField: 'subjectid',panelHeight:300,
-			            textField: 'subjectname',url: 'Subject_query',method: 'get',
-			            pageSize: 10,//每页显示的记录条数，默认为10  
-			             pageList: [10,20],//可以设置每页记录条数的列表 
-			              pagination : false,//是否分页  
-			               rownumbers:true,//序号  
-			            columns: [[
-			                {field:'ck',checkbox:true},
-			                {field:'subjectname',title:'课程名称',width:40,align:'right'},
-			                {field:'subjecttypename',title:'课程性质',width:40},
-			                {field:'subjectno',title:'课程编号',width:40},
-			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select>
-            </div>
-            
 		</form>
 	</div>
 	<div id="plandlg-buttons">
@@ -376,38 +214,38 @@
 					if(datas!=null && datas !=''){
 						var data = eval('(' + datas + ')'); 
 						var one = data.trplansubidsforone;
-						var two = data.trplansubidsfortwo;
-						var three = data.trplansubidsforthree;
-						var four = data.trplansubidsforfour;
-						var five = data.trplansubidsforfive;
-						var six = data.trplansubidsfosix;
-						var seven = data.trplansubidsforseven;
-						var eight = data.trplansubidsforeight;
+// 						var two = data.trplansubidsfortwo;
+// 						var three = data.trplansubidsforthree;
+// 						var four = data.trplansubidsforfour;
+// 						var five = data.trplansubidsforfive;
+// 						var six = data.trplansubidsfosix;
+// 						var seven = data.trplansubidsforseven;
+// 						var eight = data.trplansubidsforeight;
 // 						alert(datas);
 						if(one!=""){
 							$('#trplansubidsforone').combogrid('setValues', one.split(","));
 						}
-						if(two!=""){
-							$('#trplansubidsfortwo').combogrid('setValues', two.split(","));
-						}
-						if(three!=""){
-							$('#trplansubidsforthree').combogrid('setValues', three.split(","));					
-						}
-						if(four!=""){
-							$('#trplansubidsforfour').combogrid('setValues', four.split(","));
-						}
-						if(five!=""){
-							$('#trplansubidsforfive').combogrid('setValues', five.split(","));
-						}
-						if(six!=""){
-							$('#trplansubidsforsix').combogrid('setValues', six.split(","));
-						}
-						if(seven!=""){
-							$('#trplansubidsforseven').combogrid('setValues', seven.split(","));
-						}
-						if(eight!=""){
-							$('#trplansubidsforeight').combogrid('setValues', eight.split(","));
-						}
+// 						if(two!=""){
+// 							$('#trplansubidsfortwo').combogrid('setValues', two.split(","));
+// 						}
+// 						if(three!=""){
+// 							$('#trplansubidsforthree').combogrid('setValues', three.split(","));					
+// 						}
+// 						if(four!=""){
+// 							$('#trplansubidsforfour').combogrid('setValues', four.split(","));
+// 						}
+// 						if(five!=""){
+// 							$('#trplansubidsforfive').combogrid('setValues', five.split(","));
+// 						}
+// 						if(six!=""){
+// 							$('#trplansubidsforsix').combogrid('setValues', six.split(","));
+// 						}
+// 						if(seven!=""){
+// 							$('#trplansubidsforseven').combogrid('setValues', seven.split(","));
+// 						}
+// 						if(eight!=""){
+// 							$('#trplansubidsforeight').combogrid('setValues', eight.split(","));
+// 						}
 					}
 				},
 				error : function() {
@@ -448,13 +286,13 @@
 		if(valid==true){
 // 			alert($('#trplansubidsforone').combogrid('getValues'));
 		$('#trplansubidsforoneId').val($('#trplansubidsforone').combogrid('getValues'));
-		$('#trplansubidsfortwoId').val($('#trplansubidsfortwo').combogrid('getValues'));
-		$('#trplansubidsforthreeId').val($('#trplansubidsforthree').combogrid('getValues'));
-		$('#trplansubidsforfourId').val($('#trplansubidsforfour').combogrid('getValues'));
-		$('#trplansubidsforfiveId').val($('#trplansubidsforfive').combogrid('getValues'));
-		$('#trplansubidsforsixId').val($('#trplansubidsforsix').combogrid('getValues'));
-		$('#trplansubidsforsevenId').val($('#trplansubidsforseven').combogrid('getValues'));
-		$('#trplansubidsforeightId').val($('#trplansubidsforeight').combogrid('getValues'));
+// 		$('#trplansubidsfortwoId').val($('#trplansubidsfortwo').combogrid('getValues'));
+// 		$('#trplansubidsforthreeId').val($('#trplansubidsforthree').combogrid('getValues'));
+// 		$('#trplansubidsforfourId').val($('#trplansubidsforfour').combogrid('getValues'));
+// 		$('#trplansubidsforfiveId').val($('#trplansubidsforfive').combogrid('getValues'));
+// 		$('#trplansubidsforsixId').val($('#trplansubidsforsix').combogrid('getValues'));
+// 		$('#trplansubidsforsevenId').val($('#trplansubidsforseven').combogrid('getValues'));
+// 		$('#trplansubidsforeightId').val($('#trplansubidsforeight').combogrid('getValues'));
         $('#planfm').form('submit',{
             url: url,
             onSubmit: function(){

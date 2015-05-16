@@ -1,3 +1,5 @@
 /build/
 .settings/
 *.class
+abatorConfig.properties
+ibatorConfig.xml

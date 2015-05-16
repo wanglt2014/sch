@@ -340,7 +340,7 @@
 		
 		<!-- 课程列表 -->
 		<action name="Subject_*" class="SubjectAction" method="{1}">
-			<interceptor-ref name="json" />
+<!-- 			<interceptor-ref name="json" /> -->
 <!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
 <!-- 			<interceptor-ref name="timerInterceptor" /> -->
 			<interceptor-ref name="defaultStack"></interceptor-ref>
@@ -348,7 +348,7 @@
 			<result name="subject_detail">/subject/subjectdetail.jsp</result>
 			<result name="subject_result">/subject/subject_result.jsp</result>
 			<result name="index">/admin/subject_index.jsp</result>
-			<result type="json"></result>
+<!-- 			<result type="json"></result> -->
 		</action>
 
 		<!-- 数据字典 -->

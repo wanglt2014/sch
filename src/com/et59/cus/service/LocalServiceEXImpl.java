@@ -236,7 +236,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	 */
 	@Override
 	public Long saveTResearch(TResearch tResearch) throws Exception {
-		return tResearchDAO.insert(tResearch);
+		return tResearchDAO.insertReturnId(tResearch);
 	}
 
 	/**
@@ -260,7 +260,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	 */
 	@Override
 	public Long saveTSubject(TSubject tSubject) throws Exception {
-		return tSubjectDAO.insert(tSubject);
+		return tSubjectDAO.insertReturnId(tSubject);
 	}
 
 	/**
@@ -284,7 +284,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	 */
 	@Override
 	public Long saveTPaper(TPaper tPaper) throws Exception {
-		return tPaperDAO.insert(tPaper);
+		return tPaperDAO.insertReturnId(tPaper);
 	}
 
 	/**

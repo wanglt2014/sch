@@ -23,18 +23,25 @@
 			<div>
 				创建起始日期: <input id="startdatacreatenew" class="easyui-datebox" style="width: 80px">
 				创建结束日期: <input id="enddatacreatenew" class="easyui-datebox" style="width: 80px">
-				文章类型: <select id="articletypeQuery" class="easyui-combobox" panelHeight="auto" editable="false"
-					style="width: 100px">
-					<option value="">全部</option>
-					<option value="regulation">教学规章制度</option>
-					<option value="notice">教务教学通知</option>
-					<option value="teach">教学获奖</option>
-					<option value="reform">教改立项</option>
-					<option value="construction">教材建设</option>
-					<option value="course">精品课程</option>
-					<option value="build_course">国际共建课程</option>
-					<option value="student">学生展示</option>
-				</select>
+				文章类型: 
+				<input class="easyui-combobox" id="articletypeQuery" name="articletypeQuery"
+					data-options="url:'Dictionary_queryDictionaryByType?type=articletype',  
+									method:'get',    
+				 					valueField:'dictionarycode',    
+				 					textField:'dictionaryvalue'"
+				style="width: 110px" panelHeight="auto" editable="false"/>
+<!-- 				<select id="articletypeQuery" class="easyui-combobox" panelHeight="auto" editable="false" -->
+<!-- 					style="width: 100px"> -->
+<!-- 					<option value="">全部</option> -->
+<!-- 					<option value="regulation">教学规章制度</option> -->
+<!-- 					<option value="notice">教务教学通知</option> -->
+<!-- 					<option value="teach">教学获奖</option> -->
+<!-- 					<option value="reform">教改立项</option> -->
+<!-- 					<option value="construction">教材建设</option> -->
+<!-- 					<option value="course">精品课程</option> -->
+<!-- 					<option value="build_course">国际共建课程</option> -->
+<!-- 					<option value="student">学生展示</option> -->
+<!-- 				</select> -->
 				作者:<input type="text"  id="authorQuery">
 				标题:<input type="text"  id="articletitleQuery">
 				 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="querynews()">搜索</a>
@@ -62,25 +69,18 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyArticle()">删除</a>
     </div>
     
-    <div id="newdlg" class="easyui-dialog" style="width:860px;height:800px;padding:40px 20px 10px 20px"
-            closed="true" buttons="#newdlg-buttons">
+    <div id="newdlg" class="easyui-dialog" style="width:860px;height:800px;padding:00px 20px 10px 20px;position: relative;top: 20px;"
+            closed="true" buttons="#newdlg-buttons" >
         <div class="ftitle">文章详细信息</div>
         <form id="newsfm" method="post" novalidate>
             <div class="fitem">
                 <label>类型:</label>
-<!--                 <input type="radio" name="articletypeInsert"  value="regulation" checked="checked" />教学规章制度 -->
-<!--                 <input type="radio" name="articletypeInsert" value="notice"  />教务教学通知 -->
-                <select id="articletypeInsert" name="articletypeInsert" class="easyui-combobox" panelHeight="auto" editable="false"
-					style="width: 100px">
-					<option value="regulation" >教学规章制度</option>
-					<option value="notice">教务教学通知</option>
-					<option value="teach" >教学获奖</option>
-					<option value="reform">教改立项</option>
-					<option value="construction">教材建设</option>
-					<option value="course">精品课程</option>
-					<option value="build_course">国际共建课程</option>
-					<option value="student">学生展示</option>
-				</select>
+				<input class="easyui-combobox" id="articletypeInsert" name="articletypeInsert"
+					data-options="url:'Dictionary_queryDictionaryByType?type=articletype',  
+									method:'get',    
+				 					valueField:'dictionarycode',    
+				 					textField:'dictionaryvalue'"
+				style="width: 110px" panelHeight="auto" editable="false"/>
             </div>
              <div class="fitem">
                 <label>置顶</label>

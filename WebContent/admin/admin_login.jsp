@@ -60,11 +60,11 @@
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
      <tr>
         <td height="35" class="login-text02">用户类型：</td>
-        <td><select id="usertype" name="usertype" ><option value ="no">普通用户</option> <option value ="yes">管理员</option></select></td>
+        <td><select id="usertype" name="usertype" ><option value ="yes">管理员</option><option value ="no">普通用户</option> </select></td>
       </tr>
       <tr>
         <td width="31%" height="35" class="login-text02">用户名称：<br /></td>
-        <td width="69%"><input id="idNumber" name="idNumber"  type="text" size="30" /></td>
+        <td width="69%"><input id="idNumber" name="idNumber"  type="text" size="30" autofocus="autofocus"/></td>
       </tr>
       <tr>
         <td height="35" class="login-text02">密　码：<br /></td>

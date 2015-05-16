@@ -46,7 +46,7 @@
         <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroySubject()">删除</a>
     </div>
     
-    <div id="subjectdlg" class="easyui-dialog" style="width:860px;height:auto;padding:10px 20px"
+    <div id="subjectdlg" class="easyui-dialog" style="width:860px;height:auto;padding:10px 20px;top: 20px;"
             closed="true" buttons="#subjectdlg-buttons">
         <div class="ftitle">课程信息</div>
         <form id="subjectfm" method="post" novalidate>
@@ -382,7 +382,7 @@
 //             $('#uploadFileDIV').show();
 //             UM.getEditor('myEditornew').setContent('', false);
             url = 'Subject_save';
-            createSubjectUpload();
+//             createSubjectUpload();
             uploaderForDownload.splice(0,10);
         }
         function editSubject(){

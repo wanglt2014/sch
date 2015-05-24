@@ -30,6 +30,7 @@
 			邮件接受者:<input type="text" id="usermailto"> 是否管理员:<select
 				id="isadminquery" name="isadminquery" class="easyui-combobox" editable="false"
 				panelHeight="auto" style="width: 100px">
+				<option value="">全部</option>
 				<option value="yes">管理员</option>
 				<option value="no">普通会员</option>
 			</select> <a href="javascript:void(0)" class="easyui-linkbutton"

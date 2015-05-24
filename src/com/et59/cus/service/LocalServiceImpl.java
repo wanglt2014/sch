@@ -694,7 +694,7 @@ public class LocalServiceImpl implements LocalService {
 		bae.setOrderByClause(" articleIsTop desc,createdate desc ");
 		String type = bsArticle.getArticletype();
 		if (Constant.ARTICLE_TYPE_NOTICE.equals(type)
-				|| Constant.ARTICLE_TYPE_REGULATION.equals(type)) {// 通知和制度
+				|| Constant.ARTICLE_TYPE_REGULATION.equals(type)||Constant.ARTICLE_TYPE_RESEARCHNOTICE.equals(type)) {// 通知和制度
 			criteria.andArticletypeEqualTo(bsArticle.getArticletype());
 		} else if (Constant.ARTICLE_TYPE_RESULT.equals(type)) {
 			// 查询除通知和制度以外的内容

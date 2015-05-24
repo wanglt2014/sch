@@ -338,6 +338,13 @@
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
+	<!-- 著作表 -->
+	<bean name="tWorkDAO" class="com.et59.cus.domain.dao.TWorkDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	
 	<!-- 教师论文表 -->
 	<bean name="tTeacherPaperDAO" class="com.et59.cus.domain.dao.TTeacherPaperDAOImpl"
 		scope="prototype" autowire="byName">
@@ -373,9 +380,6 @@
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
-	
-	
-	
 	
 	<!-- 动态多数据源支持 -->
 	<jee:jndi-lookup id="ds0" jndi-name="jdbc/ds0" />

@@ -1,14 +1,24 @@
 #left_left_content{
-	width:200px;height:480px;float:left;
+	width:300px;height:480px;float:left;
 	
 }
 
 #left_content{
-	width:610px;float:left;
+	width:510px;float:left;
 }
 
 #news_right_content{
 	width:800px;
+	float:left;
+	border: 1px solid #cfcfcf;
+	height: 100%;
+    margin-left: 10px;
+    padding-bottom: 20px;
+    padding-top: 10px;
+    
+}
+#news_right_content_notice{
+	width:50%;
 	float:left;
 	border: 1px solid #cfcfcf;
 	height: 100%;
@@ -43,6 +53,17 @@
 #news_left_content{
 	width:300px;
 	float:left;
+	
+}
+#news_left_content_notice{
+		width:48%;
+	float:left;
+	border: 1px solid #cfcfcf;
+	height: 100%;
+/*     margin-left: 10px; */
+    padding-bottom: 20px;
+    padding-top: 10px;
+    min-height: 
 	
 }
 #index_topEX{

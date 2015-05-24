@@ -58,4 +58,5 @@
   
   <sqlMap resource="com/et59/cus/domain/maps/t_department_SqlMap.xml" />
   <sqlMap resource="com/et59/cus/domain/maps/t_trainingplan_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_work_SqlMap.xml" />
 </sqlMapConfig>

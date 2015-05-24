@@ -1,5 +1,5 @@
 .one_artic{
-	width:800px;
+	width:100%;
 	float:left;
 	margin-left: 5px;
 	margin-top:5px;
@@ -35,6 +35,15 @@
 	margin-bottom:0px;
 	height: 30px;
 	width:770px;
+	float:left;
+	
+}
+.news_page_50{
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom:0px;
+	height: 30px;
+	width:95%;
 	float:left;
 	
 }

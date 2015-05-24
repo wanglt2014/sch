@@ -28,7 +28,7 @@
 		</div>
 	</s:iterator>
 </c:if>
-<div class="news_page">
+<div class="news_page_50">
 	<s:if test="totalPageCount > 0">
 		<jsp:include page="../common/common_page.jsp" />
 	</s:if>

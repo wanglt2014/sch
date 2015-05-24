@@ -21,7 +21,7 @@
 }
 #introduce_div{
 	position:relative;
-	width:195px;
+	width:295px;
 	height:493px;
 	margin:0 0 0 0;
 	border:1px solid #cfcfcf;
@@ -31,7 +31,7 @@
 #introduce_div_img{
 	text-align:center;
 	position:relative;
-	width:185px;
+	width:285px;
 	height:150px;
 	margin:15px 5px;
 	float:none;
@@ -39,7 +39,7 @@
 }
 #introduce_div_word{
 	position:relative;
-	width:180px;
+	width:280px;
 	height:280px;
 	margin:10px 12px;
 	overflow: hidden;
@@ -59,7 +59,7 @@
 }
 #service_div{
 	position:relative;
-	width:603px;
+	width:503px;
 	height:230px;
 	margin:10px 0 0 0;
 	border:1px solid #cfcfcf;
@@ -326,7 +326,7 @@
 
 #banner
 {
-	width:600px;
+	width:500px;
 	margin:0px auto;
 	height:262px;
 	overflow:hidden;
@@ -337,7 +337,7 @@
 	width:110px;
 	hegiht:18px;
 	float:left;
-	margin:-30px 0px 0px 490px;
+	margin:-30px 0px 0px 390px;
 	position:absolute;
 	z-index:1;
 }

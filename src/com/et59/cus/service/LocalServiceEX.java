@@ -24,6 +24,8 @@ import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
+import com.et59.cus.domain.entity.TWork;
+import com.et59.cus.domain.entity.TWorkExample;
 import com.et59.cus.domain.entity.ex.Pager;
 
 /**
@@ -275,4 +277,24 @@ public interface LocalServiceEX {
 	 * 删除课程表
 	 */
 	public void deleteTSubject(TSubjectExample example) throws Exception;
+	
+	/**
+	 * 保存著作信息表
+	 */
+	public void saveTWork(TWork tWork) throws Exception;
+	
+	/**
+	 * 删除著作表
+	 */
+	public void deleteTWork(TWorkExample example)throws Exception;
+	
+	/**
+	 * 更新著作表
+	 */
+	public void updateTWork(TWork tWork) throws Exception;
+	
+	/**
+	 * 查询著作表
+	 */
+	public List<TWork> queryTWorkList(TWorkExample example) throws Exception;
 }

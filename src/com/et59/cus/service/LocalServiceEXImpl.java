@@ -19,6 +19,7 @@ import com.et59.cus.domain.dao.TTeacherPrizeDAO;
 import com.et59.cus.domain.dao.TTeacherResearchDAO;
 import com.et59.cus.domain.dao.TTeacherSubjectDAO;
 import com.et59.cus.domain.dao.TTrainingplanDAO;
+import com.et59.cus.domain.dao.TWorkDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentExample;
@@ -43,6 +44,8 @@ import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
+import com.et59.cus.domain.entity.TWork;
+import com.et59.cus.domain.entity.TWorkExample;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
@@ -91,6 +94,9 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 
 	@Autowired
 	private TTrainingplanDAO tTrainingplanDAO;
+	
+	@Autowired
+	private TWorkDAO tWorkDAO;
 
 	/**
 	 * 查询资料下载
@@ -310,6 +316,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public Long saveTPrize(TPrize tPrize) throws Exception {
 		return tPrizeDAO.insertReturnId(tPrize);
 	}
+	
+	/**
+	 * 保存著作信息表
+	 */
+	@Override
+	public void saveTWork(TWork tWork) throws Exception {
+		tWorkDAO.insertSelective(tWork);
+	}
 
 	/**
 	 * 保存立项关联表
@@ -526,6 +540,31 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deleteTPrize(TPrizeExample example)
 			throws Exception {
 		tPrizeDAO.deleteByExample(example);
+	}
+	
+	/**
+	 * 删除著作表
+	 */
+	@Override
+	public void deleteTWork(TWorkExample example)
+			throws Exception {
+		tWorkDAO.deleteByExample(example);
+	}
+	
+	/**
+	 * 更新著作表
+	 */
+	@Override
+	public void updateTWork(TWork tWork) throws Exception {
+		tWorkDAO.updateByPrimaryKeySelective(tWork);
+	}
+	
+	/**
+	 * 查询著作表
+	 */
+	@Override
+	public List<TWork> queryTWorkList(TWorkExample example) throws Exception {
+		return tWorkDAO.selectByExample(example);
 	}
 
 }

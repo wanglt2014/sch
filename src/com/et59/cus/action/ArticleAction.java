@@ -93,7 +93,7 @@ public class ArticleAction extends BaseAction {
 	}
 
 	/**
-	 * 查询教务教学通知
+	 * 查询教学/科研通知
 	 * 
 	 * @return
 	 */
@@ -104,7 +104,13 @@ public class ArticleAction extends BaseAction {
 		}
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+			String type = request.getParameter("type");
+			if(type!=null && "0".equals(type)){
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+			}else{
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_RESEARCHNOTICE);
+			}
+			
 			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					Constant.PAGESIZE, currentPage);
 			if (ComonUtil.validateMapResult(map)) {

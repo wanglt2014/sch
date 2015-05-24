@@ -18,6 +18,7 @@
 <script language="JavaScript" type="text/javascript">
 	$(document).ready(function() {
 		search();
+		searchLeft();
 	});
 	function search(page) {
 		var targetPage = '';
@@ -30,7 +31,8 @@
 			type : 'post',
 			url : 'Article_doQueryTeach',
 			data : {
-				currentPage : targetPage
+				currentPage : targetPage,
+				type:"0"
 			},
 			beforeSend : function(html) {
 				$.blockUI({
@@ -53,7 +55,51 @@
 			},
 			success : function(html) {
 				$.unblockUI();
-				$('#news_right_content').html(html);
+				$('#news_right_content_notice').html(html);
+
+			},
+			error : function() {
+				$.unblockUI();
+			}
+		});
+	}
+	
+	function searchLeft(page) {
+		var targetPage = '';
+		if (!page || (page == '')) {
+			targetPage = 1;
+		} else {
+			targetPage = page;
+		}
+		$.ajax({
+			type : 'post',
+			url : 'Article_doQueryTeach',
+			data : {
+				currentPage : targetPage,
+				type:"1"
+			},
+			beforeSend : function(html) {
+				$.blockUI({
+					showOverlay : false,
+					message : '数据加载中...',
+					css : {
+						border : 'none',
+						padding : '5px',
+						backgroundColor : '#000',
+						'-webkit-border-radius' : '10px',
+						'-moz-border-radius' : '10px',
+						opacity : .5,
+						color : '#fff',
+						top : '170px',
+						left : $(window).width() / 2 + 'px',
+						width : '150px',
+						height : '20px'
+					}
+				});
+			},
+			success : function(html) {
+				$.unblockUI();
+				$('#news_left_content_notice').html(html);
 
 			},
 			error : function() {
@@ -71,46 +117,8 @@
 		<jsp:include page="../nav.jsp"></jsp:include>
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">
-				<div id="news_left_content">
-<%-- 					<c:if test="${!empty(notifylist)}"> --%>
-						<div id="right_content_top">
-							<ul>
-<!-- 								<li class="normal_title_left"></li> -->
-<!-- 								<li class="normal_title_right"></li> -->
-								<li class="normal_title_content">
-									教务教学通知&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								</li>
-							</ul>
-							<div class="normal_content_top">
-							<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
-<!-- 								<ul class="news_content"> -->
-									<s:iterator var="teach" value="notifylist" status="st">
-									<div class="first_line_info" >
-									<table class="news_main_content" width="100%" >
-									<tr>
-									<td  style="width: 100%;">
-										<a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
-										<s:property value="#teach.articletitle" />
-										</a>
-									</td>
-									<td style="width: 65px;">
-										<a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
-										<s:property value="#teach.createdate" />
-										</a>
-									</td>
-									</tr>
-									</table>
-									</div>
-									<div class='separatorLine'></div>
-									</s:iterator>
-<!-- 								</ul> -->
-							
-							</div>
-							</div>
-						</div>
-<%-- 					</c:if> --%>
-				</div>
-				<div id="news_right_content"></div>
+				<div id="news_left_content_notice"></div>
+				<div id="news_right_content_notice"></div>
 			</div>
 		</div>
 		<jsp:include page="../bottom.jsp"></jsp:include>

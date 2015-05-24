@@ -72,10 +72,10 @@ $(function(){
 					<div class="flash_left"></div>
 					<div class="flash_content">
 						<div id="banner">
-						    	<img  src="${image_path}/indexpic1.jpg" width="600" height="252"/>
-						        <img  src="${image_path}/indexpic2.jpg" width="600" height="252"/>
-						        <img  src="${image_path}/indexpic3.jpg" width="600" height="252"/>
-						        <img  src="${image_path}/indexpic4.jpg" width="600" height="252"/>
+						    	<img  src="${image_path}/indexpic1.jpg" width="500" height="252"/>
+						        <img  src="${image_path}/indexpic2.jpg" width="500" height="252"/>
+						        <img  src="${image_path}/indexpic3.jpg" width="500" height="252"/>
+						        <img  src="${image_path}/indexpic4.jpg" width="500" height="252"/>
 						</div>
 						<div id="btn"></div>
 					</div>

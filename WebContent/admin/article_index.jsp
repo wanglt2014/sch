@@ -165,9 +165,9 @@
         function formatnewstype(value,rowData,rowIndex) {
         	var s="";
     		if(value=="notice"){
-    			s ="教务教学通知";
+    			s ="教学科研通知";
     		}else if(value=="regulation"){
-    			s ="教学规章制度";
+    			s ="规章制度";
     		}else if(value=="construction"){
     			s ="教材建设";
     		}else if(value=="teach"){
@@ -180,6 +180,8 @@
     			s ="国际共建课程";
     		}else if(value=="student"){
     			s ="学生展示";
+    		}else{
+    			s ="";
     		}
     		return s;
    	    }
@@ -221,7 +223,6 @@
 				$('#uploadFileDIV').hide();
 				$('#articletypeInsert').combobox('select', row.articletype);
                 UM.getEditor('myEditornew').setContent(row.content, false);
-                alert(6);
                 url = 'Article_update?id='+row.articleid;
             }
         }

@@ -21,7 +21,7 @@
 		<div id="subjecttb" style="padding: 5px; height: auto;width:auto;">
 			<div>
 <!-- 				作者:<input type="text"  id="authorQuery"> -->
-				名称:<input type="text"  id="subjectname">
+				课程名称:<input type="text"  id="subjectname" name="subjectname">
 				 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-search" onclick="querySubject()">搜索</a>
 			</div>
 		</div>
@@ -35,7 +35,7 @@
                 <th field="subjecttypename" width="30">课程类型</th>
                 <th field="subjectno" width="60" >课程编号</th>
                 <th field="subjectteachername" width="30">授课教师</th>
-                <th field="subjectCredit" width="30">学分</th>
+                <th field="subjectcredit" width="30">学分</th>
                 <th field="subjecttext" width="180" >课程介绍</th>
             </tr>
         </thead>
@@ -74,8 +74,8 @@
 				<input id="subjectcredit" name="subjectcredit" class="easyui-validatebox" style="width: 110px" maxlength="5">
             </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span class="span_column" >
-                <label style="width: 55px">学年:</label>
-				<input id="subjectyear" name="subjectyear" class="easyui-validatebox" style="width: 110px" maxlength="4">
+                <label style="width: 55px">年级:</label>
+				<input id="subjectyear" name="subjectyear" class="easyui-numberbox" style="width: 110px" maxlength="4">
             </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <span class="span_column" >
 				<label style="width: 55px">专业:</label>

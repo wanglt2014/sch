@@ -170,10 +170,10 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		bae.setOrderByClause(" subjectNO desc ");
 		criteria.andSubjectisvalidEqualTo(Constant.ISVALID_1);
 
-		// if (null != bsUserservice.getOrderIccard()
-		// && !bsUserservice.getOrderIccard().equals("")) {
-		// criteria.andOrderIccardEqualTo(bsUserservice.getOrderIccard());
-		// }
+		 if (null != subject.getSubjectname()
+		 && !subject.getSubjectname().equals("")) {
+		 criteria.andSubjectnameLike('%'+subject.getSubjectname()+'%');
+		 }
 		// if (null != bsUserservice.getUserId()) {
 		// criteria.andUserIdEqualTo(bsUserservice.getUserId());
 		// }

@@ -120,7 +120,7 @@
 						<tr>
 							<td height="35">&nbsp;</td>
 							<td><input name="Submit2" type="submit"
-								class="right-button01" value="确认登陆" /> <input type="button"
+								class="right-button01" value="确认登录" /> <input type="button"
 								class="right-button02" onclick="reset()" value="重 置" />
 							</td>
 						</tr>

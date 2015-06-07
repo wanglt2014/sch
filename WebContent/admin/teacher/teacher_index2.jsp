@@ -948,7 +948,6 @@
 			for(var i = 1; i<=subjectNum; i++){
 			$('#subjecttypename'+i).val($('#subjecttype'+i).combobox('getText'));
 			}
-			alert(projectNum);
 			$('#teacherfm').form('submit', {
     			url : url+"&prizeNum="+prizeNum+"&paperNum="+paperNum+"&subjectNum="+subjectNum+"&projectNum="+projectNum,
     			onSubmit : function() {

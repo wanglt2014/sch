@@ -16,11 +16,13 @@ import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
+import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
+import com.et59.cus.domain.entity.TTrainingplanExample.Criteria;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.dto.TSubjectDTO;
 import com.et59.cus.tools.ComonUtil;
@@ -61,6 +63,38 @@ public class TrainingPlanAction extends BaseAction {
 	public List<TSubject> sixList = new ArrayList<TSubject>();
 	public List<TSubject> sevenList = new ArrayList<TSubject>();
 	public List<TSubject> eightList = new ArrayList<TSubject>();
+	
+	
+	public String departmentid;
+	public String planType;
+	/**
+	 * 数据字典列表
+	 */
+	protected List<TDictionary> gradeList;
+
+	public List<TDictionary> getGradeList() {
+		return gradeList;
+	}
+
+	public void setGradeList(List<TDictionary> gradeList) {
+		this.gradeList = gradeList;
+	}
+
+	public String getDepartmentid() {
+		return departmentid;
+	}
+
+	public void setDepartmentid(String departmentid) {
+		this.departmentid = departmentid;
+	}
+
+	public String getPlanType() {
+		return planType;
+	}
+
+	public void setPlanType(String planType) {
+		this.planType = planType;
+	}
 
 	public TSubjectDTO gettSubjectDTO() {
 		return tSubjectDTO;
@@ -316,18 +350,19 @@ public class TrainingPlanAction extends BaseAction {
 		boolean flag = false;
 		String id = request.getParameter("id");
 		String planType = request.getParameter("planType");
+		String planNum = request.getParameter("planNum");
 		try {
-			TTrainingplan tTrainingplan = getTTrainingplan();
+			List<TTrainingplan> tTrainingplanList = getTTrainingplan(planNum);
 			TTrainingplanExample example = new TTrainingplanExample();
 			example.createCriteria()
 					.andTrainingplandepidEqualTo(Long.valueOf(id))
 					.andTrainingplantypeEqualTo(planType);
-
 			localServiceEXProxy.deleteTTrainingplan(example);
-
-			tTrainingplan.setTrainingplandepid(Long.valueOf(id));
-			tTrainingplan.setTrainingplantype(planType);
-			localServiceEXProxy.saveTTrainingplan(tTrainingplan);
+			for (TTrainingplan tTrainingplan : tTrainingplanList) {
+				tTrainingplan.setTrainingplandepid(Long.valueOf(id));
+				tTrainingplan.setTrainingplantype(planType);
+				localServiceEXProxy.saveTTrainingplan(tTrainingplan);
+			}
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
 		} catch (Exception e) {
@@ -340,35 +375,24 @@ public class TrainingPlanAction extends BaseAction {
 	 * 
 	 * @return
 	 */
-	public TTrainingplan getTTrainingplan() {
-		String trplansubidsforoneId = request
-				.getParameter("trplansubidsforoneId");
-		String trplansubidsfortwoId = request
-				.getParameter("trplansubidsfortwoId");
-		String trplansubidsforthreeId = request
-				.getParameter("trplansubidsforthreeId");
-		String trplansubidsforfourId = request
-				.getParameter("trplansubidsforfourId");
-		String trplansubidsforfiveId = request
-				.getParameter("trplansubidsforfiveId");
-		String trplansubidsforsixId = request
-				.getParameter("trplansubidsforsixId");
-		String trplansubidsforsevenId = request
-				.getParameter("trplansubidsforsevenId");
-		String trplansubidsforeightId = request
-				.getParameter("trplansubidsforeightId");
+	public List<TTrainingplan> getTTrainingplan(String planNum) {
+		List<TTrainingplan> list = new ArrayList<TTrainingplan>();
+		TTrainingplan tTrainingplan = null;
+		for (int i = 1; i <= Integer.parseInt(planNum); i++) {
+			String trplansubidsforoneId = request
+					.getParameter("trplansubidsforoneId" + i);
+			String trainingplangrade = request
+					.getParameter("trainingplangrade" + i);
+			String trplansubidsforone = request
+					.getParameter("trplansubidsforone" + i);//课程名称
+			tTrainingplan = new TTrainingplan();
+			tTrainingplan.setTrplansubidsforone(trplansubidsforoneId);
+			tTrainingplan.setTrainingplangrade(trainingplangrade);
+			tTrainingplan.setTrplansubidsfortwo(trplansubidsforone);
+			list.add(tTrainingplan);
+		}
 
-		TTrainingplan tTrainingplan = new TTrainingplan();
-		tTrainingplan.setTrplansubidsforone(trplansubidsforoneId);
-		tTrainingplan.setTrplansubidsfortwo(trplansubidsfortwoId);
-		tTrainingplan.setTrplansubidsforthree(trplansubidsforthreeId);
-		tTrainingplan.setTrplansubidsforfour(trplansubidsforfourId);
-		tTrainingplan.setTrplansubidsforfive(trplansubidsforfiveId);
-		tTrainingplan.setTrplansubidsfosix(trplansubidsforsixId);
-		tTrainingplan.setTrplansubidsforseven(trplansubidsforsevenId);
-		tTrainingplan.setTrplansubidsforeight(trplansubidsforeightId);
-
-		return tTrainingplan;
+		return list;
 	}
 
 	/**
@@ -386,20 +410,11 @@ public class TrainingPlanAction extends BaseAction {
 
 			List<TTrainingplan> list = localServiceEXProxy
 					.queryTTrainingplan(example);
-			String json = "";
-			Map map = new HashMap();
-			if (null != list && list.size() > 0) {
-				TTrainingplan row = list.get(0);
-				map.put("trplansubidsforone", row.getTrplansubidsforone());
-				map.put("trplansubidsfortwo", row.getTrplansubidsfortwo());
-				map.put("trplansubidsforthree", row.getTrplansubidsforthree());
-				map.put("trplansubidsforfour", row.getTrplansubidsforfour());
-				map.put("trplansubidsforfive", row.getTrplansubidsforfive());
-				map.put("trplansubidsfosix", row.getTrplansubidsfosix());
-				map.put("trplansubidsforseven", row.getTrplansubidsforseven());
-				map.put("trplansubidsforeight", row.getTrplansubidsforeight());
-			}
-			super.reponseWriter(JSON.toJSONString(map));
+//			Map map = new HashMap();
+//				for (TTrainingplan row : list) {
+//				map.put("trplansubidsforone", row.getTrplansubidsforone());
+//				}
+			super.reponseWriter(JSON.toJSONString(list));
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -496,74 +511,16 @@ public class TrainingPlanAction extends BaseAction {
 	 * @throws
 	 */
 	public String trainingPlanTable() {
-		String departmentid = request.getParameter("id");// 专业ID
-		String planType = request.getParameter("planType");// 方案类型（本科1，硕士2，博士3，专硕4）
+		departmentid = request.getParameter("departmentid");// 专业ID
+		planType = request.getParameter("planType");// 方案类型（本科1，硕士2，博士3，专硕4）
+		String trainingplangrade = request.getParameter("trainingplangrade");
+		
 		try {
-			TTrainingplanExample example = new TTrainingplanExample();
-			example.createCriteria()
-					.andTrainingplandepidEqualTo(Long.valueOf(departmentid))
-					.andTrainingplantypeEqualTo(planType);
-
-			List<TTrainingplan> list = localServiceEXProxy
-					.queryTTrainingplan(example);
-			if (null != list && list.size() > 0) {
-				TSubjectExample subjectExample = new TSubjectExample();
-				StringBuffer subIds = new StringBuffer();
-				HashSet hs = new HashSet();
-				TTrainingplan row = list.get(0);
-				// subIds =
-				// subIds.append(row.getTrplansubidsforone()).append(",")
-				// .append(row.getTrplansubidsfortwo()).append(",")
-				// .append(row.getTrplansubidsforthree()).append(",")
-				// .append(row.getTrplansubidsforfour()).append(",")
-				// .append(row.getTrplansubidsforfive()).append(",")
-				// .append(row.getTrplansubidsfosix()).append(",")
-				// .append(row.getTrplansubidsforseven()).append(",")
-				// .append(row.getTrplansubidsforeight());
-				// String[] arr = subIds.toString().split(",");
-
-				String[] arr = row.getTrplansubidsforone().split(",");
-				hs.addAll(Arrays.asList(arr));
-				subjectExample.createCriteria().andSubjectidIn(
-						new ArrayList(hs));
-				subjectList = localServiceEXProxy.queryTSubject(subjectExample);
-
-				TDictionary tDictionary = new TDictionary();
-				tDictionary.setDictionarytype("subjectType");
-				Pager pager = localServiceProxy.queryDictionaryBypage(
-						tDictionary, 100, 1);
-				dictionaryList = (List<TDictionary>) pager.getRows();
-				// for (Iterator iterator = subjectList.iterator(); iterator
-				// .hasNext();) {
-				// TSubject temp = (TSubject) iterator.next();
-				// String subjectId = String.valueOf(temp.getSubjectid());
-				// if (row.getTrplansubidsforone().indexOf(subjectId) >= 0) {
-				// oneList.add(temp);
-				// }
-				// if (row.getTrplansubidsfortwo().indexOf(subjectId) >= 0) {
-				// twoList.add(temp);
-				// }
-				// if (row.getTrplansubidsforthree().indexOf(subjectId) >= 0) {
-				// threeList.add(temp);
-				// }
-				// if (row.getTrplansubidsforfour().indexOf(subjectId) >= 0) {
-				// fourList.add(temp);
-				// }
-				// if (row.getTrplansubidsforfive().indexOf(subjectId) >= 0) {
-				// fiveList.add(temp);
-				// }
-				// if (row.getTrplansubidsfosix().indexOf(subjectId) >= 0) {
-				// sixList.add(temp);
-				// }
-				// if (row.getTrplansubidsforseven().indexOf(subjectId) >= 0) {
-				// sevenList.add(temp);
-				// }
-				// if (row.getTrplansubidsforeight().indexOf(subjectId) >= 0) {
-				// eightList.add(temp);
-				// }
-				// }
-			}
-
+		TDictionary tDictionary = new TDictionary();
+		tDictionary.setDictionarytype("grade");
+		Pager pager = localServiceProxy.queryDictionaryBypage(
+				tDictionary, 100, 1);
+		gradeList = (List<TDictionary>) pager.getRows();
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -572,6 +529,46 @@ public class TrainingPlanAction extends BaseAction {
 		return "plan_table_result";
 	}
 
+	
+	
+	
+	public String trainingPlanTableResult() {
+		departmentid = request.getParameter("departmentid");// 专业ID
+		planType = request.getParameter("planType");// 方案类型（本科1，硕士2，博士3，专硕4）
+		String trainingplangrade = request.getParameter("trainingplangrade");
+		try {
+			TTrainingplanExample example = new TTrainingplanExample();
+			Criteria cr = example.createCriteria();
+			cr.andTrainingplandepidEqualTo(Long.valueOf(departmentid)).andTrainingplantypeEqualTo(planType);
+			if(trainingplangrade!=null && !"".equals(trainingplangrade)){
+				cr.andTrainingplangradeEqualTo(trainingplangrade);
+			}
+
+			List<TTrainingplan> list = localServiceEXProxy
+					.queryTTrainingplan(example);
+			if (null != list && list.size() > 0) {
+				TSubjectExample subjectExample = new TSubjectExample();
+				StringBuffer subIds = new StringBuffer();
+				HashSet hs = new HashSet();
+				TTrainingplan row = list.get(0);
+				String[] arr = row.getTrplansubidsforone().split(",");
+				hs.addAll(Arrays.asList(arr));
+				subjectExample.createCriteria().andSubjectidIn(
+						new ArrayList(hs));
+				subjectList = localServiceEXProxy.queryTSubject(subjectExample);
+				TDictionary tDictionary = new TDictionary();
+				tDictionary.setDictionarytype("subjectType");
+				Pager pager = localServiceProxy.queryDictionaryBypage(
+						tDictionary, 100, 1);
+				dictionaryList = (List<TDictionary>) pager.getRows();
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "plan_table_resultTable";
+	}
 	/**
 	 * @Title: subjectDetail
 	 * @Description: 跳转到资料下载详细页面

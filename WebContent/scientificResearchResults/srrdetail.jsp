@@ -7,12 +7,13 @@
 <%
 String request_path = request.getContextPath();
 	// 当前导航栏位置
-	request.setAttribute("cur_nav", 1);
+	request.setAttribute("cur_nav", 8);
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>教学科研通知_${bsArticledetail.articletitle}</title>
+<title>科学研究成果_${bsArticledetail.articletitle}</title>
 <meta http-equiv="Content-Type" name="description"
 	content="${bsArticledetail.articlesummary}" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -25,43 +26,41 @@ String request_path = request.getContextPath();
 	<div id="fade" class="black_overlay"></div>
 	<jsp:include page="../top.jsp"></jsp:include>
 	<div class="container" style="position: relative;">
-
 		<jsp:include page="../nav.jsp"></jsp:include>
-
-
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">
 				<div id="news_left_content">
-					<div id="right_content_top">
-						<ul>
-							<li class="normal_title_content">
-								教学科研通知&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							</li>
-						</ul>
-						<div class="normal_content_top">
-						<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
-								<s:iterator var="teach" value="notifylist" status="st">
-								<div class="first_line_info" >
-								<table class="news_main_content" width="100%" >
-								<tr>
-								<td  style="width: 100%;">
-									<a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
-									<s:property value="#teach.articletitle" />
-									</a>
-								</td>
-								<td style="width: 65px;">
-									<a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
-									<s:property value="#teach.createdate" />
-									</a>
-								</td>
-								</tr>
-								</table>
-								</div>
-								<div class='separatorLine'></div>
-								</s:iterator>
+					<c:if test="${!empty(notifylist)}">
+						<div id="right_content_top">
+							<ul>
+								<li class="normal_title_content">
+									教务教学制度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								</li>
+							</ul>
+							<div class="normal_content_top">
+							<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
+									<s:iterator var="teach" value="notifylist" status="st">
+									<div class="first_line_info" >
+									<table class="news_main_content" width="100%" >
+									<tr>
+									<td  style="width: 100%;">
+									<a target="_blank" href="Article_regulationDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
+									<s:property value="#teach.articletitle" /> </a>
+									</td>
+									<td style="width: 65px;">
+										<a target="_blank" href="Article_regulationDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
+										<s:property value="#teach.createdate" />
+										</a>
+									</td>
+									</tr>
+									</table>
+									</div>
+									<div class='separatorLine'></div>
+									</s:iterator>
+									</div>
+							</div>
 						</div>
-						</div>
-					</div>
+					</c:if>
 				</div>
 				<div id="news_right_content_detail">
 					<div class="one_artic_detail">

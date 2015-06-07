@@ -13,7 +13,7 @@ String request_path = request.getContextPath();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<title>教务教学制度_${bsArticledetail.articletitle}</title>
+<title>规章制度_${bsArticledetail.articletitle}</title>
 <meta http-equiv="Content-Type" name="description"
 	content="${bsArticledetail.articlesummary}" />
 <link rel="shortcut icon" href="favicon.ico" />
@@ -34,7 +34,7 @@ String request_path = request.getContextPath();
 						<div id="right_content_top">
 							<ul>
 								<li class="normal_title_content">
-									教务教学制度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									规章制度&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								</li>
 							</ul>
 							<div class="normal_content_top">

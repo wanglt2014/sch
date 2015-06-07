@@ -14,7 +14,7 @@
 	<s:iterator var="teachInfo" value="bsArticlelist" status="st">
 		<div class="one_artic">
 			<div class="artic_title">
-						<c:choose>
+			<c:choose>
 			    <c:when test="${teachInfo.articletype == 'teach'}">
 				<b>[教学获奖]</b>
 			    </c:when>
@@ -33,9 +33,24 @@
 			     <c:when test="${teachInfo.articletype == 'student'}">
 			      <b>[学生展示]</b>
 			    </c:when>
+			    <c:when test="${teachInfo.articletype == 'studentPrize'}">
+			      <b>[学生获奖]</b>
+			    </c:when>
+			    <c:when test="${teachInfo.articletype == 'honor'}">
+			      <b>[荣誉获奖]</b>
+			    </c:when>
+			    <c:when test="${teachInfo.articletype == 'socialPractice'}">
+			      <b>[社会实践]</b>
+			    </c:when>
+			    <c:when test="${teachInfo.articletype == 'learning'}">
+			      <b>[学术活动]</b>
+			    </c:when>
+			    <c:when test="${teachInfo.articletype == 'bookClub'}">
+			      <b>[读书会]</b>
+			    </c:when>
 			    <c:otherwise>
 			    </c:otherwise>
-			</c:choose>&nbsp;&nbsp;
+			</c:choose>&nbsp;
 				<b><s:property value="#teachInfo.articletitle" /> </b> 作者:
 				<s:property value="#teachInfo.author" />
 				日期：

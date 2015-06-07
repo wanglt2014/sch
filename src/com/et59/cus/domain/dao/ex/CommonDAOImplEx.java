@@ -45,6 +45,7 @@ import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
+import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TTeacherWithBLOBs;
 
@@ -364,6 +365,21 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 		List<TTeacherWithBLOBs> list = (List<TTeacherWithBLOBs>) getSqlMapClientTemplate()
 				.queryForList(
 						"t_teacher.ibatorgenerated_selectByExampleWithBLOBs",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询师资队伍
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TTeacher> selectTeacherForPageNOBLOB(
+			TTeacherExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TTeacher> list = (List<TTeacher>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_teacher.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}

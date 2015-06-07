@@ -65,11 +65,31 @@ public class Constant {
 	 * 科研通知
 	 */
 	public static String ARTICLE_TYPE_RESEARCHNOTICE = "researchNotice";
+	
+	/**
+	 * 教学/科研通知
+	 */
+	public static String ARTICLE_TYPE_ALL_NOTICE = "allnotice";
+	
+	/**
+	 * 教师/学生国际交流
+	 */
+	public static String ARTICLE_TYPE_ALL_EXCHANGE = "allexchange";
 
 	/**
 	 * 教务教学制度
 	 */
 	public static String ARTICLE_TYPE_REGULATION = "regulation";
+	
+	/**
+	 * 学生国际交流
+	 */
+	public static String ARTICLE_TYPE_STU_EXC = "studentExchange";
+	
+	/**
+	 * 教师国际交流
+	 */
+	public static String ARTICLE_TYPE_TEA_EXC = "teacherExchange";
 	/**
 	 * 行业新闻
 	 */

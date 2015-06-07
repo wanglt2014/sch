@@ -111,6 +111,7 @@ public class SubjectAction extends BaseAction {
 	public void query() {
 		String page = request.getParameter("page"); // 当前页数
 		String rows = request.getParameter("rows"); // 每页显示行数
+		String subjectname = request.getParameter("subjectname");
 		// String roleNamequery = request.getParameter("roleNamequery");
 		if (page == null || rows == null) {
 			page = "1";
@@ -118,8 +119,9 @@ public class SubjectAction extends BaseAction {
 		}
 		Pager pager = new Pager();
 		try {
-			// TSubject tSubject = new TSubject();
-			Map map = localServiceEXProxy.querySubjectForLimit(new TSubject(),
+			 TSubject tSubject = new TSubject();
+			 tSubject.setSubjectname(subjectname);
+			Map map = localServiceEXProxy.querySubjectForLimit(tSubject,
 					Integer.valueOf(rows), Integer.valueOf(page));
 			pager.setRows(map.get(Constant.SUBJECT_LIST));
 			pager.setTotal((Integer) map.get(Constant.TOTALCOUNT));

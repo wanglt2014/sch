@@ -336,6 +336,9 @@
 			<result name="trainingResult_detail">/article/trainingdetail.jsp</result>
 			<result name="trainingResult_result">/article/training_result.jsp</result>
 			<result type="json"></result>
+			<result name="to_exchange_index">/article/exchangeList.jsp</result>
+			<result name="exchange_detail">/article/exchangedetail.jsp</result>
+			<result name="exchange_result">/article/exchange_result.jsp</result>
 		</action>
 		
 		<!-- 课程列表 -->
@@ -370,6 +373,10 @@
 			<result name="to_teacher_index">/teacher/teacherList.jsp</result>
 			<result name="teacher_detail">/teacher/teacherdetail.jsp</result>
 			<result name="teacher_result">/teacher/teacher_result.jsp</result>
+			<result name="to_srr_index">/scientificResearchResults/srrList.jsp</result>
+			<result name="srr_detail">/scientificResearchResults/srrdetail.jsp</result>
+			<result name="srr_result">/scientificResearchResults/srr_result.jsp</result>
+			<result type="json"></result>
 		</action>
 		
 		<!-- 文件上传 -->
@@ -393,7 +400,8 @@
 			<result name="plan_table_result">/trainingplan/plan_table_result.jsp</result>
 			<result name="plan_table_subject">/trainingplan/subjectdetail.jsp</result>
 			<result name="testindex">/test/testindex.jsp</result>
-		</action>
+			<result name="plan_table_resultTable">/trainingplan/plan_table_resultTable.jsp</result>
+			</action>
 	</package>
 
 </struts>    

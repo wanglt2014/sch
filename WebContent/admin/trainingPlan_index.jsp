@@ -129,13 +129,24 @@
 		buttons="#plandlg-buttons">
 		<form id="planfm" method="post" novalidate>
 			<div class="ftitle" style="font-size: 14px;font-weight: bold;padding: 5px 0;margin-bottom: 10px;border-bottom: 1px solid #ccc;">课程绑定</div>
-			<div  style="text-align: center;vertical-align: middle;">
-                <label>选择课程:</label>
+			<div  style="text-align: left;;vertical-align: middle;">
+				<span class="span_column" >
+				<label style="width: 100px;">年级:</label>
+				<select class="easyui-combobox" id="trainingplangrade" name="trainingplangrade"  editable="false"
+					data-options="
+		 					url:'Dictionary_queryDictionaryByType?type=grade',
+							method:'get',
+		 					valueField:'dictionarycode',
+		 					textField:'dictionaryvalue',  
+							panelHeight:'auto'" style="width: 110px" panelHeight="auto"> </select>
+				</span><br><br>
+				<span class="span_column" >
+                <label style="width: 100px;">选择课程:</label>
                 <input name="trplansubidsforoneId" id="trplansubidsforoneId"
 					class="easyui-validatebox" style="display: none;">
 				<select
 					class="easyui-combogrid" id="trplansubidsforone" name="trplansubidsforone"
-					style="width: 500px"
+					style="width: 500px" panelHeight="auto" editable="false"
 					data-options="
 			            panelWidth: 500,multiple: true,singleSelect:true, idField: 'subjectid',panelHeight:300,
 			            textField: 'subjectname',url: 'Subject_query',method: 'get',
@@ -149,8 +160,20 @@
 			                {field:'subjecttypename',title:'课程性质',width:40},
 			                {field:'subjectno',title:'课程编号',width:40},
 			                {field:'subjecttext',title:'课程介绍',width:120},
-			            ]],fitColumns: true">
-				</select><br><br>
+			            ]],fitColumns: true" >
+				</select>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addPlan()">新增</a><br><br>
+				</span> 
+					<hr  style="border-bottom:1px dashed;"><br>
+					<div id="plantempleate" style="display: none;">
+					<div id="row0" class="fitem">
+					<input name="trplansubidsforoneId0" id="trplansubidsforoneId0"  class="easyui-validatebox" style="display: none;"/>
+					<input name="trainingplangrade0" id="trainingplangrade0"  readonly="readonly" class="easyui-validatebox" style="width: 50px;"/>级，课程信息为
+					<input name="trplansubidsforone0" id="trplansubidsforone0"  readonly="readonly" class="easyui-validatebox" style="width: 400px;"/>
+					<span id="deletePlanDiv0"></span>
+					</div>
+					</div>
+					<div id="planDiv" ></div>
             </div>
 		</form>
 	</div>
@@ -162,6 +185,8 @@
 			onclick="javascript:$('#plandlg').dialog('close');">取消</a>
 	</div>
 	<script>
+	var planNum = 0;
+	var plantempleate = $("#plantempleate").html();//保存渲染前的模板
 	var um1 = UM.getEditor('departmentMyEditornew');
 	var um1 = UM.getEditor('directionMyEditornew');
 	var url;
@@ -201,6 +226,10 @@
 			$('#plandlg').dialog('open').dialog('setTitle',
 					'编辑培养方案');
 			$('#planfm').form('clear');
+			planNum = 0;
+			$("#planDiv").html("");
+			var data = $('#trainingplangrade').combobox('getData');
+			 $("#trainingplangrade ").combobox('select',data[0].dictionarycode);
 // 			$('#trainingPlanfm').form('load', row);
 			url = 'TrainingPlan_updatePlan?id=' + row.departmentid +'&planType='+temp;
 			$.ajax({
@@ -211,42 +240,19 @@
 					planType : temp,
 				},
 				success : function(datas) {
-					if(datas!=null && datas !=''){
+// 					alert(JSON.stringify(datas));
 						var data = eval('(' + datas + ')'); 
-						var one = data.trplansubidsforone;
-// 						var two = data.trplansubidsfortwo;
-// 						var three = data.trplansubidsforthree;
-// 						var four = data.trplansubidsforfour;
-// 						var five = data.trplansubidsforfive;
-// 						var six = data.trplansubidsfosix;
-// 						var seven = data.trplansubidsforseven;
-// 						var eight = data.trplansubidsforeight;
-// 						alert(datas);
-						if(one!=""){
-							$('#trplansubidsforone').combogrid('setValues', one.split(","));
+						for (var i = 0; i < data.length; i++) {
+							var row = data[i];
+							addPlan();
+							$('#trainingplangrade'+(parseInt(i)+1)).val(row.trainingplangrade);
+							$('#trplansubidsforone'+(parseInt(i)+1)).val(row.trplansubidsfortwo);
 						}
-// 						if(two!=""){
-// 							$('#trplansubidsfortwo').combogrid('setValues', two.split(","));
+// 						var one = data.trplansubidsforone;
+// 						if(one!=""){
+// 							$('#trplansubidsforone').combogrid('setValues', one.split(","));
 // 						}
-// 						if(three!=""){
-// 							$('#trplansubidsforthree').combogrid('setValues', three.split(","));					
-// 						}
-// 						if(four!=""){
-// 							$('#trplansubidsforfour').combogrid('setValues', four.split(","));
-// 						}
-// 						if(five!=""){
-// 							$('#trplansubidsforfive').combogrid('setValues', five.split(","));
-// 						}
-// 						if(six!=""){
-// 							$('#trplansubidsforsix').combogrid('setValues', six.split(","));
-// 						}
-// 						if(seven!=""){
-// 							$('#trplansubidsforseven').combogrid('setValues', seven.split(","));
-// 						}
-// 						if(eight!=""){
-// 							$('#trplansubidsforeight').combogrid('setValues', eight.split(","));
-// 						}
-					}
+
 				},
 				error : function() {
 					jAlert('系统错误，请联系管理员','错误提示');
@@ -284,17 +290,9 @@
 // 		alert($("#departmentContent").val()+"@@@@@@@@@@"+$("#directionContent").val());
     	var valid = $('#planfm').form('validate');
 		if(valid==true){
-// 			alert($('#trplansubidsforone').combogrid('getValues'));
-		$('#trplansubidsforoneId').val($('#trplansubidsforone').combogrid('getValues'));
-// 		$('#trplansubidsfortwoId').val($('#trplansubidsfortwo').combogrid('getValues'));
-// 		$('#trplansubidsforthreeId').val($('#trplansubidsforthree').combogrid('getValues'));
-// 		$('#trplansubidsforfourId').val($('#trplansubidsforfour').combogrid('getValues'));
-// 		$('#trplansubidsforfiveId').val($('#trplansubidsforfive').combogrid('getValues'));
-// 		$('#trplansubidsforsixId').val($('#trplansubidsforsix').combogrid('getValues'));
-// 		$('#trplansubidsforsevenId').val($('#trplansubidsforseven').combogrid('getValues'));
-// 		$('#trplansubidsforeightId').val($('#trplansubidsforeight').combogrid('getValues'));
+// 		$('#trplansubidsforoneId').val($('#trplansubidsforone').combogrid('getValues'));
         $('#planfm').form('submit',{
-            url: url,
+            url: url+'&planNum='+planNum,
             onSubmit: function(){
                 return $(this).form('validate');
             },
@@ -347,6 +345,30 @@
 	        }
 	    } 
 	});
+	
+	//动态添加获奖信息
+	function addPlan() {
+		planNum++;
+// 		$("#deletePrlanBtn").remove();
+		var html = plantempleate.replace(new RegExp("trainingplangrade0","gm"),'trainingplangrade'+planNum)
+		.replace(new RegExp("trplansubidsforoneId0","gm"),'trplansubidsforoneId'+planNum)
+		.replace(new RegExp("trplansubidsforone0","gm"),'trplansubidsforone'+planNum)
+		.replace(new RegExp("deletePlanDiv0","gm"),'deletePlanDiv'+planNum)
+		.replace(new RegExp("row0","gm"),'row'+planNum);
+		$("#planDiv").append(html);
+		$("#deletePlanDiv"+planNum).append('<a id="deletePlanBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePlan('+planNum+')">删除</a>');
+// 		alert($('#trainingplangrade').combobox('getValue')+"**"+$('#trplansubidsforone').combogrid('getValues')+"**"+$('#trplansubidsforone').combobox('getText'));
+		$('#trainingplangrade'+planNum).val($('#trainingplangrade').combobox('getValue'));
+		$('#trplansubidsforoneId'+planNum).val($('#trplansubidsforone').combogrid('getValues'));
+		$('#trplansubidsforone'+planNum).val($('#trplansubidsforone').combobox('getText'));
+	}
+	function removePlan(infoIndex) {
+		$("#row"+infoIndex).remove();
+// 		if(parseInt(infoIndex)>1){
+// 			$("#deletePlanDiv"+(parseInt(infoIndex)-1)).append('<a id="deletePlanBtn'+(parseInt(infoIndex)-1)+'" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePlan('+(parseInt(infoIndex)-1)+')">删除</a>');
+// 		}
+		planNum--;
+	}
 	</script>
 	<style type="text/css">
 #trainingPlanfm {

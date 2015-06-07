@@ -4,7 +4,7 @@
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 <%
 	// 当前导航栏位置
-	request.setAttribute("cur_nav", 5);
+	request.setAttribute("cur_nav", 3);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -32,7 +32,7 @@
 			url : 'TrainingPlan_trainingPlanTable',
 			data : {
 				currentPage : targetPage,
-				id : tempId,
+				departmentid : tempId,
 				planType : planType,
 			},
 			beforeSend : function(html) {

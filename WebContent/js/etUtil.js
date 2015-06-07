@@ -25,8 +25,8 @@ $(document).ready(function(){
 			location.href = 'Article_toNoticePage.shtm';
 		}else if (id == 'nav_link_zhidu'){
 			location.href = 'Article_toRegulationPage.shtm';
-		}else if (id == 'nav_link_download') {
-			location.href = 'Download_toDownloadPage.shtm';
+		}else if (id == 'nav_link_exchange') {
+			location.href = 'Article_toExchangePage.shtm';
 		}else if (id == 'nav_link_teacher') {
 			location.href = 'Teacher_toTeacherPage.shtm';
 		}else if (id == 'nav_link_plan') {
@@ -36,8 +36,8 @@ $(document).ready(function(){
 		}else if (id == 'nav_link_bbs') {
 //			location.href = 'http://121.42.199.93:8080/schoolbbs';
 			location.href = 'http://127.0.0.1:8080/schoolbbs';
-		}else if (id == 'nav_link_downloadinfo') {
-			location.href = 'Download_toDownloadPage.shtm';
+		}else if (id == 'nav_link_srr') {
+			location.href = 'Teacher_toSRRPage.shtm';
 		}
 	});
 	

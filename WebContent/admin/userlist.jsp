@@ -44,7 +44,7 @@
 		<thead>
 			<tr>
 <!-- 				<th field="iccard" width="50">会员卡号</th> -->
-				<th field="username" width="50">登陆账号</th>
+				<th field="username" width="50">登录账号</th>
 				<th field="realname" width="50">真实姓名</th>
 				<th field="mobilephone" width="50">手机号</th>
 				<th field="email" width="50">邮箱</th>
@@ -70,7 +70,7 @@
 		<div class="ftitle">用户信息</div>
 		<form id="userfm" method="post" novalidate>
 			<div class="fitem">
-				<label>登陆账号:</label> <input name="username"
+				<label>登录账号:</label> <input name="username"
 					class="easyui-validatebox" required="true" maxlength="20">
 			</div>
 			<div class="fitem">

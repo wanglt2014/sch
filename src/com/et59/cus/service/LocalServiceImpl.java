@@ -694,7 +694,8 @@ public class LocalServiceImpl implements LocalService {
 		bae.setOrderByClause(" articleIsTop desc,createdate desc ");
 		String type = bsArticle.getArticletype();
 		if (Constant.ARTICLE_TYPE_NOTICE.equals(type)
-				|| Constant.ARTICLE_TYPE_REGULATION.equals(type)||Constant.ARTICLE_TYPE_RESEARCHNOTICE.equals(type)) {// 通知和制度
+				|| Constant.ARTICLE_TYPE_REGULATION.equals(type)||Constant.ARTICLE_TYPE_RESEARCHNOTICE.equals(type)
+				||Constant.ARTICLE_TYPE_STU_EXC.equals(type)||Constant.ARTICLE_TYPE_TEA_EXC.equals(type)) {// 通知和制度、国际交流
 			criteria.andArticletypeEqualTo(bsArticle.getArticletype());
 		} else if (Constant.ARTICLE_TYPE_RESULT.equals(type)) {
 			// 查询除通知和制度以外的内容
@@ -702,12 +703,25 @@ public class LocalServiceImpl implements LocalService {
 			// String menuType = bsArticle.getMenuType();
 			typeList.add(Constant.ARTICLE_TYPE_NOTICE);
 			typeList.add(Constant.ARTICLE_TYPE_REGULATION);
+			typeList.add(Constant.ARTICLE_TYPE_STU_EXC);
+			typeList.add(Constant.ARTICLE_TYPE_TEA_EXC);
+			typeList.add(Constant.ARTICLE_TYPE_RESEARCHNOTICE);
 			// if (menuType != null && "result".equals(menuType)) {
 			criteria.andArticletypeNotIn(typeList);
 			// }
 			// else {
 			// criteria.andArticletypeIn(typeList);
 			// }
+		} else if (Constant.ARTICLE_TYPE_ALL_NOTICE.equals(type)) {
+			List typeList = new ArrayList();
+			typeList.add(Constant.ARTICLE_TYPE_NOTICE);
+			typeList.add(Constant.ARTICLE_TYPE_RESEARCHNOTICE);
+			criteria.andArticletypeIn(typeList);
+		} else if (Constant.ARTICLE_TYPE_ALL_EXCHANGE.equals(type)) {
+			List typeList = new ArrayList();
+			typeList.add(Constant.ARTICLE_TYPE_STU_EXC);
+			typeList.add(Constant.ARTICLE_TYPE_TEA_EXC);
+			criteria.andArticletypeIn(typeList);
 		} else {
 			// 查询全部类型的文章
 		}
@@ -2136,7 +2150,7 @@ public class LocalServiceImpl implements LocalService {
 		}
 
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TTeacherWithBLOBs> list = commonDAOEx.selectTeacherForPage(
+		List<TTeacher> list = commonDAOEx.selectTeacherForPageNOBLOB(
 				example, startrecord, pagesize);
 		int totalCount = tTeacherDAO.countByExample(example);
 		page.setRows(list);

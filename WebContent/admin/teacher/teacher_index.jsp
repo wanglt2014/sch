@@ -188,32 +188,32 @@
 					<label style="width: 85px;text-align: right;">项目种类:</label>
 					<select id="researchtype0" name="researchtype0" class="easyui-combobox" panelHeight="auto" editable="false"
 						style="width: 110px">
-						<option value="1">国家社会科学基金</option>
-						<option value="2">国家自然科学基金</option>
-						<option value="3">教育部人文社科基金</option>
-						<option value="4">省哲学社会科学研究规划项目</option>
-						<option value="5">省自然科学基金项目</option>
-						<option value="6">其他省部级以上项目</option>
+						<option value="国家社会科学基金">国家社会科学基金</option>
+						<option value="国家自然科学基金">国家自然科学基金</option>
+						<option value="教育部人文社科基金">教育部人文社科基金</option>
+						<option value="省哲学社会科学研究规划项目">省哲学社会科学研究规划项目</option>
+						<option value="省自然科学基金项目">省自然科学基金项目</option>
+						<option value="其他省部级以上项目">其他省部级以上项目</option>
 					</select>
 				</span>
 				<span class="span_column" >
 					<label style="width: 85px;text-align: right;">项目类别:</label>
 					<select id="researchlevel0" name="researchlevel0" class="easyui-combobox" panelHeight="auto" editable="false"
 						style="width: 110px">
-						<option value="1">重大</option>
-						<option value="2">重点</option>
-						<option value="3">一般</option>
-						<option value="4">面上</option>
-						<option value="5">青年</option>
-						<option value="6">其他</option>
+						<option value="重大">重大</option>
+						<option value="重点">重点</option>
+						<option value="一般">一般</option>
+						<option value="面上">面上</option>
+						<option value="青年">青年</option>
+						<option value="其他">其他</option>
 					</select>
 				</span>
 				<span class="span_column" >
 					<label >是否在研:</label> 
 					<select id="isresearch0" name="isresearch0" class="easyui-combobox" panelHeight="auto" editable="false"
 							style="width: 140px" >
-							<option value="1">是</option>
-							<option value="0">否</option>
+							<option value="是">是</option>
+							<option value="否">否</option>
 					</select>
 				</span>
 				<br><br>
@@ -236,7 +236,7 @@
 <%-- 				</span> --%>
 				<span class="span_column" >
 					<label style="width: 85px;text-align: right;">教师排名:</label>
-					<select id="researchrank0" on name="researchrank0" class="easyui-combobox" panelHeight="auto" editable="false"
+					<select id="researchrank0" name="researchrank0" class="easyui-combobox" panelHeight="auto" editable="false"
 						style="width: 110px" >
 						<option value="1">1</option>
 						<option value="2">2</option>
@@ -266,10 +266,10 @@
 					<label style="width: 90px;text-align: right;">结题等级:</label> 
 					<select id="researchknot0" name="researchknot0" class="easyui-combobox" panelHeight="auto" editable="false"
 							style="width: 100px" >
-							<option value="1">优秀</option>
-							<option value="2">良好</option>
-							<option value="3">合格</option>
-							<option value="4">其他</option>
+							<option value="优秀">优秀</option>
+							<option value="良好">良好</option>
+							<option value="合格">合格</option>
+							<option value="其他">其他</option>
 					</select>
 				</span>
 				<br><br>
@@ -293,27 +293,91 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addPaper()">新增论文信息</a><br><br>
 					<div id="paperTempleate" style="display: none;">
 					<div id="paperRow0" class="fitem">
-						<span class="span_column" ><label>论文名称:</label> <input id="papername0" name="papername0"
-								class="easyui-validatebox"  maxlength="20"></span>
-						<span class="span_column"><label>作者排序:</label> <input id="paperauthor0" name="paperauthor0" maxlength="20"
-								class="easyui-validatebox" ></span><br><br>
-						<span class="span_column" ><label>期刊名称:</label> <input id="papernotename0" name="papernotename0" maxlength="20"
-								class="easyui-validatebox" ></span>
-						<span class="span_column" ><label>刊登年份:</label> <input id="papernoteyear0" name="papernoteyear0"
-								class="easyui-numberbox"  maxlength="4"></span><br><br>
-						<span class="span_column" ><label>刊登期号:</label> <input id="papernoteno0" name="papernoteno0" maxlength="20"
-								class="easyui-validatebox" ></span>
-						<span class="span_column" >
-							<label >论文分类:</label> 
+						<span class="span_column_sm" >
+						<label style="width: 85px;text-align: right;">论文题目:</label>
+							<input id="papername0" name="papername0" style="width: 110px" class="easyui-validatebox"  maxlength="60">
+						</span>
+						<span class="span_column_sm">
+						<label style="width: 85px;text-align: right;">作者排名:</label>
+							<select id="paperauthor0" name="paperauthor0" class="easyui-combobox" panelHeight="auto" editable="false"
+								style="width: 110px" >
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</span>
+						<span class="span_column_sm" >
+						<label style="width: 85px;text-align: right;">发表刊物/论文集名称:</label>
+							<input id="papernotename0" name="papernotename0" maxlength="50"
+								class="easyui-validatebox"  style="width: 110px" ></span>
+						<br><br>	
+						<span class="span_column_sm" >
+						<label style="width: 85px;text-align: right;">刊物国别:</label>
+							<input id="papernotecountry0" name="papernotecountry0"
+								class="easyui-numberbox"  maxlength="20" style="width: 110px" ></span>
+						<span class="span_column_sm">
+							<label style="width: 85px;text-align: right;">发表/出版时间:</label> 
+							<input id="papernotedate0" name="papernotedate0" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+						</span>
+						<span class="span_column_sm" >
+						<label style="width: 85px;text-align: right;">期号（卷号）:</label>
+							<input id="papernoteno0" name="papernoteno0"
+								class="easyui-numberbox"  style="width: 110px"  maxlength="20"></span>
+						<br><br>
+						<span class="span_column_sm" >
+						<label style="width: 85px;text-align: right;">页码:</label>
+							<input id="papernotepage0" name="papernotepage0" maxlength="5"
+								class="easyui-validatebox"  style="width: 110px" ></span>
+						<span class="span_column_sm" >
+							<label style="width: 85px;text-align: right;">论文收录:</label> 
+							<select id="paperincluded0" name="paperincluded0" class="easyui-combobox" panelHeight="auto" editable="false"
+									style="width: 110px" >
+									<option value="SCI">SCI</option>
+									<option value="SSCI">SSCI</option>
+									<option value="EI">EI</option>
+									<option value="A&HCI">A&HCI</option>
+									<option value="CSSCI">CSSCI</option>
+									<option value="CSSCI扩展">CSSCI扩展</option>
+									<option value="中文核心">中文核心</option>
+							</select>
+						</span>
+						<span class="span_column_sm" >
+						<label style="width: 85px;text-align: right;">影响因子:</label>
+							<input id="paperfactors0" name="paperfactors0" maxlength="50"
+								class="easyui-validatebox"  style="width: 110px" ></span>
+						<br><br>
+						<span class="span_column_sm" >
+							<label style="width: 85px;text-align: right;">论文转载:</label> 
+							<select id="paperreprint0" name="paperreprint0" class="easyui-combobox" panelHeight="auto" editable="false"
+									style="width: 110px" >
+									<option value="是">是</option>
+									<option value="否">否</option>
+							</select>
+						</span>
+						<span class="span_column_sm" >
+							<label style="width: 85px;text-align: right;">一级学科:</label>
+							<select id="paperclassa0" name="paperclassa0" class="easyui-combobox" panelHeight="auto" editable="false"
+								style="width: 110px" >
+								<option value="840">840</option>
+								<option value="820">820</option>
+								<option value="180">180</option>
+							</select>
+						</span>
+						<span class="span_column_sm" >
+						<label style="width: 85px;text-align: right;">资助项目编号:</label>
+							<input id="paperprojectno0" name="paperprojectno0" maxlength="20"
+								class="easyui-validatebox"  style="width: 110px" ></span>
+						<br><br>
+						<span class="span_column_sm" >
+							<label style="width: 85px;text-align: right;">论文分类:</label> 
 							<select id="paperteachorresearch0" name="paperteachorresearch0" class="easyui-combobox" panelHeight="auto" editable="false"
-									style="width: 140px" >
+									style="width: 110px" >
 									<option value="0">教学</option>
 									<option value="1">科研</option>
 							</select>
 						</span>
-						<br><br>
 						<!-- 动态增加上传控件 -->
-						<span class="span_column" style="width:100%;" id="paperObj0"> <label>论文电子版:</label> 
+						<span class="span_column_sm" style="width:100%;" id="paperObj0"> <label>论文电子版:</label> 
 							<input type="button" value="选择文件..." id="browsePaper0" />
 							<input type="button" value="清空" id="paper-clear-btn0" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span>
 						</span>
@@ -342,7 +406,7 @@
 					<div id="workRow0" class="fitem">
 						<span class="span_column" >
 							<label style="width: 85px;text-align: right;">作者排名:</label>
-							<select id="workAuthorRank0" on name="workAuthorRank0" class="easyui-combobox" panelHeight="auto" editable="false"
+							<select id="workAuthorRank0" name="workAuthorRank0" class="easyui-combobox" panelHeight="auto" editable="false"
 								style="width: 110px" >
 								<option value="1">1</option>
 								<option value="2">2</option>
@@ -362,9 +426,9 @@
 							<label style="width: 85px;text-align: right;">著作类别:</label>
 							<select id="workType0" name="workType0" class="easyui-combobox" panelHeight="auto" editable="false"
 								style="width: 110px">
-								<option value="1">专著</option>
-								<option value="2">编著</option>
-								<option value="3">译著</option>
+								<option value="专著">专著</option>
+								<option value="编著">编著</option>
+								<option value="译著">译著</option>
 							</select>
 						</span>
 						<span class="span_column" >
@@ -384,8 +448,8 @@
 							<label style="width: 85px;text-align: right;">是否译成外文:</label>
 							<select id="translateForeign0" name="translateForeign0" class="easyui-combobox" panelHeight="auto" editable="false"
 								style="width: 110px;" >
-								<option value="1">是</option>
-								<option value="0">否</option>
+								<option value="是">是</option>
+								<option value="否">否</option>
 							</select>
 						</span>
 						<span class="span_column" >
@@ -429,16 +493,65 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="addPrize()">新增获奖信息</a><br><br>
 					<div id="templeate" style="display: none;">
 					<div id="row0" class="fitem">
-						<label>奖项性质:</label>
-						<select id="prizetype0" name="prizetype0" class="easyui-combobox" panelHeight="auto" editable="false"
-							style="width: 100px" >
-							<option value="teach">教学获奖</option>
-							<option value="science">科研获奖</option>
-							<option value="social" >社会服务获奖</option>
-						</select>
+						<span class="span_column" >
+							<label style="width: 85px;text-align: right;">获奖排名:</label>
+							<select id="prizerank0" name="prizerank0" class="easyui-combobox" panelHeight="auto" editable="false"
+								style="width: 110px" >
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+							</select>
+						</span>
+						<span class="span_column" >
+							<label style="width: 85px;text-align: right;">奖项名称:</label>
+							<select id="prizetitle0" name="prizetitle0" class="easyui-combobox" panelHeight="auto" editable="false"
+								style="width: 110px" >
+								<option value="高等学校科学研究优秀成果奖">高等学校科学研究优秀成果奖</option>
+								<option value="黑龙江省社会科学优秀成果奖">黑龙江省社会科学优秀成果奖</option>
+								<option value="黑龙江省高校人文社会科学研究优秀成果奖">黑龙江省高校人文社会科学研究优秀成果奖</option>
+								<option value="其他省部级以上获奖">其他省部级以上获奖</option>
+							</select>
+						</span>
+						<span class="span_column" >
+							<label style="width: 85px;text-align: right;">成果名称:</label>
+							<input id="prizeresultname0" name="prizeresultname0" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+						</span>
+						<br><br>
+						<span class="span_column" >
+							<label style="width: 85px;text-align: right;">奖励等级:</label>
+							<select id="prizelevel0" name="prizelevel0" class="easyui-combobox" panelHeight="auto" editable="false"
+								style="width: 110px" >
+								<option value="特等奖">特等奖</option>
+								<option value="一等奖">一等奖</option>
+								<option value="二等奖">二等奖</option>
+								<option value="三等奖">三等奖</option>
+								<option value="佳作奖">佳作奖</option>
+							</select>
+						</span>
+						<span class="span_column" >
+							<label style="width: 85px;text-align: right;">成果类别 :</label>
+							<select id="prizetype0" name="prizetype0" class="easyui-combobox" panelHeight="auto" editable="false"
+								style="width: 110px" >
+								<option value="学术论文">学术论文</option>
+								<option value="著作">著作</option>
+								<option value="研究报告">研究报告</option>
+								<option value="普及读物">普及读物</option>
+							</select>
+						</span>
+						<span class="span_column" >
+							<label style="width: 85px;text-align: right;">授奖部门:</label>
+							<input id="prizedep0" name="prizedep0" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+						</span>
+						<br><br>
+						<span class="span_column">
+							<label  style="width: 85px;text-align: right;">获奖时间:</label> 
+							<input id="prizedate0" name="prizedate0" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+						</span>
+						<span class="span_column" >
+							<label style="width: 85px;text-align: right;">证书编号:</label>
+							<input id="prizeno0" name="prizeno0" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+						</span>
    					<br><br>
-					<label>获奖说明:</label>
-   					<textarea id="prizeinfo0" rows=3 style="width: 400px;" name="prizeinfo0"  class="textarea easyui-validatebox" maxlength="1000"></textarea>
 					<span id="deletePrizeDiv0"></span>
 <!-- 					<input id="prizeId0" name="prizeId0" /> -->
 					<hr  style="border-bottom:1px dashed;"><br>
@@ -470,9 +583,23 @@
 	function addPrize() {
 		prizeNum++;
 		$("#deletePrizeBtn").remove();
-		var html = temp.replace(new RegExp("prizetype0","gm"),'prizetype'+prizeNum).replace(new RegExp("prizeinfo0","gm"),'prizeinfo'+prizeNum).replace(new RegExp("deletePrizeDiv0","gm"),'deletePrizeDiv'+prizeNum).replace(new RegExp("row0","gm"),'row'+prizeNum);
+		var html = temp.replace(new RegExp("prizetype0","gm"),'prizetype'+prizeNum)
+		.replace(new RegExp("prizetitle0","gm"),'prizetitle'+prizeNum)
+		.replace(new RegExp("prizeresultname0","gm"),'prizeresultname'+prizeNum)
+		.replace(new RegExp("prizerank0","gm"),'prizerank'+prizeNum)
+		.replace(new RegExp("prizelevel0","gm"),'prizelevel'+prizeNum)
+		.replace(new RegExp("prizetype0","gm"),'prizetype'+prizeNum)
+		.replace(new RegExp("prizedep0","gm"),'prizedep'+prizeNum)
+		.replace(new RegExp("prizedate0","gm"),'prizedate'+prizeNum)
+		.replace(new RegExp("prizeno0","gm"),'prizeno'+prizeNum)
+		.replace(new RegExp("deletePrizeDiv0","gm"),'deletePrizeDiv'+prizeNum)
+		.replace(new RegExp("row0","gm"),'row'+prizeNum);
 		$("#prizeDiv").append(html);
-		$("#prizeDiv select").combobox({panelHeight:"auto"});//渲染
+		$("#prizetype"+prizeNum).combobox({panelHeight:"auto"});//渲染
+		$("#prizetitle"+prizeNum).combobox({panelHeight:"auto"});//渲染
+		$("#prizerank"+prizeNum).combobox({panelHeight:"auto"});//渲染
+		$("#prizelevel"+prizeNum).combobox({panelHeight:"auto"});//渲染
+		$("#prizedate"+prizeNum).datebox({panelHeight:"auto"});//渲染
 		$("#deletePrizeDiv"+prizeNum).append('<a id="deletePrizeBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePrize('+prizeNum+')">删除获奖信息</a>');
 		
 	}
@@ -491,7 +618,14 @@
 		var html = paperTemp.replace(new RegExp("papername0","gm"),'papername'+paperNum)
 		.replace(new RegExp("paperauthor0","gm"),'paperauthor'+paperNum)
 		.replace(new RegExp("papernotename0","gm"),'papernotename'+paperNum)
-		.replace(new RegExp("papernoteyear0","gm"),'papernoteyear'+paperNum)
+		.replace(new RegExp("papernotecountry0","gm"),'papernotecountry'+paperNum)
+		.replace(new RegExp("papernotedate0","gm"),'papernotedate'+paperNum)
+		.replace(new RegExp("papernotepage0","gm"),'papernotepage'+paperNum)
+		.replace(new RegExp("paperincluded0","gm"),'paperincluded'+paperNum)
+		.replace(new RegExp("paperfactors0","gm"),'paperfactors'+paperNum)
+		.replace(new RegExp("paperreprint0","gm"),'paperreprint'+paperNum)
+		.replace(new RegExp("paperclassa0","gm"),'paperclassa'+paperNum)
+		.replace(new RegExp("paperprojectno0","gm"),'paperprojectno'+paperNum)
 		.replace(new RegExp("papernoteno0","gm"),'papernoteno'+paperNum)
 		.replace(new RegExp("deletePaperDiv0","gm"),'deletePaperDiv'+paperNum)
 		.replace(new RegExp("paperRow0","gm"),'paperRow'+paperNum)
@@ -501,7 +635,12 @@
 		.replace(new RegExp("paper-clear-btn0","gm"),'paper-clear-btn'+paperNum)
 		.replace(new RegExp("paperteachorresearch0","gm"),'paperteachorresearch'+paperNum);
 		$("#paperDiv").append(html);
-		$("#paperDiv select").combobox({panelHeight:"auto"});//渲染
+		$("#paperauthor"+paperNum).combobox({panelHeight:"auto"});//渲染
+		$("#paperincluded"+paperNum).combobox({panelHeight:"auto"});
+		$("#paperreprint"+paperNum).combobox({panelHeight:"auto"});
+		$("#paperclassa"+paperNum).combobox({panelHeight:"auto"});
+		$("#paperteachorresearch"+paperNum).combobox({panelHeight:"auto"});
+		$("#papernotedate"+paperNum).datebox({panelHeight:"auto"});//渲染
 		$("#deletePaperDiv"+paperNum).append('<a id="deletePaperBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePaper('+paperNum+')">删除论文信息</a>');
 		//动态增加上传控件
 		window["browsePaperTemp"+paperNum] = new plupload.Uploader({ //实例化一个plupload上传对象
@@ -589,7 +728,12 @@
 		.replace(new RegExp("projectRow0","gm"),'projectRow'+projectNum)
 		.replace(new RegExp("researchteachorresearch0","gm"),'researchteachorresearch'+projectNum);
 		$("#projectDiv").append(html);
-		$("#projectDiv select").combobox({panelHeight:"auto"});//渲染
+		$("#researchtype"+projectNum).combobox({panelHeight:"auto"});//渲染
+		$("#isresearch"+projectNum).combobox({panelHeight:"auto"});//渲染
+		$("#researchrank"+projectNum).combobox({panelHeight:"auto"});//渲染
+		$("#researchknot"+projectNum).combobox({panelHeight:"auto"});//渲染
+		$("#researchlevel"+projectNum).combobox({panelHeight:"auto"});//渲染
+		$("#researchteachorresearch"+projectNum).combobox({panelHeight:"auto"});//渲染
 		$("#researchbegindate"+projectNum).datebox({panelHeight:"auto"});//渲染
 		$("#researchenddate"+projectNum).datebox({panelHeight:"auto"});//渲染
 		$("#deleteProjectDiv"+projectNum).append('<a id="deleteProjectBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removeProject('+projectNum+')">删除立项信息</a>');
@@ -626,11 +770,15 @@
 		.replace(new RegExp("projectno0","gm"),'projectno'+workNum)
 		.replace(new RegExp("totalWord0","gm"),'totalWord'+workNum)
 		.replace(new RegExp("deleteWorkDiv0","gm"),'deleteWorkDiv'+workNum)
-		.replace(new RegExp("workRow0","gm"),'workRow'+workNum)
+		.replace(new RegExp("workRow0","gm"),'workRow'+workNum);
 		$("#workDiv").append(html);
-		$("#workDiv select").combobox({panelHeight:"auto"});//渲染
+		$("#workAuthorRank"+workNum).combobox({panelHeight:"auto"});//渲染
+		$("#translateForeign"+workNum).combobox({panelHeight:"auto"});//渲染
+		$("#classA"+workNum).combobox({panelHeight:"auto"});//渲染
+		$("#workType"+workNum).combobox({panelHeight:"auto"});//渲染
 		$("#workPublishTime"+workNum).datebox({panelHeight:"auto"});//渲染
 		$("#deleteWorkDiv"+workNum).append('<a id="deleteWorkBtn" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removeWork('+workNum+')">删除立项信息</a>');
+		
 		var flag=workNum;
 		$('#workType'+flag).combobox({
 			onSelect:function(newValue,oldValue){
@@ -695,9 +843,13 @@
 		 var data = $('#job').combobox('getData');
 		 $("#job ").combobox('select',data[0].dictionarycode);
 	}
+	
 	function editTeacher() {
 		var row = $('#teacherdg').datagrid('getSelected');
 		if (row) {
+// 			 var startTime,endTime; 
+// 			 var d=new Date(); 
+// 			 startTime=d.getTime(); 
 			if(uploaderForPic==null || uploaderForPic==undefined){
 				createUploaderPic();
 // 				createProject();
@@ -708,6 +860,7 @@
 // 				createProject();
 				deleteAllUploader();
 			}
+			var prizeList,paperList,subjectList,projectList;
 			prizeNum = 0;
 			paperNum = 0;
 			projectNum = 0;
@@ -722,7 +875,6 @@
 			$('#teacherfm').form('load', row);
 			$('#img_photo').show();
 			$('#img_photo').attr('src',row.iimageurll);
-			var prizeList,paperList,subjectList,projectList;
 // 			alert(JSON.stringify(row));
 			//从后台获取数据
 			$.ajax({
@@ -745,50 +897,37 @@
  					if(subjectList!=""){
 						$('#subject').combogrid('setValues', subjectList.split(","));
 					}
- 					
-// 					for(var i = 0; i < subjectList.length; i++){
-// 						addSubject();
-// 						$('#subjectno'+(parseInt(i)+1)).val(subjectList[i].subjectno);
-// 						$('#subjectname'+(parseInt(i)+1)).val(subjectList[i].subjectname);
-// 						$('#subjecttype'+(parseInt(i)+1)).combobox('select',subjectList[i].subjecttype);
-// 						$('#subjecttypename'+(parseInt(i)+1)).val(subjectList[i].subjecttypename);
-// 						$('#subjecttext'+(parseInt(i)+1)).val(subjectList[i].subjecttext);
-// 					}
-					
-					for(var i = 0; i < paperList.length; i++){
+ 					for(var i = 0; i < projectList.length; i++){
+ 						addProject();
+ 						$('#researchname'+(parseInt(i)+1)).val(projectList[i].researchname);
+ 						$('#researchno'+(parseInt(i)+1)).val(projectList[i].researchno);
+ 						$('#researchbegindate'+(parseInt(i)+1)).datebox('setValue',projectList[i].researchbegindate);
+ 						$('#researchenddate'+(parseInt(i)+1)).datebox('setValue',projectList[i].researchenddate);
+ 						$('#researchteachorresearch'+(parseInt(i)+1)).combobox('select',projectList[i].researchteachorresearch);
+ 						$('#researchtype'+(parseInt(i)+1)).combobox('select',projectList[i].researchtype);
+ 						$('#isresearch'+(parseInt(i)+1)).combobox('select',projectList[i].isresearch);
+ 						$('#researchrank'+(parseInt(i)+1)).combobox('select',projectList[i].researchrank);
+ 						$('#researchknot'+(parseInt(i)+1)).combobox('select',projectList[i].researchknot);
+ 						$('#researchlevel'+(parseInt(i)+1)).combobox('select',projectList[i].researchlevel);
+ 					}
+ 					for(var i = 0; i < paperList.length; i++){
 						addPaper();
 						$('#papername'+(parseInt(i)+1)).val(paperList[i].papername);
-						$('#paperauthor'+(parseInt(i)+1)).val(paperList[i].paperauthor);
 						$('#papernotename'+(parseInt(i)+1)).val(paperList[i].papernotename);
-						$('#papernoteyear'+(parseInt(i)+1)).val(paperList[i].papernoteyear);
 						$('#papernoteno'+(parseInt(i)+1)).val(paperList[i].papernoteno);
+						$('#papernotecountry'+(parseInt(i)+1)).val(paperList[i].papernotecountry);
+						$('#papernotepage'+(parseInt(i)+1)).val(paperList[i].papernotepage);
+						$('#paperfactors'+(parseInt(i)+1)).val(paperList[i].paperfactors);
+						$('#paperprojectno'+(parseInt(i)+1)).val(paperList[i].paperprojectno);
+ 						$('#papernotedate'+(parseInt(i)+1)).datebox('setValue',paperList[i].papernotedate);
+//  						alert(paperList[i].paperauthor);
+ 						$('#paperauthor'+(parseInt(i)+1)).combobox('select',paperList[i].paperauthor);
+ 						$('#paperincluded'+(parseInt(i)+1)).combobox('select',paperList[i].paperincluded);
+ 						$('#paperreprint'+(parseInt(i)+1)).combobox('select',paperList[i].paperreprint);
+ 						$('#paperclassa'+(parseInt(i)+1)).combobox('select',paperList[i].paperclassa);
+ 						$('#paperteachorresearch'+(parseInt(i)+1)).combobox('select',paperList[i].paperteachorresearch);
 					}
-					for(var i = 0; i < prizeList.length; i++){
-						addPrize();
-						$('#prizetype'+(parseInt(i)+1)).combobox('select',prizeList[i].prizetype);
-						$('#prizeinfo'+(parseInt(i)+1)).val(prizeList[i].prizeinfo);
-// 						$('#prizeId'+(parseInt(i)+1)).val(prizeList[i].prizeid);
-// 						alert(prizeList[i].prizeid);
-					}
-					for(var i = 0; i < projectList.length; i++){
-						addProject();
-// 						$('#researchlevel'+(parseInt(i)+1)).val(projectList[i].researchlevel);
-						$('#researchname'+(parseInt(i)+1)).val(projectList[i].researchname);
-						$('#researchno'+(parseInt(i)+1)).val(projectList[i].researchno);
-// 						$('#researchmoney'+(parseInt(i)+1)).val(projectList[i].researchmoney);
-// 						$('#researchmatchmoney'+(parseInt(i)+1)).val(projectList[i].researchmatchmoney);
-// 						$('#researchhost'+(parseInt(i)+1)).val(projectList[i].researchhost);
-// 						$('#researchactor'+(parseInt(i)+1)).val(projectList[i].researchactor);
-						$('#researchbegindate'+(parseInt(i)+1)).datebox('setValue',projectList[i].researchbegindate);
-						$('#researchenddate'+(parseInt(i)+1)).datebox('setValue',projectList[i].researchenddate);
-						$('#researchteachorresearch'+(parseInt(i)+1)).combobox('select',projectList[i].researchteachorresearch);
-						$('#researchtype'+(parseInt(i)+1)).combobox('select',projectList[i].researchtype);
-						$('#isresearch'+(parseInt(i)+1)).combobox('select',projectList[i].isresearch);
-						$('#researchrank'+(parseInt(i)+1)).combobox('select',projectList[i].researchrank);
-						$('#researchknot'+(parseInt(i)+1)).combobox('select',projectList[i].researchknot);
-						$('#researchlevel'+(parseInt(i)+1)).combobox('select',projectList[i].researchlevel);
-					}
-					for(var i = 0; i < workList.length; i++){
+ 					for(var i = 0; i < workList.length; i++){
 						addWork();
 						$('#classA'+(parseInt(i)+1)).combobox('select',workList[i].classa);
 						$('#translateForeign'+(parseInt(i)+1)).combobox('select',workList[i].translateforeign);
@@ -802,16 +941,37 @@
 						$('#workPublishArea'+(parseInt(i)+1)).val(workList[i].workpublisharea);
 						$('#workPublishUnit'+(parseInt(i)+1)).val(workList[i].workpublishunit);
 						$('#workTitle'+(parseInt(i)+1)).val(workList[i].worktitle);
-// 						alert($('#workType'+(parseInt(i)+1)).combobox('getText'));
 						$('#workType'+(parseInt(i)+1)).combobox('select',workList[i].worktype);
-// 						$('#workType'+(parseInt(i)+1)).combobox('select',3);
-// 						alert('#workType'+(parseInt(i)+1)+'@'+'#workType1');
 					}
+ 					for(var i = 0; i < prizeList.length; i++){
+						addPrize();
+						$('#prizetype'+(parseInt(i)+1)).combobox('select',prizeList[i].prizetype);
+						$('#prizetitle'+(parseInt(i)+1)).combobox('select',prizeList[i].prizetitle);
+						$('#prizerank'+(parseInt(i)+1)).combobox('select',prizeList[i].prizerank);
+						$('#prizelevel'+(parseInt(i)+1)).combobox('select',prizeList[i].prizelevel);
+ 						$('#prizedate'+(parseInt(i)+1)).datebox('setValue',prizeList[i].prizedate);
+						$('#prizeresultname'+(parseInt(i)+1)).val(prizeList[i].prizeresultname);
+						$('#prizedep'+(parseInt(i)+1)).val(prizeList[i].prizedep);
+						$('#prizeno'+(parseInt(i)+1)).val(prizeList[i].prizeno);
+						
+					}
+// 					for(var i = 0; i < subjectList.length; i++){
+// 						addSubject();
+// 						$('#subjectno'+(parseInt(i)+1)).val(subjectList[i].subjectno);
+// 						$('#subjectname'+(parseInt(i)+1)).val(subjectList[i].subjectname);
+// 						$('#subjecttype'+(parseInt(i)+1)).combobox('select',subjectList[i].subjecttype);
+// 						$('#subjecttypename'+(parseInt(i)+1)).val(subjectList[i].subjecttypename);
+// 						$('#subjecttext'+(parseInt(i)+1)).val(subjectList[i].subjecttext);
+// 					}
+					
 				},
 				error : function() {
 					jAlert('系统错误，请联系管理员','错误提示');
 				}
 			});
+// 			d=new Date(); 
+// 			endTime=d.getTime(); 
+// 			alert((endTime-startTime)/100);
 			dispalyAllUploader(paperList.length,projectList.length);
 			url = 'Teacher_update?id=' + row.id;
 		}
@@ -1012,6 +1172,43 @@
 		});
 		return s;
 	}
+	
+// 	$('#teacher_tab').tabs({ 
+// 	    border:false, 
+// 	    onSelect:function(title,index){ 
+// // 	        alert(title+' is selected'+index); 
+// 	        if(index==0){
+	        	
+// 	        }
+// 			if(index==1){
+// 	        }
+// 			if(index==2){
+// 				if(projectList!=null){
+				
+// 				projectList=null;
+// 				}
+// 			}
+// 			if(index==3){
+// 				if(paperList!=null){
+// 					paperList=null;
+// 				}
+// 			}
+// 			if(index==4){
+// 				if(workList!=null){
+					
+// 					workList=null;
+// 				}
+// 			}
+// 			if(index==5){
+// 				if(prizeList!=null){
+// 					prizeList=null;
+// 				}
+				
+// 			}
+			
+			
+// 	    } 
+// 	});
 	</script>
 	<style type="text/css">
 #teacherfm {

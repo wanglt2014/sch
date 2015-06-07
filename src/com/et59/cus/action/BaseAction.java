@@ -71,7 +71,7 @@ public abstract class BaseAction extends SystemAction {
 	 */
 	protected List<BsArticle> bsArticlelist;
 	/**
-	 * 教务教学通知
+	 * 教学/科研通知
 	 */
 	protected List<BsArticle> notifylist;
 	/**
@@ -94,6 +94,11 @@ public abstract class BaseAction extends SystemAction {
 	 * 资料下载列表
 	 */
 	protected List<TDownload> downloadlist;
+	
+	/**
+	 * 教师/学生国际交流
+	 */
+	protected List<BsArticle> exchangelist;
 	/**
 	 * 文章详情
 	 */
@@ -174,11 +179,18 @@ public abstract class BaseAction extends SystemAction {
 				regulationList = (List<BsArticle>) map1
 						.get(Constant.ARTICLE_LIST);
 			}
-			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_ALL_NOTICE);
 			Map map2 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					6, 1);
 			if (ComonUtil.validateMapResult(map2)) {
 				notifylist = (List<BsArticle>) map2.get(Constant.ARTICLE_LIST);
+			}
+			
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_ALL_EXCHANGE);
+			Map map4 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+					6, 1);
+			if (ComonUtil.validateMapResult(map4)) {
+				exchangelist = (List<BsArticle>) map4.get(Constant.ARTICLE_LIST);
 			}
 
 			TDownload download = new TDownload();
@@ -223,11 +235,13 @@ public abstract class BaseAction extends SystemAction {
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
 			if (1 == type) {
-				bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_ALL_NOTICE);//教学、科研通知
 			} else if (2 == type) {
 				bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
 			} else if (3 == type) {
 				bsArticle.setArticletype(Constant.ARTICLE_TYPE_RESULT);
+			} else if (4 == type) {
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_ALL_EXCHANGE);//教师、学生国际交流
 			}
 			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					5, 1);
@@ -601,5 +615,15 @@ public abstract class BaseAction extends SystemAction {
 			return null;
 		}
 	}
+
+	public List<BsArticle> getExchangelist() {
+		return exchangelist;
+	}
+
+	public void setExchangelist(List<BsArticle> exchangelist) {
+		this.exchangelist = exchangelist;
+	}
+	
+	
 
 }

@@ -84,7 +84,7 @@ $(function(){
 				
 				<div id="service_div">
 					<div class="service_title" style="vertical-align: bottom;">
-						<span style="display: block;float: left;">教学教务通知</span>
+						<span style="display: block;float: left;">教学科研通知</span>
 						<span style="display: block;margin-right:10px;float: right;">
 						<a href="Article_toNoticePage.shtm" style="font-size: 11px;">更多>></a></span>
 					</div>
@@ -128,27 +128,27 @@ $(function(){
 			<div id="right_content_top" >
 				<ul>
 					<li class="normal_title_content">
-						<span style="display: block;float: left;">资料下载</span>
+						<span style="display: block;float: left;">国际交流</span>
 						<span style="display: block;margin-right:10px;float: right;">
-						<a href="Download_toDownloadPage.shtm" style="font-size: 11px;">更多>></a></span>
+						<a href="Article_toExchangePage.shtm" style="font-size: 11px;">更多>></a></span>
 					</li>
 				</ul>
 				<div class="normal_content_top" >
 				<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
 <!-- 				<ul class="news_content"> -->
-					<s:iterator var="download" value="downloadlist" status="st">
+					<s:iterator var="exchange" value="exchangelist" status="st">
 <!-- 						<li> -->
 						<div class="first_line_info" >
 							<table class="news_main_content" width="100%" >
 							<tr>
 							<td  style="width: 100%;">
-							<a  target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm" title="<s:property value="#download.filename" />"/>
-							<s:property value="#download.filename" />
+							<a target="_blank" href="Article_regulationDetail_${exchange.articleid}.shtm" title="<s:property value="#exchange.articletitle" />">
+							<s:property value="#exchange.articletitle" />
 							</a>
 							</td>
 							<td style="width: 65px;">
-							<a  target="_blank" href="Download_downloaddetail_${download.downloadid}.shtm" title="<s:property value="#download.filename" />"/>
-							<s:property value="#download.createdate" />
+							<a target="_blank" href="Article_regulationDetail_${exchange.articleid}.shtm" title="<s:property value="#exchange.articletitle" />">
+							<s:property value="#exchange.createdate" />
 							</a>
 							</td>
 							</tr>
@@ -164,7 +164,7 @@ $(function(){
 				<div id="right_content_bottom" >
 				<ul>
 					<li class="normal_title_content">
-						<span style="display: block;float: left;">教务教学制度</span>
+						<span style="display: block;float: left;">规章制度</span>
 						<span style="display: block;margin-right:10px;float: right;">
 						<a href="Article_toRegulationPage.shtm" style="font-size: 11px;">更多>></a></span>
 					</li>
@@ -174,9 +174,9 @@ $(function(){
 					<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
 					<s:iterator var="regulation" value="regulationList" status="st">
 					<div class="first_line_info" >
-							<table class="news_main_content" width="100%" >
-							<tr>
-							<td  style="width: 100%;">
+						<table class="news_main_content" width="100%" >
+						<tr>
+						<td  style="width: 100%;">
 						<a target="_blank" href="Article_regulationDetail_${regulation.articleid}.shtm" title="<s:property value="#regulation.articletitle" />">
 						<s:property value="#regulation.articletitle" />
 						</a>

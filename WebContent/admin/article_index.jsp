@@ -57,6 +57,7 @@
                 <th field="createdate" width="50" >创建日期</th>
                 <th field="articletype" width="50" formatter="formatnewstype">类型</th>
                 <th field="articletitle" width="100">标题</th>
+                <th field="articleistop" width="30" formatter="formatistop">是否置顶</th>
                 <th field="articlesummary" width="250">概要</th>
                 <th field="updatedate" width="50" >更新日期</th>
                 <th field="articleid" width="30" formatter="formatpreview">预览</th>
@@ -161,11 +162,20 @@
     		var s ='<a href="'+actionUrl+'?id='+rowData.articleid+'" class="easyui-linkbutton" target="_blank"">预览</a>';
     		return s;
    	    }
+   	 function formatistop(value,rowData,rowIndex) {
+        	var s="";
+    		if(value=="0"){
+    			s ="否";
+    		}else if(value=="1"){
+    			s ="是";
+    		}
+    		return s;
+   	    }
         
         function formatnewstype(value,rowData,rowIndex) {
         	var s="";
     		if(value=="notice"){
-    			s ="教学科研通知";
+    			s ="教学通知";
     		}else if(value=="regulation"){
     			s ="规章制度";
     		}else if(value=="construction"){
@@ -180,6 +190,22 @@
     			s ="国际共建课程";
     		}else if(value=="student"){
     			s ="学生展示";
+    		}else if(value=="researchNotice"){
+    			s ="科研通知";
+    		}else if(value=="teacherExchange"){
+    			s ="教师国际交流";
+    		}else if(value=="studentExchange"){
+    			s ="学生国际交流";
+    		}else if(value=="studentPrize"){
+    			s ="学生获奖";
+    		}else if(value=="honor"){
+    			s ="荣誉获奖";
+    		}else if(value=="socialPractice"){
+    			s ="社会实践";
+    		}else if(value=="learning"){
+    			s ="学术活动";
+    		}else if(value=="bookClub"){
+    			s ="读书会";
     		}else{
     			s ="";
     		}

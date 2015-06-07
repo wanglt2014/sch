@@ -2,7 +2,11 @@ package com.et59.cus.action;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -28,10 +32,15 @@ import com.et59.cus.domain.entity.TWork;
 import com.et59.cus.domain.entity.TWorkExample;
 import com.et59.cus.domain.entity.ex.Pager;
 import com.et59.cus.dto.TPaperDTO;
+import com.et59.cus.dto.TPaperExportDTO;
+import com.et59.cus.dto.TPrizeExportDTO;
 import com.et59.cus.dto.TResearchDTO;
+import com.et59.cus.dto.TResearchExportDTO;
 import com.et59.cus.dto.TSubjectDTO;
+import com.et59.cus.dto.TWorkExportDTO;
 import com.et59.cus.tools.ComonUtil;
 import com.et59.cus.tools.Constant;
+import com.et59.cus.tools.ExportExcel;
 import com.et59.cus.tools.FileAction;
 
 /**
@@ -74,8 +83,38 @@ public class TeacherAction extends BaseAction {
 	public List<TSubjectDTO> tSubjectDtoList;
 
 	public List<TResearchDTO> tResearchList;
+	
+	public List<TResearch> researchList;
+	
+	public List<TWork> tWorkList;
+	
+	public List<TPaper> paperList;
 
 	public String defultId;
+	
+	public List<TResearch> getResearchList() {
+		return researchList;
+	}
+
+	public void setResearchList(List<TResearch> researchList) {
+		this.researchList = researchList;
+	}
+
+	public List<TPaper> getPaperList() {
+		return paperList;
+	}
+
+	public void setPaperList(List<TPaper> paperList) {
+		this.paperList = paperList;
+	}
+
+	public List<TWork> gettWorkList() {
+		return tWorkList;
+	}
+
+	public void settWorkList(List<TWork> tWorkList) {
+		this.tWorkList = tWorkList;
+	}
 
 	public List<TResearchDTO> gettResearchList() {
 		return tResearchList;
@@ -295,6 +334,7 @@ public class TeacherAction extends BaseAction {
 	public void queryTeacherOtherInfo() {
 		String teacherId = request.getParameter("teacherId");
 		HashMap map = new HashMap();
+//		long startTime=System.currentTimeMillis();   //获取开始时间
 		try {
 			Long teacherIdLong = Long.parseLong(teacherId);
 			// 加载课程
@@ -347,7 +387,8 @@ public class TeacherAction extends BaseAction {
 			map.put("tResearch", tResearchList);
 			map.put("tPrize", tPrizeList);
 			map.put("tWork", tWorkList);
-
+//			long endTime=System.currentTimeMillis(); //获取结束时间
+//			System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
 			super.reponseWriter(JSON.toJSONString(map));
 			// } catch (IOException e) {
 			// e.printStackTrace();
@@ -513,12 +554,18 @@ public class TeacherAction extends BaseAction {
 			tPaper.setPapername(request.getParameter("papername" + i));
 			tPaper.setPaperauthor(request.getParameter("paperauthor" + i));
 			tPaper.setPapernotename(request.getParameter("papernotename" + i));
-			tPaper.setPapernoteyear(request.getParameter("papernoteyear" + i));
 			tPaper.setPapernoteno(request.getParameter("papernoteno" + i));
-			tPaper.setPapernoteno(request.getParameter("paperteachorresearch" + i));
+			tPaper.setPaperteachorresearch(request.getParameter("paperteachorresearch" + i));
+			tPaper.setPapernotecountry(request.getParameter("papernotecountry" + i));
+			tPaper.setPapernotedate(request.getParameter("papernotedate" + i));
+			tPaper.setPapernotepage(request.getParameter("papernotepage" + i));
+			tPaper.setPaperincluded(request.getParameter("paperincluded" + i));
+			tPaper.setPaperfactors(request.getParameter("paperfactors" + i));
+			tPaper.setPaperreprint(request.getParameter("paperreprint" + i));
+			tPaper.setPaperclassa(request.getParameter("paperclassa" + i));
+			tPaper.setPaperprojectno(request.getParameter("paperprojectno" + i));
 			list.add(tPaper);
 		}
-
 		return list;
 	}
 	
@@ -564,8 +611,14 @@ public class TeacherAction extends BaseAction {
 		String prizeNum = request.getParameter("prizeNum");
 		for (int i = 1; i <= Integer.parseInt(prizeNum); i++) {
 			tPrize = new TPrize();
-			tPrize.setPrizeinfo(request.getParameter("prizeinfo" + i));
 			tPrize.setPrizetype(request.getParameter("prizetype" + i));
+			tPrize.setPrizedate(request.getParameter("prizedate" + i));
+			tPrize.setPrizetitle(request.getParameter("prizetitle" + i));
+			tPrize.setPrizerank(request.getParameter("prizerank" + i));
+			tPrize.setPrizelevel(request.getParameter("prizelevel" + i));
+			tPrize.setPrizeresultname(request.getParameter("prizeresultname" + i));
+			tPrize.setPrizedep(request.getParameter("prizedep" + i));
+			tPrize.setPrizeno(request.getParameter("prizeno" + i));
 			list.add(tPrize);
 		}
 		return list;
@@ -616,11 +669,13 @@ public class TeacherAction extends BaseAction {
 			String tempID = null;
 			for (int i = 0; i < idArr.length; i++) {
 				tempID = idArr[i];
+				if(!tempID.equals("")){
 				tSubject = new TSubject();
 				tSubject.setSubjectid(Long.valueOf(tempID));
 				tSubject.setSubjectteacherid(teacher.getId());
 				tSubject.setSubjectteachername(teacher.getTeachername());
 				localServiceEXProxy.updateTSubject(tSubject);
+				}
 			}
 
 			// if (subjectList != null && subjectList.size() > 0) {
@@ -644,6 +699,7 @@ public class TeacherAction extends BaseAction {
 						.hasNext();) {
 					TResearch tResearch = (TResearch) iterator.next();
 					tResearch.setResearchteacherid(id);
+					tResearch.setResearchteachername(teacher.getTeachername());
 					localServiceEXProxy.saveTResearch(tResearch);
 				}
 			}
@@ -656,6 +712,7 @@ public class TeacherAction extends BaseAction {
 						.hasNext();) {
 					TPaper tPaper = (TPaper) iterator.next();
 					tPaper.setPaperteacherid(id);
+					tPaper.setPaperteachername(teacher.getTeachername());
 					localServiceEXProxy.saveTPaper(tPaper);
 				}
 
@@ -669,6 +726,7 @@ public class TeacherAction extends BaseAction {
 						.hasNext();) {
 					TPrize tPrize = (TPrize) iterator.next();
 					tPrize.setPrizeteacherid(id);
+					tPrize.setPrizeteachername(teacher.getTeachername());
 					localServiceEXProxy.saveTPrize(tPrize);
 
 				}
@@ -682,6 +740,7 @@ public class TeacherAction extends BaseAction {
 						.hasNext();) {
 					TWork tWork = (TWork) iterator.next();
 					tWork.setWorkteacherid(id);
+					tWork.setWorkteachername(teacher.getTeachername());
 					localServiceEXProxy.saveTWork(tWork);
 
 				}
@@ -743,6 +802,7 @@ public class TeacherAction extends BaseAction {
 				tResearch.setDownloadid((Long) downloadIdMap.get("proDLId"
 						+ (i + 1)));
 				tResearch.setResearchteacherid(teacherId);
+				tResearch.setResearchteachername(teacher.getTeachername());
 				localServiceEXProxy.saveTResearch(tResearch);
 			}
 
@@ -752,11 +812,15 @@ public class TeacherAction extends BaseAction {
 			String tempID = null;
 			for (int i = 0; i < idArr.length; i++) {
 				tempID = idArr[i];
-				tSubject = new TSubject();
-				tSubject.setSubjectid(Long.valueOf(tempID));
-				tSubject.setSubjectteacherid(teacher.getId());
-				tSubject.setSubjectteachername(teacher.getTeachername());
-				localServiceEXProxy.updateTSubject(tSubject);
+				if(!tempID.equals("")){
+					tSubject = new TSubject();
+					tSubject.setSubjectid(Long.valueOf(tempID));
+					tSubject.setSubjectteacherid(teacher.getId());
+					tSubject.setSubjectteachername(teacher.getTeachername());
+					localServiceEXProxy.updateTSubject(tSubject);
+				}
+				
+				
 			}
 			// for (int i = 0; i < subjectSize; i++) {
 			// tSubject = subjectList.get(i);
@@ -779,6 +843,7 @@ public class TeacherAction extends BaseAction {
 				tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"
 						+ (i + 1)));
 				tPaper.setPaperteacherid(teacherId);
+				tPaper.setPaperteachername(teacher.getTeachername());
 				localServiceEXProxy.saveTPaper(tPaper);
 			}
 
@@ -787,6 +852,7 @@ public class TeacherAction extends BaseAction {
 			for (int i = 0; i < prizeSize; i++) {
 				TPrize tPrize = (TPrize) tPrizeList.get(i);
 				tPrize.setPrizeteacherid(teacherId);
+				tPrize.setPrizeteachername(teacher.getTeachername());
 				localServiceEXProxy.saveTPrize(tPrize);
 			}
 			
@@ -795,6 +861,7 @@ public class TeacherAction extends BaseAction {
 			for (int i = 0; i < workSize; i++) {
 				TWork tWork = (TWork) tWorkList.get(i);
 				tWork.setWorkteacherid(teacherId);
+				tWork.setWorkteachername(teacher.getTeachername());
 				localServiceEXProxy.saveTWork(tWork);
 			}
 
@@ -1022,5 +1089,154 @@ public class TeacherAction extends BaseAction {
 		}
 		return "teacher_result";
 	}
+	
+	/**
+	 * @Title: toSRRPage
+	 * @Description: 跳转到科学研究成果
+	 * @return String 返回类型
+	 * @throws
+	 */
 
+	public String toSRRPage() {
+		// super.commonQueryForTeacher("");
+		return "to_srr_index";
+	}
+
+	
+	/**
+	 * 查询师资队伍
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQuerySRR() {
+		try {
+			// 加载立项
+//			List<TResearch> tResearchList = new ArrayList<TResearch>();
+			TResearchExample trexample = new TResearchExample();
+			trexample.createCriteria().andResearchrankEqualTo("1");
+			researchList = localServiceEXProxy.queryTResearchList(trexample);
+
+			// 加载论文
+//			List<TPaper> tPaperList = new ArrayList<TPaper>();
+			TPaperExample tpexample = new TPaperExample();
+			tpexample.createCriteria().andPaperauthorEqualTo("1");
+			paperList = localServiceEXProxy.queryTPaperList(tpexample);
+
+			// 加载著作
+//			List<TWork> tWorkList = new ArrayList<TWork>();
+			TWorkExample twexample = new TWorkExample();
+			twexample.createCriteria().andWorkauthorrankEqualTo("1");
+			tWorkList = localServiceEXProxy.queryTWorkList(twexample);
+			
+			// 加载获奖信息
+//			List<TPrize> tPrizeList = new ArrayList<TPrize>();
+			TPrizeExample tPrizeExample = new TPrizeExample();
+			tPrizeExample.createCriteria().andPrizerankEqualTo("1");
+			tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "srr_result";
+	}
+	
+	/**
+	 * 导出Excel
+	 */
+	@SuppressWarnings("unchecked")
+	public  void  ExportExcel(){
+		String type = request.getParameter("type"); // 当前页数  
+		String[] hearders  = null;
+		try {
+			 SimpleDateFormat timeFormat = new SimpleDateFormat("yyyyMMddHHmmss");  
+			    String filename = timeFormat.format(new Date())+".xls";  
+			    response.setContentType("application/ms-excel;charset=UTF-8");  
+			    response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode(filename, "UTF-8"))));  
+			    OutputStream out = response.getOutputStream();  
+			if("research".equals(type)){
+				// 加载立项
+				TResearchExample trexample = new TResearchExample();
+				trexample.createCriteria().andResearchrankEqualTo("1");
+				List<TResearch> tResearchList  = localServiceEXProxy.queryTResearchList(trexample);
+				TResearchExportDTO researchExportDTO = null;
+				List<TResearchExportDTO> resExportList = new ArrayList<TResearchExportDTO>();
+				for (Iterator iterator = tResearchList.iterator(); iterator
+						.hasNext();) {
+					TResearch tResearch = (TResearch) iterator.next();
+					researchExportDTO =  new TResearchExportDTO();
+					BeanUtils.copyProperties(researchExportDTO, tResearch);
+					resExportList.add(researchExportDTO);
+				}
+				hearders = new String[] {"姓名", "教师排名", "项目种类", "项目类别", "项目名称",
+						"项目编号", "开始时间","结束时间","是否在研","结束等级"};//表头数组     
+				ExportExcel<TResearchExportDTO> ex = new ExportExcel<TResearchExportDTO>();  
+			    ex.exportExcel(hearders, resExportList, out);  
+			}else if("paper".equals(type)){
+				TPaperExample tpexample = new TPaperExample();
+				tpexample.createCriteria().andPaperauthorEqualTo("1");
+				List<TPaper> tPaperList = localServiceEXProxy.queryTPaperList(tpexample);
+				
+				TPaperExportDTO paperExportDTO = null;
+				List<TPaperExportDTO> paperExportList = new ArrayList<TPaperExportDTO>();
+				for (Iterator iterator = tPaperList.iterator(); iterator
+						.hasNext();) {
+					TPaper tPaper = (TPaper) iterator.next();
+					paperExportDTO =  new TPaperExportDTO();
+					BeanUtils.copyProperties(paperExportDTO, tPaper);
+					paperExportList.add(paperExportDTO);
+				}
+				hearders = new String[] {"姓名", "作者排名", "论文题目", "发表刊物/论文集名称", "刊物国别",
+						"发表/出版时间", "期号（卷号）","页码","论文收录","影响因子","论文转载","一级学科","资助项目编号"};//表头数组     
+				ExportExcel<TPaperExportDTO> ex = new ExportExcel<TPaperExportDTO>();  
+			    ex.exportExcel(hearders, paperExportList, out);  
+			}else if("work".equals(type)){
+				TWorkExample twexample = new TWorkExample();
+				twexample.createCriteria().andWorkauthorrankEqualTo("1");
+				List<TWork> tWorkList = localServiceEXProxy.queryTWorkList(twexample);
+				
+				TWorkExportDTO workExportDTO = null;
+				List<TWorkExportDTO> workExportList = new ArrayList<TWorkExportDTO>();
+				for (Iterator iterator = tWorkList.iterator(); iterator
+						.hasNext();) {
+					TWork tWork = (TWork) iterator.next();
+					workExportDTO =  new TWorkExportDTO();
+					BeanUtils.copyProperties(workExportDTO, tWork);
+					workExportList.add(workExportDTO);
+				}
+				hearders = new String[] {"姓名", "作者排名", "著作题目", "出版单位", "出版地",
+						"出版时间", "著作类别","原作者","自己承担字数/全书总字数（千）","已出几版","是否译成外文","ISBN号","一级学科","资助项目编号"};//表头数组     
+				ExportExcel<TWorkExportDTO> ex = new ExportExcel<TWorkExportDTO>();  
+			    ex.exportExcel(hearders, workExportList, out);  
+			}else if("prize".equals(type)){
+				// 加载获奖信息
+				TPrizeExample tPrizeExample = new TPrizeExample();
+				tPrizeExample.createCriteria().andPrizerankEqualTo("1");
+				List<TPrize> tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
+				
+				TPrizeExportDTO prizeExportDTO = null;
+				List<TPrizeExportDTO> prizeExportList = new ArrayList<TPrizeExportDTO>();
+				for (Iterator iterator = tPrizeList.iterator(); iterator
+						.hasNext();) {
+					TPrize tPrize = (TPrize) iterator.next();
+					prizeExportDTO =  new TPrizeExportDTO();
+					BeanUtils.copyProperties(prizeExportDTO, tPrize);
+					prizeExportList.add(prizeExportDTO);
+				}
+				hearders = new String[] {"姓名", "获奖排名", "奖项名称", "成果名称", "奖励等级",
+						"成果类别", "授奖部门","获奖时间","证书编号"};//表头数组     
+				ExportExcel<TPrizeExportDTO> ex = new ExportExcel<TPrizeExportDTO>();  
+			    ex.exportExcel(hearders, prizeExportList, out);  
+			}
+			
+		    
+		    out.close();  
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		   
+	}
+	
 }

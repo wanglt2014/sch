@@ -35,6 +35,8 @@ public class ArticleAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	Logger log = Logger.getLogger(this.getClass());
+	
+	public String defultId;
 
 	// public TDownload tDownload;
 
@@ -54,6 +56,16 @@ public class ArticleAction extends BaseAction {
 	 */
 	public String trainingResultsIndex() {
 		return "trainingResults_index";
+	}
+	
+	/**
+	 * 跳转到国际交流页面
+	 * 
+	 * @return
+	 */
+	public String toExchangePage() {
+		super.commonQueryForArticle(3);
+		return "to_exchange_index";
 	}
 
 	/**
@@ -151,6 +163,9 @@ public class ArticleAction extends BaseAction {
 		}
 		return "regulation_result";
 	}
+	
+	
+	
 
 	/**
 	 * @Title: teachDetail
@@ -488,8 +503,8 @@ public class ArticleAction extends BaseAction {
 				tDownload.setFileisvalid(Constant.ISVALID_1);
 				Long downloadId = localServiceEXProxy
 						.saveDownloadInfo(tDownload);
-				System.out.println(downloadId + "******downloadId" + "路径："
-						+ filepath);
+//				System.out.println(downloadId + "******downloadId" + "路径："
+//						+ filepath);
 				bsArticle.setDownloadid(downloadId);
 			}
 			localServiceProxy.saveArticle(bsArticle);
@@ -538,6 +553,62 @@ public class ArticleAction extends BaseAction {
 		bsArticle.setCreatedate(createdate);
 		bsArticle.setAuthor(author);
 		return bsArticle;
+	}
+	
+	/**
+	 * 查询国际交流
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryExchange() {
+		String type = request.getParameter("excTypePara");
+		try {
+			BsArticleQuery bsArticle = new BsArticleQuery();
+			if("teacher".equals(type)){
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_TEA_EXC);
+			}else{
+				bsArticle.setArticletype(Constant.ARTICLE_TYPE_STU_EXC);
+			}
+			Map map = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+					Constant.PAGESIZE, currentPage);
+			if (ComonUtil.validateMapResult(map)) {
+				bsArticlelist = (List<BsArticle>) map
+						.get(Constant.ARTICLE_LIST);
+				totalCount = (Integer) map.get(Constant.TOTALCOUNT);
+				totalPageCount = (Integer) map.get(Constant.TOTALPAGECOUNT);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_result";
+	}
+	
+	/**
+	 * @Title: exchangeDetail
+	 * @Description: 跳转到国际交流详细页面
+	 * @param @return 设定文件
+	 * @return String 返回类型
+	 * @throws
+	 */
+	public String exchangeDetail() {
+//		super.commonQueryForArticle(4);
+		String id = request.getParameter("id");
+		try {
+			bsArticledetail = localServiceProxy.queryArticleById(Long
+					.valueOf(id));
+			if (bsArticledetail.getDownloadid() != null) {
+				TDownload download = localServiceEXProxy
+						.queryDownloadById(bsArticledetail.getDownloadid());
+				bsArticledetail.setDownload(download);
+			}
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_detail";
 	}
 
 	public static void main(String[] args) throws Exception {

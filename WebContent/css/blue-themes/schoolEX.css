@@ -119,6 +119,10 @@ margin:0px auto; min-width:1000px; float:none;
 .line_teacher{
 	color:#bbbbbb; width:90%;
 }
+
+.line_keyanchenguo{
+	color:#bbbbbb; width:95%;
+}
 .div_planInfo{font-size: 14px;height: 100%;height: auto;min-height: 120px;margin-top: 30px;}
 .planInfo{width: 90%;height: 100%;height: auto;margin-left: 5%;}
 

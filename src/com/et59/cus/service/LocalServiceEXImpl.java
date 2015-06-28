@@ -34,6 +34,8 @@ import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TResearchExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
+import com.et59.cus.domain.entity.TTeacher;
+import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
 import com.et59.cus.domain.entity.TTeacherPrizeExample;
@@ -394,6 +396,22 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public List<TResearch> queryTResearchList(TResearchExample example) throws Exception {
 		return tResearchDAO.selectByExample(example);
 	}
+	
+	/**
+	 * 查询立项表
+	 */
+	@Override
+	public Pager queryTResearchBypage(TResearchExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TResearch> list = commonDAOEx.selectTResearchForPage(
+				example, startrecord, pagesize);
+		int totalCount = tResearchDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
 
 	/**
 	 * 查询论文关联表
@@ -418,6 +436,22 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public List<TPaper> queryTPaperList(TPaperExample example) throws Exception {
 		return tPaperDAO.selectByExample(example);
+	}
+	
+	/**
+	 * 查询论文表
+	 */
+	@Override
+	public Pager queryTPaperBypage(TPaperExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TPaper> list = commonDAOEx.selectTPaperForPage(
+				example, startrecord, pagesize);
+		int totalCount = tPaperDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
 	}
 
 	/**
@@ -565,6 +599,22 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public List<TWork> queryTWorkList(TWorkExample example) throws Exception {
 		return tWorkDAO.selectByExample(example);
+	}
+	
+	/**
+	 * 查询著作表
+	 */
+	@Override
+	public Pager queryWorkBypage(TWorkExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TWork> list = commonDAOEx.selectWorkForPage(
+				example, startrecord, pagesize);
+		int totalCount = tWorkDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
 	}
 
 }

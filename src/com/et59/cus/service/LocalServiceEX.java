@@ -297,4 +297,22 @@ public interface LocalServiceEX {
 	 * 查询著作表
 	 */
 	public List<TWork> queryTWorkList(TWorkExample example) throws Exception;
+	
+	/**
+	 * 查询立项表
+	 */
+	public Pager queryTResearchBypage(TResearchExample example, int pagesize,
+			int currentpage) throws Exception;
+	
+	/**
+	 * 查询论文表
+	 */
+	public Pager queryTPaperBypage(TPaperExample example, int pagesize,
+			int currentpage) throws Exception;
+	
+	/**
+	 * 查询著作表
+	 */
+	public Pager queryWorkBypage(TWorkExample example, int pagesize,
+			int currentpage) throws Exception;
 }

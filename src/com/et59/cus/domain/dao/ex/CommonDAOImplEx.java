@@ -43,11 +43,17 @@ import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.TPaper;
+import com.et59.cus.domain.entity.TPaperExample;
+import com.et59.cus.domain.entity.TResearch;
+import com.et59.cus.domain.entity.TResearchExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TTeacherWithBLOBs;
+import com.et59.cus.domain.entity.TWork;
+import com.et59.cus.domain.entity.TWorkExample;
 
 /**
  * <p>
@@ -395,6 +401,51 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 		List<TDepartmentWithBLOBs> list = (List<TDepartmentWithBLOBs>) getSqlMapClientTemplate()
 				.queryForList(
 						"t_department.ibatorgenerated_selectByExampleWithBLOBs",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询立项
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TResearch> selectTResearchForPage(
+			TResearchExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TResearch> list = (List<TResearch>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_research.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询论文
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TPaper> selectTPaperForPage(
+			TPaperExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TPaper> list = (List<TPaper>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_paper.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询论文
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TWork> selectWorkForPage(
+			TWorkExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TWork> list = (List<TWork>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_work.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}

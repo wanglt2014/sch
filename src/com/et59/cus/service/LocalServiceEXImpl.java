@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.et59.cus.domain.dao.TDepartmentDAO;
 import com.et59.cus.domain.dao.TDownloadDAO;
+import com.et59.cus.domain.dao.THonorandotherDAO;
 import com.et59.cus.domain.dao.TPaperDAO;
+import com.et59.cus.domain.dao.TPartjobDAO;
 import com.et59.cus.domain.dao.TPrizeDAO;
 import com.et59.cus.domain.dao.TResearchDAO;
 import com.et59.cus.domain.dao.TSubjectDAO;
@@ -26,8 +28,12 @@ import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.THonorandother;
+import com.et59.cus.domain.entity.THonorandotherExample;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPaperExample;
+import com.et59.cus.domain.entity.TPartjob;
+import com.et59.cus.domain.entity.TPartjobExample;
 import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
@@ -99,6 +105,13 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	
 	@Autowired
 	private TWorkDAO tWorkDAO;
+	
+	@Autowired
+	private TPartjobDAO tPartjobDAO;
+	
+	@Autowired
+	private THonorandotherDAO tHonorandotherDAO;
+	
 
 	/**
 	 * 查询资料下载
@@ -325,6 +338,29 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public void saveTWork(TWork tWork) throws Exception {
 		tWorkDAO.insertSelective(tWork);
+	}
+	
+	/**
+	 * 保存获奖信息表
+	 */
+	@Override
+	public void savePartJob(TPartjob tPartjob) throws Exception {
+		tPartjobDAO.insertSelective(tPartjob);
+	}
+	
+	@Override
+	public void deletePartJob(TPartjobExample example) throws Exception {
+		tPartjobDAO.deleteByExample(example);
+	}
+	
+	@Override
+	public void saveHonor(THonorandother tHonorandother) throws Exception {
+		tHonorandotherDAO.insertSelective(tHonorandother);
+	}
+	
+	@Override
+	public void deleteHonor(THonorandotherExample tHonorandotherExample) throws Exception {
+		tHonorandotherDAO.deleteByExample(tHonorandotherExample);
 	}
 
 	/**
@@ -612,6 +648,54 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		List<TWork> list = commonDAOEx.selectWorkForPage(
 				example, startrecord, pagesize);
 		int totalCount = tWorkDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+	
+	/**
+	 * 查询获奖表
+	 */
+	@Override
+	public Pager queryPrizeBypage(TPrizeExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TPrize> list = commonDAOEx.selectPrizeForPage(
+				example, startrecord, pagesize);
+		int totalCount = tPrizeDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+	
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryPartJobBypage(TPartjobExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TPartjob> list = commonDAOEx.selectPartJobForPage(
+				example, startrecord, pagesize);
+		int totalCount = tPartjobDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+	
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryHonorBypage(THonorandotherExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<THonorandother> list = commonDAOEx.selectHonorForPage(
+				example, startrecord, pagesize);
+		int totalCount = tHonorandotherDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;

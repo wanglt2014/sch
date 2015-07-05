@@ -43,8 +43,14 @@ import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.THonorandother;
+import com.et59.cus.domain.entity.THonorandotherExample;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPaperExample;
+import com.et59.cus.domain.entity.TPartjob;
+import com.et59.cus.domain.entity.TPartjobExample;
+import com.et59.cus.domain.entity.TPrize;
+import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TResearchExample;
 import com.et59.cus.domain.entity.TSubject;
@@ -446,6 +452,51 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 		List<TWork> list = (List<TWork>) getSqlMapClientTemplate()
 				.queryForList(
 						"t_work.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询获奖
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TPrize> selectPrizeForPage(
+			TPrizeExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TPrize> list = (List<TPrize>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_prize.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询获奖
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TPartjob> selectPartJobForPage(
+			TPartjobExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TPartjob> list = (List<TPartjob>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_partjob.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询获奖
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<THonorandother> selectHonorForPage(
+			THonorandotherExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<THonorandother> list = (List<THonorandother>) getSqlMapClientTemplate()
+				.queryForList(
+						"t_honorandother.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}

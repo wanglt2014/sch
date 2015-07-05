@@ -19,8 +19,12 @@ import com.alibaba.fastjson.JSON;
 import com.et59.cus.domain.entity.BsUser;
 import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDownload;
+import com.et59.cus.domain.entity.THonorandother;
+import com.et59.cus.domain.entity.THonorandotherExample;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPaperExample;
+import com.et59.cus.domain.entity.TPartjob;
+import com.et59.cus.domain.entity.TPartjobExample;
 import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
@@ -1542,6 +1546,29 @@ public class TeacherAction extends BaseAction {
 	}
 	
 	/**
+	 * 分页查询教学著作信息
+	 */
+	public void queryTeachWork() {
+		String teacherIdLong = request.getParameter("teacherId");
+		if(teacherIdLong!=null){
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载著作
+				TWorkExample twexample = new TWorkExample();
+				twexample.createCriteria().andWorkteacheridEqualTo(Long.valueOf(teacherIdLong)).andWorkteachorresearchEqualTo("0");
+				Pager pager = localServiceEXProxy.queryWorkBypage(twexample,
+						Integer.valueOf(rows), Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
 	 * 得到教师科研著作信息
 	 * 
 	 * @return
@@ -1564,6 +1591,25 @@ public class TeacherAction extends BaseAction {
 		return tWork;
 	}
 	
+	/**
+	 * 得到教师教学著作信息
+	 * 
+	 * @return
+	 */
+	public TWork getTeachWork() {
+		TWork tWork =  new TWork();
+		tWork.setAlreadypublish(request.getParameter("teachalreadyPublish"));
+		tWork.setIsbnno(request.getParameter("teachisbnNO"));
+		tWork.setProjectno(request.getParameter("teachprojectno"));
+		tWork.setTotalword(request.getParameter("teachtotalWord"));
+		tWork.setWorkauthorrank(request.getParameter("teachworkAuthorRank"));
+		tWork.setWorkpublisharea(request.getParameter("teachworkPublishArea"));
+		tWork.setWorkpublishtime(request.getParameter("teachworkPublishTime"));
+		tWork.setWorkpublishunit(request.getParameter("teachworkPublishUnit"));
+		tWork.setWorktitle(request.getParameter("teachworkTitle"));
+		return tWork;
+	}
+	
 	public void saveWork() {
 		boolean flag = false;
 		try {
@@ -1573,7 +1619,7 @@ public class TeacherAction extends BaseAction {
 		// 保存著作表
 		TWork tWork = null;
 		if(type!=null && type.equals("teach")){
-//			tWork = getTeachWork();
+			tWork = getTeachWork();
 			tWork.setWorkteachorresearch("0");
 		} else if(type!=null && type.equals("keyan")){
 			tWork = getKeyanWork();
@@ -1588,4 +1634,352 @@ public class TeacherAction extends BaseAction {
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
+	
+	/**
+	 * 删除论文
+	 */
+	public void deleteWork() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			TWorkExample tpexample = new TWorkExample();
+			tpexample.createCriteria().andWorkidEqualTo(idL);
+			localServiceEXProxy.deleteTWork(tpexample);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
+	/**
+	 * 分页查询科研获奖信息
+	 */
+	public void queryPrize() {
+		String teacherIdLong = request.getParameter("teacherId");
+		if(teacherIdLong!=null){
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载获奖信息
+//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				TPrizeExample tPrizeExample = new TPrizeExample();
+				tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("1").andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPrizeBypage(tPrizeExample,
+						Integer.valueOf(rows), Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 分页查询科研获奖信息
+	 */
+	public void queryTeachPrize() {
+		String teacherIdLong = request.getParameter("teacherId");
+		if(teacherIdLong!=null){
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载获奖信息
+//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				TPrizeExample tPrizeExample = new TPrizeExample();
+				tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("0").andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPrizeBypage(tPrizeExample,
+						Integer.valueOf(rows), Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 分页查询科研获奖信息
+	 */
+	public void querySpeakerPrize() {
+		String teacherIdLong = request.getParameter("teacherId");
+		if(teacherIdLong!=null){
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载获奖信息
+//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				TPrizeExample tPrizeExample = new TPrizeExample();
+				tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("2").andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPrizeBypage(tPrizeExample,
+						Integer.valueOf(rows), Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 得到教师获奖信息
+	 * 
+	 * @return
+	 */
+	public TPrize getKeyanPrize() {
+		TPrize tPrize = new TPrize();
+		tPrize.setPrizetype(request.getParameter("prizetype"));
+		tPrize.setPrizedate(request.getParameter("prizedate"));
+		tPrize.setPrizetitle(request.getParameter("prizetitle"));
+		tPrize.setPrizerank(request.getParameter("prizerank"));
+		tPrize.setPrizelevel(request.getParameter("prizelevel"));
+		tPrize.setPrizeresultname(request.getParameter("prizeresultname"));
+		tPrize.setPrizedep(request.getParameter("prizedep"));
+		tPrize.setPrizeno(request.getParameter("prizeno"));
+		return tPrize;
+	}
+	
+	/**
+	 * 得到优秀主讲教师信息
+	 * 
+	 * @return
+	 */
+	public TPrize getSpeakerPrize() {
+		TPrize tPrize = new TPrize();
+		tPrize.setPrizedate(request.getParameter("speakerprizedate"));
+		tPrize.setPrizetitle(request.getParameter("speakerprizetitle"));
+		tPrize.setPrizelevel(request.getParameter("speakerprizelevel"));
+		tPrize.setPrizedep(request.getParameter("speakerprizedep"));
+		tPrize.setPrizeno(request.getParameter("speakerprizeno"));
+		return tPrize;
+	}
+	
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public TPrize getTeachPrize() {
+		TPrize tPrize = new TPrize();
+		tPrize.setPrizetype(request.getParameter("teachprizetype"));
+		tPrize.setPrizedate(request.getParameter("teachprizedate"));
+		tPrize.setPrizetitle(request.getParameter("teachprizetitle"));
+		tPrize.setPrizerank(request.getParameter("teachprizerank"));
+		tPrize.setPrizelevel(request.getParameter("teachprizelevel"));
+		tPrize.setPrizeresultname(request.getParameter("teachprizeresultname"));
+		tPrize.setPrizedep(request.getParameter("teachprizedep"));
+		tPrize.setPrizeno(request.getParameter("teachprizeno"));
+		return tPrize;
+	}
+	
+	public void savePrize() {
+		boolean flag = false;
+		try {
+		String teacherId = request.getParameter("id");
+		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
+		String type = request.getParameter("type");
+		// 保存获奖表
+		TPrize tPrize = null;
+		if(type!=null && type.equals("teach")){
+			tPrize = getTeachPrize();
+			tPrize.setPrizeteachorresearch("0");
+		} else if(type!=null && type.equals("keyan")){
+			tPrize = getKeyanPrize();
+			tPrize.setPrizeteachorresearch("1");
+		}else if(type!=null && type.equals("speaker")){
+			tPrize = getSpeakerPrize();
+			tPrize.setPrizeteachorresearch("2");
+		}
+		tPrize.setPrizeteacherid(Long.valueOf(teacherId));
+		tPrize.setPrizeteachername(teacherName);
+		localServiceEXProxy.saveTPrize(tPrize);
+		flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+	
+	/**
+	 * 删除论文
+	 */
+	public void deletePrize() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			TPrizeExample tpexample = new TPrizeExample();
+			tpexample.createCriteria().andPrizeidEqualTo(idL);
+			localServiceEXProxy.deleteTPrize(tpexample);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
+	/**
+	 * 分页查询科研获奖信息
+	 */
+	public void queryPartJob() {
+		String teacherIdLong = request.getParameter("teacherId");
+		if(teacherIdLong!=null){
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载获奖信息
+//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				TPartjobExample tPartjobExample = new TPartjobExample();
+				tPartjobExample.createCriteria().andPartteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPartJobBypage(tPartjobExample,
+						Integer.valueOf(rows), Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public TPartjob getPartJob() {
+		TPartjob tPartjob = new TPartjob();
+		tPartjob.setPartbegintime(request.getParameter("partbegintime"));
+		tPartjob.setPartendtime(request.getParameter("partendtime"));
+		tPartjob.setPartjob(request.getParameter("partjob"));
+		tPartjob.setPartlevel(request.getParameter("partlevel"));
+		tPartjob.setPartofmoney(request.getParameter("partofmoney"));
+		tPartjob.setPartplace(request.getParameter("partplace"));
+		tPartjob.setParttopay(request.getParameter("parttopay"));
+		return tPartjob;
+	}
+	
+	public void savePartJob() {
+		boolean flag = false;
+		try {
+		String teacherId = request.getParameter("id");
+		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
+		TPartjob tPartjob = getPartJob();
+		tPartjob.setPartteacherid(Long.valueOf(teacherId));
+		tPartjob.setPartname(teacherName);
+		localServiceEXProxy.savePartJob(tPartjob);
+		flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+	
+	/**
+	 * 删除论文
+	 */
+	public void deletePartJob() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			TPartjobExample example = new TPartjobExample();
+			example.createCriteria().andPartidEqualTo(idL);
+			localServiceEXProxy.deletePartJob(example);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
+	
+	/**
+	 * 分页查询科研获奖信息
+	 */
+	public void queryHonor() {
+		String teacherIdLong = request.getParameter("teacherId");
+		if(teacherIdLong!=null){
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载获奖信息
+//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				THonorandotherExample tHonorandotherExample = new THonorandotherExample();
+				tHonorandotherExample.createCriteria().andHonorteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryHonorBypage(tHonorandotherExample,
+						Integer.valueOf(rows), Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public THonorandother getHonor() {
+		THonorandother tHonorandother = new THonorandother();
+		tHonorandother.setHonordep(request.getParameter("honordep"));
+		tHonorandother.setHonorleave(request.getParameter("honorleave"));
+		tHonorandother.setHonorremark(request.getParameter("honorremark"));
+		tHonorandother.setHonortitle(request.getParameter("honortitle"));
+		return tHonorandother;
+	}
+	
+	public void saveHonor() {
+		boolean flag = false;
+		try {
+		String teacherId = request.getParameter("id");
+		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
+		THonorandother tHonorandother = getHonor();
+		tHonorandother.setHonorteacherid(Long.valueOf(teacherId));
+		tHonorandother.setHonorteachername(teacherName);
+		localServiceEXProxy.saveHonor(tHonorandother);
+		flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+	
+	/**
+	 * 删除论文
+	 */
+	public void deleteHonor() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			THonorandotherExample tHonorandotherExample = new THonorandotherExample();
+			tHonorandotherExample.createCriteria().andHonoridEqualTo(idL);
+			localServiceEXProxy.deleteHonor(tHonorandotherExample);
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
 }

@@ -572,13 +572,223 @@
 				</div>
 			</div>
 			<div title="教材出版" style="padding:20px;" id="Tab3"> 
-					<div class="ftitle">教材出版</div>
+				<div class="ftitle">教材出版</div>
+				<div id="teachworkRow" class="fitem">
+				<form id="teachWorkfm" method="post" novalidate>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">作者排名:</label>
+						<select id="teachworkAuthorRank" name="teachworkAuthorRank" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">教材名称:</label>
+						<input id="teachworkTitle" name="teachworkTitle" maxlength="50" class="easyui-validatebox" style="width: 110px;">
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">出版单位:</label>
+						<input id="teachworkPublishUnit" name="teachworkPublishUnit" maxlength="50" class="easyui-validatebox" style="width: 110px;">
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">出版地:</label>
+						<input id="teachworkPublishArea" name="teachworkPublishArea" maxlength="50" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<span class="span_column_sm">
+						<label  style="width: 85px;text-align: right;">出版时间:</label> 
+						<input id="teachworkPublishTime" name="teachworkPublishTime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">已出几版:</label>
+						<input id="teachalreadyPublish" name="teachalreadyPublish" maxlength="2" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">ISBN号:</label>
+						<input id="teachisbnNO" name="teachisbnNO" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">资助项目编号:</label>
+						<input id="teachprojectno" name="teachprojectno" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">自己承担字数/全书总字数:</label>
+						<input id="teachtotalWord" name="teachtotalWord" maxlength="10" style="width: 110px;" class="easyui-validatebox" >（千）
+					</span>
+					<br><br>
+					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveWork('teach')">保存</a>
+					</form>
+				<hr  style="border-bottom:1px dashed;"><br>
+				<table id="teachWorkdg" title="列表" class="easyui-datagrid"
+					style="width: 1100px; height: 250px" url="Teacher_queryTeachWork"
+					toolbar="#teachWorktoolbar" pagination="true" rownumbers="true"
+					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
+					<thead>
+						<tr>
+							<th field="workauthorrank" width="100">作者排名</th>
+							<th field="worktitle" width="100">教材名称</th>
+							<th field="workpublishunit" width="120" >出版单位</th>
+							<th field="workpublisharea" width="100">出版地</th>
+							<th field="workpublishtime" width="100">出版时间</th>
+							<th field="alreadypublish" width="100">已出几版</th>
+							<th field="isbnno" width="100">ISBN号</th>
+							<th field="projectno" width="150">资助项目编号</th>
+							<th field="totalword" width="150">自己承担字数/全书总字数</th>
+						</tr>
+					</thead>
+				</table>
+				<div id="teachWorktoolbar">
+					<a href="javascript:void(0)" class="easyui-linkbutton"
+						iconCls="icon-remove" plain="true" onclick="deleteWork('teach')">删除</a>
+				</div>
+				</div>
 			</div>
 			<div title="优秀主讲师" style="padding:20px;" id="Tab4"> 
-					<div class="ftitle">优秀主讲师</div>
+				<div class="ftitle">优秀主讲师</div>
+				<div id="speakerprizeRow" class="fitem">
+				<form id="speakerPrizefm" method="post" novalidate>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">奖项名称:</label>
+						<select id="speakerprizetitle" name="speakerprizetitle" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="本科生优秀主讲教师">本科生优秀主讲教师</option>
+							<option value="研究生优秀主讲教师">研究生优秀主讲教师</option>
+							<option value="通识课优秀主讲教师">通识课优秀主讲教师</option>
+							<option value="优秀硕士生指导教师">优秀硕士生指导教师</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">奖励等级:</label>
+						<select id="speakerprizelevel" name="speakerprizelevel" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="一等奖">一等奖</option>
+							<option value="二等奖">二等奖</option>
+							<option value="三等奖">三等奖</option>
+							<option value="优秀青年授课教师">优秀青年授课教师</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">授奖部门:</label>
+						<input id="speakerprizedep" name="speakerprizedep" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column">
+						<label  style="width: 85px;text-align: right;">获奖时间:</label> 
+						<input id="speakerrizedate" name="speakerprizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">证书编号:</label>
+						<input id="speakerprizeno" name="speakerprizeno" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+  					<br><br>
+				<hr  style="border-bottom:1px dashed;"><br>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePrize('speaker')">保存</a>
+				</form>
+				<table id="speakerPrizedg" title="列表" class="easyui-datagrid"
+				style="width: 1300px; height: 250px" url="Teacher_querySpeakerPrize"
+				toolbar="#speakerPrizetoolbar" pagination="true" rownumbers="true"
+				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
+				<thead>
+					<tr>
+						<th field="prizetitle" width="100">奖项名称</th>
+						<th field="prizelevel" width="100">奖励等级</th>
+						<th field="prizedep" width="100">授奖部门</th>
+						<th field="prizedate" width="80">获奖时间</th>
+						<th field="prizeno" width="100">证书编号</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="speakerPrizetoolbar">
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-remove" plain="true" onclick="deletePrize('speaker')">删除</a>
+			</div>
+			</div>
 			</div>
 			<div title="教学成果奖" style="padding:20px;" id="Tab5"> 
-					<div class="ftitle">教学成果奖</div>
+				<div class="ftitle">教学成果奖</div>
+				<div id="teachprizeRow" class="fitem">
+				<form id="teachPrizefm" method="post" novalidate>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">作者排名:</label>
+						<select id="teachprizerank" name="teachprizerank" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">奖项名称:</label>
+						<input id="teachprizetitle" name="teachprizetitle" maxlength="50" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">成果名称:</label>
+						<input id="teachprizeresultname" name="teachprizeresultname" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">奖励等级:</label>
+						<select id="teachprizelevel" name="teachprizelevel" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="特等奖">特等奖</option>
+							<option value="一等奖">一等奖</option>
+							<option value="二等奖">二等奖</option>
+							<option value="三等奖">三等奖</option>
+							<option value="其它">其它</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">成果类别 :</label>
+						<select id="teachprizetype" name="teachprizetype" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="教改论文">教改论文</option>
+							<option value="教材">教材</option>
+							<option value="研究报告">研究报告</option>
+							<option value="其它">其它</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">授奖部门:</label>
+						<input id="teachprizedep" name="teachprizedep" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column">
+						<label  style="width: 85px;text-align: right;">获奖时间:</label> 
+						<input id="teachprizedate" name="teachprizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">证书编号:</label>
+						<input id="teachprizeno" name="teachprizeno" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+  					<br><br>
+				<hr  style="border-bottom:1px dashed;"><br>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePrize('teach')">保存</a>
+				</form>
+				<table id="teachPrizedg" title="列表" class="easyui-datagrid"
+				style="width: 1300px; height: 250px" url="Teacher_queryTeachPrize"
+				toolbar="#teachPrizetoolbar" pagination="true" rownumbers="true"
+				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
+				<thead>
+					<tr>
+						<th field="prizerank" width="100">获奖排名</th>
+						<th field="prizetitle" width="100">奖项名称</th>
+						<th field="prizeresultname" width="120" >成果名称</th>
+						<th field="prizelevel" width="100">奖励等级</th>
+						<th field="prizetype" width="100">成果类别</th>
+						<th field="prizedep" width="100">授奖部门</th>
+						<th field="prizedate" width="80">获奖时间</th>
+						<th field="prizeno" width="100">证书编号</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="teachPrizetoolbar">
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-remove" plain="true" onclick="deletePrize('teach')">删除</a>
+			</div>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -815,7 +1025,7 @@
 			<div title="著作" style="overflow:auto;padding:20px;" id="Tab3"> 
 				<div class="ftitle">著作</div>
 				<div id="workRow" class="fitem">
-				<form id="keyanPaperfm" method="post" novalidate>
+				<form id="keyanWorkfm" method="post" novalidate>
 					<span class="span_column" >
 						<label style="width: 85px;text-align: right;">作者排名:</label>
 						<select id="workAuthorRank" name="workAuthorRank" class="easyui-combobox" panelHeight="auto" editable="false"
@@ -923,15 +1133,218 @@
 				</div>
 			</div>
 			<div title="获奖" style="padding:20px;" id="Tab4"> 
-					<div class="ftitle">获奖</div>
+				<div id="prizeRow" class="fitem">
+				<form id="keyanPrizefm" method="post" novalidate>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">获奖排名:</label>
+						<select id="prizerank" name="prizerank" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">奖项名称:</label>
+						<select id="prizetitle" name="prizetitle" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="高等学校科学研究优秀成果奖">高等学校科学研究优秀成果奖</option>
+							<option value="黑龙江省社会科学优秀成果奖">黑龙江省社会科学优秀成果奖</option>
+							<option value="黑龙江省高校人文社会科学研究优秀成果奖">黑龙江省高校人文社会科学研究优秀成果奖</option>
+							<option value="其他省部级以上获奖">其他省部级以上获奖</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">成果名称:</label>
+						<input id="prizeresultname" name="prizeresultname" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">奖励等级:</label>
+						<select id="prizelevel" name="prizelevel" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="特等奖">特等奖</option>
+							<option value="一等奖">一等奖</option>
+							<option value="二等奖">二等奖</option>
+							<option value="三等奖">三等奖</option>
+							<option value="佳作奖">佳作奖</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">成果类别 :</label>
+						<select id="prizetype" name="prizetype" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="学术论文">学术论文</option>
+							<option value="著作">著作</option>
+							<option value="研究报告">研究报告</option>
+							<option value="普及读物">普及读物</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">授奖部门:</label>
+						<input id="prizedep" name="prizedep" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column">
+						<label  style="width: 85px;text-align: right;">获奖时间:</label> 
+						<input id="prizedate" name="prizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+					</span>
+					<span class="span_column" >
+						<label style="width: 85px;text-align: right;">证书编号:</label>
+						<input id="prizeno" name="prizeno" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+  					<br><br>
+				<hr  style="border-bottom:1px dashed;"><br>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePrize('keyan')">保存</a>
+				</form>
+				<table id="keyanPrizedg" title="列表" class="easyui-datagrid"
+				style="width: 1300px; height: 250px" url="Teacher_queryPrize"
+				toolbar="#keyanPrizetoolbar" pagination="true" rownumbers="true"
+				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
+				<thead>
+					<tr>
+						<th field="prizerank" width="100">获奖排名</th>
+						<th field="prizetitle" width="100">奖项名称</th>
+						<th field="prizeresultname" width="120" >成果名称</th>
+						<th field="prizelevel" width="100">奖励等级</th>
+						<th field="prizetype" width="100">成果类别</th>
+						<th field="prizedep" width="100">授奖部门</th>
+						<th field="prizedate" width="80">获奖时间</th>
+						<th field="prizeno" width="100">证书编号</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="keyanPrizetoolbar">
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-remove" plain="true" onclick="deletePrize('keyan')">删除</a>
 			</div>
-			<div title="学术兼职" style="padding:20px;" id="Tab5"> 
-					<div class="ftitle">学术兼职</div>
-			</div>
-			<div title="荣誉及其他" style="padding:20px;" id="Tab5"> 
-					<div class="ftitle">荣誉及其他</div>
 			</div>
 		</div>
+		<div title="学术兼职" style="padding:20px;" id="Tab5"> 
+			<div class="ftitle">学术兼职</div>
+			<div id="partJobRow" class="fitem">
+				<form id="partJobfm" method="post" novalidate>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">学会/协会/期刊名称:</label>
+						<input id="partplace" name="partplace" maxlength="50" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">在学会/协会/期刊中职务:</label>
+						<input id="partjob" name="partjob" maxlength="30" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">任职开始时间:</label>
+						<input id="partbegintime" name="partbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+					</span>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">任职截止时间:</label>
+						<input id="partendtime" name="partendtime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">学会/协会/期刊级别:</label>
+						<select id="partlevel" name="partlevel" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="国家">国家</option>
+							<option value="国家一级">国家一级</option>
+							<option value="国家二级">国家二级</option>
+							<option value="省内">省内</option>
+							<option value="省级一级">省级一级</option>
+							<option value="省级二级">省级二级</option>
+							<option value="市级一级">市级一级</option>
+							<option value="其他">其他</option>
+						</select>
+					</span>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">是否需要交纳会费 :</label>
+						<select id="parttopay" name="parttopay" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="是">是</option>
+							<option value="否">否</option>
+						</select>
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">交纳金额:</label>
+						<input id="partofmoney" name="partofmoney" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+				<hr  style="border-bottom:1px dashed;"><br>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePartJob()">保存</a>
+				</form>
+				<table id="partJobdg" title="列表" class="easyui-datagrid"
+				style="width: 1300px; height: 250px" url="Teacher_queryPartJob"
+				toolbar="#partJobtoolbar" pagination="true" rownumbers="true"
+				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
+				<thead>
+					<tr>
+						<th field="partplace" width="150">学会/协会/期刊名称</th>
+						<th field="partjob" width="150">在学会/协会/期刊中职务</th>
+						<th field="partbegintime" width="120" >任职开始时间</th>
+						<th field="partendtime" width="100">任职截止时间</th>
+						<th field="partlevel" width="150">学会/协会/期刊级别</th>
+						<th field="parttopay" width="150">是否需要交纳会费 </th>
+						<th field="partofmoney" width="100">交纳金额</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="partJobtoolbar">
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-remove" plain="true" onclick="deletePartJob()">删除</a>
+			</div>
+			</div>
+		</div>
+		<div title="荣誉及其他" style="padding:20px;" id="Tab5"> 
+			<div class="ftitle">荣誉及其他</div>
+			<div id="honorRow" class="fitem">
+				<form id="honorfm" method="post" novalidate>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">荣誉名称:</label>
+						<input id="honortitle" name="honortitle" maxlength="50" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">荣誉级别:</label>
+						<select id="honorleave" name="honorleave" class="easyui-combobox" panelHeight="auto" editable="false"
+							style="width: 110px" >
+							<option value="国家">国家</option>
+							<option value="省内">省内</option>
+							<option value="其他">其他</option>
+						</select>
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">授予部门:</label>
+						<input id="honordep" name="honordep" maxlength="20" style="width: 110px;" class="easyui-validatebox" >
+					</span>
+					<br><br>
+					<span class="span_column" >
+						<label style="width: 145px;text-align: right;">备注:</label>
+						<input id="honorremark" name="honorremark" maxlength="100" style="width: 410px;" class="easyui-validatebox" >
+					</span>
+				<hr  style="border-bottom:1px dashed;"><br>
+				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveHonor()">保存</a>
+				</form>
+				<table id="honordg" title="列表" class="easyui-datagrid"
+				style="width: 850px; height: 250px" url="Teacher_queryHonor"
+				toolbar="#honortoolbar" pagination="true" rownumbers="true"
+				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
+				<thead>
+					<tr>
+						<th field="honortitle" width="150">荣誉名称</th>
+						<th field="honorleave" width="150">荣誉级别</th>
+						<th field="honordep" width="120" >授予部门</th>
+						<th field="honorremark" width="380">备注</th>
+					</tr>
+				</thead>
+			</table>
+			<div id="honortoolbar">
+				<a href="javascript:void(0)" class="easyui-linkbutton"
+					iconCls="icon-remove" plain="true" onclick="deleteHonor()">删除</a>
+			</div>
+			</div>
+		</div>
+	</div>
 	</div>
 	<div id="keyandlg-buttons">
 		<a href="javascript:void(0)" class="easyui-linkbutton"
@@ -1230,6 +1643,12 @@
 			$('#teachWorkdg').datagrid('load', {
 				teacherId : row.id
 			});
+			$('#teachPrizedg').datagrid('load', {
+				teacherId : row.id
+			});
+			$('#speakerPrizedg').datagrid('load', {
+				teacherId : row.id
+			});
 		}
 	}
 	function saveRearch(typeval) {
@@ -1308,6 +1727,18 @@
 			});
 			
 			$('#keyanWorkdg').datagrid('load', {
+				teacherId : row.id
+			});
+			
+			$('#keyanPrizedg').datagrid('load', {
+				teacherId : row.id
+			});
+			
+			$('#partJobdg').datagrid('load', {
+				teacherId : row.id
+			});
+			
+			$('#honordg').datagrid('load', {
 				teacherId : row.id
 			});
 			
@@ -1400,6 +1831,181 @@
 				}
 			}
 		});
+	}
+	
+	//删除论文
+	function deleteWork(typeval) {
+		var row = null;
+		if(typeval == 'teach'){
+			row = $('#teachWorkdg').datagrid('getSelected');
+		}else if(typeval == 'keyan'){
+			row = $('#keyanWorkdg').datagrid('getSelected');
+		}
+		if (row) {
+			$.messager.confirm('确认', '是否要删除?', function(r) {
+				if (r) {
+					$.post('Teacher_deleteWork', {
+						id : row.workid
+					}, function(result) {
+						if (result = "true") {
+							if(typeval == 'teach'){
+								$('#teachWorkdg').datagrid('reload'); // reload the user data
+							}else if(typeval == 'keyan'){
+								$('#keyanWorkdg').datagrid('reload'); // reload the user data
+							}
+						} else {
+							jAlert('系统错误，请联系管理员', '错误提示');
+						}
+					}, 'json');
+// 					$('#teachResearchdg').datagrid('reload'); // reload the user data
+				}
+			});
+		}
+	}
+	
+	function savePrize(typeval) {
+		var teachername = $('#teacherNameForSave').val();
+		var teacherId = $('#teacherIdForSave').val();
+		var formId = null;
+		if(typeval == 'teach'){
+			formId = 'teachPrizefm';
+		}else if(typeval == 'keyan'){
+			formId = 'keyanPrizefm';
+		}else if(typeval == 'speaker'){
+			formId = 'speakerPrizefm';
+		}
+		$('#'+formId).form('submit', {
+			url : 'Teacher_savePrize?id=' + teacherId+'&type='+typeval+'&name='+encodeURI(encodeURI(teachername)),
+			onSubmit : function() {
+				return $(this).form('validate');
+			},
+			success : function(result) {
+				if (result != "true") {
+					jAlert('系统错误，请联系管理员', '错误提示');
+				} else {
+					if(typeval == 'teach'){
+						$('#teachPrizedg').datagrid('reload'); // reload the user data
+					}else if(typeval == 'keyan'){
+						$('#keyanPrizedg').datagrid('reload'); // reload the user data
+					}else if(typeval == 'speaker'){
+						$('#speakerPrizedg').datagrid('reload'); // reload the user data
+					}
+					
+				}
+			}
+		});
+	}
+	
+	//删除论文
+	function deletePrize(typeval) {
+		var row = null;
+		if(typeval == 'teach'){
+			row = $('#teachPrizedg').datagrid('getSelected');
+		}else if(typeval == 'keyan'){
+			row = $('#keyanPrizedg').datagrid('getSelected');
+		}else if(typeval == 'speaker'){
+			row = $('#speakerPrizedg').datagrid('getSelected');
+		}
+		if (row) {
+			$.messager.confirm('确认', '是否要删除?', function(r) {
+				if (r) {
+					$.post('Teacher_deletePrize', {
+						id : row.prizeid
+					}, function(result) {
+						if (result = "true") {
+							if(typeval == 'teach'){
+								$('#teachPrizedg').datagrid('reload'); // reload the user data
+							}else if(typeval == 'keyan'){
+								$('#keyanPrizedg').datagrid('reload'); // reload the user data
+							}else if(typeval == 'speaker'){
+								$('#speakerPrizedg').datagrid('reload'); // reload the user data
+							}
+						} else {
+							jAlert('系统错误，请联系管理员', '错误提示');
+						}
+					}, 'json');
+// 					$('#teachResearchdg').datagrid('reload'); // reload the user data
+				}
+			});
+		}
+	}
+	
+	function savePartJob() {
+		var teachername = $('#teacherNameForSave').val();
+		var teacherId = $('#teacherIdForSave').val();
+		$('#partJobfm').form('submit', {
+			url : 'Teacher_savePartJob?id=' + teacherId+'&name='+encodeURI(encodeURI(teachername)),
+			onSubmit : function() {
+				return $(this).form('validate');
+			},
+			success : function(result) {
+				if (result != "true") {
+					jAlert('系统错误，请联系管理员', '错误提示');
+				} else {
+						$('#partJobdg').datagrid('reload'); // reload the user data
+				}
+			}
+		});
+	}
+	
+	//删除
+	function deletePartJob() {
+		var row = $('#partJobdg').datagrid('getSelected');
+		if (row) {
+			$.messager.confirm('确认', '是否要删除?', function(r) {
+				if (r) {
+					$.post('Teacher_deletePartJob', {
+						id : row.partid
+					}, function(result) {
+						if (result = "true") {
+							$('#partJobdg').datagrid('reload'); // reload the user data
+						} else {
+							jAlert('系统错误，请联系管理员', '错误提示');
+						}
+					}, 'json');
+// 					$('#teachResearchdg').datagrid('reload'); // reload the user data
+				}
+			});
+		}
+	}
+	
+	function saveHonor() {
+		var teachername = $('#teacherNameForSave').val();
+		var teacherId = $('#teacherIdForSave').val();
+		$('#honorfm').form('submit', {
+			url : 'Teacher_saveHonor?id=' + teacherId+'&name='+encodeURI(encodeURI(teachername)),
+			onSubmit : function() {
+				return $(this).form('validate');
+			},
+			success : function(result) {
+				if (result != "true") {
+					jAlert('系统错误，请联系管理员', '错误提示');
+				} else {
+						$('#honordg').datagrid('reload'); // reload the user data
+				}
+			}
+		});
+	}
+	
+	//删除
+	function deleteHonor() {
+		var row = $('#honordg').datagrid('getSelected');
+		if (row) {
+			$.messager.confirm('确认', '是否要删除?', function(r) {
+				if (r) {
+					$.post('Teacher_deleteHonor', {
+						id : row.honorid
+					}, function(result) {
+						if (result = "true") {
+							$('#honordg').datagrid('reload'); // reload the user data
+						} else {
+							jAlert('系统错误，请联系管理员', '错误提示');
+						}
+					}, 'json');
+// 					$('#teachResearchdg').datagrid('reload'); // reload the user data
+				}
+			});
+		}
 	}
 	</script>
 	<style type="text/css">

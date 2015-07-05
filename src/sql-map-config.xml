@@ -59,4 +59,13 @@
   <sqlMap resource="com/et59/cus/domain/maps/t_department_SqlMap.xml" />
   <sqlMap resource="com/et59/cus/domain/maps/t_trainingplan_SqlMap.xml" />
   <sqlMap resource="com/et59/cus/domain/maps/t_work_SqlMap.xml" />
+  
+  <sqlMap resource="com/et59/cus/domain/maps/t_partjob_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_honorandother_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_visitschool_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_holdmeeting_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_foreign_experts_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_exchange_stu_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_attmeeting_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_atttrain_SqlMap.xml" />
 </sqlMapConfig>

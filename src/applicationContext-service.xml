@@ -344,6 +344,18 @@
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
+	<!--学术兼职表 -->
+	<bean name="tPartjobDAO" class="com.et59.cus.domain.dao.TPartjobDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--荣誉及其他表 -->
+	<bean name="tHonorandotherDAO" class="com.et59.cus.domain.dao.THonorandotherDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
 	
 	<!-- 教师论文表 -->
 	<bean name="tTeacherPaperDAO" class="com.et59.cus.domain.dao.TTeacherPaperDAOImpl"

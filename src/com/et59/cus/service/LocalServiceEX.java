@@ -6,8 +6,12 @@ import java.util.Map;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
+import com.et59.cus.domain.entity.THonorandother;
+import com.et59.cus.domain.entity.THonorandotherExample;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPaperExample;
+import com.et59.cus.domain.entity.TPartjob;
+import com.et59.cus.domain.entity.TPartjobExample;
 import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
@@ -315,4 +319,23 @@ public interface LocalServiceEX {
 	 */
 	public Pager queryWorkBypage(TWorkExample example, int pagesize,
 			int currentpage) throws Exception;
+	
+	/**
+	 * 查询获奖表
+	 */
+	public Pager queryPrizeBypage(TPrizeExample example, int pagesize,
+			int currentpage) throws Exception;
+	
+	public Pager queryPartJobBypage(TPartjobExample example, int pagesize,
+			int currentpage) throws Exception;
+	public void savePartJob(TPartjob tPartjob) throws Exception;
+	
+	public void deletePartJob(TPartjobExample example) throws Exception;
+	
+	public Pager queryHonorBypage(THonorandotherExample example, int pagesize,
+			int currentpage) throws Exception;
+	
+	public void saveHonor(THonorandother tHonorandother) throws Exception;
+	
+	public void deleteHonor(THonorandotherExample tHonorandotherExample) throws Exception;
 }

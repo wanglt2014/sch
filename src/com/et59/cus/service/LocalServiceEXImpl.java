@@ -7,6 +7,8 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.et59.cus.domain.dao.TAttmeetingDAO;
+import com.et59.cus.domain.dao.TAtttrainDAO;
 import com.et59.cus.domain.dao.TDepartmentDAO;
 import com.et59.cus.domain.dao.TDownloadDAO;
 import com.et59.cus.domain.dao.THonorandotherDAO;
@@ -21,8 +23,13 @@ import com.et59.cus.domain.dao.TTeacherPrizeDAO;
 import com.et59.cus.domain.dao.TTeacherResearchDAO;
 import com.et59.cus.domain.dao.TTeacherSubjectDAO;
 import com.et59.cus.domain.dao.TTrainingplanDAO;
+import com.et59.cus.domain.dao.TVisitschoolDAO;
 import com.et59.cus.domain.dao.TWorkDAO;
 import com.et59.cus.domain.dao.ex.CommonDAOEx;
+import com.et59.cus.domain.entity.TAttmeeting;
+import com.et59.cus.domain.entity.TAttmeetingExample;
+import com.et59.cus.domain.entity.TAtttrain;
+import com.et59.cus.domain.entity.TAtttrainExample;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
@@ -40,8 +47,6 @@ import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TResearchExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
-import com.et59.cus.domain.entity.TTeacher;
-import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
 import com.et59.cus.domain.entity.TTeacherPaperKey;
 import com.et59.cus.domain.entity.TTeacherPrizeExample;
@@ -52,6 +57,8 @@ import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
+import com.et59.cus.domain.entity.TVisitschool;
+import com.et59.cus.domain.entity.TVisitschoolExample;
 import com.et59.cus.domain.entity.TWork;
 import com.et59.cus.domain.entity.TWorkExample;
 import com.et59.cus.domain.entity.ex.Pager;
@@ -102,16 +109,24 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 
 	@Autowired
 	private TTrainingplanDAO tTrainingplanDAO;
-	
+
 	@Autowired
 	private TWorkDAO tWorkDAO;
-	
+
 	@Autowired
 	private TPartjobDAO tPartjobDAO;
-	
+
 	@Autowired
 	private THonorandotherDAO tHonorandotherDAO;
-	
+
+	@Autowired
+	private TVisitschoolDAO tVisitschoolDAO;
+
+	@Autowired
+	private TAttmeetingDAO tAttmeetingDAO;
+
+	@Autowired
+	private TAtttrainDAO tAtttrainDAO;
 
 	/**
 	 * 查询资料下载
@@ -125,10 +140,11 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 				.createCriteria();
 		bae.setOrderByClause(" createdate desc ");
 		criteria.andFileisvalidEqualTo(Constant.ISVALID_1);
-		if(download.getInfotype()!=null && !download.getInfotype().equals("")){
+		if (download.getInfotype() != null
+				&& !download.getInfotype().equals("")) {
 			criteria.andInfotypeEqualTo(download.getInfotype());
 		}
-		
+
 		// if (null != bsUserservice.getOrderIccard()
 		// && !bsUserservice.getOrderIccard().equals("")) {
 		// criteria.andOrderIccardEqualTo(bsUserservice.getOrderIccard());
@@ -185,10 +201,10 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		bae.setOrderByClause(" subjectNO desc ");
 		criteria.andSubjectisvalidEqualTo(Constant.ISVALID_1);
 
-		 if (null != subject.getSubjectname()
-		 && !subject.getSubjectname().equals("")) {
-		 criteria.andSubjectnameLike('%'+subject.getSubjectname()+'%');
-		 }
+		if (null != subject.getSubjectname()
+				&& !subject.getSubjectname().equals("")) {
+			criteria.andSubjectnameLike('%' + subject.getSubjectname() + '%');
+		}
 		// if (null != bsUserservice.getUserId()) {
 		// criteria.andUserIdEqualTo(bsUserservice.getUserId());
 		// }
@@ -267,7 +283,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTResearch(TResearch tResearch) throws Exception {
 		tResearchDAO.updateByPrimaryKeySelective(tResearch);
 	}
-	
+
 	/**
 	 * 删除立项表
 	 */
@@ -291,7 +307,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTSubject(TSubject tSubject) throws Exception {
 		tSubjectDAO.updateByPrimaryKeySelective(tSubject);
 	}
-	
+
 	/**
 	 * 删除课程表
 	 */
@@ -315,7 +331,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTPaper(TPaper tPaper) throws Exception {
 		tPaperDAO.updateByPrimaryKeySelective(tPaper);
 	}
-	
+
 	/**
 	 * 删除论文表
 	 */
@@ -323,7 +339,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deleteTPaper(TPaperExample example) throws Exception {
 		tPaperDAO.deleteByExample(example);
 	}
-	
+
 	/**
 	 * 保存获奖信息表
 	 */
@@ -331,7 +347,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public Long saveTPrize(TPrize tPrize) throws Exception {
 		return tPrizeDAO.insertReturnId(tPrize);
 	}
-	
+
 	/**
 	 * 保存著作信息表
 	 */
@@ -339,7 +355,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void saveTWork(TWork tWork) throws Exception {
 		tWorkDAO.insertSelective(tWork);
 	}
-	
+
 	/**
 	 * 保存获奖信息表
 	 */
@@ -347,19 +363,20 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void savePartJob(TPartjob tPartjob) throws Exception {
 		tPartjobDAO.insertSelective(tPartjob);
 	}
-	
+
 	@Override
 	public void deletePartJob(TPartjobExample example) throws Exception {
 		tPartjobDAO.deleteByExample(example);
 	}
-	
+
 	@Override
 	public void saveHonor(THonorandother tHonorandother) throws Exception {
 		tHonorandotherDAO.insertSelective(tHonorandother);
 	}
-	
+
 	@Override
-	public void deleteHonor(THonorandotherExample tHonorandotherExample) throws Exception {
+	public void deleteHonor(THonorandotherExample tHonorandotherExample)
+			throws Exception {
 		tHonorandotherDAO.deleteByExample(tHonorandotherExample);
 	}
 
@@ -424,15 +441,16 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public TResearch queryTResearch(Long researchid) throws Exception {
 		return tResearchDAO.selectByPrimaryKey(researchid);
 	}
-	
+
 	/**
 	 * 查询立项表
 	 */
 	@Override
-	public List<TResearch> queryTResearchList(TResearchExample example) throws Exception {
+	public List<TResearch> queryTResearchList(TResearchExample example)
+			throws Exception {
 		return tResearchDAO.selectByExample(example);
 	}
-	
+
 	/**
 	 * 查询立项表
 	 */
@@ -441,8 +459,8 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TResearch> list = commonDAOEx.selectTResearchForPage(
-				example, startrecord, pagesize);
+		List<TResearch> list = commonDAOEx.selectTResearchForPage(example,
+				startrecord, pagesize);
 		int totalCount = tResearchDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
@@ -465,7 +483,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public TPaper queryTPaper(Long paperid) throws Exception {
 		return tPaperDAO.selectByPrimaryKey(paperid);
 	}
-	
+
 	/**
 	 * 查询论文表
 	 */
@@ -473,7 +491,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public List<TPaper> queryTPaperList(TPaperExample example) throws Exception {
 		return tPaperDAO.selectByExample(example);
 	}
-	
+
 	/**
 	 * 查询论文表
 	 */
@@ -482,8 +500,8 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TPaper> list = commonDAOEx.selectTPaperForPage(
-				example, startrecord, pagesize);
+		List<TPaper> list = commonDAOEx.selectTPaperForPage(example,
+				startrecord, pagesize);
 		int totalCount = tPaperDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
@@ -577,7 +595,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			throws Exception {
 		return tSubjectDAO.selectByExample(example);
 	}
-	
+
 	/**
 	 * 查询获奖关联表
 	 */
@@ -586,7 +604,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			throws Exception {
 		return tTeacherPrizeDAO.selectByExample(example);
 	}
-	
+
 	/**
 	 * 查询获奖表
 	 */
@@ -602,25 +620,23 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTPrize(TPrize tPrize) throws Exception {
 		tPrizeDAO.updateByPrimaryKeySelective(tPrize);
 	}
-	
+
 	/**
 	 * 删除获奖表
 	 */
 	@Override
-	public void deleteTPrize(TPrizeExample example)
-			throws Exception {
+	public void deleteTPrize(TPrizeExample example) throws Exception {
 		tPrizeDAO.deleteByExample(example);
 	}
-	
+
 	/**
 	 * 删除著作表
 	 */
 	@Override
-	public void deleteTWork(TWorkExample example)
-			throws Exception {
+	public void deleteTWork(TWorkExample example) throws Exception {
 		tWorkDAO.deleteByExample(example);
 	}
-	
+
 	/**
 	 * 更新著作表
 	 */
@@ -628,7 +644,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void updateTWork(TWork tWork) throws Exception {
 		tWorkDAO.updateByPrimaryKeySelective(tWork);
 	}
-	
+
 	/**
 	 * 查询著作表
 	 */
@@ -636,7 +652,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public List<TWork> queryTWorkList(TWorkExample example) throws Exception {
 		return tWorkDAO.selectByExample(example);
 	}
-	
+
 	/**
 	 * 查询著作表
 	 */
@@ -645,14 +661,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TWork> list = commonDAOEx.selectWorkForPage(
-				example, startrecord, pagesize);
+		List<TWork> list = commonDAOEx.selectWorkForPage(example, startrecord,
+				pagesize);
 		int totalCount = tWorkDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;
 	}
-	
+
 	/**
 	 * 查询获奖表
 	 */
@@ -661,14 +677,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TPrize> list = commonDAOEx.selectPrizeForPage(
-				example, startrecord, pagesize);
+		List<TPrize> list = commonDAOEx.selectPrizeForPage(example,
+				startrecord, pagesize);
 		int totalCount = tPrizeDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;
 	}
-	
+
 	/**
 	 * 查询
 	 */
@@ -677,14 +693,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TPartjob> list = commonDAOEx.selectPartJobForPage(
-				example, startrecord, pagesize);
+		List<TPartjob> list = commonDAOEx.selectPartJobForPage(example,
+				startrecord, pagesize);
 		int totalCount = tPartjobDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;
 	}
-	
+
 	/**
 	 * 查询
 	 */
@@ -693,12 +709,106 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<THonorandother> list = commonDAOEx.selectHonorForPage(
-				example, startrecord, pagesize);
+		List<THonorandother> list = commonDAOEx.selectHonorForPage(example,
+				startrecord, pagesize);
 		int totalCount = tHonorandotherDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
 		return page;
+	}
+
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryVisitSchoolBypage(TVisitschoolExample example,
+			int pagesize, int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TVisitschool> list = commonDAOEx.selectVisitSchoolForPage(example,
+				startrecord, pagesize);
+		int totalCount = tVisitschoolDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void saveTVisitschool(TVisitschool tVisitschool) throws Exception {
+		tVisitschoolDAO.insertSelective(tVisitschool);
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deleteTVisitschool(TVisitschoolExample example)
+			throws Exception {
+		tVisitschoolDAO.deleteByExample(example);
+	}
+
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryAttMeetingBypage(TAttmeetingExample example,
+			int pagesize, int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TAttmeeting> list = commonDAOEx.selectAttMeetingForPage(example,
+				startrecord, pagesize);
+		int totalCount = tAttmeetingDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void saveAttMeeting(TAttmeeting tAttmeeting) throws Exception {
+		tAttmeetingDAO.insertSelective(tAttmeeting);
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deleteAttMeeting(TAttmeetingExample example) throws Exception {
+		tAttmeetingDAO.deleteByExample(example);
+	}
+
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryAttTrainBypage(TAtttrainExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TAtttrain> list = commonDAOEx.selectAtttrainForPage(example,
+				startrecord, pagesize);
+		int totalCount = tAtttrainDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void saveAttTrain(TAtttrain tAttmeeting) throws Exception {
+		tAtttrainDAO.insertSelective(tAttmeeting);
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deleteAttTrain(TAtttrainExample example) throws Exception {
+		tAtttrainDAO.deleteByExample(example);
 	}
 
 }

@@ -37,6 +37,10 @@ import com.et59.cus.domain.entity.OpenLog;
 import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
+import com.et59.cus.domain.entity.TAttmeeting;
+import com.et59.cus.domain.entity.TAttmeetingExample;
+import com.et59.cus.domain.entity.TAtttrain;
+import com.et59.cus.domain.entity.TAtttrainExample;
 import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDictionary;
@@ -58,6 +62,8 @@ import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TTeacherWithBLOBs;
+import com.et59.cus.domain.entity.TVisitschool;
+import com.et59.cus.domain.entity.TVisitschoolExample;
 import com.et59.cus.domain.entity.TWork;
 import com.et59.cus.domain.entity.TWorkExample;
 
@@ -161,41 +167,49 @@ public interface CommonDAOEx {
 	public List<TDepartmentWithBLOBs> selectTDepartmentForPage(
 			TDepartmentExample example, int startrecord, int endrecord)
 			throws Exception;
-	
+
 	/**
 	 * 分页查询师资队伍
 	 */
-	public List<TTeacher> selectTeacherForPageNOBLOB(
-			TTeacherExample example, int startrecord, int endrecord)
-			throws Exception;
-	
-	public List<TResearch> selectTResearchForPage(
-			TResearchExample example, int startrecord, int endrecord)
-			throws Exception;
-	
-	public List<TPaper> selectTPaperForPage(
-			TPaperExample example, int startrecord, int endrecord)
-			throws Exception;
-	
+	public List<TTeacher> selectTeacherForPageNOBLOB(TTeacherExample example,
+			int startrecord, int endrecord) throws Exception;
+
+	public List<TResearch> selectTResearchForPage(TResearchExample example,
+			int startrecord, int endrecord) throws Exception;
+
+	public List<TPaper> selectTPaperForPage(TPaperExample example,
+			int startrecord, int endrecord) throws Exception;
+
 	/**
 	 * 分页查询著作
 	 */
-	public List<TWork> selectWorkForPage(
-			TWorkExample example, int startrecord, int endrecord)
-			throws Exception;
-	
+	public List<TWork> selectWorkForPage(TWorkExample example, int startrecord,
+			int endrecord) throws Exception;
+
 	/**
 	 * 分页查询获奖
 	 */
-	public List<TPrize> selectPrizeForPage(
-			TPrizeExample example, int startrecord, int endrecord)
-			throws Exception;
-	
-	public List<TPartjob> selectPartJobForPage(
-			TPartjobExample example, int startrecord, int endrecord)
-			throws Exception;
-	
+	public List<TPrize> selectPrizeForPage(TPrizeExample example,
+			int startrecord, int endrecord) throws Exception;
+
+	public List<TPartjob> selectPartJobForPage(TPartjobExample example,
+			int startrecord, int endrecord) throws Exception;
+
 	public List<THonorandother> selectHonorForPage(
 			THonorandotherExample example, int startrecord, int endrecord)
 			throws Exception;
+
+	/**
+	 * 分页查询
+	 */
+	public List<TVisitschool> selectVisitSchoolForPage(
+			TVisitschoolExample example, int startrecord, int endrecord)
+			throws Exception;
+
+	public List<TAttmeeting> selectAttMeetingForPage(
+			TAttmeetingExample example, int startrecord, int endrecord)
+			throws Exception;
+
+	public List<TAtttrain> selectAtttrainForPage(TAtttrainExample example,
+			int startrecord, int endrecord) throws Exception;
 }

@@ -3,6 +3,10 @@ package com.et59.cus.service;
 import java.util.List;
 import java.util.Map;
 
+import com.et59.cus.domain.entity.TAttmeeting;
+import com.et59.cus.domain.entity.TAttmeetingExample;
+import com.et59.cus.domain.entity.TAtttrain;
+import com.et59.cus.domain.entity.TAtttrainExample;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
@@ -28,6 +32,8 @@ import com.et59.cus.domain.entity.TTeacherSubjectExample;
 import com.et59.cus.domain.entity.TTeacherSubjectKey;
 import com.et59.cus.domain.entity.TTrainingplan;
 import com.et59.cus.domain.entity.TTrainingplanExample;
+import com.et59.cus.domain.entity.TVisitschool;
+import com.et59.cus.domain.entity.TVisitschoolExample;
 import com.et59.cus.domain.entity.TWork;
 import com.et59.cus.domain.entity.TWorkExample;
 import com.et59.cus.domain.entity.ex.Pager;
@@ -232,110 +238,134 @@ public interface LocalServiceEX {
 	 * 保存获奖信息表
 	 */
 	public Long saveTPrize(TPrize tPrize) throws Exception;
-	
+
 	/**
 	 * 查询获奖关联表
 	 */
 	@SuppressWarnings("rawtypes")
 	public List queryTTeacherPrizeKey(TTeacherPrizeExample example)
 			throws Exception;
-	
+
 	/**
 	 * 查询获奖表
 	 */
 	@SuppressWarnings("rawtypes")
 	public List queryTPrizeList(TPrizeExample example) throws Exception;
-	
+
 	/**
 	 * 更新获奖表
 	 */
 	public void updateTPrize(TPrize tPrize) throws Exception;
-	
+
 	/**
 	 * 删除获奖表
 	 */
-	public void deleteTPrize(TPrizeExample example)
-			throws Exception;
-	
+	public void deleteTPrize(TPrizeExample example) throws Exception;
+
 	/**
 	 * 查询立项表
 	 */
-	public List<TResearch> queryTResearchList(TResearchExample example) throws Exception;
-	
+	public List<TResearch> queryTResearchList(TResearchExample example)
+			throws Exception;
+
 	/**
 	 * 查询论文表
 	 */
 	public List<TPaper> queryTPaperList(TPaperExample example) throws Exception;
-	
+
 	/**
 	 * 删除立项表
 	 */
 	public void deleteTResearch(TResearchExample example) throws Exception;
-	
+
 	/**
 	 * 删除论文表
 	 */
 	public void deleteTPaper(TPaperExample example) throws Exception;
-	
+
 	/**
 	 * 删除课程表
 	 */
 	public void deleteTSubject(TSubjectExample example) throws Exception;
-	
+
 	/**
 	 * 保存著作信息表
 	 */
 	public void saveTWork(TWork tWork) throws Exception;
-	
+
 	/**
 	 * 删除著作表
 	 */
-	public void deleteTWork(TWorkExample example)throws Exception;
-	
+	public void deleteTWork(TWorkExample example) throws Exception;
+
 	/**
 	 * 更新著作表
 	 */
 	public void updateTWork(TWork tWork) throws Exception;
-	
+
 	/**
 	 * 查询著作表
 	 */
 	public List<TWork> queryTWorkList(TWorkExample example) throws Exception;
-	
+
 	/**
 	 * 查询立项表
 	 */
 	public Pager queryTResearchBypage(TResearchExample example, int pagesize,
 			int currentpage) throws Exception;
-	
+
 	/**
 	 * 查询论文表
 	 */
 	public Pager queryTPaperBypage(TPaperExample example, int pagesize,
 			int currentpage) throws Exception;
-	
+
 	/**
 	 * 查询著作表
 	 */
 	public Pager queryWorkBypage(TWorkExample example, int pagesize,
 			int currentpage) throws Exception;
-	
+
 	/**
 	 * 查询获奖表
 	 */
 	public Pager queryPrizeBypage(TPrizeExample example, int pagesize,
 			int currentpage) throws Exception;
-	
+
 	public Pager queryPartJobBypage(TPartjobExample example, int pagesize,
 			int currentpage) throws Exception;
+
 	public void savePartJob(TPartjob tPartjob) throws Exception;
-	
+
 	public void deletePartJob(TPartjobExample example) throws Exception;
-	
+
 	public Pager queryHonorBypage(THonorandotherExample example, int pagesize,
 			int currentpage) throws Exception;
-	
+
 	public void saveHonor(THonorandother tHonorandother) throws Exception;
-	
-	public void deleteHonor(THonorandotherExample tHonorandotherExample) throws Exception;
+
+	public void deleteHonor(THonorandotherExample tHonorandotherExample)
+			throws Exception;
+
+	public Pager queryVisitSchoolBypage(TVisitschoolExample example,
+			int pagesize, int currentpage) throws Exception;
+
+	public void saveTVisitschool(TVisitschool tVisitschool) throws Exception;
+
+	public void deleteTVisitschool(TVisitschoolExample example)
+			throws Exception;
+
+	public Pager queryAttMeetingBypage(TAttmeetingExample example,
+			int pagesize, int currentpage) throws Exception;
+
+	public void saveAttMeeting(TAttmeeting tAttmeeting) throws Exception;
+
+	public void deleteAttMeeting(TAttmeetingExample example) throws Exception;
+
+	public Pager queryAttTrainBypage(TAtttrainExample example, int pagesize,
+			int currentpage) throws Exception;
+
+	public void saveAttTrain(TAtttrain tAttmeeting) throws Exception;
+
+	public void deleteAttTrain(TAtttrainExample example) throws Exception;
 }

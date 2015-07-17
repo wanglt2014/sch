@@ -88,15 +88,15 @@ public class TeacherAction extends BaseAction {
 	public List<TSubjectDTO> tSubjectDtoList;
 
 	public List<TResearchDTO> tResearchList;
-	
+
 	public List<TResearch> researchList;
-	
+
 	public List<TWork> tWorkList;
-	
+
 	public List<TPaper> paperList;
 
 	public String defultId;
-	
+
 	public List<TResearch> getResearchList() {
 		return researchList;
 	}
@@ -275,6 +275,24 @@ public class TeacherAction extends BaseAction {
 	}
 
 	/**
+	 * 数据字典首页
+	 * 
+	 * @return
+	 */
+	public String teach() {
+		return "teach";
+	}
+
+	/**
+	 * 数据字典首页
+	 * 
+	 * @return
+	 */
+	public String keyan() {
+		return "keyan";
+	}
+
+	/**
 	 * @Title: toTeacherPage
 	 * @Description: 跳转到
 	 * @return String 返回类型
@@ -339,7 +357,7 @@ public class TeacherAction extends BaseAction {
 	public void queryTeacherOtherInfo() {
 		String teacherId = request.getParameter("teacherId");
 		HashMap map = new HashMap();
-//		long startTime=System.currentTimeMillis();   //获取开始时间
+		// long startTime=System.currentTimeMillis(); //获取开始时间
 		try {
 			Long teacherIdLong = Long.parseLong(teacherId);
 			// 加载课程
@@ -371,7 +389,7 @@ public class TeacherAction extends BaseAction {
 			tPrizeExample.createCriteria().andPrizeteacheridEqualTo(
 					teacherIdLong);
 			tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
-			
+
 			// 加载著作
 			List<TWork> tWorkList = new ArrayList<TWork>();
 			TWorkExample twexample = new TWorkExample();
@@ -381,19 +399,19 @@ public class TeacherAction extends BaseAction {
 			// map.put("subject", tSubject);
 			// map.put("tPaper", tPaper);
 			// map.put("tResearch", tResearch);
-			if(subjectIds!=null && subjectIds.indexOf(",")>0 ){
+			if (subjectIds != null && subjectIds.indexOf(",") > 0) {
 				map.put("subject",
 						subjectIds.substring(0, subjectIds.lastIndexOf(",")));
-			}else{
-				map.put("subject",subjectIds);
+			} else {
+				map.put("subject", subjectIds);
 			}
-			
+
 			map.put("tPaper", tPaperList);
 			map.put("tResearch", tResearchList);
 			map.put("tPrize", tPrizeList);
 			map.put("tWork", tWorkList);
-//			long endTime=System.currentTimeMillis(); //获取结束时间
-//			System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
+			// long endTime=System.currentTimeMillis(); //获取结束时间
+			// System.out.println("程序运行时间： "+(endTime-startTime)+"ms");
 			super.reponseWriter(JSON.toJSONString(map));
 			// } catch (IOException e) {
 			// e.printStackTrace();
@@ -522,23 +540,25 @@ public class TeacherAction extends BaseAction {
 			tResearch.setIsresearch(request.getParameter("isresearch" + i));
 			tResearch.setResearchrank(request.getParameter("researchrank" + i));
 			tResearch.setResearchknot(request.getParameter("researchknot" + i));
-//			String researchmoney = request.getParameter("researchmoney" + i) == "" ? "0"
-//					: request.getParameter("researchmoney" + i);
-//			tResearch.setResearchmoney(Integer.parseInt(researchmoney));
-//			String researchmatchmoney = request
-//					.getParameter("researchmatchmoney" + i) == "" ? "0"
-//					: request.getParameter("researchmatchmoney" + i);
-//			tResearch.setResearchmatchmoney(Integer
-//					.parseInt(researchmatchmoney));
-//			tResearch.setResearchhost(request.getParameter("researchhost" + i));
-//			tResearch.setResearchactor(request
-//					.getParameter("researchactor" + i));
+			// String researchmoney = request.getParameter("researchmoney" + i)
+			// == "" ? "0"
+			// : request.getParameter("researchmoney" + i);
+			// tResearch.setResearchmoney(Integer.parseInt(researchmoney));
+			// String researchmatchmoney = request
+			// .getParameter("researchmatchmoney" + i) == "" ? "0"
+			// : request.getParameter("researchmatchmoney" + i);
+			// tResearch.setResearchmatchmoney(Integer
+			// .parseInt(researchmatchmoney));
+			// tResearch.setResearchhost(request.getParameter("researchhost" +
+			// i));
+			// tResearch.setResearchactor(request
+			// .getParameter("researchactor" + i));
 			tResearch.setResearchbegindate(request
 					.getParameter("researchbegindate" + i));
 			tResearch.setResearchenddate(request.getParameter("researchenddate"
 					+ i));
-			tResearch.setResearchteachorresearch(request.getParameter("researchteachorresearch"
-					+ i));
+			tResearch.setResearchteachorresearch(request
+					.getParameter("researchteachorresearch" + i));
 			list.add(tResearch);
 		}
 
@@ -560,8 +580,10 @@ public class TeacherAction extends BaseAction {
 			tPaper.setPaperauthor(request.getParameter("paperauthor" + i));
 			tPaper.setPapernotename(request.getParameter("papernotename" + i));
 			tPaper.setPapernoteno(request.getParameter("papernoteno" + i));
-			tPaper.setPaperteachorresearch(request.getParameter("paperteachorresearch" + i));
-			tPaper.setPapernotecountry(request.getParameter("papernotecountry" + i));
+			tPaper.setPaperteachorresearch(request
+					.getParameter("paperteachorresearch" + i));
+			tPaper.setPapernotecountry(request.getParameter("papernotecountry"
+					+ i));
 			tPaper.setPapernotedate(request.getParameter("papernotedate" + i));
 			tPaper.setPapernotepage(request.getParameter("papernotepage" + i));
 			tPaper.setPaperincluded(request.getParameter("paperincluded" + i));
@@ -573,7 +595,7 @@ public class TeacherAction extends BaseAction {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * 得到教师著作信息
 	 * 
@@ -591,14 +613,18 @@ public class TeacherAction extends BaseAction {
 			tWork.setOriauthor(request.getParameter("oriAuthor" + i));
 			tWork.setProjectno(request.getParameter("projectno" + i));
 			tWork.setTotalword(request.getParameter("totalWord" + i));
-			tWork.setTranslateforeign(request.getParameter("translateForeign" + i));
+			tWork.setTranslateforeign(request.getParameter("translateForeign"
+					+ i));
 			tWork.setWorkauthorrank(request.getParameter("workAuthorRank" + i));
-			tWork.setWorkpublisharea(request.getParameter("workPublishArea" + i));
-			tWork.setWorkpublishtime(request.getParameter("workPublishTime" + i));
-			tWork.setWorkpublishunit(request.getParameter("workPublishUnit" + i));
+			tWork.setWorkpublisharea(request
+					.getParameter("workPublishArea" + i));
+			tWork.setWorkpublishtime(request
+					.getParameter("workPublishTime" + i));
+			tWork.setWorkpublishunit(request
+					.getParameter("workPublishUnit" + i));
 			tWork.setWorktitle(request.getParameter("workTitle" + i));
 			tWork.setWorktype(request.getParameter("workType" + i));
-			
+
 			list.add(tWork);
 		}
 
@@ -621,7 +647,8 @@ public class TeacherAction extends BaseAction {
 			tPrize.setPrizetitle(request.getParameter("prizetitle" + i));
 			tPrize.setPrizerank(request.getParameter("prizerank" + i));
 			tPrize.setPrizelevel(request.getParameter("prizelevel" + i));
-			tPrize.setPrizeresultname(request.getParameter("prizeresultname" + i));
+			tPrize.setPrizeresultname(request.getParameter("prizeresultname"
+					+ i));
 			tPrize.setPrizedep(request.getParameter("prizedep" + i));
 			tPrize.setPrizeno(request.getParameter("prizeno" + i));
 			list.add(tPrize);
@@ -674,12 +701,12 @@ public class TeacherAction extends BaseAction {
 			String tempID = null;
 			for (int i = 0; i < idArr.length; i++) {
 				tempID = idArr[i];
-				if(!tempID.equals("")){
-				tSubject = new TSubject();
-				tSubject.setSubjectid(Long.valueOf(tempID));
-				tSubject.setSubjectteacherid(teacher.getId());
-				tSubject.setSubjectteachername(teacher.getTeachername());
-				localServiceEXProxy.updateTSubject(tSubject);
+				if (!tempID.equals("")) {
+					tSubject = new TSubject();
+					tSubject.setSubjectid(Long.valueOf(tempID));
+					tSubject.setSubjectteacherid(teacher.getId());
+					tSubject.setSubjectteachername(teacher.getTeachername());
+					localServiceEXProxy.updateTSubject(tSubject);
 				}
 			}
 
@@ -736,7 +763,7 @@ public class TeacherAction extends BaseAction {
 
 				}
 			}
-			
+
 			if (tWorkList != null && tWorkList.size() > 0) {
 				TWorkExample example = new TWorkExample();
 				example.createCriteria().andWorkteacheridEqualTo(id);
@@ -817,15 +844,14 @@ public class TeacherAction extends BaseAction {
 			String tempID = null;
 			for (int i = 0; i < idArr.length; i++) {
 				tempID = idArr[i];
-				if(!tempID.equals("")){
+				if (!tempID.equals("")) {
 					tSubject = new TSubject();
 					tSubject.setSubjectid(Long.valueOf(tempID));
 					tSubject.setSubjectteacherid(teacher.getId());
 					tSubject.setSubjectteachername(teacher.getTeachername());
 					localServiceEXProxy.updateTSubject(tSubject);
 				}
-				
-				
+
 			}
 			// for (int i = 0; i < subjectSize; i++) {
 			// tSubject = subjectList.get(i);
@@ -860,7 +886,7 @@ public class TeacherAction extends BaseAction {
 				tPrize.setPrizeteachername(teacher.getTeachername());
 				localServiceEXProxy.saveTPrize(tPrize);
 			}
-			
+
 			int workSize = tWorkList.size();
 			// 5.保存著作表
 			for (int i = 0; i < workSize; i++) {
@@ -1094,7 +1120,7 @@ public class TeacherAction extends BaseAction {
 		}
 		return "teacher_result";
 	}
-	
+
 	/**
 	 * @Title: toSRRPage
 	 * @Description: 跳转到科学研究成果
@@ -1107,7 +1133,6 @@ public class TeacherAction extends BaseAction {
 		return "to_srr_index";
 	}
 
-	
 	/**
 	 * 查询师资队伍
 	 * 
@@ -1117,182 +1142,201 @@ public class TeacherAction extends BaseAction {
 	public String doQuerySRR() {
 		try {
 			// 加载立项
-//			List<TResearch> tResearchList = new ArrayList<TResearch>();
+			// List<TResearch> tResearchList = new ArrayList<TResearch>();
 			TResearchExample trexample = new TResearchExample();
 			trexample.createCriteria().andResearchrankEqualTo("1");
 			researchList = localServiceEXProxy.queryTResearchList(trexample);
 
 			// 加载论文
-//			List<TPaper> tPaperList = new ArrayList<TPaper>();
+			// List<TPaper> tPaperList = new ArrayList<TPaper>();
 			TPaperExample tpexample = new TPaperExample();
 			tpexample.createCriteria().andPaperauthorEqualTo("1");
 			paperList = localServiceEXProxy.queryTPaperList(tpexample);
 
 			// 加载著作
-//			List<TWork> tWorkList = new ArrayList<TWork>();
+			// List<TWork> tWorkList = new ArrayList<TWork>();
 			TWorkExample twexample = new TWorkExample();
 			twexample.createCriteria().andWorkauthorrankEqualTo("1");
 			tWorkList = localServiceEXProxy.queryTWorkList(twexample);
-			
+
 			// 加载获奖信息
-//			List<TPrize> tPrizeList = new ArrayList<TPrize>();
+			// List<TPrize> tPrizeList = new ArrayList<TPrize>();
 			TPrizeExample tPrizeExample = new TPrizeExample();
 			tPrizeExample.createCriteria().andPrizerankEqualTo("1");
 			tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return "srr_result";
 	}
-	
+
 	/**
 	 * 导出Excel
 	 */
 	@SuppressWarnings("unchecked")
-	public  void  ExportExcel(){
-		String type = request.getParameter("type"); // 当前页数  
-		String[] hearders  = null;
+	public void ExportExcel() {
+		String type = request.getParameter("type"); // 当前页数
+		String[] hearders = null;
 		try {
-			 SimpleDateFormat timeFormat = new SimpleDateFormat("yyyyMMddHHmmss");  
-			    String filename = timeFormat.format(new Date())+".xls";  
-			    response.setContentType("application/ms-excel;charset=UTF-8");  
-			    response.setHeader("Content-Disposition", "attachment;filename=".concat(String.valueOf(URLEncoder.encode(filename, "UTF-8"))));  
-			    OutputStream out = response.getOutputStream();  
-			if("research".equals(type)){
+			SimpleDateFormat timeFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+			String filename = timeFormat.format(new Date()) + ".xls";
+			response.setContentType("application/ms-excel;charset=UTF-8");
+			response.setHeader("Content-Disposition",
+					"attachment;filename=".concat(String.valueOf(URLEncoder
+							.encode(filename, "UTF-8"))));
+			OutputStream out = response.getOutputStream();
+			if ("research".equals(type)) {
 				// 加载立项
 				TResearchExample trexample = new TResearchExample();
 				trexample.createCriteria().andResearchrankEqualTo("1");
-				List<TResearch> tResearchList  = localServiceEXProxy.queryTResearchList(trexample);
+				List<TResearch> tResearchList = localServiceEXProxy
+						.queryTResearchList(trexample);
 				TResearchExportDTO researchExportDTO = null;
 				List<TResearchExportDTO> resExportList = new ArrayList<TResearchExportDTO>();
 				for (Iterator iterator = tResearchList.iterator(); iterator
 						.hasNext();) {
 					TResearch tResearch = (TResearch) iterator.next();
-					researchExportDTO =  new TResearchExportDTO();
+					researchExportDTO = new TResearchExportDTO();
 					BeanUtils.copyProperties(researchExportDTO, tResearch);
 					resExportList.add(researchExportDTO);
 				}
-				hearders = new String[] {"姓名", "教师排名", "项目种类", "项目类别", "项目名称",
-						"项目编号", "开始时间","结束时间","是否在研","结束等级"};//表头数组     
-				ExportExcel<TResearchExportDTO> ex = new ExportExcel<TResearchExportDTO>();  
-			    ex.exportExcel(hearders, resExportList, out);  
-			}else if("paper".equals(type)){
+				hearders = new String[] { "姓名", "教师排名", "项目种类", "项目类别", "项目名称",
+						"项目编号", "开始时间", "结束时间", "是否在研", "结束等级" };// 表头数组
+				ExportExcel<TResearchExportDTO> ex = new ExportExcel<TResearchExportDTO>();
+				ex.exportExcel(hearders, resExportList, out);
+			} else if ("paper".equals(type)) {
 				TPaperExample tpexample = new TPaperExample();
 				tpexample.createCriteria().andPaperauthorEqualTo("1");
-				List<TPaper> tPaperList = localServiceEXProxy.queryTPaperList(tpexample);
-				
+				List<TPaper> tPaperList = localServiceEXProxy
+						.queryTPaperList(tpexample);
+
 				TPaperExportDTO paperExportDTO = null;
 				List<TPaperExportDTO> paperExportList = new ArrayList<TPaperExportDTO>();
 				for (Iterator iterator = tPaperList.iterator(); iterator
 						.hasNext();) {
 					TPaper tPaper = (TPaper) iterator.next();
-					paperExportDTO =  new TPaperExportDTO();
+					paperExportDTO = new TPaperExportDTO();
 					BeanUtils.copyProperties(paperExportDTO, tPaper);
 					paperExportList.add(paperExportDTO);
 				}
-				hearders = new String[] {"姓名", "作者排名", "论文题目", "发表刊物/论文集名称", "刊物国别",
-						"发表/出版时间", "期号（卷号）","页码","论文收录","影响因子","论文转载","一级学科","资助项目编号"};//表头数组     
-				ExportExcel<TPaperExportDTO> ex = new ExportExcel<TPaperExportDTO>();  
-			    ex.exportExcel(hearders, paperExportList, out);  
-			}else if("work".equals(type)){
+				hearders = new String[] { "姓名", "作者排名", "论文题目", "发表刊物/论文集名称",
+						"刊物国别", "发表/出版时间", "期号（卷号）", "页码", "论文收录", "影响因子",
+						"论文转载", "一级学科", "资助项目编号" };// 表头数组
+				ExportExcel<TPaperExportDTO> ex = new ExportExcel<TPaperExportDTO>();
+				ex.exportExcel(hearders, paperExportList, out);
+			} else if ("work".equals(type)) {
 				TWorkExample twexample = new TWorkExample();
 				twexample.createCriteria().andWorkauthorrankEqualTo("1");
-				List<TWork> tWorkList = localServiceEXProxy.queryTWorkList(twexample);
-				
+				List<TWork> tWorkList = localServiceEXProxy
+						.queryTWorkList(twexample);
+
 				TWorkExportDTO workExportDTO = null;
 				List<TWorkExportDTO> workExportList = new ArrayList<TWorkExportDTO>();
 				for (Iterator iterator = tWorkList.iterator(); iterator
 						.hasNext();) {
 					TWork tWork = (TWork) iterator.next();
-					workExportDTO =  new TWorkExportDTO();
+					workExportDTO = new TWorkExportDTO();
 					BeanUtils.copyProperties(workExportDTO, tWork);
 					workExportList.add(workExportDTO);
 				}
-				hearders = new String[] {"姓名", "作者排名", "著作题目", "出版单位", "出版地",
-						"出版时间", "著作类别","原作者","自己承担字数/全书总字数（千）","已出几版","是否译成外文","ISBN号","一级学科","资助项目编号"};//表头数组     
-				ExportExcel<TWorkExportDTO> ex = new ExportExcel<TWorkExportDTO>();  
-			    ex.exportExcel(hearders, workExportList, out);  
-			}else if("prize".equals(type)){
+				hearders = new String[] { "姓名", "作者排名", "著作题目", "出版单位", "出版地",
+						"出版时间", "著作类别", "原作者", "自己承担字数/全书总字数（千）", "已出几版",
+						"是否译成外文", "ISBN号", "一级学科", "资助项目编号" };// 表头数组
+				ExportExcel<TWorkExportDTO> ex = new ExportExcel<TWorkExportDTO>();
+				ex.exportExcel(hearders, workExportList, out);
+			} else if ("prize".equals(type)) {
 				// 加载获奖信息
 				TPrizeExample tPrizeExample = new TPrizeExample();
 				tPrizeExample.createCriteria().andPrizerankEqualTo("1");
-				List<TPrize> tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
-				
+				List<TPrize> tPrizeList = localServiceEXProxy
+						.queryTPrizeList(tPrizeExample);
+
 				TPrizeExportDTO prizeExportDTO = null;
 				List<TPrizeExportDTO> prizeExportList = new ArrayList<TPrizeExportDTO>();
 				for (Iterator iterator = tPrizeList.iterator(); iterator
 						.hasNext();) {
 					TPrize tPrize = (TPrize) iterator.next();
-					prizeExportDTO =  new TPrizeExportDTO();
+					prizeExportDTO = new TPrizeExportDTO();
 					BeanUtils.copyProperties(prizeExportDTO, tPrize);
 					prizeExportList.add(prizeExportDTO);
 				}
-				hearders = new String[] {"姓名", "获奖排名", "奖项名称", "成果名称", "奖励等级",
-						"成果类别", "授奖部门","获奖时间","证书编号"};//表头数组     
-				ExportExcel<TPrizeExportDTO> ex = new ExportExcel<TPrizeExportDTO>();  
-			    ex.exportExcel(hearders, prizeExportList, out);  
+				hearders = new String[] { "姓名", "获奖排名", "奖项名称", "成果名称", "奖励等级",
+						"成果类别", "授奖部门", "获奖时间", "证书编号" };// 表头数组
+				ExportExcel<TPrizeExportDTO> ex = new ExportExcel<TPrizeExportDTO>();
+				ex.exportExcel(hearders, prizeExportList, out);
 			}
-			
-		    
-		    out.close();  
+
+			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		   
+
 	}
-	
+
 	/**
 	 * 分页查询科研立项信息
 	 */
 	public void queryTResearch() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载立项
 				TResearchExample trexample = new TResearchExample();
-				trexample.createCriteria().andResearchteacheridEqualTo(
-						Long.valueOf(teacherIdLong)).andResearchteachorresearchEqualTo("1");
-				Pager pager = localServiceEXProxy.queryTResearchBypage(trexample,
-						Integer.valueOf(rows), Integer.valueOf(page));
+				trexample
+						.createCriteria()
+						.andResearchteacheridEqualTo(
+								Long.valueOf(teacherIdLong))
+						.andResearchteachorresearchEqualTo("1");
+				Pager pager = localServiceEXProxy
+						.queryTResearchBypage(trexample, Integer.valueOf(rows),
+								Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 分页查询教改立项信息
 	 */
 	public void queryTeachResearch() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载立项
 				TResearchExample trexample = new TResearchExample();
-				trexample.createCriteria().andResearchteacheridEqualTo(
-						Long.valueOf(teacherIdLong)).andResearchteachorresearchEqualTo("0");
-				Pager pager = localServiceEXProxy.queryTResearchBypage(trexample,
-						Integer.valueOf(rows), Integer.valueOf(page));
+				trexample
+						.createCriteria()
+						.andResearchteacheridEqualTo(
+								Long.valueOf(teacherIdLong))
+						.andResearchteachorresearchEqualTo("0");
+				Pager pager = localServiceEXProxy
+						.queryTResearchBypage(trexample, Integer.valueOf(rows),
+								Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
-		
+
 	}
-	
+
 	/**
 	 * 得到教师科研立项信息
 	 * 
@@ -1300,21 +1344,20 @@ public class TeacherAction extends BaseAction {
 	 */
 	public TResearch getResearchNew() {
 		TResearch tResearch = new TResearch();
-			tResearch.setResearchlevel(request
-					.getParameter("researchlevel"));
-			tResearch.setResearchname(request.getParameter("researchname"));
-			tResearch.setResearchno(request.getParameter("researchno"));
-			tResearch.setResearchtype(request.getParameter("researchtype"));
-			tResearch.setIsresearch(request.getParameter("isresearch"));
-			tResearch.setResearchrank(request.getParameter("researchrank"));
-			tResearch.setResearchknot(request.getParameter("researchknot"));
-			tResearch.setResearchbegindate(request
-					.getParameter("researchbegindate"));
-			tResearch.setResearchenddate(request.getParameter("researchenddate"));
-//			tResearch.setResearchteachorresearch(request.getParameter("researchteachorresearch"));
+		tResearch.setResearchlevel(request.getParameter("researchlevel"));
+		tResearch.setResearchname(request.getParameter("researchname"));
+		tResearch.setResearchno(request.getParameter("researchno"));
+		tResearch.setResearchtype(request.getParameter("researchtype"));
+		tResearch.setIsresearch(request.getParameter("isresearch"));
+		tResearch.setResearchrank(request.getParameter("researchrank"));
+		tResearch.setResearchknot(request.getParameter("researchknot"));
+		tResearch.setResearchbegindate(request
+				.getParameter("researchbegindate"));
+		tResearch.setResearchenddate(request.getParameter("researchenddate"));
+		// tResearch.setResearchteachorresearch(request.getParameter("researchteachorresearch"));
 		return tResearch;
 	}
-	
+
 	/**
 	 * 得到教师教改立项信息
 	 * 
@@ -1322,46 +1365,46 @@ public class TeacherAction extends BaseAction {
 	 */
 	public TResearch getTeachResearch() {
 		TResearch tResearch = new TResearch();
-			tResearch.setResearchlevel(request
-					.getParameter("teachresearchlevel"));
-			tResearch.setResearchname(request.getParameter("teachresearchname"));
-			tResearch.setResearchno(request.getParameter("teachresearchno"));
-			tResearch.setIsresearch(request.getParameter("teachisresearch"));
-			tResearch.setResearchrank(request.getParameter("teachresearchrank"));
-			tResearch.setResearchknot(request.getParameter("teachresearchknot"));
-			tResearch.setResearchbegindate(request
-					.getParameter("teachresearchbegindate"));
-			tResearch.setResearchenddate(request.getParameter("teachresearchenddate"));
-//			tResearch.setResearchteachorresearch(request.getParameter("researchteachorresearch"));
+		tResearch.setResearchlevel(request.getParameter("teachresearchlevel"));
+		tResearch.setResearchname(request.getParameter("teachresearchname"));
+		tResearch.setResearchno(request.getParameter("teachresearchno"));
+		tResearch.setIsresearch(request.getParameter("teachisresearch"));
+		tResearch.setResearchrank(request.getParameter("teachresearchrank"));
+		tResearch.setResearchknot(request.getParameter("teachresearchknot"));
+		tResearch.setResearchbegindate(request
+				.getParameter("teachresearchbegindate"));
+		tResearch.setResearchenddate(request
+				.getParameter("teachresearchenddate"));
+		// tResearch.setResearchteachorresearch(request.getParameter("researchteachorresearch"));
 		return tResearch;
 	}
-	
+
 	public void saveResearch() {
 		boolean flag = false;
 		try {
-		String teacherId = request.getParameter("id");
-		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
-		String type = request.getParameter("type");
-		// 1.保存立项表
-		TResearch tResearch = null;
-		if(type!=null && type.equals("teach")){
-			tResearch = getTeachResearch();
-			tResearch.setResearchteachorresearch("0");
-		} else if(type!=null && type.equals("keyan")){
-			tResearch = getResearchNew();
-			tResearch.setResearchteachorresearch("1");
-		}
-		tResearch.setResearchteacherid(Long.valueOf(teacherId));
-		tResearch.setResearchteachername(teacherName);
-		localServiceEXProxy.saveTResearch(tResearch);
-		flag = true;
+			String teacherId = request.getParameter("id");
+			String teacherName = URLDecoder.decode(
+					request.getParameter("name"), "UTF-8");
+			String type = request.getParameter("type");
+			// 1.保存立项表
+			TResearch tResearch = null;
+			if (type != null && type.equals("teach")) {
+				tResearch = getTeachResearch();
+				tResearch.setResearchteachorresearch("0");
+			} else if (type != null && type.equals("keyan")) {
+				tResearch = getResearchNew();
+				tResearch.setResearchteachorresearch("1");
+			}
+			tResearch.setResearchteacherid(Long.valueOf(teacherId));
+			tResearch.setResearchteachername(teacherName);
+			localServiceEXProxy.saveTResearch(tResearch);
+			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
-	
-	
+
 	/**
 	 * 删除
 	 */
@@ -1382,20 +1425,21 @@ public class TeacherAction extends BaseAction {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
-	
-	
+
 	/**
 	 * 分页查询科研论文信息
 	 */
 	public void queryPaper() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载论文
 				TPaperExample tpexample = new TPaperExample();
-				tpexample.createCriteria().andPaperteacheridEqualTo(Long.valueOf(teacherIdLong)).andPaperteachorresearchEqualTo("1");
+				tpexample.createCriteria()
+						.andPaperteacheridEqualTo(Long.valueOf(teacherIdLong))
+						.andPaperteachorresearchEqualTo("1");
 				Pager pager = localServiceEXProxy.queryTPaperBypage(tpexample,
 						Integer.valueOf(rows), Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
@@ -1404,21 +1448,25 @@ public class TeacherAction extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 分页查询教改论文信息
 	 */
 	public void queryTeachPaper() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载论文
 				TPaperExample tpexample = new TPaperExample();
-				tpexample.createCriteria().andPaperteacheridEqualTo(Long.valueOf(teacherIdLong)).andPaperteachorresearchEqualTo("0");
+				tpexample.createCriteria()
+						.andPaperteacheridEqualTo(Long.valueOf(teacherIdLong))
+						.andPaperteachorresearchEqualTo("0");
 				Pager pager = localServiceEXProxy.queryTPaperBypage(tpexample,
 						Integer.valueOf(rows), Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
@@ -1427,9 +1475,11 @@ public class TeacherAction extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 得到教师科研论文信息
 	 * 
@@ -1441,7 +1491,8 @@ public class TeacherAction extends BaseAction {
 		tPaper.setPaperauthor(request.getParameter("paperauthor"));
 		tPaper.setPapernotename(request.getParameter("papernotename"));
 		tPaper.setPapernoteno(request.getParameter("papernoteno"));
-		tPaper.setPaperteachorresearch(request.getParameter("paperteachorresearch"));
+		tPaper.setPaperteachorresearch(request
+				.getParameter("paperteachorresearch"));
 		tPaper.setPapernotecountry(request.getParameter("papernotecountry"));
 		tPaper.setPapernotedate(request.getParameter("papernotedate"));
 		tPaper.setPapernotepage(request.getParameter("papernotepage"));
@@ -1452,7 +1503,7 @@ public class TeacherAction extends BaseAction {
 		tPaper.setPaperprojectno(request.getParameter("paperprojectno"));
 		return tPaper;
 	}
-	
+
 	/**
 	 * 得到教师教改论文信息
 	 * 
@@ -1464,7 +1515,8 @@ public class TeacherAction extends BaseAction {
 		tPaper.setPaperauthor(request.getParameter("teachpaperauthor"));
 		tPaper.setPapernotename(request.getParameter("teachpapernotename"));
 		tPaper.setPapernoteno(request.getParameter("teachpapernoteno"));
-		tPaper.setPapernotecountry(request.getParameter("teachpapernotecountry"));
+		tPaper.setPapernotecountry(request
+				.getParameter("teachpapernotecountry"));
 		tPaper.setPapernotedate(request.getParameter("teachpapernotedate"));
 		tPaper.setPapernotepage(request.getParameter("teachpapernotepage"));
 		tPaper.setPaperincluded(request.getParameter("teachpaperincluded"));
@@ -1473,34 +1525,35 @@ public class TeacherAction extends BaseAction {
 		tPaper.setPaperprojectno(request.getParameter("teachpaperprojectno"));
 		return tPaper;
 	}
-	
+
 	public void savePaper() {
 		boolean flag = false;
 		try {
-		String teacherId = request.getParameter("id");
-		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
-		String type = request.getParameter("type");
-		// 保存论文表
-		TPaper tPaper = null;
-		if(type!=null && type.equals("teach")){
-			tPaper = getTeachPaper();
-			tPaper.setPaperteachorresearch("0");
-		} else if(type!=null && type.equals("keyan")){
-			tPaper = getKeyanPaper();
-			tPaper.setPaperteachorresearch("1");
-		}
-//		tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"
-//				+ (i + 1)));
-		tPaper.setPaperteacherid(Long.valueOf(teacherId));
-		tPaper.setPaperteachername(teacherName);
-		localServiceEXProxy.saveTPaper(tPaper);
-		flag = true;
+			String teacherId = request.getParameter("id");
+			String teacherName = URLDecoder.decode(
+					request.getParameter("name"), "UTF-8");
+			String type = request.getParameter("type");
+			// 保存论文表
+			TPaper tPaper = null;
+			if (type != null && type.equals("teach")) {
+				tPaper = getTeachPaper();
+				tPaper.setPaperteachorresearch("0");
+			} else if (type != null && type.equals("keyan")) {
+				tPaper = getKeyanPaper();
+				tPaper.setPaperteachorresearch("1");
+			}
+			// tPaper.setPaperdownloadid((Long) downloadIdMap.get("paperDLId"
+			// + (i + 1)));
+			tPaper.setPaperteacherid(Long.valueOf(teacherId));
+			tPaper.setPaperteachername(teacherName);
+			localServiceEXProxy.saveTPaper(tPaper);
+			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
-	
+
 	/**
 	 * 删除论文
 	 */
@@ -1521,19 +1574,21 @@ public class TeacherAction extends BaseAction {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
-	
+
 	/**
 	 * 分页查询科研著作信息
 	 */
 	public void queryWork() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载著作
 				TWorkExample twexample = new TWorkExample();
-				twexample.createCriteria().andWorkteacheridEqualTo(Long.valueOf(teacherIdLong)).andWorkteachorresearchEqualTo("1");
+				twexample.createCriteria()
+						.andWorkteacheridEqualTo(Long.valueOf(teacherIdLong))
+						.andWorkteachorresearchEqualTo("1");
 				Pager pager = localServiceEXProxy.queryWorkBypage(twexample,
 						Integer.valueOf(rows), Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
@@ -1542,21 +1597,25 @@ public class TeacherAction extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 分页查询教学著作信息
 	 */
 	public void queryTeachWork() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载著作
 				TWorkExample twexample = new TWorkExample();
-				twexample.createCriteria().andWorkteacheridEqualTo(Long.valueOf(teacherIdLong)).andWorkteachorresearchEqualTo("0");
+				twexample.createCriteria()
+						.andWorkteacheridEqualTo(Long.valueOf(teacherIdLong))
+						.andWorkteachorresearchEqualTo("0");
 				Pager pager = localServiceEXProxy.queryWorkBypage(twexample,
 						Integer.valueOf(rows), Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
@@ -1565,16 +1624,18 @@ public class TeacherAction extends BaseAction {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 得到教师科研著作信息
 	 * 
 	 * @return
 	 */
 	public TWork getKeyanWork() {
-		TWork tWork =  new TWork();
+		TWork tWork = new TWork();
 		tWork.setAlreadypublish(request.getParameter("alreadyPublish"));
 		tWork.setClassa(request.getParameter("classA"));
 		tWork.setIsbnno(request.getParameter("isbnNO"));
@@ -1590,14 +1651,14 @@ public class TeacherAction extends BaseAction {
 		tWork.setWorktype(request.getParameter("workType"));
 		return tWork;
 	}
-	
+
 	/**
 	 * 得到教师教学著作信息
 	 * 
 	 * @return
 	 */
 	public TWork getTeachWork() {
-		TWork tWork =  new TWork();
+		TWork tWork = new TWork();
 		tWork.setAlreadypublish(request.getParameter("teachalreadyPublish"));
 		tWork.setIsbnno(request.getParameter("teachisbnNO"));
 		tWork.setProjectno(request.getParameter("teachprojectno"));
@@ -1609,32 +1670,33 @@ public class TeacherAction extends BaseAction {
 		tWork.setWorktitle(request.getParameter("teachworkTitle"));
 		return tWork;
 	}
-	
+
 	public void saveWork() {
 		boolean flag = false;
 		try {
-		String teacherId = request.getParameter("id");
-		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
-		String type = request.getParameter("type");
-		// 保存著作表
-		TWork tWork = null;
-		if(type!=null && type.equals("teach")){
-			tWork = getTeachWork();
-			tWork.setWorkteachorresearch("0");
-		} else if(type!=null && type.equals("keyan")){
-			tWork = getKeyanWork();
-			tWork.setWorkteachorresearch("1");
-		}
-		tWork.setWorkteacherid(Long.valueOf(teacherId));
-		tWork.setWorkteachername(teacherName);
-		localServiceEXProxy.saveTWork(tWork);
-		flag = true;
+			String teacherId = request.getParameter("id");
+			String teacherName = URLDecoder.decode(
+					request.getParameter("name"), "UTF-8");
+			String type = request.getParameter("type");
+			// 保存著作表
+			TWork tWork = null;
+			if (type != null && type.equals("teach")) {
+				tWork = getTeachWork();
+				tWork.setWorkteachorresearch("0");
+			} else if (type != null && type.equals("keyan")) {
+				tWork = getKeyanWork();
+				tWork.setWorkteachorresearch("1");
+			}
+			tWork.setWorkteacherid(Long.valueOf(teacherId));
+			tWork.setWorkteachername(teacherName);
+			localServiceEXProxy.saveTWork(tWork);
+			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
-	
+
 	/**
 	 * 删除论文
 	 */
@@ -1655,79 +1717,94 @@ public class TeacherAction extends BaseAction {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
-	
+
 	/**
 	 * 分页查询科研获奖信息
 	 */
 	public void queryPrize() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载获奖信息
-//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				// List<TPrize> tPrizeList = new ArrayList<TPrize>();
 				TPrizeExample tPrizeExample = new TPrizeExample();
-				tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("1").andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
-				Pager pager = localServiceEXProxy.queryPrizeBypage(tPrizeExample,
-						Integer.valueOf(rows), Integer.valueOf(page));
+				tPrizeExample.createCriteria()
+						.andPrizeteachorresearchEqualTo("1")
+						.andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPrizeBypage(
+						tPrizeExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 分页查询科研获奖信息
 	 */
 	public void queryTeachPrize() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载获奖信息
-//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				// List<TPrize> tPrizeList = new ArrayList<TPrize>();
 				TPrizeExample tPrizeExample = new TPrizeExample();
-				tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("0").andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
-				Pager pager = localServiceEXProxy.queryPrizeBypage(tPrizeExample,
-						Integer.valueOf(rows), Integer.valueOf(page));
+				tPrizeExample.createCriteria()
+						.andPrizeteachorresearchEqualTo("0")
+						.andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPrizeBypage(
+						tPrizeExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 分页查询科研获奖信息
 	 */
 	public void querySpeakerPrize() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载获奖信息
-//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				// List<TPrize> tPrizeList = new ArrayList<TPrize>();
 				TPrizeExample tPrizeExample = new TPrizeExample();
-				tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("2").andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
-				Pager pager = localServiceEXProxy.queryPrizeBypage(tPrizeExample,
-						Integer.valueOf(rows), Integer.valueOf(page));
+				tPrizeExample.createCriteria()
+						.andPrizeteachorresearchEqualTo("2")
+						.andPrizeteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPrizeBypage(
+						tPrizeExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 得到教师获奖信息
 	 * 
@@ -1745,7 +1822,7 @@ public class TeacherAction extends BaseAction {
 		tPrize.setPrizeno(request.getParameter("prizeno"));
 		return tPrize;
 	}
-	
+
 	/**
 	 * 得到优秀主讲教师信息
 	 * 
@@ -1760,7 +1837,7 @@ public class TeacherAction extends BaseAction {
 		tPrize.setPrizeno(request.getParameter("speakerprizeno"));
 		return tPrize;
 	}
-	
+
 	/**
 	 * 得到教学成果奖信息
 	 * 
@@ -1778,35 +1855,36 @@ public class TeacherAction extends BaseAction {
 		tPrize.setPrizeno(request.getParameter("teachprizeno"));
 		return tPrize;
 	}
-	
+
 	public void savePrize() {
 		boolean flag = false;
 		try {
-		String teacherId = request.getParameter("id");
-		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
-		String type = request.getParameter("type");
-		// 保存获奖表
-		TPrize tPrize = null;
-		if(type!=null && type.equals("teach")){
-			tPrize = getTeachPrize();
-			tPrize.setPrizeteachorresearch("0");
-		} else if(type!=null && type.equals("keyan")){
-			tPrize = getKeyanPrize();
-			tPrize.setPrizeteachorresearch("1");
-		}else if(type!=null && type.equals("speaker")){
-			tPrize = getSpeakerPrize();
-			tPrize.setPrizeteachorresearch("2");
-		}
-		tPrize.setPrizeteacherid(Long.valueOf(teacherId));
-		tPrize.setPrizeteachername(teacherName);
-		localServiceEXProxy.saveTPrize(tPrize);
-		flag = true;
+			String teacherId = request.getParameter("id");
+			String teacherName = URLDecoder.decode(
+					request.getParameter("name"), "UTF-8");
+			String type = request.getParameter("type");
+			// 保存获奖表
+			TPrize tPrize = null;
+			if (type != null && type.equals("teach")) {
+				tPrize = getTeachPrize();
+				tPrize.setPrizeteachorresearch("0");
+			} else if (type != null && type.equals("keyan")) {
+				tPrize = getKeyanPrize();
+				tPrize.setPrizeteachorresearch("1");
+			} else if (type != null && type.equals("speaker")) {
+				tPrize = getSpeakerPrize();
+				tPrize.setPrizeteachorresearch("2");
+			}
+			tPrize.setPrizeteacherid(Long.valueOf(teacherId));
+			tPrize.setPrizeteachername(teacherName);
+			localServiceEXProxy.saveTPrize(tPrize);
+			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
-	
+
 	/**
 	 * 删除论文
 	 */
@@ -1827,31 +1905,35 @@ public class TeacherAction extends BaseAction {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
-	
+
 	/**
 	 * 分页查询科研获奖信息
 	 */
 	public void queryPartJob() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载获奖信息
-//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				// List<TPrize> tPrizeList = new ArrayList<TPrize>();
 				TPartjobExample tPartjobExample = new TPartjobExample();
-				tPartjobExample.createCriteria().andPartteacheridEqualTo(Long.valueOf(teacherIdLong));
-				Pager pager = localServiceEXProxy.queryPartJobBypage(tPartjobExample,
-						Integer.valueOf(rows), Integer.valueOf(page));
+				tPartjobExample.createCriteria().andPartteacheridEqualTo(
+						Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryPartJobBypage(
+						tPartjobExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 得到教学成果奖信息
 	 * 
@@ -1868,23 +1950,24 @@ public class TeacherAction extends BaseAction {
 		tPartjob.setParttopay(request.getParameter("parttopay"));
 		return tPartjob;
 	}
-	
+
 	public void savePartJob() {
 		boolean flag = false;
 		try {
-		String teacherId = request.getParameter("id");
-		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
-		TPartjob tPartjob = getPartJob();
-		tPartjob.setPartteacherid(Long.valueOf(teacherId));
-		tPartjob.setPartname(teacherName);
-		localServiceEXProxy.savePartJob(tPartjob);
-		flag = true;
+			String teacherId = request.getParameter("id");
+			String teacherName = URLDecoder.decode(
+					request.getParameter("name"), "UTF-8");
+			TPartjob tPartjob = getPartJob();
+			tPartjob.setPartteacherid(Long.valueOf(teacherId));
+			tPartjob.setPartname(teacherName);
+			localServiceEXProxy.savePartJob(tPartjob);
+			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
-	
+
 	/**
 	 * 删除论文
 	 */
@@ -1905,32 +1988,35 @@ public class TeacherAction extends BaseAction {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
-	
-	
+
 	/**
 	 * 分页查询科研获奖信息
 	 */
 	public void queryHonor() {
 		String teacherIdLong = request.getParameter("teacherId");
-		if(teacherIdLong!=null){
+		if (teacherIdLong != null) {
 			String page = request.getParameter("page"); // 当前页数
 			String rows = request.getParameter("rows"); // 每页显示行数
 			try {
 				// 加载获奖信息
-//				List<TPrize> tPrizeList = new ArrayList<TPrize>();
+				// List<TPrize> tPrizeList = new ArrayList<TPrize>();
 				THonorandotherExample tHonorandotherExample = new THonorandotherExample();
-				tHonorandotherExample.createCriteria().andHonorteacheridEqualTo(Long.valueOf(teacherIdLong));
-				Pager pager = localServiceEXProxy.queryHonorBypage(tHonorandotherExample,
-						Integer.valueOf(rows), Integer.valueOf(page));
+				tHonorandotherExample.createCriteria()
+						.andHonorteacheridEqualTo(Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryHonorBypage(
+						tHonorandotherExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
 				super.reponseWriter(JSON.toJSONString(pager));
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		} else {
+			super.reponseWriter(JSON.toJSONString(new ArrayList()));
 		}
 	}
-	
+
 	/**
 	 * 得到教学成果奖信息
 	 * 
@@ -1944,23 +2030,24 @@ public class TeacherAction extends BaseAction {
 		tHonorandother.setHonortitle(request.getParameter("honortitle"));
 		return tHonorandother;
 	}
-	
+
 	public void saveHonor() {
 		boolean flag = false;
 		try {
-		String teacherId = request.getParameter("id");
-		String teacherName = URLDecoder.decode(request.getParameter("name"),"UTF-8");
-		THonorandother tHonorandother = getHonor();
-		tHonorandother.setHonorteacherid(Long.valueOf(teacherId));
-		tHonorandother.setHonorteachername(teacherName);
-		localServiceEXProxy.saveHonor(tHonorandother);
-		flag = true;
+			String teacherId = request.getParameter("id");
+			String teacherName = URLDecoder.decode(
+					request.getParameter("name"), "UTF-8");
+			THonorandother tHonorandother = getHonor();
+			tHonorandother.setHonorteacherid(Long.valueOf(teacherId));
+			tHonorandother.setHonorteachername(teacherName);
+			localServiceEXProxy.saveHonor(tHonorandother);
+			flag = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
-	
+
 	/**
 	 * 删除论文
 	 */
@@ -1981,5 +2068,5 @@ public class TeacherAction extends BaseAction {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
-	
+
 }

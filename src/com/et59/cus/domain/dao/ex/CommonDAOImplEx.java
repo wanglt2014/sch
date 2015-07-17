@@ -37,6 +37,10 @@ import com.et59.cus.domain.entity.OpenLog;
 import com.et59.cus.domain.entity.OpenLogExample;
 import com.et59.cus.domain.entity.OpenOauth;
 import com.et59.cus.domain.entity.OpenOauthExample;
+import com.et59.cus.domain.entity.TAttmeeting;
+import com.et59.cus.domain.entity.TAttmeetingExample;
+import com.et59.cus.domain.entity.TAtttrain;
+import com.et59.cus.domain.entity.TAtttrainExample;
 import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDictionary;
@@ -58,6 +62,8 @@ import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacher;
 import com.et59.cus.domain.entity.TTeacherExample;
 import com.et59.cus.domain.entity.TTeacherWithBLOBs;
+import com.et59.cus.domain.entity.TVisitschool;
+import com.et59.cus.domain.entity.TVisitschoolExample;
 import com.et59.cus.domain.entity.TWork;
 import com.et59.cus.domain.entity.TWorkExample;
 
@@ -380,18 +386,16 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询师资队伍
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TTeacher> selectTeacherForPageNOBLOB(
-			TTeacherExample example, int startrecord, int endrecord)
-			throws Exception {
+	public List<TTeacher> selectTeacherForPageNOBLOB(TTeacherExample example,
+			int startrecord, int endrecord) throws Exception {
 		List<TTeacher> list = (List<TTeacher>) getSqlMapClientTemplate()
-				.queryForList(
-						"t_teacher.ibatorgenerated_selectByExample",
+				.queryForList("t_teacher.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}
@@ -410,82 +414,72 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询立项
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TResearch> selectTResearchForPage(
-			TResearchExample example, int startrecord, int endrecord)
-			throws Exception {
+	public List<TResearch> selectTResearchForPage(TResearchExample example,
+			int startrecord, int endrecord) throws Exception {
 		List<TResearch> list = (List<TResearch>) getSqlMapClientTemplate()
-				.queryForList(
-						"t_research.ibatorgenerated_selectByExample",
+				.queryForList("t_research.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询论文
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TPaper> selectTPaperForPage(
-			TPaperExample example, int startrecord, int endrecord)
-			throws Exception {
+	public List<TPaper> selectTPaperForPage(TPaperExample example,
+			int startrecord, int endrecord) throws Exception {
 		List<TPaper> list = (List<TPaper>) getSqlMapClientTemplate()
-				.queryForList(
-						"t_paper.ibatorgenerated_selectByExample",
+				.queryForList("t_paper.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询论文
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TWork> selectWorkForPage(
-			TWorkExample example, int startrecord, int endrecord)
-			throws Exception {
+	public List<TWork> selectWorkForPage(TWorkExample example, int startrecord,
+			int endrecord) throws Exception {
 		List<TWork> list = (List<TWork>) getSqlMapClientTemplate()
-				.queryForList(
-						"t_work.ibatorgenerated_selectByExample",
+				.queryForList("t_work.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询获奖
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TPrize> selectPrizeForPage(
-			TPrizeExample example, int startrecord, int endrecord)
-			throws Exception {
+	public List<TPrize> selectPrizeForPage(TPrizeExample example,
+			int startrecord, int endrecord) throws Exception {
 		List<TPrize> list = (List<TPrize>) getSqlMapClientTemplate()
-				.queryForList(
-						"t_prize.ibatorgenerated_selectByExample",
+				.queryForList("t_prize.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询获奖
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<TPartjob> selectPartJobForPage(
-			TPartjobExample example, int startrecord, int endrecord)
-			throws Exception {
+	public List<TPartjob> selectPartJobForPage(TPartjobExample example,
+			int startrecord, int endrecord) throws Exception {
 		List<TPartjob> list = (List<TPartjob>) getSqlMapClientTemplate()
-				.queryForList(
-						"t_partjob.ibatorgenerated_selectByExample",
+				.queryForList("t_partjob.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}
-	
+
 	/**
 	 * 分页查询获奖
 	 */
@@ -497,6 +491,47 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 		List<THonorandother> list = (List<THonorandother>) getSqlMapClientTemplate()
 				.queryForList(
 						"t_honorandother.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TVisitschool> selectVisitSchoolForPage(
+			TVisitschoolExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TVisitschool> list = (List<TVisitschool>) getSqlMapClientTemplate()
+				.queryForList("t_visitschool.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TAttmeeting> selectAttMeetingForPage(
+			TAttmeetingExample example, int startrecord, int endrecord)
+			throws Exception {
+		List<TAttmeeting> list = (List<TAttmeeting>) getSqlMapClientTemplate()
+				.queryForList("t_attmeeting.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+
+	/**
+	 * 分页查询
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TAtttrain> selectAtttrainForPage(TAtttrainExample example,
+			int startrecord, int endrecord) throws Exception {
+		List<TAtttrain> list = (List<TAtttrain>) getSqlMapClientTemplate()
+				.queryForList("t_atttrain.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}

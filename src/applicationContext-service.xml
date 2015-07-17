@@ -147,6 +147,11 @@
 		scope="prototype" autowire="byName">
 	</bean>
 	
+	<!-- 国际交流 -->
+	<bean name="ExchangeAction" class="com.et59.cus.action.ExchangeAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	
 	<!-- 文件下载 -->
 	<bean name="FileAction" class="com.et59.cus.tools.FileAction"
 		scope="prototype" autowire="byName">
@@ -389,6 +394,36 @@
 	
 	<!-- 培养方案表（人才培养方案） -->
 	<bean name="tTrainingplanDAO" class="com.et59.cus.domain.dao.TTrainingplanDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  教师参加国际/国内会议表（国际交流） -->
+	<bean name="tAttmeetingDAO" class="com.et59.cus.domain.dao.TAttmeetingDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  教师参加培训表（国际交流） -->
+	<bean name="tAtttrainDAO" class="com.et59.cus.domain.dao.TAtttrainDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  学院举办国际/国内会议表（国际交流） -->
+	<bean name="tHoldmeetingDAO" class="com.et59.cus.domain.dao.THoldmeetingDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  教师访学表（国际交流） -->
+	<bean name="tVisitschoolDAO" class="com.et59.cus.domain.dao.TVisitschoolDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  国外专家来访表（国际交流） -->
+	<bean name="tForeignExpertsDAO" class="com.et59.cus.domain.dao.TForeignExpertsDAOImpl"
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>

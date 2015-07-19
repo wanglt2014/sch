@@ -11,6 +11,8 @@ import com.et59.cus.domain.dao.TAttmeetingDAO;
 import com.et59.cus.domain.dao.TAtttrainDAO;
 import com.et59.cus.domain.dao.TDepartmentDAO;
 import com.et59.cus.domain.dao.TDownloadDAO;
+import com.et59.cus.domain.dao.TForeignExpertsDAO;
+import com.et59.cus.domain.dao.THoldmeetingDAO;
 import com.et59.cus.domain.dao.THonorandotherDAO;
 import com.et59.cus.domain.dao.TPaperDAO;
 import com.et59.cus.domain.dao.TPartjobDAO;
@@ -35,6 +37,10 @@ import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.TForeignExperts;
+import com.et59.cus.domain.entity.TForeignExpertsExample;
+import com.et59.cus.domain.entity.THoldmeeting;
+import com.et59.cus.domain.entity.THoldmeetingExample;
 import com.et59.cus.domain.entity.THonorandother;
 import com.et59.cus.domain.entity.THonorandotherExample;
 import com.et59.cus.domain.entity.TPaper;
@@ -128,6 +134,13 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Autowired
 	private TAtttrainDAO tAtttrainDAO;
 
+	@Autowired
+	private THoldmeetingDAO tHoldmeetingDAO;
+	
+	@Autowired
+	private TForeignExpertsDAO tForeignExpertsDAO;
+	
+	
 	/**
 	 * 查询资料下载
 	 */
@@ -809,6 +822,84 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public void deleteAttTrain(TAtttrainExample example) throws Exception {
 		tAtttrainDAO.deleteByExample(example);
+	}
+	
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryHoldMeetingBypage(THoldmeetingExample example,
+			int pagesize, int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<THoldmeeting> list = commonDAOEx.selectHoldMeetingForPage(example,
+				startrecord, pagesize);
+		int totalCount = tHoldmeetingDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+	
+	/**
+	 */
+	@Override
+	public void saveHoldMeeting(THoldmeeting tHoldmeeting) throws Exception {
+		tHoldmeetingDAO.insertSelective(tHoldmeeting);
+	}
+	
+	/**
+	 */
+	@Override
+	public void updateHoldMeeting(THoldmeeting tHoldmeeting) throws Exception {
+		tHoldmeetingDAO.updateByPrimaryKeySelective(tHoldmeeting);
+		
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deleteHoldMeeting(THoldmeetingExample example) throws Exception {
+		tHoldmeetingDAO.deleteByExample(example);
+	}
+	
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryForeignBypage(TForeignExpertsExample example,
+			int pagesize, int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TForeignExperts> list = commonDAOEx.selectForeignForPage(example,
+				startrecord, pagesize);
+		int totalCount = tForeignExpertsDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+	
+	/**
+	 */
+	@Override
+	public void saveForeign(TForeignExperts tForeignExperts) throws Exception {
+		tForeignExpertsDAO.insertSelective(tForeignExperts);
+	}
+	
+	/**
+	 */
+	@Override
+	public void updateForeign(TForeignExperts tForeignExperts) throws Exception {
+		tForeignExpertsDAO.updateByPrimaryKeySelective(tForeignExperts);
+		
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deleteForeign(TForeignExpertsExample example) throws Exception {
+		tForeignExpertsDAO.deleteByExample(example);
 	}
 
 }

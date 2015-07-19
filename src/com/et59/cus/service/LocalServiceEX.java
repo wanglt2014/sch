@@ -10,6 +10,10 @@ import com.et59.cus.domain.entity.TAtttrainExample;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
+import com.et59.cus.domain.entity.TForeignExperts;
+import com.et59.cus.domain.entity.TForeignExpertsExample;
+import com.et59.cus.domain.entity.THoldmeeting;
+import com.et59.cus.domain.entity.THoldmeetingExample;
 import com.et59.cus.domain.entity.THonorandother;
 import com.et59.cus.domain.entity.THonorandotherExample;
 import com.et59.cus.domain.entity.TPaper;
@@ -368,4 +372,18 @@ public interface LocalServiceEX {
 	public void saveAttTrain(TAtttrain tAttmeeting) throws Exception;
 
 	public void deleteAttTrain(TAtttrainExample example) throws Exception;
+	
+	public void saveHoldMeeting(THoldmeeting tHoldmeeting) throws Exception;
+	
+	public void updateHoldMeeting(THoldmeeting tHoldmeeting) throws Exception;
+	
+	public void deleteHoldMeeting(THoldmeetingExample example) throws Exception;
+	public Pager queryHoldMeetingBypage(THoldmeetingExample example,
+			int pagesize, int currentpage) throws Exception;
+	
+	public Pager queryForeignBypage(TForeignExpertsExample example,
+			int pagesize, int currentpage) throws Exception;
+	public void saveForeign(TForeignExperts tForeignExperts) throws Exception;
+	public void updateForeign(TForeignExperts tForeignExperts) throws Exception;
+	public void deleteForeign(TForeignExpertsExample example) throws Exception;
 }

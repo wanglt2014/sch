@@ -113,6 +113,23 @@ public class FileAction extends BaseAction {
 			}
 		}
 	}
+	
+	public String uploadForFirstPic() throws Exception {
+		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+		// System.out.println(isMultipart + "***************");
+		String dstPath = getSavePathForFirstPic();
+		File dstFile = new File(dstPath);
+		if (!dstFile.exists()) {
+			dstFile.mkdirs();
+		}
+		//indexpic1.jpg
+		dstPath = dstPath + "\\" + filetype+".jpg";
+		File dst = new File(dstPath);
+		copy(this.fileData, dst);
+		System.out.println("上传文件路径:" + dstPath + " " + " 临时文件名："
+				+ this.getName()+"图片序号："+filetype);
+		return SUCCESS;
+	}
 
 	public String uploadForTeacher() throws Exception {
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
@@ -157,7 +174,6 @@ public class FileAction extends BaseAction {
 	public String uploadForArticle() throws Exception {
 		String dstPath = getSavePathForArticle();
 		File dstFile = new File(dstPath);
-
 		if (!dstFile.exists()) {
 			dstFile.mkdirs();
 		}
@@ -173,10 +189,18 @@ public class FileAction extends BaseAction {
 			// + uploadContentType + " " + chunk + " " + chunks + "路径："
 			// + dstPath);
 		}
-
 		return SUCCESS;
 	}
 
+	/**
+	 * 获取首页图片保存路径
+	 * 
+	 * @return
+	 */
+	public static String getSavePathForFirstPic() {
+		return getSavePath() + Constant.PATH_FIRSTPIC;
+	}
+	
 	/**
 	 * 获取师资队伍保存路径
 	 * 

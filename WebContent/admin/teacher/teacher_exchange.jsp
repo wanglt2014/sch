@@ -206,11 +206,11 @@
 				class="easyui-validatebox"  maxlength="30">
 		</span><br><br>
 		<span class="span_column">
-			<label style="width: 160px;text-align: right;">会议开始时间:</label> 
+			<label style="width: 160px;text-align: right;">培训开始时间:</label> 
 			<input id="atttrainbegintime" name="atttrainbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
 		</span>
 		<span class="span_column" >
-			<label style="width: 160px;text-align: right;">会议结束时间:</label> 
+			<label style="width: 160px;text-align: right;">培训结束时间:</label> 
 			<input id="atttrainendtime" name="atttrainendtime" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
 		</span><br><br>
 		<span class="span_column" >
@@ -228,14 +228,13 @@
 			fitColumns="true" pageList="[5,10]" singleSelect="true" pageSize="5" >
 			<thead>
 				<tr>
-					<th field="attmeetingname" width="30">会议名称</th>
-					<th field="attmeetingtype" width="30" >类别</th>
-					<th field="attmeetinghost" width="30">主办方</th>
-					<th field="attmeetingplace" width="50">会议地点</th>
-					<th field="attmeetingbegintime" width="50">会议开始时间</th>
-					<th field="attmeetingendtime" width="50">会议结束时间</th>
-					<th field="attmeetingpaper" width="50">参会论文</th>
-					<th field="attmeetingreporttype" width="50">报告类别</th>
+					<th field="attname" width="30">培训名称</th>
+					<th field="atttype" width="30" >类别</th>
+					<th field="atthost" width="30">主办方</th>
+					<th field="atttrainplace" width="50">培训地点</th>
+					<th field="atttrainbegintime" width="50">培训开始时间</th>
+					<th field="atttrainendtime" width="50">培训结束时间</th>
+					<th field="atttrainresult" width="50">培训成果</th>
 				</tr>
 			</thead>
 		</table>
@@ -336,11 +335,11 @@
 		if (row) {
 			$('#teacherNameForSave').val(row.teachername);
 			$('#teacherIdForSave').val(row.id);
-			$('#teachdlg').dialog('open').dialog('setTitle',
+			$('#attTraindlg').dialog('open').dialog('setTitle',
 					'参加培训');
-			$('#teachfm').form('clear');
-			$('#teachfm').form('load', row);
-			$('#teachResearchdg').datagrid('load', {
+			$('#attTrainfm').form('clear');
+			$('#attTrainfm').form('load', row);
+			$('#attTraindg').datagrid('load', {
 				teacherId : row.id
 			});
 		}

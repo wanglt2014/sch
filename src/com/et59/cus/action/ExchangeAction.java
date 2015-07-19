@@ -12,7 +12,9 @@ import com.et59.cus.domain.entity.TAttmeetingExample;
 import com.et59.cus.domain.entity.TAtttrain;
 import com.et59.cus.domain.entity.TAtttrainExample;
 import com.et59.cus.domain.entity.TForeignExperts;
+import com.et59.cus.domain.entity.TForeignExpertsExample;
 import com.et59.cus.domain.entity.THoldmeeting;
+import com.et59.cus.domain.entity.THoldmeetingExample;
 import com.et59.cus.domain.entity.TVisitschool;
 import com.et59.cus.domain.entity.TVisitschoolExample;
 import com.et59.cus.domain.entity.ex.Pager;
@@ -67,7 +69,34 @@ public class ExchangeAction extends BaseAction {
 	public String index() {
 		return "index";
 	}
-
+	
+	/**
+	 * 首页
+	 * 
+	 * @return
+	 */
+	public String index2() {
+		return "index2";
+	}
+	
+	/**
+	 * 首页
+	 * 
+	 * @return
+	 */
+	public String foreign() {
+		return "foreign";
+	}
+	
+	/**
+	 * 首页
+	 * 
+	 * @return
+	 */
+	public String firstPic() {
+		return "firstPic";
+	}
+	
 	/**
 	 * 分页查询
 	 */
@@ -320,6 +349,205 @@ public class ExchangeAction extends BaseAction {
 		} finally {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
+	}
+	
+	
+	/**
+	 * 分页查询
+	 */
+	public void queryHoldMeeting() {
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载获奖信息
+				THoldmeetingExample tHoldmeetingExample = new THoldmeetingExample();
+				Pager pager = localServiceEXProxy.queryHoldMeetingBypage(
+						tHoldmeetingExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public THoldmeeting getHoldMeeting() {
+		THoldmeeting tHoldmeeting = new THoldmeeting();
+		tHoldmeeting.setMeetingbegintime(request
+				.getParameter("meetingbegintime"));
+		tHoldmeeting.setMeetingendtime(request
+				.getParameter("meetingendtime"));
+		tHoldmeeting.setMeetingpeoplenum(request.getParameter("meetingpeoplenum"));
+		tHoldmeeting.setMeetingname(request.getParameter("meetingname"));
+		tHoldmeeting.setMeetingresult(request.getParameter("meetingresult"));
+		tHoldmeeting.setMeetingplace(request.getParameter("meetingplace"));
+		tHoldmeeting.setMeetingtype(request.getParameter("meetingtype"));
+		return tHoldmeeting;
+	}
+
+	public void saveHoldMeeting() {
+		boolean flag = false;
+		try {
+			
+			// 保存获奖表
+			THoldmeeting tHoldmeeting = getHoldMeeting();
+			localServiceEXProxy.saveHoldMeeting(tHoldmeeting);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+
+	public void updateHoldMeeting() {
+		boolean flag = false;
+		try {
+			String holdId = request.getParameter("id");
+			// 保存获奖表
+			THoldmeeting tHoldmeeting = getHoldMeeting();
+			tHoldmeeting.setHoldid(Long.valueOf(holdId));
+			localServiceEXProxy.updateHoldMeeting(tHoldmeeting);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+	
+	/**
+	 * 删除
+	 */
+	public void deleteHoldMeeting() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			THoldmeetingExample tpexample = new THoldmeetingExample();
+			tpexample.createCriteria().andHoldidEqualTo(idL);
+			localServiceEXProxy.deleteHoldMeeting(tpexample);
+			flag = true;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
+	/**
+	 * 分页查询
+	 */
+	public void queryForeign() {
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				// 加载获奖信息
+				TForeignExpertsExample tForeignExpertsExample = new TForeignExpertsExample();
+				Pager pager = localServiceEXProxy.queryForeignBypage(
+						tForeignExpertsExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
+
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public TForeignExperts getForeign() {
+		TForeignExperts tForeignExperts = new TForeignExperts();
+		tForeignExperts.setExpertname(request
+				.getParameter("expertname"));
+		tForeignExperts.setExpertnationality(request
+				.getParameter("expertnationality"));
+		tForeignExperts.setFprojectmanager(request
+				.getParameter("fprojectmanager"));
+		tForeignExperts.setFprojecttype(request
+				.getParameter("fprojecttype"));
+		tForeignExperts.setOther(request
+				.getParameter("other"));
+		tForeignExperts.setVisitactivity(request
+				.getParameter("visitactivity"));
+		tForeignExperts.setVisitgoal(request
+				.getParameter("visitgoal"));
+		tForeignExperts.setVisittime(request
+				.getParameter("visittime"));
+		tForeignExperts.setWorkunit(request
+				.getParameter("workunit"));
+		return tForeignExperts;
+	}
+
+	public void saveForeign() {
+		boolean flag = false;
+		try {
+			
+			// 保存获奖表
+			TForeignExperts tForeignExperts = getForeign();
+			localServiceEXProxy.saveForeign(tForeignExperts);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+
+	public void updateForeign() {
+		boolean flag = false;
+		try {
+			String foreignid = request.getParameter("id");
+			// 保存获奖表
+			TForeignExperts tForeignExperts = getForeign();
+			tForeignExperts.setForeignid(Long.valueOf(foreignid));
+			localServiceEXProxy.updateForeign(tForeignExperts);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+	
+	/**
+	 * 删除
+	 */
+	public void deleteForeign() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			TForeignExpertsExample tpexample = new TForeignExpertsExample();
+			tpexample.createCriteria().andForeignidEqualTo(idL);
+			localServiceEXProxy.deleteForeign(tpexample);
+			flag = true;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
+	public void UpdatePic() {
+		boolean flag = false;
+		try {
+			
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
 	}
 
 	public TVisitschool getVisitschool() {

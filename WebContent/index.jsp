@@ -10,10 +10,12 @@
 	String image_path = request_path + "/images/blue-themes";
 	String css_path = request_path + "/css/blue-themes";
 	String js_path = request_path + "/js";
+	String first_path = request_path + "/uploadFile/firstpic";
 	request.setAttribute("request_path", request_path);
 	request.setAttribute("image_path", image_path);
 	request.setAttribute("css_path", css_path);
 	request.setAttribute("js_path", js_path);
+	request.setAttribute("first_path", first_path);
 	// 当前导航栏位置
 	request.setAttribute("cur_nav", 0);
 %>
@@ -72,10 +74,14 @@ $(function(){
 					<div class="flash_left"></div>
 					<div class="flash_content">
 						<div id="banner">
-						    	<img  src="${image_path}/indexpic1.jpg" width="500" height="252"/>
-						        <img  src="${image_path}/indexpic2.jpg" width="500" height="252"/>
-						        <img  src="${image_path}/indexpic3.jpg" width="500" height="252"/>
-						        <img  src="${image_path}/indexpic4.jpg" width="500" height="252"/>
+<%-- 						    	<img  src="${image_path}/indexpic1.jpg" width="500" height="252"/> --%>
+<%-- 						        <img  src="${image_path}/indexpic2.jpg" width="500" height="252"/> --%>
+<%-- 						        <img  src="${image_path}/indexpic3.jpg" width="500" height="252"/> --%>
+<%-- 						        <img  src="${image_path}/indexpic4.jpg" width="500" height="252"/> --%>
+						        <img src="${first_path}/indexpic1.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic2.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic3.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic4.jpg" width="500" height="252"/>
 						</div>
 						<div id="btn"></div>
 					</div>

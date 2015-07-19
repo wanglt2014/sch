@@ -46,6 +46,7 @@ public class Constant {
 	public static String PATH_OTHER = "uploadFile\\other";
 	public static String PATH_ARTICLE = "uploadFile\\article";
 	public static String PATH_DOWNLOADINFO = "uploadFile\\downloadinfo";
+	public static String PATH_FIRSTPIC = "uploadFile\\firstpic";
 
 	public static String DOWNLOAD_LIST = "DOWNLOAD_LIST"; // 资料下载列表
 	public static String SUBJECT_LIST = "SUBJECT_LIST"; // 课程列表

@@ -47,6 +47,10 @@ import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.TForeignExperts;
+import com.et59.cus.domain.entity.TForeignExpertsExample;
+import com.et59.cus.domain.entity.THoldmeeting;
+import com.et59.cus.domain.entity.THoldmeetingExample;
 import com.et59.cus.domain.entity.THonorandother;
 import com.et59.cus.domain.entity.THonorandotherExample;
 import com.et59.cus.domain.entity.TPaper;
@@ -212,4 +216,12 @@ public interface CommonDAOEx {
 
 	public List<TAtttrain> selectAtttrainForPage(TAtttrainExample example,
 			int startrecord, int endrecord) throws Exception;
+	
+	public List<THoldmeeting> selectHoldMeetingForPage(
+			THoldmeetingExample example, int startrecord, int endrecord)
+			throws Exception;
+	
+	public List<TForeignExperts> selectForeignForPage(
+			TForeignExpertsExample example, int startrecord, int endrecord)
+			throws Exception;
 }

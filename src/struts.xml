@@ -414,15 +414,21 @@
 			<result name="index">/admin/teacher/teacher_exchange.jsp</result>
 			<result name="index2">/admin/teacher/teacher_exchange2.jsp</result>
 			<result name="foreign">/admin/teacher/exchange_foreign.jsp</result>
-			<result name="to_teacher_index">/teacher/teacherList.jsp</result>
-			<result name="teacher_detail">/teacher/teacherdetail.jsp</result>
-			<result name="teacher_result">/teacher/teacher_result.jsp</result>
-			<result name="to_srr_index">/scientificResearchResults/srrList.jsp</result>
-			<result name="srr_detail">/scientificResearchResults/srrdetail.jsp</result>
-			<result name="srr_result">/scientificResearchResults/srr_result.jsp</result>
-			<result name="teach">/admin/teacher/teacher_teach.jsp</result>
-			<result name="keyan">/admin/teacher/teacher_keyan.jsp</result>
 			<result name="firstPic">/admin/updateIndexPic.jsp</result>
+			<result type="json"></result>
+		</action>
+		
+		<!-- 学生培养 -->
+		<action name="StuTrain_*" class="StuTrainAction"
+			method="{1}">
+<!-- 			<interceptor-ref name="loginInterceptor"></interceptor-ref> -->
+<!-- 			<interceptor-ref name="timerInterceptor" /> -->
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+			<result name="bookclubindex">/admin/stutrain/bookclub.jsp</result>
+			<result name="honorawardindex">/admin/stutrain/honoraward.jsp</result>
+			<result name="learnactindex">/admin/stutrain/learnact.jsp</result>
+			<result name="socialeventindex">/admin/stutrain/socialevent.jsp</result>
+			<result name="studentawardindex">/admin/stutrain/studentaward.jsp</result>
 			<result type="json"></result>
 		</action>
 	</package>

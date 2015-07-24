@@ -41,6 +41,8 @@ import com.et59.cus.domain.entity.TAttmeeting;
 import com.et59.cus.domain.entity.TAttmeetingExample;
 import com.et59.cus.domain.entity.TAtttrain;
 import com.et59.cus.domain.entity.TAtttrainExample;
+import com.et59.cus.domain.entity.TBookclub;
+import com.et59.cus.domain.entity.TBookclubExample;
 import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDictionary;
@@ -53,6 +55,10 @@ import com.et59.cus.domain.entity.THoldmeeting;
 import com.et59.cus.domain.entity.THoldmeetingExample;
 import com.et59.cus.domain.entity.THonorandother;
 import com.et59.cus.domain.entity.THonorandotherExample;
+import com.et59.cus.domain.entity.THonoraward;
+import com.et59.cus.domain.entity.THonorawardExample;
+import com.et59.cus.domain.entity.TLearnact;
+import com.et59.cus.domain.entity.TLearnactExample;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPaperExample;
 import com.et59.cus.domain.entity.TPartjob;
@@ -216,12 +222,22 @@ public interface CommonDAOEx {
 
 	public List<TAtttrain> selectAtttrainForPage(TAtttrainExample example,
 			int startrecord, int endrecord) throws Exception;
-	
+
 	public List<THoldmeeting> selectHoldMeetingForPage(
 			THoldmeetingExample example, int startrecord, int endrecord)
 			throws Exception;
-	
+
 	public List<TForeignExperts> selectForeignForPage(
 			TForeignExpertsExample example, int startrecord, int endrecord)
 			throws Exception;
+
+	public List<TBookclub> selectbookclubForPage(TBookclubExample example,
+			int startrecord, int endrecord) throws Exception;
+
+	public List<THonoraward> selecthonorawardForPage(
+			THonorawardExample example, int startrecord, int endrecord)
+			throws Exception;
+
+	public List<TLearnact> selectlearnactForPage(TLearnactExample example,
+			int startrecord, int endrecord) throws Exception;
 }

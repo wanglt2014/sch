@@ -16,78 +16,97 @@
 <title>${sitename}--后台管理系统--图片修改</title>
 </head>
 <body>
-<!-- 	<div id="firstpicdlg" class="easyui-dialog" -->
-<!-- 		style="width: 800px; height: 720px; padding: 60px 20px;overflow: visible;" closed="true" -->
-<!-- 		buttons="#firstpicdlg-buttons"> -->
- <img src="${first_path}/indexpic1.jpg" width="500" height="252"/>
- <img src="${first_path}/indexpic2.jpg" width="500" height="252"/>
- <img src="${first_path}/indexpic3.jpg" width="500" height="252"/>
- <img src="${first_path}/indexpic4.jpg" width="500" height="252"/>
-		<form id="firstpicfm" method="post" novalidate>
-			<div class="fitem">
-				<div class="wraper">
-				<label>图片1:</label>
-					<div class="btn-wraper">
-						<input type="button" value="选择文件..." id="browse1" />
-						<input type="button" value="清空" id="clear-btn" />
-						<p class="tip2">注意：只能上传1M以内，格式为jpg,gif,png,bmp的照片</p></div>
-					<div id="file-list" style="text-align: left;margin:0px 0px 0px 60px; "></div>
-					<img style="WIDTH:500px; HEIGHT:252px; BORDER:0;margin-left: 60px;" id="img_photo" src="" alt=""/>
-				</div>
+<div style="{width:auto;float:left;margin-left: auto;margin-right: auto;">
+	<form id="firstpicfm" method="post" novalidate>
+	<p class="tip2">注意：只能上传1M以内，格式为jpg,gif,png,bmp的照片，宽:500，高:252</p>
+		<div class="fitem" style="float: left;">
+			<div class="wraper">
+			<label>图片1:</label><input type="button" value="选择文件..." id="browse1" />
+				<div class="btn-wraper"></div>
+				<img src="${first_path}/indexpic1.jpg" id="indexpic1" width="500" height="252"/>
 			</div>
-			<div class="fitem">
-				<div class="wraper">
-				<label>图片2:</label>
-					<div class="btn-wraper">
-						<input type="button" value="选择文件..." id="browse2" />
-						<input type="button" value="清空" id="clear-btn" />
-						<p class="tip2">注意：只能上传1M以内，格式为jpg,gif,png,bmp的照片</p></div>
-					<div id="file-list2" style="text-align: left;margin:0px 0px 0px 60px; "></div>
-				</div>
+		</div>
+		<div class="fitem" style="float: left;clear: right;">
+			<div class="wraper">
+			<label>图片2:</label><input type="button" value="选择文件..." id="browse2" />
+				<div class="btn-wraper"></div>
+				<img src="${first_path}/indexpic2.jpg" id="indexpic2" width="500" height="252"/>
 			</div>
-			
-		</form>
+		</div>
+		<div class="fitem" style="float: left;">
+			<div class="wraper">
+			<label>图片3:</label><input type="button" value="选择文件..." id="browse3" />
+				<div class="btn-wraper"></div>
+				<img src="${first_path}/indexpic3.jpg" id="indexpic3" width="500" height="252"/>
+			</div>
+		</div>
+		<div class="fitem" style="float: left;clear: right;">
+			<div class="wraper">
+			<label>图片4:</label><input type="button" value="选择文件..." id="browse4" />
+				<div class="btn-wraper"></div>
+				<img src="${first_path}/indexpic4.jpg" id="indexpic4" width="500" height="252"/>
+			</div>
+		</div>
+	</form>
+	<a href="javascript:void(0)" class="easyui-linkbutton"
+		iconCls="icon-ok" onclick="savefirstpic()">保存</a>
+</div>
 	<script>
 	var url;
-	function newfirstpic() {
-		createUploaderPic();
-		createUploaderPic2();
-		$('#firstpicdlg').dialog('open').dialog('setTitle', '');
-		$('#firstpicfm').form('clear');
-		url = 'Exchange_UpdatePic';
-	}
-	
+	createUploaderPic();
+	createUploaderPic2();
+	createUploaderPic3();
+	createUploaderPic4();
 	function savefirstpic() {
 		var picLen = uploaderForPic.files.length;
+		var picLen2 = uploaderForPic2.files.length;
+		var picLen3 = uploaderForPic3.files.length;
+		var picLen4 = uploaderForPic4.files.length;
 			$('#firstpicfm').form('submit', {
-    			url : url,
+    			url :'Exchange_UpdatePic',
     			onSubmit : function() {
     				return $(this).form('validate');
     			},
     			success : function(result) {
     				if (result != "true") {
     					jAlert('系统错误，请联系管理员', '错误提示');
+    				}else{
+    					jAlert('保存成功', '提示');
     				}
     			}
     		});
 			if (picLen > 0) {
 				uploaderForPic.start();
 			}
+			if (picLen2 > 0) {
+				uploaderForPic2.start();
+			}
+			if (picLen3 > 0) {
+				uploaderForPic3.start();
+			}
+			if (picLen4 > 0) {
+				uploaderForPic4.start();
+			}
 		}
 	
 	//销毁所有上传控件
 	function deleteAllUploader(){
-		uploaderForPic.splice(0,10);
+		uploaderForPic.splice(0,2);
+		uploaderForPic2.splice(0,2);
+		uploaderForPic3.splice(0,2);
+		uploaderForPic4.splice(0,2);
 	}
 	
 	//销毁所有上传控件
 	function destroyAllUploader(){
 		uploaderForPic.destroy();
+		uploaderForPic2.destroy();
+		uploaderForPic3.destroy();
+		uploaderForPic4.destroy();
 	}
 	
 	var uploaderForPic;
 	function createUploaderPic(){
-		var picno = $('#picNo').val();
 		//照片 上传控件##########################################
 		uploaderForPic = new plupload.Uploader({ //实例化一个plupload上传对象
 			browse_button : 'browse1',
@@ -109,11 +128,6 @@
 	        }
 		});
 		uploaderForPic.init(); //初始化
-		//绑定文件上传删除事件
-		uploaderForPic.bind('FilesRemoved',function(uploader,file){
-			$('#file-list').html("");
-		});
-		
 		//绑定文件添加进队列事件
 		uploaderForPic.bind('FilesAdded',function(uploader,files){
 			$.each(uploader.files, function (i, file) { 
@@ -125,21 +139,14 @@
 			for(var i = 0, len = files.length; i<len; i++){
 				var file_name = files[i].name; //文件名
 				var file_id = files[i].id;//ID,临时文件名
-				//构造html来更新UI
-				var	html = '<span id="file-' + file_id +'" style="text-align: left;">';
-					html += '<input type="hiddent" style="display: none;" name="uploader_pic_tmpname" value="' + file_id + '" />';
-					html += '<input type="hiddent" style="display: none;" name="uploader_pic_name" value="' + file_name + '" /></span>';
-				$(html).appendTo('#file-list');
 				!function(i){
 					previewImage(files[i],function(imgsrc){
-						$('#file-'+files[i].id).append('<img src="'+ imgsrc +'" />');
+						$('#indexpic1').attr("src",imgsrc);
 					})
 			    }(i);
-			    $('#img_photo').hide();
 			}
 		});
 	}
-	
 	
 	var uploaderForPic2;
 	function createUploaderPic2(){
@@ -164,11 +171,6 @@
 	        }
 		});
 		uploaderForPic2.init(); //初始化
-		//绑定文件上传删除事件
-		uploaderForPic2.bind('FilesRemoved',function(uploader,file){
-			$('#file-list2').html("");
-		});
-		
 		//绑定文件添加进队列事件
 		uploaderForPic2.bind('FilesAdded',function(uploader,files){
 			$.each(uploader.files, function (i, file) { 
@@ -180,17 +182,96 @@
 			for(var i = 0, len = files.length; i<len; i++){
 				var file_name = files[i].name; //文件名
 				var file_id = files[i].id;//ID,临时文件名
-				//构造html来更新UI
-				var	html = '<span id="file-' + file_id +'" style="text-align: left;">';
-					html += '<input type="hiddent" style="display: none;" name="uploader_pic_tmpname" value="' + file_id + '" />';
-					html += '<input type="hiddent" style="display: none;" name="uploader_pic_name" value="' + file_name + '" /></span>';
-				$(html).appendTo('#file-list2');
 				!function(i){
 					previewImage(files[i],function(imgsrc){
-						$('#file-'+files[i].id).append('<img src="'+ imgsrc +'" />');
+						$('#indexpic2').attr("src",imgsrc);
 					})
 			    }(i);
-// 			    $('#img_photo').hide();
+			}
+		});
+	}
+	
+	var uploaderForPic3;
+	function createUploaderPic3(){
+		//照片 上传控件##########################################
+		uploaderForPic3 = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browse3',
+			multi_selection: false,
+	 		url : 'File_uploadForFirstPic',
+	 		file_data_name : 'fileData',
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: "indexpic3"
+	        	},
+	        filters: {
+	  		  mime_types : [ //只允许上传图片文件和rar压缩文件
+	  		    { title : "图片文件", extensions : "jpg,gif,png,bmp" }
+	  		  ],
+	  		  max_file_size : '1000kb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+		uploaderForPic3.init(); //初始化
+		//绑定文件添加进队列事件
+		uploaderForPic3.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+			        uploaderForPic3.removeFile(file); 
+			    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				!function(i){
+					previewImage(files[i],function(imgsrc){
+						$('#indexpic3').attr("src",imgsrc);
+					})
+			    }(i);
+			}
+		});
+	}
+	var uploaderForPic4;
+	function createUploaderPic4(){
+		//照片 上传控件##########################################
+		uploaderForPic4 = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'browse4',
+			multi_selection: false,
+	 		url : 'File_uploadForFirstPic',
+	 		file_data_name : 'fileData',
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: "indexpic4"
+	        	},
+	        filters: {
+	  		  mime_types : [ //只允许上传图片文件和rar压缩文件
+	  		    { title : "图片文件", extensions : "jpg,gif,png,bmp" }
+	  		  ],
+	  		  max_file_size : '1000kb', //最大只能上传100kb的文件
+	  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+		uploaderForPic4.init(); //初始化
+		//绑定文件添加进队列事件
+		uploaderForPic4.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+			        uploaderForPic4.removeFile(file); 
+			    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				!function(i){
+					previewImage(files[i],function(imgsrc){
+						$('#indexpic4').attr("src",imgsrc);
+					})
+			    }(i);
 			}
 		});
 	}

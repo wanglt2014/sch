@@ -152,6 +152,11 @@
 		scope="prototype" autowire="byName">
 	</bean>
 	
+	<!-- 学生培养 -->
+	<bean name="StuTrainAction" class="com.et59.cus.action.StuTrainAction"
+		scope="prototype" autowire="byName">
+	</bean>
+	
 	<!-- 文件下载 -->
 	<bean name="FileAction" class="com.et59.cus.tools.FileAction"
 		scope="prototype" autowire="byName">
@@ -424,6 +429,36 @@
 	
 	<!--  国外专家来访表（国际交流） -->
 	<bean name="tForeignExpertsDAO" class="com.et59.cus.domain.dao.TForeignExpertsDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  读书会 -->
+	<bean name="tBookclubDAO" class="com.et59.cus.domain.dao.TBookclubDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  荣誉获奖 -->
+	<bean name="tHonorawardDAO" class="com.et59.cus.domain.dao.THonorawardDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!--  社会事件 -->
+	<bean name="tSocialeventDAO" class="com.et59.cus.domain.dao.TSocialeventDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 学生获奖  -->
+	<bean name="tStudentawardDAO" class="com.et59.cus.domain.dao.TStudentawardDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+	<!-- 学术活动  -->
+	<bean name="tLearnactDAOImpl" class="com.et59.cus.domain.dao.TLearnactDAOImpl"
 		scope="prototype" autowire="byName">
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>

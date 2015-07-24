@@ -68,4 +68,10 @@
   <sqlMap resource="com/et59/cus/domain/maps/t_exchange_stu_SqlMap.xml" />
   <sqlMap resource="com/et59/cus/domain/maps/t_attmeeting_SqlMap.xml" />
   <sqlMap resource="com/et59/cus/domain/maps/t_atttrain_SqlMap.xml" />
+  
+  <sqlMap resource="com/et59/cus/domain/maps/t_honoraward_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_bookclub_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_socialevent_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_learnact_SqlMap.xml" />
+  <sqlMap resource="com/et59/cus/domain/maps/t_studentaward_SqlMap.xml" />
 </sqlMapConfig>

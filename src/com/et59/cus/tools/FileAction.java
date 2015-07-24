@@ -81,8 +81,11 @@ public class FileAction extends BaseAction {
 		OutputStream out = null;
 		try {
 			if (dst.exists()) {
-				out = new BufferedOutputStream(new FileOutputStream(dst, true),
+				out = new BufferedOutputStream(new FileOutputStream(dst),
 						BUFFER_SIZE);
+				// out = new BufferedOutputStream(new FileOutputStream(dst,
+				// true),
+				// BUFFER_SIZE);
 			} else {
 				out = new BufferedOutputStream(new FileOutputStream(dst),
 						BUFFER_SIZE);
@@ -113,7 +116,7 @@ public class FileAction extends BaseAction {
 			}
 		}
 	}
-	
+
 	public String uploadForFirstPic() throws Exception {
 		// boolean isMultipart = ServletFileUpload.isMultipartContent(request);
 		// System.out.println(isMultipart + "***************");
@@ -122,12 +125,12 @@ public class FileAction extends BaseAction {
 		if (!dstFile.exists()) {
 			dstFile.mkdirs();
 		}
-		//indexpic1.jpg
-		dstPath = dstPath + "\\" + filetype+".jpg";
+		// indexpic1.jpg
+		dstPath = dstPath + "\\" + filetype + ".jpg";
 		File dst = new File(dstPath);
 		copy(this.fileData, dst);
 		System.out.println("上传文件路径:" + dstPath + " " + " 临时文件名："
-				+ this.getName()+"图片序号："+filetype);
+				+ this.getName() + "图片序号：" + filetype);
 		return SUCCESS;
 	}
 
@@ -200,7 +203,7 @@ public class FileAction extends BaseAction {
 	public static String getSavePathForFirstPic() {
 		return getSavePath() + Constant.PATH_FIRSTPIC;
 	}
-	
+
 	/**
 	 * 获取师资队伍保存路径
 	 * 

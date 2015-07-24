@@ -9,11 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.et59.cus.domain.dao.TAttmeetingDAO;
 import com.et59.cus.domain.dao.TAtttrainDAO;
+import com.et59.cus.domain.dao.TBookclubDAO;
 import com.et59.cus.domain.dao.TDepartmentDAO;
 import com.et59.cus.domain.dao.TDownloadDAO;
 import com.et59.cus.domain.dao.TForeignExpertsDAO;
 import com.et59.cus.domain.dao.THoldmeetingDAO;
 import com.et59.cus.domain.dao.THonorandotherDAO;
+import com.et59.cus.domain.dao.THonorawardDAO;
+import com.et59.cus.domain.dao.TLearnactDAOImpl;
 import com.et59.cus.domain.dao.TPaperDAO;
 import com.et59.cus.domain.dao.TPartjobDAO;
 import com.et59.cus.domain.dao.TPrizeDAO;
@@ -32,6 +35,8 @@ import com.et59.cus.domain.entity.TAttmeeting;
 import com.et59.cus.domain.entity.TAttmeetingExample;
 import com.et59.cus.domain.entity.TAtttrain;
 import com.et59.cus.domain.entity.TAtttrainExample;
+import com.et59.cus.domain.entity.TBookclub;
+import com.et59.cus.domain.entity.TBookclubExample;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
@@ -43,6 +48,10 @@ import com.et59.cus.domain.entity.THoldmeeting;
 import com.et59.cus.domain.entity.THoldmeetingExample;
 import com.et59.cus.domain.entity.THonorandother;
 import com.et59.cus.domain.entity.THonorandotherExample;
+import com.et59.cus.domain.entity.THonoraward;
+import com.et59.cus.domain.entity.THonorawardExample;
+import com.et59.cus.domain.entity.TLearnact;
+import com.et59.cus.domain.entity.TLearnactExample;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPaperExample;
 import com.et59.cus.domain.entity.TPartjob;
@@ -136,11 +145,19 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 
 	@Autowired
 	private THoldmeetingDAO tHoldmeetingDAO;
-	
+
 	@Autowired
 	private TForeignExpertsDAO tForeignExpertsDAO;
-	
-	
+
+	@Autowired
+	private TBookclubDAO tBookclubDAO;
+
+	@Autowired
+	private THonorawardDAO tHonorawardDAO;
+
+	@Autowired
+	private TLearnactDAOImpl tLearnactDAOImpl;
+
 	/**
 	 * 查询资料下载
 	 */
@@ -823,7 +840,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deleteAttTrain(TAtttrainExample example) throws Exception {
 		tAtttrainDAO.deleteByExample(example);
 	}
-	
+
 	/**
 	 * 查询
 	 */
@@ -839,20 +856,20 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		page.setTotal(totalCount);
 		return page;
 	}
-	
+
 	/**
 	 */
 	@Override
 	public void saveHoldMeeting(THoldmeeting tHoldmeeting) throws Exception {
 		tHoldmeetingDAO.insertSelective(tHoldmeeting);
 	}
-	
+
 	/**
 	 */
 	@Override
 	public void updateHoldMeeting(THoldmeeting tHoldmeeting) throws Exception {
 		tHoldmeetingDAO.updateByPrimaryKeySelective(tHoldmeeting);
-		
+
 	}
 
 	/**
@@ -862,7 +879,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deleteHoldMeeting(THoldmeetingExample example) throws Exception {
 		tHoldmeetingDAO.deleteByExample(example);
 	}
-	
+
 	/**
 	 * 查询
 	 */
@@ -878,20 +895,20 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		page.setTotal(totalCount);
 		return page;
 	}
-	
+
 	/**
 	 */
 	@Override
 	public void saveForeign(TForeignExperts tForeignExperts) throws Exception {
 		tForeignExpertsDAO.insertSelective(tForeignExperts);
 	}
-	
+
 	/**
 	 */
 	@Override
 	public void updateForeign(TForeignExperts tForeignExperts) throws Exception {
 		tForeignExpertsDAO.updateByPrimaryKeySelective(tForeignExperts);
-		
+
 	}
 
 	/**
@@ -900,6 +917,123 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public void deleteForeign(TForeignExpertsExample example) throws Exception {
 		tForeignExpertsDAO.deleteByExample(example);
+	}
+
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager querybookclub(TBookclubExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TBookclub> list = commonDAOEx.selectbookclubForPage(example,
+				startrecord, pagesize);
+		int totalCount = tBookclubDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void savebookclub(TBookclub tBookclub) throws Exception {
+		tBookclubDAO.insertSelective(tBookclub);
+	}
+
+	/**
+	 */
+	@Override
+	public void updatebookclub(TBookclub tBookclub) throws Exception {
+		tBookclubDAO.updateByPrimaryKeySelective(tBookclub);
+
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deletebookclub(TBookclubExample example) throws Exception {
+		tBookclubDAO.deleteByExample(example);
+	}
+
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager queryhonoraward(THonorawardExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<THonoraward> list = commonDAOEx.selecthonorawardForPage(example,
+				startrecord, pagesize);
+		int totalCount = tHonorawardDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void savehonoraward(THonoraward tHonoraward) throws Exception {
+		tHonorawardDAO.insertSelective(tHonoraward);
+	}
+
+	/**
+	 */
+	@Override
+	public void updatehonoraward(THonoraward tHonoraward) throws Exception {
+		tHonorawardDAO.updateByPrimaryKeySelective(tHonoraward);
+
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deletehonoraward(THonorawardExample example) throws Exception {
+		tHonorawardDAO.deleteByExample(example);
+	}
+
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager querylearnact(TLearnactExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TLearnact> list = commonDAOEx.selectlearnactForPage(example,
+				startrecord, pagesize);
+		int totalCount = tLearnactDAOImpl.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void savelearnact(TLearnact tLearnact) throws Exception {
+		tLearnactDAOImpl.insertSelective(tLearnact);
+	}
+
+	/**
+	 */
+	@Override
+	public void updatelearnact(TLearnact tLearnact) throws Exception {
+		tLearnactDAOImpl.updateByPrimaryKeySelective(tLearnact);
+
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deletelearnact(TLearnactExample example) throws Exception {
+		tLearnactDAOImpl.deleteByExample(example);
 	}
 
 }

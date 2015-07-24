@@ -7,6 +7,8 @@ import com.et59.cus.domain.entity.TAttmeeting;
 import com.et59.cus.domain.entity.TAttmeetingExample;
 import com.et59.cus.domain.entity.TAtttrain;
 import com.et59.cus.domain.entity.TAtttrainExample;
+import com.et59.cus.domain.entity.TBookclub;
+import com.et59.cus.domain.entity.TBookclubExample;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
@@ -16,6 +18,10 @@ import com.et59.cus.domain.entity.THoldmeeting;
 import com.et59.cus.domain.entity.THoldmeetingExample;
 import com.et59.cus.domain.entity.THonorandother;
 import com.et59.cus.domain.entity.THonorandotherExample;
+import com.et59.cus.domain.entity.THonoraward;
+import com.et59.cus.domain.entity.THonorawardExample;
+import com.et59.cus.domain.entity.TLearnact;
+import com.et59.cus.domain.entity.TLearnactExample;
 import com.et59.cus.domain.entity.TPaper;
 import com.et59.cus.domain.entity.TPaperExample;
 import com.et59.cus.domain.entity.TPartjob;
@@ -372,18 +378,49 @@ public interface LocalServiceEX {
 	public void saveAttTrain(TAtttrain tAttmeeting) throws Exception;
 
 	public void deleteAttTrain(TAtttrainExample example) throws Exception;
-	
+
 	public void saveHoldMeeting(THoldmeeting tHoldmeeting) throws Exception;
-	
+
 	public void updateHoldMeeting(THoldmeeting tHoldmeeting) throws Exception;
-	
+
 	public void deleteHoldMeeting(THoldmeetingExample example) throws Exception;
+
 	public Pager queryHoldMeetingBypage(THoldmeetingExample example,
 			int pagesize, int currentpage) throws Exception;
-	
+
 	public Pager queryForeignBypage(TForeignExpertsExample example,
 			int pagesize, int currentpage) throws Exception;
+
 	public void saveForeign(TForeignExperts tForeignExperts) throws Exception;
+
 	public void updateForeign(TForeignExperts tForeignExperts) throws Exception;
+
 	public void deleteForeign(TForeignExpertsExample example) throws Exception;
+
+	public void deletebookclub(TBookclubExample example) throws Exception;
+
+	public void updatebookclub(TBookclub tBookclub) throws Exception;
+
+	public void savebookclub(TBookclub tBookclub) throws Exception;
+
+	public Pager querybookclub(TBookclubExample example, int pagesize,
+			int currentpage) throws Exception;
+
+	public Pager queryhonoraward(THonorawardExample example, int pagesize,
+			int currentpage) throws Exception;
+
+	public void savehonoraward(THonoraward tHonoraward) throws Exception;
+
+	public void updatehonoraward(THonoraward tHonoraward) throws Exception;
+
+	public void deletehonoraward(THonorawardExample example) throws Exception;
+
+	public Pager querylearnact(TLearnactExample example, int pagesize,
+			int currentpage) throws Exception;
+
+	public void savelearnact(TLearnact tLearnact) throws Exception;
+
+	public void updatelearnact(TLearnact tLearnact) throws Exception;
+
+	public void deletelearnact(TLearnactExample example) throws Exception;
 }

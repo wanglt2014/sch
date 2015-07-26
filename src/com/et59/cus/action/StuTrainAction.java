@@ -12,7 +12,9 @@ import com.et59.cus.domain.entity.THonorawardExample;
 import com.et59.cus.domain.entity.TLearnact;
 import com.et59.cus.domain.entity.TLearnactExample;
 import com.et59.cus.domain.entity.TSocialevent;
+import com.et59.cus.domain.entity.TSocialeventExample;
 import com.et59.cus.domain.entity.TStudentaward;
+import com.et59.cus.domain.entity.TStudentawardExample;
 import com.et59.cus.domain.entity.ex.Pager;
 
 /**
@@ -354,6 +356,181 @@ public class StuTrainAction extends BaseAction {
 			TLearnactExample tpexample = new TLearnactExample();
 			tpexample.createCriteria().andActidEqualTo(idL);
 			localServiceEXProxy.deletelearnact(tpexample);
+			flag = true;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
+	/**
+	 * 分页查询
+	 */
+	public void querysocialevent() {
+		String page = request.getParameter("page"); // 当前页数
+		String rows = request.getParameter("rows"); // 每页显示行数
+		try {
+			// 加载获奖信息
+			TSocialeventExample tSocialeventExample = new TSocialeventExample();
+			Pager pager = localServiceEXProxy.querysocialevent(tSocialeventExample,
+					Integer.valueOf(rows), Integer.valueOf(page));
+			super.reponseWriter(JSON.toJSONString(pager));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public TSocialevent getsocialevent() {
+		TSocialevent tSocialevent = new TSocialevent();
+		tSocialevent.setEventname(request.getParameter("eventname"));
+		tSocialevent.setEventplace(request.getParameter("eventplace"));
+		tSocialevent.setEventtime(request.getParameter("eventtime"));
+		tSocialevent.setEventtype(request.getParameter("eventtype"));
+		tSocialevent.setIstogether(request.getParameter("istogether"));
+		tSocialevent.setRemark(request.getParameter("remark"));
+		tSocialevent.setStudents(request.getParameter("students"));
+		tSocialevent.setTeachernames(request.getParameter("teachernames"));
+		tSocialevent.setUnitname(request.getParameter("unitname"));
+		tSocialevent.setWebsite(request.getParameter("website"));
+		return tSocialevent;
+	}
+
+	public void savesocialevent() {
+		boolean flag = false;
+		try {
+			// 保存获奖表
+			TSocialevent tSocialevent = getsocialevent();
+			localServiceEXProxy.savesocialevent(tSocialevent);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+
+	public void updatesocialevent() {
+		boolean flag = false;
+		try {
+			String eventid = request.getParameter("id");
+			// 保存获奖表
+			TSocialevent tSocialevent = getsocialevent();
+			tSocialevent.setEventid(Long.valueOf(eventid));
+			localServiceEXProxy.updatesocialevent(tSocialevent);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+
+	/**
+	 * 删除
+	 */
+	public void deletesocialevent() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			TSocialeventExample tpexample = new TSocialeventExample();
+			tpexample.createCriteria().andEventidEqualTo(idL);
+			localServiceEXProxy.deletesocialevent(tpexample);
+			flag = true;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+	
+	/**
+	 * 分页查询
+	 */
+	public void querystudentaward() {
+		String page = request.getParameter("page"); // 当前页数
+		String rows = request.getParameter("rows"); // 每页显示行数
+		try {
+			// 加载获奖信息
+			TStudentawardExample tStudentawardExample = new TStudentawardExample();
+			Pager pager = localServiceEXProxy.querystudentaward(tStudentawardExample,
+					Integer.valueOf(rows), Integer.valueOf(page));
+			super.reponseWriter(JSON.toJSONString(pager));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public TStudentaward getstudentaward() {
+		TStudentaward tStudentaward = new TStudentaward();
+		tStudentaward.setAwardname(request.getParameter("awardname"));
+		tStudentaward.setAwardtype(request.getParameter("awardtype"));
+		tStudentaward.setGrantorg(request.getParameter("grantorg"));
+		tStudentaward.setGranttime(request.getParameter("granttime"));
+		tStudentaward.setRemark(request.getParameter("remark"));
+		tStudentaward.setStuname(request.getParameter("stuname"));
+		tStudentaward.setStuno(request.getParameter("stuno"));
+		tStudentaward.setStuprofession(request.getParameter("stuprofession"));
+		tStudentaward.setTeachernames(request.getParameter("teachernames"));
+		return tStudentaward;
+	}
+
+	public void savestudentaward() {
+		boolean flag = false;
+		try {
+			// 保存获奖表
+			TStudentaward tStudentaward = getstudentaward();
+			localServiceEXProxy.savestudentaward(tStudentaward);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+
+	public void updatestudentaward() {
+		boolean flag = false;
+		try {
+			String awardid = request.getParameter("id");
+			// 保存获奖表
+			TStudentaward tStudentaward = getstudentaward();
+			tStudentaward.setAwardid(Long.valueOf(awardid));
+			localServiceEXProxy.updatestudentaward(tStudentaward);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+
+	/**
+	 * 删除
+	 */
+	public void deletestudentaward() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			TStudentawardExample tpexample = new TStudentawardExample();
+			tpexample.createCriteria().andAwardidEqualTo(idL);
+			localServiceEXProxy.deletestudentaward(tpexample);
 			flag = true;
 		} catch (NumberFormatException e) {
 			e.printStackTrace();

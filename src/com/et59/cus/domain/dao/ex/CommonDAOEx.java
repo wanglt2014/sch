@@ -67,6 +67,10 @@ import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TResearchExample;
+import com.et59.cus.domain.entity.TSocialevent;
+import com.et59.cus.domain.entity.TSocialeventExample;
+import com.et59.cus.domain.entity.TStudentaward;
+import com.et59.cus.domain.entity.TStudentawardExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacher;
@@ -239,5 +243,11 @@ public interface CommonDAOEx {
 			throws Exception;
 
 	public List<TLearnact> selectlearnactForPage(TLearnactExample example,
+			int startrecord, int endrecord) throws Exception;
+	
+	public List<TSocialevent> selectsocialeventForPage(TSocialeventExample example,
+			int startrecord, int endrecord) throws Exception;
+	
+	public List<TStudentaward> selectstudentawardForPage(TStudentawardExample example,
 			int startrecord, int endrecord) throws Exception;
 }

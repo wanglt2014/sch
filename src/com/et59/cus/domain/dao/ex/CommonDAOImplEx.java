@@ -67,6 +67,10 @@ import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TResearchExample;
+import com.et59.cus.domain.entity.TSocialevent;
+import com.et59.cus.domain.entity.TSocialeventExample;
+import com.et59.cus.domain.entity.TStudentaward;
+import com.et59.cus.domain.entity.TStudentawardExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacher;
@@ -611,6 +615,32 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 			int startrecord, int endrecord) throws Exception {
 		List<TLearnact> list = (List<TLearnact>) getSqlMapClientTemplate()
 				.queryForList("t_learnact.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TSocialevent> selectsocialeventForPage(TSocialeventExample example,
+			int startrecord, int endrecord) throws Exception {
+		List<TSocialevent> list = (List<TSocialevent>) getSqlMapClientTemplate()
+				.queryForList("t_socialevent.ibatorgenerated_selectByExample",
+						example, startrecord, endrecord);
+		return list;
+	}
+	
+	/**
+	 * 分页查询
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<TStudentaward> selectstudentawardForPage(TStudentawardExample example,
+			int startrecord, int endrecord) throws Exception {
+		List<TStudentaward> list = (List<TStudentaward>) getSqlMapClientTemplate()
+				.queryForList("t_studentaward.ibatorgenerated_selectByExample",
 						example, startrecord, endrecord);
 		return list;
 	}

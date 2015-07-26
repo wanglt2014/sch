@@ -22,13 +22,15 @@
 			fitColumns="true" pageList="[5,10]" singleSelect="true" pageSize="5" >
 			<thead>
 				<tr>
-					<th field="actname" width="30">学术活动名称</th>
-					<th field="expertnames" width="30" >邀请专家姓名</th>
-					<th field="teachernames" width="30" >参加老师</th>
-					<th field="studentnames" width="30">参加学生人数</th>
-					<th field="actplace" width="30">举办地点</th>
-					<th field="acttime" width="40">举办时间</th>
-					<th field="subjects" width="60">活动涉及学科</th>
+					<th field="eventtime" width="30">时间</th>
+					<th field="eventplace" width="30" >地点</th>
+					<th field="eventname" width="30" >社会事件名称</th>
+					<th field="eventtype" width="30">事件类别</th>
+					<th field="students" width="30">参与学生</th>
+					<th field="istogether" width="50">是否有共建（合作）单位</th>
+					<th field="unitname" width="60">共建（合作）单位名称</th>
+					<th field="teachernames" width="40">指导老师</th>
+					<th field="website" width="60">传媒报道网址</th>
 					<th field="remark" width="60">备注</th>
 				</tr>
 			</thead>
@@ -47,41 +49,60 @@
 		<div id="socialeventRow" class="fitem">
 		<form id="socialeventfm" method="post" novalidate>
 		<span class="span_column" >
-			<label style="width: 160px;text-align: right;">学术活动名称:</label>
-			<input id="actname" name="actname" style="width: 110px"
-				class="easyui-validatebox"  maxlength="30">
+			<label style="width: 160px;text-align: right;">时间:</label>
+			<input id="eventtime" name="eventtime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
 		</span>
 		<span class="span_column" >
-			<label style="width: 160px;text-align: right;">邀请专家姓名:</label>
-			<input id="expertnames" name="expertnames" style="width: 110px"
+			<label style="width: 160px;text-align: right;">地点:</label>
+			<input id="eventplace" name="eventplace" style="width: 110px"
 				class="easyui-validatebox"  maxlength="100">
 		</span>
 		<br><br>
 		<span class="span_column" >
-			<label style="width: 160px;text-align: right;">参加老师:</label>
-			<input id="teachernames" name="teachernames" style="width: 110px"
+			<label style="width: 160px;text-align: right;">社会事件名称:</label>
+			<input id="eventname" name="eventname" style="width: 110px"
 				class="easyui-validatebox"  maxlength="100">
 		</span>
 		<span class="span_column" >
-			<label style="width: 160px;text-align: right;">参加学生人数:</label>
-			<input id="studentnames" name="studentnames" style="width: 110px"
-				class="easyui-validatebox"  maxlength="5">
+			<label style="width: 160px;text-align: right;">事件类别:</label>
+			<select id="eventtype" name="eventtype" class="easyui-combobox" panelHeight="auto" editable="false"
+				style="width: 110px">
+				<option value="校级">校级</option>
+				<option value="省市级">省市级</option>
+				<option value="国家级">国家级</option>
+				<option value="国际级">国际级</option>
+			</select>
 		</span>
 		<br><br>
 		<span class="span_column" >
-			<label style="width: 160px;text-align: right;">举办地点:</label>
-			<input id="actplace" name="actplace" style="width: 110px"
-				class="easyui-validatebox"  maxlength="50">
+			<label style="width: 160px;text-align: right;">是否有共建（合作）单位:</label>
+			<select id="istogether" name="istogether" class="easyui-combobox" panelHeight="auto" editable="false"
+				style="width: 110px">
+				<option value="是">是</option>
+				<option value="否">否</option>
+			</select>
 		</span>
 		<span class="span_column">
-			<label style="width: 160px;text-align: right;">举办时间:</label> 
-			<input id="acttime" name="acttime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+			<label style="width: 160px;text-align: right;">共建（合作）单位名称:</label> 
+			<input id="unitname" name="unitname" style="width: 110px"
+				class="easyui-validatebox"  maxlength="50">
 		</span>
 		<br><br>
 		<span class="span_column" >
-			<label style="width: 160px;text-align: right;">活动涉及学科:</label>
-			<input id="subjects" name="subjects" style="width: 390px"
+			<label style="width: 160px;text-align: right;">参与学生:</label>
+			<input id="students" name="students" style="width: 110px"
+				class="easyui-validatebox"  maxlength="100">
+		</span>
+		<span class="span_column" >
+			<label style="width: 160px;text-align: right;">指导老师:</label>
+			<input id="teachernames" name="teachernames" style="width: 110px"
 				class="easyui-validatebox"  maxlength="50">
+		</span>
+		<br><br>
+		<span class="span_column" >
+			<label style="width: 160px;text-align: right;">传媒报道网址:</label>
+			<input id="website" name="website" style="width: 390px"
+				class="easyui-validatebox"  maxlength="100">
 		</span>
 		<br><br>
 		<span class="span_column" >
@@ -121,7 +142,7 @@
 					'编辑');
 			$('#socialeventfm').form('clear');
 			$('#socialeventfm').form('load', row);
-			url = 'StuTrain_updatesocialevent?id=' + row.actid;
+			url = 'StuTrain_updatesocialevent?id=' + row.eventid;
 		}
 	}
 	
@@ -153,7 +174,7 @@
 			$.messager.confirm('确认', '是否要删除?', function(r) {
 				if (r) {
 					$.post('StuTrain_deletesocialevent', {
-						id : row.actid
+						id : row.eventid
 					}, function(result) {
 						if (result = "true") {
 							$('#socialeventdg').datagrid('reload'); // reload the user data

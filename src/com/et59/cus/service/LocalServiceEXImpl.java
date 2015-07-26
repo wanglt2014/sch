@@ -16,11 +16,14 @@ import com.et59.cus.domain.dao.TForeignExpertsDAO;
 import com.et59.cus.domain.dao.THoldmeetingDAO;
 import com.et59.cus.domain.dao.THonorandotherDAO;
 import com.et59.cus.domain.dao.THonorawardDAO;
+import com.et59.cus.domain.dao.TLearnactDAO;
 import com.et59.cus.domain.dao.TLearnactDAOImpl;
 import com.et59.cus.domain.dao.TPaperDAO;
 import com.et59.cus.domain.dao.TPartjobDAO;
 import com.et59.cus.domain.dao.TPrizeDAO;
 import com.et59.cus.domain.dao.TResearchDAO;
+import com.et59.cus.domain.dao.TSocialeventDAO;
+import com.et59.cus.domain.dao.TStudentawardDAO;
 import com.et59.cus.domain.dao.TSubjectDAO;
 import com.et59.cus.domain.dao.TTeacherDAO;
 import com.et59.cus.domain.dao.TTeacherPaperDAO;
@@ -60,6 +63,10 @@ import com.et59.cus.domain.entity.TPrize;
 import com.et59.cus.domain.entity.TPrizeExample;
 import com.et59.cus.domain.entity.TResearch;
 import com.et59.cus.domain.entity.TResearchExample;
+import com.et59.cus.domain.entity.TSocialevent;
+import com.et59.cus.domain.entity.TSocialeventExample;
+import com.et59.cus.domain.entity.TStudentaward;
+import com.et59.cus.domain.entity.TStudentawardExample;
 import com.et59.cus.domain.entity.TSubject;
 import com.et59.cus.domain.entity.TSubjectExample;
 import com.et59.cus.domain.entity.TTeacherPaperExample;
@@ -156,7 +163,14 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	private THonorawardDAO tHonorawardDAO;
 
 	@Autowired
-	private TLearnactDAOImpl tLearnactDAOImpl;
+	private TLearnactDAO tLearnactDAOImpl;
+	
+	@Autowired
+	private TSocialeventDAO tSocialeventDAO;
+	
+	@Autowired
+	private TStudentawardDAO tStudentawardDAO;
+	
 
 	/**
 	 * 查询资料下载
@@ -1034,6 +1048,84 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	@Override
 	public void deletelearnact(TLearnactExample example) throws Exception {
 		tLearnactDAOImpl.deleteByExample(example);
+	}
+	
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager querysocialevent(TSocialeventExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TSocialevent> list = commonDAOEx.selectsocialeventForPage(example,
+				startrecord, pagesize);
+		int totalCount = tSocialeventDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void savesocialevent(TSocialevent tLearnact) throws Exception {
+		tSocialeventDAO.insertSelective(tLearnact);
+	}
+
+	/**
+	 */
+	@Override
+	public void updatesocialevent(TSocialevent tLearnact) throws Exception {
+		tSocialeventDAO.updateByPrimaryKeySelective(tLearnact);
+
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deletesocialevent(TSocialeventExample example) throws Exception {
+		tSocialeventDAO.deleteByExample(example);
+	}
+	
+	/**
+	 * 查询
+	 */
+	@Override
+	public Pager querystudentaward(TStudentawardExample example, int pagesize,
+			int currentpage) throws Exception {
+		Pager page = new Pager();
+		int startrecord = (currentpage - 1) * pagesize;
+		List<TStudentaward> list = commonDAOEx.selectstudentawardForPage(example,
+				startrecord, pagesize);
+		int totalCount = tStudentawardDAO.countByExample(example);
+		page.setRows(list);
+		page.setTotal(totalCount);
+		return page;
+	}
+
+	/**
+	 */
+	@Override
+	public void savestudentaward(TStudentaward tLearnact) throws Exception {
+		tStudentawardDAO.insertSelective(tLearnact);
+	}
+
+	/**
+	 */
+	@Override
+	public void updatestudentaward(TStudentaward tLearnact) throws Exception {
+		tStudentawardDAO.updateByPrimaryKeySelective(tLearnact);
+
+	}
+
+	/**
+	 * 删除
+	 */
+	@Override
+	public void deletestudentaward(TStudentawardExample example) throws Exception {
+		tStudentawardDAO.deleteByExample(example);
 	}
 
 }

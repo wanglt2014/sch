@@ -65,7 +65,7 @@
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">参加学生人数:</label>
 			<input id="studentnames" name="studentnames" style="width: 110px"
-				class="easyui-validatebox"  maxlength="5">
+				class="easyui-numberbox"  maxlength="5">
 		</span>
 		<br><br>
 		<span class="span_column" >

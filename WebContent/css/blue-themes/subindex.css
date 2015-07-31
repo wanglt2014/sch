@@ -1,10 +1,10 @@
 #left_left_content{
-	width:300px;height:480px;float:left;
+	width:420px;height:511px;float:left;
 	
 }
 
 #left_content{
-	width:510px;float:left;
+	width:690px;float:left;
 }
 
 #news_right_content{
@@ -53,7 +53,8 @@
 	float:left;
 }
 #right_content_bottom{
-	width:300px;
+	margin:10px 0 0 0;
+	width:690px;
 /* 	height:260px; */
 	float:left;
 }

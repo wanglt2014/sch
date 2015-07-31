@@ -17,6 +17,8 @@
 
 <div id="teachertb" style="padding: 5px; height: auto">
 	</div>
+	<input type="hidden" id="teacherIdForSave"> 
+	<input type="hidden" id="teacherNameForSave"> 
 	<table id="teacherdg3" title="列表" class="easyui-datagrid"
 		style="width: auto; height: 616px" url="Teacher_query"
 		toolbar="#teachertoolbar3" pagination="true" rownumbers="true"

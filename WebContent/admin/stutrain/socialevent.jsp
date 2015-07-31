@@ -55,13 +55,13 @@
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">地点:</label>
 			<input id="eventplace" name="eventplace" style="width: 110px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="50">
 		</span>
 		<br><br>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">社会事件名称:</label>
 			<input id="eventname" name="eventname" style="width: 110px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="30">
 		</span>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">事件类别:</label>
@@ -85,7 +85,7 @@
 		<span class="span_column">
 			<label style="width: 160px;text-align: right;">共建（合作）单位名称:</label> 
 			<input id="unitname" name="unitname" style="width: 110px"
-				class="easyui-validatebox"  maxlength="50">
+				class="easyui-validatebox"  maxlength="30">
 		</span>
 		<br><br>
 		<span class="span_column" >
@@ -96,7 +96,7 @@
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">指导老师:</label>
 			<input id="teachernames" name="teachernames" style="width: 110px"
-				class="easyui-validatebox"  maxlength="50">
+				class="easyui-validatebox"  maxlength="100">
 		</span>
 		<br><br>
 		<span class="span_column" >
@@ -108,7 +108,7 @@
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">备注:</label>
 			<input id="remark" name="remark" style="width: 390px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="200">
 		</span>
 		</form>
 		</div>

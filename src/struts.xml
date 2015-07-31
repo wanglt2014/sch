@@ -376,6 +376,7 @@
 			<result name="to_srr_index">/scientificResearchResults/srrList.jsp</result>
 			<result name="srr_detail">/scientificResearchResults/srrdetail.jsp</result>
 			<result name="srr_result">/scientificResearchResults/srr_result.jsp</result>
+			<result name="srr_keyanresult">/scientificResearchResults/srr_keyanresult.jsp</result>
 			<result name="teach">/admin/teacher/teacher_teach.jsp</result>
 			<result name="keyan">/admin/teacher/teacher_keyan.jsp</result>
 			<result type="json"></result>

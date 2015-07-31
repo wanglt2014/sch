@@ -1,7 +1,7 @@
 
 #flash_div{
 	position:relative;
-	width:510px;
+	width:410px;
 	height:253px;
 }
 .flash_left{
@@ -24,7 +24,7 @@
 	left:5px;
 	border-top:1px solid #eee;
 	border-bottom:1px solid #eee;
-	width:500px;
+	width:400px;
 	height:252px;
 	z-index: 2;
 }

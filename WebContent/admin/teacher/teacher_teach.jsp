@@ -17,6 +17,8 @@
 
 <div id="teachertb" style="padding: 5px; height: auto">
 	</div>
+	<input type="hidden" id="teacherIdForSave"> 
+	<input type="hidden" id="teacherNameForSave"> 
 	<table id="teacherdg2" title="列表" class="easyui-datagrid"
 		style="width: auto; height: 616px" url="Teacher_query"
 		toolbar="#teachertoolbar2" pagination="true" rownumbers="true"
@@ -153,7 +155,7 @@
 					<span class="span_column_sm" >
 					<label style="width: 85px;text-align: right;">刊物国别:</label>
 						<input id="teachpapernotecountry" name="teachpapernotecountry"
-							class="easyui-numberbox"  maxlength="20" style="width: 110px" ></span>
+							class="easyui-validatebox"  maxlength="20" style="width: 110px" ></span>
 					<span class="span_column_sm">
 						<label style="width: 85px;text-align: right;">发表/出版时间:</label> 
 						<input id="teachpapernotedate" name="teachpapernotedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />

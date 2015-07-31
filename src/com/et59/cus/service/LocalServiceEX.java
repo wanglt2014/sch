@@ -427,22 +427,26 @@ public interface LocalServiceEX {
 	public void updatelearnact(TLearnact tLearnact) throws Exception;
 
 	public void deletelearnact(TLearnactExample example) throws Exception;
-	
+
 	public Pager querysocialevent(TSocialeventExample example, int pagesize,
 			int currentpage) throws Exception;
-	
+
 	public void savesocialevent(TSocialevent tLearnact) throws Exception;
-	
+
 	public void updatesocialevent(TSocialevent tLearnact) throws Exception;
-	
+
 	public void deletesocialevent(TSocialeventExample example) throws Exception;
-	
+
 	public Pager querystudentaward(TStudentawardExample example, int pagesize,
 			int currentpage) throws Exception;
-	
+
 	public void savestudentaward(TStudentaward tLearnact) throws Exception;
-	
+
 	public void updatestudentaward(TStudentaward tLearnact) throws Exception;
-	
-	public void deletestudentaward(TStudentawardExample example) throws Exception;
+
+	public void deletestudentaward(TStudentawardExample example)
+			throws Exception;
+
+	public List queryTHonorandotherList(THonorandotherExample example)
+			throws Exception;
 }

@@ -26,7 +26,7 @@ function queryInfo() {
 // 	alert(tbname);
 	$.ajax({
 		type : 'post',
-		url : 'Teacher_doQuerySRRJson',
+		url : 'Teacher_doQuerySRRKeyanJson',
 		data : {
 			currentPage : '1',
 			srrTypePara : 'jx',
@@ -95,7 +95,7 @@ function queryInfo() {
 				'<td>'+item.projectno+'</td></tr>');
 			});
 			$.each(obj.speakerprizeList, function(i, item){
-				$("#speakerprizeTb").append('<tr><td>'+item.prizeteachername+'</td>'
+				$("#prizeTb").append('<tr><td>'+item.prizeteachername+'</td>'
 				+'<td>'+item.prizetitle+'</td>'
 				+'<td>'+item.prizelevel+'</td>'
 				+'<td>'+item.prizedep+'</td>'
@@ -103,7 +103,18 @@ function queryInfo() {
 				+'<td>'+item.prizeno+'</td></tr>');
 			});
 			$.each(obj.teachprizeList, function(i, item){
-				$("#teachprizeTb").append('<tr><td>'+item.prizeteachername+'</td>'
+				$("#partJobTb").append('<tr><td>'+item.prizeteachername+'</td>'
+				+'<td>'+item.prizerank+'</td>'
+				+'<td>'+item.prizetitle+'</td>'
+				+'<td>'+item.prizeresultname+'</td>'
+				+'<td>'+item.prizelevel+'</td>'
+				+'<td>'+item.prizetype+'</td>'
+				+'<td>'+item.prizedep+'</td>'
+				+'<td>'+item.prizedate+'</td>'
+				+'<td>'+item.prizeno+'</td></tr>');
+			});
+			$.each(obj.teachprizeList, function(i, item){
+				$("#honorTb").append('<tr><td>'+item.prizeteachername+'</td>'
 				+'<td>'+item.prizerank+'</td>'
 				+'<td>'+item.prizetitle+'</td>'
 				+'<td>'+item.prizeresultname+'</td>'
@@ -126,16 +137,18 @@ function hiddenAllDiv() {
 	 $("#researchDiv").hide();
 	 $("#paperDiv").hide();
 	 $("#workDiv").hide();
-	 $("#speakerprizeDiv").hide();
-	 $("#teachprizeDiv").hide();
+	 $("#prizeDiv").hide();
+	 $("#partJobDiv").hide();
+	 $("#honorDiv").hide();
 }
 
 function clearAllTb() {
 	 $("#researchTb").empty();
 	 $("#paperTb").empty();
 	 $("#workTb").empty();
-	 $("#speakerprizeTb").empty();
-	 $("#teachprizeTb").empty();
+	 $("#prizeTb").empty();
+	 $("#partJobTb").empty();
+	 $("#honorTb").empty();
 }
 </script>
 
@@ -143,8 +156,9 @@ function clearAllTb() {
 	<option value="researchDiv" selected="selected">立项</option>
 	<option value="paperDiv">论文</option>
 	<option value="workDiv">著作</option>
-	<option value="speakerprizeDiv">优秀主讲师</option>
-	<option value="teachprizeDiv">获奖</option>
+	<option value="prizeDiv">获奖</option>
+	<option value="partJobDiv">学术兼职</option>
+	<option value="honorDiv">荣誉及其他</option>
 </select>
 
 <select id="yearType">

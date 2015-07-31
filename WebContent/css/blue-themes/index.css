@@ -1,6 +1,6 @@
 
 #left_content{
-	width:740px;height:480px;float:left;
+	width:840px;height:511px;float:left;
 	
 }
 
@@ -10,20 +10,20 @@
 	float:left;
 }
 #right_content_bottom{
-	width:240px;
-	height:300px;
+	width:690px;
+	height:245px;
 	float:left;
 }
 #index_top{
-	height:500px;
+	height:510px;
 	background-color: white;
 /* 	z-index: 0; */
 }
 #introduce_div{
 	position:relative;
-	width:295px;
-	height:493px;
-	margin:0 0 0 0;
+	width:410px;
+	height:238px;
+	margin:10px 0 0 0;
 	border:1px solid #cfcfcf;
 	line-height: 20px;
 /* 	letter-spacing:2px; */
@@ -39,8 +39,8 @@
 }
 #introduce_div_word{
 	position:relative;
-	width:280px;
-	height:280px;
+	width:390px;
+	height:190px;
 	margin:10px 12px;
 	overflow: hidden;
 	font-size:12px;
@@ -59,9 +59,9 @@
 }
 #service_div{
 	position:relative;
-	width:503px;
-	height:230px;
-	margin:10px 0 0 0;
+	width:690px;
+	height:252px;
+	margin:0 0 0 0;
 	border:1px solid #cfcfcf;
 }
 .left_img{
@@ -326,7 +326,7 @@
 
 #banner
 {
-	width:500px;
+	width:400px;
 	margin:0px auto;
 	height:262px;
 	overflow:hidden;
@@ -337,7 +337,7 @@
 	width:110px;
 	hegiht:18px;
 	float:left;
-	margin:-30px 0px 0px 390px;
+	margin:-30px 0px 0px 290px;
 	position:absolute;
 	z-index:1;
 }

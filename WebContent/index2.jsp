@@ -62,14 +62,10 @@ $(function(){
 					<div class="flash_left"></div>
 					<div class="flash_content">
 						<div id="banner">
-<%-- 						    	<img  src="${image_path}/indexpic1.jpg" width="500" height="252"/> --%>
-<%-- 						        <img  src="${image_path}/indexpic2.jpg" width="500" height="252"/> --%>
-<%-- 						        <img  src="${image_path}/indexpic3.jpg" width="500" height="252"/> --%>
-<%-- 						        <img  src="${image_path}/indexpic4.jpg" width="500" height="252"/> --%>
-						        <img src="${first_path}/indexpic1.jpg" width="400" height="252"/>
-						        <img src="${first_path}/indexpic2.jpg" width="400" height="252"/>
-						        <img src="${first_path}/indexpic3.jpg" width="400" height="252"/>
-						        <img src="${first_path}/indexpic4.jpg" width="400" height="252"/>
+						        <img src="${first_path}/indexpic1.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic2.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic3.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic4.jpg" width="500" height="252"/>
 						</div>
 						<div id="btn"></div>
 					</div>
@@ -77,6 +73,7 @@ $(function(){
 				</div>
    			<div id="introduce_div">
    			<div class="normal_title_content">学院简介</div>
+   			<div id="introduce_div_img"><img  src="${request_path}/images/img/school2.jpg" width="185" height="133"/></div>
    			<div id="introduce_div_word">&nbsp;&nbsp;
    			人文社会科学学院是在“哈军工”时期马列教研室基础上发展而来的，
    			经历了上世纪80年代的社科部和90年代的社科系发展时期，
@@ -86,34 +83,102 @@ $(function(){
    			</div>
    			</div>
 			<div id="left_content">
-				<div id="service_div">
-					<ul>
-						<li class="normal_title_content">
-							<span style="display: block;float: left;">教学科研通知</span>
-							<span style="display: block;margin-right:10px;float: right;">
-							<a href="Article_toNoticePage.shtm" style="font-size: 11px;">更多>></a></span>
-						</li>
-					</ul>
-					<div class="first_center_td" style="margin-left: 20px;margin-right: 20px;">
-						<s:iterator var="notify" value="notifylist" status="st">
-						<div class="first_line_info" >
-						<table class="news_main_content" width="100%" >
-						<tr>
-						<td  style="width: 100%;">
-						<a style="width: 100%;display: block;" target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm" title="<s:property value="#notify.articletitle" />">
-						<s:property value="#notify.articletitle" />
-						</a>
-						</td>
-						<td style="width: 65px;">
-						<a style="width: 100%;display: block;" target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm" title="<s:property value="#notify.articletitle" />">
-						<s:property value="#notify.createdate" />
-						</a></td>
-						</tr>
-						</table>
-						</div>		
-						<div class='separatorLine'></div>
-						</s:iterator>
+				<div id="flash_div">
+					<div class="flash_left"></div>
+					<div class="flash_content">
+						<div id="banner">
+<%-- 						    	<img  src="${image_path}/indexpic1.jpg" width="500" height="252"/> --%>
+<%-- 						        <img  src="${image_path}/indexpic2.jpg" width="500" height="252"/> --%>
+<%-- 						        <img  src="${image_path}/indexpic3.jpg" width="500" height="252"/> --%>
+<%-- 						        <img  src="${image_path}/indexpic4.jpg" width="500" height="252"/> --%>
+						        <img src="${first_path}/indexpic1.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic2.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic3.jpg" width="500" height="252"/>
+						        <img src="${first_path}/indexpic4.jpg" width="500" height="252"/>
+						</div>
+						<div id="btn"></div>
 					</div>
+					<div class="flash_right"></div>
+				</div>
+				
+				<div id="service_div">
+					<div class="service_title" style="vertical-align: bottom;">
+						<span style="display: block;float: left;">教学科研通知</span>
+						<span style="display: block;margin-right:10px;float: right;">
+						<a href="Article_toNoticePage.shtm" style="font-size: 11px;">更多>></a></span>
+					</div>
+					<div class="split_1px"></div>
+					<div class="first_center_td" style="margin-left: 20px;margin-right: 20px;">
+<!-- 						<ul > -->
+							<s:iterator var="notify" value="notifylist" status="st">
+							<div class="first_line_info" >
+							<table class="news_main_content" width="100%" >
+							<tr>
+							<td  style="width: 100%;">
+							<a style="width: 100%;display: block;" target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm" title="<s:property value="#notify.articletitle" />">
+							<s:property value="#notify.articletitle" />
+							</a>
+							</td>
+							<td style="width: 65px;">
+							<a style="width: 100%;display: block;" target="_blank" href="Article_regulationDetail_${notify.articleid}.shtm" title="<s:property value="#notify.articletitle" />">
+							<s:property value="#notify.createdate" />
+							</a></td>
+							</tr>
+							</table>
+							</div>		
+					<div class='separatorLine'></div>
+							</s:iterator>
+					
+<!-- 						</ul> -->
+<!-- 						<tr> -->
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_26.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云主机</td></tr><tr><td>销售和代购云主机</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table> </td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_28.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">云运维</td></tr><tr><td>搭建系统运行环境</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_30.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">软件服务</td></tr><tr><td>根据需求定制软件开发</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_39.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">TinyERP</td></tr><tr><td>进销存管理系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_40.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">TinyOA</td></tr><tr><td>自动化办公系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<%-- 							<td><div class="small_service"><div class="left_img"> <img  src="${image_path}/1_41.png" width="68px;" height="68px;"/></div><div class="right_text"><table class="tableheigt"><tr><td class="fontstrong">sch</td></tr><tr><td>企业建站系统</td></tr><tr><td><table><tr><td><a href="#" class="linkindex">查看详情</a></td><td><img  src="${image_path}/jiantou.png"/></td></tr></table></td></tr></table></div></div></td> --%>
+<!-- 						</tr> -->
+					
+					</div>
+				</div>
+			</div>
+			<div id="right_content_top" >
+				<ul>
+					<li class="normal_title_content">
+						<span style="display: block;float: left;">国际交流</span>
+						<span style="display: block;margin-right:10px;float: right;">
+						<a href="Article_toExchangePage.shtm" style="font-size: 11px;">更多>></a></span>
+					</li>
+				</ul>
+				<div class="normal_content_top" >
+				<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
+<!-- 				<ul class="news_content"> -->
+					<s:iterator var="exchange" value="exchangelist" status="st">
+<!-- 						<li> -->
+						<div class="first_line_info" >
+							<table class="news_main_content" width="100%" >
+							<tr>
+							<td  style="width: 100%;">
+							<a target="_blank" href="Article_regulationDetail_${exchange.articleid}.shtm" title="<s:property value="#exchange.articletitle" />">
+							<s:property value="#exchange.articletitle" />
+							</a>
+							</td>
+							<td style="width: 65px;">
+							<a target="_blank" href="Article_regulationDetail_${exchange.articleid}.shtm" title="<s:property value="#exchange.articletitle" />">
+							<s:property value="#exchange.createdate" />
+							</a>
+							</td>
+							</tr>
+							</table>
+						</div>		
+					<div class='separatorLine'></div>
+<!-- 						</li> -->
+					</s:iterator>
+<!-- 				</ul> -->
+				</div>
+				</div>
 				</div>
 				<div id="right_content_bottom" >
 				<ul>
@@ -146,7 +211,6 @@ $(function(){
 					</s:iterator>
 					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 		<div  class="user_show">

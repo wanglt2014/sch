@@ -7,6 +7,7 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -96,6 +97,7 @@ public class TeacherAction extends BaseAction {
 	public List<TPaper> paperList;
 
 	public String defultId;
+	public String result;
 
 	public List<TResearch> getResearchList() {
 		return researchList;
@@ -1140,35 +1142,59 @@ public class TeacherAction extends BaseAction {
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String doQuerySRR() {
-		try {
-			// 加载立项
-			// List<TResearch> tResearchList = new ArrayList<TResearch>();
-			TResearchExample trexample = new TResearchExample();
-			trexample.createCriteria().andResearchrankEqualTo("1");
-			researchList = localServiceEXProxy.queryTResearchList(trexample);
-
-			// 加载论文
-			// List<TPaper> tPaperList = new ArrayList<TPaper>();
-			TPaperExample tpexample = new TPaperExample();
-			tpexample.createCriteria().andPaperauthorEqualTo("1");
-			paperList = localServiceEXProxy.queryTPaperList(tpexample);
-
-			// 加载著作
-			// List<TWork> tWorkList = new ArrayList<TWork>();
-			TWorkExample twexample = new TWorkExample();
-			twexample.createCriteria().andWorkauthorrankEqualTo("1");
-			tWorkList = localServiceEXProxy.queryTWorkList(twexample);
-
-			// 加载获奖信息
-			// List<TPrize> tPrizeList = new ArrayList<TPrize>();
-			TPrizeExample tPrizeExample = new TPrizeExample();
-			tPrizeExample.createCriteria().andPrizerankEqualTo("1");
-			tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		String type = request.getParameter("srrTypePara");
+		// String yearType = request.getParameter("yearType");
+		// if (yearType == null) {
+		// yearType = "60";
+		// }
+		// String temp_str = "";
+		// Date dt = new Date();
+		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// Calendar calendar = Calendar.getInstance();// 日历对象
+		// calendar.setTime(dt);// 设置当前日期
+		// // System.out.println("当前：" + sdf.format(calendar.getTime()));
+		// calendar.add(Calendar.MONTH, -(Integer.valueOf(yearType)));// 月份减
+		// temp_str = sdf.format(calendar.getTime());
+		// // System.out.println("减去：" + yearType + "结果：" + temp_str);
+		// try {
+		// // 加载立项
+		// // List<TResearch> tResearchList = new ArrayList<TResearch>();
+		// TResearchExample trexample = new TResearchExample();
+		// trexample.createCriteria().andResearchrankEqualTo("1")
+		// .andResearchbegindateGreaterThanOrEqualTo(temp_str);
+		// researchList = localServiceEXProxy.queryTResearchList(trexample);
+		//
+		// // 加载论文
+		// // List<TPaper> tPaperList = new ArrayList<TPaper>();
+		// TPaperExample tpexample = new TPaperExample();
+		// tpexample.createCriteria().andPaperauthorEqualTo("1");
+		// paperList = localServiceEXProxy.queryTPaperList(tpexample);
+		//
+		// // 加载著作
+		// // List<TWork> tWorkList = new ArrayList<TWork>();
+		// TWorkExample twexample = new TWorkExample();
+		// twexample.createCriteria().andWorkauthorrankEqualTo("1");
+		// tWorkList = localServiceEXProxy.queryTWorkList(twexample);
+		//
+		// // 加载获奖信息
+		// // List<TPrize> tPrizeList = new ArrayList<TPrize>();
+		// TPrizeExample tPrizeExample = new TPrizeExample();
+		// tPrizeExample.createCriteria().andPrizerankEqualTo("1");
+		// tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
+		//
+		// Map<String, Object> map = new HashMap<String, Object>();
+		// map.put("researchList", researchList);
+		// JSONObject json = JSONObject.fromObject(map);// 将map对象转换成json类型数据
+		// result = json.toString();// 给result赋值，传递给页面
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+		if (type != null && "jx".equals(type)) {
+			return "srr_result";
+		} else {
+			return "srr_keyanresult";
 		}
-		return "srr_result";
+
 	}
 
 	/**
@@ -2069,4 +2095,163 @@ public class TeacherAction extends BaseAction {
 		}
 	}
 
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
+
+	/**
+	 * 查询师资队伍
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void doQuerySRRJson() {
+		String type = request.getParameter("srrTypePara");
+		String yearType = request.getParameter("yearType");
+		if (yearType == null) {
+			yearType = "60";
+		}
+		String temp_str = "";
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();// 日历对象
+		calendar.setTime(dt);// 设置当前日期
+		// System.out.println("当前：" + sdf.format(calendar.getTime()));
+		calendar.add(Calendar.MONTH, -(Integer.valueOf(yearType)));// 月份减
+		temp_str = sdf.format(calendar.getTime());
+		// System.out.println("减去：" + yearType + "结果：" + temp_str);
+		try {
+			// 加载立项
+			// List<TResearch> tResearchList = new ArrayList<TResearch>();
+			TResearchExample trexample = new TResearchExample();
+			trexample.createCriteria().andResearchrankEqualTo("1")
+					.andResearchteachorresearchEqualTo("0")
+					.andResearchbegindateGreaterThanOrEqualTo(temp_str);
+			researchList = localServiceEXProxy.queryTResearchList(trexample);
+
+			// 加载论文
+			// List<TPaper> tPaperList = new ArrayList<TPaper>();
+			TPaperExample tpexample = new TPaperExample();
+			tpexample.createCriteria().andPaperauthorEqualTo("1")
+					.andPaperteachorresearchEqualTo("0")
+					.andPapernotedateGreaterThanOrEqualTo(temp_str);
+			paperList = localServiceEXProxy.queryTPaperList(tpexample);
+
+			// 加载著作
+			// List<TWork> tWorkList = new ArrayList<TWork>();
+			TWorkExample twexample = new TWorkExample();
+			twexample.createCriteria().andWorkauthorrankEqualTo("1")
+					.andWorkteachorresearchEqualTo("0")
+					.andWorkpublishtimeGreaterThanOrEqualTo(temp_str);
+			tWorkList = localServiceEXProxy.queryTWorkList(twexample);
+
+			// 加载获奖信息
+			// List<TPrize> tPrizeList = new ArrayList<TPrize>();
+			TPrizeExample tPrizeExample = new TPrizeExample();
+			tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("2")
+					.andPrizedateGreaterThanOrEqualTo(temp_str);
+			List speakerprizeList = localServiceEXProxy
+					.queryTPrizeList(tPrizeExample);
+
+			TPrizeExample tPrizeExample2 = new TPrizeExample();
+			tPrizeExample2.createCriteria().andPrizerankEqualTo("1")
+					.andPrizeteachorresearchEqualTo("0")
+					.andPrizedateGreaterThanOrEqualTo(temp_str);
+			List teachprizeList = localServiceEXProxy
+					.queryTPrizeList(tPrizeExample2);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("researchList", researchList);
+			map.put("paperList", paperList);
+			map.put("tWorkList", tWorkList);
+			map.put("speakerprizeList", speakerprizeList);
+			map.put("teachprizeList", teachprizeList);
+			super.reponseWriter(JSON.toJSONString(map));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 查询师资队伍
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public void doQuerySRRKeyanJson() {
+		String type = request.getParameter("srrTypePara");
+		String yearType = request.getParameter("yearType");
+		if (yearType == null) {
+			yearType = "60";
+		}
+		String temp_str = "";
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();// 日历对象
+		calendar.setTime(dt);// 设置当前日期
+		// System.out.println("当前：" + sdf.format(calendar.getTime()));
+		calendar.add(Calendar.MONTH, -(Integer.valueOf(yearType)));// 月份减
+		temp_str = sdf.format(calendar.getTime());
+		// System.out.println("减去：" + yearType + "结果：" + temp_str);
+		try {
+			// 加载立项
+			// List<TResearch> tResearchList = new ArrayList<TResearch>();
+			TResearchExample trexample = new TResearchExample();
+			trexample.createCriteria().andResearchrankEqualTo("1")
+					.andResearchteachorresearchEqualTo("1")
+					.andResearchbegindateGreaterThanOrEqualTo(temp_str);
+			List researchList = localServiceEXProxy
+					.queryTResearchList(trexample);
+
+			// 加载论文
+			// List<TPaper> tPaperList = new ArrayList<TPaper>();
+			TPaperExample tpexample = new TPaperExample();
+			tpexample.createCriteria().andPaperauthorEqualTo("1")
+					.andPaperteachorresearchEqualTo("1")
+					.andPapernotedateGreaterThanOrEqualTo(temp_str);
+			List paperList = localServiceEXProxy.queryTPaperList(tpexample);
+
+			// 加载著作
+			// List<TWork> tWorkList = new ArrayList<TWork>();
+			TWorkExample twexample = new TWorkExample();
+			twexample.createCriteria().andWorkauthorrankEqualTo("1")
+					.andWorkteachorresearchEqualTo("1")
+					.andWorkpublishtimeGreaterThanOrEqualTo(temp_str);
+			List tWorkList = localServiceEXProxy.queryTWorkList(twexample);
+
+			// 加载获奖信息
+			// List<TPrize> tPrizeList = new ArrayList<TPrize>();
+			TPrizeExample tPrizeExample = new TPrizeExample();
+			tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("1")
+					.andPrizedateGreaterThanOrEqualTo(temp_str);
+			List speakerprizeList = localServiceEXProxy
+					.queryTPrizeList(tPrizeExample);
+
+			// 荣誉及其他
+			THonorandotherExample tHonorandotherExample = new THonorandotherExample();
+			tHonorandotherExample.createCriteria()
+			List teachprizeList = localServiceEXProxy.queryTHonorandotherList(tHonorandotherExample);
+			
+			TPrizeExample tPrizeExample2 = new TPrizeExample();
+			tPrizeExample2.createCriteria().andPrizerankEqualTo("1")
+					.andPrizeteachorresearchEqualTo("0")
+					.andPrizedateGreaterThanOrEqualTo(temp_str);
+			List teachprizeList = localServiceEXProxy
+					.queryTPrizeList(tPrizeExample2);
+
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("researchList", researchList);
+			map.put("paperList", paperList);
+			map.put("tWorkList", tWorkList);
+			map.put("speakerprizeList", speakerprizeList);
+			map.put("teachprizeList", teachprizeList);
+			super.reponseWriter(JSON.toJSONString(map));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }

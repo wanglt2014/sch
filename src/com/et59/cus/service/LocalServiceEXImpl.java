@@ -17,7 +17,6 @@ import com.et59.cus.domain.dao.THoldmeetingDAO;
 import com.et59.cus.domain.dao.THonorandotherDAO;
 import com.et59.cus.domain.dao.THonorawardDAO;
 import com.et59.cus.domain.dao.TLearnactDAO;
-import com.et59.cus.domain.dao.TLearnactDAOImpl;
 import com.et59.cus.domain.dao.TPaperDAO;
 import com.et59.cus.domain.dao.TPartjobDAO;
 import com.et59.cus.domain.dao.TPrizeDAO;
@@ -164,13 +163,12 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 
 	@Autowired
 	private TLearnactDAO tLearnactDAOImpl;
-	
+
 	@Autowired
 	private TSocialeventDAO tSocialeventDAO;
-	
+
 	@Autowired
 	private TStudentawardDAO tStudentawardDAO;
-	
 
 	/**
 	 * 查询资料下载
@@ -1049,7 +1047,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deletelearnact(TLearnactExample example) throws Exception {
 		tLearnactDAOImpl.deleteByExample(example);
 	}
-	
+
 	/**
 	 * 查询
 	 */
@@ -1088,7 +1086,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deletesocialevent(TSocialeventExample example) throws Exception {
 		tSocialeventDAO.deleteByExample(example);
 	}
-	
+
 	/**
 	 * 查询
 	 */
@@ -1097,8 +1095,8 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TStudentaward> list = commonDAOEx.selectstudentawardForPage(example,
-				startrecord, pagesize);
+		List<TStudentaward> list = commonDAOEx.selectstudentawardForPage(
+				example, startrecord, pagesize);
 		int totalCount = tStudentawardDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
@@ -1124,8 +1122,18 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	 * 删除
 	 */
 	@Override
-	public void deletestudentaward(TStudentawardExample example) throws Exception {
+	public void deletestudentaward(TStudentawardExample example)
+			throws Exception {
 		tStudentawardDAO.deleteByExample(example);
+	}
+
+	/**
+	 * 查询获奖表
+	 */
+	@Override
+	public List queryTHonorandotherList(THonorandotherExample example)
+			throws Exception {
+		return tHonorandotherDAO.selectByExample(example);
 	}
 
 }

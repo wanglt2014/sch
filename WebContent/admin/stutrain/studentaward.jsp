@@ -50,23 +50,23 @@
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">学生姓名:</label>
 			<input id="stuname" name="stuname" style="width: 110px"
-				class="easyui-validatebox"  maxlength="100">		
+				class="easyui-validatebox"  maxlength="20">		
 		</span>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">学号:</label>
 			<input id="stuno" name="stuno" style="width: 110px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="10">
 		</span>
 		<br><br>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">学生专业:</label>
 			<input id="stuprofession" name="stuprofession" style="width: 110px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="20">
 		</span>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">奖项名称:</label>
 			<input id="awardname" name="awardname" style="width: 110px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="30">
 		</span>
 		<br><br>
 		<span class="span_column" >
@@ -88,18 +88,18 @@
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">授予机构:</label>
 			<input id="grantorg" name="grantorg" style="width: 110px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="20">
 		</span>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">指导老师:</label>
 			<input id="teachernames" name="teachernames" style="width: 110px"
-				class="easyui-validatebox"  maxlength="50">
+				class="easyui-validatebox"  maxlength="100">
 		</span>
 		<br><br>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">备注:</label>
 			<input id="remark" name="remark" style="width: 390px"
-				class="easyui-validatebox"  maxlength="100">
+				class="easyui-validatebox"  maxlength="200">
 		</span>
 		</form>
 		</div>

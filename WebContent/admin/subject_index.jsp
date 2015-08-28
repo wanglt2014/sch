@@ -427,7 +427,7 @@
                     }
                 }
             });
-            if(uploaderForOutline==null || uploaderForOutline==undefined){
+            if(uploaderForOutline!=null || uploaderForOutline!=undefined){
        		 	var outlineLen = uploaderForOutline.files.length;
        		 	var scheduleLen = uploaderForSchedule.files.length;
        		 	var subjectLen = uploaderForSubject.files.length;

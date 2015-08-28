@@ -60,6 +60,7 @@ function queryInfo() {
 			$.each(obj.researchList, function(i, item){
 				$("#researchTb").append('<tr><td>'+item.researchteachername+'</td>'
 				+'<td>'+item.researchrank+'</td>'
+				+'<td>'+item.researchtype+'</td>'
 				+'<td>'+item.researchlevel+'</td>'
 				+'<td>'+item.researchname+'</td>'
 				+'<td>'+item.researchno+'</td>'
@@ -80,6 +81,7 @@ function queryInfo() {
 				'<td>'+item.paperincluded+'</td>'+
 				'<td>'+item.paperfactors+'</td>'+
 				'<td>'+item.paperreprint+'</td>'+
+				'<td>'+item.paperclassa+'</td>'+
 				'<td>'+item.paperprojectno+'</td></tr>');
 			});
 			$.each(obj.tWorkList, function(i, item){
@@ -92,18 +94,15 @@ function queryInfo() {
 				'<td>'+item.totalword+'</td>'+
 				'<td>'+item.alreadypublish+'</td>'+
 				'<td>'+item.isbnno+'</td>'+
-				'<td>'+item.projectno+'</td></tr>');
+				'<td>'+item.projectno+'</td>'+
+				'<td>'+item.worktype+'</td>'+
+				'<td>'+item.oriauthor+'</td>'+
+				'<td>'+item.translateforeign+'</td>'+
+				'<td>'+item.classa+'</td>'+
+				'</tr>');
 			});
-			$.each(obj.speakerprizeList, function(i, item){
+			$.each(obj.prizeList, function(i, item){
 				$("#prizeTb").append('<tr><td>'+item.prizeteachername+'</td>'
-				+'<td>'+item.prizetitle+'</td>'
-				+'<td>'+item.prizelevel+'</td>'
-				+'<td>'+item.prizedep+'</td>'
-				+'<td>'+item.prizedate+'</td>'
-				+'<td>'+item.prizeno+'</td></tr>');
-			});
-			$.each(obj.teachprizeList, function(i, item){
-				$("#partJobTb").append('<tr><td>'+item.prizeteachername+'</td>'
 				+'<td>'+item.prizerank+'</td>'
 				+'<td>'+item.prizetitle+'</td>'
 				+'<td>'+item.prizeresultname+'</td>'
@@ -113,16 +112,20 @@ function queryInfo() {
 				+'<td>'+item.prizedate+'</td>'
 				+'<td>'+item.prizeno+'</td></tr>');
 			});
-			$.each(obj.teachprizeList, function(i, item){
-				$("#honorTb").append('<tr><td>'+item.prizeteachername+'</td>'
-				+'<td>'+item.prizerank+'</td>'
-				+'<td>'+item.prizetitle+'</td>'
-				+'<td>'+item.prizeresultname+'</td>'
-				+'<td>'+item.prizelevel+'</td>'
-				+'<td>'+item.prizetype+'</td>'
-				+'<td>'+item.prizedep+'</td>'
-				+'<td>'+item.prizedate+'</td>'
-				+'<td>'+item.prizeno+'</td></tr>');
+			$.each(obj.tPartjobList, function(i, item){
+				$("#partJobTb").append('<tr><td>'+item.partname+'</td>'
+				+'<td>'+item.partplace+'</td>'
+				+'<td>'+item.partjob+'</td>'
+				+'<td>'+item.partbegintime+'</td>'
+				+'<td>'+item.partendtime+'</td>'
+				+'<td>'+item.partlevel+'</td></tr>');
+			});
+			$.each(obj.honorandotherList, function(i, item){
+				$("#honorTb").append('<tr><td>'+item.honorteachername+'</td>'
+				+'<td>'+item.honortitle+'</td>'
+				+'<td>'+item.honorleave+'</td>'
+				+'<td>'+item.honordep+'</td>'
+				+'<td>'+item.honorremark+'</td></tr>');
 			});
 			hiddenAllDiv();
         	$("#"+srrType).show();
@@ -167,10 +170,6 @@ function clearAllTb() {
 	<option value="60">五年</option>
 </select>
 <button onclick="queryInfo();">查询</button>
-<%-- <c:if test="${empty(researchList) && empty(paperList) && empty(tWorkList) && empty(tPrizeList)}"> --%>
-<!-- 没有检索到相关记录。 -->
-<%-- </c:if> --%>
-<%-- <c:if test="${!empty(researchList) || !empty(paperList) || !empty(tWorkList) || !empty(tPrizeList)}"> --%>
 <div id="researchDiv" >
 	<h1 align="center">立项</h1>
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportResearch()">【导出立项Excel】</a></div>
@@ -179,6 +178,7 @@ function clearAllTb() {
 		<tr>
 		<th>姓名</th>
 		<th>教师排名</th>
+		<th>项目种类</th>
 		<th>项目类别</th>
 		<th>项目名称</th>
 		<th>项目编号</th>
@@ -188,20 +188,6 @@ function clearAllTb() {
 		<th>结束等级</th>
 		</tr>
 		<tbody id="researchTb">
-<%-- 	<s:iterator var="tResearch" value="researchList" status="st"> --%>
-<!-- 	<tr> -->
-<%-- 	<td><s:property value="#tResearch.researchteachername" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchrank" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchtype" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchlevel" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchname" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchno" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchbegindate" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchenddate" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.isresearch" /></td> --%>
-<%-- 	<td><s:property value="#tResearch.researchknot" /></td> --%>
-<!-- 	</tr> -->
-<%-- 	</s:iterator> --%>
 	</tbody>
 	</table>
 </div>
@@ -222,24 +208,9 @@ function clearAllTb() {
 		<th>论文收录</th>
 		<th>影响因子</th>
 		<th>论文转载</th>
+		<th>一级学科</th>
 		<th>资助项目编号</th>
 		</tr>
-<%-- 	<s:iterator var="paper" value="paperList" status="st"> --%>
-<!-- 	<tr> -->
-<%-- 	<td><s:property value="#paper.paperteachername" /></td> --%>
-<%-- 	<td><s:property value="#paper.paperauthor" /></td> --%>
-<%-- 	<td><s:property value="#paper.papername" /></td> --%>
-<%-- 	<td><s:property value="#paper.papernotename" /></td> --%>
-<%-- 	<td><s:property value="#paper.papernotecountry" /></td> --%>
-<%-- 	<td><s:property value="#paper.papernotedate" /></td> --%>
-<%-- 	<td><s:property value="#paper.papernoteno" /></td> --%>
-<%-- 	<td><s:property value="#paper.papernotepage" /></td> --%>
-<%-- 	<td><s:property value="#paper.paperincluded" /></td> --%>
-<%-- 	<td><s:property value="#paper.paperfactors" /></td> --%>
-<%-- 	<td><s:property value="#paper.paperreprint" /></td> --%>
-<%-- 	<td><s:property value="#paper.paperprojectno" /></td> --%>
-<!-- 	</tr> -->
-<%-- 	</s:iterator> --%>
 	<tbody id="paperTb">
 	</tbody>
 	</table>
@@ -249,7 +220,6 @@ function clearAllTb() {
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportWork()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center">
-		
 		<tr>
 		<th>姓名</th>
 		<th>作者排名</th>
@@ -261,46 +231,17 @@ function clearAllTb() {
 		<th>已出几版</th>
 		<th>ISBN号</th>
 		<th>资助项目编号</th>
+		<th>著作类别</th>
+		<th>原作者</th>
+		<th>是否译成外文</th>
+		<th>一级学科</th>
 		</tr>
 	<tbody id="workTb">
 	</tbody>
 	</table>
 </div>
-<div id="speakerprizeDiv" >
-	<h1 align="center">优秀主讲师</h1>
-	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportPrize()">【导出立项Excel】</a></div>
-	<hr class="line_keyanchenguo" /><br>
-	<table class="plan_table_list_new" align="center">
-		<tr>
-		<th>姓名</th>
-		<th>奖励名称</th>
-		<th>奖励等级</th>
-		<th>授奖部门</th>
-		<th>获奖时间</th>
-		<th>证书编号</th>
-		</tr>
-<%-- 	<s:iterator var="prize" value="tPrizeList" status="st"> --%>
-<!-- 	<tr> -->
-<%-- 	<td><s:property value="#prize.prizeteachername" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizerank" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizetitle" /> --%>
-<!-- 	</td> -->
-<%-- 	<td><s:property value="#prize.prizeresultname" /> --%>
-<!-- 	</td> -->
-<%-- 	<td><s:property value="#prize.prizelevel" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizetype" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizedep" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizedate" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizeno" /></td> --%>
-<!-- 	</tr> -->
-<%-- 	</s:iterator> --%>
-	<tbody id="speakerprizeTb">
-	</tbody>
-	</table>
-	</div>
-	
-	<div id="teachprizeDiv" >
-	<h1 align="center">教学成果奖</h1>
+	<div id="prizeDiv" >
+	<h1 align="center">获奖</h1>
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportPrize()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center">
@@ -315,26 +256,42 @@ function clearAllTb() {
 		<th>获奖时间</th>
 		<th>证书编号</th>
 		</tr>
-<%-- 	<s:iterator var="prize" value="tPrizeList" status="st"> --%>
-<!-- 	<tr> -->
-<%-- 	<td><s:property value="#prize.prizeteachername" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizerank" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizetitle" /> --%>
-<!-- 	</td> -->
-<%-- 	<td><s:property value="#prize.prizeresultname" /> --%>
-<!-- 	</td> -->
-<%-- 	<td><s:property value="#prize.prizelevel" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizetype" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizedep" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizedate" /></td> --%>
-<%-- 	<td><s:property value="#prize.prizeno" /></td> --%>
-<!-- 	</tr> -->
-<%-- 	</s:iterator> --%>
-	<tbody id="teachprizeTb">
+	<tbody id="prizeTb">
 	</tbody>
 	</table>
 	</div>
-<%-- </c:if> --%>
+	<div id="partJobDiv" >
+	<h1 align="center">学术兼职</h1>
+	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportPartJob()">【导出立项Excel】</a></div>
+	<hr class="line_keyanchenguo" /><br>
+	<table class="plan_table_list_new" align="center">
+		<tr>
+		<th>姓名</th>
+		<th>学会/协会/期刊名称</th>
+		<th>在学会/协会/期刊中职务</th>
+		<th>任职时间</th>
+		<th>学会/协会/期刊级别</th>
+		</tr>
+	<tbody id="partJobTb">
+	</tbody>
+	</table>
+	</div>
+	<div id="honorDiv" >
+	<h1 align="center">荣誉及其他</h1>
+	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportHonor()">【导出立项Excel】</a></div>
+	<hr class="line_keyanchenguo" /><br>
+	<table class="plan_table_list_new" align="center">
+		<tr>
+		<th>姓名</th>
+		<th>荣誉名称</th>
+		<th>荣誉级别</th>
+		<th>授予部门</th>
+		<th>备注</th>
+		</tr>
+	<tbody id="honorTb">
+	</tbody>
+	</table>
+	</div>
 <div class="news_page">
 	<s:if test="totalPageCount > 0">
 		<jsp:include page="../common/common_page.jsp" />
@@ -344,22 +301,38 @@ function clearAllTb() {
 </div>
 <script type="text/javascript">
 function exportResearch() {
-    var url = 'Teacher_ExportExcel?type=research';
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=research&time='+yearType;
     window.location.href = url;   
 }
 
 function exportPaper() {
-    var url = 'Teacher_ExportExcel?type=paper';
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=paper&time='+yearType;
     window.location.href = url;   
 }
 
 function exportWork() {
-    var url = 'Teacher_ExportExcel?type=work';
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=work&time='+yearType;
     window.location.href = url;   
 }
 
 function exportPrize() {
-    var url = 'Teacher_ExportExcel?type=prize';
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=prize&time='+yearType;
+    window.location.href = url;   
+}
+
+function exportPartJob() {
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=partJob&time='+yearType;
+    window.location.href = url;   
+}
+
+function exportHonor() {
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=honor&time='+yearType;
     window.location.href = url;   
 }
 

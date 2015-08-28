@@ -3,21 +3,31 @@ package com.et59.cus.action;
 import java.io.IOException;
 import java.net.URLDecoder;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import com.alibaba.fastjson.JSON;
+import com.et59.cus.domain.entity.BsArticle;
 import com.et59.cus.domain.entity.TAttmeeting;
 import com.et59.cus.domain.entity.TAttmeetingExample;
 import com.et59.cus.domain.entity.TAtttrain;
 import com.et59.cus.domain.entity.TAtttrainExample;
+import com.et59.cus.domain.entity.TExchangeStu;
+import com.et59.cus.domain.entity.TExchangeStuExample;
 import com.et59.cus.domain.entity.TForeignExperts;
 import com.et59.cus.domain.entity.TForeignExpertsExample;
 import com.et59.cus.domain.entity.THoldmeeting;
 import com.et59.cus.domain.entity.THoldmeetingExample;
+import com.et59.cus.domain.entity.THonoraward;
+import com.et59.cus.domain.entity.THonorawardExample;
 import com.et59.cus.domain.entity.TVisitschool;
 import com.et59.cus.domain.entity.TVisitschoolExample;
+import com.et59.cus.domain.entity.ex.BsArticleQuery;
 import com.et59.cus.domain.entity.ex.Pager;
+import com.et59.cus.tools.ComonUtil;
+import com.et59.cus.tools.Constant;
 
 /**
  * <p>
@@ -60,6 +70,55 @@ public class ExchangeAction extends BaseAction {
 	 * 国外专家来访（学院录入）
 	 */
 	public TForeignExperts foreignExperts;
+	
+	public List<TVisitschool> visitlist;
+	
+	public List<THoldmeeting> holdmeetingList;
+	public List<TAttmeeting> attMeetingList;
+	public List<TAtttrain> atttrainList;
+	public List<TExchangeStu> excStuList;
+	public List<TForeignExperts> foreignList;
+	
+
+	public List<TForeignExperts> getForeignList() {
+		return foreignList;
+	}
+
+	public void setForeignList(List<TForeignExperts> foreignList) {
+		this.foreignList = foreignList;
+	}
+
+	public List<TExchangeStu> getExcStuList() {
+		return excStuList;
+	}
+
+	public void setExcStuList(List<TExchangeStu> excStuList) {
+		this.excStuList = excStuList;
+	}
+
+	public List<TAtttrain> getAtttrainList() {
+		return atttrainList;
+	}
+
+	public void setAtttrainList(List<TAtttrain> atttrainList) {
+		this.atttrainList = atttrainList;
+	}
+
+	public List<TAttmeeting> getAttMeetingList() {
+		return attMeetingList;
+	}
+
+	public void setAttMeetingList(List<TAttmeeting> attMeetingList) {
+		this.attMeetingList = attMeetingList;
+	}
+
+	public List<THoldmeeting> getHoldmeetingList() {
+		return holdmeetingList;
+	}
+
+	public void setHoldmeetingList(List<THoldmeeting> holdmeetingList) {
+		this.holdmeetingList = holdmeetingList;
+	}
 
 	/**
 	 * 首页
@@ -96,6 +155,10 @@ public class ExchangeAction extends BaseAction {
 	public String firstPic() {
 		return "firstPic";
 	}
+	public String stuindex() {
+		return "stuindex";
+	}
+	
 	
 	/**
 	 * 分页查询
@@ -549,7 +612,227 @@ public class ExchangeAction extends BaseAction {
 		}
 		super.reponseWriter(JSON.toJSONString(flag));
 	}
+	
+	
+	/**
+	 * 分页查询
+	 */
+	public void queryStudentExchange() {
+			String page = request.getParameter("page"); // 当前页数
+			String rows = request.getParameter("rows"); // 每页显示行数
+			try {
+				TExchangeStuExample tExchangeStuExample = new TExchangeStuExample();
+//				tExchangeStuExample.createCriteria().andTeacheridEqualTo(
+//						Long.valueOf(teacherIdLong));
+				Pager pager = localServiceEXProxy.queryStudentExchangeBypage(
+						tExchangeStuExample, Integer.valueOf(rows),
+						Integer.valueOf(page));
+				super.reponseWriter(JSON.toJSONString(pager));
+			} catch (IOException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+	}
 
+	/**
+	 * 得到教学成果奖信息
+	 * 
+	 * @return
+	 */
+	public TExchangeStu getstudentExchange() {
+		TExchangeStu tExchangeStu = new TExchangeStu();
+		tExchangeStu.setExchangebegintime(request.getParameter("exchangebegintime"));
+		tExchangeStu.setExchangeendtime(request.getParameter("exchangeendtime"));
+		tExchangeStu.setExchangeplace(request.getParameter("exchangeplace"));
+		tExchangeStu.setProjectname(request.getParameter("projectname"));
+		tExchangeStu.setStuname(request.getParameter("stuname"));
+		tExchangeStu.setStutype(request.getParameter("stutype"));
+		tExchangeStu.setTimelength(request.getParameter("timelength"));
+		return tExchangeStu;
+	}
+
+	public void savestudentExchange() {
+		boolean flag = false;
+		try {
+			// 保存获奖表
+			TExchangeStu tExchangeStu = getstudentExchange();
+			localServiceEXProxy.saveStudentExchange(tExchangeStu);
+			flag = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		super.reponseWriter(JSON.toJSONString(flag));
+	}
+	
+	/**
+	 * 编辑
+	 */
+	public void updatestudentExchange() {
+		boolean flag = false;
+		String id = request.getParameter("id");
+		TExchangeStu tExchangeStu = getstudentExchange();
+		tExchangeStu.setExchangestuid(Long.valueOf(id));
+		try {
+			localServiceEXProxy.updateStudentExchange(tExchangeStu);
+			flag = true;
+			super.reponseWriter(JSON.toJSONString(flag));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 删除
+	 */
+	public void deletestudentExchange() {
+		boolean flag = false;
+		String id = request.getParameter("id");//
+		try {
+			Long idL = Long.parseLong(id);
+			TExchangeStuExample tpexample = new TExchangeStuExample();
+			tpexample.createCriteria().andExchangestuidEqualTo(idL);
+			localServiceEXProxy.deleteStudentExchange(tpexample);
+			flag = true;
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			super.reponseWriter(JSON.toJSONString(flag));
+		}
+	}
+
+	
+	/**
+	 * 查询国际交流--教师访学
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryVisit() {
+		try {
+			TVisitschoolExample tVisitschoolExample = new TVisitschoolExample();
+//			tVisitschoolExample.createCriteria().andTeacheridEqualTo(
+//					Long.valueOf(teacherIdLong));
+			Pager pager = localServiceEXProxy.queryVisitSchoolBypage(
+					tVisitschoolExample, Integer.valueOf("1000"),
+					Integer.valueOf("1"));
+			visitlist = (List<TVisitschool>)pager.getRows();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_visitresult";
+	}
+
+	/**
+	 * 查询国际交流--举办会议
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryHoldMeeting() {
+		try {
+			// 加载获奖信息
+			THoldmeetingExample tHoldmeetingExample = new THoldmeetingExample();
+			Pager pager = localServiceEXProxy.queryHoldMeetingBypage(
+					tHoldmeetingExample, Integer.valueOf("1000"),
+					Integer.valueOf("1"));
+			holdmeetingList = (List<THoldmeeting>)pager.getRows();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_holdMeeting";
+	}
+	
+	/**
+	 * 查询国际交流--参加会议
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryAttMeeting() {
+		try {
+			// 加载获奖信息
+			TAttmeetingExample tAttmeetingExample = new TAttmeetingExample();
+//			tAttmeetingExample.createCriteria().andTeacheridEqualTo(
+//					Long.valueOf(teacherIdLong));
+			Pager pager = localServiceEXProxy.queryAttMeetingBypage(
+					tAttmeetingExample, Integer.valueOf("1000"),
+					Integer.valueOf("1"));
+			attMeetingList = (List<TAttmeeting>)pager.getRows();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_attMeeting";
+	}
+	
+	/**
+	 * 查询国际交流--国外专家来访
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryForeign() {
+		try {
+			// 加载获奖信息
+			TForeignExpertsExample tForeignExpertsExample = new TForeignExpertsExample();
+//			tAttmeetingExample.createCriteria().andTeacheridEqualTo(
+//					Long.valueOf(teacherIdLong));
+			Pager pager = localServiceEXProxy.queryForeignBypage(
+					tForeignExpertsExample, Integer.valueOf("1000"),
+					Integer.valueOf("1"));
+			foreignList = (List<TForeignExperts>)pager.getRows();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_foreign";
+	}
+	
+	/**
+	 * 查询国际交流--国外专家来访
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryAttTrain() {
+		try {
+			// 加载获奖信息
+			TAtttrainExample tAtttrainExample = new TAtttrainExample();
+//			tAtttrainExample.createCriteria().andTeacheridEqualTo(
+//					Long.valueOf(teacherIdLong));
+			Pager pager = localServiceEXProxy.queryAttTrainBypage(
+					tAtttrainExample, Integer.valueOf("1000"),
+					Integer.valueOf("1"));
+			atttrainList = (List<TAtttrain>)pager.getRows();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_attTrain";
+	}
+	
+	/**
+	 * 查询国际交流--国外专家来访
+	 * 
+	 * @return
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public String doQueryExcStu() {
+		try {
+			// 加载获奖信息
+			TExchangeStuExample tExchangeStuExample = new TExchangeStuExample();
+//			tAtttrainExample.createCriteria().andTeacheridEqualTo(
+//					Long.valueOf(teacherIdLong));
+			Pager pager = localServiceEXProxy.queryStudentExchangeBypage(
+					tExchangeStuExample, Integer.valueOf("1000"),
+					Integer.valueOf("1"));
+			excStuList = (List<TExchangeStu>)pager.getRows();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return "exchange_excStu";
+	}
+	
 	public TVisitschool getVisitschool() {
 		return visitschool;
 	}
@@ -589,5 +872,15 @@ public class ExchangeAction extends BaseAction {
 	public void setForeignExperts(TForeignExperts foreignExperts) {
 		this.foreignExperts = foreignExperts;
 	}
+
+	public List<TVisitschool> getVisitlist() {
+		return visitlist;
+	}
+
+	public void setVisitlist(List<TVisitschool> visitlist) {
+		this.visitlist = visitlist;
+	}
+	
+	
 
 }

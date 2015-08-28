@@ -12,6 +12,8 @@ import com.et59.cus.domain.entity.TBookclubExample;
 import com.et59.cus.domain.entity.TDepartment;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
+import com.et59.cus.domain.entity.TExchangeStu;
+import com.et59.cus.domain.entity.TExchangeStuExample;
 import com.et59.cus.domain.entity.TForeignExperts;
 import com.et59.cus.domain.entity.TForeignExpertsExample;
 import com.et59.cus.domain.entity.THoldmeeting;
@@ -447,6 +449,22 @@ public interface LocalServiceEX {
 	public void deletestudentaward(TStudentawardExample example)
 			throws Exception;
 
-	public List queryTHonorandotherList(THonorandotherExample example)
+	public abstract List queryTHonorandotherList(
+			THonorandotherExample paramTHonorandotherExample) throws Exception;
+
+	public abstract List queryPartJobList(TPartjobExample paramTPartjobExample)
+			throws Exception;
+
+	public abstract Pager queryStudentExchangeBypage(
+			TExchangeStuExample paramTExchangeStuExample, int paramInt1,
+			int paramInt2) throws Exception;
+
+	public abstract void saveStudentExchange(TExchangeStu paramTExchangeStu)
+			throws Exception;
+
+	public abstract void deleteStudentExchange(
+			TExchangeStuExample paramTExchangeStuExample) throws Exception;
+
+	public abstract void updateStudentExchange(TExchangeStu paramTExchangeStu)
 			throws Exception;
 }

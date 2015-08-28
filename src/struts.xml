@@ -414,8 +414,15 @@
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 			<result name="index">/admin/teacher/teacher_exchange.jsp</result>
 			<result name="index2">/admin/teacher/teacher_exchange2.jsp</result>
+			<result name="stuindex">/admin/student/student_exchange.jsp</result>
 			<result name="foreign">/admin/teacher/exchange_foreign.jsp</result>
 			<result name="firstPic">/admin/updateIndexPic.jsp</result>
+			<result name="exchange_visitresult">/article/exchange_visitresult.jsp</result>
+			<result name="exchange_holdMeeting">/article/exchange_holdMeetingresult.jsp</result>
+			<result name="exchange_attMeeting">/article/exchange_attMeetingresult.jsp</result>
+			<result name="exchange_foreign">/article/exchange_foreignresult.jsp</result>
+			<result name="exchange_attTrain">/article/exchange_attTrainresult.jsp</result>
+			<result name="exchange_excStu">/article/exchange_excSturesult.jsp</result>
 			<result type="json"></result>
 		</action>
 		
@@ -430,6 +437,11 @@
 			<result name="learnactindex">/admin/stutrain/learnact.jsp</result>
 			<result name="socialeventindex">/admin/stutrain/socialevent.jsp</result>
 			<result name="studentawardindex">/admin/stutrain/studentaward.jsp</result>
+			<result name="stut_honoraward">/article/train_honorawardresult.jsp</result>
+			<result name="stut_stuaward">/article/train_stuawardresult.jsp</result>
+			<result name="stut_learnact">/article/train_learnactresult.jsp</result>
+			<result name="stut_bookclub">/article/train_bookclubresult.jsp</result>
+			<result name="stut_socialevent">/article/train_socialeventresult.jsp</result>
 			<result type="json"></result>
 		</action>
 	</package>

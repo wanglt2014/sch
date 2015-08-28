@@ -232,7 +232,6 @@
 					jAlert('系统错误，请联系管理员','错误提示');
 				}
 			});
-			dispalyAllUploader(paperList.length);
 			url = 'Teacher_update?id=' + row.id;
 		}
 	}

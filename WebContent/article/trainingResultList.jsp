@@ -16,51 +16,57 @@
 <jsp:include page="../pre.jsp"></jsp:include>
 
 <script language="JavaScript" type="text/javascript">
-	$(document).ready(function() {
-		search();
-	});
-	function search(page) {
-		var targetPage = '';
-		if (!page || (page == '')) {
-			targetPage = 1;
-		} else {
-			targetPage = page;
-		}
-		$.ajax({
-			type : 'post',
-			url : 'Article_doQueryTrainingResult',
-			data : {
-				currentPage : targetPage
-			},
-			beforeSend : function(html) {
-				$.blockUI({
-					showOverlay : false,
-					message : '数据加载中...',
-					css : {
-						border : 'none',
-						padding : '5px',
-						backgroundColor : '#000',
-						'-webkit-border-radius' : '10px',
-						'-moz-border-radius' : '10px',
-						opacity : .5,
-						color : '#fff',
-						top : '170px',
-						left : $(window).width() / 2 + 'px',
-						width : '150px',
-						height : '20px'
-					}
-				});
-			},
-			success : function(html) {
-				$.unblockUI();
-				$('#news_right_content').html(html);
-
-			},
-			error : function() {
-				$.unblockUI();
-			}
-		});
+$(document).ready(function() {
+	showTrainingContent("teacher");
+});
+function showTrainingContent(excType) {
+	var targetPage = '1';
+	var url = "doQueryhonoraward";
+	if(excType=="honoraward"){
+		url = "doQueryhonoraward";
+	}else if(excType=="studentaward"){
+		url = "doQuerystudentaward";
+	}else if(excType=="learnact"){
+		url = "doQuerylearnact";
+	}else if(excType=="bookclub"){
+		url = "doQuerybookclub";
+	}else if(excType=="socialevent"){
+		url = "doQuerysocialevent";
 	}
+	$.ajax({
+		type : 'post',
+		url : 'StuTrain_'+url,
+		data : {
+			currentPage : targetPage
+		},
+		beforeSend : function(html) {
+			$.blockUI({
+				showOverlay : false,
+				message : '数据加载中...',
+				css : {
+					border : 'none',
+					padding : '5px',
+					backgroundColor : '#000',
+					'-webkit-border-radius' : '10px',
+					'-moz-border-radius' : '10px',
+					opacity : .5,
+					color : '#fff',
+					top : '170px',
+					left : $(window).width() / 2 + 'px',
+					width : '150px',
+					height : '20px'
+				}
+			});
+		},
+		success : function(html) {
+			$.unblockUI();
+			$('#news_right_content').html(html);
+		},
+		error : function() {
+			$.unblockUI();
+		}
+	});
+}
 </script>
 </head>
 
@@ -80,25 +86,62 @@
 								</li>
 							</ul>
 							<div class="normal_content_top">
-								<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
-									<s:iterator var="teach" value="notifylist" status="st">
-									<div class="first_line_info" >
-									<table class="news_main_content" width="100%" >
-									<tr>
-									<td  style="width: 100%;">
-									<a target="_blank" href="Article_trainingResultDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
-									<s:property value="#teach.articletitle" /> </a>
-									</td>
-									<td style="width: 65px;">
-										<a target="_blank" href="Article_trainingResultDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
-										<s:property value="#teach.createdate" />
-										</a>
-									</td>
-									</tr>
-									</table>
-									</div>
-									<div class='separatorLine'></div>
-									</s:iterator>
+							<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
+								<div class="first_line_info" >
+								<table class="news_main_content" width="100%" >
+								<tr>
+								<td  style="width: 100%;">
+								<a href="javascript:void(0);"  onclick="showTrainingContent('honoraward');" title="荣誉获奖">
+								荣誉获奖</a>
+								</td>
+								</tr>
+								</table>
+								</div>
+								<div class='separatorLine'></div>
+								<div class="first_line_info" >
+								<table class="news_main_content" width="100%" >
+								<tr>
+								<td  style="width: 100%;">
+								<a href="javascript:void(0);"  onclick="showTrainingContent('studentaward');" title="学生获奖">
+								学生获奖</a>
+								</td>
+								</tr>
+								</table>
+								</div>
+								<div class='separatorLine'></div>
+								<div class="first_line_info" >
+								<table class="news_main_content" width="100%" >
+								<tr>
+								<td  style="width: 100%;">
+								<a href="javascript:void(0);"  onclick="showTrainingContent('learnact');" title="学术活动">
+								学术活动</a>
+								</td>
+								</tr>
+								</table>
+								</div>
+								<div class='separatorLine'></div>
+								<div class="first_line_info" >
+								<table class="news_main_content" width="100%" >
+								<tr>
+								<td  style="width: 100%;">
+								<a href="javascript:void(0);"  onclick="showTrainingContent('bookclub');" title="读书会">
+								读书会</a>
+								</td>
+								</tr>
+								</table>
+								</div>
+								<div class='separatorLine'></div>
+								<div class="first_line_info" >
+								<table class="news_main_content" width="100%" >
+								<tr>
+								<td  style="width: 100%;">
+								<a href="javascript:void(0);"  onclick="showTrainingContent('socialevent');" title="社会事件">
+								社会事件</a>
+								</td>
+								</tr>
+								</table>
+								</div>
+								<div class='separatorLine'></div>
 								</div>
 							</div>
 						</div>

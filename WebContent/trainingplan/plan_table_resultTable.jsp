@@ -4,6 +4,51 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 <jsp:include page="../pre.jsp"></jsp:include>
+<script language="JavaScript" type="text/javascript">
+	function showTeacher(tempId,planType) {
+		var targetPage = 1;
+// 		if (!page || (page == '')) {
+// 			targetPage = 1;
+// 		} else {
+// 			targetPage = page;
+// 		}
+		$.ajax({
+			type : 'post',
+			url : 'TrainingPlan_trainingPlanTable',
+			data : {
+				currentPage : targetPage,
+				departmentid : tempId,
+				planType : planType,
+			},
+			beforeSend : function(html) {
+				$.blockUI({
+					showOverlay : false,
+					message : '数据加载中...',
+					css : {
+						border : 'none',
+						padding : '5px',
+						backgroundColor : '#000',
+						'-webkit-border-radius' : '10px',
+						'-moz-border-radius' : '10px',
+						opacity : .5,
+						color : '#fff',
+						top : '170px',
+						left : $(window).width() / 2 + 'px',
+						width : '150px',
+						height : '20px'
+					}
+				});
+			},
+			success : function(html) {
+				$.unblockUI();
+				$('#news_right_content').html(html);
+			},
+			error : function() {
+				$.unblockUI();
+			}
+		});
+	}
+</script>
 <c:if test="${empty(subjectList)}">
 	<tr>
 		<td colspan="5" style="text-align: center"><a href="">没有检索到相关记录。</a>
@@ -55,7 +100,8 @@
 		
 		<td><s:property value="#s.count" /></td>
 		<td><s:property value="#subject.subjectno" /></td>
-		<td><s:property value="#subject.subjectname" /></td>
+		<td><a href="javascript:void(0);" onclick="window.open('Teacher_teacherDetail_${subject.subjectteacherid}.shtm')">
+		<s:property value="#subject.subjectname" /></a></td>
 		<td><s:property value="#subject.subjectcredit" /></td>
 		<td><s:property value="#subject.classhourfortheory" /></td>
 		<td><s:property value="#subject.classhourfortest" /></td>

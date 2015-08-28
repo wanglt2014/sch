@@ -200,11 +200,11 @@
 						<input id="teachpaperprojectno" name="teachpaperprojectno" maxlength="20"
 							class="easyui-validatebox"  style="width: 110px" ></span>
 					<br><br>
-					<span class="span_column_sm" style="width:100%;" id="teachpaperObj"> <label>论文电子版:</label> 
-						<input type="button" value="选择文件..." id="teachbrowsePaper" />
-						<input type="button" value="清空" id="teachpaper-clear-btn" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span>
-					</span>
-					<span id="file-list-paper"></span>
+<%-- 					<span class="span_column_sm" style="width:100%;" id="teachpaperObj"> <label>论文电子版:</label>  --%>
+<!-- 						<input type="button" value="选择文件..." id="teachbrowsePaper" /> -->
+<%-- 						<input type="button" value="清空" id="teachpaper-clear-btn" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span> --%>
+<%-- 					</span> --%>
+<%-- 					<span id="file-list-paper"></span> --%>
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePaper('teach')">保存</a>
 					</form>
 					<hr  style="border-bottom:1px dashed;"><br>
@@ -533,6 +533,15 @@
 			$('#speakerPrizedg').datagrid('load', {
 				teacherId : row.id
 			});
+			
+// 			if(uploaderForTp==null || uploaderForTp==undefined){
+// 				createUploaderTP();
+// //	 			createProject();
+// 			}else{
+// 				uploaderForTp.destroy();
+// 				createUploaderTP();
+// // 				deleteAllUploader();
+// 			}
 		}
 	}
 	function saveRearch(typeval) {
@@ -768,6 +777,58 @@
 				}
 			});
 		}
+	}
+	
+	var uploaderForTp;
+	function createUploaderTP(){
+		uploaderForTp = new plupload.Uploader({ //实例化一个plupload上传对象
+			browse_button : 'teachbrowsePaper',
+			multi_selection: false,
+	 		url : 'File_uploadForTeacher',
+	 		file_data_name : 'fileData',
+//	 		url : '${request_path}/pupload/upload.php', //服务器端的上传页面地址
+	        flash_swf_url : '${js_path}/plupload/Moxie.swf', //swf文件，当需要使用swf方式进行上传时需要配置该参数
+	        silverlight_xap_url : '${js_path}/plupload/Moxie.xap', //silverlight文件，当需要使用silverlight方式进行上传时需要配置该参数
+	        unique_names : true,  // 上传的文件名是否唯一   
+	        multipart_params: {
+	        	  filetype: 'paper'
+	        	},
+	        filters: {
+	        	 max_file_size : '20mb', //最大只能上传100kb的文件
+		  		  prevent_duplicates : true //不允许队列中存在重复文件
+	        }
+		});
+		uploaderForTp.init(); //初始化
+		//绑定文件上传删除事件
+		uploaderForTp.bind('FilesRemoved',function(uploader,file){
+			$('#file-list-paper').html("");
+		});
+		
+		//清空按钮
+		$('#clear-btn').click(function(){
+			uploaderForTp.splice(0,10); 
+		});
+		
+		//绑定文件添加进队列事件
+		uploaderForTp.bind('FilesAdded',function(uploader,files){
+			$.each(uploader.files, function (i, file) { 
+				if (uploader.files.length <= 1) { 
+			            return; 
+			        } 
+			        uploaderForTp.removeFile(file); 
+			    });
+			for(var i = 0, len = files.length; i<len; i++){
+				var file_name = files[i].name; //文件名
+				var file_id = files[i].id;//ID,临时文件名
+				//构造html来更新UI
+//	 			var html = '<li id="file-' + files[i].id +'"><p class="file-name">' + file_name + '</p><p class="progress"></p></li>';
+//	 			var html = '<li id="file-' + file_id +'" style="text-align: left;">';
+				var html = '<span id="file-' + file_id +'" style="text-align: left;"><p class="file-name">' + file_name + '</p><p class="progress"></p>';
+					html += '<input type="hiddent" style="display: none;" name="uploader_paper_tmpname_'+para+'" value="' + file_id + '" />';
+					html += '<input type="hiddent" style="display: none;" name="uploader_paper_name_'+para+'" value="' + file_name + '" /></span>';
+				$(html).appendTo('#file-list');
+			}
+		});
 	}
 	</script>
 	<style type="text/css">

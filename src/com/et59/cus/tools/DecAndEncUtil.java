@@ -13,25 +13,26 @@ import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
+//import sun.misc.BASE64Decoder;
+//import sun.misc.BASE64Encoder;
 
 public class DecAndEncUtil
 {
   public static String base64Encode(byte[] bstr)
   {
-    return new BASE64Encoder().encode(bstr);
+//    return new BASE64Encoder().encode(bstr);
+    return null;
   }
 
   public static byte[] base64Decode(String str)
   {
     byte[] bt = null;
-    try {
-      BASE64Decoder decoder = new BASE64Decoder();
-      bt = decoder.decodeBuffer(str);
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+//    try {
+//      BASE64Decoder decoder = new BASE64Decoder();
+//      bt = decoder.decodeBuffer(str);
+//    } catch (IOException e) {
+//      e.printStackTrace();
+//    }
 
     return bt;
   }

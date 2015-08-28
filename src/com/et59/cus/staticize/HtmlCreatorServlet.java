@@ -60,7 +60,7 @@ public class HtmlCreatorServlet extends HttpServlet {
 		if (!realPathFile.exists()) {
 			realPathFile.mkdirs();
 		}
-		// 想要生成的静态html文件的名字
+		// 想要生成的静态html文件的名字1
 		String htmlName = getHtmlFileName(request);
 		// 静态html的名字，包含绝对路径
 		String cachFileName = realPath + File.separator + htmlName;
@@ -69,9 +69,9 @@ public class HtmlCreatorServlet extends HttpServlet {
 		boolean load = true;
 		// 如果静态html 存在，就直接显示html，否则，我们就生成它。
 		// wlt WLT注释掉 --------------------------------------------
-		// if (cacheFile.exists()) {
-		// load = false;
-		// }
+//		 if (cacheFile.exists()) {
+//		 load = false;
+//		 }
 		// 注释掉 --------------------------------------------
 		RequestDispatcher dispatcher = null;
 		if (load) {

@@ -89,7 +89,7 @@ $(function(){
 				<div id="service_div">
 					<ul>
 						<li class="normal_title_content">
-							<span style="display: block;float: left;">教学科研通知</span>
+							<span style="display: block;float: left;">科研通知</span>
 							<span style="display: block;margin-right:10px;float: right;">
 							<a href="Article_toNoticePage.shtm" style="font-size: 11px;">更多>></a></span>
 						</li>
@@ -117,33 +117,32 @@ $(function(){
 				</div>
 				<div id="right_content_bottom" >
 				<ul>
-					<li class="normal_title_content">
-						<span style="display: block;float: left;">规章制度</span>
-						<span style="display: block;margin-right:10px;float: right;">
-						<a href="Article_toRegulationPage.shtm" style="font-size: 11px;">更多>></a></span>
-					</li>
-				</ul>
+						<li class="normal_title_content">
+							<span style="display: block;float: left;">教学通知</span>
+							<span style="display: block;margin-right:10px;float: right;">
+							<a href="Article_toNoticePage.shtm" style="font-size: 11px;">更多>></a></span>
+						</li>
+					</ul>
 				<div class="normal_content_bottom">
 					<div class="first_center_td" style="margin-left:0px;margin-right: 0px;">
-					<s:iterator var="regulation" value="regulationList" status="st">
-					<div class="first_line_info" >
+					<s:iterator var="ke" value="keyannotifylist" status="st">
+						<div class="first_line_info" >
 						<table class="news_main_content" width="100%" >
 						<tr>
 						<td  style="width: 100%;">
-						<a target="_blank" href="Article_regulationDetail_${regulation.articleid}.shtm" title="<s:property value="#regulation.articletitle" />">
-						<s:property value="#regulation.articletitle" />
+						<a style="width: 100%;display: block;" target="_blank" href="Article_regulationDetail_${ke.articleid}.shtm" title="<s:property value="#ke.articletitle" />">
+						<s:property value="#ke.articletitle" />
 						</a>
 						</td>
 						<td style="width: 65px;">
-						<a target="_blank" href="Article_regulationDetail_${regulation.articleid}.shtm" title="<s:property value="#regulation.articletitle" />">
-						<s:property value="#regulation.createdate" />
-						</a>
-						</td>
+						<a style="width: 100%;display: block;" target="_blank" href="Article_regulationDetail_${ke.articleid}.shtm" title="<s:property value="#ke.articletitle" />">
+						<s:property value="#ke.createdate" />
+						</a></td>
 						</tr>
 						</table>
 						</div>		
 						<div class='separatorLine'></div>
-					</s:iterator>
+						</s:iterator>
 					</div>
 				</div>
 			</div>

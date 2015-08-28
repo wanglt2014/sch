@@ -251,16 +251,31 @@ public class SubjectAction extends BaseAction {
 	 */
 	public void update() {
 		boolean flag = false;
-		String id = request.getParameter("id");
-		TSubject tSubject = getTSubject();
-		tSubject.setSubjectid(Long.valueOf(id));
-		try {
-			localServiceEXProxy.updateTSubject(tSubject);
-			flag = true;
-			super.reponseWriter(JSON.toJSONString(flag));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	    String id = this.request.getParameter("id");
+	    TSubject tSubject = getTSubject();
+	    tSubject.setSubjectid(Long.valueOf(id));
+	    try
+	    {
+	      HashMap downloadIdMap = saveDownloadInfo();
+	      if (downloadIdMap.get("outlineDLId") != null) {
+	        tSubject.setSubjectoutline((Long)downloadIdMap.get("outlineDLId"));
+	      }
+	      if (downloadIdMap
+	        .get("scheduleDLId") != null) {
+	        tSubject.setSubjectschedule(
+	          (Long)downloadIdMap.get("scheduleDLId"));
+	      }
+	      if (downloadIdMap.get("subjectDLId") != null) {
+	        tSubject.setSubjectinfo((Long)downloadIdMap.get("subjectDLId"));
+	      }
+	      this.localServiceEXProxy.updateTSubject(tSubject);
+	      flag = true;
+	      super.reponseWriter(JSON.toJSONString(Boolean.valueOf(flag)));
+	    }
+	    catch (Exception e)
+	    {
+	      e.printStackTrace();
+	    }
 	}
 
 	//

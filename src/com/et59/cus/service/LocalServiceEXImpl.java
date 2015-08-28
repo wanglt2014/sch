@@ -12,11 +12,13 @@ import com.et59.cus.domain.dao.TAtttrainDAO;
 import com.et59.cus.domain.dao.TBookclubDAO;
 import com.et59.cus.domain.dao.TDepartmentDAO;
 import com.et59.cus.domain.dao.TDownloadDAO;
+import com.et59.cus.domain.dao.TExchangeStuDAO;
 import com.et59.cus.domain.dao.TForeignExpertsDAO;
 import com.et59.cus.domain.dao.THoldmeetingDAO;
 import com.et59.cus.domain.dao.THonorandotherDAO;
 import com.et59.cus.domain.dao.THonorawardDAO;
 import com.et59.cus.domain.dao.TLearnactDAO;
+import com.et59.cus.domain.dao.TLearnactDAOImpl;
 import com.et59.cus.domain.dao.TPaperDAO;
 import com.et59.cus.domain.dao.TPartjobDAO;
 import com.et59.cus.domain.dao.TPrizeDAO;
@@ -44,6 +46,8 @@ import com.et59.cus.domain.entity.TDepartmentExample;
 import com.et59.cus.domain.entity.TDepartmentWithBLOBs;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.TExchangeStu;
+import com.et59.cus.domain.entity.TExchangeStuExample;
 import com.et59.cus.domain.entity.TForeignExperts;
 import com.et59.cus.domain.entity.TForeignExpertsExample;
 import com.et59.cus.domain.entity.THoldmeeting;
@@ -163,13 +167,15 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 
 	@Autowired
 	private TLearnactDAO tLearnactDAOImpl;
-
+	
 	@Autowired
 	private TSocialeventDAO tSocialeventDAO;
-
+	
 	@Autowired
 	private TStudentawardDAO tStudentawardDAO;
-
+	
+	  @Autowired
+	  private TExchangeStuDAO tExchangeStuDAO;
 	/**
 	 * 查询资料下载
 	 */
@@ -549,7 +555,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 		page.setTotal(totalCount);
 		return page;
 	}
-
+	
 	/**
 	 * 专业查询--（人才培养方案）
 	 */
@@ -1047,7 +1053,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deletelearnact(TLearnactExample example) throws Exception {
 		tLearnactDAOImpl.deleteByExample(example);
 	}
-
+	
 	/**
 	 * 查询
 	 */
@@ -1086,7 +1092,7 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	public void deletesocialevent(TSocialeventExample example) throws Exception {
 		tSocialeventDAO.deleteByExample(example);
 	}
-
+	
 	/**
 	 * 查询
 	 */
@@ -1095,8 +1101,8 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 			int currentpage) throws Exception {
 		Pager page = new Pager();
 		int startrecord = (currentpage - 1) * pagesize;
-		List<TStudentaward> list = commonDAOEx.selectstudentawardForPage(
-				example, startrecord, pagesize);
+		List<TStudentaward> list = commonDAOEx.selectstudentawardForPage(example,
+				startrecord, pagesize);
 		int totalCount = tStudentawardDAO.countByExample(example);
 		page.setRows(list);
 		page.setTotal(totalCount);
@@ -1122,18 +1128,49 @@ public class LocalServiceEXImpl implements LocalServiceEX {
 	 * 删除
 	 */
 	@Override
-	public void deletestudentaward(TStudentawardExample example)
-			throws Exception {
+	public void deletestudentaward(TStudentawardExample example) throws Exception {
 		tStudentawardDAO.deleteByExample(example);
 	}
-
-	/**
-	 * 查询获奖表
-	 */
-	@Override
-	public List queryTHonorandotherList(THonorandotherExample example)
-			throws Exception {
-		return tHonorandotherDAO.selectByExample(example);
-	}
+	
+	  public List queryTHonorandotherList(THonorandotherExample example)
+			    throws Exception
+	  {
+	    return this.tHonorandotherDAO.selectByExample(example);
+	  }
+	  
+	  public List queryPartJobList(TPartjobExample example)
+			    throws Exception
+	  {
+	    return this.tPartjobDAO.selectByExample(example);
+	  }
+	  public Pager queryStudentExchangeBypage(TExchangeStuExample example, int pagesize, int currentpage)
+			    throws Exception
+	  {
+	    Pager page = new Pager();
+	    int startrecord = (currentpage - 1) * pagesize;
+	    List<TExchangeStu> list = this.commonDAOEx.selectStudentExchangeForPage(example, 
+	      startrecord, pagesize);
+	    int totalCount = this.tExchangeStuDAO.countByExample(example);
+	    page.setRows(list);
+	    page.setTotal(totalCount);
+	    return page;
+	  }
+	  public void saveStudentExchange(TExchangeStu tExchangeStu)
+			    throws Exception
+	  {
+	    this.tExchangeStuDAO.insertSelective(tExchangeStu);
+	  }
+			  
+	  public void updateStudentExchange(TExchangeStu tExchangeStu)
+	    throws Exception
+	  {
+	    this.tExchangeStuDAO.updateByPrimaryKeySelective(tExchangeStu);
+	  }
+	  
+	  public void deleteStudentExchange(TExchangeStuExample example)
+	    throws Exception
+	  {
+	    this.tExchangeStuDAO.deleteByExample(example);
+	  }
 
 }

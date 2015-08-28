@@ -1,46 +1,19 @@
 package com.et59.cus.dto;
 
-public class TPaperDTO
+public class TeachPaperExportDTO
 {
-  private Long paperid;
-  private String papername;
-  private String paperauthor;
-  private String papernotename;
-  private String papernoteyear;
-  private String papernoteno;
-  private Long paperdownloadid;
-  private String paperdownloadPath;
-  private Long paperteacherid;
-  private String paperteachorresearch;
   private String paperteachername;
+  private String paperauthor;
+  private String papername;
+  private String papernotename;
   private String papernotecountry;
   private String papernotedate;
+  private String papernoteno;
   private String papernotepage;
   private String paperincluded;
   private String paperfactors;
   private String paperreprint;
-  private String paperclassa;
   private String paperprojectno;
-  
-  public String getPaperdownloadPath()
-  {
-    return this.paperdownloadPath;
-  }
-  
-  public void setPaperdownloadPath(String paperdownloadPath)
-  {
-    this.paperdownloadPath = paperdownloadPath;
-  }
-  
-  public Long getPaperid()
-  {
-    return this.paperid;
-  }
-  
-  public void setPaperid(Long paperid)
-  {
-    this.paperid = paperid;
-  }
   
   public String getPapername()
   {
@@ -72,16 +45,6 @@ public class TPaperDTO
     this.papernotename = papernotename;
   }
   
-  public String getPapernoteyear()
-  {
-    return this.papernoteyear;
-  }
-  
-  public void setPapernoteyear(String papernoteyear)
-  {
-    this.papernoteyear = papernoteyear;
-  }
-  
   public String getPapernoteno()
   {
     return this.papernoteno;
@@ -90,36 +53,6 @@ public class TPaperDTO
   public void setPapernoteno(String papernoteno)
   {
     this.papernoteno = papernoteno;
-  }
-  
-  public Long getPaperdownloadid()
-  {
-    return this.paperdownloadid;
-  }
-  
-  public void setPaperdownloadid(Long paperdownloadid)
-  {
-    this.paperdownloadid = paperdownloadid;
-  }
-  
-  public Long getPaperteacherid()
-  {
-    return this.paperteacherid;
-  }
-  
-  public void setPaperteacherid(Long paperteacherid)
-  {
-    this.paperteacherid = paperteacherid;
-  }
-  
-  public String getPaperteachorresearch()
-  {
-    return this.paperteachorresearch;
-  }
-  
-  public void setPaperteachorresearch(String paperteachorresearch)
-  {
-    this.paperteachorresearch = paperteachorresearch;
   }
   
   public String getPaperteachername()
@@ -190,16 +123,6 @@ public class TPaperDTO
   public void setPaperreprint(String paperreprint)
   {
     this.paperreprint = paperreprint;
-  }
-  
-  public String getPaperclassa()
-  {
-    return this.paperclassa;
-  }
-  
-  public void setPaperclassa(String paperclassa)
-  {
-    this.paperclassa = paperclassa;
   }
   
   public String getPaperprojectno()

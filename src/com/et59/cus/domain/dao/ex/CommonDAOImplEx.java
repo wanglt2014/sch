@@ -49,6 +49,8 @@ import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.TExchangeStu;
+import com.et59.cus.domain.entity.TExchangeStuExample;
 import com.et59.cus.domain.entity.TForeignExperts;
 import com.et59.cus.domain.entity.TForeignExpertsExample;
 import com.et59.cus.domain.entity.THoldmeeting;
@@ -644,4 +646,17 @@ public class CommonDAOImplEx extends BaseDaoiBatis implements CommonDAOEx {
 						example, startrecord, endrecord);
 		return list;
 	}
+	/**
+	 * 分页查询
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	  public List<TExchangeStu> selectStudentExchangeForPage(TExchangeStuExample example, int startrecord, int endrecord)
+			    throws Exception
+			  {
+			    List<TExchangeStu> list = getSqlMapClientTemplate()
+			      .queryForList("t_exchange_stu.ibatorgenerated_selectByExample", 
+			      example, startrecord, endrecord);
+			    return list;
+			  }
 }

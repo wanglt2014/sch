@@ -254,7 +254,8 @@ function clearAllTb() {
 </div>
 <div id="speakerprizeDiv" >
 	<h1 align="center">优秀主讲师</h1>
-	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportPrize()">【导出立项Excel】</a></div>
+	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" 
+	onclick="exportSpeakerprize()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center">
 		<tr>
@@ -287,7 +288,8 @@ function clearAllTb() {
 	
 	<div id="teachprizeDiv" >
 	<h1 align="center">教学成果奖</h1>
-	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportPrize()">【导出立项Excel】</a></div>
+	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" 
+	onclick="exportTeachprize()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center">
 		<tr>
@@ -330,22 +332,32 @@ function clearAllTb() {
 </div>
 <script type="text/javascript">
 function exportResearch() {
-    var url = 'Teacher_ExportExcel?type=research';
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=teachresearch&time='+yearType;
     window.location.href = url;   
 }
 
 function exportPaper() {
-    var url = 'Teacher_ExportExcel?type=paper';
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=teachpaper&time='+yearType;
     window.location.href = url;   
 }
 
 function exportWork() {
-    var url = 'Teacher_ExportExcel?type=work';
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=teachwork&time='+yearType;
     window.location.href = url;   
 }
 
-function exportPrize() {
-    var url = 'Teacher_ExportExcel?type=prize';
+function exportSpeakerprize() {
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=speakerprize&time='+yearType;
+    window.location.href = url;   
+}
+
+function exportTeachprize() {
+	var yearType = $("#yearType").val();
+    var url = 'Teacher_ExportExcel?type=teachprize&time='+yearType;
     window.location.href = url;   
 }
 

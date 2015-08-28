@@ -225,11 +225,11 @@
 						<input id="paperprojectno" name="paperprojectno" maxlength="20"
 							class="easyui-validatebox"  style="width: 110px" ></span>
 					<br><br>
-					<span class="span_column_sm" style="width:100%;" id="paperObj"> <label>论文电子版:</label> 
-						<input type="button" value="选择文件..." id="browsePaper" />
-						<input type="button" value="清空" id="paper-clear-btn" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span>
-					</span>
-					<span id="file-list-paper"></span>
+<%-- 					<span class="span_column_sm" style="width:100%;" id="paperObj"> <label>论文电子版:</label>  --%>
+<!-- 						<input type="button" value="选择文件..." id="browsePaper" /> -->
+<%-- 						<input type="button" value="清空" id="paper-clear-btn" />&nbsp;&nbsp;<span class="tip2">(注意：只能上传20M以内的文件)</span> --%>
+<%-- 					</span> --%>
+<%-- 					<span id="file-list-paper"></span> --%>
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePaper('keyan')">保存</a>
 					</form>
 					<hr  style="border-bottom:1px dashed;"><br>

@@ -71,9 +71,14 @@ public abstract class BaseAction extends SystemAction {
 	 */
 	protected List<BsArticle> bsArticlelist;
 	/**
-	 * 教学/科研通知
+	 * 教学通知
 	 */
 	protected List<BsArticle> notifylist;
+	
+	/**
+	 * 教学/科研通知
+	 */
+	protected List<BsArticle> keyannotifylist;
 	/**
 	 * 公司媒体
 	 */
@@ -172,35 +177,41 @@ public abstract class BaseAction extends SystemAction {
 	public void commonquery() {
 		try {
 			BsArticleQuery bsArticle = new BsArticleQuery();
-			bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
-			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
-					10, 1);
-			if (ComonUtil.validateMapResult(map1)) {
-				regulationList = (List<BsArticle>) map1
-						.get(Constant.ARTICLE_LIST);
-			}
-			bsArticle.setArticletype(Constant.ARTICLE_TYPE_ALL_NOTICE);
+//			bsArticle.setArticletype(Constant.ARTICLE_TYPE_REGULATION);
+//			Map map1 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+//					10, 1);
+//			if (ComonUtil.validateMapResult(map1)) {
+//				regulationList = (List<BsArticle>) map1
+//						.get(Constant.ARTICLE_LIST);
+//			}
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_NOTICE);
 			Map map2 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
 					6, 1);
 			if (ComonUtil.validateMapResult(map2)) {
 				notifylist = (List<BsArticle>) map2.get(Constant.ARTICLE_LIST);
 			}
 			
-			bsArticle.setArticletype(Constant.ARTICLE_TYPE_ALL_EXCHANGE);
-			Map map4 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
-					6, 1);
-			if (ComonUtil.validateMapResult(map4)) {
-				exchangelist = (List<BsArticle>) map4.get(Constant.ARTICLE_LIST);
-			}
+//			bsArticle.setArticletype(Constant.ARTICLE_TYPE_ALL_EXCHANGE);
+//			Map map4 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+//					6, 1);
+//			if (ComonUtil.validateMapResult(map4)) {
+//				exchangelist = (List<BsArticle>) map4.get(Constant.ARTICLE_LIST);
+//			}
 
-			TDownload download = new TDownload();
-			download.setFileisvalid(Constant.ISVALID_1);// 可用
-			download.setInfotype(Constant.ARTICLE_TYPE_DOWNLOAD);
-			Map map3 = localServiceEXProxy.queryDownloadInfoForLimit(download,
-					5, 1);
-			if (ComonUtil.validateMapResult(map3)) {
-				downloadlist = (List<TDownload>) map3
-						.get(Constant.DOWNLOAD_LIST);
+//			TDownload download = new TDownload();
+//			download.setFileisvalid(Constant.ISVALID_1);// 可用
+//			download.setInfotype(Constant.ARTICLE_TYPE_DOWNLOAD);
+//			Map map3 = localServiceEXProxy.queryDownloadInfoForLimit(download,
+//					5, 1);
+//			if (ComonUtil.validateMapResult(map3)) {
+//				downloadlist = (List<TDownload>) map3
+//						.get(Constant.DOWNLOAD_LIST);
+//			}
+			bsArticle.setArticletype(Constant.ARTICLE_TYPE_RESEARCHNOTICE);
+			Map map5 = localServiceProxy.queryArticleByTypeForPage(bsArticle,
+					6, 1);
+			if (ComonUtil.validateMapResult(map5)) {
+				keyannotifylist = (List<BsArticle>) map5.get(Constant.ARTICLE_LIST);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -623,7 +634,13 @@ public abstract class BaseAction extends SystemAction {
 	public void setExchangelist(List<BsArticle> exchangelist) {
 		this.exchangelist = exchangelist;
 	}
-	
-	
 
+	public List<BsArticle> getKeyannotifylist() {
+		return keyannotifylist;
+	}
+
+	public void setKeyannotifylist(List<BsArticle> keyannotifylist) {
+		this.keyannotifylist = keyannotifylist;
+	}
+	
 }

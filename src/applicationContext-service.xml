@@ -463,6 +463,12 @@
 		<property name="sqlMapClient" ref="sqlMapClient" />
 	</bean>
 	
+	
+	<!-- 学生国际交流  -->
+	<bean name="tExchangeStuDAO" class="com.et59.cus.domain.dao.TExchangeStuDAOImpl"
+		scope="prototype" autowire="byName">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
 	<!-- 动态多数据源支持 -->
 	<jee:jndi-lookup id="ds0" jndi-name="jdbc/ds0" />
 	<jee:jndi-lookup id="ds1" jndi-name="jdbc/ds1" />

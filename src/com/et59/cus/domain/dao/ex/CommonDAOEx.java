@@ -49,6 +49,8 @@ import com.et59.cus.domain.entity.TDictionary;
 import com.et59.cus.domain.entity.TDictionaryExample;
 import com.et59.cus.domain.entity.TDownload;
 import com.et59.cus.domain.entity.TDownloadExample;
+import com.et59.cus.domain.entity.TExchangeStu;
+import com.et59.cus.domain.entity.TExchangeStuExample;
 import com.et59.cus.domain.entity.TForeignExperts;
 import com.et59.cus.domain.entity.TForeignExpertsExample;
 import com.et59.cus.domain.entity.THoldmeeting;
@@ -250,4 +252,6 @@ public interface CommonDAOEx {
 	
 	public List<TStudentaward> selectstudentawardForPage(TStudentawardExample example,
 			int startrecord, int endrecord) throws Exception;
+	public List<TExchangeStu> selectStudentExchangeForPage(TExchangeStuExample paramTExchangeStuExample, int paramInt1, int paramInt2)
+			    throws Exception;
 }

@@ -359,9 +359,12 @@ public class TrainingPlanAction extends BaseAction {
 					.andTrainingplantypeEqualTo(planType);
 			localServiceEXProxy.deleteTTrainingplan(example);
 			for (TTrainingplan tTrainingplan : tTrainingplanList) {
-				tTrainingplan.setTrainingplandepid(Long.valueOf(id));
-				tTrainingplan.setTrainingplantype(planType);
-				localServiceEXProxy.saveTTrainingplan(tTrainingplan);
+				if(tTrainingplan.getTrplansubidsforone()!=null){
+					tTrainingplan.setTrainingplandepid(Long.valueOf(id));
+					tTrainingplan.setTrainingplantype(planType);
+					localServiceEXProxy.saveTTrainingplan(tTrainingplan);
+				}
+				
 			}
 			flag = true;
 			super.reponseWriter(JSON.toJSONString(flag));
@@ -385,10 +388,13 @@ public class TrainingPlanAction extends BaseAction {
 					.getParameter("trainingplangrade" + i);
 			String trplansubidsforone = request
 					.getParameter("trplansubidsforone" + i);//课程名称
+			String trplansubidsfortwo = request
+					.getParameter("trplansubidsfortwo" + i);//课程名称
 			tTrainingplan = new TTrainingplan();
 			tTrainingplan.setTrplansubidsforone(trplansubidsforoneId);
 			tTrainingplan.setTrainingplangrade(trainingplangrade);
-			tTrainingplan.setTrplansubidsfortwo(trplansubidsforone);
+			tTrainingplan.setTrplansubidsforone(trplansubidsforone);
+			tTrainingplan.setTrplansubidsfortwo(trplansubidsfortwo);
 			list.add(tTrainingplan);
 		}
 

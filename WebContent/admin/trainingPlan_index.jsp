@@ -169,7 +169,8 @@
 					<div id="row0" class="fitem">
 					<input name="trplansubidsforoneId0" id="trplansubidsforoneId0"  class="easyui-validatebox" style="display: none;"/>
 					<input name="trainingplangrade0" id="trainingplangrade0"  readonly="readonly" class="easyui-validatebox" style="width: 50px;"/>级，课程信息为
-					<input name="trplansubidsforone0" id="trplansubidsforone0"  readonly="readonly" class="easyui-validatebox" style="width: 400px;"/>
+					<input name="trplansubidsforone0" id="trplansubidsforone0"  class="easyui-validatebox" style="width: 0px;display: none;"/>
+					<input name="trplansubidsfortwo0" id="trplansubidsfortwo0"  readonly="readonly" class="easyui-validatebox" style="width: 400px;"/>
 					<span id="deletePlanDiv0"></span>
 					</div>
 					</div>
@@ -246,7 +247,8 @@
 							var row = data[i];
 							addPlan();
 							$('#trainingplangrade'+(parseInt(i)+1)).val(row.trainingplangrade);
-							$('#trplansubidsforone'+(parseInt(i)+1)).val(row.trplansubidsfortwo);
+							$('#trplansubidsforone'+(parseInt(i)+1)).val(row.trplansubidsforone);
+							$('#trplansubidsfortwo'+(parseInt(i)+1)).val(row.trplansubidsfortwo);
 						}
 // 						var one = data.trplansubidsforone;
 // 						if(one!=""){
@@ -353,6 +355,7 @@
 		var html = plantempleate.replace(new RegExp("trainingplangrade0","gm"),'trainingplangrade'+planNum)
 		.replace(new RegExp("trplansubidsforoneId0","gm"),'trplansubidsforoneId'+planNum)
 		.replace(new RegExp("trplansubidsforone0","gm"),'trplansubidsforone'+planNum)
+		.replace(new RegExp("trplansubidsfortwo0","gm"),'trplansubidsfortwo'+planNum)
 		.replace(new RegExp("deletePlanDiv0","gm"),'deletePlanDiv'+planNum)
 		.replace(new RegExp("row0","gm"),'row'+planNum);
 		$("#planDiv").append(html);
@@ -360,14 +363,15 @@
 // 		alert($('#trainingplangrade').combobox('getValue')+"**"+$('#trplansubidsforone').combogrid('getValues')+"**"+$('#trplansubidsforone').combobox('getText'));
 		$('#trainingplangrade'+planNum).val($('#trainingplangrade').combobox('getValue'));
 		$('#trplansubidsforoneId'+planNum).val($('#trplansubidsforone').combogrid('getValues'));
-		$('#trplansubidsforone'+planNum).val($('#trplansubidsforone').combobox('getText'));
+		$('#trplansubidsforone'+planNum).val($('#trplansubidsforone').combobox('getValues'));
+		$('#trplansubidsfortwo'+planNum).val($('#trplansubidsforone').combobox('getText'));
 	}
 	function removePlan(infoIndex) {
 		$("#row"+infoIndex).remove();
 // 		if(parseInt(infoIndex)>1){
 // 			$("#deletePlanDiv"+(parseInt(infoIndex)-1)).append('<a id="deletePlanBtn'+(parseInt(infoIndex)-1)+'" href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="removePlan('+(parseInt(infoIndex)-1)+')">删除</a>');
 // 		}
-		planNum--;
+		//planNum--;
 	}
 	</script>
 	<style type="text/css">

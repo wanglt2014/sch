@@ -60,7 +60,7 @@
 	<table class="plan_table_list_new">
 		<tbody>
 		<tr>
-		<th rowspan="3" style="width: 30px;">课程性质</th>
+		<th rowspan="3" style="width: 30px;">课程<br>性质</th>
 		<th rowspan="3" style="width: 20px;">序号</th>
 		<th rowspan="3" style="width: 60px;">课程编号</th>
 		<th rowspan="3" style="width: 160px;">课程名称</th>
@@ -72,10 +72,10 @@
 		<tr>
 		<th rowspan="2" style="width: 20px;">理论</th>
 		<th colspan="3"  style="width: 60px;">实践</th>
-		<th colspan="2">第一学年</th>
-		<th colspan="2">第二学年</th>
-		<th colspan="2">第三学年</th>
-		<th colspan="2">第四学年</th>
+		<th colspan="2">第一<br>学年</th>
+		<th colspan="2">第二<br>学年</th>
+		<th colspan="2">第三<br>学年</th>
+		<th colspan="2">第四<br>学年</th>
 		</tr>
 		<tr>
 		<th rowspan="1" style="width: 20px;">实验</th>

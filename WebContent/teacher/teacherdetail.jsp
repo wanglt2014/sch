@@ -26,12 +26,23 @@ String request_path = request.getContextPath();
 .container {width: 100%;}
 .photo { width: 40%;position:absolute; text-align: right;height: 300px;height:auto;}
 .content_left {float: left;text-align: center; margin-left: 45%; width: 45%;}
-.content_all {width: 80%;text-align: center; position: absolute;margin-left: 10%;}
+.content_all {width: 80%;text-align: center; margin-left: 10%;}
 .base_info{margin-top: 10px;text-align: center;}
 .ul_teacher{list-style:disc; !important;}
 td.p20{width: 20%;height: 30px;}
 td.p15{width: 15%;height: 30px;}
 td.p80{width: 80%;height: 30px;}
+
+.yj{
+    padding:10px; width:200px; height:15px;
+    border: 0px solid #000000;
+    -moz-border-radius: 20px 20px 0px 0px;     
+    -webkit-border-radius: 20px 20px 0px 0px;  
+    border-radius:20px 20px 0px 0px;
+    background-color: #C2E1FF;
+    text-align: center;
+}
+
 </style>
 </head>
 
@@ -69,8 +80,10 @@ td.p80{width: 80%;height: 30px;}
 <%-- 							<c:out value="${bsArticledetail.articlesummary}" escapeXml="false" /> --%>
 <!-- 						</div>  -->
 				<div class="div_baseinfo"><br /><br />
-					<h3 class="title_teacher">基本信息</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">基本信息</div>
 					<hr class="line_teacher" />
+				</div>
 <%-- 							<c:out value="${bsArticledetail.content}" escapeXml="false" /> --%>
 <%-- 							<s:property value="tTeacherdetail.iimageurll"/> --%>
 <%-- 							<div align="center" style="width: 100%"><img src="<s:property value="tTeacherdetail.iimageurll"/>" WIDTH="200" HEIGHT="200" BORDER="0" alt=""/></div> --%>
@@ -102,12 +115,14 @@ td.p80{width: 80%;height: 30px;}
 				</div>
 				<s:if test="tSubjectDtoList!=null">
 				<div class="div_baseinfo">
-					<h3 class="title_teacher">讲授课程资料</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">讲授课程资料</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th>课程名称</th><th>课程性质</th><th>教学大纲</th><th>教学进度表</th><th>课程资料</th></tr>
 						<s:iterator var="subjectDTO" value="tSubjectDtoList" status="tps">
 						<tr>
@@ -147,12 +162,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="tResearchList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">立项信息</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">立项信息</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th>教师排名</th><th>项目种类</th><th>项目类别</th><th>项目名称</th><th>项目编号</th><th>开始时间</th><th>结束时间</th><th>是否在研</th><th>结题等级</th></tr>
 						<s:iterator var="tResearchDetail" value="tResearchList" status="trl">
 						<tr>
@@ -176,12 +193,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="tPaperList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">论文信息</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">论文信息</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th>作者排名</th><th>论文题目</th><th>发表刊物/论文集名称</th>
 						<th>刊物国别</th><th>发表/出版时间</th><th>期号（卷号）</th><th>页码</th>
 						<th>论文收录</th><th>影响因子</th><th>论文转载</th><th>一级学科</th><th>资助项目编号</th></tr>
@@ -201,12 +220,12 @@ td.p80{width: 80%;height: 30px;}
 						<td class="p15"><s:property value="#tPaperDetail.paperreprint"/></td>
 						<td class="p15"><s:property value="#tPaperDetail.paperclassa"/></td>
 						<td class="p15"><s:property value="#tPaperDetail.paperprojectno"/></td>
-						<td class="p15">
-						<s:if test="#tPaperDetail.paperdownloadPath!=null">
-						<a href="<%=request_path %>/${tPaperDetail.paperdownloadPath}">[论文电子版]</a>
-						</s:if>
-						<s:else></s:else>
-						</td>
+<!-- 						<td class="p15"> -->
+<%-- 						<s:if test="#tPaperDetail.paperdownloadPath!=null"> --%>
+<%-- 						<a href="<%=request_path %>/${tPaperDetail.paperdownloadPath}">[论文电子版]</a> --%>
+<%-- 						</s:if> --%>
+<%-- 						<s:else></s:else> --%>
+<!-- 						</td> -->
 						</tr>
 						</s:iterator>
 						</table>
@@ -217,12 +236,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="tWorkList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">著作信息</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">著作信息</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th class="p15">作者排名</th><th class="p15">著作题目</th>
 						<th class="p15">出版单位</th><th class="p15">出版地</th>
 						<th class="p15">出版时间</th><th class="p15">著作类别</th>
@@ -256,12 +277,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="tPrizeList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">获奖信息</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">获奖信息</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th class="p15">获奖排名</th><th class="p15">奖项名称</th>
 						<th class="p15">成果名称</th><th class="p15">奖励等级</th>
 						<th class="p15">成果类别</th><th class="p15">授奖部门</th>
@@ -288,12 +311,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="tPartjobList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">学术兼职</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">学术兼职</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th class="p15">学会/协会/期刊名称</th><th class="p15">在学会/协会/期刊中职务</th>
 						<th class="p15">任职开始时间</th><th class="p15">任职结束时间</th>
 						<th class="p15">学会/协会/期刊级别</th></tr>
@@ -315,12 +340,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="honorandotherList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">荣誉及其他</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">荣誉及其他</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th class="p15">荣誉名称</th><th class="p15">荣誉级别</th>
 						<th class="p15">授予部门</th><th class="p15">备注</th></tr>
 						<s:iterator var="honorandother" value="honorandotherList" status="tpr">
@@ -340,12 +367,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="teachresearchList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">教改立项</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">教改立项</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th>教师排名</th><th>项目类别</th><th>项目名称</th><th>项目编号</th><th>开始时间</th><th>结束时间</th><th>是否在研</th><th>结题等级</th></tr>
 						<s:iterator var="tResearchDetail" value="teachresearchList" status="trl">
 						<tr>
@@ -368,12 +397,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="teachpaperList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">教改论文</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">教改论文</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th>作者排名</th><th>论文题目</th><th>发表刊物/论文集名称</th>
 						<th>刊物国别</th><th>发表/出版时间</th><th>期号（卷号）</th><th>页码</th>
 						<th>论文收录</th><th>影响因子</th><th>论文转载</th><th>资助项目编号</th></tr>
@@ -408,12 +439,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="teachWorkList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">教改著作</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">教改著作</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th class="p15">作者排名</th><th class="p15">教材名称</th>
 						<th class="p15">出版单位</th><th class="p15">出版地</th>
 						<th class="p15">出版时间</th><th class="p15">自己承担字数/全书总字数（千）</th>
@@ -442,12 +475,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="speakerprizeList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">优秀主讲教师</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">优秀主讲教师</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th class="p15">奖项名称</th><th class="p15">奖励等级</th>
 						<th class="p15">授奖部门</th>
 						<th class="p15">获奖时间</th><th class="p15">证书编号</th></tr>
@@ -469,12 +504,14 @@ td.p80{width: 80%;height: 30px;}
 				</s:if>
 				<s:if test="teachprizeList!=null">
 				<div class="div_baseinfo" >
-					<h3 class="title_teacher">教学成果奖</h3>
+				<div style="text-align: center;width: 90%;margin-left: auto;margin-right: auto;"> 
+					<div class="title_teacher yj">教学成果奖</div>
 					<hr class="line_teacher" />
+				</div>
 					<div  class="baseInfo">
 						<div class="content_all">
 						<div style="margin-top: 20px;" >
-						<table style="width: 100%;">
+						<table style="width: 100%;" class="teacher_table">
 						<tr><th class="p15">作者排名</th><th class="p15">奖项名称</th>
 						<th class="p15">成果名称</th><th class="p15">奖励等级</th>
 						<th class="p15">成果类别</th><th class="p15">授奖部门</th>

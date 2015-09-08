@@ -162,7 +162,7 @@ function clearAllTb() {
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportResearch()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center" >
-		<tr>
+		<tr >
 		<th>姓名</th>
 		<th>教师排名</th>
 		<th>项目类别</th>

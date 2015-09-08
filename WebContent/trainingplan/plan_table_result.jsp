@@ -3,9 +3,17 @@
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
+<%
+String url = request.getRequestURL().toString();
+String uri = request.getRequestURI();
+String website =url.substring(0, url.indexOf(uri));
+String request_path = website+request.getContextPath();
+	String image_path_img = request_path + "/images/img";
+	request.setAttribute("image_path_img", image_path_img);
+%>
 <jsp:include page="../pre.jsp"></jsp:include>
-	<div align="center" style="width: 100%;">
-	<h3 class="span_title" style="text-align: center;">课程配置流程图</h3>
+	<div align="center" style="width: 100%;" >
+	<img alt="" src="${image_path_img}/title.jpg" />
 	<div align="center" style="width: 90%;text-align: right;">
 	年级：<select id="trainingplangrade" name="trainingplangrade"  editable="false"
 		style="width: 100px;text-align: right;" onChange="querySubject();">

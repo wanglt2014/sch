@@ -22,7 +22,7 @@
 			<tr>
 			<td><s:property value="#es.stuname" /></td>
 			<td><s:property value="#es.stutype" /></td>
-			<td><s:property value="#es.exchangebegintime" />-<s:property value="#es.exchangeendtime" /></td>
+			<td><s:property value="#es.exchangebegintime" /> - <s:property value="#es.exchangeendtime" /></td>
 			<td><s:property value="#es.timelength" /></td>
 			<td><s:property value="#es.exchangeplace" /></td>
 			<td><s:property value="#es.projectname" /></td>

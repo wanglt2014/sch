@@ -25,7 +25,7 @@
 			<td><s:property value="#at.attname" /></td>
 			<td><s:property value="#at.atttype" /></td>
 			<td><s:property value="#at.atthost" /></td>
-			<td><s:property value="#at.atttrainbegintime" />-<s:property value="#at.atttrainendtime" /></td>
+			<td><s:property value="#at.atttrainbegintime" /> - <s:property value="#at.atttrainendtime" /></td>
 			<td><s:property value="#at.atttrainplace" /></td>
 			<td><s:property value="#at.atttrainresult" /></td>
 			</tr>

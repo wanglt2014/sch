@@ -22,7 +22,7 @@
 			<tr>
 			<td ><s:property value="#hl.meetingname" /></td>
 			<td ><s:property value="#hl.meetingtype" /></td>
-			<td ><s:property value="#hl.meetingbegintime" />~<s:property value="#hl.meetingendtime" /></td>
+			<td ><s:property value="#hl.meetingbegintime" /> - <s:property value="#hl.meetingendtime" /></td>
 			<td><s:property value="#hl.meetingplace" /></td>
 			<td><s:property value="#hl.meetingpeoplenum" /></td>
 			<td><s:property value="#hl.meetingresult" /></td>

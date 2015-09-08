@@ -26,7 +26,7 @@
 			<td><s:property value="#aml.attmeetingname" /></td>
 			<td><s:property value="#aml.attmeetingtype" /></td>
 			<td><s:property value="#aml.attmeetinghost" /></td>
-			<td><s:property value="#aml.attmeetingbegintime" />-<s:property value="#aml.attmeetingendtime" /></td>
+			<td><s:property value="#aml.attmeetingbegintime" /> - <s:property value="#aml.attmeetingendtime" /></td>
 			<td><s:property value="#aml.attmeetingplace" /></td>
 			<td><s:property value="#aml.attmeetingpaper" /></td>
 			<td><s:property value="#aml.attmeetingreporttype" /></td>

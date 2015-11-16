@@ -16,7 +16,6 @@
 			href="Login_linkus.shtm" target="_blank">联系我们</a> | <a
 			href="Login_question.shtm" target="_blank">帮助中心</a> | <a id="ico_pp_a"
 			target="_blank">意见反馈</a> | <a href="Login_team.shtm" target="_blank">团队介绍</a>
-
 	</div>
 
 	<div style="margin-bottom: 5px; margin-top: 5px;">

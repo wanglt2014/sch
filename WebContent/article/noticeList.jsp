@@ -11,10 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="教学科研通知" />
 <title>教学科研通知_${sitename}</title>
-
 <link rel="shortcut icon" href="favicon.ico" />
 <jsp:include page="../pre.jsp"></jsp:include>
-
 <script language="JavaScript" type="text/javascript">
 	$(document).ready(function() {
 		search();
@@ -56,14 +54,12 @@
 			success : function(html) {
 				$.unblockUI();
 				$('#news_right_content_notice').html(html);
-
 			},
 			error : function() {
 				$.unblockUI();
 			}
 		});
 	}
-	
 	function searchLeft(page) {
 		var targetPage = '';
 		if (!page || (page == '')) {
@@ -100,7 +96,6 @@
 			success : function(html) {
 				$.unblockUI();
 				$('#news_left_content_notice').html(html);
-
 			},
 			error : function() {
 				$.unblockUI();
@@ -109,7 +104,6 @@
 	}
 </script>
 </head>
-
 <body>
 	<div id="fade" class="black_overlay"></div>
 	<jsp:include page="../top.jsp"></jsp:include>

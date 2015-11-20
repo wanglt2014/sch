@@ -20,7 +20,6 @@ String request_path = request.getContextPath();
 <%-- <script language="JavaScript" type="text/javascript" --%>
 <%-- 	src="${js_path}/fileUploadHandle.js"></script> --%>
 </head>
-
 <body>
 	<div id="fade" class="black_overlay"></div>
 		<jsp:include page="../top.jsp"></jsp:include>
@@ -102,8 +101,7 @@ String request_path = request.getContextPath();
 						</div>
 						<br><br><br><br>
 					</s:iterator>
-				</c:if>
-								</div>
+				</c:if></div>
 		</div>
 		</div>
 		<jsp:include page="../bottom.jsp"></jsp:include>

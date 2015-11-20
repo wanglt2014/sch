@@ -3,7 +3,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-
 <%
 String request_path = request.getContextPath();
 	// 当前导航栏位置
@@ -17,18 +16,12 @@ String request_path = request.getContextPath();
 	content="${bsArticledetail.articlesummary}" />
 <link rel="shortcut icon" href="favicon.ico" />
 <jsp:include page="../pre.jsp"></jsp:include>
-<%-- <script language="JavaScript" type="text/javascript" --%>
-<%-- 	src="${js_path}/fileUploadHandle.js"></script> --%>
 </head>
-
 <body>
 	<div id="fade" class="black_overlay"></div>
 	<jsp:include page="../top.jsp"></jsp:include>
 	<div class="container" style="position: relative;">
-
 		<jsp:include page="../nav.jsp"></jsp:include>
-
-
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">
 				<div id="news_left_content">
@@ -53,9 +46,7 @@ String request_path = request.getContextPath();
 									<a target="_blank" href="Article_teachDetail_${teach.articleid}.shtm" title="<s:property value="#teach.articletitle" />">
 									<s:property value="#teach.createdate" />
 									</a>
-								</td>
-								</tr>
-								</table>
+								</td></tr></table>
 								</div>
 								<div class='separatorLine'></div>
 								</s:iterator>
@@ -84,7 +75,6 @@ String request_path = request.getContextPath();
 								</select>
 							</div>
 						</div>
-
 						<div class="normal_summary">
 							描述：
 							<c:out value="${bsArticledetail.articlesummary}" escapeXml="false" />
@@ -98,19 +88,9 @@ String request_path = request.getContextPath();
 						</s:if>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
-
 		</div>
-			<%-- <input type="text" id="wordName" name="wordName"  style="display:none">
-			 <input type="text" id="documentType" name="documentType" style="display:none">
-			 <input type="text" id="serverName" name="serverName" style="display:none">
-			 <input type="text" id="serverIp" name="serverIp" style="display:none">
-			 <input type="text" id="restorePath" name="restorePath" value="${bsArticledetail.download.filepath}" style="display:none">
-			 <input type="text" id="pwd" name="pwd" style="display:none">
-			 <input type="text" id="account" name="account" style="display:none"> --%>
 		<jsp:include page="../bottom.jsp"></jsp:include>
 
 	</div>

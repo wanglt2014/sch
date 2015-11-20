@@ -86,12 +86,14 @@
 				</span>
 				<span class="span_column_sm">
 					<label style="width: 85px;text-align: right;">项目开始时间:</label> 
-					<input id="teachresearchbegindate" name="teachresearchbegindate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 					<input id="teachresearchbegindate" name="teachresearchbegindate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+					<div id="researchbegindate" name="researchbegindate" data-options="formatter:ww4,parser:w4"></div>
 				</span>
 				<br><br>
 				<span class="span_column_sm" >
 					<label style="width: 90px;text-align: right;">项目结束时间:</label> 
-					<input id="teachresearchenddate" name="teachresearchenddate" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 					<input id="teachresearchenddate" name="teachresearchenddate" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+					<div id="teachresearchenddate" name="teachresearchenddate" data-options="formatter:ww4,parser:w4"></div>
 				</span>
 				<span class="span_column_sm" >
 					<label style="width: 90px;text-align: right;">结题等级:</label> 
@@ -108,23 +110,24 @@
 				</form>
 				<hr  style="border-bottom:1px dashed;"><br>
 				</div>
-				<table id="teachResearchdg" title="列表" class="easyui-datagrid"
-					style="width: auto; height: 250px" url="Teacher_queryTeachResearch"
-					toolbar="#teachResearchtoolbar" pagination="true" rownumbers="true"
-					fitColumns="true" pageList="[5,10]" singleSelect="true" pageSize="5" >
-					<thead>
-						<tr>
-							<th field="researchlevel" width="50">项目类别</th>
-							<th field="researchrank" width="30" >教师排名</th>
-							<th field="isresearch" width="30">是否在研</th>
-							<th field="researchname" width="20">项目名称</th>
-							<th field="researchno" width="20">项目编号</th>
-							<th field="researchbegindate" width="20">项目开始时间</th>
-							<th field="researchenddate" width="20">项目结束时间</th>
-							<th field="researchknot" width="20">结题等级</th>
-						</tr>
-					</thead>
-				</table>
+				<table id="teachResearchdg"></table>
+<!-- 				<table id="teachResearchdg" title="列表" class="easyui-datagrid" -->
+<!-- 					style="width: auto; height: 250px" url="Teacher_queryTeachResearch" -->
+<!-- 					toolbar="#teachResearchtoolbar" pagination="true" rownumbers="true" -->
+<!-- 					fitColumns="true" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th field="researchlevel" width="50">项目类别</th> -->
+<!-- 							<th field="researchrank" width="30" >教师排名</th> -->
+<!-- 							<th field="isresearch" width="30">是否在研</th> -->
+<!-- 							<th field="researchname" width="20">项目名称</th> -->
+<!-- 							<th field="researchno" width="20">项目编号</th> -->
+<!-- 							<th field="researchbegindate" width="20">项目开始时间</th> -->
+<!-- 							<th field="researchenddate" width="20">项目结束时间</th> -->
+<!-- 							<th field="researchknot" width="20">结题等级</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 				</table> -->
 				<div id="teachResearchtoolbar">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
 						iconCls="icon-remove" plain="true" onclick="destroyResearch('teach')">删除</a>
@@ -158,7 +161,8 @@
 							class="easyui-validatebox"  maxlength="20" style="width: 110px" ></span>
 					<span class="span_column_sm">
 						<label style="width: 85px;text-align: right;">发表/出版时间:</label> 
-						<input id="teachpapernotedate" name="teachpapernotedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="teachpapernotedate" name="teachpapernotedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="teachpapernotedate" name="teachpapernotedate" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<span class="span_column_sm" >
 					<label style="width: 85px;text-align: right;">期号（卷号）:</label>
@@ -208,26 +212,27 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePaper('teach')">保存</a>
 					</form>
 					<hr  style="border-bottom:1px dashed;"><br>
-					<table id="teachPaperdg" title="列表" class="easyui-datagrid"
-					style="width: 950px; height: 250px" url="Teacher_queryTeachPaper"
-					toolbar="#teachPapertoolbar" pagination="true" rownumbers="true"
-					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-					<thead>
-						<tr>
-							<th field="papername" width="100">论文题目</th>
-							<th field="paperauthor" width="60">作者排名</th>
-							<th field="papernotename" width="120" >发表刊物/论文集名称</th>
-							<th field="papernotecountry" width="60">刊物国别</th>
-							<th field="papernotedate" width="100">发表/出版时间</th>
-							<th field="papernoteno" width="80">期号（卷号）</th>
-							<th field="papernotepage" width="50">页码</th>
-							<th field="paperincluded" width="100">论文收录</th>
-							<th field="paperfactors" width="60">影响因子</th>
-							<th field="paperreprint" width="60">论文转载</th>
-							<th field="paperprojectno" width="100">资助项目编号</th>
-						</tr>
-					</thead>
-				</table>
+					<table id="teachPaperdg"></table>
+<!-- 					<table id="teachPaperdg" title="列表" class="easyui-datagrid" -->
+<!-- 					style="width: 950px; height: 250px" url="Teacher_queryTeachPaper" -->
+<!-- 					toolbar="#teachPapertoolbar" pagination="true" rownumbers="true" -->
+<!-- 					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th field="papername" width="100">论文题目</th> -->
+<!-- 							<th field="paperauthor" width="60">作者排名</th> -->
+<!-- 							<th field="papernotename" width="120" >发表刊物/论文集名称</th> -->
+<!-- 							<th field="papernotecountry" width="60">刊物国别</th> -->
+<!-- 							<th field="papernotedate" width="100">发表/出版时间</th> -->
+<!-- 							<th field="papernoteno" width="80">期号（卷号）</th> -->
+<!-- 							<th field="papernotepage" width="50">页码</th> -->
+<!-- 							<th field="paperincluded" width="100">论文收录</th> -->
+<!-- 							<th field="paperfactors" width="60">影响因子</th> -->
+<!-- 							<th field="paperreprint" width="60">论文转载</th> -->
+<!-- 							<th field="paperprojectno" width="100">资助项目编号</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 				</table> -->
 				<div id="teachPapertoolbar">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
 						iconCls="icon-remove" plain="true" onclick="deletePaper('teach')">删除</a>
@@ -261,7 +266,8 @@
 					</span>
 					<span class="span_column_sm">
 						<label  style="width: 85px;text-align: right;">出版时间:</label> 
-						<input id="teachworkPublishTime" name="teachworkPublishTime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="teachworkPublishTime" name="teachworkPublishTime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="teachworkPublishTime" name="teachworkPublishTime" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<span class="span_column" >
 						<label style="width: 85px;text-align: right;">已出几版:</label>
@@ -284,24 +290,25 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveWork('teach')">保存</a>
 					</form>
 				<hr  style="border-bottom:1px dashed;"><br>
-				<table id="teachWorkdg" title="列表" class="easyui-datagrid"
-					style="width: 1100px; height: 250px" url="Teacher_queryTeachWork"
-					toolbar="#teachWorktoolbar" pagination="true" rownumbers="true"
-					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-					<thead>
-						<tr>
-							<th field="workauthorrank" width="100">作者排名</th>
-							<th field="worktitle" width="100">教材名称</th>
-							<th field="workpublishunit" width="120" >出版单位</th>
-							<th field="workpublisharea" width="100">出版地</th>
-							<th field="workpublishtime" width="100">出版时间</th>
-							<th field="alreadypublish" width="100">已出几版</th>
-							<th field="isbnno" width="100">ISBN号</th>
-							<th field="projectno" width="150">资助项目编号</th>
-							<th field="totalword" width="150">自己承担字数/全书总字数</th>
-						</tr>
-					</thead>
-				</table>
+				<table id="teachWorkdg"></table>
+<!-- 				<table id="teachWorkdg" title="列表" class="easyui-datagrid" -->
+<!-- 					style="width: 1100px; height: 250px" url="Teacher_queryTeachWork" -->
+<!-- 					toolbar="#teachWorktoolbar" pagination="true" rownumbers="true" -->
+<!-- 					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th field="workauthorrank" width="100">作者排名</th> -->
+<!-- 							<th field="worktitle" width="100">教材名称</th> -->
+<!-- 							<th field="workpublishunit" width="120" >出版单位</th> -->
+<!-- 							<th field="workpublisharea" width="100">出版地</th> -->
+<!-- 							<th field="workpublishtime" width="100">出版时间</th> -->
+<!-- 							<th field="alreadypublish" width="100">已出几版</th> -->
+<!-- 							<th field="isbnno" width="100">ISBN号</th> -->
+<!-- 							<th field="projectno" width="150">资助项目编号</th> -->
+<!-- 							<th field="totalword" width="150">自己承担字数/全书总字数</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 				</table> -->
 				<div id="teachWorktoolbar">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
 						iconCls="icon-remove" plain="true" onclick="deleteWork('teach')">删除</a>
@@ -339,7 +346,8 @@
 					<br><br>
 					<span class="span_column">
 						<label  style="width: 85px;text-align: right;">获奖时间:</label> 
-						<input id="speakerrizedate" name="speakerprizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="speakerrizedate" name="speakerprizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="speakerrizedate" name="speakerrizedate" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<span class="span_column" >
 						<label style="width: 85px;text-align: right;">证书编号:</label>
@@ -349,18 +357,19 @@
 				<hr  style="border-bottom:1px dashed;"><br>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePrize('speaker')">保存</a>
 				</form>
-				<table id="speakerPrizedg" title="列表" class="easyui-datagrid"
-				style="width: 1300px; height: 250px" url="Teacher_querySpeakerPrize"
-				toolbar="#speakerPrizetoolbar" pagination="true" rownumbers="true"
-				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-				<thead><tr>
-						<th field="prizetitle" width="100">奖项名称</th>
-						<th field="prizelevel" width="100">奖励等级</th>
-						<th field="prizedep" width="100">授奖部门</th>
-						<th field="prizedate" width="80">获奖时间</th>
-						<th field="prizeno" width="100">证书编号</th>
-					</tr></thead>
-			</table>
+				<table id="speakerPrizedg"></table>
+<!-- 				<table id="speakerPrizedg" title="列表" class="easyui-datagrid" -->
+<!-- 				style="width: 1300px; height: 250px" url="Teacher_querySpeakerPrize" -->
+<!-- 				toolbar="#speakerPrizetoolbar" pagination="true" rownumbers="true" -->
+<!-- 				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 				<thead><tr> -->
+<!-- 						<th field="prizetitle" width="100">奖项名称</th> -->
+<!-- 						<th field="prizelevel" width="100">奖励等级</th> -->
+<!-- 						<th field="prizedep" width="100">授奖部门</th> -->
+<!-- 						<th field="prizedate" width="80">获奖时间</th> -->
+<!-- 						<th field="prizeno" width="100">证书编号</th> -->
+<!-- 					</tr></thead> -->
+<!-- 			</table> -->
 			<div id="speakerPrizetoolbar">
 				<a href="javascript:void(0)" class="easyui-linkbutton"
 					iconCls="icon-remove" plain="true" onclick="deletePrize('speaker')">删除</a>
@@ -415,7 +424,8 @@
 					<br><br>
 					<span class="span_column">
 						<label  style="width: 85px;text-align: right;">获奖时间:</label> 
-						<input id="teachprizedate" name="teachprizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="teachprizedate" name="teachprizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="teachprizedate" name="teachprizedate" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<span class="span_column" >
 						<label style="width: 85px;text-align: right;">证书编号:</label>
@@ -425,23 +435,24 @@
 				<hr  style="border-bottom:1px dashed;"><br>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePrize('teach')">保存</a>
 				</form>
-				<table id="teachPrizedg" title="列表" class="easyui-datagrid"
-				style="width: 1300px; height: 250px" url="Teacher_queryTeachPrize"
-				toolbar="#teachPrizetoolbar" pagination="true" rownumbers="true"
-				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-				<thead>
-					<tr>
-						<th field="prizerank" width="100">获奖排名</th>
-						<th field="prizetitle" width="100">奖项名称</th>
-						<th field="prizeresultname" width="120" >成果名称</th>
-						<th field="prizelevel" width="100">奖励等级</th>
-						<th field="prizetype" width="100">成果类别</th>
-						<th field="prizedep" width="100">授奖部门</th>
-						<th field="prizedate" width="80">获奖时间</th>
-						<th field="prizeno" width="100">证书编号</th>
-					</tr>
-				</thead>
-			</table>
+				<table id="teachPrizedg"></table>
+<!-- 				<table id="teachPrizedg" title="列表" class="easyui-datagrid" -->
+<!-- 				style="width: 1300px; height: 250px" url="Teacher_queryTeachPrize" -->
+<!-- 				toolbar="#teachPrizetoolbar" pagination="true" rownumbers="true" -->
+<!-- 				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th field="prizerank" width="100">获奖排名</th> -->
+<!-- 						<th field="prizetitle" width="100">奖项名称</th> -->
+<!-- 						<th field="prizeresultname" width="120" >成果名称</th> -->
+<!-- 						<th field="prizelevel" width="100">奖励等级</th> -->
+<!-- 						<th field="prizetype" width="100">成果类别</th> -->
+<!-- 						<th field="prizedep" width="100">授奖部门</th> -->
+<!-- 						<th field="prizedate" width="80">获奖时间</th> -->
+<!-- 						<th field="prizeno" width="100">证书编号</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 			</table> -->
 			<div id="teachPrizetoolbar">
 				<a href="javascript:void(0)" class="easyui-linkbutton"
 					iconCls="icon-remove" plain="true" onclick="deletePrize('teach')">删除</a>
@@ -456,7 +467,165 @@
 	
 	<script>
 	var url;
+	function loadTeachResearchdg(teacherId){
+		using('datagrid', function(){
+			$('#teachResearchdg').datagrid({
+				title:'列表',
+				width:900,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryTeachResearch?teacherId='+teacherId,
+				toolbar:'#teachResearchtoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'researchlevel',title:'项目类别',width:60},
+					{field:'researchrank',title:'教师排名',width:60},
+					{field:'isresearch',title:'是否在研',width:60},
+					{field:'researchname',title:'项目名称',width:120},
+					{field:'researchno',title:'项目编号',width:130},
+					{field:'researchbegindate',title:'项目开始时间',width:90},
+					{field:'researchenddate',title:'项目结束时间',width:90},
+					{field:'researchknot',title:'结题等级',width:90}
+					]]
+			});
+		});
+	}
+	function loadTeachPaperdg(teacherId){
+		using('datagrid', function(){
+			$('#teachPaperdg').datagrid({
+				title:'列表',
+				width:1050,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryTeachPaper?teacherId='+teacherId,
+				toolbar:'#teachPapertoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'papername',title:'论文题目',width:100},
+					{field:'paperauthor',title:'作者排名',width:60},
+					{field:'papernotename',title:'发表刊物/论文集名称',width:120},
+					{field:'papernotecountry',title:'刊物国别',width:120},
+					{field:'papernotedate',title:'发表/出版时间',width:100},
+					{field:'papernoteno',title:'期号（卷号）',width:80},
+					{field:'papernotepage',title:'页码',width:50},
+					{field:'paperincluded',title:'论文收录',width:100},
+					{field:'paperfactors',title:'影响因子',width:70},
+					{field:'paperreprint',title:'论文转载',width:70},
+					{field:'paperprojectno',title:'资助项目编号',width:100}
+					]]
+			});
+		});
+	}
 	
+	function loadTeachWorkdg(teacherId){
+		using('datagrid', function(){
+			$('#teachWorkdg').datagrid({
+				title:'列表',
+				width:1050,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryTeachWork?teacherId='+teacherId,
+				toolbar:'#teachWorktoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'workauthorrank',title:'作者排名',width:60},
+					{field:'worktitle',title:'教材名称',width:120},
+					{field:'workpublishunit',title:'出版单位',width:120},
+					{field:'workpublisharea',title:'出版地',width:100},
+					{field:'workpublishtime',title:'出版时间',width:100},
+					{field:'alreadypublish',title:'已出几版',width:100},
+					{field:'isbnno',title:'ISBN号',width:100},
+					{field:'projectno',title:'资助项目编号',width:150},
+					{field:'totalword',title:'自己承担字数/全书总字数',width:150}
+					]]
+			});
+		});
+	}
+	function loadSpeakerPrizedg(teacherId){
+		using('datagrid', function(){
+			$('#speakerPrizedg').datagrid({
+				title:'列表',
+				width:650,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_querySpeakerPrize?teacherId='+teacherId,
+				toolbar:'#speakerPrizetoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'prizetitle',title:'奖项名称',width:130},
+					{field:'prizelevel',title:'奖励等级',width:100},
+					{field:'prizedep',title:'授奖部门',width:100},
+					{field:'prizedate',title:'获奖时间',width:100},
+					{field:'prizeno',title:'证书编号',width:120}
+					]]
+			});
+		});
+	}
+	function loadTeachPrizedg(teacherId){
+		using('datagrid', function(){
+			$('#teachPrizedg').datagrid({
+				title:'列表',
+				width:850,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryTeachPrize?teacherId='+teacherId,
+				toolbar:'#teachPrizetoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'prizerank',title:'获奖排名',width:100},
+					{field:'prizetitle',title:'奖项名称',width:100},
+					{field:'prizeresultname',title:'成果名称',width:100},
+					{field:'prizelevel',title:'奖励等级',width:100},
+					{field:'prizetype',title:'成果类别',width:100},
+					{field:'prizedep',title:'授奖部门',width:100},
+					{field:'prizedate',title:'获奖时间',width:100},
+					{field:'prizeno',title:'证书编号',width:100}
+					]]
+			});
+		});
+	}
+	function loadCalendarForTeach(){
+		using('datebox', function(){
+			$('#teachresearchbegindate').datebox({
+				width:110
+			});
+			$('#teachresearchenddate').datebox({
+				width:110
+			});
+			$('#teachpapernotedate').datebox({
+				width:110
+			});
+			$('#teachworkPublishTime').datebox({
+				width:110
+			});
+			$('#speakerrizedate').datebox({
+				width:110
+			});
+			$('#teachprizedate').datebox({
+				width:110
+			});
+		});
+	}
 	function formatTutortype(value,rowData,rowIndex) {
     	var s="";
 		if(value=="1"){
@@ -518,22 +687,27 @@
 					'编辑教学信息');
 			$('#teachfm').form('clear');
 			$('#teachfm').form('load', row);
-			$('#teachResearchdg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#teachPaperdg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#teachWorkdg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#teachPrizedg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#speakerPrizedg').datagrid('load', {
-				teacherId : row.id
-			});
-			
+// 			$('#teachResearchdg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+// 			$('#teachPaperdg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+// 			$('#teachWorkdg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+// 			$('#teachPrizedg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+// 			$('#speakerPrizedg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+			loadCalendarForTeach();
+			loadTeachPrizedg(row.id);
+			loadTeachResearchdg(row.id);
+			loadTeachPaperdg(row.id);
+			loadTeachWorkdg(row.id);
+			loadSpeakerPrizedg(row.id);
 // 			if(uploaderForTp==null || uploaderForTp==undefined){
 // 				createUploaderTP();
 // //	 			createProject();

@@ -1,13 +1,11 @@
 <%@ page contentType="text/html; charset=utf-8" language="java"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
-
 <%
 String request_path = request.getContextPath();
 %>
-<jsp:include page="../pre.jsp"></jsp:include>
+<%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
 <c:if test="${empty(teacherList)}">
 	<tr>
 		<td colspan="5" style="text-align: center"><a href="">没有检索到相关记录。</a>
@@ -22,8 +20,6 @@ String request_path = request.getContextPath();
 	<hr color="#bbbbbb" width="80%" />
 	<table class="teacher_list">
 		<s:iterator var="teacher" value="teacherList" status="st">
-<%-- 		<s:property value="#dictionary.dictionarycode" />@@@<s:property value="#teacher.department" />#### --%>
-<%-- 		<s:property value="#st.index" /> --%>
 		<s:if test="#dictionary.dictionarycode==#teacher.department">
 		  <s:if test="#st.index % 4 == 0">
 		<tr>
@@ -36,17 +32,6 @@ String request_path = request.getContextPath();
 		  <s:if test="#st.index % 4 == 3">
 		  </tr>
 		  </s:if>
-<!-- 		<div class="artic_content"> -->
-<!-- 		</div> -->
-<!-- 			<div class="one_artic"> -->
-<!-- 				<div class="artic_content"> -->
-<%-- 				<s:property value="#dictionary.dictionaryvalue" /> --%>
-<%-- 					<s:property value="#teacher.teachername" /> --%>
-<%-- 					<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img alt="' + teacher.teachername + '" src="<s:property value="#teacher.iimageurll"/>" /></a> --%>
-<%-- 					<a style="color: #524EA3; text-decoration: underline;" href="Article_teachDetail_<s:property value="#teachInfo.articleid"/>.shtm" target="_blank">[阅读全文]</a> --%>
-<!-- 				</div> -->
-<!-- 				<div class="split_spx"></div> -->
-<!-- 			</div> -->
 		</s:if>
 		</s:iterator>
 		</table>
@@ -55,7 +40,4 @@ String request_path = request.getContextPath();
 	</s:iterator>
 </c:if>
 <div class="news_page">
-<%-- 	<s:if test="totalPageCount > 0"> --%>
-<%-- 		<jsp:include page="../common/common_page.jsp" /> --%>
-<%-- 	</s:if> --%>
 </div>

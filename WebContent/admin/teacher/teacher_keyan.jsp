@@ -39,7 +39,7 @@
 			iconCls="icon-edit" plain="true" onclick="editForkeyan()">科研信息</a>
 	</div>
 	<div id="keyandlg" class="easyui-dialog"
-		style="width: 800px; height: 620px; padding: 20px 20px;overflow: visible;" closed="true"
+		style="width: 800px; height: 700px; padding: 20px 20px;overflow: visible;" closed="true"
 		buttons="#keyandlg-buttons">
 		<div id="keyan_tab" class="easyui-tabs" style="height: 616px"
 			data-options="fit:true,border:false,plain:true" >
@@ -102,11 +102,13 @@
 				<br><br>
 				<span class="span_column_sm">
 					<label style="width: 85px;text-align: right;">项目开始时间:</label> 
-					<input id="researchbegindate" name="researchbegindate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 					<input id="researchbegindate" name="researchbegindate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+					<div id="researchbegindate" name="researchbegindate" data-options="formatter:ww4,parser:w4"></div>
 				</span>
 				<span class="span_column_sm" >
 					<label style="width: 90px;text-align: right;">项目结束时间:</label> 
-					<input id="researchenddate" name="researchenddate" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 					<input id="researchenddate" name="researchenddate" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+					<div id="researchenddate" name="researchenddate" data-options="formatter:ww4,parser:w4"></div>
 				</span>
 				<span class="span_column_sm" >
 					<label style="width: 90px;text-align: right;">结题等级:</label> 
@@ -123,24 +125,25 @@
 				</form>
 				<hr  style="border-bottom:1px dashed;"><br>
 				</div>
-				<table id="keyanResearchdg" title="列表" class="easyui-datagrid"
-					style="width: auto; height: 250px" url="Teacher_queryTResearch"
-					toolbar="#keyanResearchtoolbar" pagination="true" rownumbers="true"
-					fitColumns="true" pageList="[5,10]" singleSelect="true" pageSize="5" >
-					<thead>
-						<tr>
-							<th field="researchtype" width="30">项目种类</th>
-							<th field="researchlevel" width="50">项目类别</th>
-							<th field="researchrank" width="30" >教师排名</th>
-							<th field="isresearch" width="30">是否在研</th>
-							<th field="researchname" width="20">项目名称</th>
-							<th field="researchno" width="20">项目编号</th>
-							<th field="researchbegindate" width="20">项目开始时间</th>
-							<th field="researchenddate" width="20">项目结束时间</th>
-							<th field="researchknot" width="20">结题等级</th>
-						</tr>
-					</thead>
-				</table>
+				<table id="keyanResearchdg"></table>
+<!-- 				<table id="keyanResearchdg" title="列表" class="easyui-datagrid" -->
+<!-- 					style="width: auto; height: 250px" url="Teacher_queryTResearch" -->
+<!-- 					toolbar="#keyanResearchtoolbar" pagination="true" rownumbers="true" -->
+<!-- 					fitColumns="true" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th field="researchtype" width="30">项目种类</th> -->
+<!-- 							<th field="researchlevel" width="50">项目类别</th> -->
+<!-- 							<th field="researchrank" width="30" >教师排名</th> -->
+<!-- 							<th field="isresearch" width="30">是否在研</th> -->
+<!-- 							<th field="researchname" width="20">项目名称</th> -->
+<!-- 							<th field="researchno" width="20">项目编号</th> -->
+<!-- 							<th field="researchbegindate" width="20">项目开始时间</th> -->
+<!-- 							<th field="researchenddate" width="20">项目结束时间</th> -->
+<!-- 							<th field="researchknot" width="20">结题等级</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 				</table> -->
 				<div id="keyanResearchtoolbar">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
 						iconCls="icon-remove" plain="true" onclick="destroyResearch('keyan')">删除</a>
@@ -171,10 +174,11 @@
 					<span class="span_column_sm" >
 					<label style="width: 85px;text-align: right;">刊物国别:</label>
 						<input id="papernotecountry" name="papernotecountry"
-							class="easyui-numberbox"  maxlength="20" style="width: 110px" ></span>
+							class="easyui-validatebox"  maxlength="20" style="width: 110px" ></span>
 					<span class="span_column_sm">
 						<label style="width: 85px;text-align: right;">发表/出版时间:</label> 
-						<input id="papernotedate" name="papernotedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="papernotedate" name="papernotedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="papernotedate" name="papernotedate" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<span class="span_column_sm" >
 					<label style="width: 85px;text-align: right;">期号（卷号）:</label>
@@ -184,7 +188,7 @@
 					<span class="span_column_sm" >
 					<label style="width: 85px;text-align: right;">页码:</label>
 						<input id="papernotepage" name="papernotepage" maxlength="5"
-							class="easyui-validatebox"  style="width: 110px" ></span>
+							class="easyui-numberbox"  style="width: 110px" ></span>
 					<span class="span_column_sm" >
 						<label style="width: 85px;text-align: right;">论文收录:</label> 
 						<select id="paperincluded" name="paperincluded" class="easyui-combobox" panelHeight="auto" editable="false"
@@ -233,26 +237,27 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePaper('keyan')">保存</a>
 					</form>
 					<hr  style="border-bottom:1px dashed;"><br>
-					<table id="keyanPaperdg" title="列表" class="easyui-datagrid"
-					style="width: 1300px; height: 250px" url="Teacher_queryPaper"
-					toolbar="#keyanPapertoolbar" pagination="true" rownumbers="true"
-					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-					<thead>
-						<tr>
-							<th field="papername" width="100">论文题目</th>
-							<th field="paperauthor" width="100">作者排名</th>
-							<th field="papernotename" width="120" >发表刊物/论文集名称</th>
-							<th field="papernotecountry" width="100">刊物国别</th>
-							<th field="papernotedate" width="100">发表/出版时间</th>
-							<th field="papernoteno" width="100">期号（卷号）</th>
-							<th field="papernotepage" width="80">页码</th>
-							<th field="paperincluded" width="100">论文收录</th>
-							<th field="paperfactors" width="100">影响因子</th>
-							<th field="paperreprint" width="100">论文转载</th>
-							<th field="paperclassa" width="100">一级学科</th>
-							<th field="paperprojectno" width="150">资助项目编号</th>
-						</tr>
-					</thead>
+					<table id="keyanPaperdg"></table>
+<!-- 					<table id="keyanPaperdg" title="列表" class="easyui-datagrid" -->
+<!-- 					style="width: 1300px; height: 250px" url="Teacher_queryPaper" -->
+<!-- 					toolbar="#keyanPapertoolbar" pagination="true" rownumbers="true" -->
+<!-- 					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th field="papername" width="100">论文题目</th> -->
+<!-- 							<th field="paperauthor" width="100">作者排名</th> -->
+<!-- 							<th field="papernotename" width="120" >发表刊物/论文集名称</th> -->
+<!-- 							<th field="papernotecountry" width="100">刊物国别</th> -->
+<!-- 							<th field="papernotedate" width="100">发表/出版时间</th> -->
+<!-- 							<th field="papernoteno" width="100">期号（卷号）</th> -->
+<!-- 							<th field="papernotepage" width="80">页码</th> -->
+<!-- 							<th field="paperincluded" width="100">论文收录</th> -->
+<!-- 							<th field="paperfactors" width="100">影响因子</th> -->
+<!-- 							<th field="paperreprint" width="100">论文转载</th> -->
+<!-- 							<th field="paperclassa" width="100">一级学科</th> -->
+<!-- 							<th field="paperprojectno" width="150">资助项目编号</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
 				</table>
 				<div id="keyanPapertoolbar">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
@@ -297,7 +302,8 @@
 					</span>
 					<span class="span_column_sm">
 						<label  style="width: 85px;text-align: right;">出版时间:</label> 
-						<input id="workPublishTime" name="workPublishTime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="workPublishTime" name="workPublishTime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="workPublishTime" name="workPublishTime" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<br><br>
 					<span class="span_column" style="display: none;" id="oriAuthorSpan0">
@@ -342,28 +348,29 @@
 					<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveWork('keyan')">保存</a>
 					</form>
 				<hr  style="border-bottom:1px dashed;"><br>
-				<table id="keyanWorkdg" title="列表" class="easyui-datagrid"
-					style="width: 1300px; height: 250px" url="Teacher_queryWork"
-					toolbar="#keyanWorktoolbar" pagination="true" rownumbers="true"
-					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-					<thead>
-						<tr>
-							<th field="workauthorrank" width="100">作者排名</th>
-							<th field="worktitle" width="100">著作题目</th>
-							<th field="workpublishunit" width="120" >出版单位</th>
-							<th field="worktype" width="100">著作类别</th>
-							<th field="workpublisharea" width="100">出版地</th>
-							<th field="workpublishtime" width="100">出版时间</th>
-							<th field="oriauthor" width="80">原作者</th>
-							<th field="translateforeign" width="100">是否译成外文</th>
-							<th field="alreadypublish" width="100">已出几版</th>
-							<th field="isbnno" width="100">ISBN号</th>
-							<th field="classa" width="100">一级学科</th>
-							<th field="projectno" width="150">资助项目编号</th>
-							<th field="totalword" width="150">自己承担字数/全书总字数</th>
-						</tr>
-					</thead>
-				</table>
+				<table id="keyanWorkdg"></table>
+<!-- 				<table id="keyanWorkdg" title="列表" class="easyui-datagrid" -->
+<!-- 					style="width: 1300px; height: 250px" url="Teacher_queryWork" -->
+<!-- 					toolbar="#keyanWorktoolbar" pagination="true" rownumbers="true" -->
+<!-- 					fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 					<thead> -->
+<!-- 						<tr> -->
+<!-- 							<th field="workauthorrank" width="100">作者排名</th> -->
+<!-- 							<th field="worktitle" width="100">著作题目</th> -->
+<!-- 							<th field="workpublishunit" width="120" >出版单位</th> -->
+<!-- 							<th field="worktype" width="100">著作类别</th> -->
+<!-- 							<th field="workpublisharea" width="100">出版地</th> -->
+<!-- 							<th field="workpublishtime" width="100">出版时间</th> -->
+<!-- 							<th field="oriauthor" width="80">原作者</th> -->
+<!-- 							<th field="translateforeign" width="100">是否译成外文</th> -->
+<!-- 							<th field="alreadypublish" width="100">已出几版</th> -->
+<!-- 							<th field="isbnno" width="100">ISBN号</th> -->
+<!-- 							<th field="classa" width="100">一级学科</th> -->
+<!-- 							<th field="projectno" width="150">资助项目编号</th> -->
+<!-- 							<th field="totalword" width="150">自己承担字数/全书总字数</th> -->
+<!-- 						</tr> -->
+<!-- 					</thead> -->
+<!-- 				</table> -->
 				<div id="keyanWorktoolbar">
 					<a href="javascript:void(0)" class="easyui-linkbutton"
 						iconCls="icon-remove" plain="true" onclick="deleteWork('keyan')">删除</a>
@@ -424,7 +431,8 @@
 					<br><br>
 					<span class="span_column">
 						<label  style="width: 85px;text-align: right;">获奖时间:</label> 
-						<input id="prizedate" name="prizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="prizedate" name="prizedate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="prizedate" name="prizedate" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<span class="span_column" >
 						<label style="width: 85px;text-align: right;">证书编号:</label>
@@ -434,23 +442,24 @@
 				<hr  style="border-bottom:1px dashed;"><br>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePrize('keyan')">保存</a>
 				</form>
-				<table id="keyanPrizedg" title="列表" class="easyui-datagrid"
-				style="width: 1300px; height: 250px" url="Teacher_queryPrize"
-				toolbar="#keyanPrizetoolbar" pagination="true" rownumbers="true"
-				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-				<thead>
-					<tr>
-						<th field="prizerank" width="100">获奖排名</th>
-						<th field="prizetitle" width="100">奖项名称</th>
-						<th field="prizeresultname" width="120" >成果名称</th>
-						<th field="prizelevel" width="100">奖励等级</th>
-						<th field="prizetype" width="100">成果类别</th>
-						<th field="prizedep" width="100">授奖部门</th>
-						<th field="prizedate" width="80">获奖时间</th>
-						<th field="prizeno" width="100">证书编号</th>
-					</tr>
-				</thead>
-			</table>
+				<table id="keyanPrizedg"></table>
+<!-- 				<table id="keyanPrizedg" title="列表" class="easyui-datagrid" -->
+<!-- 				style="width: 1300px; height: 250px" url="Teacher_queryPrize" -->
+<!-- 				toolbar="#keyanPrizetoolbar" pagination="true" rownumbers="true" -->
+<!-- 				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th field="prizerank" width="100">获奖排名</th> -->
+<!-- 						<th field="prizetitle" width="100">奖项名称</th> -->
+<!-- 						<th field="prizeresultname" width="120" >成果名称</th> -->
+<!-- 						<th field="prizelevel" width="100">奖励等级</th> -->
+<!-- 						<th field="prizetype" width="100">成果类别</th> -->
+<!-- 						<th field="prizedep" width="100">授奖部门</th> -->
+<!-- 						<th field="prizedate" width="80">获奖时间</th> -->
+<!-- 						<th field="prizeno" width="100">证书编号</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 			</table> -->
 			<div id="keyanPrizetoolbar">
 				<a href="javascript:void(0)" class="easyui-linkbutton"
 					iconCls="icon-remove" plain="true" onclick="deletePrize('keyan')">删除</a>
@@ -472,11 +481,13 @@
 					<br><br>
 					<span class="span_column" >
 						<label style="width: 145px;text-align: right;">任职开始时间:</label>
-						<input id="partbegintime" name="partbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="partbegintime" name="partbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="partbegintime" name="partbegintime" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<span class="span_column" >
 						<label style="width: 145px;text-align: right;">任职截止时间:</label>
-						<input id="partendtime" name="partendtime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 						<input id="partendtime" name="partendtime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+						<div id="partendtime" name="partendtime" data-options="formatter:ww4,parser:w4"></div>
 					</span>
 					<br><br>
 					<span class="span_column" >
@@ -510,22 +521,23 @@
 				<hr  style="border-bottom:1px dashed;"><br>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="savePartJob()">保存</a>
 				</form>
-				<table id="partJobdg" title="列表" class="easyui-datagrid"
-				style="width: 1300px; height: 250px" url="Teacher_queryPartJob"
-				toolbar="#partJobtoolbar" pagination="true" rownumbers="true"
-				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-				<thead>
-					<tr>
-						<th field="partplace" width="150">学会/协会/期刊名称</th>
-						<th field="partjob" width="150">在学会/协会/期刊中职务</th>
-						<th field="partbegintime" width="120" >任职开始时间</th>
-						<th field="partendtime" width="100">任职截止时间</th>
-						<th field="partlevel" width="150">学会/协会/期刊级别</th>
-						<th field="parttopay" width="150">是否需要交纳会费 </th>
-						<th field="partofmoney" width="100">交纳金额</th>
-					</tr>
-				</thead>
-			</table>
+				<table id="partJobdg"></table>
+<!-- 				<table id="partJobdg" title="列表" class="easyui-datagrid" -->
+<!-- 				style="width: 1300px; height: 250px" url="Teacher_queryPartJob" -->
+<!-- 				toolbar="#partJobtoolbar" pagination="true" rownumbers="true" -->
+<!-- 				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th field="partplace" width="150">学会/协会/期刊名称</th> -->
+<!-- 						<th field="partjob" width="150">在学会/协会/期刊中职务</th> -->
+<!-- 						<th field="partbegintime" width="120" >任职开始时间</th> -->
+<!-- 						<th field="partendtime" width="100">任职截止时间</th> -->
+<!-- 						<th field="partlevel" width="150">学会/协会/期刊级别</th> -->
+<!-- 						<th field="parttopay" width="150">是否需要交纳会费 </th> -->
+<!-- 						<th field="partofmoney" width="100">交纳金额</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
+<!-- 			</table> -->
 			<div id="partJobtoolbar">
 				<a href="javascript:void(0)" class="easyui-linkbutton"
 					iconCls="icon-remove" plain="true" onclick="deletePartJob()">删除</a>
@@ -561,18 +573,19 @@
 				<hr  style="border-bottom:1px dashed;"><br>
 				<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveHonor()">保存</a>
 				</form>
-				<table id="honordg" title="列表" class="easyui-datagrid"
-				style="width: 850px; height: 250px" url="Teacher_queryHonor"
-				toolbar="#honortoolbar" pagination="true" rownumbers="true"
-				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" >
-				<thead>
-					<tr>
-						<th field="honortitle" width="150">荣誉名称</th>
-						<th field="honorleave" width="150">荣誉级别</th>
-						<th field="honordep" width="120" >授予部门</th>
-						<th field="honorremark" width="380">备注</th>
-					</tr>
-				</thead>
+				<table id="honordg"></table>
+<!-- 				<table id="honordg" title="列表" class="easyui-datagrid" -->
+<!-- 				style="width: 850px; height: 250px" url="Teacher_queryHonor" -->
+<!-- 				toolbar="#honortoolbar" pagination="true" rownumbers="true" -->
+<!-- 				fitColumns="false" pageList="[5,10]" singleSelect="true" pageSize="5" > -->
+<!-- 				<thead> -->
+<!-- 					<tr> -->
+<!-- 						<th field="honortitle" width="150">荣誉名称</th> -->
+<!-- 						<th field="honorleave" width="150">荣誉级别</th> -->
+<!-- 						<th field="honordep" width="120" >授予部门</th> -->
+<!-- 						<th field="honorremark" width="380">备注</th> -->
+<!-- 					</tr> -->
+<!-- 				</thead> -->
 			</table>
 			<div id="honortoolbar">
 				<a href="javascript:void(0)" class="easyui-linkbutton"
@@ -598,7 +611,200 @@
 		}
 		return s;
 	    }
+	function loadCalendar(){
+		using('datebox', function(){
+			$('#researchbegindate').datebox({
+				width:110
+			});
+			$('#researchenddate').datebox({
+				width:110
+			});
+			$('#papernotedate').datebox({
+				width:110
+			});
+			$('#workPublishTime').datebox({
+				width:110
+			});
+			$('#prizedate').datebox({
+				width:110
+			});
+			$('#partbegintime').datebox({
+				width:110
+			});
+			$('#partendtime').datebox({
+				width:110
+			});
+		});
+	}
+	function loadKeyanResearchdg(teacherId){
+		using('datagrid', function(){
+			$('#keyanResearchdg').datagrid({
+				title:'列表',
+				width:900,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryTResearch?teacherId='+teacherId,
+				toolbar:'#keyanResearchtoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'researchtype',title:'项目种类',width:160},
+					{field:'researchlevel',title:'项目类别',width:60},
+					{field:'researchrank',title:'教师排名',width:60},
+					{field:'isresearch',title:'是否在研',width:60},
+					{field:'researchname',title:'项目名称',width:120},
+					{field:'researchno',title:'项目编号',width:130},
+					{field:'researchbegindate',title:'项目开始时间',width:90},
+					{field:'researchenddate',title:'项目结束时间',width:90},
+					{field:'researchknot',title:'结题等级',width:90}
+					]]
+			});
+		});
+	}
+	function loadKeyanPaperdg(teacherId){
+		using('datagrid', function(){
+			$('#keyanPaperdg').datagrid({
+				title:'列表',
+				width:1000,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryPaper?teacherId='+teacherId,
+				toolbar:'#keyanPapertoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'papername',title:'论文题目',width:100},
+					{field:'paperauthor',title:'作者排名',width:60},
+					{field:'papernotename',title:'发表刊物/论文集名称',width:120},
+					{field:'papernotecountry',title:'刊物国别',width:80},
+					{field:'papernotedate',title:'发表/出版时间',width:100},
+					{field:'papernoteno',title:'期号（卷号）',width:70},
+					{field:'papernotepage',title:'页码',width:50},
+					{field:'paperincluded',title:'论文收录',width:80},
+					{field:'paperfactors',title:'影响因子',width:80},
+					{field:'paperreprint',title:'论文转载',width:60},
+					{field:'paperclassa',title:'一级学科',width:60},
+					{field:'paperprojectno',title:'资助项目编号',width:130}
+					]]
+			});
+		});
+	}
+	function loadKeyanWorkdg(teacherId){
+		using('datagrid', function(){
+			$('#keyanWorkdg').datagrid({
+				title:'列表',
+				width:1200,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryWork?teacherId='+teacherId,
+				toolbar:'#keyanWorktoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'workauthorrank',title:'作者排名',width:60},
+					{field:'worktitle',title:'著作题目',width:110},
+					{field:'workpublishunit',title:'出版单位',width:110},
+					{field:'worktype',title:'著作类别',width:70},
+					{field:'workpublisharea',title:'出版地',width:80},
+					{field:'workpublishtime',title:'出版时间',width:70},
+					{field:'oriauthor',title:'原作者',width:80},
+					{field:'translateforeign',title:'是否译成外文',width:80},
+					{field:'alreadypublish',title:'已出几版',width:60},
+					{field:'isbnno',title:'ISBN号',width:80},
+					{field:'classa',title:'一级学科',width:60},
+					{field:'projectno',title:'资助项目编号',width:120},
+					{field:'totalword',title:'自己承担字数/全书总字数',width:150}
+				]]
+			});
+		});
+	}
+	function loadKeyanPrizedg(teacherId){
+		using('datagrid', function(){
+			$('#keyanPrizedg').datagrid({
+				title:'列表',
+				width:850,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryPrize?teacherId='+teacherId,
+				toolbar:'#keyanPrizetoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'prizerank',title:'获奖排名',width:100},
+					{field:'prizetitle',title:'奖项名称',width:100},
+					{field:'prizeresultname',title:'成果名称',width:120},
+					{field:'prizelevel',title:'奖励等级',width:100},
+					{field:'prizetype',title:'成果类别',width:100},
+					{field:'prizedep',title:'授奖部门',width:100},
+					{field:'prizedate',title:'获奖时间',width:80},
+					{field:'prizeno',title:'证书编号',width:100}
+				]]
+			});
+		});
+	}
 	
+	function loadPartJobdg(teacherId){
+		using('datagrid', function(){
+			$('#partJobdg').datagrid({
+				title:'列表',
+				width:850,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryPartJob?teacherId='+teacherId,
+				toolbar:'#partJobtoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'partplace',title:'学会/协会/期刊名称',width:120},
+					{field:'partjob',title:'在学会/协会/期刊中职务',width:130},
+					{field:'partbegintime',title:'任职开始时间',width:100},
+					{field:'partendtime',title:'任职截止时间',width:100},
+					{field:'partlevel',title:'学会/协会/期刊级别',width:120},
+					{field:'parttopay',title:'是否需要交纳会费',width:120},
+					{field:'partofmoney',title:'交纳金额',width:100}
+				]]
+			});
+		});
+	}
+	
+	function loadHonordg(teacherId){
+		using('datagrid', function(){
+			$('#honordg').datagrid({
+				title:'列表',
+				width:850,
+				height:250,
+				fitColumns:false,
+				url:'Teacher_queryHonor?teacherId='+teacherId,
+				toolbar:'#honortoolbar',
+				pagination:true, 
+				rownumbers:true,
+				pageList:'[5,10]',
+				singleSelect:true,
+				pageSize:5,
+				columns:[[
+					{field:'honortitle',title:'荣誉名称',width:150},
+					{field:'honorleave',title:'荣誉级别',width:150},
+					{field:'honordep',title:'授予部门',width:120},
+					{field:'honorremark',title:'备注',width:380}
+				]]
+			});
+		});
+	}
 	function formatSextype(value,rowData,rowIndex) {
     	var s="";
 		if(value=="0"){
@@ -706,24 +912,31 @@
 			$('#keyandlg').dialog('open').dialog('setTitle',
 					'编辑科研信息');
 			$('#keyanfm').form('clear');
-			$('#keyanResearchdg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#keyanPaperdg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#keyanWorkdg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#keyanPrizedg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#partJobdg').datagrid('load', {
-				teacherId : row.id
-			});
-			$('#honordg').datagrid('load', {
-				teacherId : row.id
-			});
+			loadKeyanResearchdg(row.id);
+			loadCalendar();
+// 			$('#keyanResearchdg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+			loadKeyanPaperdg(row.id);
+// 			$('#keyanPaperdg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+			loadKeyanWorkdg(row.id);
+// 			$('#keyanWorkdg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+			loadKeyanPrizedg(row.id);
+// 			$('#keyanPrizedg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+			loadPartJobdg(row.id);
+// 			$('#partJobdg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
+			loadHonordg(row.id);
+// 			$('#honordg').datagrid('load', {
+// 				teacherId : row.id
+// 			});
 		}
 	}
 	

@@ -48,11 +48,13 @@
 		<form id="visitSchoolfm" method="post" novalidate>
 		<span class="span_column">
 			<label style="width: 160px;text-align: right;">访学开始时间:</label> 
-			<input id="visitbegdate" name="visitbegdate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 			<input id="visitbegdate" name="visitbegdate" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+			<div id="visitbegdate" name="visitbegdate" data-options="formatter:ww4,parser:w4"></div>
 		</span>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">访学结束时间:</label> 
-			<input id="visitenddate" name="visitenddate" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 			<input id="visitenddate" name="visitenddate" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+			<div id="visitenddate" name="visitenddate" data-options="formatter:ww4,parser:w4"></div>
 		</span><br><br>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">时间长度（月）:</label>
@@ -127,11 +129,13 @@
 		</span><br><br>
 		<span class="span_column">
 			<label style="width: 160px;text-align: right;">会议开始时间:</label> 
-			<input id="attmeetingbegintime" name="attmeetingbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 			<input id="attmeetingbegintime" name="attmeetingbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+			<div id="attmeetingbegintime" name="attmeetingbegintime" data-options="formatter:ww4,parser:w4"></div>
 		</span>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">会议结束时间:</label> 
-			<input id="attmeetingendtime" name="attmeetingendtime" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 			<input id="attmeetingendtime" name="attmeetingendtime" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+			<div id="attmeetingendtime" name="attmeetingendtime" data-options="formatter:ww4,parser:w4"></div>
 		</span><br><br>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">参会论文:</label>
@@ -207,11 +211,13 @@
 		</span><br><br>
 		<span class="span_column">
 			<label style="width: 160px;text-align: right;">培训开始时间:</label> 
-			<input id="atttrainbegintime" name="atttrainbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 			<input id="atttrainbegintime" name="atttrainbegintime" type="text" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+			<div id="atttrainbegintime" name="atttrainbegintime" data-options="formatter:ww4,parser:w4"></div>
 		</span>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">培训结束时间:</label> 
-			<input id="atttrainendtime" name="atttrainendtime" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  />
+<!-- 			<input id="atttrainendtime" name="atttrainendtime" type="date" style="width: 110px" data-options="formatter:ww4,parser:w4" class="easyui-datebox"  /> -->
+			<div id="atttrainendtime" name="atttrainendtime" data-options="formatter:ww4,parser:w4"></div>
 		</span><br><br>
 		<span class="span_column" >
 			<label style="width: 160px;text-align: right;">培训成果:</label>
@@ -249,6 +255,28 @@
 	</div>
 	<script>
 	var url;
+	function loadCalendarForExchange(){
+		using('datebox', function(){
+			$('#visitbegdate').datebox({
+				width:110
+			});
+			$('#visitenddate').datebox({
+				width:110
+			});
+			$('#attmeetingbegintime').datebox({
+				width:110
+			});
+			$('#attmeetingendtime').datebox({
+				width:110
+			});
+			$('#atttrainbegintime').datebox({
+				width:110
+			});
+			$('#atttrainendtime').datebox({
+				width:110
+			});
+		});
+	}
 	function formatTutortype(value,rowData,rowIndex) {
     	var s="";
 		if(value=="1"){
@@ -313,6 +341,7 @@
 			$('#visitSchooldg').datagrid('load', {
 				teacherId : row.id
 			});
+			loadCalendarForExchange();
 		}
 	}
 	

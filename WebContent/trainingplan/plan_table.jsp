@@ -3,6 +3,14 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 <%
+	String request_path = request.getContextPath();
+	String image_path = request_path + "/images/blue-themes";
+	String css_path = request_path + "/css/blue-themes";
+	String js_path = request_path + "/js";
+	request.setAttribute("request_path", request_path);
+	request.setAttribute("image_path", image_path);
+	request.setAttribute("css_path", css_path);
+	request.setAttribute("js_path", js_path);
 	// 当前导航栏位置
 	request.setAttribute("cur_nav", 3);
 %>
@@ -11,10 +19,12 @@
 <head>
 <meta http-equiv="Content-Type" content="人才培养方案" />
 <title>人才培养方案_${sitename}</title>
-
 <link rel="shortcut icon" href="favicon.ico" />
-<jsp:include page="../pre.jsp"></jsp:include>
-
+<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.js"></script>
+<jsp:include page="../top.jsp"></jsp:include>
+<%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
+<%-- <script language="JavaScript" type="text/javascript" src="${js_path}/jquery-ui.js"></script> --%>
+<%-- <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.blockUI.js"></script> --%>
 <script language="JavaScript" type="text/javascript">
 	$(document).ready(function() {
 		var defultId = "${defultId}";
@@ -22,11 +32,6 @@
 	});
 	function showTable(tempId,planType) {
 		var targetPage = 1;
-// 		if (!page || (page == '')) {
-// 			targetPage = 1;
-// 		} else {
-// 			targetPage = page;
-// 		}
 		$.ajax({
 			type : 'post',
 			url : 'TrainingPlan_trainingPlanTable',
@@ -65,16 +70,13 @@
 	}
 </script>
 </head>
-
 <body>
 	<div id="fade" class="black_overlay"></div>
-	<jsp:include page="../top.jsp"></jsp:include>
 	<div class="container" style="position: relative;">
 		<jsp:include page="../nav.jsp"></jsp:include>
 		<div style="position: relative; margin: 5px 0px 10px 0px;">
 			<div id="index_top">
 				<div id="news_left_content">
-<%-- 					<c:if test="${!empty(notifylist)}"> --%>
 						<div id="right_content_top">
 							<ul>
 								<li class="normal_title_left"></li>
@@ -128,7 +130,6 @@
 							</div>
 							</div>
 						</div>
-<%-- 					</c:if> --%>
 				</div>
 				<div id="news_right_content"></div>
 			</div>

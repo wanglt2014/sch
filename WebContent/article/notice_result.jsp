@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
-<jsp:include page="../pre.jsp"></jsp:include>
+<%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
 <c:if test="${empty(bsArticlelist)}">
 	<tr>
 		<td colspan="5" style="text-align: center"><a href="">没有检索到相关记录。</a>

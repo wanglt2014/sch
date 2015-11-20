@@ -3,7 +3,7 @@
 
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
-<jsp:include page="../pre.jsp"></jsp:include>
+<%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
 <script>
 $(document).ready(function() {
 	queryInfo();

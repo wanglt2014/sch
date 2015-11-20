@@ -29,7 +29,7 @@
 <link rel="stylesheet" type="text/css" href="${css_path}/flash.css" />
 <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.js" ></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.blockUI.js" ></script>
-<script language="JavaScript" type="text/javascript" src="${js_path}/jquery.cookie.js" ></script>
+<%-- <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.cookie.js" ></script> --%>
 <script language="JavaScript" type="text/javascript" src="${js_path}/etUtil.js" ></script>
 <script language="JavaScript" type="text/javascript" src="${js_path}/flash.js" ></script>
 <%-- <script language="JavaScript" type="text/javascript" src="${js_path}/jquery.min.js" ></script> --%>

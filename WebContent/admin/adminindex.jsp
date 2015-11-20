@@ -37,6 +37,7 @@
 <script type="text/javascript" src="${js_path}/jquery.js"></script>
 <script type="text/javascript" src="${js_path}/menu.js"></script>
 <script type="text/javascript" src="${js_path}/jquery.json-2.4.min.js"></script>
+<script type="text/javascript" src="${js_path}/easyui/easyloader.js" ></script>
 <script type="text/javascript" src="${js_path}/easyui/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${js_path}/jquery.alerts.js"></script>
 <link type="text/css" rel="stylesheet" href="${request_path}/umeditor/themes/default/css/umeditor.css" >
@@ -131,12 +132,18 @@ function getMyName(){
 				});
 				//$("#tab_iframe_div").html(iframestr);
 			} else {
-				$('#right_tab').tabs('add', {
-					title : name,
-					href : url,
-					closable : true
+				var tabcount = $('#right_tab').tabs('tabs').length;
+				if(tabcount<=8){
+					$('#right_tab').tabs('add', {
+						title : name,
+						href : url,
+						closable : true
 
-				});
+					});
+				}else{
+					alert("对不起，您打开的页面数量过多。");
+				}
+				
 			}
 
 		}

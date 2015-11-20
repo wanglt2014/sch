@@ -11,10 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="人才培养成果" />
 <title>人才培养成果_${sitename}</title>
-
 <link rel="shortcut icon" href="favicon.ico" />
 <jsp:include page="../pre.jsp"></jsp:include>
-
 <script language="JavaScript" type="text/javascript">
 $(document).ready(function() {
 	showTrainingContent("teacher");
@@ -69,7 +67,6 @@ function showTrainingContent(excType) {
 }
 </script>
 </head>
-
 <body>
 	<div id="fade" class="black_overlay"></div>
 	<jsp:include page="../top.jsp"></jsp:include>

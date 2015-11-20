@@ -1,9 +1,8 @@
 <%@ page contentType="text/html; charset=utf-8" language="java"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
-<jsp:include page="../pre.jsp"></jsp:include>
+<%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
 <div id="researchDiv" >
 	<h1 align="center">学术活动</h1>
 	<div style="width: 90%;text-align: right;"></div>

@@ -9,12 +9,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="规章制度" />
-<title>规章制度_${sitename}</title>
-
+<meta http-equiv="Content-Type" content="教学科研成果" />
+<title>教学科研成果_${sitename}</title>
 <link rel="shortcut icon" href="favicon.ico" />
 <jsp:include page="../pre.jsp"></jsp:include>
-
 <script language="JavaScript" type="text/javascript">
 	$(document).ready(function() {
 		showSRRContent("jx");
@@ -23,11 +21,6 @@
 		var yearType = $("#yearType").val();
 		var srrType = $("#srrType").val();
 		var targetPage = '';
-// 		if (!page || (page == '')) {
-// 			targetPage = 1;
-// 		} else {
-// 			targetPage = page;
-// 		}
 		$.ajax({
 			type : 'post',
 			url : 'Teacher_doQuerySRR',
@@ -58,7 +51,6 @@
 			},
 			success : function(html) {
 				$.unblockUI();
-// 				$('#news_main_content').html(html);
 				$('#news_right_content').html(html);
 			},
 			error : function() {
@@ -68,7 +60,6 @@
 	}
 </script>
 </head>
-
 <body>
 	<div id="fade" class="black_overlay"></div>
 	<jsp:include page="../top.jsp"></jsp:include>
@@ -91,10 +82,7 @@
 								<td  style="width: 100%;">
 								<a href="javascript:void(0);"  onclick="showSRRContent('jx');" title="教学部分">
 								教学部分</a>
-								</td>
-								</tr>
-								</table>
-								</div>
+								</td></tr></table></div>
 								<div class='separatorLine'></div>
 								<div class="first_line_info" >
 								<table class="news_main_content" width="100%" >
@@ -102,30 +90,13 @@
 								<td  style="width: 100%;">
 								<a href="javascript:void(0);"  onclick="showSRRContent('ky');" title="科研部分">
 								科研部分</a>
-								</td>
-								</tr>
-								</table>
-									</div>
-									<div class='separatorLine'></div>
+								</td></tr></table></div>
+								<div class='separatorLine'></div>
 								</div>
 							</div>
 						</div>
 				</div>
 				<div id="news_right_content"></div>
-<!-- <div style="float: left;clear: both;margin-left: 30px;"> -->
-<%-- <select id="srrType" style="width:80px;"> --%>
-<!-- 	<option value="researchDiv" selected="selected">立项</option> -->
-<!-- 	<option value="paperDiv">论文</option> -->
-<!-- 	<option value="workDiv">著作</option> -->
-<!-- 	<option value="prizeDiv">获奖</option> -->
-<%-- </select> --%>
-<%-- <select id="yearType" style="width:80px;"> --%>
-<!-- 	<option value="6" selected="selected">半年</option> -->
-<!-- 	<option value="12">一年</option> -->
-<!-- 	<option value="60">五年</option> -->
-<%-- </select> --%>
-<!-- <button onclick="showSRRContent('jx');">查询</button> -->
-<!-- </div> -->
 			</div>
 		</div>
 		<jsp:include page="../bottom.jsp"></jsp:include>

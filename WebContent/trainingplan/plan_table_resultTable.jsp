@@ -1,17 +1,11 @@
 <%@ page contentType="text/html; charset=utf-8" language="java"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
-<jsp:include page="../pre.jsp"></jsp:include>
+<%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
 <script language="JavaScript" type="text/javascript">
 	function showTeacher(tempId,planType) {
 		var targetPage = 1;
-// 		if (!page || (page == '')) {
-// 			targetPage = 1;
-// 		} else {
-// 			targetPage = page;
-// 		}
 		$.ajax({
 			type : 'post',
 			url : 'TrainingPlan_trainingPlanTable',
@@ -97,7 +91,6 @@
 		<tr>
 		<%i++; System.out.println(i);%>
 		<td ><s:property value="#subject.subjecttypename" /></td>
-		
 		<td><s:property value="#s.count" /></td>
 		<td><s:property value="#subject.subjectno" /></td>
 		<td><a href="javascript:void(0);" onclick="window.open('Teacher_teacherDetail_${subject.subjectteacherid}.shtm')">
@@ -116,11 +109,8 @@
 		<td><s:property value="#subject.termclasshourforseven" /></td>
 		<td><s:property value="#subject.termclasshourforeight" /></td>
 		<td><s:property value="#subject.subjectremark" /></td>
-		</tr>
-		</s:if>
-		</s:iterator>
-		</s:iterator>
+		</tr></s:if>
+		</s:iterator></s:iterator>
 		</tbody>
-	</table>
-	<br><br><br><br>
+	</table><br><br><br><br>
 </c:if>

@@ -135,7 +135,6 @@ function queryInfo() {
 		}
 	});
 }
-
 function hiddenAllDiv() {
 	 $("#researchDiv").hide();
 	 $("#paperDiv").hide();
@@ -144,7 +143,6 @@ function hiddenAllDiv() {
 	 $("#partJobDiv").hide();
 	 $("#honorDiv").hide();
 }
-
 function clearAllTb() {
 	 $("#researchTb").empty();
 	 $("#paperTb").empty();
@@ -154,7 +152,6 @@ function clearAllTb() {
 	 $("#honorTb").empty();
 }
 </script>
-
 <select id="srrType">
 	<option value="researchDiv" selected="selected">立项</option>
 	<option value="paperDiv">论文</option>
@@ -269,7 +266,8 @@ function clearAllTb() {
 		<th>姓名</th>
 		<th>学会/协会/期刊名称</th>
 		<th>在学会/协会/期刊中职务</th>
-		<th>任职时间</th>
+		<th>任职开始时间</th>
+		<th>任职截止时间</th>
 		<th>学会/协会/期刊级别</th>
 		</tr>
 	<tbody id="partJobTb">

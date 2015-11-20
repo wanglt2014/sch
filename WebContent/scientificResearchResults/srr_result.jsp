@@ -23,7 +23,6 @@ function queryInfo() {
 	var yearType = $("#yearType").val();
 	var srrType = $("#srrType").val();
 	var tbname = srrType.replace('Div','Tb'); 
-// 	alert(tbname);
 	$.ajax({
 		type : 'post',
 		url : 'Teacher_doQuerySRRJson',
@@ -121,7 +120,6 @@ function queryInfo() {
 		}
 	});
 }
-
 function hiddenAllDiv() {
 	 $("#researchDiv").hide();
 	 $("#paperDiv").hide();
@@ -129,7 +127,6 @@ function hiddenAllDiv() {
 	 $("#speakerprizeDiv").hide();
 	 $("#teachprizeDiv").hide();
 }
-
 function clearAllTb() {
 	 $("#researchTb").empty();
 	 $("#paperTb").empty();
@@ -138,13 +135,12 @@ function clearAllTb() {
 	 $("#teachprizeTb").empty();
 }
 </script>
-
 <select id="srrType">
-	<option value="researchDiv" selected="selected">立项</option>
-	<option value="paperDiv">论文</option>
-	<option value="workDiv">著作</option>
+	<option value="researchDiv" selected="selected">教改立项</option>
+	<option value="paperDiv">教改论文</option>
+	<option value="workDiv">教材出版</option>
 	<option value="speakerprizeDiv">优秀主讲师</option>
-	<option value="teachprizeDiv">获奖</option>
+	<option value="teachprizeDiv">教学成果奖</option>
 </select>
 
 <select id="yearType">
@@ -153,12 +149,8 @@ function clearAllTb() {
 	<option value="60">五年</option>
 </select>
 <button onclick="queryInfo();">查询</button>
-<%-- <c:if test="${empty(researchList) && empty(paperList) && empty(tWorkList) && empty(tPrizeList)}"> --%>
-<!-- 没有检索到相关记录。 -->
-<%-- </c:if> --%>
-<%-- <c:if test="${!empty(researchList) || !empty(paperList) || !empty(tWorkList) || !empty(tPrizeList)}"> --%>
 <div id="researchDiv" >
-	<h1 align="center">立项</h1>
+	<h1 align="center">教改立项</h1>
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportResearch()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center" >
@@ -192,7 +184,7 @@ function clearAllTb() {
 	</table>
 </div>
 <div id="paperDiv" >
-	<h1 align="center">论文</h1>
+	<h1 align="center">教改论文</h1>
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportPaper()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center">
@@ -231,7 +223,7 @@ function clearAllTb() {
 	</table>
 </div>
 <div id="workDiv" >
-	<h1 align="center">著作</h1>
+	<h1 align="center">教材出版</h1>
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" onclick="exportWork()">【导出立项Excel】</a></div>
 	<hr class="line_keyanchenguo" /><br>
 	<table class="plan_table_list_new" align="center">
@@ -239,7 +231,7 @@ function clearAllTb() {
 		<tr>
 		<th>姓名</th>
 		<th>作者排名</th>
-		<th>著作题目</th>
+		<th>教材名称</th>
 		<th>出版单位</th>
 		<th>出版地</th>
 		<th>出版时间</th>
@@ -285,7 +277,6 @@ function clearAllTb() {
 	</tbody>
 	</table>
 	</div>
-	
 	<div id="teachprizeDiv" >
 	<h1 align="center">教学成果奖</h1>
 	<div style="width: 90%;text-align: right;"><a href="javascript:void(0)" style="color: #524EA3;" 

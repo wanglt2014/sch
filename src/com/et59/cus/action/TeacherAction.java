@@ -97,8 +97,8 @@ public class TeacherAction extends BaseAction {
 	public List<TPaper> paperList;
 
 	public String defultId;
-	
-	 public String result;
+
+	public String result;
 
 	public List<TResearch> getResearchList() {
 		return researchList;
@@ -1137,41 +1137,47 @@ public class TeacherAction extends BaseAction {
 	}
 
 	/**
-	 * 查询师资队伍
+	 * 查询科研成果
 	 * 
 	 * @return
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public String doQuerySRR() {
-		try {
-			// 加载立项
-			// List<TResearch> tResearchList = new ArrayList<TResearch>();
-			TResearchExample trexample = new TResearchExample();
-			trexample.createCriteria().andResearchrankEqualTo("1");
-			researchList = localServiceEXProxy.queryTResearchList(trexample);
-
-			// 加载论文
-			// List<TPaper> tPaperList = new ArrayList<TPaper>();
-			TPaperExample tpexample = new TPaperExample();
-			tpexample.createCriteria().andPaperauthorEqualTo("1");
-			paperList = localServiceEXProxy.queryTPaperList(tpexample);
-
-			// 加载著作
-			// List<TWork> tWorkList = new ArrayList<TWork>();
-			TWorkExample twexample = new TWorkExample();
-			twexample.createCriteria().andWorkauthorrankEqualTo("1");
-			tWorkList = localServiceEXProxy.queryTWorkList(twexample);
-
-			// 加载获奖信息
-			// List<TPrize> tPrizeList = new ArrayList<TPrize>();
-			TPrizeExample tPrizeExample = new TPrizeExample();
-			tPrizeExample.createCriteria().andPrizerankEqualTo("1");
-			tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		String srrTypePara = request.getParameter("srrTypePara");
+		if (srrTypePara != null && "jx".equals(srrTypePara)) {
+			return "srr_result";
+		} else {
+			return "srr_keyanresult";
 		}
-		return "srr_result";
+		// try {
+		// // 加载立项
+		// // List<TResearch> tResearchList = new ArrayList<TResearch>();
+		// TResearchExample trexample = new TResearchExample();
+		// trexample.createCriteria().andResearchrankEqualTo("1");
+		// researchList = localServiceEXProxy.queryTResearchList(trexample);
+		//
+		// // 加载论文
+		// // List<TPaper> tPaperList = new ArrayList<TPaper>();
+		// TPaperExample tpexample = new TPaperExample();
+		// tpexample.createCriteria().andPaperauthorEqualTo("1");
+		// paperList = localServiceEXProxy.queryTPaperList(tpexample);
+		//
+		// // 加载著作
+		// // List<TWork> tWorkList = new ArrayList<TWork>();
+		// TWorkExample twexample = new TWorkExample();
+		// twexample.createCriteria().andWorkauthorrankEqualTo("1");
+		// tWorkList = localServiceEXProxy.queryTWorkList(twexample);
+		//
+		// // 加载获奖信息
+		// // List<TPrize> tPrizeList = new ArrayList<TPrize>();
+		// TPrizeExample tPrizeExample = new TPrizeExample();
+		// tPrizeExample.createCriteria().andPrizerankEqualTo("1");
+		// tPrizeList = localServiceEXProxy.queryTPrizeList(tPrizeExample);
+		//
+		// } catch (Exception e) {
+		// e.printStackTrace();
+		// }
+
 	}
 
 	/**
@@ -2071,156 +2077,139 @@ public class TeacherAction extends BaseAction {
 			super.reponseWriter(JSON.toJSONString(flag));
 		}
 	}
-	
-	public String getResult()
-	  {
-	    return this.result;
-	  }
-	  
-	  public void setResult(String result)
-	  {
-	    this.result = result;
-	  }
-	  
-	  public void doQuerySRRJson()
-	  {
-	    String type = this.request.getParameter("srrTypePara");
-	    String yearType = this.request.getParameter("yearType");
-	    if (yearType == null) {
-	      yearType = "60";
-	    }
-	    String temp_str = "";
-	    Date dt = new Date();
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	    Calendar calendar = Calendar.getInstance();
-	    calendar.setTime(dt);
-	    
-	    calendar.add(2, -Integer.valueOf(yearType).intValue());
-	    temp_str = sdf.format(calendar.getTime());
-	    try
-	    {
-	      TResearchExample trexample = new TResearchExample();
-	      trexample.createCriteria().andResearchrankEqualTo("1")
-	        .andResearchteachorresearchEqualTo("0")
-	        .andResearchbegindateGreaterThanOrEqualTo(temp_str);
-	      List researchList = this.localServiceEXProxy.queryTResearchList(trexample);
-	      
 
+	public String getResult() {
+		return this.result;
+	}
 
-	      TPaperExample tpexample = new TPaperExample();
-	      tpexample.createCriteria().andPaperauthorEqualTo("1")
-	        .andPaperteachorresearchEqualTo("0")
-	        .andPapernotedateGreaterThanOrEqualTo(temp_str);
-	      List paperList = this.localServiceEXProxy.queryTPaperList(tpexample);
-	      
+	public void setResult(String result) {
+		this.result = result;
+	}
 
+	public void doQuerySRRJson() {
+		String type = this.request.getParameter("srrTypePara");
+		String yearType = this.request.getParameter("yearType");
+		if (yearType == null) {
+			yearType = "60";
+		}
+		String temp_str = "";
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(dt);
 
-	      TWorkExample twexample = new TWorkExample();
-	      twexample.createCriteria().andWorkauthorrankEqualTo("1")
-	        .andWorkteachorresearchEqualTo("0")
-	        .andWorkpublishtimeGreaterThanOrEqualTo(temp_str);
-	      this.tWorkList = this.localServiceEXProxy.queryTWorkList(twexample);
-	      
+		calendar.add(2, -Integer.valueOf(yearType).intValue());
+		temp_str = sdf.format(calendar.getTime());
+		try {
+			TResearchExample trexample = new TResearchExample();
+			trexample.createCriteria().andResearchrankEqualTo("1")
+					.andResearchteachorresearchEqualTo("0")
+					.andResearchbegindateGreaterThanOrEqualTo(temp_str);
+			List researchList = this.localServiceEXProxy
+					.queryTResearchList(trexample);
 
+			TPaperExample tpexample = new TPaperExample();
+			tpexample.createCriteria().andPaperauthorEqualTo("1")
+					.andPaperteachorresearchEqualTo("0")
+					.andPapernotedateGreaterThanOrEqualTo(temp_str);
+			List paperList = this.localServiceEXProxy
+					.queryTPaperList(tpexample);
 
-	      TPrizeExample tPrizeExample = new TPrizeExample();
-	      tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("2")
-	        .andPrizedateGreaterThanOrEqualTo(temp_str);
-	      List speakerprizeList = this.localServiceEXProxy
-	        .queryTPrizeList(tPrizeExample);
-	      
-	      TPrizeExample tPrizeExample2 = new TPrizeExample();
-	      tPrizeExample2.createCriteria().andPrizerankEqualTo("1")
-	        .andPrizeteachorresearchEqualTo("0")
-	        .andPrizedateGreaterThanOrEqualTo(temp_str);
-	      List teachprizeList = this.localServiceEXProxy
-	        .queryTPrizeList(tPrizeExample2);
-	      
-	      Map<String, Object> map = new HashMap();
-	      map.put("researchList", researchList);
-	      map.put("paperList", paperList);
-	      map.put("tWorkList", this.tWorkList);
-	      map.put("speakerprizeList", speakerprizeList);
-	      map.put("teachprizeList", teachprizeList);
-	      super.reponseWriter(JSON.toJSONString(map));
-	    }
-	    catch (Exception e)
-	    {
-	      e.printStackTrace();
-	    }
-	  }
-	  
-	  public void doQuerySRRKeyanJson()
-	  {
-	    String type = this.request.getParameter("srrTypePara");
-	    String yearType = this.request.getParameter("yearType");
-	    if (yearType == null) {
-	      yearType = "60";
-	    }
-	    String temp_str = "";
-	    Date dt = new Date();
-	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	    Calendar calendar = Calendar.getInstance();
-	    calendar.setTime(dt);
-	    
-	    calendar.add(2, -Integer.valueOf(yearType).intValue());
-	    temp_str = sdf.format(calendar.getTime());
-	    try
-	    {
-	      TResearchExample trexample = new TResearchExample();
-	      trexample.createCriteria().andResearchrankEqualTo("1")
-	        .andResearchteachorresearchEqualTo("1")
-	        .andResearchbegindateGreaterThanOrEqualTo(temp_str);
-	      List researchList = this.localServiceEXProxy
-	        .queryTResearchList(trexample);
-	      
+			TWorkExample twexample = new TWorkExample();
+			twexample.createCriteria().andWorkauthorrankEqualTo("1")
+					.andWorkteachorresearchEqualTo("0")
+					.andWorkpublishtimeGreaterThanOrEqualTo(temp_str);
+			this.tWorkList = this.localServiceEXProxy.queryTWorkList(twexample);
 
+			TPrizeExample tPrizeExample = new TPrizeExample();
+			tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("2")
+					.andPrizedateGreaterThanOrEqualTo(temp_str);
+			List speakerprizeList = this.localServiceEXProxy
+					.queryTPrizeList(tPrizeExample);
 
-	      TPaperExample tpexample = new TPaperExample();
-	      tpexample.createCriteria().andPaperauthorEqualTo("1")
-	        .andPaperteachorresearchEqualTo("1")
-	        .andPapernotedateGreaterThanOrEqualTo(temp_str);
-	      List paperList = this.localServiceEXProxy.queryTPaperList(tpexample);
-	      
+			TPrizeExample tPrizeExample2 = new TPrizeExample();
+			tPrizeExample2.createCriteria().andPrizerankEqualTo("1")
+					.andPrizeteachorresearchEqualTo("0")
+					.andPrizedateGreaterThanOrEqualTo(temp_str);
+			List teachprizeList = this.localServiceEXProxy
+					.queryTPrizeList(tPrizeExample2);
 
+			Map<String, Object> map = new HashMap();
+			map.put("researchList", researchList);
+			map.put("paperList", paperList);
+			map.put("tWorkList", this.tWorkList);
+			map.put("speakerprizeList", speakerprizeList);
+			map.put("teachprizeList", teachprizeList);
+			super.reponseWriter(JSON.toJSONString(map));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-	      TWorkExample twexample = new TWorkExample();
-	      twexample.createCriteria().andWorkauthorrankEqualTo("1")
-	        .andWorkteachorresearchEqualTo("1")
-	        .andWorkpublishtimeGreaterThanOrEqualTo(temp_str);
-	      List tWorkList = this.localServiceEXProxy.queryTWorkList(twexample);
-	      
+	public void doQuerySRRKeyanJson() {
+		String type = this.request.getParameter("srrTypePara");
+		String yearType = this.request.getParameter("yearType");
+		if (yearType == null) {
+			yearType = "60";
+		}
+		String temp_str = "";
+		Date dt = new Date();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(dt);
 
+		calendar.add(2, -Integer.valueOf(yearType).intValue());
+		temp_str = sdf.format(calendar.getTime());
+		try {
+			TResearchExample trexample = new TResearchExample();
+			trexample.createCriteria().andResearchrankEqualTo("1")
+					.andResearchteachorresearchEqualTo("1")
+					.andResearchbegindateGreaterThanOrEqualTo(temp_str);
+			List researchList = this.localServiceEXProxy
+					.queryTResearchList(trexample);
 
-	      TPrizeExample tPrizeExample = new TPrizeExample();
-	      tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("1")
-	        .andPrizedateGreaterThanOrEqualTo(temp_str).andPrizerankEqualTo("1");
-	      List prizeList = this.localServiceEXProxy
-	        .queryTPrizeList(tPrizeExample);
-	      
+			TPaperExample tpexample = new TPaperExample();
+			tpexample.createCriteria().andPaperauthorEqualTo("1")
+					.andPaperteachorresearchEqualTo("1")
+					.andPapernotedateGreaterThanOrEqualTo(temp_str);
+			List paperList = this.localServiceEXProxy
+					.queryTPaperList(tpexample);
 
-	      TPartjobExample tPartjobExample = new TPartjobExample();
-	      tPartjobExample.createCriteria().andPartbegintimeGreaterThanOrEqualTo(temp_str);
-	      List tPartjobList = this.localServiceEXProxy.queryPartJobList(tPartjobExample);
-	      
+			TWorkExample twexample = new TWorkExample();
+			twexample.createCriteria().andWorkauthorrankEqualTo("1")
+					.andWorkteachorresearchEqualTo("1")
+					.andWorkpublishtimeGreaterThanOrEqualTo(temp_str);
+			List tWorkList = this.localServiceEXProxy.queryTWorkList(twexample);
 
-	      THonorandotherExample tHonorandotherExample = new THonorandotherExample();
-	      
-	      List honorandotherList = this.localServiceEXProxy.queryTHonorandotherList(tHonorandotherExample);
-	      
-	      Map<String, Object> map = new HashMap();
-	      map.put("researchList", researchList);
-	      map.put("paperList", paperList);
-	      map.put("tWorkList", tWorkList);
-	      map.put("prizeList", prizeList);
-	      map.put("honorandotherList", honorandotherList);
-	      map.put("tPartjobList", tPartjobList);
-	      super.reponseWriter(JSON.toJSONString(map));
-	    }
-	    catch (Exception e)
-	    {
-	      e.printStackTrace();
-	    }
-	  }
+			TPrizeExample tPrizeExample = new TPrizeExample();
+			tPrizeExample.createCriteria().andPrizeteachorresearchEqualTo("1")
+					.andPrizedateGreaterThanOrEqualTo(temp_str)
+					.andPrizerankEqualTo("1");
+			List prizeList = this.localServiceEXProxy
+					.queryTPrizeList(tPrizeExample);
+
+			TPartjobExample tPartjobExample = new TPartjobExample();
+			tPartjobExample.createCriteria()
+					.andPartbegintimeGreaterThanOrEqualTo(temp_str);
+			List tPartjobList = this.localServiceEXProxy
+					.queryPartJobList(tPartjobExample);
+
+			THonorandotherExample tHonorandotherExample = new THonorandotherExample();
+
+			List honorandotherList = this.localServiceEXProxy
+					.queryTHonorandotherList(tHonorandotherExample);
+
+			Map<String, Object> map = new HashMap();
+			map.put("researchList", researchList);
+			map.put("paperList", paperList);
+			map.put("tWorkList", tWorkList);
+			map.put("prizeList", prizeList);
+			map.put("honorandotherList", honorandotherList);
+			map.put("tPartjobList", tPartjobList);
+			super.reponseWriter(JSON.toJSONString(map));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

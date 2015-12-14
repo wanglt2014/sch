@@ -66,10 +66,10 @@ $(function(){
 <%-- 						        <img  src="${image_path}/indexpic2.jpg" width="500" height="252"/> --%>
 <%-- 						        <img  src="${image_path}/indexpic3.jpg" width="500" height="252"/> --%>
 <%-- 						        <img  src="${image_path}/indexpic4.jpg" width="500" height="252"/> --%>
-						        <img src="${first_path}/indexpic1.jpg" width="400" height="252"/>
-						        <img src="${first_path}/indexpic2.jpg" width="400" height="252"/>
-						        <img src="${first_path}/indexpic3.jpg" width="400" height="252"/>
-						        <img src="${first_path}/indexpic4.jpg" width="400" height="252"/>
+						        <img src="${first_path}/indexpic1.jpg" width="400" height="252" onerror="this.src='${image_path}/nopic.jpg'"/>
+						        <img src="${first_path}/indexpic2.jpg" width="400" height="252" onerror="this.src='${image_path}/nopic.jpg'"/>
+						        <img src="${first_path}/indexpic3.jpg" width="400" height="252" onerror="this.src='${image_path}/nopic.jpg'"/>
+						        <img src="${first_path}/indexpic4.jpg" width="400" height="252" onerror="this.src='${image_path}/nopic.jpg'"/>
 						</div>
 						<div id="btn"></div>
 					</div>

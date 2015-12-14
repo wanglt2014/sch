@@ -3,8 +3,13 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jstl/fmt_rt"%>
 <%@ taglib prefix='c' uri='http://java.sun.com/jstl/core_rt'%>
 <%
+String url = request.getRequestURL().toString();
+String uri = request.getRequestURI();
+String website =url.substring(0, url.indexOf(uri));
 String request_path = request.getContextPath();
+String image_path = website+request.getContextPath() + "/images/blue-themes";
 %>
+<%=image_path %>
 <%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
 <c:if test="${empty(teacherList)}">
 	<tr>
@@ -25,7 +30,7 @@ String request_path = request.getContextPath();
 		<tr>
 		  </s:if>
 		  <td>
-		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img class="img_thunmb" alt="' + teacher.teachername + '" src="file:///<s:property value="#teacher.iimageurll"/>" /></a>
+		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><img class="img_thunmb" alt="' + teacher.teachername + '" onerror="this.src='<%=image_path %>/nopic.jpg'" src="file:///<s:property value="#teacher.iimageurll"/>" /></a>
 		  	<br>
 		  	<a href="Teacher_teacherDetail_${teacher.id}.shtm"><i class="point">•</i>&nbsp;<s:property value="#teacher.teachername" /></a>
 		  </td>

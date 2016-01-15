@@ -716,6 +716,8 @@
 // 				createUploaderTP();
 // // 				deleteAllUploader();
 // 			}
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	function saveRearch(typeval) {

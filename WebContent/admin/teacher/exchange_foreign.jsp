@@ -126,6 +126,8 @@
 			$('#foreignfm').form('clear');
 			$('#foreignfm').form('load', row);
 			url = 'Exchange_updateForeign?id=' + row.foreignid;
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	
@@ -168,6 +170,8 @@
 					$('#foreigndg').datagrid('reload'); // reload the user data
 				}
 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	</script>

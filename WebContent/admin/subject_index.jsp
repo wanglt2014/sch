@@ -403,7 +403,9 @@
                 $('#subjectfm').form('load',row);
                 
                 url = 'Subject_update?id='+row.subjectid;
-            }
+            }else{
+    			alert("请选择一条记录！");
+    		}
         }
         function saveSubject(){
         	var valid = $('#subjectfm').form('validate');
@@ -459,7 +461,9 @@
                         },'json');
                     }
                 });
-            }
+            }else{
+    			alert("请选择一条记录！");
+    		}
         }
         
     	//销毁所有上传控件

@@ -218,6 +218,8 @@
 			url = 'TrainingPlan_update?id=' + row.departmentid;
 			UM.getEditor('directionMyEditornew').setContent(row.departmentdirection, false);
 			UM.getEditor('departmentMyEditornew').setContent(row.departmentintroduction, false);
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	
@@ -260,6 +262,8 @@
 					jAlert('系统错误，请联系管理员','错误提示');
 				}
 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	
@@ -330,6 +334,8 @@
 					
 				}
 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	$('#trainingPlan_tab').tabs({ 

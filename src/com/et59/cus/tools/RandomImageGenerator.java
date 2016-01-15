@@ -5,13 +5,18 @@ package com.et59.cus.tools;
  * @company 点滴工作室
  * @author liuhaihua
  */
-import java.awt.*;
-import java.awt.image.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+
 import javax.imageio.ImageIO;
-import org.apache.commons.lang.RandomStringUtils;
+//import org.apache.commons.lang.RandomStringUtils;
+
+import org.apache.commons.lang3.RandomStringUtils;
 
 /**
  * 随即图片生成器 该类用于用户注册时候需要用户根据图片内容进行填写正确后方可注册
@@ -79,17 +84,17 @@ public class RandomImageGenerator {
 			g.setColor(color1); // 随即画各种颜色的点
 			g.drawOval(x, y, 0, 0);
 		}
-//		// 画干扰线
-//		for (int i = 0; i < 5; i++) {
-//			int x = random.nextInt(width);
-//			int y = random.nextInt(height);
-//			int x1 = random.nextInt(width);
-//			int y1 = random.nextInt(height);
-//			Color color1 = new Color(random.nextInt(255), random.nextInt(255),
-//					random.nextInt(255));
-//			g.setColor(color1); // 随即画各种颜色的线
-//			g.drawLine(x, y, x1, y1);
-//		}
+		// // 画干扰线
+		// for (int i = 0; i < 5; i++) {
+		// int x = random.nextInt(width);
+		// int y = random.nextInt(height);
+		// int x1 = random.nextInt(width);
+		// int y1 = random.nextInt(height);
+		// Color color1 = new Color(random.nextInt(255), random.nextInt(255),
+		// random.nextInt(255));
+		// g.setColor(color1); // 随即画各种颜色的线
+		// g.drawLine(x, y, x1, y1);
+		// }
 		// 图像生效
 		g.dispose();
 		// 输出页面

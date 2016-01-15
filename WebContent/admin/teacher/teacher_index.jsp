@@ -233,6 +233,8 @@
 				}
 			});
 			url = 'Teacher_update?id=' + row.id;
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	
@@ -283,6 +285,8 @@
 					$('#teacherdg').datagrid('reload'); // reload the user data
 				}
 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	

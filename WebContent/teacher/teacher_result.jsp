@@ -9,7 +9,6 @@ String website =url.substring(0, url.indexOf(uri));
 String request_path = request.getContextPath();
 String image_path = website+request.getContextPath() + "/images/blue-themes";
 %>
-<%=image_path %>
 <%-- <jsp:include page="../pre.jsp"></jsp:include> --%>
 <c:if test="${empty(teacherList)}">
 	<tr>

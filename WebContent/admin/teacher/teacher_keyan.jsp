@@ -828,6 +828,8 @@
 // 			$('#honordg').datagrid('load', {
 // 				teacherId : row.id
 // 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	

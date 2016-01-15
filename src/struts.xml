@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN" "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<!--struts2默认上传每个小文件最大值2M 可以适当增大 -->
 <!-- 	<constant name= "struts.multipart.maxSize" value="5242880" /> -->
 	<constant name= "struts.multipart.maxSize" value="31457280" />
 	
-	<constant name="struts.devMode" value="true"></constant>
+	<constant name="struts.devMode" value="false"></constant>
 	<constant name="struts.ui.theme" value="simple"></constant>
 	<constant name="struts.objectFactory" value="spring"></constant>
 	<constant name="struts.multipart.saveDir" value="/cus/temp"></constant>

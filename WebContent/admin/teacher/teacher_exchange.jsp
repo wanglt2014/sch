@@ -342,6 +342,8 @@
 				teacherId : row.id
 			});
 			loadCalendarForExchange();
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	
@@ -357,6 +359,8 @@
 			$('#attMeetingdg').datagrid('load', {
 				teacherId : row.id
 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	function editForAttTrain() {
@@ -371,6 +375,8 @@
 			$('#attTraindg').datagrid('load', {
 				teacherId : row.id
 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	

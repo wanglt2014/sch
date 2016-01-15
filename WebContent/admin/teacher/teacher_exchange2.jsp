@@ -114,6 +114,8 @@
 			$('#holdMeetingfm').form('clear');
 			$('#holdMeetingfm').form('load', row);
 			url = 'Exchange_updateHoldMeeting?id=' + row.holdid;
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	
@@ -156,6 +158,8 @@
 					$('#holdMeetingdg').datagrid('reload'); // reload the user data
 				}
 			});
+		}else{
+			alert("请选择一条记录！");
 		}
 	}
 	</script>

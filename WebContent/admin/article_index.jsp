@@ -250,7 +250,9 @@
 				$('#articletypeInsert').combobox('select', row.articletype);
                 UM.getEditor('myEditornew').setContent(row.content, false);
                 url = 'Article_update?id='+row.articleid;
-            }
+            }else{
+    			alert("请选择一条记录！");
+    		}
         }
         function saveNews(){
         	$("#content").val(UM.getEditor('myEditornew').getContent());
@@ -295,7 +297,9 @@
                         },'json');
                     }
                 });
-            }
+            }else{
+    			alert("请选择一条记录！");
+    		}
         }
         
         
